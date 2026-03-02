@@ -49,6 +49,15 @@
           Server-side rendered. World Bank data cached for 24 hours.
         </p>
       </div>
+
+      <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8">
+        <h2 class="font-serif text-xl font-bold text-primary-900 mb-3">Created by</h2>
+        <p class="text-primary-600 leading-relaxed">
+          Created by <strong>Tomas Gonzalez</strong>.
+          For questions, suggestions, or contributions, reach out at
+          <a href="mailto:me@tomasgonzalez.net" class="text-accent-600 hover:text-accent-700 underline">me@tomasgonzalez.net</a>.
+        </p>
+      </div>
     </div>
   </div>
 </template>
