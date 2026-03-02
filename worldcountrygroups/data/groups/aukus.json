@@ -1,0 +1,30 @@
+{
+  "gid": "aukus",
+  "acronym": "AUKUS",
+  "name": "AUKUS",
+  "description": "A trilateral security partnership announced in 2021 to bolster allied defense capabilities in the Indo-Pacific.",
+  "classifier": "AUKUS",
+  "domains": [
+    "Oceania",
+    "Europe",
+    "North America",
+    "Peace and Security"
+  ],
+  "countries": [
+    {
+      "name": "Australia",
+      "iso2": "AU",
+      "iso3": "AUS"
+    },
+    {
+      "name": "United Kingdom",
+      "iso2": "GB",
+      "iso3": "GBR"
+    },
+    {
+      "name": "United States",
+      "iso2": "US",
+      "iso3": "USA"
+    }
+  ]
+}

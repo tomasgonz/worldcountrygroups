@@ -1,0 +1,27 @@
+{
+  "gid": "benelux",
+  "acronym": "Benelux",
+  "name": "Benelux Union",
+  "description": "A politico-economic union of three Western European states established in 1944, considered a forerunner of European integration.",
+  "classifier": "Benelux",
+  "domains": [
+    "Europe"
+  ],
+  "countries": [
+    {
+      "name": "Belgium",
+      "iso2": "BE",
+      "iso3": "BEL"
+    },
+    {
+      "name": "Luxembourg",
+      "iso2": "LU",
+      "iso3": "LUX"
+    },
+    {
+      "name": "Netherlands",
+      "iso2": "NL",
+      "iso3": "NLD"
+    }
+  ]
+}

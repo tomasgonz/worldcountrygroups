@@ -1,0 +1,70 @@
+{
+  "gid": "n11",
+  "acronym": "N-11",
+  "name": "Next Eleven",
+  "description": "Eleven countries identified by Goldman Sachs as having high potential to become among the world's largest economies in the 21st century.",
+  "classifier": "Goldman Sachs",
+  "domains": [
+    "Asia",
+    "Africa",
+    "Latin America and the Caribbean",
+    "Europe"
+  ],
+  "countries": [
+    {
+      "name": "Bangladesh",
+      "iso2": "BD",
+      "iso3": "BGD"
+    },
+    {
+      "name": "Egypt",
+      "iso2": "EG",
+      "iso3": "EGY"
+    },
+    {
+      "name": "Indonesia",
+      "iso2": "ID",
+      "iso3": "IDN"
+    },
+    {
+      "name": "Iran",
+      "iso2": "IR",
+      "iso3": "IRN"
+    },
+    {
+      "name": "Korea Rep.",
+      "iso2": "KR",
+      "iso3": "KOR"
+    },
+    {
+      "name": "Mexico",
+      "iso2": "MX",
+      "iso3": "MEX"
+    },
+    {
+      "name": "Nigeria",
+      "iso2": "NG",
+      "iso3": "NGA"
+    },
+    {
+      "name": "Pakistan",
+      "iso2": "PK",
+      "iso3": "PAK"
+    },
+    {
+      "name": "Philippines",
+      "iso2": "PH",
+      "iso3": "PHL"
+    },
+    {
+      "name": "Turkey",
+      "iso2": "TR",
+      "iso3": "TUR"
+    },
+    {
+      "name": "Vietnam",
+      "iso2": "VN",
+      "iso3": "VNM"
+    }
+  ]
+}

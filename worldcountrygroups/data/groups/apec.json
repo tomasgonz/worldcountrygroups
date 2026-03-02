@@ -1,0 +1,120 @@
+{
+  "gid": "apec",
+  "acronym": "APEC",
+  "name": "Asia-Pacific Economic Cooperation",
+  "description": "An intergovernmental forum for 21 member economies in the Pacific Rim that promotes free trade, accounting for approximately 60% of world GDP.",
+  "classifier": "APEC",
+  "domains": [
+    "Asia",
+    "Oceania",
+    "North America",
+    "Latin America and the Caribbean"
+  ],
+  "countries": [
+    {
+      "name": "Australia",
+      "iso2": "AU",
+      "iso3": "AUS"
+    },
+    {
+      "name": "Brunei Darussalam",
+      "iso2": "BN",
+      "iso3": "BRN"
+    },
+    {
+      "name": "Canada",
+      "iso2": "CA",
+      "iso3": "CAN"
+    },
+    {
+      "name": "Chile",
+      "iso2": "CL",
+      "iso3": "CHL"
+    },
+    {
+      "name": "China",
+      "iso2": "CN",
+      "iso3": "CHN"
+    },
+    {
+      "name": "Hong Kong",
+      "iso2": "HK",
+      "iso3": "HKG"
+    },
+    {
+      "name": "Indonesia",
+      "iso2": "ID",
+      "iso3": "IDN"
+    },
+    {
+      "name": "Japan",
+      "iso2": "JP",
+      "iso3": "JPN"
+    },
+    {
+      "name": "Korea Rep.",
+      "iso2": "KR",
+      "iso3": "KOR"
+    },
+    {
+      "name": "Malaysia",
+      "iso2": "MY",
+      "iso3": "MYS"
+    },
+    {
+      "name": "Mexico",
+      "iso2": "MX",
+      "iso3": "MEX"
+    },
+    {
+      "name": "New Zealand",
+      "iso2": "NZ",
+      "iso3": "NZL"
+    },
+    {
+      "name": "Papua New Guinea",
+      "iso2": "PG",
+      "iso3": "PNG"
+    },
+    {
+      "name": "Peru",
+      "iso2": "PE",
+      "iso3": "PER"
+    },
+    {
+      "name": "Philippines",
+      "iso2": "PH",
+      "iso3": "PHL"
+    },
+    {
+      "name": "Russian Federation",
+      "iso2": "RU",
+      "iso3": "RUS"
+    },
+    {
+      "name": "Singapore",
+      "iso2": "SG",
+      "iso3": "SGP"
+    },
+    {
+      "name": "Taiwan",
+      "iso2": "TW",
+      "iso3": "TWN"
+    },
+    {
+      "name": "Thailand",
+      "iso2": "TH",
+      "iso3": "THA"
+    },
+    {
+      "name": "United States",
+      "iso2": "US",
+      "iso3": "USA"
+    },
+    {
+      "name": "Vietnam",
+      "iso2": "VN",
+      "iso3": "VNM"
+    }
+  ]
+}

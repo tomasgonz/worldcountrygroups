@@ -1,0 +1,49 @@
+{
+  "gid": "g7",
+  "acronym": "G7",
+  "name": "Group of Seven",
+  "description": "An intergovernmental forum of seven of the world's largest advanced economies coordinating on global economic governance and international security.",
+  "classifier": "G7",
+  "domains": [
+    "Europe",
+    "North America",
+    "Asia"
+  ],
+  "countries": [
+    {
+      "name": "Canada",
+      "iso2": "CA",
+      "iso3": "CAN"
+    },
+    {
+      "name": "France",
+      "iso2": "FR",
+      "iso3": "FRA"
+    },
+    {
+      "name": "Germany",
+      "iso2": "DE",
+      "iso3": "DEU"
+    },
+    {
+      "name": "Italy",
+      "iso2": "IT",
+      "iso3": "ITA"
+    },
+    {
+      "name": "Japan",
+      "iso2": "JP",
+      "iso3": "JPN"
+    },
+    {
+      "name": "United Kingdom",
+      "iso2": "GB",
+      "iso3": "GBR"
+    },
+    {
+      "name": "United States",
+      "iso2": "US",
+      "iso3": "USA"
+    }
+  ]
+}

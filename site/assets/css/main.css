@@ -1,15 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    @apply bg-gray-50 text-gray-900 antialiased;
+    @apply bg-primary-50 text-primary-900 antialiased;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+  h1, h2, h3 {
+    font-family: 'Instrument Serif', Georgia, serif;
   }
 }
 
 @layer components {
   .skeleton {
-    @apply animate-pulse bg-gray-200 rounded;
+    @apply animate-pulse bg-primary-100 rounded-xl;
   }
 }

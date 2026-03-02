@@ -1,0 +1,63 @@
+{
+  "gid": "cis",
+  "acronym": "CIS",
+  "name": "Commonwealth of Independent States",
+  "description": "A regional intergovernmental organization of post-Soviet states formed in 1991 following the dissolution of the Soviet Union.",
+  "classifier": "CIS",
+  "domains": [
+    "Europe",
+    "Asia"
+  ],
+  "countries": [
+    {
+      "name": "Armenia",
+      "iso2": "AM",
+      "iso3": "ARM"
+    },
+    {
+      "name": "Azerbaijan",
+      "iso2": "AZ",
+      "iso3": "AZE"
+    },
+    {
+      "name": "Belarus",
+      "iso2": "BY",
+      "iso3": "BLR"
+    },
+    {
+      "name": "Kazakhstan",
+      "iso2": "KZ",
+      "iso3": "KAZ"
+    },
+    {
+      "name": "Kyrgyzstan",
+      "iso2": "KG",
+      "iso3": "KGZ"
+    },
+    {
+      "name": "Moldova",
+      "iso2": "MD",
+      "iso3": "MDA"
+    },
+    {
+      "name": "Russian Federation",
+      "iso2": "RU",
+      "iso3": "RUS"
+    },
+    {
+      "name": "Tajikistan",
+      "iso2": "TJ",
+      "iso3": "TJK"
+    },
+    {
+      "name": "Turkmenistan",
+      "iso2": "TM",
+      "iso3": "TKM"
+    },
+    {
+      "name": "Uzbekistan",
+      "iso2": "UZ",
+      "iso3": "UZB"
+    }
+  ]
+}

@@ -8,7 +8,7 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Browse 47 international country groups — EU, G20, BRICS, OECD, NATO and more. Explore memberships, GDP, population, and CO2 data.' },
+        { name: 'description', content: 'Browse 90+ international country groups — EU, G20, BRICS, OECD, NATO, OPEC and more. Explore memberships, GDP, population, and CO2 data.' },
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },

@@ -1,0 +1,58 @@
+{
+  "gid": "d8",
+  "acronym": "D-8",
+  "name": "D-8 Organization for Economic Cooperation",
+  "description": "An organization for development cooperation among major Muslim-majority developing countries, founded in 1997.",
+  "classifier": "D-8",
+  "domains": [
+    "Asia",
+    "Africa"
+  ],
+  "countries": [
+    {
+      "name": "Azerbaijan",
+      "iso2": "AZ",
+      "iso3": "AZE"
+    },
+    {
+      "name": "Bangladesh",
+      "iso2": "BD",
+      "iso3": "BGD"
+    },
+    {
+      "name": "Egypt",
+      "iso2": "EG",
+      "iso3": "EGY"
+    },
+    {
+      "name": "Indonesia",
+      "iso2": "ID",
+      "iso3": "IDN"
+    },
+    {
+      "name": "Iran",
+      "iso2": "IR",
+      "iso3": "IRN"
+    },
+    {
+      "name": "Malaysia",
+      "iso2": "MY",
+      "iso3": "MYS"
+    },
+    {
+      "name": "Nigeria",
+      "iso2": "NG",
+      "iso3": "NGA"
+    },
+    {
+      "name": "Pakistan",
+      "iso2": "PK",
+      "iso3": "PAK"
+    },
+    {
+      "name": "Turkey",
+      "iso2": "TR",
+      "iso3": "TUR"
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "gid": "eeg",
+  "acronym": "EEG",
+  "name": "Eastern European Group",
+  "description": "One of the five UN General Assembly regional groups, composed of 23 member states from Eastern, Central, and Southern Europe.",
+  "classifier": "United Nations General Assembly",
+  "domains": [
+    "UNGA"
+  ],
+  "countries": [
+    {
+      "name": "Albania",
+      "iso2": "AL",
+      "iso3": "ALB"
+    },
+    {
+      "name": "Armenia",
+      "iso2": "AM",
+      "iso3": "ARM"
+    },
+    {
+      "name": "Azerbaijan",
+      "iso2": "AZ",
+      "iso3": "AZE"
+    },
+    {
+      "name": "Belarus",
+      "iso2": "BY",
+      "iso3": "BLR"
+    },
+    {
+      "name": "Bosnia and Herzegovina",
+      "iso2": "BA",
+      "iso3": "BIH"
+    },
+    {
+      "name": "Bulgaria",
+      "iso2": "BG",
+      "iso3": "BGR"
+    },
+    {
+      "name": "Croatia",
+      "iso2": "HR",
+      "iso3": "HRV"
+    },
+    {
+      "name": "Czech Republic",
+      "iso2": "CZ",
+      "iso3": "CZE"
+    },
+    {
+      "name": "Estonia",
+      "iso2": "EE",
+      "iso3": "EST"
+    },
+    {
+      "name": "Georgia",
+      "iso2": "GE",
+      "iso3": "GEO"
+    },
+    {
+      "name": "Hungary",
+      "iso2": "HU",
+      "iso3": "HUN"
+    },
+    {
+      "name": "Latvia",
+      "iso2": "LV",
+      "iso3": "LVA"
+    },
+    {
+      "name": "Lithuania",
+      "iso2": "LT",
+      "iso3": "LTU"
+    },
+    {
+      "name": "Montenegro",
+      "iso2": "ME",
+      "iso3": "MNE"
+    },
+    {
+      "name": "North Macedonia",
+      "iso2": "MK",
+      "iso3": "MKD"
+    },
+    {
+      "name": "Poland",
+      "iso2": "PL",
+      "iso3": "POL"
+    },
+    {
+      "name": "Moldova",
+      "iso2": "MD",
+      "iso3": "MDA"
+    },
+    {
+      "name": "Romania",
+      "iso2": "RO",
+      "iso3": "ROU"
+    },
+    {
+      "name": "Russian Federation",
+      "iso2": "RU",
+      "iso3": "RUS"
+    },
+    {
+      "name": "Serbia",
+      "iso2": "RS",
+      "iso3": "SRB"
+    },
+    {
+      "name": "Slovakia",
+      "iso2": "SK",
+      "iso3": "SVK"
+    },
+    {
+      "name": "Slovenia",
+      "iso2": "SI",
+      "iso3": "SVN"
+    },
+    {
+      "name": "Ukraine",
+      "iso2": "UA",
+      "iso3": "UKR"
+    }
+  ]
+}

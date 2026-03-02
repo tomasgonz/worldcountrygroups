@@ -1,0 +1,32 @@
+{
+  "gid": "pa",
+  "acronym": "PA",
+  "name": "Pacific Alliance",
+  "description": "A Latin American trade bloc formed in 2011 by four Pacific-facing countries to promote regional integration.",
+  "classifier": "Pacific Alliance",
+  "domains": [
+    "Latin America and the Caribbean"
+  ],
+  "countries": [
+    {
+      "name": "Chile",
+      "iso2": "CL",
+      "iso3": "CHL"
+    },
+    {
+      "name": "Colombia",
+      "iso2": "CO",
+      "iso3": "COL"
+    },
+    {
+      "name": "Mexico",
+      "iso2": "MX",
+      "iso3": "MEX"
+    },
+    {
+      "name": "Peru",
+      "iso2": "PE",
+      "iso3": "PER"
+    }
+  ]
+}

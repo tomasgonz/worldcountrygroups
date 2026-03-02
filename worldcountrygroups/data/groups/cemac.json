@@ -1,0 +1,42 @@
+{
+  "gid": "cemac",
+  "acronym": "CEMAC",
+  "name": "Economic and Monetary Community of Central Africa",
+  "description": "A regional economic community of six Central African states sharing the Central African CFA franc as a common currency.",
+  "classifier": "CEMAC",
+  "domains": [
+    "Africa"
+  ],
+  "countries": [
+    {
+      "name": "Cameroon",
+      "iso2": "CM",
+      "iso3": "CMR"
+    },
+    {
+      "name": "Central African Republic",
+      "iso2": "CF",
+      "iso3": "CAF"
+    },
+    {
+      "name": "Chad",
+      "iso2": "TD",
+      "iso3": "TCD"
+    },
+    {
+      "name": "Congo Rep.",
+      "iso2": "CG",
+      "iso3": "COG"
+    },
+    {
+      "name": "Equatorial Guinea",
+      "iso2": "GQ",
+      "iso3": "GNQ"
+    },
+    {
+      "name": "Gabon",
+      "iso2": "GA",
+      "iso3": "GAB"
+    }
+  ]
+}

@@ -53,7 +53,7 @@ export function formatPopulation(n: number | null | undefined): string {
 
 export function formatCO2(n: number | null | undefined): string {
   if (n == null) return 'N/A'
-  if (n >= 1e6) return `${(n / 1e6).toFixed(2)}M kt`
-  if (n >= 1e3) return `${(n / 1e3).toFixed(1)}K kt`
-  return `${n.toFixed(0)} kt`
+  if (n >= 1e3) return `${(n / 1e3).toFixed(2)} Gt`
+  if (n >= 1) return `${n.toFixed(1)} Mt`
+  return `${(n * 1e3).toFixed(0)} kt`
 }

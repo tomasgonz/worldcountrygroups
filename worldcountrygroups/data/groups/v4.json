@@ -1,0 +1,32 @@
+{
+  "gid": "v4",
+  "acronym": "V4",
+  "name": "Visegrad Group",
+  "description": "A cultural and political alliance of four Central European EU member states formed in 1991.",
+  "classifier": "Visegrad Group",
+  "domains": [
+    "Europe"
+  ],
+  "countries": [
+    {
+      "name": "Czech Republic",
+      "iso2": "CZ",
+      "iso3": "CZE"
+    },
+    {
+      "name": "Hungary",
+      "iso2": "HU",
+      "iso3": "HUN"
+    },
+    {
+      "name": "Poland",
+      "iso2": "PL",
+      "iso3": "POL"
+    },
+    {
+      "name": "Slovakia",
+      "iso2": "SK",
+      "iso3": "SVK"
+    }
+  ]
+}

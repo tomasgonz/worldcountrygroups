@@ -1,0 +1,38 @@
+{
+  "gid": "ots",
+  "acronym": "OTS",
+  "name": "Organisation of Turkic States",
+  "description": "An international organization comprising Turkic-speaking countries promoting comprehensive cooperation in political, economic, and cultural spheres.",
+  "classifier": "OTS",
+  "domains": [
+    "Asia",
+    "Europe"
+  ],
+  "countries": [
+    {
+      "name": "Azerbaijan",
+      "iso2": "AZ",
+      "iso3": "AZE"
+    },
+    {
+      "name": "Kazakhstan",
+      "iso2": "KZ",
+      "iso3": "KAZ"
+    },
+    {
+      "name": "Kyrgyzstan",
+      "iso2": "KG",
+      "iso3": "KGZ"
+    },
+    {
+      "name": "Turkey",
+      "iso2": "TR",
+      "iso3": "TUR"
+    },
+    {
+      "name": "Uzbekistan",
+      "iso2": "UZ",
+      "iso3": "UZB"
+    }
+  ]
+}

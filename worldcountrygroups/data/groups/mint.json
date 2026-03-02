@@ -1,0 +1,34 @@
+{
+  "gid": "mint",
+  "acronym": "MINT",
+  "name": "MINT",
+  "description": "Four large, rapidly growing emerging market economies identified by Jim O'Neill in 2013.",
+  "classifier": "Goldman Sachs",
+  "domains": [
+    "Asia",
+    "Africa",
+    "Latin America and the Caribbean"
+  ],
+  "countries": [
+    {
+      "name": "Indonesia",
+      "iso2": "ID",
+      "iso3": "IDN"
+    },
+    {
+      "name": "Mexico",
+      "iso2": "MX",
+      "iso3": "MEX"
+    },
+    {
+      "name": "Nigeria",
+      "iso2": "NG",
+      "iso3": "NGA"
+    },
+    {
+      "name": "Turkey",
+      "iso2": "TR",
+      "iso3": "TUR"
+    }
+  ]
+}

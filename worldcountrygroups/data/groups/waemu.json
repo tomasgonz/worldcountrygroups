@@ -1,0 +1,52 @@
+{
+  "gid": "waemu",
+  "acronym": "WAEMU",
+  "name": "West African Economic and Monetary Union",
+  "description": "A regional economic and monetary union of eight West African states sharing the West African CFA franc.",
+  "classifier": "WAEMU",
+  "domains": [
+    "Africa"
+  ],
+  "countries": [
+    {
+      "name": "Benin",
+      "iso2": "BJ",
+      "iso3": "BEN"
+    },
+    {
+      "name": "Burkina Faso",
+      "iso2": "BF",
+      "iso3": "BFA"
+    },
+    {
+      "name": "Cote d'Ivoire",
+      "iso2": "CI",
+      "iso3": "CIV"
+    },
+    {
+      "name": "Guinea-Bissau",
+      "iso2": "GW",
+      "iso3": "GNB"
+    },
+    {
+      "name": "Mali",
+      "iso2": "ML",
+      "iso3": "MLI"
+    },
+    {
+      "name": "Niger",
+      "iso2": "NE",
+      "iso3": "NER"
+    },
+    {
+      "name": "Senegal",
+      "iso2": "SN",
+      "iso3": "SEN"
+    },
+    {
+      "name": "Togo",
+      "iso2": "TG",
+      "iso3": "TGO"
+    }
+  ]
+}

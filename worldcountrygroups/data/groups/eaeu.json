@@ -1,0 +1,38 @@
+{
+  "gid": "eaeu",
+  "acronym": "EAEU",
+  "name": "Eurasian Economic Union",
+  "description": "An economic union of five post-Soviet states providing for the free movement of goods, services, capital, and labor.",
+  "classifier": "EAEU",
+  "domains": [
+    "Europe",
+    "Asia"
+  ],
+  "countries": [
+    {
+      "name": "Armenia",
+      "iso2": "AM",
+      "iso3": "ARM"
+    },
+    {
+      "name": "Belarus",
+      "iso2": "BY",
+      "iso3": "BLR"
+    },
+    {
+      "name": "Kazakhstan",
+      "iso2": "KZ",
+      "iso3": "KAZ"
+    },
+    {
+      "name": "Kyrgyzstan",
+      "iso2": "KG",
+      "iso3": "KGZ"
+    },
+    {
+      "name": "Russian Federation",
+      "iso2": "RU",
+      "iso3": "RUS"
+    }
+  ]
+}

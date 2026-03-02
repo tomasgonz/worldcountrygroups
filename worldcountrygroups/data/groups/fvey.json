@@ -1,0 +1,40 @@
+{
+  "gid": "fvey",
+  "acronym": "FVEY",
+  "name": "Five Eyes",
+  "description": "An Anglophone intelligence alliance comprising five nations party to the UKUSA Agreement for joint signals intelligence cooperation.",
+  "classifier": "Five Eyes",
+  "domains": [
+    "North America",
+    "Europe",
+    "Oceania",
+    "Peace and Security"
+  ],
+  "countries": [
+    {
+      "name": "Australia",
+      "iso2": "AU",
+      "iso3": "AUS"
+    },
+    {
+      "name": "Canada",
+      "iso2": "CA",
+      "iso3": "CAN"
+    },
+    {
+      "name": "New Zealand",
+      "iso2": "NZ",
+      "iso3": "NZL"
+    },
+    {
+      "name": "United Kingdom",
+      "iso2": "GB",
+      "iso3": "GBR"
+    },
+    {
+      "name": "United States",
+      "iso2": "US",
+      "iso3": "USA"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "gid": "opec",
+  "acronym": "OPEC",
+  "name": "Organization of the Petroleum Exporting Countries",
+  "description": "An intergovernmental organization of 12 oil-exporting nations founded in 1960 to coordinate petroleum policies and stabilize oil markets.",
+  "classifier": "OPEC",
+  "domains": [
+    "Africa",
+    "Asia",
+    "Latin America and the Caribbean"
+  ],
+  "countries": [
+    {
+      "name": "Algeria",
+      "iso2": "DZ",
+      "iso3": "DZA"
+    },
+    {
+      "name": "Congo Rep.",
+      "iso2": "CG",
+      "iso3": "COG"
+    },
+    {
+      "name": "Equatorial Guinea",
+      "iso2": "GQ",
+      "iso3": "GNQ"
+    },
+    {
+      "name": "Gabon",
+      "iso2": "GA",
+      "iso3": "GAB"
+    },
+    {
+      "name": "Iran",
+      "iso2": "IR",
+      "iso3": "IRN"
+    },
+    {
+      "name": "Iraq",
+      "iso2": "IQ",
+      "iso3": "IRQ"
+    },
+    {
+      "name": "Kuwait",
+      "iso2": "KW",
+      "iso3": "KWT"
+    },
+    {
+      "name": "Libya",
+      "iso2": "LY",
+      "iso3": "LBY"
+    },
+    {
+      "name": "Nigeria",
+      "iso2": "NG",
+      "iso3": "NGA"
+    },
+    {
+      "name": "Saudi Arabia",
+      "iso2": "SA",
+      "iso3": "SAU"
+    },
+    {
+      "name": "United Arab Emirates",
+      "iso2": "AE",
+      "iso3": "ARE"
+    },
+    {
+      "name": "Venezuela",
+      "iso2": "VE",
+      "iso3": "VEN"
+    }
+  ]
+}

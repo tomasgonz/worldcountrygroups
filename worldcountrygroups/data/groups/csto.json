@@ -1,0 +1,44 @@
+{
+  "gid": "csto",
+  "acronym": "CSTO",
+  "name": "Collective Security Treaty Organization",
+  "description": "An intergovernmental military alliance of post-Soviet states established in 2002 for collective defense and crisis response.",
+  "classifier": "CSTO",
+  "domains": [
+    "Europe",
+    "Asia",
+    "Peace and Security"
+  ],
+  "countries": [
+    {
+      "name": "Armenia",
+      "iso2": "AM",
+      "iso3": "ARM"
+    },
+    {
+      "name": "Belarus",
+      "iso2": "BY",
+      "iso3": "BLR"
+    },
+    {
+      "name": "Kazakhstan",
+      "iso2": "KZ",
+      "iso3": "KAZ"
+    },
+    {
+      "name": "Kyrgyzstan",
+      "iso2": "KG",
+      "iso3": "KGZ"
+    },
+    {
+      "name": "Russian Federation",
+      "iso2": "RU",
+      "iso3": "RUS"
+    },
+    {
+      "name": "Tajikistan",
+      "iso2": "TJ",
+      "iso3": "TJK"
+    }
+  ]
+}

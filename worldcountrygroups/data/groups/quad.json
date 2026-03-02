@@ -1,0 +1,35 @@
+{
+  "gid": "quad",
+  "acronym": "Quad",
+  "name": "Quadrilateral Security Dialogue",
+  "description": "A strategic security dialogue among four Indo-Pacific democracies committed to a free and open Indo-Pacific region.",
+  "classifier": "Quad",
+  "domains": [
+    "Asia",
+    "Oceania",
+    "North America",
+    "Peace and Security"
+  ],
+  "countries": [
+    {
+      "name": "Australia",
+      "iso2": "AU",
+      "iso3": "AUS"
+    },
+    {
+      "name": "India",
+      "iso2": "IN",
+      "iso3": "IND"
+    },
+    {
+      "name": "Japan",
+      "iso2": "JP",
+      "iso3": "JPN"
+    },
+    {
+      "name": "United States",
+      "iso2": "US",
+      "iso3": "USA"
+    }
+  ]
+}

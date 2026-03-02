@@ -1,124 +1,119 @@
 <template>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div v-if="error" class="text-center py-20">
-      <h1 class="text-2xl font-bold text-gray-400 mb-2">Group not found</h1>
-      <NuxtLink to="/groups" class="text-accent-500 hover:text-accent-600">Browse all groups &rarr;</NuxtLink>
+      <h1 class="font-serif text-2xl font-bold text-primary-400 mb-2">Group not found</h1>
+      <NuxtLink to="/groups" class="text-accent-600 hover:text-accent-700">Browse all groups &rarr;</NuxtLink>
     </div>
 
     <template v-else-if="group">
       <!-- Breadcrumb -->
-      <nav class="text-sm text-gray-400 mb-6">
-        <NuxtLink to="/groups" class="hover:text-accent-500">Groups</NuxtLink>
-        <span class="mx-2">/</span>
-        <span class="text-gray-700">{{ (group as any).acronym }}</span>
+      <nav class="text-sm text-primary-400 mb-6">
+        <NuxtLink to="/groups" class="hover:text-primary-700 transition-colors">Groups</NuxtLink>
+        <span class="mx-2 text-primary-300">/</span>
+        <span class="text-primary-600">{{ (group as any).acronym }}</span>
       </nav>
 
       <!-- Header -->
-      <div class="mb-8">
-        <div class="flex items-start gap-4 mb-3">
-          <h1 class="text-3xl sm:text-4xl font-bold text-primary-500">{{ (group as any).name }}</h1>
-        </div>
-        <div class="flex flex-wrap gap-2 mb-4">
+      <div class="mb-10">
+        <h1 class="font-serif text-3xl sm:text-4xl font-bold text-primary-900 mb-3">{{ (group as any).name }}</h1>
+        <div class="flex flex-wrap items-center gap-2 mb-4">
           <DomainTag v-for="d in (group as any).domains" :key="d" :domain="d" size="md" />
-          <span class="inline-block rounded-full px-3 py-1 text-sm font-medium bg-primary-50 text-primary-600">
+          <span class="text-xs text-primary-500 bg-primary-100 px-2.5 py-1 rounded-md font-medium">
             {{ (group as any).classifier }}
           </span>
         </div>
-        <p class="text-gray-600 leading-relaxed max-w-4xl">{{ (group as any).description }}</p>
+        <p class="text-primary-600 leading-relaxed max-w-3xl">{{ (group as any).description }}</p>
       </div>
 
       <!-- Stats -->
-      <div class="mb-10">
-        <h2 class="text-xl font-bold text-primary-500 mb-4">Aggregate Statistics</h2>
+      <div class="mb-12">
+        <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">Aggregate Statistics</h2>
         <GroupStats :stats="stats as any" :pending="statsPending" />
       </div>
 
-      <!-- Country Comparison -->
-      <div class="mb-10">
-        <h2 class="text-xl font-bold text-primary-500 mb-4">Compare Countries</h2>
+      <!-- Country Breakdown -->
+      <div class="mb-12">
+        <h2 class="font-serif text-xl font-bold text-primary-900 mb-2">Country Breakdown</h2>
+        <p class="text-primary-500 text-sm mb-4">Each country's share of the group's total GDP, population, and CO2 emissions.</p>
 
-        <!-- Selected country chips -->
-        <div v-if="selectedCountries.length" class="flex flex-wrap gap-2 mb-3">
-          <span
-            v-for="iso in selectedCountries"
-            :key="iso"
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary-500 text-white rounded-full text-sm font-medium"
-          >
-            <span v-if="countryMap[iso]?.iso2">{{ isoToFlag(countryMap[iso].iso2) }}</span>
-            {{ countryMap[iso]?.name || iso }}
-            <button
-              class="ml-0.5 hover:bg-primary-400 rounded-full w-5 h-5 inline-flex items-center justify-center text-xs"
-              @click="removeCountry(iso)"
-            >&times;</button>
-          </span>
-          <button
-            class="px-3 py-1.5 text-sm text-gray-500 hover:text-red-500 transition-colors"
-            @click="selectedCountries = []"
-          >Clear all</button>
+        <div v-if="breakdownPending" class="space-y-2">
+          <div v-for="i in 8" :key="i" class="skeleton h-12 rounded-lg" />
         </div>
 
-        <!-- Add country select -->
-        <select
-          :value="''"
-          :disabled="selectedCountries.length >= 10"
-          class="block w-full sm:w-80 px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-900 focus:ring-2 focus:ring-accent-500 focus:border-transparent outline-none disabled:opacity-50 disabled:cursor-not-allowed"
-          @change="addCountry($event)"
-        >
-          <option value="" disabled>
-            {{ selectedCountries.length >= 10 ? 'Maximum 10 countries selected' : 'Add a country to compare...' }}
-          </option>
-          <option
-            v-for="c in availableCountries"
-            :key="c.iso2 || c.iso3"
-            :value="c.iso2 || c.iso3"
-          >
-            {{ c.name }} ({{ c.iso2 || c.iso3 }})
-          </option>
-        </select>
-
-        <!-- Comparison results -->
-        <div v-if="selectedCountries.length > 0" class="mt-6">
-          <div v-if="comparePending" class="space-y-4">
-            <div v-for="i in selectedCountries.length" :key="i" class="skeleton h-28 rounded-xl" />
-          </div>
-          <div v-else-if="compareData && (compareData as any[]).length" class="space-y-4">
-            <div
-              v-for="entry in (compareData as any[])"
-              :key="entry.iso3"
-              class="bg-white rounded-xl shadow-sm border border-gray-100 p-5"
-            >
-              <div class="flex items-center gap-2 mb-3">
-                <span v-if="entry.iso2" class="text-xl">{{ isoToFlag(entry.iso2) }}</span>
-                <h3 class="text-lg font-bold text-primary-500">{{ entry.name }}</h3>
-                <span class="text-sm text-gray-400">({{ entry.iso3 }})</span>
-              </div>
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div>
-                  <div class="text-sm text-gray-500">GDP (nominal)</div>
-                  <div v-if="entry.stats.gdp" class="text-lg font-bold text-primary-500">{{ formatNumber(entry.stats.gdp.total) }}</div>
-                  <div v-else class="text-gray-400">No data</div>
-                </div>
-                <div>
-                  <div class="text-sm text-gray-500">Population</div>
-                  <div v-if="entry.stats.population" class="text-lg font-bold text-primary-500">{{ formatPopulation(entry.stats.population.total) }}</div>
-                  <div v-else class="text-gray-400">No data</div>
-                </div>
-                <div>
-                  <div class="text-sm text-gray-500">CO2 Emissions</div>
-                  <div v-if="entry.stats.co2" class="text-lg font-bold text-primary-500">{{ formatCO2(entry.stats.co2.total) }}</div>
-                  <div v-else class="text-gray-400">No data</div>
-                </div>
-              </div>
-            </div>
+        <div v-else-if="breakdown" class="bg-white rounded-xl border border-primary-200/60 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-primary-100 text-left">
+                  <th class="px-4 py-3 font-medium text-primary-500 text-xs uppercase tracking-wider">Country</th>
+                  <th class="px-4 py-3 font-medium text-primary-500 text-xs uppercase tracking-wider text-right">GDP</th>
+                  <th class="px-4 py-3 font-medium text-primary-500 text-xs uppercase tracking-wider text-right w-24">%</th>
+                  <th class="px-4 py-3 font-medium text-primary-500 text-xs uppercase tracking-wider text-right">Population</th>
+                  <th class="px-4 py-3 font-medium text-primary-500 text-xs uppercase tracking-wider text-right w-24">%</th>
+                  <th class="px-4 py-3 font-medium text-primary-500 text-xs uppercase tracking-wider text-right hidden sm:table-cell">CO2</th>
+                  <th class="px-4 py-3 font-medium text-primary-500 text-xs uppercase tracking-wider text-right w-24 hidden sm:table-cell">%</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-primary-50">
+                <tr
+                  v-for="c in (breakdown as any).countries"
+                  :key="c.iso3 || c.name"
+                  class="hover:bg-primary-50/50 transition-colors"
+                >
+                  <td class="px-4 py-2.5">
+                    <NuxtLink :to="`/countries/${c.iso2 || c.iso3}`" class="flex items-center gap-2 hover:text-accent-600 transition-colors">
+                      <span v-if="c.iso2" class="text-base">{{ isoToFlag(c.iso2) }}</span>
+                      <span class="text-primary-800 font-medium">{{ c.name }}</span>
+                    </NuxtLink>
+                  </td>
+                  <td class="px-4 py-2.5 text-right text-primary-700 tabular-nums">
+                    {{ c.gdp !== null ? formatCompact(c.gdp) : '—' }}
+                  </td>
+                  <td class="px-4 py-2.5 text-right w-24">
+                    <div v-if="c.gdpPct !== null" class="flex items-center justify-end gap-2">
+                      <div class="w-16 h-1.5 bg-primary-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-accent-500 rounded-full" :style="{ width: Math.min(c.gdpPct, 100) + '%' }"></div>
+                      </div>
+                      <span class="text-primary-500 text-xs tabular-nums w-12 text-right">{{ c.gdpPct }}%</span>
+                    </div>
+                    <span v-else class="text-primary-300">—</span>
+                  </td>
+                  <td class="px-4 py-2.5 text-right text-primary-700 tabular-nums">
+                    {{ c.population !== null ? formatCompactPop(c.population) : '—' }}
+                  </td>
+                  <td class="px-4 py-2.5 text-right w-24">
+                    <div v-if="c.populationPct !== null" class="flex items-center justify-end gap-2">
+                      <div class="w-16 h-1.5 bg-primary-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-emerald-500 rounded-full" :style="{ width: Math.min(c.populationPct, 100) + '%' }"></div>
+                      </div>
+                      <span class="text-primary-500 text-xs tabular-nums w-12 text-right">{{ c.populationPct }}%</span>
+                    </div>
+                    <span v-else class="text-primary-300">—</span>
+                  </td>
+                  <td class="px-4 py-2.5 text-right text-primary-700 tabular-nums hidden sm:table-cell">
+                    {{ c.co2 !== null ? formatCompactCO2(c.co2) : '—' }}
+                  </td>
+                  <td class="px-4 py-2.5 text-right w-24 hidden sm:table-cell">
+                    <div v-if="c.co2Pct !== null" class="flex items-center justify-end gap-2">
+                      <div class="w-16 h-1.5 bg-primary-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-orange-400 rounded-full" :style="{ width: Math.min(c.co2Pct, 100) + '%' }"></div>
+                      </div>
+                      <span class="text-primary-500 text-xs tabular-nums w-12 text-right">{{ c.co2Pct }}%</span>
+                    </div>
+                    <span v-else class="text-primary-300">—</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
 
       <!-- Countries -->
       <div>
-        <h2 class="text-xl font-bold text-primary-500 mb-4">
+        <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">
           Member Countries
-          <span class="text-base font-normal text-gray-400">({{ (group as any).countries.length }})</span>
+          <span class="text-base font-normal text-primary-400">({{ (group as any).countries.length }})</span>
         </h2>
         <div class="flex flex-wrap gap-2">
           <CountryBadge v-for="c in (group as any).countries" :key="c.iso3 || c.name" :country="c" />
@@ -145,65 +140,27 @@ const gid = route.params.gid as string
 const { group, error } = useGroup(gid)
 const { stats, pending: statsPending } = useGroupStats(gid)
 
-const selectedCountries = ref<string[]>([])
+const { data: breakdown, pending: breakdownPending } = useFetch(`/api/groups/${gid}/breakdown`)
 
-// Build a lookup map from ISO code to country object
-const countryMap = computed(() => {
-  const map: Record<string, { name: string; iso2: string; iso3: string }> = {}
-  if (!group.value) return map
-  for (const c of (group.value as any).countries) {
-    const key = c.iso2 || c.iso3
-    if (key) map[key] = c
-  }
-  return map
-})
-
-// Countries not yet selected, sorted by name
-const availableCountries = computed(() => {
-  if (!group.value) return []
-  const selected = new Set(selectedCountries.value)
-  return (group.value as any).countries
-    .filter((c: any) => {
-      const key = c.iso2 || c.iso3
-      return key && !selected.has(key)
-    })
-    .sort((a: any, b: any) => a.name.localeCompare(b.name))
-})
-
-function addCountry(event: Event) {
-  const select = event.target as HTMLSelectElement
-  const val = select.value
-  if (val && !selectedCountries.value.includes(val) && selectedCountries.value.length < 10) {
-    selectedCountries.value = [...selectedCountries.value, val]
-  }
-  select.value = ''
+function formatCompact(val: number): string {
+  if (val >= 1e12) return '$' + (val / 1e12).toFixed(1) + 'T'
+  if (val >= 1e9) return '$' + (val / 1e9).toFixed(1) + 'B'
+  if (val >= 1e6) return '$' + (val / 1e6).toFixed(0) + 'M'
+  return '$' + val.toLocaleString()
 }
 
-function removeCountry(iso: string) {
-  selectedCountries.value = selectedCountries.value.filter(c => c !== iso)
+function formatCompactPop(val: number): string {
+  if (val >= 1e9) return (val / 1e9).toFixed(2) + 'B'
+  if (val >= 1e6) return (val / 1e6).toFixed(1) + 'M'
+  if (val >= 1e3) return (val / 1e3).toFixed(0) + 'K'
+  return val.toLocaleString()
 }
 
-// Fetch comparison data when selected countries change
-const countriesParam = computed(() => selectedCountries.value.join(','))
-
-const { data: compareData, pending: comparePending } = useFetch(
-  () => selectedCountries.value.length > 0
-    ? `/api/countries/compare?countries=${countriesParam.value}`
-    : null,
-  {
-    watch: [countriesParam],
-    default: () => [],
-  }
-)
-
-// Clear invalid selections when group changes
-watch(group, () => {
-  if (!group.value) return
-  const validKeys = new Set(
-    (group.value as any).countries.map((c: any) => c.iso2 || c.iso3).filter(Boolean)
-  )
-  selectedCountries.value = selectedCountries.value.filter(c => validKeys.has(c))
-})
+function formatCompactCO2(val: number): string {
+  if (val >= 1e3) return (val / 1e3).toFixed(1) + ' Gt'
+  if (val >= 1) return val.toFixed(1) + ' Mt'
+  return (val * 1e3).toFixed(0) + ' kt'
+}
 
 useHead({
   title: computed(() => {

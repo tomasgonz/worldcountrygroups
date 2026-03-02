@@ -1,0 +1,38 @@
+{
+  "gid": "g5sahel",
+  "acronym": "G5 Sahel",
+  "name": "G5 Sahel",
+  "description": "An institutional framework for security and development coordination in the Sahel region, founded in 2014.",
+  "classifier": "G5 Sahel",
+  "domains": [
+    "Africa",
+    "Peace and Security"
+  ],
+  "countries": [
+    {
+      "name": "Burkina Faso",
+      "iso2": "BF",
+      "iso3": "BFA"
+    },
+    {
+      "name": "Chad",
+      "iso2": "TD",
+      "iso3": "TCD"
+    },
+    {
+      "name": "Mali",
+      "iso2": "ML",
+      "iso3": "MLI"
+    },
+    {
+      "name": "Mauritania",
+      "iso2": "MR",
+      "iso3": "MRT"
+    },
+    {
+      "name": "Niger",
+      "iso2": "NE",
+      "iso3": "NER"
+    }
+  ]
+}

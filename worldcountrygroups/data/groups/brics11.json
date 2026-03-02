@@ -1,0 +1,69 @@
+{
+  "gid": "brics11",
+  "acronym": "BRICS+",
+  "name": "BRICS+ Expanded",
+  "description": "The expanded BRICS grouping as of 2025, with 11 member states after Egypt, Ethiopia, Iran, Saudi Arabia, UAE, and Indonesia joined the original five.",
+  "classifier": "BRICS",
+  "domains": [
+    "Africa",
+    "Asia",
+    "Latin America and the Caribbean"
+  ],
+  "countries": [
+    {
+      "name": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA"
+    },
+    {
+      "name": "China",
+      "iso2": "CN",
+      "iso3": "CHN"
+    },
+    {
+      "name": "Egypt",
+      "iso2": "EG",
+      "iso3": "EGY"
+    },
+    {
+      "name": "Ethiopia",
+      "iso2": "ET",
+      "iso3": "ETH"
+    },
+    {
+      "name": "India",
+      "iso2": "IN",
+      "iso3": "IND"
+    },
+    {
+      "name": "Indonesia",
+      "iso2": "ID",
+      "iso3": "IDN"
+    },
+    {
+      "name": "Iran",
+      "iso2": "IR",
+      "iso3": "IRN"
+    },
+    {
+      "name": "Russian Federation",
+      "iso2": "RU",
+      "iso3": "RUS"
+    },
+    {
+      "name": "Saudi Arabia",
+      "iso2": "SA",
+      "iso3": "SAU"
+    },
+    {
+      "name": "South Africa",
+      "iso2": "ZA",
+      "iso3": "ZAF"
+    },
+    {
+      "name": "United Arab Emirates",
+      "iso2": "AE",
+      "iso3": "ARE"
+    }
+  ]
+}

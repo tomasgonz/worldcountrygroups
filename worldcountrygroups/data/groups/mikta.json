@@ -1,0 +1,40 @@
+{
+  "gid": "mikta",
+  "acronym": "MIKTA",
+  "name": "MIKTA",
+  "description": "An informal cross-regional partnership of five middle-power democracies created in 2013.",
+  "classifier": "MIKTA",
+  "domains": [
+    "Asia",
+    "Oceania",
+    "Latin America and the Caribbean",
+    "Europe"
+  ],
+  "countries": [
+    {
+      "name": "Australia",
+      "iso2": "AU",
+      "iso3": "AUS"
+    },
+    {
+      "name": "Indonesia",
+      "iso2": "ID",
+      "iso3": "IDN"
+    },
+    {
+      "name": "Korea Rep.",
+      "iso2": "KR",
+      "iso3": "KOR"
+    },
+    {
+      "name": "Mexico",
+      "iso2": "MX",
+      "iso3": "MEX"
+    },
+    {
+      "name": "Turkey",
+      "iso2": "TR",
+      "iso3": "TUR"
+    }
+  ]
+}

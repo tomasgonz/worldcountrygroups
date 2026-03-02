@@ -1,0 +1,45 @@
+{
+  "gid": "civets",
+  "acronym": "CIVETS",
+  "name": "CIVETS",
+  "description": "Six emerging market countries identified for their diversified economies and strong growth potential.",
+  "classifier": "Economist Intelligence Unit",
+  "domains": [
+    "Asia",
+    "Africa",
+    "Latin America and the Caribbean",
+    "Europe"
+  ],
+  "countries": [
+    {
+      "name": "Colombia",
+      "iso2": "CO",
+      "iso3": "COL"
+    },
+    {
+      "name": "Egypt",
+      "iso2": "EG",
+      "iso3": "EGY"
+    },
+    {
+      "name": "Indonesia",
+      "iso2": "ID",
+      "iso3": "IDN"
+    },
+    {
+      "name": "South Africa",
+      "iso2": "ZA",
+      "iso3": "ZAF"
+    },
+    {
+      "name": "Turkey",
+      "iso2": "TR",
+      "iso3": "TUR"
+    },
+    {
+      "name": "Vietnam",
+      "iso2": "VN",
+      "iso3": "VNM"
+    }
+  ]
+}

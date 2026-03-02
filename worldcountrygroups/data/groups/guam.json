@@ -1,0 +1,33 @@
+{
+  "gid": "guam",
+  "acronym": "GUAM",
+  "name": "GUAM Organization",
+  "description": "A regional organization of four post-Soviet states promoting democratic values and Euro-Atlantic integration.",
+  "classifier": "GUAM",
+  "domains": [
+    "Europe",
+    "Asia"
+  ],
+  "countries": [
+    {
+      "name": "Azerbaijan",
+      "iso2": "AZ",
+      "iso3": "AZE"
+    },
+    {
+      "name": "Georgia",
+      "iso2": "GE",
+      "iso3": "GEO"
+    },
+    {
+      "name": "Moldova",
+      "iso2": "MD",
+      "iso3": "MDA"
+    },
+    {
+      "name": "Ukraine",
+      "iso2": "UA",
+      "iso3": "UKR"
+    }
+  ]
+}

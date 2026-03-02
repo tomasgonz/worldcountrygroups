@@ -23,7 +23,7 @@ function setCache(key: string, data: any): void {
 const INDICATORS = {
   gdp: 'NY.GDP.MKTP.CD',
   population: 'SP.POP.TOTL',
-  co2: 'EN.ATM.CO2E.KT',
+  co2: 'EN.GHG.CO2.MT.CE.AR5',
 } as const
 
 type IndicatorKey = keyof typeof INDICATORS
@@ -33,17 +33,45 @@ function isValidIso2(code: string): boolean {
   return /^[A-Z]{2}$/.test(code)
 }
 
+// Per-country per-indicator cache for sharing data between group and individual lookups
+const indicatorCache = new Map<string, CacheEntry>()
+
+function getIndicatorCached(iso2: string, indicator: string): number | undefined {
+  const key = `ind:${iso2}:${indicator}`
+  const entry = indicatorCache.get(key)
+  if (!entry) return undefined
+  if (Date.now() - entry.timestamp > TTL) {
+    indicatorCache.delete(key)
+    return undefined
+  }
+  return entry.data
+}
+
+function setIndicatorCache(iso2: string, indicator: string, value: number): void {
+  indicatorCache.set(`ind:${iso2}:${indicator}`, { data: value, timestamp: Date.now() })
+}
+
 async function fetchIndicator(iso2Codes: string[], indicator: string): Promise<Map<string, number>> {
   const results = new Map<string, number>()
-  // Filter invalid codes
   const validCodes = iso2Codes.filter(isValidIso2)
   if (validCodes.length === 0) return results
 
-  // Batch in groups of 50
-  for (let i = 0; i < validCodes.length; i += 50) {
-    const batch = validCodes.slice(i, i + 50)
+  // Check per-country indicator cache first
+  const uncached: string[] = []
+  for (const code of validCodes) {
+    const cached = getIndicatorCached(code, indicator)
+    if (cached !== undefined) {
+      results.set(code, cached)
+    } else {
+      uncached.push(code)
+    }
+  }
+
+  // Fetch only uncached countries in batches of 50
+  for (let i = 0; i < uncached.length; i += 50) {
+    const batch = uncached.slice(i, i + 50)
     const joined = batch.join(';')
-    const url = `https://api.worldbank.org/v2/country/${joined}/indicator/${indicator}?format=json&per_page=1000&date=2020:2023&source=2`
+    const url = `https://api.worldbank.org/v2/country/${joined}/indicator/${indicator}?format=json&per_page=1000&date=2018:2024`
 
     try {
       const resp = await fetch(url)
@@ -51,15 +79,16 @@ async function fetchIndicator(iso2Codes: string[], indicator: string): Promise<M
       const data = await resp.json()
       if (!Array.isArray(data) || data.length < 2) continue
 
-      // Get most recent value for each country
       const entries = data[1] as any[]
       if (!entries) continue
 
+      // Get most recent value for each country
       for (const entry of entries) {
         if (entry.value !== null && entry.countryiso3code) {
           const iso2 = entry.country?.id
           if (iso2 && !results.has(iso2)) {
             results.set(iso2, entry.value)
+            setIndicatorCache(iso2, indicator, entry.value)
           }
         }
       }
@@ -80,7 +109,7 @@ export interface StatsResult {
 export async function fetchGroupStats(iso2Codes: string[]): Promise<StatsResult> {
   const validCodes = iso2Codes.filter(isValidIso2)
   const totalCountries = validCodes.length
-  const cacheKey = `group:${validCodes.sort().join(',')}`
+  const cacheKey = `group:${[...validCodes].sort().join(',')}`
 
   const cached = getCached(cacheKey)
   if (cached) return cached
@@ -109,6 +138,23 @@ export async function fetchGroupStats(iso2Codes: string[]): Promise<StatsResult>
   }
 
   setCache(cacheKey, result)
+
+  // Also cache individual country stats from the batch data
+  for (const code of validCodes) {
+    const countryCacheKey = `country:${code}`
+    if (!getCached(countryCacheKey)) {
+      const gdpVal = gdpMap.get(code)
+      const popVal = popMap.get(code)
+      const co2Val = co2Map.get(code)
+      const countryResult: StatsResult = {
+        gdp: gdpVal !== undefined ? { total: gdpVal, count: 1, coverage: '1 of 1 countries' } : null,
+        population: popVal !== undefined ? { total: popVal, count: 1, coverage: '1 of 1 countries' } : null,
+        co2: co2Val !== undefined ? { total: co2Val, count: 1, coverage: '1 of 1 countries' } : null,
+      }
+      setCache(countryCacheKey, countryResult)
+    }
+  }
+
   return result
 }
 

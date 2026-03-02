@@ -1,14 +1,14 @@
 <template>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <h1 class="text-3xl font-bold text-primary-500 mb-2">Browse Groups</h1>
-    <p class="text-gray-500 mb-8">{{ filteredGroups.length }} groups found</p>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="font-serif text-3xl font-bold text-primary-900 mb-1">Browse Groups</h1>
+    <p class="text-primary-500 text-sm mb-8">{{ filteredGroups.length }} groups</p>
 
     <!-- Filters -->
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
       <SearchBar v-model="query" placeholder="Search groups..." />
       <select
         v-model="domain"
-        class="block w-full px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-900 focus:ring-2 focus:ring-accent-500 focus:border-transparent outline-none"
+        class="block w-full px-3 py-2.5 border border-primary-200 rounded-lg bg-white text-primary-900 text-sm focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 outline-none transition-all"
       >
         <option value="">All domains</option>
         <option v-for="d in domains" :key="d" :value="d">{{ d }}</option>
@@ -16,8 +16,8 @@
       <input
         v-model="country"
         type="text"
-        placeholder="Filter by country (name or ISO)..."
-        class="block w-full px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-accent-500 focus:border-transparent outline-none"
+        placeholder="Filter by country..."
+        class="block w-full px-3 py-2.5 border border-primary-200 rounded-lg bg-white text-primary-900 placeholder-primary-400 text-sm focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 outline-none transition-all"
       />
     </div>
 
@@ -28,7 +28,7 @@
     <div v-else-if="filteredGroups.length" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <GroupCard v-for="g in filteredGroups" :key="g.gid" :group="g" />
     </div>
-    <p v-else class="text-gray-500 text-center py-12">No groups match your filters.</p>
+    <p v-else class="text-primary-500 text-center py-12">No groups match your filters.</p>
   </div>
 </template>
 
@@ -55,7 +55,6 @@ let searchTimeout: ReturnType<typeof setTimeout> | null = null
 
 watch([query, domain, country], () => {
   if (searchTimeout) clearTimeout(searchTimeout)
-  // If any filter is active, use the search API
   if (query.value || domain.value || country.value) {
     searchTimeout = setTimeout(async () => {
       const params = new URLSearchParams()

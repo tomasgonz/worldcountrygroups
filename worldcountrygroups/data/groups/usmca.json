@@ -1,0 +1,27 @@
+{
+  "gid": "usmca",
+  "acronym": "USMCA",
+  "name": "United States-Mexico-Canada Agreement",
+  "description": "A free trade agreement among the United States, Mexico, and Canada that replaced NAFTA on July 1, 2020.",
+  "classifier": "USMCA",
+  "domains": [
+    "North America"
+  ],
+  "countries": [
+    {
+      "name": "Canada",
+      "iso2": "CA",
+      "iso3": "CAN"
+    },
+    {
+      "name": "Mexico",
+      "iso2": "MX",
+      "iso3": "MEX"
+    },
+    {
+      "name": "United States",
+      "iso2": "US",
+      "iso3": "USA"
+    }
+  ]
+}

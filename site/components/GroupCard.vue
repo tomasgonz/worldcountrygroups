@@ -1,15 +1,15 @@
 <template>
   <NuxtLink
     :to="`/groups/${group.gid}`"
-    class="block bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md hover:border-accent-200 transition-all p-5"
+    class="block bg-white rounded-xl border border-primary-200/60 hover:border-primary-300 hover:shadow-md transition-all p-5 group"
   >
-    <div class="flex items-start justify-between mb-2">
-      <h3 class="font-bold text-primary-500 text-lg leading-tight">{{ group.acronym }}</h3>
-      <span class="text-xs bg-primary-50 text-primary-500 px-2 py-0.5 rounded-full font-medium whitespace-nowrap ml-2">
-        {{ group.country_count }} countries
+    <div class="flex items-start justify-between mb-1.5">
+      <h3 class="font-serif font-semibold text-primary-900 text-lg group-hover:text-accent-600 transition-colors">{{ group.acronym }}</h3>
+      <span class="text-xs text-primary-400 font-medium tabular-nums ml-2 whitespace-nowrap">
+        {{ group.country_count }}
       </span>
     </div>
-    <p class="text-gray-600 text-sm mb-3 line-clamp-2">{{ group.name }}</p>
+    <p class="text-primary-500 text-sm mb-3 line-clamp-2">{{ group.name }}</p>
     <div class="flex flex-wrap gap-1.5">
       <DomainTag v-for="d in group.domains" :key="d" :domain="d" size="sm" />
     </div>
