@@ -3,7 +3,7 @@
     <h1 class="font-serif text-3xl font-bold text-primary-900 mb-8">About</h1>
 
     <div class="space-y-8">
-      <div class="bg-white rounded-xl border border-primary-200/60 p-6 sm:p-8">
+      <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-3">World Country Groups</h2>
         <p class="text-primary-600 leading-relaxed mb-3">
           This site provides an interactive reference for international country groups and organizations.
@@ -17,7 +17,7 @@
         </p>
       </div>
 
-      <div class="bg-white rounded-xl border border-primary-200/60 p-6 sm:p-8">
+      <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-3">Data Package</h2>
         <p class="text-primary-600 leading-relaxed mb-4">Available as open-source:</p>
         <ul class="space-y-3">
@@ -32,7 +32,7 @@
         </ul>
       </div>
 
-      <div class="bg-white rounded-xl border border-primary-200/60 p-6 sm:p-8">
+      <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-3">Data Sources</h2>
         <ul class="space-y-2 text-primary-600">
           <li><strong>Country groups:</strong> Official organization sources, UN, and World Bank classifications</li>
@@ -42,7 +42,7 @@
         </ul>
       </div>
 
-      <div class="bg-white rounded-xl border border-primary-200/60 p-6 sm:p-8">
+      <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-3">Technology</h2>
         <p class="text-primary-600 leading-relaxed">
           Built with <strong>Nuxt 3</strong> and <strong>Tailwind CSS</strong>.

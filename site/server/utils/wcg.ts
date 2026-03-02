@@ -2,7 +2,7 @@ import { readFileSync, readdirSync } from 'fs'
 import { join } from 'path'
 
 // Resolve data dir: works both in dev (site/) and production (.output/)
-const DATA_DIR = process.env.WCG_DATA_DIR || join(process.env.HOME || '/home/exedev', 'worldcountrygroups', 'worldcountrygroups', 'data', 'groups')
+const DATA_DIR = process.env.WCG_DATA_DIR || join(process.env.HOME || '/home', 'worldcountrygroups', 'worldcountrygroups', 'data', 'groups')
 
 export interface Country {
   name: string

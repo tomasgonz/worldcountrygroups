@@ -1,7 +1,7 @@
 <template>
   <NuxtLink
     :to="`/countries/${country.iso2 || country.iso3}`"
-    class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-primary-200/60 hover:border-accent-300 hover:bg-accent-50 rounded-lg text-sm transition-all"
+    class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-primary-100 hover:border-primary-200 hover:shadow-sm rounded-lg text-sm transition-all duration-150"
   >
     <span v-if="country.iso2" class="text-base">{{ isoToFlag(country.iso2) }}</span>
     <span class="text-primary-700">{{ country.name }}</span>

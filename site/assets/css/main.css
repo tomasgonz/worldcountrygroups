@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply bg-primary-50 text-primary-900 antialiased;
+    @apply bg-[#f9fafb] text-primary-900 antialiased;
     font-family: 'Space Grotesk', system-ui, sans-serif;
   }
   h1, h2, h3 {
@@ -18,4 +18,14 @@
   .skeleton {
     @apply animate-pulse bg-primary-100 rounded-xl;
   }
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.15s ease;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
 }

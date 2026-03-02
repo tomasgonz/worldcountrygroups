@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "worldcountrygroups"
-version = "0.2.0"
+version = "0.3.0"
 description = "Query international country groupings (EU, BRICS, G20, NATO, etc.)"
 authors = ["Tomas Gonzalez <tomasgonz@gmail.com>"]
 license = "MIT"
