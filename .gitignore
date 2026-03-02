@@ -9,3 +9,9 @@ build/
 .venv/
 .pytest_cache/
 .mypy_cache/
+
+# Nuxt site
+site/node_modules/
+site/.nuxt/
+site/.output/
+site/*.log
