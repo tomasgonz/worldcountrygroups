@@ -1,6 +1,6 @@
 """Tests for Pydantic models."""
 
-from countrygroups.models import Country, Group, GroupSummary, CountryMembership
+from worldcountrygroups.models import Country, Group, GroupSummary, CountryMembership
 
 
 def test_country_model():

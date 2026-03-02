@@ -1,11 +1,11 @@
 """Tests for GroupRegistry and public API."""
 
-import countrygroups
-from countrygroups.core import GroupRegistry
+import worldcountrygroups
+from worldcountrygroups.core import GroupRegistry
 
 
 def test_list_groups():
-    groups = countrygroups.list_groups()
+    groups = worldcountrygroups.list_groups()
     assert isinstance(groups, list)
     assert len(groups) == 46
     assert groups == sorted(groups)
@@ -15,7 +15,7 @@ def test_list_groups():
 
 
 def test_get_group():
-    group = countrygroups.get_group("eu")
+    group = worldcountrygroups.get_group("eu")
     assert group is not None
     assert group.gid == "eu"
     assert group.name == "European Union"
@@ -23,17 +23,17 @@ def test_get_group():
 
 
 def test_get_group_case_insensitive():
-    group = countrygroups.get_group("EU")
+    group = worldcountrygroups.get_group("EU")
     assert group is not None
     assert group.gid == "eu"
 
 
 def test_get_group_not_found():
-    assert countrygroups.get_group("nonexistent") is None
+    assert worldcountrygroups.get_group("nonexistent") is None
 
 
 def test_get_countries():
-    countries = countrygroups.get_countries("brics")
+    countries = worldcountrygroups.get_countries("brics")
     assert countries is not None
     assert len(countries) == 5
     names = {c.name for c in countries}
@@ -42,11 +42,11 @@ def test_get_countries():
 
 
 def test_get_countries_not_found():
-    assert countrygroups.get_countries("nonexistent") is None
+    assert worldcountrygroups.get_countries("nonexistent") is None
 
 
 def test_search_by_country_name():
-    results = countrygroups.search_groups(country="Brazil")
+    results = worldcountrygroups.search_groups(country="Brazil")
     assert len(results) > 0
     gids = [g.gid for g in results]
     assert "brics" in gids
@@ -54,34 +54,34 @@ def test_search_by_country_name():
 
 
 def test_search_by_iso2():
-    results = countrygroups.search_groups(country="BR")
+    results = worldcountrygroups.search_groups(country="BR")
     gids = [g.gid for g in results]
     assert "brics" in gids
 
 
 def test_search_by_iso3():
-    results = countrygroups.search_groups(country="BRA")
+    results = worldcountrygroups.search_groups(country="BRA")
     gids = [g.gid for g in results]
     assert "brics" in gids
 
 
 def test_search_by_domain():
-    results = countrygroups.search_groups(domain="Europe")
+    results = worldcountrygroups.search_groups(domain="Europe")
     assert len(results) > 0
     gids = [g.gid for g in results]
     assert "eu" in gids
 
 
 def test_search_by_text():
-    results = countrygroups.search_groups(q="european")
+    results = worldcountrygroups.search_groups(q="european")
     assert len(results) > 0
     gids = [g.gid for g in results]
     assert "eu" in gids
 
 
 def test_registry_singleton():
-    r1 = countrygroups.core.get_registry()
-    r2 = countrygroups.core.get_registry()
+    r1 = worldcountrygroups.core.get_registry()
+    r2 = worldcountrygroups.core.get_registry()
     assert r1 is r2
 
 

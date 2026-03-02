@@ -9,8 +9,8 @@ description = "Query international country groupings (EU, BRICS, G20, NATO, etc.
 authors = ["Tomas Gonzalez <tomasgonz@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/tomasgonz/countrygroups"
-repository = "https://github.com/tomasgonz/countrygroups"
+homepage = "https://github.com/tomasgonz/worldcountrygroups"
+repository = "https://github.com/tomasgonz/worldcountrygroups"
 keywords = ["countries", "groups", "iso", "geopolitics", "international"]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -19,7 +19,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Topic :: Software Development :: Libraries",
 ]
-packages = [{include = "countrygroups"}]
+packages = [{include = "worldcountrygroups"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -31,7 +31,7 @@ uvicorn = {version = ">=0.20", optional = true}
 api = ["fastapi", "uvicorn"]
 
 [tool.poetry.scripts]
-countrygroups = "countrygroups.cli:main"
+worldcountrygroups = "worldcountrygroups.cli:main"
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=7.0"

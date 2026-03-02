@@ -1,4 +1,4 @@
-"""countrygroups - Query international country groupings."""
+"""worldcountrygroups - Query international country groupings."""
 
 from __future__ import annotations
 

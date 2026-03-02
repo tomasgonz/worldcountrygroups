@@ -3,7 +3,7 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from countrygroups.api import app
+from worldcountrygroups.api import app
 
 client = TestClient(app)
 

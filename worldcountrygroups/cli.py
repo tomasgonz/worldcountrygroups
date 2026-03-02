@@ -1,4 +1,4 @@
-"""CLI entry point for countrygroups."""
+"""CLI entry point for worldcountrygroups."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ import sys
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(prog="countrygroups", description="Country Groups CLI")
+    parser = argparse.ArgumentParser(prog="worldcountrygroups", description="Country Groups CLI")
     subparsers = parser.add_subparsers(dest="command")
 
     serve_parser = subparsers.add_parser("serve", help="Start the API server")
@@ -20,9 +20,9 @@ def main() -> None:
         try:
             import uvicorn
         except ImportError:
-            print("Error: uvicorn is required. Install with: pip install countrygroups[api]", file=sys.stderr)
+            print("Error: uvicorn is required. Install with: pip install worldcountrygroups[api]", file=sys.stderr)
             sys.exit(1)
-        uvicorn.run("countrygroups.api:app", host=args.host, port=args.port)
+        uvicorn.run("worldcountrygroups.api:app", host=args.host, port=args.port)
     else:
         parser.print_help()
 
