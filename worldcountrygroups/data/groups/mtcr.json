@@ -1,0 +1,188 @@
+{
+  "gid": "mtcr",
+  "acronym": "MTCR",
+  "name": "Missile Technology Control Regime",
+  "description": "The Missile Technology Control Regime is an informal partnership among 35 countries to limit the proliferation of missiles and missile technology capable of delivering weapons of mass destruction. It was established in 1987.",
+  "classifier": "Non-Proliferation",
+  "domains": [
+    "Peace and Security",
+    "Non-Proliferation"
+  ],
+  "countries": [
+    {
+      "name": "Argentina",
+      "iso2": "AR",
+      "iso3": "ARG"
+    },
+    {
+      "name": "Australia",
+      "iso2": "AU",
+      "iso3": "AUS"
+    },
+    {
+      "name": "Austria",
+      "iso2": "AT",
+      "iso3": "AUT"
+    },
+    {
+      "name": "Belgium",
+      "iso2": "BE",
+      "iso3": "BEL"
+    },
+    {
+      "name": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA"
+    },
+    {
+      "name": "Bulgaria",
+      "iso2": "BG",
+      "iso3": "BGR"
+    },
+    {
+      "name": "Canada",
+      "iso2": "CA",
+      "iso3": "CAN"
+    },
+    {
+      "name": "Czech Republic",
+      "iso2": "CZ",
+      "iso3": "CZE"
+    },
+    {
+      "name": "Denmark",
+      "iso2": "DK",
+      "iso3": "DNK"
+    },
+    {
+      "name": "Finland",
+      "iso2": "FI",
+      "iso3": "FIN"
+    },
+    {
+      "name": "France",
+      "iso2": "FR",
+      "iso3": "FRA"
+    },
+    {
+      "name": "Germany",
+      "iso2": "DE",
+      "iso3": "DEU"
+    },
+    {
+      "name": "Greece",
+      "iso2": "GR",
+      "iso3": "GRC"
+    },
+    {
+      "name": "Hungary",
+      "iso2": "HU",
+      "iso3": "HUN"
+    },
+    {
+      "name": "Iceland",
+      "iso2": "IS",
+      "iso3": "ISL"
+    },
+    {
+      "name": "India",
+      "iso2": "IN",
+      "iso3": "IND"
+    },
+    {
+      "name": "Ireland",
+      "iso2": "IE",
+      "iso3": "IRL"
+    },
+    {
+      "name": "Italy",
+      "iso2": "IT",
+      "iso3": "ITA"
+    },
+    {
+      "name": "Japan",
+      "iso2": "JP",
+      "iso3": "JPN"
+    },
+    {
+      "name": "Luxembourg",
+      "iso2": "LU",
+      "iso3": "LUX"
+    },
+    {
+      "name": "Netherlands",
+      "iso2": "NL",
+      "iso3": "NLD"
+    },
+    {
+      "name": "New Zealand",
+      "iso2": "NZ",
+      "iso3": "NZL"
+    },
+    {
+      "name": "Norway",
+      "iso2": "NO",
+      "iso3": "NOR"
+    },
+    {
+      "name": "Poland",
+      "iso2": "PL",
+      "iso3": "POL"
+    },
+    {
+      "name": "Portugal",
+      "iso2": "PT",
+      "iso3": "PRT"
+    },
+    {
+      "name": "Republic of Korea",
+      "iso2": "KR",
+      "iso3": "KOR"
+    },
+    {
+      "name": "Russian Federation",
+      "iso2": "RU",
+      "iso3": "RUS"
+    },
+    {
+      "name": "South Africa",
+      "iso2": "ZA",
+      "iso3": "ZAF"
+    },
+    {
+      "name": "Spain",
+      "iso2": "ES",
+      "iso3": "ESP"
+    },
+    {
+      "name": "Sweden",
+      "iso2": "SE",
+      "iso3": "SWE"
+    },
+    {
+      "name": "Switzerland",
+      "iso2": "CH",
+      "iso3": "CHE"
+    },
+    {
+      "name": "Turkey",
+      "iso2": "TR",
+      "iso3": "TUR"
+    },
+    {
+      "name": "Ukraine",
+      "iso2": "UA",
+      "iso3": "UKR"
+    },
+    {
+      "name": "United Kingdom",
+      "iso2": "GB",
+      "iso3": "GBR"
+    },
+    {
+      "name": "United States",
+      "iso2": "US",
+      "iso3": "USA"
+    }
+  ]
+}

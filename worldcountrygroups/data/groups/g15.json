@@ -1,0 +1,104 @@
+{
+  "gid": "g15",
+  "acronym": "G-15",
+  "name": "Group of Fifteen",
+  "description": "The Group of Fifteen is a group of developing countries from Asia, Africa, and Latin America established in 1989 at the Non-Aligned Movement summit. It aims to foster cooperation and provide input for other international groups such as the WTO and G8.",
+  "classifier": "Developing Countries",
+  "domains": [
+    "Africa",
+    "Asia",
+    "Latin America"
+  ],
+  "countries": [
+    {
+      "name": "Algeria",
+      "iso2": "DZ",
+      "iso3": "DZA"
+    },
+    {
+      "name": "Argentina",
+      "iso2": "AR",
+      "iso3": "ARG"
+    },
+    {
+      "name": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA"
+    },
+    {
+      "name": "Chile",
+      "iso2": "CL",
+      "iso3": "CHL"
+    },
+    {
+      "name": "Egypt",
+      "iso2": "EG",
+      "iso3": "EGY"
+    },
+    {
+      "name": "India",
+      "iso2": "IN",
+      "iso3": "IND"
+    },
+    {
+      "name": "Indonesia",
+      "iso2": "ID",
+      "iso3": "IDN"
+    },
+    {
+      "name": "Iran",
+      "iso2": "IR",
+      "iso3": "IRN"
+    },
+    {
+      "name": "Jamaica",
+      "iso2": "JM",
+      "iso3": "JAM"
+    },
+    {
+      "name": "Kenya",
+      "iso2": "KE",
+      "iso3": "KEN"
+    },
+    {
+      "name": "Malaysia",
+      "iso2": "MY",
+      "iso3": "MYS"
+    },
+    {
+      "name": "Mexico",
+      "iso2": "MX",
+      "iso3": "MEX"
+    },
+    {
+      "name": "Nigeria",
+      "iso2": "NG",
+      "iso3": "NGA"
+    },
+    {
+      "name": "Peru",
+      "iso2": "PE",
+      "iso3": "PER"
+    },
+    {
+      "name": "Senegal",
+      "iso2": "SN",
+      "iso3": "SEN"
+    },
+    {
+      "name": "Sri Lanka",
+      "iso2": "LK",
+      "iso3": "LKA"
+    },
+    {
+      "name": "Venezuela",
+      "iso2": "VE",
+      "iso3": "VEN"
+    },
+    {
+      "name": "Zimbabwe",
+      "iso2": "ZW",
+      "iso3": "ZWE"
+    }
+  ]
+}

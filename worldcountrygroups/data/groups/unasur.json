@@ -1,0 +1,72 @@
+{
+  "gid": "unasur",
+  "acronym": "UNASUR",
+  "name": "Union of South American Nations",
+  "description": "The Union of South American Nations (UNASUR) is an intergovernmental regional organization comprising twelve South American countries. Established in 2008 by the Constitutive Treaty of the Union of South American Nations, it aims to build an integrated region in political, social, cultural, economic, and environmental matters.",
+  "classifier": "Regional Integration",
+  "domains": [
+    "South America"
+  ],
+  "countries": [
+    {
+      "name": "Argentina",
+      "iso2": "AR",
+      "iso3": "ARG"
+    },
+    {
+      "name": "Bolivia",
+      "iso2": "BO",
+      "iso3": "BOL"
+    },
+    {
+      "name": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA"
+    },
+    {
+      "name": "Chile",
+      "iso2": "CL",
+      "iso3": "CHL"
+    },
+    {
+      "name": "Colombia",
+      "iso2": "CO",
+      "iso3": "COL"
+    },
+    {
+      "name": "Ecuador",
+      "iso2": "EC",
+      "iso3": "ECU"
+    },
+    {
+      "name": "Guyana",
+      "iso2": "GY",
+      "iso3": "GUY"
+    },
+    {
+      "name": "Paraguay",
+      "iso2": "PY",
+      "iso3": "PRY"
+    },
+    {
+      "name": "Peru",
+      "iso2": "PE",
+      "iso3": "PER"
+    },
+    {
+      "name": "Suriname",
+      "iso2": "SR",
+      "iso3": "SUR"
+    },
+    {
+      "name": "Uruguay",
+      "iso2": "UY",
+      "iso3": "URY"
+    },
+    {
+      "name": "Venezuela",
+      "iso2": "VE",
+      "iso3": "VEN"
+    }
+  ]
+}

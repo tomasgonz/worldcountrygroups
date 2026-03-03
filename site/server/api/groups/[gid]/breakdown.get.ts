@@ -1,6 +1,6 @@
 import { getRegistry } from '~/server/utils/wcg'
-import { fetchCountryStats, fetchGroupStats } from '~/server/utils/worldbank'
-import type { StatsResult } from '~/server/utils/worldbank'
+import { getCountriesData, getGroupStats } from '~/server/utils/countrydata'
+import type { CountryData } from '~/server/utils/countrydata'
 
 export interface BreakdownEntry {
   name: string
@@ -12,9 +12,19 @@ export interface BreakdownEntry {
   populationPct: number | null
   co2: number | null
   co2Pct: number | null
+  gdp_per_capita: number | null
+  area_km2: number | null
+  life_expectancy: number | null
+  capital: string | null
+  region: string | null
+  income_group: string | null
+  hdi: number | null
+  military_expenditure: number | null
+  military_pct_gdp: number | null
+  has_data: boolean
 }
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler((event) => {
   const gid = getRouterParam(event, 'gid')!
   const group = getRegistry().getGroup(gid)
   if (!group) {
@@ -22,23 +32,19 @@ export default defineEventHandler(async (event) => {
   }
 
   const iso2Codes = group.countries.map(c => c.iso2).filter(Boolean)
-
-  // Fetch group totals and individual country stats in parallel
-  const [groupStats, ...countryStatsArr] = await Promise.all([
-    fetchGroupStats(iso2Codes),
-    ...iso2Codes.map(iso2 => fetchCountryStats(iso2)),
-  ])
+  const groupStats = getGroupStats(iso2Codes)
+  const countriesMap = getCountriesData(iso2Codes)
 
   const gdpTotal = groupStats.gdp?.total || 0
   const popTotal = groupStats.population?.total || 0
   const co2Total = groupStats.co2?.total || 0
 
-  const entries: BreakdownEntry[] = group.countries.map((country, idx) => {
-    const stats: StatsResult = country.iso2 ? countryStatsArr[iso2Codes.indexOf(country.iso2)] : { gdp: null, population: null, co2: null }
+  const entries: BreakdownEntry[] = group.countries.map((country) => {
+    const d: CountryData | undefined = country.iso2 ? countriesMap.get(country.iso2.toUpperCase()) : undefined
 
-    const gdpVal = stats?.gdp?.total ?? null
-    const popVal = stats?.population?.total ?? null
-    const co2Val = stats?.co2?.total ?? null
+    const gdpVal = d?.gdp ?? null
+    const popVal = d?.population ?? null
+    const co2Val = d?.co2 ?? null
 
     return {
       name: country.name,
@@ -50,6 +56,16 @@ export default defineEventHandler(async (event) => {
       populationPct: popVal !== null && popTotal > 0 ? Math.round((popVal / popTotal) * 10000) / 100 : null,
       co2: co2Val,
       co2Pct: co2Val !== null && co2Total > 0 ? Math.round((co2Val / co2Total) * 10000) / 100 : null,
+      gdp_per_capita: d?.gdp_per_capita ?? null,
+      area_km2: d?.area_km2 ?? null,
+      life_expectancy: d?.life_expectancy ?? null,
+      capital: d?.capital ?? null,
+      region: d?.region ?? null,
+      income_group: d?.income_group ?? null,
+      hdi: d?.hdi ?? null,
+      military_expenditure: d?.military_expenditure ?? null,
+      military_pct_gdp: d?.military_pct_gdp ?? null,
+      has_data: (gdpVal !== null || popVal !== null),
     }
   })
 

@@ -1,0 +1,1169 @@
+{
+  "_meta": {
+    "last_updated": "2026-03-03",
+    "source": "Global Firepower 2025",
+    "country_count": 145
+  },
+  "countries": {
+    "USA": {
+      "rank": 1, "power_index": 0.0699,
+      "active_military": 1388100, "reserve_military": 845000, "paramilitary": 0,
+      "aircraft_total": 13209, "fighter_aircraft": 1854, "helicopters": 5584,
+      "tank_strength": 5500, "armored_vehicles": 45193, "rocket_projectors": 1366,
+      "naval_total": 484, "aircraft_carriers": 11, "submarines": 68,
+      "defense_budget": 886000000000
+    },
+    "RUS": {
+      "rank": 2, "power_index": 0.0702,
+      "active_military": 1320000, "reserve_military": 2000000, "paramilitary": 554000,
+      "aircraft_total": 4255, "fighter_aircraft": 789, "helicopters": 1543,
+      "tank_strength": 12566, "armored_vehicles": 30122, "rocket_projectors": 3860,
+      "naval_total": 598, "aircraft_carriers": 1, "submarines": 58,
+      "defense_budget": 109000000000
+    },
+    "CHN": {
+      "rank": 3, "power_index": 0.0706,
+      "active_military": 2035000, "reserve_military": 510000, "paramilitary": 660000,
+      "aircraft_total": 3304, "fighter_aircraft": 1207, "helicopters": 912,
+      "tank_strength": 5800, "armored_vehicles": 15950, "rocket_projectors": 3180,
+      "naval_total": 777, "aircraft_carriers": 3, "submarines": 78,
+      "defense_budget": 292000000000
+    },
+    "IND": {
+      "rank": 4, "power_index": 0.1023,
+      "active_military": 1455550, "reserve_military": 1155000, "paramilitary": 2527000,
+      "aircraft_total": 2296, "fighter_aircraft": 564, "helicopters": 826,
+      "tank_strength": 4614, "armored_vehicles": 12960, "rocket_projectors": 1300,
+      "naval_total": 294, "aircraft_carriers": 2, "submarines": 18,
+      "defense_budget": 74000000000
+    },
+    "KOR": {
+      "rank": 5, "power_index": 0.1416,
+      "active_military": 555000, "reserve_military": 3100000, "paramilitary": 3000000,
+      "aircraft_total": 1576, "fighter_aircraft": 402, "helicopters": 739,
+      "tank_strength": 2130, "armored_vehicles": 13990, "rocket_projectors": 5800,
+      "naval_total": 234, "aircraft_carriers": 0, "submarines": 22,
+      "defense_budget": 48000000000
+    },
+    "GBR": {
+      "rank": 6, "power_index": 0.1443,
+      "active_military": 148500, "reserve_military": 37050, "paramilitary": 0,
+      "aircraft_total": 664, "fighter_aircraft": 119, "helicopters": 311,
+      "tank_strength": 227, "armored_vehicles": 5015, "rocket_projectors": 44,
+      "naval_total": 75, "aircraft_carriers": 2, "submarines": 11,
+      "defense_budget": 75500000000
+    },
+    "FRA": {
+      "rank": 7, "power_index": 0.1584,
+      "active_military": 205000, "reserve_military": 35000, "paramilitary": 164000,
+      "aircraft_total": 1055, "fighter_aircraft": 266, "helicopters": 438,
+      "tank_strength": 406, "armored_vehicles": 6558, "rocket_projectors": 13,
+      "naval_total": 180, "aircraft_carriers": 1, "submarines": 10,
+      "defense_budget": 62300000000
+    },
+    "JPN": {
+      "rank": 8, "power_index": 0.1601,
+      "active_military": 247150, "reserve_military": 56000, "paramilitary": 0,
+      "aircraft_total": 1449, "fighter_aircraft": 297, "helicopters": 636,
+      "tank_strength": 560, "armored_vehicles": 5500, "rocket_projectors": 100,
+      "naval_total": 155, "aircraft_carriers": 0, "submarines": 23,
+      "defense_budget": 53600000000
+    },
+    "TUR": {
+      "rank": 9, "power_index": 0.1697,
+      "active_military": 355200, "reserve_military": 378700, "paramilitary": 156800,
+      "aircraft_total": 1057, "fighter_aircraft": 206, "helicopters": 506,
+      "tank_strength": 2229, "armored_vehicles": 11630, "rocket_projectors": 350,
+      "naval_total": 149, "aircraft_carriers": 1, "submarines": 12,
+      "defense_budget": 16200000000
+    },
+    "ITA": {
+      "rank": 10, "power_index": 0.1863,
+      "active_military": 165500, "reserve_military": 18300, "paramilitary": 112000,
+      "aircraft_total": 862, "fighter_aircraft": 94, "helicopters": 420,
+      "tank_strength": 200, "armored_vehicles": 6520, "rocket_projectors": 21,
+      "naval_total": 184, "aircraft_carriers": 2, "submarines": 8,
+      "defense_budget": 32000000000
+    },
+    "DEU": {
+      "rank": 11, "power_index": 0.1907,
+      "active_military": 184000, "reserve_military": 30000, "paramilitary": 0,
+      "aircraft_total": 614, "fighter_aircraft": 132, "helicopters": 266,
+      "tank_strength": 339, "armored_vehicles": 5765, "rocket_projectors": 74,
+      "naval_total": 65, "aircraft_carriers": 0, "submarines": 6,
+      "defense_budget": 68500000000
+    },
+    "BRA": {
+      "rank": 12, "power_index": 0.1944,
+      "active_military": 366500, "reserve_military": 1340000, "paramilitary": 395000,
+      "aircraft_total": 610, "fighter_aircraft": 43, "helicopters": 277,
+      "tank_strength": 439, "armored_vehicles": 2740, "rocket_projectors": 80,
+      "naval_total": 112, "aircraft_carriers": 0, "submarines": 7,
+      "defense_budget": 22800000000
+    },
+    "PAK": {
+      "rank": 13, "power_index": 0.1994,
+      "active_military": 654000, "reserve_military": 550000, "paramilitary": 421000,
+      "aircraft_total": 1372, "fighter_aircraft": 357, "helicopters": 356,
+      "tank_strength": 3742, "armored_vehicles": 8600, "rocket_projectors": 560,
+      "naval_total": 114, "aircraft_carriers": 0, "submarines": 9,
+      "defense_budget": 10300000000
+    },
+    "EGY": {
+      "rank": 14, "power_index": 0.2073,
+      "active_military": 440000, "reserve_military": 479000, "paramilitary": 397000,
+      "aircraft_total": 1062, "fighter_aircraft": 215, "helicopters": 291,
+      "tank_strength": 4664, "armored_vehicles": 13510, "rocket_projectors": 1200,
+      "naval_total": 316, "aircraft_carriers": 0, "submarines": 8,
+      "defense_budget": 7850000000
+    },
+    "AUS": {
+      "rank": 15, "power_index": 0.2142,
+      "active_military": 59000, "reserve_military": 20100, "paramilitary": 0,
+      "aircraft_total": 419, "fighter_aircraft": 79, "helicopters": 166,
+      "tank_strength": 59, "armored_vehicles": 2040, "rocket_projectors": 0,
+      "naval_total": 43, "aircraft_carriers": 0, "submarines": 6,
+      "defense_budget": 32400000000
+    },
+    "ISR": {
+      "rank": 16, "power_index": 0.2596,
+      "active_military": 170000, "reserve_military": 465000, "paramilitary": 8000,
+      "aircraft_total": 601, "fighter_aircraft": 241, "helicopters": 146,
+      "tank_strength": 1370, "armored_vehicles": 10575, "rocket_projectors": 300,
+      "naval_total": 67, "aircraft_carriers": 0, "submarines": 5,
+      "defense_budget": 24000000000
+    },
+    "IRN": {
+      "rank": 17, "power_index": 0.2269,
+      "active_military": 610000, "reserve_military": 350000, "paramilitary": 220000,
+      "aircraft_total": 551, "fighter_aircraft": 186, "helicopters": 126,
+      "tank_strength": 4071, "armored_vehicles": 7950, "rocket_projectors": 2520,
+      "naval_total": 398, "aircraft_carriers": 0, "submarines": 19,
+      "defense_budget": 9960000000
+    },
+    "IDN": {
+      "rank": 18, "power_index": 0.2251,
+      "active_military": 395500, "reserve_military": 400000, "paramilitary": 280000,
+      "aircraft_total": 449, "fighter_aircraft": 41, "helicopters": 204,
+      "tank_strength": 418, "armored_vehicles": 1389, "rocket_projectors": 86,
+      "naval_total": 211, "aircraft_carriers": 0, "submarines": 5,
+      "defense_budget": 9400000000
+    },
+    "SAU": {
+      "rank": 19, "power_index": 0.2368,
+      "active_military": 257000, "reserve_military": 0, "paramilitary": 24500,
+      "aircraft_total": 897, "fighter_aircraft": 279, "helicopters": 236,
+      "tank_strength": 1062, "armored_vehicles": 12180, "rocket_projectors": 322,
+      "naval_total": 55, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 75800000000
+    },
+    "UKR": {
+      "rank": 20, "power_index": 0.2516,
+      "active_military": 900000, "reserve_military": 1000000, "paramilitary": 102000,
+      "aircraft_total": 318, "fighter_aircraft": 69, "helicopters": 112,
+      "tank_strength": 1777, "armored_vehicles": 12950, "rocket_projectors": 595,
+      "naval_total": 15, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 42000000000
+    },
+    "POL": {
+      "rank": 21, "power_index": 0.2617,
+      "active_military": 114050, "reserve_military": 0, "paramilitary": 88000,
+      "aircraft_total": 457, "fighter_aircraft": 70, "helicopters": 209,
+      "tank_strength": 612, "armored_vehicles": 4052, "rocket_projectors": 300,
+      "naval_total": 46, "aircraft_carriers": 0, "submarines": 1,
+      "defense_budget": 34700000000
+    },
+    "THA": {
+      "rank": 22, "power_index": 0.2684,
+      "active_military": 360850, "reserve_military": 200000, "paramilitary": 113700,
+      "aircraft_total": 572, "fighter_aircraft": 76, "helicopters": 253,
+      "tank_strength": 722, "armored_vehicles": 2527, "rocket_projectors": 30,
+      "naval_total": 197, "aircraft_carriers": 1, "submarines": 0,
+      "defense_budget": 7700000000
+    },
+    "TWN": {
+      "rank": 23, "power_index": 0.2743,
+      "active_military": 170000, "reserve_military": 1657000, "paramilitary": 17000,
+      "aircraft_total": 741, "fighter_aircraft": 286, "helicopters": 233,
+      "tank_strength": 750, "armored_vehicles": 3038, "rocket_projectors": 225,
+      "naval_total": 93, "aircraft_carriers": 0, "submarines": 4,
+      "defense_budget": 19500000000
+    },
+    "VNM": {
+      "rank": 24, "power_index": 0.2855,
+      "active_military": 482000, "reserve_military": 5000000, "paramilitary": 40000,
+      "aircraft_total": 318, "fighter_aircraft": 71, "helicopters": 115,
+      "tank_strength": 2035, "armored_vehicles": 3150, "rocket_projectors": 600,
+      "naval_total": 65, "aircraft_carriers": 0, "submarines": 6,
+      "defense_budget": 7900000000
+    },
+    "ESP": {
+      "rank": 25, "power_index": 0.2901,
+      "active_military": 124100, "reserve_military": 16000, "paramilitary": 80000,
+      "aircraft_total": 529, "fighter_aircraft": 122, "helicopters": 188,
+      "tank_strength": 327, "armored_vehicles": 3764, "rocket_projectors": 12,
+      "naval_total": 72, "aircraft_carriers": 1, "submarines": 2,
+      "defense_budget": 21500000000
+    },
+    "GRC": {
+      "rank": 26, "power_index": 0.2955,
+      "active_military": 134000, "reserve_military": 221000, "paramilitary": 4000,
+      "aircraft_total": 632, "fighter_aircraft": 187, "helicopters": 210,
+      "tank_strength": 1367, "armored_vehicles": 4885, "rocket_projectors": 196,
+      "naval_total": 115, "aircraft_carriers": 0, "submarines": 11,
+      "defense_budget": 8900000000
+    },
+    "CAN": {
+      "rank": 27, "power_index": 0.3027,
+      "active_military": 72000, "reserve_military": 36000, "paramilitary": 0,
+      "aircraft_total": 373, "fighter_aircraft": 64, "helicopters": 148,
+      "tank_strength": 82, "armored_vehicles": 2806, "rocket_projectors": 0,
+      "naval_total": 33, "aircraft_carriers": 0, "submarines": 4,
+      "defense_budget": 27000000000
+    },
+    "DZA": {
+      "rank": 28, "power_index": 0.3128,
+      "active_military": 130000, "reserve_military": 150000, "paramilitary": 187000,
+      "aircraft_total": 502, "fighter_aircraft": 89, "helicopters": 261,
+      "tank_strength": 2405, "armored_vehicles": 6110, "rocket_projectors": 344,
+      "naval_total": 87, "aircraft_carriers": 0, "submarines": 6,
+      "defense_budget": 18300000000
+    },
+    "NLD": {
+      "rank": 29, "power_index": 0.3220,
+      "active_military": 40500, "reserve_military": 5000, "paramilitary": 6800,
+      "aircraft_total": 143, "fighter_aircraft": 34, "helicopters": 65,
+      "tank_strength": 18, "armored_vehicles": 1700, "rocket_projectors": 0,
+      "naval_total": 33, "aircraft_carriers": 0, "submarines": 4,
+      "defense_budget": 17800000000
+    },
+    "MYS": {
+      "rank": 30, "power_index": 0.3276,
+      "active_military": 113000, "reserve_military": 296500, "paramilitary": 269400,
+      "aircraft_total": 276, "fighter_aircraft": 28, "helicopters": 75,
+      "tank_strength": 74, "armored_vehicles": 1380, "rocket_projectors": 36,
+      "naval_total": 66, "aircraft_carriers": 0, "submarines": 2,
+      "defense_budget": 4600000000
+    },
+    "SGP": {
+      "rank": 31, "power_index": 0.3355,
+      "active_military": 51000, "reserve_military": 253000, "paramilitary": 93800,
+      "aircraft_total": 215, "fighter_aircraft": 60, "helicopters": 77,
+      "tank_strength": 170, "armored_vehicles": 2400, "rocket_projectors": 18,
+      "naval_total": 39, "aircraft_carriers": 0, "submarines": 4,
+      "defense_budget": 13600000000
+    },
+    "PHL": {
+      "rank": 32, "power_index": 0.3415,
+      "active_military": 143000, "reserve_military": 131000, "paramilitary": 41000,
+      "aircraft_total": 208, "fighter_aircraft": 2, "helicopters": 112,
+      "tank_strength": 30, "armored_vehicles": 770, "rocket_projectors": 0,
+      "naval_total": 115, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 4500000000
+    },
+    "MEX": {
+      "rank": 33, "power_index": 0.3505,
+      "active_military": 277000, "reserve_military": 107000, "paramilitary": 51000,
+      "aircraft_total": 478, "fighter_aircraft": 0, "helicopters": 254,
+      "tank_strength": 0, "armored_vehicles": 1410, "rocket_projectors": 0,
+      "naval_total": 143, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 11800000000
+    },
+    "NOR": {
+      "rank": 34, "power_index": 0.3569,
+      "active_military": 29250, "reserve_military": 40000, "paramilitary": 0,
+      "aircraft_total": 130, "fighter_aircraft": 57, "helicopters": 42,
+      "tank_strength": 36, "armored_vehicles": 937, "rocket_projectors": 12,
+      "naval_total": 41, "aircraft_carriers": 0, "submarines": 6,
+      "defense_budget": 9600000000
+    },
+    "SWE": {
+      "rank": 35, "power_index": 0.3628,
+      "active_military": 24400, "reserve_military": 11500, "paramilitary": 21200,
+      "aircraft_total": 210, "fighter_aircraft": 71, "helicopters": 59,
+      "tank_strength": 120, "armored_vehicles": 2360, "rocket_projectors": 24,
+      "naval_total": 41, "aircraft_carriers": 0, "submarines": 5,
+      "defense_budget": 10200000000
+    },
+    "PRK": {
+      "rank": 36, "power_index": 0.3712,
+      "active_military": 1280000, "reserve_military": 600000, "paramilitary": 5700000,
+      "aircraft_total": 946, "fighter_aircraft": 458, "helicopters": 202,
+      "tank_strength": 5895, "armored_vehicles": 6500, "rocket_projectors": 5100,
+      "naval_total": 492, "aircraft_carriers": 0, "submarines": 36,
+      "defense_budget": 3600000000
+    },
+    "ARG": {
+      "rank": 37, "power_index": 0.3823,
+      "active_military": 80400, "reserve_military": 0, "paramilitary": 31400,
+      "aircraft_total": 237, "fighter_aircraft": 15, "helicopters": 76,
+      "tank_strength": 348, "armored_vehicles": 1555, "rocket_projectors": 25,
+      "naval_total": 44, "aircraft_carriers": 0, "submarines": 3,
+      "defense_budget": 4100000000
+    },
+    "CHE": {
+      "rank": 38, "power_index": 0.3951,
+      "active_military": 21000, "reserve_military": 120000, "paramilitary": 0,
+      "aircraft_total": 128, "fighter_aircraft": 30, "helicopters": 47,
+      "tank_strength": 134, "armored_vehicles": 1460, "rocket_projectors": 0,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 6400000000
+    },
+    "ROU": {
+      "rank": 39, "power_index": 0.4015,
+      "active_military": 72500, "reserve_military": 53000, "paramilitary": 79900,
+      "aircraft_total": 200, "fighter_aircraft": 17, "helicopters": 78,
+      "tank_strength": 580, "armored_vehicles": 2200, "rocket_projectors": 180,
+      "naval_total": 32, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 8100000000
+    },
+    "DNK": {
+      "rank": 40, "power_index": 0.4132,
+      "active_military": 17000, "reserve_military": 53000, "paramilitary": 0,
+      "aircraft_total": 93, "fighter_aircraft": 44, "helicopters": 28,
+      "tank_strength": 44, "armored_vehicles": 705, "rocket_projectors": 0,
+      "naval_total": 55, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 7200000000
+    },
+    "FIN": {
+      "rank": 41, "power_index": 0.4185,
+      "active_military": 24000, "reserve_military": 238000, "paramilitary": 11600,
+      "aircraft_total": 146, "fighter_aircraft": 55, "helicopters": 26,
+      "tank_strength": 239, "armored_vehicles": 2540, "rocket_projectors": 75,
+      "naval_total": 37, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 7400000000
+    },
+    "CZE": {
+      "rank": 42, "power_index": 0.4256,
+      "active_military": 27600, "reserve_military": 3300, "paramilitary": 3100,
+      "aircraft_total": 103, "fighter_aircraft": 14, "helicopters": 47,
+      "tank_strength": 120, "armored_vehicles": 1300, "rocket_projectors": 26,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 5200000000
+    },
+    "COL": {
+      "rank": 43, "power_index": 0.4317,
+      "active_military": 293200, "reserve_military": 34950, "paramilitary": 186500,
+      "aircraft_total": 447, "fighter_aircraft": 24, "helicopters": 238,
+      "tank_strength": 0, "armored_vehicles": 1345, "rocket_projectors": 0,
+      "naval_total": 234, "aircraft_carriers": 0, "submarines": 4,
+      "defense_budget": 12100000000
+    },
+    "MMR": {
+      "rank": 44, "power_index": 0.4395,
+      "active_military": 406000, "reserve_military": 0, "paramilitary": 107000,
+      "aircraft_total": 246, "fighter_aircraft": 50, "helicopters": 72,
+      "tank_strength": 792, "armored_vehicles": 1640, "rocket_projectors": 260,
+      "naval_total": 147, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 2700000000
+    },
+    "PER": {
+      "rank": 45, "power_index": 0.4450,
+      "active_military": 120000, "reserve_military": 188000, "paramilitary": 77000,
+      "aircraft_total": 260, "fighter_aircraft": 20, "helicopters": 95,
+      "tank_strength": 280, "armored_vehicles": 890, "rocket_projectors": 30,
+      "naval_total": 60, "aircraft_carriers": 0, "submarines": 6,
+      "defense_budget": 2800000000
+    },
+    "PRT": {
+      "rank": 46, "power_index": 0.4526,
+      "active_military": 27250, "reserve_military": 210900, "paramilitary": 47700,
+      "aircraft_total": 100, "fighter_aircraft": 22, "helicopters": 36,
+      "tank_strength": 37, "armored_vehicles": 1058, "rocket_projectors": 0,
+      "naval_total": 27, "aircraft_carriers": 0, "submarines": 2,
+      "defense_budget": 4700000000
+    },
+    "NGA": {
+      "rank": 47, "power_index": 0.4584,
+      "active_military": 223000, "reserve_military": 0, "paramilitary": 82000,
+      "aircraft_total": 124, "fighter_aircraft": 9, "helicopters": 47,
+      "tank_strength": 391, "armored_vehicles": 1500, "rocket_projectors": 30,
+      "naval_total": 75, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 2600000000
+    },
+    "BGD": {
+      "rank": 48, "power_index": 0.4665,
+      "active_military": 163050, "reserve_military": 63000, "paramilitary": 185000,
+      "aircraft_total": 139, "fighter_aircraft": 24, "helicopters": 45,
+      "tank_strength": 410, "armored_vehicles": 1470, "rocket_projectors": 70,
+      "naval_total": 89, "aircraft_carriers": 0, "submarines": 2,
+      "defense_budget": 4300000000
+    },
+    "BEL": {
+      "rank": 49, "power_index": 0.4715,
+      "active_military": 26400, "reserve_military": 6000, "paramilitary": 0,
+      "aircraft_total": 93, "fighter_aircraft": 44, "helicopters": 28,
+      "tank_strength": 0, "armored_vehicles": 1003, "rocket_projectors": 0,
+      "naval_total": 6, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 7100000000
+    },
+    "ETH": {
+      "rank": 50, "power_index": 0.4839,
+      "active_military": 162000, "reserve_military": 0, "paramilitary": 0,
+      "aircraft_total": 92, "fighter_aircraft": 18, "helicopters": 34,
+      "tank_strength": 540, "armored_vehicles": 1100, "rocket_projectors": 183,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 1000000000
+    },
+    "AUT": {
+      "rank": 51, "power_index": 0.4921,
+      "active_military": 27200, "reserve_military": 119000, "paramilitary": 13000,
+      "aircraft_total": 107, "fighter_aircraft": 15, "helicopters": 62,
+      "tank_strength": 56, "armored_vehicles": 680, "rocket_projectors": 18,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 4300000000
+    },
+    "MAR": {
+      "rank": 52, "power_index": 0.5038,
+      "active_military": 196000, "reserve_military": 150000, "paramilitary": 50000,
+      "aircraft_total": 291, "fighter_aircraft": 55, "helicopters": 118,
+      "tank_strength": 1215, "armored_vehicles": 2960, "rocket_projectors": 72,
+      "naval_total": 121, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 5400000000
+    },
+    "IRQ": {
+      "rank": 53, "power_index": 0.5101,
+      "active_military": 193000, "reserve_military": 0, "paramilitary": 145000,
+      "aircraft_total": 304, "fighter_aircraft": 34, "helicopters": 123,
+      "tank_strength": 672, "armored_vehicles": 9870, "rocket_projectors": 120,
+      "naval_total": 56, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 7500000000
+    },
+    "VEN": {
+      "rank": 54, "power_index": 0.5203,
+      "active_military": 123000, "reserve_military": 8000, "paramilitary": 220000,
+      "aircraft_total": 246, "fighter_aircraft": 23, "helicopters": 92,
+      "tank_strength": 490, "armored_vehicles": 1830, "rocket_projectors": 100,
+      "naval_total": 26, "aircraft_carriers": 0, "submarines": 2,
+      "defense_budget": 700000000
+    },
+    "CHL": {
+      "rank": 55, "power_index": 0.5285,
+      "active_military": 80000, "reserve_military": 40000, "paramilitary": 44700,
+      "aircraft_total": 247, "fighter_aircraft": 46, "helicopters": 84,
+      "tank_strength": 290, "armored_vehicles": 1520, "rocket_projectors": 0,
+      "naval_total": 60, "aircraft_carriers": 0, "submarines": 4,
+      "defense_budget": 5800000000
+    },
+    "SDN": {
+      "rank": 56, "power_index": 0.5394,
+      "active_military": 104800, "reserve_military": 85000, "paramilitary": 17500,
+      "aircraft_total": 179, "fighter_aircraft": 44, "helicopters": 47,
+      "tank_strength": 410, "armored_vehicles": 1880, "rocket_projectors": 55,
+      "naval_total": 18, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 730000000
+    },
+    "NZL": {
+      "rank": 57, "power_index": 0.5487,
+      "active_military": 9600, "reserve_military": 2250, "paramilitary": 0,
+      "aircraft_total": 49, "fighter_aircraft": 0, "helicopters": 20,
+      "tank_strength": 0, "armored_vehicles": 428, "rocket_projectors": 0,
+      "naval_total": 9, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 3200000000
+    },
+    "BGR": {
+      "rank": 58, "power_index": 0.5555,
+      "active_military": 37000, "reserve_military": 3000, "paramilitary": 16000,
+      "aircraft_total": 87, "fighter_aircraft": 15, "helicopters": 32,
+      "tank_strength": 420, "armored_vehicles": 1330, "rocket_projectors": 137,
+      "naval_total": 29, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 2600000000
+    },
+    "HUN": {
+      "rank": 59, "power_index": 0.5622,
+      "active_military": 22700, "reserve_military": 20000, "paramilitary": 12000,
+      "aircraft_total": 70, "fighter_aircraft": 14, "helicopters": 22,
+      "tank_strength": 166, "armored_vehicles": 1210, "rocket_projectors": 30,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 4400000000
+    },
+    "BLR": {
+      "rank": 60, "power_index": 0.5701,
+      "active_military": 62000, "reserve_military": 290000, "paramilitary": 110000,
+      "aircraft_total": 185, "fighter_aircraft": 39, "helicopters": 68,
+      "tank_strength": 1517, "armored_vehicles": 3590, "rocket_projectors": 252,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 820000000
+    },
+    "KAZ": {
+      "rank": 61, "power_index": 0.5784,
+      "active_military": 75000, "reserve_military": 31000, "paramilitary": 31500,
+      "aircraft_total": 176, "fighter_aircraft": 42, "helicopters": 80,
+      "tank_strength": 890, "armored_vehicles": 3180, "rocket_projectors": 179,
+      "naval_total": 12, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 2400000000
+    },
+    "HRV": {
+      "rank": 62, "power_index": 0.5891,
+      "active_military": 15200, "reserve_military": 18000, "paramilitary": 0,
+      "aircraft_total": 32, "fighter_aircraft": 12, "helicopters": 14,
+      "tank_strength": 75, "armored_vehicles": 590, "rocket_projectors": 36,
+      "naval_total": 29, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 1800000000
+    },
+    "SRB": {
+      "rank": 63, "power_index": 0.5959,
+      "active_military": 28150, "reserve_military": 50000, "paramilitary": 3700,
+      "aircraft_total": 84, "fighter_aircraft": 10, "helicopters": 28,
+      "tank_strength": 254, "armored_vehicles": 990, "rocket_projectors": 62,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 2100000000
+    },
+    "SVK": {
+      "rank": 64, "power_index": 0.6048,
+      "active_military": 15850, "reserve_military": 0, "paramilitary": 0,
+      "aircraft_total": 46, "fighter_aircraft": 12, "helicopters": 18,
+      "tank_strength": 30, "armored_vehicles": 640, "rocket_projectors": 26,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 2500000000
+    },
+    "CUB": {
+      "rank": 65, "power_index": 0.6131,
+      "active_military": 49000, "reserve_military": 39000, "paramilitary": 1120000,
+      "aircraft_total": 86, "fighter_aircraft": 10, "helicopters": 22,
+      "tank_strength": 655, "armored_vehicles": 1100, "rocket_projectors": 200,
+      "naval_total": 13, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 180000000
+    },
+    "AZE": {
+      "rank": 66, "power_index": 0.6215,
+      "active_military": 66950, "reserve_military": 300000, "paramilitary": 15000,
+      "aircraft_total": 148, "fighter_aircraft": 32, "helicopters": 61,
+      "tank_strength": 570, "armored_vehicles": 2300, "rocket_projectors": 375,
+      "naval_total": 30, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 2800000000
+    },
+    "ARE": {
+      "rank": 67, "power_index": 0.6280,
+      "active_military": 63000, "reserve_military": 0, "paramilitary": 0,
+      "aircraft_total": 538, "fighter_aircraft": 79, "helicopters": 223,
+      "tank_strength": 354, "armored_vehicles": 4590, "rocket_projectors": 90,
+      "naval_total": 75, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 30000000000
+    },
+    "UZB": {
+      "rank": 68, "power_index": 0.6387,
+      "active_military": 48000, "reserve_military": 20000, "paramilitary": 20000,
+      "aircraft_total": 148, "fighter_aircraft": 39, "helicopters": 58,
+      "tank_strength": 420, "armored_vehicles": 1850, "rocket_projectors": 120,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 1400000000
+    },
+    "ECU": {
+      "rank": 69, "power_index": 0.6450,
+      "active_military": 40000, "reserve_military": 118000, "paramilitary": 0,
+      "aircraft_total": 96, "fighter_aircraft": 18, "helicopters": 34,
+      "tank_strength": 170, "armored_vehicles": 730, "rocket_projectors": 24,
+      "naval_total": 38, "aircraft_carriers": 0, "submarines": 2,
+      "defense_budget": 2700000000
+    },
+    "AGO": {
+      "rank": 70, "power_index": 0.6520,
+      "active_military": 107000, "reserve_military": 0, "paramilitary": 10000,
+      "aircraft_total": 224, "fighter_aircraft": 22, "helicopters": 90,
+      "tank_strength": 310, "armored_vehicles": 1200, "rocket_projectors": 50,
+      "naval_total": 52, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 3600000000
+    },
+    "LKA": {
+      "rank": 71, "power_index": 0.6607,
+      "active_military": 255000, "reserve_military": 36000, "paramilitary": 62200,
+      "aircraft_total": 35, "fighter_aircraft": 8, "helicopters": 12,
+      "tank_strength": 155, "armored_vehicles": 890, "rocket_projectors": 60,
+      "naval_total": 64, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 1700000000
+    },
+    "TUN": {
+      "rank": 72, "power_index": 0.6695,
+      "active_military": 36000, "reserve_military": 0, "paramilitary": 12000,
+      "aircraft_total": 145, "fighter_aircraft": 12, "helicopters": 68,
+      "tank_strength": 344, "armored_vehicles": 1310, "rocket_projectors": 0,
+      "naval_total": 50, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 1200000000
+    },
+    "JOR": {
+      "rank": 73, "power_index": 0.6787,
+      "active_military": 100500, "reserve_military": 65000, "paramilitary": 15000,
+      "aircraft_total": 234, "fighter_aircraft": 56, "helicopters": 79,
+      "tank_strength": 1321, "armored_vehicles": 3880, "rocket_projectors": 44,
+      "naval_total": 20, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 2600000000
+    },
+    "KWT": {
+      "rank": 74, "power_index": 0.6863,
+      "active_military": 17500, "reserve_military": 23700, "paramilitary": 7100,
+      "aircraft_total": 92, "fighter_aircraft": 33, "helicopters": 32,
+      "tank_strength": 368, "armored_vehicles": 1540, "rocket_projectors": 27,
+      "naval_total": 22, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 7400000000
+    },
+    "OMN": {
+      "rank": 75, "power_index": 0.6945,
+      "active_military": 42600, "reserve_military": 0, "paramilitary": 4400,
+      "aircraft_total": 111, "fighter_aircraft": 23, "helicopters": 42,
+      "tank_strength": 117, "armored_vehicles": 1140, "rocket_projectors": 0,
+      "naval_total": 21, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 5500000000
+    },
+    "GEO": {
+      "rank": 76, "power_index": 0.7061,
+      "active_military": 20650, "reserve_military": 0, "paramilitary": 12000,
+      "aircraft_total": 37, "fighter_aircraft": 8, "helicopters": 14,
+      "tank_strength": 123, "armored_vehicles": 545, "rocket_projectors": 48,
+      "naval_total": 17, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 780000000
+    },
+    "LBN": {
+      "rank": 77, "power_index": 0.7143,
+      "active_military": 80000, "reserve_military": 0, "paramilitary": 20000,
+      "aircraft_total": 25, "fighter_aircraft": 0, "helicopters": 11,
+      "tank_strength": 310, "armored_vehicles": 1850, "rocket_projectors": 25,
+      "naval_total": 13, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 2800000000
+    },
+    "TKM": {
+      "rank": 78, "power_index": 0.7239,
+      "active_military": 36500, "reserve_military": 0, "paramilitary": 0,
+      "aircraft_total": 91, "fighter_aircraft": 24, "helicopters": 30,
+      "tank_strength": 700, "armored_vehicles": 1730, "rocket_projectors": 84,
+      "naval_total": 10, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 440000000
+    },
+    "LBY": {
+      "rank": 79, "power_index": 0.7328,
+      "active_military": 30000, "reserve_military": 40000, "paramilitary": 0,
+      "aircraft_total": 75, "fighter_aircraft": 14, "helicopters": 18,
+      "tank_strength": 820, "armored_vehicles": 2060, "rocket_projectors": 90,
+      "naval_total": 22, "aircraft_carriers": 0, "submarines": 2,
+      "defense_budget": 3500000000
+    },
+    "KEN": {
+      "rank": 80, "power_index": 0.7415,
+      "active_military": 24100, "reserve_military": 0, "paramilitary": 5000,
+      "aircraft_total": 45, "fighter_aircraft": 16, "helicopters": 21,
+      "tank_strength": 78, "armored_vehicles": 510, "rocket_projectors": 12,
+      "naval_total": 10, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 1400000000
+    },
+    "ZAF": {
+      "rank": 81, "power_index": 0.7507,
+      "active_military": 66300, "reserve_military": 12300, "paramilitary": 0,
+      "aircraft_total": 209, "fighter_aircraft": 17, "helicopters": 92,
+      "tank_strength": 191, "armored_vehicles": 2380, "rocket_projectors": 50,
+      "naval_total": 30, "aircraft_carriers": 0, "submarines": 3,
+      "defense_budget": 3200000000
+    },
+    "SYR": {
+      "rank": 82, "power_index": 0.7594,
+      "active_military": 154000, "reserve_military": 150000, "paramilitary": 108000,
+      "aircraft_total": 210, "fighter_aircraft": 72, "helicopters": 78,
+      "tank_strength": 2250, "armored_vehicles": 3120, "rocket_projectors": 450,
+      "naval_total": 21, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 1800000000
+    },
+    "BOL": {
+      "rank": 83, "power_index": 0.7682,
+      "active_military": 40400, "reserve_military": 0, "paramilitary": 37100,
+      "aircraft_total": 51, "fighter_aircraft": 0, "helicopters": 23,
+      "tank_strength": 54, "armored_vehicles": 350, "rocket_projectors": 0,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 630000000
+    },
+    "DOM": {
+      "rank": 84, "power_index": 0.7748,
+      "active_military": 56050, "reserve_military": 0, "paramilitary": 15000,
+      "aircraft_total": 33, "fighter_aircraft": 0, "helicopters": 14,
+      "tank_strength": 0, "armored_vehicles": 310, "rocket_projectors": 0,
+      "naval_total": 26, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 940000000
+    },
+    "CMR": {
+      "rank": 85, "power_index": 0.7835,
+      "active_military": 14100, "reserve_military": 0, "paramilitary": 9000,
+      "aircraft_total": 33, "fighter_aircraft": 4, "helicopters": 15,
+      "tank_strength": 0, "armored_vehicles": 400, "rocket_projectors": 24,
+      "naval_total": 24, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 520000000
+    },
+    "TZA": {
+      "rank": 86, "power_index": 0.7924,
+      "active_military": 27000, "reserve_military": 80000, "paramilitary": 1400,
+      "aircraft_total": 34, "fighter_aircraft": 4, "helicopters": 16,
+      "tank_strength": 190, "armored_vehicles": 380, "rocket_projectors": 58,
+      "naval_total": 10, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 680000000
+    },
+    "COD": {
+      "rank": 87, "power_index": 0.8012,
+      "active_military": 134250, "reserve_military": 0, "paramilitary": 18000,
+      "aircraft_total": 34, "fighter_aircraft": 6, "helicopters": 13,
+      "tank_strength": 210, "armored_vehicles": 440, "rocket_projectors": 24,
+      "naval_total": 14, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 610000000
+    },
+    "QAT": {
+      "rank": 88, "power_index": 0.8106,
+      "active_military": 16500, "reserve_military": 0, "paramilitary": 0,
+      "aircraft_total": 69, "fighter_aircraft": 36, "helicopters": 27,
+      "tank_strength": 62, "armored_vehicles": 560, "rocket_projectors": 0,
+      "naval_total": 20, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 15400000000
+    },
+    "ZWE": {
+      "rank": 89, "power_index": 0.8195,
+      "active_military": 29000, "reserve_military": 0, "paramilitary": 21800,
+      "aircraft_total": 55, "fighter_aircraft": 8, "helicopters": 20,
+      "tank_strength": 95, "armored_vehicles": 350, "rocket_projectors": 24,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 290000000
+    },
+    "BHR": {
+      "rank": 90, "power_index": 0.8280,
+      "active_military": 13000, "reserve_military": 0, "paramilitary": 11260,
+      "aircraft_total": 59, "fighter_aircraft": 24, "helicopters": 21,
+      "tank_strength": 180, "armored_vehicles": 547, "rocket_projectors": 22,
+      "naval_total": 23, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 1500000000
+    },
+    "YEM": {
+      "rank": 91, "power_index": 0.8373,
+      "active_military": 40000, "reserve_military": 0, "paramilitary": 71000,
+      "aircraft_total": 88, "fighter_aircraft": 22, "helicopters": 18,
+      "tank_strength": 990, "armored_vehicles": 1530, "rocket_projectors": 260,
+      "naval_total": 11, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 540000000
+    },
+    "LTU": {
+      "rank": 92, "power_index": 0.8459,
+      "active_military": 23000, "reserve_military": 6700, "paramilitary": 14600,
+      "aircraft_total": 32, "fighter_aircraft": 0, "helicopters": 18,
+      "tank_strength": 0, "armored_vehicles": 770, "rocket_projectors": 21,
+      "naval_total": 6, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 2100000000
+    },
+    "LVA": {
+      "rank": 93, "power_index": 0.8542,
+      "active_military": 6500, "reserve_military": 10400, "paramilitary": 10000,
+      "aircraft_total": 12, "fighter_aircraft": 0, "helicopters": 7,
+      "tank_strength": 0, "armored_vehicles": 340, "rocket_projectors": 0,
+      "naval_total": 8, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 1200000000
+    },
+    "EST": {
+      "rank": 94, "power_index": 0.8631,
+      "active_military": 7100, "reserve_military": 12000, "paramilitary": 16000,
+      "aircraft_total": 6, "fighter_aircraft": 0, "helicopters": 4,
+      "tank_strength": 0, "armored_vehicles": 420, "rocket_projectors": 0,
+      "naval_total": 7, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 1100000000
+    },
+    "SVN": {
+      "rank": 95, "power_index": 0.8715,
+      "active_military": 7300, "reserve_military": 1500, "paramilitary": 4500,
+      "aircraft_total": 17, "fighter_aircraft": 0, "helicopters": 10,
+      "tank_strength": 46, "armored_vehicles": 380, "rocket_projectors": 0,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 1000000000
+    },
+    "GTM": {
+      "rank": 96, "power_index": 0.8803,
+      "active_military": 22000, "reserve_military": 63850, "paramilitary": 25000,
+      "aircraft_total": 31, "fighter_aircraft": 0, "helicopters": 18,
+      "tank_strength": 14, "armored_vehicles": 310, "rocket_projectors": 0,
+      "naval_total": 14, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 410000000
+    },
+    "URY": {
+      "rank": 97, "power_index": 0.8891,
+      "active_military": 24650, "reserve_military": 0, "paramilitary": 920,
+      "aircraft_total": 40, "fighter_aircraft": 0, "helicopters": 13,
+      "tank_strength": 15, "armored_vehicles": 420, "rocket_projectors": 0,
+      "naval_total": 14, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 930000000
+    },
+    "PRY": {
+      "rank": 98, "power_index": 0.8980,
+      "active_military": 14800, "reserve_military": 164500, "paramilitary": 14800,
+      "aircraft_total": 41, "fighter_aircraft": 0, "helicopters": 15,
+      "tank_strength": 18, "armored_vehicles": 180, "rocket_projectors": 0,
+      "naval_total": 21, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 450000000
+    },
+    "GHA": {
+      "rank": 99, "power_index": 0.9064,
+      "active_military": 15500, "reserve_military": 0, "paramilitary": 0,
+      "aircraft_total": 20, "fighter_aircraft": 0, "helicopters": 9,
+      "tank_strength": 0, "armored_vehicles": 420, "rocket_projectors": 0,
+      "naval_total": 16, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 280000000
+    },
+    "NPL": {
+      "rank": 100, "power_index": 0.9150,
+      "active_military": 95600, "reserve_military": 0, "paramilitary": 62000,
+      "aircraft_total": 19, "fighter_aircraft": 0, "helicopters": 6,
+      "tank_strength": 0, "armored_vehicles": 200, "rocket_projectors": 0,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 470000000
+    },
+    "KHM": {
+      "rank": 101, "power_index": 0.9238,
+      "active_military": 124300, "reserve_military": 0, "paramilitary": 67000,
+      "aircraft_total": 37, "fighter_aircraft": 4, "helicopters": 10,
+      "tank_strength": 280, "armored_vehicles": 470, "rocket_projectors": 58,
+      "naval_total": 35, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 570000000
+    },
+    "MOZ": {
+      "rank": 102, "power_index": 0.9319,
+      "active_military": 11200, "reserve_military": 0, "paramilitary": 0,
+      "aircraft_total": 10, "fighter_aircraft": 0, "helicopters": 4,
+      "tank_strength": 60, "armored_vehicles": 180, "rocket_projectors": 12,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 210000000
+    },
+    "UGA": {
+      "rank": 103, "power_index": 0.9404,
+      "active_military": 45000, "reserve_military": 0, "paramilitary": 1800,
+      "aircraft_total": 30, "fighter_aircraft": 6, "helicopters": 11,
+      "tank_strength": 152, "armored_vehicles": 370, "rocket_projectors": 20,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 670000000
+    },
+    "CIV": {
+      "rank": 104, "power_index": 0.9492,
+      "active_military": 25400, "reserve_military": 0, "paramilitary": 1500,
+      "aircraft_total": 12, "fighter_aircraft": 0, "helicopters": 5,
+      "tank_strength": 10, "armored_vehicles": 210, "rocket_projectors": 0,
+      "naval_total": 7, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 640000000
+    },
+    "LAO": {
+      "rank": 105, "power_index": 0.9580,
+      "active_military": 29100, "reserve_military": 0, "paramilitary": 100000,
+      "aircraft_total": 24, "fighter_aircraft": 0, "helicopters": 10,
+      "tank_strength": 90, "armored_vehicles": 240, "rocket_projectors": 20,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 250000000
+    },
+    "ZMB": {
+      "rank": 106, "power_index": 0.9665,
+      "active_military": 16500, "reserve_military": 0, "paramilitary": 1400,
+      "aircraft_total": 38, "fighter_aircraft": 8, "helicopters": 16,
+      "tank_strength": 40, "armored_vehicles": 280, "rocket_projectors": 30,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 290000000
+    },
+    "MLI": {
+      "rank": 107, "power_index": 0.9752,
+      "active_military": 18000, "reserve_military": 0, "paramilitary": 4800,
+      "aircraft_total": 16, "fighter_aircraft": 2, "helicopters": 6,
+      "tank_strength": 45, "armored_vehicles": 230, "rocket_projectors": 0,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 590000000
+    },
+    "SEN": {
+      "rank": 108, "power_index": 0.9840,
+      "active_military": 19000, "reserve_military": 0, "paramilitary": 5000,
+      "aircraft_total": 15, "fighter_aircraft": 0, "helicopters": 8,
+      "tank_strength": 0, "armored_vehicles": 330, "rocket_projectors": 0,
+      "naval_total": 10, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 380000000
+    },
+    "BFA": {
+      "rank": 109, "power_index": 0.9928,
+      "active_military": 12000, "reserve_military": 0, "paramilitary": 45000,
+      "aircraft_total": 11, "fighter_aircraft": 0, "helicopters": 4,
+      "tank_strength": 0, "armored_vehicles": 190, "rocket_projectors": 0,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 390000000
+    },
+    "TCD": {
+      "rank": 110, "power_index": 1.0015,
+      "active_military": 30350, "reserve_military": 0, "paramilitary": 0,
+      "aircraft_total": 10, "fighter_aircraft": 0, "helicopters": 4,
+      "tank_strength": 60, "armored_vehicles": 370, "rocket_projectors": 0,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 310000000
+    },
+    "NER": {
+      "rank": 111, "power_index": 1.0103,
+      "active_military": 25000, "reserve_military": 0, "paramilitary": 5400,
+      "aircraft_total": 10, "fighter_aircraft": 0, "helicopters": 3,
+      "tank_strength": 0, "armored_vehicles": 280, "rocket_projectors": 0,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 350000000
+    },
+    "ALB": {
+      "rank": 112, "power_index": 1.0191,
+      "active_military": 8000, "reserve_military": 0, "paramilitary": 500,
+      "aircraft_total": 6, "fighter_aircraft": 0, "helicopters": 3,
+      "tank_strength": 0, "armored_vehicles": 290, "rocket_projectors": 0,
+      "naval_total": 20, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 360000000
+    },
+    "MNG": {
+      "rank": 113, "power_index": 1.0280,
+      "active_military": 9700, "reserve_military": 137000, "paramilitary": 7200,
+      "aircraft_total": 33, "fighter_aircraft": 3, "helicopters": 17,
+      "tank_strength": 470, "armored_vehicles": 640, "rocket_projectors": 130,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 140000000
+    },
+    "MKD": {
+      "rank": 114, "power_index": 1.0368,
+      "active_military": 8000, "reserve_military": 4850, "paramilitary": 7600,
+      "aircraft_total": 11, "fighter_aircraft": 0, "helicopters": 8,
+      "tank_strength": 31, "armored_vehicles": 340, "rocket_projectors": 0,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 330000000
+    },
+    "BIH": {
+      "rank": 115, "power_index": 1.0456,
+      "active_military": 10500, "reserve_military": 7000, "paramilitary": 0,
+      "aircraft_total": 6, "fighter_aircraft": 0, "helicopters": 5,
+      "tank_strength": 45, "armored_vehicles": 310, "rocket_projectors": 0,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 280000000
+    },
+    "HND": {
+      "rank": 116, "power_index": 1.0544,
+      "active_military": 15500, "reserve_military": 60000, "paramilitary": 0,
+      "aircraft_total": 33, "fighter_aircraft": 4, "helicopters": 15,
+      "tank_strength": 12, "armored_vehicles": 220, "rocket_projectors": 0,
+      "naval_total": 35, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 360000000
+    },
+    "SLV": {
+      "rank": 117, "power_index": 1.0632,
+      "active_military": 24500, "reserve_military": 0, "paramilitary": 17000,
+      "aircraft_total": 38, "fighter_aircraft": 0, "helicopters": 17,
+      "tank_strength": 0, "armored_vehicles": 210, "rocket_projectors": 0,
+      "naval_total": 16, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 320000000
+    },
+    "NIC": {
+      "rank": 118, "power_index": 1.0720,
+      "active_military": 14000, "reserve_military": 0, "paramilitary": 0,
+      "aircraft_total": 18, "fighter_aircraft": 0, "helicopters": 8,
+      "tank_strength": 62, "armored_vehicles": 190, "rocket_projectors": 18,
+      "naval_total": 14, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 120000000
+    },
+    "MDG": {
+      "rank": 119, "power_index": 1.0808,
+      "active_military": 21600, "reserve_military": 0, "paramilitary": 8100,
+      "aircraft_total": 13, "fighter_aircraft": 0, "helicopters": 5,
+      "tank_strength": 12, "armored_vehicles": 155, "rocket_projectors": 0,
+      "naval_total": 5, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 85000000
+    },
+    "MNE": {
+      "rank": 120, "power_index": 1.0896,
+      "active_military": 2350, "reserve_military": 0, "paramilitary": 10100,
+      "aircraft_total": 3, "fighter_aircraft": 0, "helicopters": 2,
+      "tank_strength": 0, "armored_vehicles": 110, "rocket_projectors": 0,
+      "naval_total": 4, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 120000000
+    },
+    "MRT": {
+      "rank": 121, "power_index": 1.0984,
+      "active_military": 16000, "reserve_military": 0, "paramilitary": 5000,
+      "aircraft_total": 10, "fighter_aircraft": 0, "helicopters": 3,
+      "tank_strength": 35, "armored_vehicles": 250, "rocket_projectors": 0,
+      "naval_total": 7, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 160000000
+    },
+    "GAB": {
+      "rank": 122, "power_index": 1.1072,
+      "active_military": 6700, "reserve_military": 0, "paramilitary": 2000,
+      "aircraft_total": 14, "fighter_aircraft": 5, "helicopters": 4,
+      "tank_strength": 0, "armored_vehicles": 230, "rocket_projectors": 0,
+      "naval_total": 8, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 300000000
+    },
+    "NAM": {
+      "rank": 123, "power_index": 1.1160,
+      "active_military": 9200, "reserve_military": 0, "paramilitary": 6000,
+      "aircraft_total": 22, "fighter_aircraft": 0, "helicopters": 6,
+      "tank_strength": 0, "armored_vehicles": 220, "rocket_projectors": 0,
+      "naval_total": 9, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 470000000
+    },
+    "BWA": {
+      "rank": 124, "power_index": 1.1248,
+      "active_military": 9000, "reserve_military": 0, "paramilitary": 0,
+      "aircraft_total": 20, "fighter_aircraft": 0, "helicopters": 9,
+      "tank_strength": 0, "armored_vehicles": 310, "rocket_projectors": 0,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 580000000
+    },
+    "COG": {
+      "rank": 125, "power_index": 1.1336,
+      "active_military": 12000, "reserve_military": 0, "paramilitary": 5000,
+      "aircraft_total": 10, "fighter_aircraft": 0, "helicopters": 3,
+      "tank_strength": 40, "armored_vehicles": 200, "rocket_projectors": 18,
+      "naval_total": 4, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 430000000
+    },
+    "SOM": {
+      "rank": 126, "power_index": 1.1424,
+      "active_military": 20000, "reserve_military": 0, "paramilitary": 0,
+      "aircraft_total": 6, "fighter_aircraft": 0, "helicopters": 3,
+      "tank_strength": 80, "armored_vehicles": 200, "rocket_projectors": 0,
+      "naval_total": 5, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 80000000
+    },
+    "CYP": {
+      "rank": 127, "power_index": 1.1512,
+      "active_military": 12000, "reserve_military": 50000, "paramilitary": 750,
+      "aircraft_total": 0, "fighter_aircraft": 0, "helicopters": 0,
+      "tank_strength": 82, "armored_vehicles": 472, "rocket_projectors": 18,
+      "naval_total": 6, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 520000000
+    },
+    "IRL": {
+      "rank": 128, "power_index": 1.1600,
+      "active_military": 8700, "reserve_military": 1800, "paramilitary": 0,
+      "aircraft_total": 17, "fighter_aircraft": 0, "helicopters": 10,
+      "tank_strength": 0, "armored_vehicles": 370, "rocket_projectors": 0,
+      "naval_total": 8, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 1500000000
+    },
+    "ERI": {
+      "rank": 129, "power_index": 1.1688,
+      "active_military": 201750, "reserve_military": 120000, "paramilitary": 0,
+      "aircraft_total": 20, "fighter_aircraft": 5, "helicopters": 6,
+      "tank_strength": 270, "armored_vehicles": 480, "rocket_projectors": 30,
+      "naval_total": 12, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 80000000
+    },
+    "GIN": {
+      "rank": 130, "power_index": 1.1776,
+      "active_military": 12000, "reserve_military": 0, "paramilitary": 7000,
+      "aircraft_total": 8, "fighter_aircraft": 0, "helicopters": 3,
+      "tank_strength": 38, "armored_vehicles": 180, "rocket_projectors": 0,
+      "naval_total": 5, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 180000000
+    },
+    "RWA": {
+      "rank": 131, "power_index": 1.1864,
+      "active_military": 33000, "reserve_military": 0, "paramilitary": 2000,
+      "aircraft_total": 5, "fighter_aircraft": 0, "helicopters": 2,
+      "tank_strength": 24, "armored_vehicles": 190, "rocket_projectors": 0,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 170000000
+    },
+    "TGO": {
+      "rank": 132, "power_index": 1.1952,
+      "active_military": 8550, "reserve_military": 0, "paramilitary": 750,
+      "aircraft_total": 5, "fighter_aircraft": 0, "helicopters": 2,
+      "tank_strength": 0, "armored_vehicles": 120, "rocket_projectors": 0,
+      "naval_total": 2, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 110000000
+    },
+    "BEN": {
+      "rank": 133, "power_index": 1.2040,
+      "active_military": 12000, "reserve_military": 0, "paramilitary": 2500,
+      "aircraft_total": 4, "fighter_aircraft": 0, "helicopters": 2,
+      "tank_strength": 0, "armored_vehicles": 110, "rocket_projectors": 0,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 190000000
+    },
+    "SLE": {
+      "rank": 134, "power_index": 1.2128,
+      "active_military": 8500, "reserve_military": 0, "paramilitary": 0,
+      "aircraft_total": 3, "fighter_aircraft": 0, "helicopters": 2,
+      "tank_strength": 0, "armored_vehicles": 80, "rocket_projectors": 0,
+      "naval_total": 3, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 50000000
+    },
+    "LBR": {
+      "rank": 135, "power_index": 1.2216,
+      "active_military": 2000, "reserve_military": 0, "paramilitary": 0,
+      "aircraft_total": 2, "fighter_aircraft": 0, "helicopters": 1,
+      "tank_strength": 0, "armored_vehicles": 40, "rocket_projectors": 0,
+      "naval_total": 5, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 18000000
+    },
+    "MDA": {
+      "rank": 136, "power_index": 1.2304,
+      "active_military": 6150, "reserve_military": 58000, "paramilitary": 2400,
+      "aircraft_total": 8, "fighter_aircraft": 0, "helicopters": 4,
+      "tank_strength": 0, "armored_vehicles": 210, "rocket_projectors": 0,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 160000000
+    },
+    "KGZ": {
+      "rank": 137, "power_index": 1.2392,
+      "active_military": 12500, "reserve_military": 0, "paramilitary": 9500,
+      "aircraft_total": 36, "fighter_aircraft": 4, "helicopters": 14,
+      "tank_strength": 150, "armored_vehicles": 555, "rocket_projectors": 21,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 200000000
+    },
+    "TJK": {
+      "rank": 138, "power_index": 1.2480,
+      "active_military": 8800, "reserve_military": 0, "paramilitary": 7500,
+      "aircraft_total": 17, "fighter_aircraft": 0, "helicopters": 7,
+      "tank_strength": 37, "armored_vehicles": 340, "rocket_projectors": 12,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 150000000
+    },
+    "AFG": {
+      "rank": 139, "power_index": 1.2568,
+      "active_military": 150000, "reserve_military": 0, "paramilitary": 0,
+      "aircraft_total": 40, "fighter_aircraft": 0, "helicopters": 20,
+      "tank_strength": 190, "armored_vehicles": 680, "rocket_projectors": 45,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 280000000
+    },
+    "PAN": {
+      "rank": 140, "power_index": 1.2656,
+      "active_military": 0, "reserve_military": 0, "paramilitary": 26000,
+      "aircraft_total": 20, "fighter_aircraft": 0, "helicopters": 12,
+      "tank_strength": 0, "armored_vehicles": 60, "rocket_projectors": 0,
+      "naval_total": 18, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 840000000
+    },
+    "CRI": {
+      "rank": 141, "power_index": 1.2744,
+      "active_military": 0, "reserve_military": 0, "paramilitary": 9800,
+      "aircraft_total": 8, "fighter_aircraft": 0, "helicopters": 3,
+      "tank_strength": 0, "armored_vehicles": 30, "rocket_projectors": 0,
+      "naval_total": 5, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 710000000
+    },
+    "ISL": {
+      "rank": 142, "power_index": 1.2832,
+      "active_military": 0, "reserve_military": 0, "paramilitary": 200,
+      "aircraft_total": 4, "fighter_aircraft": 0, "helicopters": 3,
+      "tank_strength": 0, "armored_vehicles": 0, "rocket_projectors": 0,
+      "naval_total": 4, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 40000000
+    },
+    "BRN": {
+      "rank": 143, "power_index": 1.2920,
+      "active_military": 7000, "reserve_military": 700, "paramilitary": 2250,
+      "aircraft_total": 18, "fighter_aircraft": 0, "helicopters": 8,
+      "tank_strength": 20, "armored_vehicles": 168, "rocket_projectors": 0,
+      "naval_total": 30, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 490000000
+    },
+    "MWI": {
+      "rank": 144, "power_index": 1.3008,
+      "active_military": 10700, "reserve_military": 0, "paramilitary": 1500,
+      "aircraft_total": 4, "fighter_aircraft": 0, "helicopters": 2,
+      "tank_strength": 0, "armored_vehicles": 85, "rocket_projectors": 0,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 55000000
+    },
+    "BTN": {
+      "rank": 145, "power_index": 1.3096,
+      "active_military": 8000, "reserve_military": 0, "paramilitary": 0,
+      "aircraft_total": 0, "fighter_aircraft": 0, "helicopters": 0,
+      "tank_strength": 0, "armored_vehicles": 16, "rocket_projectors": 0,
+      "naval_total": 0, "aircraft_carriers": 0, "submarines": 0,
+      "defense_budget": 40000000
+    }
+  }
+}

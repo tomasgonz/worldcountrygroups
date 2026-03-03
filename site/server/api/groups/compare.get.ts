@@ -1,7 +1,7 @@
 import { getRegistry } from '~/server/utils/wcg'
-import { fetchGroupStats } from '~/server/utils/worldbank'
+import { getGroupStats } from '~/server/utils/countrydata'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler((event) => {
   const query = getQuery(event)
   const groupsParam = (query.groups as string) || ''
   const gids = groupsParam.split(',').map(g => g.trim().toLowerCase()).filter(Boolean)
@@ -19,9 +19,8 @@ export default defineEventHandler(async (event) => {
     return group
   })
 
-  // Fetch stats in parallel
-  const statsResults = await Promise.all(
-    groups.map(g => fetchGroupStats(g.countries.map(c => c.iso2).filter(Boolean)))
+  const statsResults = groups.map(g =>
+    getGroupStats(g.countries.map(c => c.iso2).filter(Boolean))
   )
 
   // Build ISO2-keyed country sets per group

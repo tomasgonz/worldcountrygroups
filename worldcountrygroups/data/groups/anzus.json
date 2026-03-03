@@ -1,0 +1,28 @@
+{
+  "gid": "anzus",
+  "acronym": "ANZUS",
+  "name": "Australia, New Zealand, United States Security Treaty",
+  "description": "ANZUS is a collective security non-binding treaty between Australia, New Zealand, and the United States, signed in 1951. It is a mutual defense pact in the Pacific region.",
+  "classifier": "Peace and Security",
+  "domains": [
+    "Asia-Pacific",
+    "Peace and Security"
+  ],
+  "countries": [
+    {
+      "name": "Australia",
+      "iso2": "AU",
+      "iso3": "AUS"
+    },
+    {
+      "name": "New Zealand",
+      "iso2": "NZ",
+      "iso3": "NZL"
+    },
+    {
+      "name": "United States",
+      "iso2": "US",
+      "iso3": "USA"
+    }
+  ]
+}

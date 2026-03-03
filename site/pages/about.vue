@@ -12,8 +12,10 @@
         </p>
         <p class="text-primary-600 leading-relaxed">
           Each group includes member country lists with ISO 3166-1 codes. Aggregate statistics
-          (GDP, population, CO2 emissions) are sourced from the
-          <a href="https://data.worldbank.org/" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">World Bank Open Data API</a>.
+          (GDP, population, CO2 emissions, and more) are sourced from the
+          <a href="https://data.worldbank.org/" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">World Bank Open Data API</a>,
+          <a href="https://restcountries.com/" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">REST Countries</a>,
+          and <a href="https://hdr.undp.org/" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">UNDP Human Development Reports</a>.
         </p>
       </div>
 
@@ -34,19 +36,26 @@
 
       <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-3">Data Sources</h2>
-        <ul class="space-y-2 text-primary-600">
-          <li><strong>Country groups:</strong> Official organization sources, UN, and World Bank classifications</li>
-          <li><strong>GDP (nominal):</strong> World Bank indicator NY.GDP.MKTP.CD</li>
-          <li><strong>Population:</strong> World Bank indicator SP.POP.TOTL</li>
-          <li><strong>CO2 Emissions:</strong> World Bank indicator EN.GHG.CO2.MT.CE.AR5</li>
-        </ul>
+        <p class="text-primary-600 leading-relaxed mb-4">
+          All data is drawn from public, authoritative sources including the World Bank, United Nations Digital Library,
+          SIPRI, Global Firepower, ACLED, and more.
+        </p>
+        <NuxtLink
+          to="/sources"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-primary-900 text-white text-sm rounded-lg hover:bg-primary-800 transition-colors"
+        >
+          View all data sources
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </NuxtLink>
       </div>
 
       <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-3">Technology</h2>
         <p class="text-primary-600 leading-relaxed">
           Built with <strong>Nuxt 3</strong> and <strong>Tailwind CSS</strong>.
-          Server-side rendered. World Bank data cached for 24 hours.
+          Server-side rendered with local data store for instant page loads.
         </p>
       </div>
 
@@ -72,4 +81,5 @@ const countryCount = computed(() => {
   const world = (groups.value as any[]).find(g => g.gid === 'world')
   return world ? world.country_count : 220
 })
+
 </script>

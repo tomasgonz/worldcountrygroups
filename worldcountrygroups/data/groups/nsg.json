@@ -1,0 +1,253 @@
+{
+  "gid": "nsg",
+  "acronym": "NSG",
+  "name": "Nuclear Suppliers Group",
+  "description": "The Nuclear Suppliers Group is a multilateral export control regime of 48 nuclear supplier countries that seeks to contribute to the non-proliferation of nuclear weapons through the implementation of guidelines for nuclear and nuclear-related exports.",
+  "classifier": "Non-Proliferation",
+  "domains": [
+    "Peace and Security",
+    "Non-Proliferation"
+  ],
+  "countries": [
+    {
+      "name": "Argentina",
+      "iso2": "AR",
+      "iso3": "ARG"
+    },
+    {
+      "name": "Australia",
+      "iso2": "AU",
+      "iso3": "AUS"
+    },
+    {
+      "name": "Austria",
+      "iso2": "AT",
+      "iso3": "AUT"
+    },
+    {
+      "name": "Belarus",
+      "iso2": "BY",
+      "iso3": "BLR"
+    },
+    {
+      "name": "Belgium",
+      "iso2": "BE",
+      "iso3": "BEL"
+    },
+    {
+      "name": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA"
+    },
+    {
+      "name": "Bulgaria",
+      "iso2": "BG",
+      "iso3": "BGR"
+    },
+    {
+      "name": "Canada",
+      "iso2": "CA",
+      "iso3": "CAN"
+    },
+    {
+      "name": "China",
+      "iso2": "CN",
+      "iso3": "CHN"
+    },
+    {
+      "name": "Croatia",
+      "iso2": "HR",
+      "iso3": "HRV"
+    },
+    {
+      "name": "Cyprus",
+      "iso2": "CY",
+      "iso3": "CYP"
+    },
+    {
+      "name": "Czech Republic",
+      "iso2": "CZ",
+      "iso3": "CZE"
+    },
+    {
+      "name": "Denmark",
+      "iso2": "DK",
+      "iso3": "DNK"
+    },
+    {
+      "name": "Estonia",
+      "iso2": "EE",
+      "iso3": "EST"
+    },
+    {
+      "name": "Finland",
+      "iso2": "FI",
+      "iso3": "FIN"
+    },
+    {
+      "name": "France",
+      "iso2": "FR",
+      "iso3": "FRA"
+    },
+    {
+      "name": "Germany",
+      "iso2": "DE",
+      "iso3": "DEU"
+    },
+    {
+      "name": "Greece",
+      "iso2": "GR",
+      "iso3": "GRC"
+    },
+    {
+      "name": "Hungary",
+      "iso2": "HU",
+      "iso3": "HUN"
+    },
+    {
+      "name": "Iceland",
+      "iso2": "IS",
+      "iso3": "ISL"
+    },
+    {
+      "name": "Ireland",
+      "iso2": "IE",
+      "iso3": "IRL"
+    },
+    {
+      "name": "Italy",
+      "iso2": "IT",
+      "iso3": "ITA"
+    },
+    {
+      "name": "Japan",
+      "iso2": "JP",
+      "iso3": "JPN"
+    },
+    {
+      "name": "Kazakhstan",
+      "iso2": "KZ",
+      "iso3": "KAZ"
+    },
+    {
+      "name": "Latvia",
+      "iso2": "LV",
+      "iso3": "LVA"
+    },
+    {
+      "name": "Lithuania",
+      "iso2": "LT",
+      "iso3": "LTU"
+    },
+    {
+      "name": "Luxembourg",
+      "iso2": "LU",
+      "iso3": "LUX"
+    },
+    {
+      "name": "Malta",
+      "iso2": "MT",
+      "iso3": "MLT"
+    },
+    {
+      "name": "Mexico",
+      "iso2": "MX",
+      "iso3": "MEX"
+    },
+    {
+      "name": "Netherlands",
+      "iso2": "NL",
+      "iso3": "NLD"
+    },
+    {
+      "name": "New Zealand",
+      "iso2": "NZ",
+      "iso3": "NZL"
+    },
+    {
+      "name": "Norway",
+      "iso2": "NO",
+      "iso3": "NOR"
+    },
+    {
+      "name": "Poland",
+      "iso2": "PL",
+      "iso3": "POL"
+    },
+    {
+      "name": "Portugal",
+      "iso2": "PT",
+      "iso3": "PRT"
+    },
+    {
+      "name": "Romania",
+      "iso2": "RO",
+      "iso3": "ROU"
+    },
+    {
+      "name": "Russian Federation",
+      "iso2": "RU",
+      "iso3": "RUS"
+    },
+    {
+      "name": "Serbia",
+      "iso2": "RS",
+      "iso3": "SRB"
+    },
+    {
+      "name": "Slovakia",
+      "iso2": "SK",
+      "iso3": "SVK"
+    },
+    {
+      "name": "Slovenia",
+      "iso2": "SI",
+      "iso3": "SVN"
+    },
+    {
+      "name": "South Africa",
+      "iso2": "ZA",
+      "iso3": "ZAF"
+    },
+    {
+      "name": "Republic of Korea",
+      "iso2": "KR",
+      "iso3": "KOR"
+    },
+    {
+      "name": "Spain",
+      "iso2": "ES",
+      "iso3": "ESP"
+    },
+    {
+      "name": "Sweden",
+      "iso2": "SE",
+      "iso3": "SWE"
+    },
+    {
+      "name": "Switzerland",
+      "iso2": "CH",
+      "iso3": "CHE"
+    },
+    {
+      "name": "Turkey",
+      "iso2": "TR",
+      "iso3": "TUR"
+    },
+    {
+      "name": "Ukraine",
+      "iso2": "UA",
+      "iso3": "UKR"
+    },
+    {
+      "name": "United Kingdom",
+      "iso2": "GB",
+      "iso3": "GBR"
+    },
+    {
+      "name": "United States",
+      "iso2": "US",
+      "iso3": "USA"
+    }
+  ]
+}

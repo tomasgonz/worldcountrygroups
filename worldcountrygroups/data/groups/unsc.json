@@ -1,0 +1,90 @@
+{
+  "gid": "unsc",
+  "acronym": "UNSC",
+  "name": "United Nations Security Council",
+  "description": "The United Nations Security Council is one of the six principal organs of the United Nations, charged with ensuring international peace and security. It has 15 members: 5 permanent members with veto power (P5) and 10 non-permanent members elected for two-year terms by the General Assembly. The Council can authorize peacekeeping operations, impose sanctions, and authorize military action.",
+  "classifier": "UN Principal Organ",
+  "domains": [
+    "UNGA"
+  ],
+  "founded": 1945,
+  "headquarters": "New York, USA",
+  "website": "https://www.un.org/securitycouncil/",
+  "countries": [
+    {
+      "name": "China",
+      "iso2": "CN",
+      "iso3": "CHN"
+    },
+    {
+      "name": "France",
+      "iso2": "FR",
+      "iso3": "FRA"
+    },
+    {
+      "name": "Russian Federation",
+      "iso2": "RU",
+      "iso3": "RUS"
+    },
+    {
+      "name": "United Kingdom",
+      "iso2": "GB",
+      "iso3": "GBR"
+    },
+    {
+      "name": "United States",
+      "iso2": "US",
+      "iso3": "USA"
+    },
+    {
+      "name": "Denmark",
+      "iso2": "DK",
+      "iso3": "DNK"
+    },
+    {
+      "name": "Greece",
+      "iso2": "GR",
+      "iso3": "GRC"
+    },
+    {
+      "name": "Pakistan",
+      "iso2": "PK",
+      "iso3": "PAK"
+    },
+    {
+      "name": "Panama",
+      "iso2": "PA",
+      "iso3": "PAN"
+    },
+    {
+      "name": "Somalia",
+      "iso2": "SO",
+      "iso3": "SOM"
+    },
+    {
+      "name": "Bahrain",
+      "iso2": "BH",
+      "iso3": "BHR"
+    },
+    {
+      "name": "Colombia",
+      "iso2": "CO",
+      "iso3": "COL"
+    },
+    {
+      "name": "Congo, Dem. Rep.",
+      "iso2": "CD",
+      "iso3": "COD"
+    },
+    {
+      "name": "Latvia",
+      "iso2": "LV",
+      "iso3": "LVA"
+    },
+    {
+      "name": "Liberia",
+      "iso2": "LR",
+      "iso3": "LBR"
+    }
+  ]
+}

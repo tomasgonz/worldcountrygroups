@@ -1,0 +1,48 @@
+{
+  "gid": "apta",
+  "acronym": "APTA",
+  "name": "Asia-Pacific Trade Agreement",
+  "description": "The Asia-Pacific Trade Agreement (formerly the Bangkok Agreement) is a preferential trade agreement among developing countries in the Asia-Pacific region. It was signed in 1975 under the auspices of UNESCAP.",
+  "classifier": "Trade",
+  "domains": [
+    "Asia",
+    "Trade"
+  ],
+  "countries": [
+    {
+      "name": "Bangladesh",
+      "iso2": "BD",
+      "iso3": "BGD"
+    },
+    {
+      "name": "China",
+      "iso2": "CN",
+      "iso3": "CHN"
+    },
+    {
+      "name": "India",
+      "iso2": "IN",
+      "iso3": "IND"
+    },
+    {
+      "name": "Lao People's Democratic Republic",
+      "iso2": "LA",
+      "iso3": "LAO"
+    },
+    {
+      "name": "Mongolia",
+      "iso2": "MN",
+      "iso3": "MNG"
+    },
+    {
+      "name": "Republic of Korea",
+      "iso2": "KR",
+      "iso3": "KOR"
+    },
+    {
+      "name": "Sri Lanka",
+      "iso2": "LK",
+      "iso3": "LKA"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "gid": "cefta",
+  "acronym": "CEFTA",
+  "name": "Central European Free Trade Agreement",
+  "description": "The Central European Free Trade Agreement is a trade agreement among non-EU countries in Southeast Europe. Originally signed in 1992 among Visegrad Group countries, its current members are primarily Western Balkans countries aspiring to EU membership.",
+  "classifier": "Trade",
+  "domains": [
+    "Europe",
+    "Trade"
+  ],
+  "countries": [
+    {
+      "name": "Albania",
+      "iso2": "AL",
+      "iso3": "ALB"
+    },
+    {
+      "name": "Bosnia and Herzegovina",
+      "iso2": "BA",
+      "iso3": "BIH"
+    },
+    {
+      "name": "Georgia",
+      "iso2": "GE",
+      "iso3": "GEO"
+    },
+    {
+      "name": "Moldova",
+      "iso2": "MD",
+      "iso3": "MDA"
+    },
+    {
+      "name": "Montenegro",
+      "iso2": "ME",
+      "iso3": "MNE"
+    },
+    {
+      "name": "North Macedonia",
+      "iso2": "MK",
+      "iso3": "MKD"
+    },
+    {
+      "name": "Serbia",
+      "iso2": "RS",
+      "iso3": "SRB"
+    },
+    {
+      "name": "Ukraine",
+      "iso2": "UA",
+      "iso3": "UKR"
+    }
+  ]
+}

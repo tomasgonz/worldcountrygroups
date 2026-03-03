@@ -1,0 +1,43 @@
+{
+  "gid": "oecs",
+  "acronym": "OECS",
+  "name": "Organisation of Eastern Caribbean States",
+  "description": "The Organisation of Eastern Caribbean States is an intergovernmental organization dedicated to economic harmonization and integration, protection of human and legal rights, and good governance among countries in the Eastern Caribbean.",
+  "classifier": "Regional Integration",
+  "domains": [
+    "Caribbean",
+    "Trade"
+  ],
+  "countries": [
+    {
+      "name": "Antigua and Barbuda",
+      "iso2": "AG",
+      "iso3": "ATG"
+    },
+    {
+      "name": "Dominica",
+      "iso2": "DM",
+      "iso3": "DMA"
+    },
+    {
+      "name": "Grenada",
+      "iso2": "GD",
+      "iso3": "GRD"
+    },
+    {
+      "name": "Saint Kitts and Nevis",
+      "iso2": "KN",
+      "iso3": "KNA"
+    },
+    {
+      "name": "Saint Lucia",
+      "iso2": "LC",
+      "iso3": "LCA"
+    },
+    {
+      "name": "Saint Vincent and the Grenadines",
+      "iso2": "VC",
+      "iso3": "VCT"
+    }
+  ]
+}

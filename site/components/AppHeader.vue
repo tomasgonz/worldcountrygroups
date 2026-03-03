@@ -17,8 +17,20 @@
             <NuxtLink to="/groups" active-class="!text-primary-900" class="text-primary-400 hover:text-primary-900 transition-colors">
               Groups
             </NuxtLink>
+            <NuxtLink to="/countries" active-class="!text-primary-900" class="text-primary-400 hover:text-primary-900 transition-colors">
+              Countries
+            </NuxtLink>
             <NuxtLink to="/compare" active-class="!text-primary-900" class="text-primary-400 hover:text-primary-900 transition-colors">
               Compare
+            </NuxtLink>
+            <NuxtLink to="/votes" active-class="!text-primary-900" class="text-primary-400 hover:text-primary-900 transition-colors">
+              Votes
+            </NuxtLink>
+            <NuxtLink to="/conflicts" active-class="!text-primary-900" class="text-primary-400 hover:text-primary-900 transition-colors">
+              Conflicts
+            </NuxtLink>
+            <NuxtLink to="/sources" active-class="!text-primary-900" class="text-primary-400 hover:text-primary-900 transition-colors">
+              Sources
             </NuxtLink>
             <NuxtLink to="/about" active-class="!text-primary-900" class="text-primary-400 hover:text-primary-900 transition-colors">
               About

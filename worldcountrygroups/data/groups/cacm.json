@@ -1,0 +1,38 @@
+{
+  "gid": "cacm",
+  "acronym": "CACM",
+  "name": "Central American Common Market",
+  "description": "The Central American Common Market is an economic trade organization of Central American countries established in 1960 by Guatemala, El Salvador, Honduras, and Nicaragua, with Costa Rica joining in 1963. It aims at economic integration and free trade among its members.",
+  "classifier": "Trade",
+  "domains": [
+    "Central America",
+    "Trade"
+  ],
+  "countries": [
+    {
+      "name": "Costa Rica",
+      "iso2": "CR",
+      "iso3": "CRI"
+    },
+    {
+      "name": "El Salvador",
+      "iso2": "SV",
+      "iso3": "SLV"
+    },
+    {
+      "name": "Guatemala",
+      "iso2": "GT",
+      "iso3": "GTM"
+    },
+    {
+      "name": "Honduras",
+      "iso2": "HN",
+      "iso3": "HND"
+    },
+    {
+      "name": "Nicaragua",
+      "iso2": "NI",
+      "iso3": "NIC"
+    }
+  ]
+}

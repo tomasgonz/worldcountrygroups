@@ -1,0 +1,117 @@
+{
+  "_meta": { "last_updated": "2026-03-03", "regime_count": 14 },
+  "regimes": [
+    {
+      "id": "dprk",
+      "name": "Democratic People's Republic of Korea",
+      "resolution": "S/RES/1718",
+      "established": "2006-10-14",
+      "measures": ["arms_embargo", "travel_ban", "asset_freeze", "financial_sanctions", "luxury_goods_ban", "sectoral_sanctions"],
+      "target_countries": ["PRK"]
+    },
+    {
+      "id": "iran",
+      "name": "Iran (Non-proliferation)",
+      "resolution": "S/RES/2231",
+      "established": "2015-07-20",
+      "measures": ["arms_embargo", "travel_ban", "asset_freeze", "nuclear_restrictions"],
+      "target_countries": ["IRN"]
+    },
+    {
+      "id": "somalia",
+      "name": "Somalia",
+      "resolution": "S/RES/751",
+      "established": "1992-04-24",
+      "measures": ["arms_embargo", "travel_ban", "asset_freeze", "charcoal_ban"],
+      "target_countries": ["SOM"]
+    },
+    {
+      "id": "isil-alqaida",
+      "name": "ISIL (Da'esh) and Al-Qaida",
+      "resolution": "S/RES/1267",
+      "established": "1999-10-15",
+      "measures": ["travel_ban", "asset_freeze", "arms_embargo"],
+      "target_countries": []
+    },
+    {
+      "id": "iraq",
+      "name": "Iraq (residual)",
+      "resolution": "S/RES/1518",
+      "established": "2003-12-24",
+      "measures": ["asset_freeze"],
+      "target_countries": ["IRQ"]
+    },
+    {
+      "id": "libya",
+      "name": "Libya",
+      "resolution": "S/RES/1970",
+      "established": "2011-02-26",
+      "measures": ["arms_embargo", "travel_ban", "asset_freeze"],
+      "target_countries": ["LBY"]
+    },
+    {
+      "id": "car",
+      "name": "Central African Republic",
+      "resolution": "S/RES/2127",
+      "established": "2013-12-05",
+      "measures": ["arms_embargo", "travel_ban", "asset_freeze"],
+      "target_countries": ["CAF"]
+    },
+    {
+      "id": "yemen",
+      "name": "Yemen",
+      "resolution": "S/RES/2140",
+      "established": "2014-02-26",
+      "measures": ["travel_ban", "asset_freeze", "arms_embargo"],
+      "target_countries": ["YEM"]
+    },
+    {
+      "id": "south-sudan",
+      "name": "South Sudan",
+      "resolution": "S/RES/2206",
+      "established": "2015-03-03",
+      "measures": ["travel_ban", "asset_freeze", "arms_embargo"],
+      "target_countries": ["SSD"]
+    },
+    {
+      "id": "mali",
+      "name": "Mali",
+      "resolution": "S/RES/2374",
+      "established": "2017-09-05",
+      "measures": ["travel_ban", "asset_freeze"],
+      "target_countries": ["MLI"]
+    },
+    {
+      "id": "drc",
+      "name": "Democratic Republic of the Congo",
+      "resolution": "S/RES/1533",
+      "established": "2004-03-12",
+      "measures": ["arms_embargo", "travel_ban", "asset_freeze"],
+      "target_countries": ["COD"]
+    },
+    {
+      "id": "sudan",
+      "name": "Sudan (Darfur)",
+      "resolution": "S/RES/1556",
+      "established": "2004-07-30",
+      "measures": ["arms_embargo", "travel_ban", "asset_freeze"],
+      "target_countries": ["SDN"]
+    },
+    {
+      "id": "guinea-bissau",
+      "name": "Guinea-Bissau",
+      "resolution": "S/RES/2048",
+      "established": "2012-05-18",
+      "measures": ["travel_ban"],
+      "target_countries": ["GNB"]
+    },
+    {
+      "id": "haiti",
+      "name": "Haiti",
+      "resolution": "S/RES/2653",
+      "established": "2022-10-21",
+      "measures": ["travel_ban", "asset_freeze", "arms_embargo"],
+      "target_countries": ["HTI"]
+    }
+  ]
+}

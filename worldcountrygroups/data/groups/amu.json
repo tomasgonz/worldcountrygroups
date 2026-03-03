@@ -1,0 +1,39 @@
+{
+  "gid": "amu",
+  "acronym": "AMU",
+  "name": "Arab Maghreb Union",
+  "description": "The Arab Maghreb Union is a trade agreement between five North African countries, formed in 1989 to promote cooperation and integration among the Arab Maghreb states.",
+  "classifier": "Regional Integration",
+  "domains": [
+    "Africa",
+    "Middle East",
+    "Trade"
+  ],
+  "countries": [
+    {
+      "name": "Algeria",
+      "iso2": "DZ",
+      "iso3": "DZA"
+    },
+    {
+      "name": "Libya",
+      "iso2": "LY",
+      "iso3": "LBY"
+    },
+    {
+      "name": "Mauritania",
+      "iso2": "MR",
+      "iso3": "MRT"
+    },
+    {
+      "name": "Morocco",
+      "iso2": "MA",
+      "iso3": "MAR"
+    },
+    {
+      "name": "Tunisia",
+      "iso2": "TN",
+      "iso3": "TUN"
+    }
+  ]
+}

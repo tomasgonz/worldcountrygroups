@@ -1,0 +1,40 @@
+{
+  "gid": "unsc-p5",
+  "acronym": "P5",
+  "name": "Permanent Members of the UN Security Council",
+  "description": "The five permanent members of the United Nations Security Council, each holding veto power over substantive resolutions. Established by the UN Charter in 1945, the P5 reflects the post-World War II power structure and remains the only group with the authority to block Security Council decisions.",
+  "classifier": "UN Principal Organ",
+  "domains": [
+    "UNGA"
+  ],
+  "founded": 1945,
+  "headquarters": "New York, USA",
+  "website": "https://www.un.org/securitycouncil/",
+  "countries": [
+    {
+      "name": "China",
+      "iso2": "CN",
+      "iso3": "CHN"
+    },
+    {
+      "name": "France",
+      "iso2": "FR",
+      "iso3": "FRA"
+    },
+    {
+      "name": "Russian Federation",
+      "iso2": "RU",
+      "iso3": "RUS"
+    },
+    {
+      "name": "United Kingdom",
+      "iso2": "GB",
+      "iso3": "GBR"
+    },
+    {
+      "name": "United States",
+      "iso2": "US",
+      "iso3": "USA"
+    }
+  ]
+}

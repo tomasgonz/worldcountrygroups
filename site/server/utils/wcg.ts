@@ -18,6 +18,10 @@ export interface Group {
   classifier: string
   domains: string[]
   countries: Country[]
+  founded?: number
+  headquarters?: string
+  website?: string
+  official_languages?: string[]
 }
 
 export interface GroupSummary {
@@ -28,6 +32,10 @@ export interface GroupSummary {
   classifier: string
   domains: string[]
   country_count: number
+  founded?: number
+  headquarters?: string
+  website?: string
+  official_languages?: string[]
 }
 
 export interface CountryMembership {
@@ -99,7 +107,7 @@ class GroupRegistry {
   }
 
   getSummary(group: Group): GroupSummary {
-    return {
+    const summary: GroupSummary = {
       gid: group.gid,
       acronym: group.acronym,
       name: group.name,
@@ -108,6 +116,11 @@ class GroupRegistry {
       domains: group.domains,
       country_count: group.countries.length,
     }
+    if (group.founded) summary.founded = group.founded
+    if (group.headquarters) summary.headquarters = group.headquarters
+    if (group.website) summary.website = group.website
+    if (group.official_languages) summary.official_languages = group.official_languages
+    return summary
   }
 
   listSummaries(): GroupSummary[] {
@@ -198,6 +211,11 @@ class GroupRegistry {
       for (const d of group.domains) domains.add(d)
     }
     return [...domains].sort()
+  }
+
+  getAllIso2Codes(): string[] {
+    this.ensureLoaded()
+    return [...this.iso2ToCountry.keys()].sort()
   }
 }
 

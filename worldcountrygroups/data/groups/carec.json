@@ -1,0 +1,68 @@
+{
+  "gid": "carec",
+  "acronym": "CAREC",
+  "name": "Central Asia Regional Economic Cooperation",
+  "description": "The Central Asia Regional Economic Cooperation (CAREC) Program is a partnership of 11 countries and development partners working together to promote development through cooperation, leading to accelerated economic growth and poverty reduction.",
+  "classifier": "Regional Cooperation",
+  "domains": [
+    "Asia",
+    "Trade"
+  ],
+  "countries": [
+    {
+      "name": "Afghanistan",
+      "iso2": "AF",
+      "iso3": "AFG"
+    },
+    {
+      "name": "Azerbaijan",
+      "iso2": "AZ",
+      "iso3": "AZE"
+    },
+    {
+      "name": "China",
+      "iso2": "CN",
+      "iso3": "CHN"
+    },
+    {
+      "name": "Georgia",
+      "iso2": "GE",
+      "iso3": "GEO"
+    },
+    {
+      "name": "Kazakhstan",
+      "iso2": "KZ",
+      "iso3": "KAZ"
+    },
+    {
+      "name": "Kyrgyzstan",
+      "iso2": "KG",
+      "iso3": "KGZ"
+    },
+    {
+      "name": "Mongolia",
+      "iso2": "MN",
+      "iso3": "MNG"
+    },
+    {
+      "name": "Pakistan",
+      "iso2": "PK",
+      "iso3": "PAK"
+    },
+    {
+      "name": "Tajikistan",
+      "iso2": "TJ",
+      "iso3": "TJK"
+    },
+    {
+      "name": "Turkmenistan",
+      "iso2": "TM",
+      "iso3": "TKM"
+    },
+    {
+      "name": "Uzbekistan",
+      "iso2": "UZ",
+      "iso3": "UZB"
+    }
+  ]
+}

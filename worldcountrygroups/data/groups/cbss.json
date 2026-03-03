@@ -1,0 +1,62 @@
+{
+  "gid": "cbss",
+  "acronym": "CBSS",
+  "name": "Council of the Baltic Sea States",
+  "description": "The Council of the Baltic Sea States is an intergovernmental organization of eleven states bordering the Baltic Sea. Founded in 1992, it serves as a forum for regional inter-governmental cooperation on issues like environment, energy, and civil security.",
+  "classifier": "Regional Cooperation",
+  "domains": [
+    "Europe"
+  ],
+  "countries": [
+    {
+      "name": "Denmark",
+      "iso2": "DK",
+      "iso3": "DNK"
+    },
+    {
+      "name": "Estonia",
+      "iso2": "EE",
+      "iso3": "EST"
+    },
+    {
+      "name": "Finland",
+      "iso2": "FI",
+      "iso3": "FIN"
+    },
+    {
+      "name": "Germany",
+      "iso2": "DE",
+      "iso3": "DEU"
+    },
+    {
+      "name": "Iceland",
+      "iso2": "IS",
+      "iso3": "ISL"
+    },
+    {
+      "name": "Latvia",
+      "iso2": "LV",
+      "iso3": "LVA"
+    },
+    {
+      "name": "Lithuania",
+      "iso2": "LT",
+      "iso3": "LTU"
+    },
+    {
+      "name": "Norway",
+      "iso2": "NO",
+      "iso3": "NOR"
+    },
+    {
+      "name": "Poland",
+      "iso2": "PL",
+      "iso3": "POL"
+    },
+    {
+      "name": "Sweden",
+      "iso2": "SE",
+      "iso3": "SWE"
+    }
+  ]
+}

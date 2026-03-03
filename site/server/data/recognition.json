@@ -1,0 +1,41 @@
+{
+  "_meta": { "last_updated": "2026-03-03", "entity_count": 4 },
+  "entities": [
+    {
+      "id": "kosovo",
+      "name": "Kosovo",
+      "declared": "2008-02-17",
+      "un_status": "non-member",
+      "recognizers": ["USA","GBR","FRA","DEU","ITA","JPN","KOR","AUS","CAN","NOR","DNK","SWE","FIN","ISL","IRL","NLD","BEL","LUX","AUT","CHE","PRT","ESP","POL","CZE","SVK","HUN","SVN","HRV","BGR","ROU","EST","LVA","LTU","ALB","MNE","MKD","TUR","AFG","BHR","BRN","COM","DJI","EGY","JOR","KWT","LBR","LBY","MYS","MDV","MHL","FSM","MNG","NRU","NER","OMN","PLW","PAN","PER","QAT","SAU","SEN","SLE","SGP","SOM","TUV","ARE","VUT","BFA","CRI","DOM","SLV","GMB","GIN","GNB","GUY","HND","HTI","KIR","LIE","MRT","NZL","NGA","WSM","STP","TCD","TGO","TLS","TON","COD","BLZ","GRD","ATG","DMA","KNA","LCA","VCT","BRB","COL","GAB","GHA"],
+      "withdrawn": ["SUR","GNB","BDI","PNG","LSO","COM","TGO","CAF","GAB","SLE","GIN","MDG","NRU"],
+      "total_recognizers": 104
+    },
+    {
+      "id": "palestine",
+      "name": "Palestine",
+      "declared": "1988-11-15",
+      "un_status": "observer-state",
+      "recognizers": ["DZA","BHR","BGD","BLR","BOL","BRA","BRN","BGR","BFA","CHN","COL","COM","CRI","CUB","CYP","CZE","PRK","DJI","ECU","EGY","SLV","GNQ","ERI","EST","SWZ","ETH","GAB","GHA","GRC","GRD","GTM","GIN","GNB","GUY","HND","HUN","ISL","IND","IDN","IRN","IRQ","IRL","JOR","KAZ","KEN","KWT","KGZ","LAO","LBN","LSO","LBR","LBY","MWI","MYS","MDV","MLI","MLT","MRT","MUS","MEX","MNG","MNE","MAR","MOZ","NAM","NPL","NIC","NER","NGA","MKD","NOR","OMN","PAK","PAN","PNG","PRY","PER","PHL","POL","QAT","ROU","RUS","RWA","STP","SAU","SEN","SRB","SYC","SLE","SVK","SVN","SOM","ZAF","ESP","LKA","SDN","SUR","SWE","SYR","TJK","TZA","THA","TGO","TTO","TUN","TUR","TKM","UGA","UKR","ARE","URY","UZB","VUT","VEN","VNM","YEM","ZMB","ZWE","AGO","ATG","ARM","BRB","BEN","BWA","KHM","CMR","CAF","TCD","CHL","COG","COD","CIV","DMA","DOM","FJI","FIN","GMB","GEO","JAM","JPN","KIR","LVA","LTU","LUX","MDG","MHL","FSM","MDA","NRU","NLD","NZL","PLW","WSM","SGP","SLB","KNA","LCA","VCT","BEL","AUS","GBR","FRA","DEU","ITA","DNK","CHE","AUT","PRT","CAN","CZE","HRV","BGR","ROU","EST"],
+      "withdrawn": [],
+      "total_recognizers": 146
+    },
+    {
+      "id": "taiwan",
+      "name": "Taiwan",
+      "declared": "1912-01-01",
+      "un_status": "non-member",
+      "recognizers": ["BLZ","GTM","HTI","MHL","PLW","PRY","KNA","LCA","VCT","SWZ","TUV","VAT"],
+      "withdrawn": ["PAN","DOM","SLV","KIR","SLB","NRU","NIC","HND"],
+      "total_recognizers": 12
+    },
+    {
+      "id": "western-sahara",
+      "name": "Western Sahara (SADR)",
+      "declared": "1976-02-27",
+      "un_status": "non-self-governing",
+      "recognizers": ["DZA","AGO","ATG","BRB","BOL","BWA","BDI","KHM","COL","CRI","CUB","ECU","SLV","ETH","GHA","GRD","GTM","GUY","HND","IRN","JAM","KEN","PRK","LAO","LSO","LBR","LBY","MDG","MWI","MLI","MUS","MEX","MOZ","NAM","NGA","NIC","PNG","PRY","PER","RWA","KNA","SYC","SLE","ZAF","SUR","SYR","TZA","TLS","TGO","TTO","UGA","URY","VUT","VEN","VNM","YEM","ZMB","ZWE","DMA","LCA","VCT","BLZ","DJI"],
+      "withdrawn": ["TCD","COG","CIV","DOM","SWZ","GIN","GNB","HTI","IND","JOR","MRT","SEN","SRB","UKR","ZMB"],
+      "total_recognizers": 63
+    }
+  ]
+}

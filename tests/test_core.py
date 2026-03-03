@@ -7,7 +7,7 @@ from worldcountrygroups.core import GroupRegistry
 def test_list_groups():
     groups = worldcountrygroups.list_groups()
     assert isinstance(groups, list)
-    assert len(groups) == 46
+    assert len(groups) == 117
     assert groups == sorted(groups)
     assert "eu" in groups
     assert "brics" in groups
@@ -88,7 +88,7 @@ def test_registry_singleton():
 def test_registry_list_summaries():
     reg = GroupRegistry()
     summaries = reg.list_summaries()
-    assert len(summaries) == 46
+    assert len(summaries) == 117
     for s in summaries:
         assert s.country_count >= 0
 

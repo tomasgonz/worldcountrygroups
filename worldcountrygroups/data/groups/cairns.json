@@ -1,0 +1,108 @@
+{
+  "gid": "cairns",
+  "acronym": "CAIRNS",
+  "name": "Cairns Group",
+  "description": "The Cairns Group is a coalition of 19 agricultural exporting countries which account for over 25% of the world's agricultural exports. Formed in 1986, it lobbies for the liberalization of international trade in agriculture within the WTO.",
+  "classifier": "Trade",
+  "domains": [
+    "Trade",
+    "Agriculture"
+  ],
+  "countries": [
+    {
+      "name": "Argentina",
+      "iso2": "AR",
+      "iso3": "ARG"
+    },
+    {
+      "name": "Australia",
+      "iso2": "AU",
+      "iso3": "AUS"
+    },
+    {
+      "name": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA"
+    },
+    {
+      "name": "Canada",
+      "iso2": "CA",
+      "iso3": "CAN"
+    },
+    {
+      "name": "Chile",
+      "iso2": "CL",
+      "iso3": "CHL"
+    },
+    {
+      "name": "Colombia",
+      "iso2": "CO",
+      "iso3": "COL"
+    },
+    {
+      "name": "Costa Rica",
+      "iso2": "CR",
+      "iso3": "CRI"
+    },
+    {
+      "name": "Guatemala",
+      "iso2": "GT",
+      "iso3": "GTM"
+    },
+    {
+      "name": "Indonesia",
+      "iso2": "ID",
+      "iso3": "IDN"
+    },
+    {
+      "name": "Malaysia",
+      "iso2": "MY",
+      "iso3": "MYS"
+    },
+    {
+      "name": "New Zealand",
+      "iso2": "NZ",
+      "iso3": "NZL"
+    },
+    {
+      "name": "Pakistan",
+      "iso2": "PK",
+      "iso3": "PAK"
+    },
+    {
+      "name": "Paraguay",
+      "iso2": "PY",
+      "iso3": "PRY"
+    },
+    {
+      "name": "Peru",
+      "iso2": "PE",
+      "iso3": "PER"
+    },
+    {
+      "name": "Philippines",
+      "iso2": "PH",
+      "iso3": "PHL"
+    },
+    {
+      "name": "South Africa",
+      "iso2": "ZA",
+      "iso3": "ZAF"
+    },
+    {
+      "name": "Thailand",
+      "iso2": "TH",
+      "iso3": "THA"
+    },
+    {
+      "name": "Uruguay",
+      "iso2": "UY",
+      "iso3": "URY"
+    },
+    {
+      "name": "Viet Nam",
+      "iso2": "VN",
+      "iso3": "VNM"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "gid": "d10",
+  "acronym": "D-10",
+  "name": "D-10 Strategy Forum of Democracies",
+  "description": "The D-10 is a proposed alliance of ten major democracies: the G7 nations plus Australia, India, and South Korea. It aims to coordinate policy on technology standards, supply chains, and countering authoritarianism.",
+  "classifier": "Strategic Partnership",
+  "domains": [
+    "Europe",
+    "North America",
+    "Asia-Pacific"
+  ],
+  "countries": [
+    {
+      "name": "Australia",
+      "iso2": "AU",
+      "iso3": "AUS"
+    },
+    {
+      "name": "Canada",
+      "iso2": "CA",
+      "iso3": "CAN"
+    },
+    {
+      "name": "France",
+      "iso2": "FR",
+      "iso3": "FRA"
+    },
+    {
+      "name": "Germany",
+      "iso2": "DE",
+      "iso3": "DEU"
+    },
+    {
+      "name": "India",
+      "iso2": "IN",
+      "iso3": "IND"
+    },
+    {
+      "name": "Italy",
+      "iso2": "IT",
+      "iso3": "ITA"
+    },
+    {
+      "name": "Japan",
+      "iso2": "JP",
+      "iso3": "JPN"
+    },
+    {
+      "name": "Republic of Korea",
+      "iso2": "KR",
+      "iso3": "KOR"
+    },
+    {
+      "name": "United Kingdom",
+      "iso2": "GB",
+      "iso3": "GBR"
+    },
+    {
+      "name": "United States",
+      "iso2": "US",
+      "iso3": "USA"
+    }
+  ]
+}

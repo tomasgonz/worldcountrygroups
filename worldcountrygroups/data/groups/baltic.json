@@ -1,0 +1,27 @@
+{
+  "gid": "baltic",
+  "acronym": "BALTIC",
+  "name": "Baltic States",
+  "description": "The Baltic states are the three countries on the eastern coast of the Baltic Sea: Estonia, Latvia, and Lithuania. They cooperate on regional security, energy, and transport issues.",
+  "classifier": "Regional",
+  "domains": [
+    "Europe"
+  ],
+  "countries": [
+    {
+      "name": "Estonia",
+      "iso2": "EE",
+      "iso3": "EST"
+    },
+    {
+      "name": "Latvia",
+      "iso2": "LV",
+      "iso3": "LVA"
+    },
+    {
+      "name": "Lithuania",
+      "iso2": "LT",
+      "iso3": "LTU"
+    }
+  ]
+}

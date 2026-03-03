@@ -15,6 +15,14 @@ export default defineNuxtConfig({
       ],
     },
   },
+  runtimeConfig: {
+    adminPassword: process.env.ADMIN_PASSWORD || '',
+  },
+  vite: {
+    server: {
+      allowedHosts: ['worldcountrygroups.whereistomas.org'],
+    },
+  },
   nitro: {
     preset: 'node-server',
   },

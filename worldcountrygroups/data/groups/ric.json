@@ -1,0 +1,28 @@
+{
+  "gid": "ric",
+  "acronym": "RIC",
+  "name": "Russia-India-China Strategic Triangle",
+  "description": "RIC is a strategic grouping of Russia, India, and China. The concept was proposed in the late 1990s by Russian foreign minister Yevgeny Primakov to promote multipolarity in global affairs.",
+  "classifier": "Strategic Partnership",
+  "domains": [
+    "Asia",
+    "Europe"
+  ],
+  "countries": [
+    {
+      "name": "China",
+      "iso2": "CN",
+      "iso3": "CHN"
+    },
+    {
+      "name": "India",
+      "iso2": "IN",
+      "iso3": "IND"
+    },
+    {
+      "name": "Russian Federation",
+      "iso2": "RU",
+      "iso3": "RUS"
+    }
+  ]
+}

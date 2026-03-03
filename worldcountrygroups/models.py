@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 from pydantic import BaseModel
 
 
@@ -23,6 +25,10 @@ class Group(BaseModel):
     classifier: str
     domains: list[str]
     countries: list[Country]
+    founded: Optional[int] = None
+    headquarters: Optional[str] = None
+    website: Optional[str] = None
+    official_languages: Optional[list[str]] = None
 
     @property
     def country_count(self) -> int:

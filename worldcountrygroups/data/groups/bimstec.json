@@ -1,0 +1,48 @@
+{
+  "gid": "bimstec",
+  "acronym": "BIMSTEC",
+  "name": "Bay of Bengal Initiative for Multi-Sectoral Technical and Economic Cooperation",
+  "description": "BIMSTEC is a regional multilateral organization comprising seven member states lying in the littoral and adjacent areas of the Bay of Bengal, forming a contiguous regional unity. It was established in 1997.",
+  "classifier": "Regional Cooperation",
+  "domains": [
+    "Asia",
+    "Trade"
+  ],
+  "countries": [
+    {
+      "name": "Bangladesh",
+      "iso2": "BD",
+      "iso3": "BGD"
+    },
+    {
+      "name": "Bhutan",
+      "iso2": "BT",
+      "iso3": "BTN"
+    },
+    {
+      "name": "India",
+      "iso2": "IN",
+      "iso3": "IND"
+    },
+    {
+      "name": "Myanmar",
+      "iso2": "MM",
+      "iso3": "MMR"
+    },
+    {
+      "name": "Nepal",
+      "iso2": "NP",
+      "iso3": "NPL"
+    },
+    {
+      "name": "Sri Lanka",
+      "iso2": "LK",
+      "iso3": "LKA"
+    },
+    {
+      "name": "Thailand",
+      "iso2": "TH",
+      "iso3": "THA"
+    }
+  ]
+}

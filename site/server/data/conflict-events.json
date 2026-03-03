@@ -1,0 +1,1215 @@
+{
+  "_meta": {
+    "last_updated": "2026-03-03",
+    "source": "ACLED 2023-2025",
+    "period": "2023-01-01 to 2025-12-31"
+  },
+  "countries": {
+    "UKR": {
+      "total_events": 48200,
+      "total_fatalities": 32500,
+      "by_type": {
+        "battles": { "events": 28000, "fatalities": 22000 },
+        "explosions_remote_violence": { "events": 15000, "fatalities": 8500 },
+        "violence_against_civilians": { "events": 3200, "fatalities": 1800 },
+        "protests": { "events": 800, "fatalities": 50 },
+        "riots": { "events": 200, "fatalities": 150 },
+        "strategic_developments": { "events": 1000, "fatalities": 0 }
+      },
+      "trend": [
+        { "year": 2023, "events": 18500, "fatalities": 14000 },
+        { "year": 2024, "events": 16200, "fatalities": 10500 },
+        { "year": 2025, "events": 13500, "fatalities": 8000 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "RUS": {
+      "total_events": 5400,
+      "total_fatalities": 3200,
+      "by_type": {
+        "battles": { "events": 1200, "fatalities": 1800 },
+        "explosions_remote_violence": { "events": 2400, "fatalities": 1100 },
+        "violence_against_civilians": { "events": 600, "fatalities": 200 },
+        "protests": { "events": 800, "fatalities": 10 },
+        "riots": { "events": 100, "fatalities": 40 },
+        "strategic_developments": { "events": 300, "fatalities": 50 }
+      },
+      "trend": [
+        { "year": 2023, "events": 1900, "fatalities": 1100 },
+        { "year": 2024, "events": 1800, "fatalities": 1050 },
+        { "year": 2025, "events": 1700, "fatalities": 1050 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "SDN": {
+      "total_events": 28500,
+      "total_fatalities": 26000,
+      "by_type": {
+        "battles": { "events": 14500, "fatalities": 16000 },
+        "explosions_remote_violence": { "events": 6500, "fatalities": 5200 },
+        "violence_against_civilians": { "events": 5200, "fatalities": 4500 },
+        "protests": { "events": 600, "fatalities": 80 },
+        "riots": { "events": 300, "fatalities": 120 },
+        "strategic_developments": { "events": 1400, "fatalities": 100 }
+      },
+      "trend": [
+        { "year": 2023, "events": 8500, "fatalities": 9000 },
+        { "year": 2024, "events": 11000, "fatalities": 10000 },
+        { "year": 2025, "events": 9000, "fatalities": 7000 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "PSE": {
+      "total_events": 22000,
+      "total_fatalities": 45000,
+      "by_type": {
+        "battles": { "events": 6500, "fatalities": 8000 },
+        "explosions_remote_violence": { "events": 10500, "fatalities": 32000 },
+        "violence_against_civilians": { "events": 3000, "fatalities": 4500 },
+        "protests": { "events": 1200, "fatalities": 200 },
+        "riots": { "events": 500, "fatalities": 150 },
+        "strategic_developments": { "events": 300, "fatalities": 150 }
+      },
+      "trend": [
+        { "year": 2023, "events": 6000, "fatalities": 12000 },
+        { "year": 2024, "events": 9500, "fatalities": 20000 },
+        { "year": 2025, "events": 6500, "fatalities": 13000 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "MMR": {
+      "total_events": 24000,
+      "total_fatalities": 18000,
+      "by_type": {
+        "battles": { "events": 12500, "fatalities": 11500 },
+        "explosions_remote_violence": { "events": 5800, "fatalities": 3800 },
+        "violence_against_civilians": { "events": 3500, "fatalities": 2300 },
+        "protests": { "events": 1000, "fatalities": 120 },
+        "riots": { "events": 400, "fatalities": 80 },
+        "strategic_developments": { "events": 800, "fatalities": 200 }
+      },
+      "trend": [
+        { "year": 2023, "events": 7000, "fatalities": 5500 },
+        { "year": 2024, "events": 9000, "fatalities": 7000 },
+        { "year": 2025, "events": 8000, "fatalities": 5500 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "SYR": {
+      "total_events": 11500,
+      "total_fatalities": 8200,
+      "by_type": {
+        "battles": { "events": 4800, "fatalities": 4500 },
+        "explosions_remote_violence": { "events": 3500, "fatalities": 2600 },
+        "violence_against_civilians": { "events": 1800, "fatalities": 850 },
+        "protests": { "events": 700, "fatalities": 30 },
+        "riots": { "events": 200, "fatalities": 70 },
+        "strategic_developments": { "events": 500, "fatalities": 150 }
+      },
+      "trend": [
+        { "year": 2023, "events": 4200, "fatalities": 3200 },
+        { "year": 2024, "events": 3800, "fatalities": 2800 },
+        { "year": 2025, "events": 3500, "fatalities": 2200 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "YEM": {
+      "total_events": 9800,
+      "total_fatalities": 7500,
+      "by_type": {
+        "battles": { "events": 3200, "fatalities": 3800 },
+        "explosions_remote_violence": { "events": 4000, "fatalities": 2900 },
+        "violence_against_civilians": { "events": 1200, "fatalities": 600 },
+        "protests": { "events": 800, "fatalities": 30 },
+        "riots": { "events": 200, "fatalities": 70 },
+        "strategic_developments": { "events": 400, "fatalities": 100 }
+      },
+      "trend": [
+        { "year": 2023, "events": 2800, "fatalities": 2000 },
+        { "year": 2024, "events": 4000, "fatalities": 3200 },
+        { "year": 2025, "events": 3000, "fatalities": 2300 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "ETH": {
+      "total_events": 10200,
+      "total_fatalities": 6800,
+      "by_type": {
+        "battles": { "events": 4500, "fatalities": 4200 },
+        "explosions_remote_violence": { "events": 1500, "fatalities": 900 },
+        "violence_against_civilians": { "events": 2400, "fatalities": 1400 },
+        "protests": { "events": 1000, "fatalities": 80 },
+        "riots": { "events": 400, "fatalities": 120 },
+        "strategic_developments": { "events": 400, "fatalities": 100 }
+      },
+      "trend": [
+        { "year": 2023, "events": 4200, "fatalities": 3200 },
+        { "year": 2024, "events": 3200, "fatalities": 2000 },
+        { "year": 2025, "events": 2800, "fatalities": 1600 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "SOM": {
+      "total_events": 9500,
+      "total_fatalities": 8200,
+      "by_type": {
+        "battles": { "events": 3800, "fatalities": 4500 },
+        "explosions_remote_violence": { "events": 3000, "fatalities": 2600 },
+        "violence_against_civilians": { "events": 1500, "fatalities": 850 },
+        "protests": { "events": 500, "fatalities": 30 },
+        "riots": { "events": 200, "fatalities": 70 },
+        "strategic_developments": { "events": 500, "fatalities": 150 }
+      },
+      "trend": [
+        { "year": 2023, "events": 3500, "fatalities": 3000 },
+        { "year": 2024, "events": 3200, "fatalities": 2800 },
+        { "year": 2025, "events": 2800, "fatalities": 2400 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "AFG": {
+      "total_events": 6200,
+      "total_fatalities": 4100,
+      "by_type": {
+        "battles": { "events": 2200, "fatalities": 2000 },
+        "explosions_remote_violence": { "events": 2000, "fatalities": 1500 },
+        "violence_against_civilians": { "events": 1200, "fatalities": 500 },
+        "protests": { "events": 400, "fatalities": 20 },
+        "riots": { "events": 100, "fatalities": 30 },
+        "strategic_developments": { "events": 300, "fatalities": 50 }
+      },
+      "trend": [
+        { "year": 2023, "events": 2400, "fatalities": 1700 },
+        { "year": 2024, "events": 2000, "fatalities": 1300 },
+        { "year": 2025, "events": 1800, "fatalities": 1100 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "COD": {
+      "total_events": 14500,
+      "total_fatalities": 11200,
+      "by_type": {
+        "battles": { "events": 6500, "fatalities": 6800 },
+        "explosions_remote_violence": { "events": 2000, "fatalities": 1200 },
+        "violence_against_civilians": { "events": 4000, "fatalities": 2800 },
+        "protests": { "events": 1000, "fatalities": 100 },
+        "riots": { "events": 500, "fatalities": 200 },
+        "strategic_developments": { "events": 500, "fatalities": 100 }
+      },
+      "trend": [
+        { "year": 2023, "events": 4500, "fatalities": 3500 },
+        { "year": 2024, "events": 5500, "fatalities": 4200 },
+        { "year": 2025, "events": 4500, "fatalities": 3500 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "NGA": {
+      "total_events": 12800,
+      "total_fatalities": 10500,
+      "by_type": {
+        "battles": { "events": 3800, "fatalities": 4200 },
+        "explosions_remote_violence": { "events": 2200, "fatalities": 1800 },
+        "violence_against_civilians": { "events": 4000, "fatalities": 3600 },
+        "protests": { "events": 1500, "fatalities": 200 },
+        "riots": { "events": 800, "fatalities": 500 },
+        "strategic_developments": { "events": 500, "fatalities": 200 }
+      },
+      "trend": [
+        { "year": 2023, "events": 4500, "fatalities": 3800 },
+        { "year": 2024, "events": 4300, "fatalities": 3500 },
+        { "year": 2025, "events": 4000, "fatalities": 3200 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "MEX": {
+      "total_events": 18500,
+      "total_fatalities": 12000,
+      "by_type": {
+        "battles": { "events": 5500, "fatalities": 5000 },
+        "explosions_remote_violence": { "events": 1500, "fatalities": 800 },
+        "violence_against_civilians": { "events": 8000, "fatalities": 5500 },
+        "protests": { "events": 2000, "fatalities": 100 },
+        "riots": { "events": 800, "fatalities": 300 },
+        "strategic_developments": { "events": 700, "fatalities": 300 }
+      },
+      "trend": [
+        { "year": 2023, "events": 6200, "fatalities": 4100 },
+        { "year": 2024, "events": 6300, "fatalities": 4000 },
+        { "year": 2025, "events": 6000, "fatalities": 3900 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "SSD": {
+      "total_events": 5800,
+      "total_fatalities": 4500,
+      "by_type": {
+        "battles": { "events": 2200, "fatalities": 2300 },
+        "explosions_remote_violence": { "events": 500, "fatalities": 300 },
+        "violence_against_civilians": { "events": 2000, "fatalities": 1600 },
+        "protests": { "events": 400, "fatalities": 50 },
+        "riots": { "events": 300, "fatalities": 150 },
+        "strategic_developments": { "events": 400, "fatalities": 100 }
+      },
+      "trend": [
+        { "year": 2023, "events": 2100, "fatalities": 1700 },
+        { "year": 2024, "events": 1900, "fatalities": 1500 },
+        { "year": 2025, "events": 1800, "fatalities": 1300 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "MLI": {
+      "total_events": 7200,
+      "total_fatalities": 5500,
+      "by_type": {
+        "battles": { "events": 3000, "fatalities": 3200 },
+        "explosions_remote_violence": { "events": 1800, "fatalities": 1300 },
+        "violence_against_civilians": { "events": 1500, "fatalities": 800 },
+        "protests": { "events": 400, "fatalities": 20 },
+        "riots": { "events": 200, "fatalities": 80 },
+        "strategic_developments": { "events": 300, "fatalities": 100 }
+      },
+      "trend": [
+        { "year": 2023, "events": 2800, "fatalities": 2200 },
+        { "year": 2024, "events": 2400, "fatalities": 1800 },
+        { "year": 2025, "events": 2000, "fatalities": 1500 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "BFA": {
+      "total_events": 8500,
+      "total_fatalities": 7200,
+      "by_type": {
+        "battles": { "events": 3500, "fatalities": 3800 },
+        "explosions_remote_violence": { "events": 2000, "fatalities": 1600 },
+        "violence_against_civilians": { "events": 2000, "fatalities": 1500 },
+        "protests": { "events": 400, "fatalities": 30 },
+        "riots": { "events": 200, "fatalities": 120 },
+        "strategic_developments": { "events": 400, "fatalities": 150 }
+      },
+      "trend": [
+        { "year": 2023, "events": 3200, "fatalities": 2800 },
+        { "year": 2024, "events": 2800, "fatalities": 2400 },
+        { "year": 2025, "events": 2500, "fatalities": 2000 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "ISR": {
+      "total_events": 8500,
+      "total_fatalities": 2800,
+      "by_type": {
+        "battles": { "events": 2500, "fatalities": 1200 },
+        "explosions_remote_violence": { "events": 3000, "fatalities": 1100 },
+        "violence_against_civilians": { "events": 800, "fatalities": 200 },
+        "protests": { "events": 1500, "fatalities": 20 },
+        "riots": { "events": 400, "fatalities": 80 },
+        "strategic_developments": { "events": 300, "fatalities": 200 }
+      },
+      "trend": [
+        { "year": 2023, "events": 3500, "fatalities": 1500 },
+        { "year": 2024, "events": 3000, "fatalities": 800 },
+        { "year": 2025, "events": 2000, "fatalities": 500 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "IRQ": {
+      "total_events": 4200,
+      "total_fatalities": 950,
+      "by_type": {
+        "battles": { "events": 1200, "fatalities": 400 },
+        "explosions_remote_violence": { "events": 1500, "fatalities": 350 },
+        "violence_against_civilians": { "events": 600, "fatalities": 120 },
+        "protests": { "events": 500, "fatalities": 20 },
+        "riots": { "events": 200, "fatalities": 30 },
+        "strategic_developments": { "events": 200, "fatalities": 30 }
+      },
+      "trend": [
+        { "year": 2023, "events": 1500, "fatalities": 350 },
+        { "year": 2024, "events": 1400, "fatalities": 320 },
+        { "year": 2025, "events": 1300, "fatalities": 280 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "NER": {
+      "total_events": 3500,
+      "total_fatalities": 2200,
+      "by_type": {
+        "battles": { "events": 1400, "fatalities": 1200 },
+        "explosions_remote_violence": { "events": 800, "fatalities": 500 },
+        "violence_against_civilians": { "events": 700, "fatalities": 350 },
+        "protests": { "events": 300, "fatalities": 30 },
+        "riots": { "events": 100, "fatalities": 70 },
+        "strategic_developments": { "events": 200, "fatalities": 50 }
+      },
+      "trend": [
+        { "year": 2023, "events": 1400, "fatalities": 900 },
+        { "year": 2024, "events": 1100, "fatalities": 700 },
+        { "year": 2025, "events": 1000, "fatalities": 600 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "CMR": {
+      "total_events": 3800,
+      "total_fatalities": 980,
+      "by_type": {
+        "battles": { "events": 1000, "fatalities": 400 },
+        "explosions_remote_violence": { "events": 500, "fatalities": 200 },
+        "violence_against_civilians": { "events": 1200, "fatalities": 300 },
+        "protests": { "events": 600, "fatalities": 20 },
+        "riots": { "events": 300, "fatalities": 40 },
+        "strategic_developments": { "events": 200, "fatalities": 20 }
+      },
+      "trend": [
+        { "year": 2023, "events": 1400, "fatalities": 380 },
+        { "year": 2024, "events": 1300, "fatalities": 320 },
+        { "year": 2025, "events": 1100, "fatalities": 280 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "MOZ": {
+      "total_events": 3200,
+      "total_fatalities": 1800,
+      "by_type": {
+        "battles": { "events": 1200, "fatalities": 900 },
+        "explosions_remote_violence": { "events": 400, "fatalities": 250 },
+        "violence_against_civilians": { "events": 900, "fatalities": 500 },
+        "protests": { "events": 400, "fatalities": 50 },
+        "riots": { "events": 200, "fatalities": 80 },
+        "strategic_developments": { "events": 100, "fatalities": 20 }
+      },
+      "trend": [
+        { "year": 2023, "events": 1000, "fatalities": 600 },
+        { "year": 2024, "events": 1000, "fatalities": 550 },
+        { "year": 2025, "events": 1200, "fatalities": 650 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "COL": {
+      "total_events": 7500,
+      "total_fatalities": 3200,
+      "by_type": {
+        "battles": { "events": 1800, "fatalities": 1400 },
+        "explosions_remote_violence": { "events": 1200, "fatalities": 600 },
+        "violence_against_civilians": { "events": 2500, "fatalities": 900 },
+        "protests": { "events": 1200, "fatalities": 50 },
+        "riots": { "events": 500, "fatalities": 150 },
+        "strategic_developments": { "events": 300, "fatalities": 100 }
+      },
+      "trend": [
+        { "year": 2023, "events": 2600, "fatalities": 1100 },
+        { "year": 2024, "events": 2500, "fatalities": 1100 },
+        { "year": 2025, "events": 2400, "fatalities": 1000 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "PAK": {
+      "total_events": 6800,
+      "total_fatalities": 4500,
+      "by_type": {
+        "battles": { "events": 1800, "fatalities": 2000 },
+        "explosions_remote_violence": { "events": 2000, "fatalities": 1500 },
+        "violence_against_civilians": { "events": 1200, "fatalities": 600 },
+        "protests": { "events": 1200, "fatalities": 80 },
+        "riots": { "events": 400, "fatalities": 220 },
+        "strategic_developments": { "events": 200, "fatalities": 100 }
+      },
+      "trend": [
+        { "year": 2023, "events": 2200, "fatalities": 1400 },
+        { "year": 2024, "events": 2400, "fatalities": 1600 },
+        { "year": 2025, "events": 2200, "fatalities": 1500 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "TCD": {
+      "total_events": 2200,
+      "total_fatalities": 820,
+      "by_type": {
+        "battles": { "events": 700, "fatalities": 400 },
+        "explosions_remote_violence": { "events": 300, "fatalities": 150 },
+        "violence_against_civilians": { "events": 600, "fatalities": 200 },
+        "protests": { "events": 300, "fatalities": 30 },
+        "riots": { "events": 200, "fatalities": 30 },
+        "strategic_developments": { "events": 100, "fatalities": 10 }
+      },
+      "trend": [
+        { "year": 2023, "events": 800, "fatalities": 300 },
+        { "year": 2024, "events": 750, "fatalities": 280 },
+        { "year": 2025, "events": 650, "fatalities": 240 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "CAF": {
+      "total_events": 3000,
+      "total_fatalities": 1500,
+      "by_type": {
+        "battles": { "events": 1100, "fatalities": 800 },
+        "explosions_remote_violence": { "events": 300, "fatalities": 150 },
+        "violence_against_civilians": { "events": 1000, "fatalities": 450 },
+        "protests": { "events": 200, "fatalities": 10 },
+        "riots": { "events": 200, "fatalities": 60 },
+        "strategic_developments": { "events": 200, "fatalities": 30 }
+      },
+      "trend": [
+        { "year": 2023, "events": 1100, "fatalities": 600 },
+        { "year": 2024, "events": 1000, "fatalities": 500 },
+        { "year": 2025, "events": 900, "fatalities": 400 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "LBY": {
+      "total_events": 2400,
+      "total_fatalities": 680,
+      "by_type": {
+        "battles": { "events": 600, "fatalities": 300 },
+        "explosions_remote_violence": { "events": 500, "fatalities": 200 },
+        "violence_against_civilians": { "events": 500, "fatalities": 100 },
+        "protests": { "events": 400, "fatalities": 20 },
+        "riots": { "events": 200, "fatalities": 40 },
+        "strategic_developments": { "events": 200, "fatalities": 20 }
+      },
+      "trend": [
+        { "year": 2023, "events": 900, "fatalities": 280 },
+        { "year": 2024, "events": 800, "fatalities": 220 },
+        { "year": 2025, "events": 700, "fatalities": 180 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "HTI": {
+      "total_events": 5200,
+      "total_fatalities": 4800,
+      "by_type": {
+        "battles": { "events": 1800, "fatalities": 2000 },
+        "explosions_remote_violence": { "events": 400, "fatalities": 200 },
+        "violence_against_civilians": { "events": 2200, "fatalities": 2300 },
+        "protests": { "events": 400, "fatalities": 50 },
+        "riots": { "events": 300, "fatalities": 200 },
+        "strategic_developments": { "events": 100, "fatalities": 50 }
+      },
+      "trend": [
+        { "year": 2023, "events": 1600, "fatalities": 1500 },
+        { "year": 2024, "events": 2000, "fatalities": 1900 },
+        { "year": 2025, "events": 1600, "fatalities": 1400 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "PHL": {
+      "total_events": 4200,
+      "total_fatalities": 900,
+      "by_type": {
+        "battles": { "events": 1000, "fatalities": 350 },
+        "explosions_remote_violence": { "events": 500, "fatalities": 150 },
+        "violence_against_civilians": { "events": 1500, "fatalities": 300 },
+        "protests": { "events": 700, "fatalities": 10 },
+        "riots": { "events": 300, "fatalities": 60 },
+        "strategic_developments": { "events": 200, "fatalities": 30 }
+      },
+      "trend": [
+        { "year": 2023, "events": 1500, "fatalities": 350 },
+        { "year": 2024, "events": 1400, "fatalities": 300 },
+        { "year": 2025, "events": 1300, "fatalities": 250 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "LBN": {
+      "total_events": 4500,
+      "total_fatalities": 3800,
+      "by_type": {
+        "battles": { "events": 800, "fatalities": 600 },
+        "explosions_remote_violence": { "events": 2200, "fatalities": 2800 },
+        "violence_against_civilians": { "events": 500, "fatalities": 200 },
+        "protests": { "events": 600, "fatalities": 30 },
+        "riots": { "events": 200, "fatalities": 70 },
+        "strategic_developments": { "events": 200, "fatalities": 100 }
+      },
+      "trend": [
+        { "year": 2023, "events": 800, "fatalities": 300 },
+        { "year": 2024, "events": 2500, "fatalities": 2800 },
+        { "year": 2025, "events": 1200, "fatalities": 700 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "IND": {
+      "total_events": 12000,
+      "total_fatalities": 1800,
+      "by_type": {
+        "battles": { "events": 1500, "fatalities": 600 },
+        "explosions_remote_violence": { "events": 1200, "fatalities": 400 },
+        "violence_against_civilians": { "events": 2500, "fatalities": 500 },
+        "protests": { "events": 4500, "fatalities": 80 },
+        "riots": { "events": 2000, "fatalities": 180 },
+        "strategic_developments": { "events": 300, "fatalities": 40 }
+      },
+      "trend": [
+        { "year": 2023, "events": 4200, "fatalities": 650 },
+        { "year": 2024, "events": 4000, "fatalities": 600 },
+        { "year": 2025, "events": 3800, "fatalities": 550 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "THA": {
+      "total_events": 1200,
+      "total_fatalities": 90,
+      "by_type": {
+        "battles": { "events": 150, "fatalities": 30 },
+        "explosions_remote_violence": { "events": 250, "fatalities": 25 },
+        "violence_against_civilians": { "events": 200, "fatalities": 20 },
+        "protests": { "events": 400, "fatalities": 5 },
+        "riots": { "events": 100, "fatalities": 5 },
+        "strategic_developments": { "events": 100, "fatalities": 5 }
+      },
+      "trend": [
+        { "year": 2023, "events": 450, "fatalities": 35 },
+        { "year": 2024, "events": 400, "fatalities": 30 },
+        { "year": 2025, "events": 350, "fatalities": 25 }
+      ],
+      "conflict_intensity": "low"
+    },
+    "MYS": {
+      "total_events": 350,
+      "total_fatalities": 15,
+      "by_type": {
+        "battles": { "events": 20, "fatalities": 5 },
+        "explosions_remote_violence": { "events": 10, "fatalities": 2 },
+        "violence_against_civilians": { "events": 40, "fatalities": 5 },
+        "protests": { "events": 200, "fatalities": 1 },
+        "riots": { "events": 50, "fatalities": 2 },
+        "strategic_developments": { "events": 30, "fatalities": 0 }
+      },
+      "trend": [
+        { "year": 2023, "events": 130, "fatalities": 6 },
+        { "year": 2024, "events": 120, "fatalities": 5 },
+        { "year": 2025, "events": 100, "fatalities": 4 }
+      ],
+      "conflict_intensity": "low"
+    },
+    "EGY": {
+      "total_events": 1800,
+      "total_fatalities": 95,
+      "by_type": {
+        "battles": { "events": 150, "fatalities": 30 },
+        "explosions_remote_violence": { "events": 200, "fatalities": 25 },
+        "violence_against_civilians": { "events": 300, "fatalities": 20 },
+        "protests": { "events": 800, "fatalities": 10 },
+        "riots": { "events": 200, "fatalities": 5 },
+        "strategic_developments": { "events": 150, "fatalities": 5 }
+      },
+      "trend": [
+        { "year": 2023, "events": 600, "fatalities": 35 },
+        { "year": 2024, "events": 650, "fatalities": 35 },
+        { "year": 2025, "events": 550, "fatalities": 25 }
+      ],
+      "conflict_intensity": "low"
+    },
+    "KEN": {
+      "total_events": 3500,
+      "total_fatalities": 350,
+      "by_type": {
+        "battles": { "events": 300, "fatalities": 100 },
+        "explosions_remote_violence": { "events": 100, "fatalities": 30 },
+        "violence_against_civilians": { "events": 600, "fatalities": 100 },
+        "protests": { "events": 1800, "fatalities": 60 },
+        "riots": { "events": 500, "fatalities": 50 },
+        "strategic_developments": { "events": 200, "fatalities": 10 }
+      },
+      "trend": [
+        { "year": 2023, "events": 1100, "fatalities": 110 },
+        { "year": 2024, "events": 1400, "fatalities": 140 },
+        { "year": 2025, "events": 1000, "fatalities": 100 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "UGA": {
+      "total_events": 1500,
+      "total_fatalities": 85,
+      "by_type": {
+        "battles": { "events": 100, "fatalities": 20 },
+        "explosions_remote_violence": { "events": 50, "fatalities": 10 },
+        "violence_against_civilians": { "events": 300, "fatalities": 30 },
+        "protests": { "events": 600, "fatalities": 10 },
+        "riots": { "events": 350, "fatalities": 10 },
+        "strategic_developments": { "events": 100, "fatalities": 5 }
+      },
+      "trend": [
+        { "year": 2023, "events": 550, "fatalities": 35 },
+        { "year": 2024, "events": 500, "fatalities": 28 },
+        { "year": 2025, "events": 450, "fatalities": 22 }
+      ],
+      "conflict_intensity": "low"
+    },
+    "TZA": {
+      "total_events": 600,
+      "total_fatalities": 30,
+      "by_type": {
+        "battles": { "events": 30, "fatalities": 8 },
+        "explosions_remote_violence": { "events": 10, "fatalities": 2 },
+        "violence_against_civilians": { "events": 100, "fatalities": 10 },
+        "protests": { "events": 300, "fatalities": 5 },
+        "riots": { "events": 120, "fatalities": 3 },
+        "strategic_developments": { "events": 40, "fatalities": 2 }
+      },
+      "trend": [
+        { "year": 2023, "events": 220, "fatalities": 12 },
+        { "year": 2024, "events": 200, "fatalities": 10 },
+        { "year": 2025, "events": 180, "fatalities": 8 }
+      ],
+      "conflict_intensity": "low"
+    },
+    "BRA": {
+      "total_events": 9500,
+      "total_fatalities": 3500,
+      "by_type": {
+        "battles": { "events": 1500, "fatalities": 1200 },
+        "explosions_remote_violence": { "events": 500, "fatalities": 200 },
+        "violence_against_civilians": { "events": 4000, "fatalities": 1800 },
+        "protests": { "events": 2500, "fatalities": 50 },
+        "riots": { "events": 800, "fatalities": 200 },
+        "strategic_developments": { "events": 200, "fatalities": 50 }
+      },
+      "trend": [
+        { "year": 2023, "events": 3300, "fatalities": 1200 },
+        { "year": 2024, "events": 3200, "fatalities": 1200 },
+        { "year": 2025, "events": 3000, "fatalities": 1100 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "VEN": {
+      "total_events": 2800,
+      "total_fatalities": 450,
+      "by_type": {
+        "battles": { "events": 300, "fatalities": 150 },
+        "explosions_remote_violence": { "events": 100, "fatalities": 30 },
+        "violence_against_civilians": { "events": 800, "fatalities": 180 },
+        "protests": { "events": 1200, "fatalities": 40 },
+        "riots": { "events": 300, "fatalities": 40 },
+        "strategic_developments": { "events": 100, "fatalities": 10 }
+      },
+      "trend": [
+        { "year": 2023, "events": 800, "fatalities": 130 },
+        { "year": 2024, "events": 1200, "fatalities": 200 },
+        { "year": 2025, "events": 800, "fatalities": 120 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "ECU": {
+      "total_events": 3000,
+      "total_fatalities": 1800,
+      "by_type": {
+        "battles": { "events": 600, "fatalities": 500 },
+        "explosions_remote_violence": { "events": 500, "fatalities": 400 },
+        "violence_against_civilians": { "events": 1000, "fatalities": 700 },
+        "protests": { "events": 500, "fatalities": 30 },
+        "riots": { "events": 300, "fatalities": 120 },
+        "strategic_developments": { "events": 100, "fatalities": 50 }
+      },
+      "trend": [
+        { "year": 2023, "events": 800, "fatalities": 500 },
+        { "year": 2024, "events": 1200, "fatalities": 750 },
+        { "year": 2025, "events": 1000, "fatalities": 550 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "PER": {
+      "total_events": 2800,
+      "total_fatalities": 250,
+      "by_type": {
+        "battles": { "events": 200, "fatalities": 60 },
+        "explosions_remote_violence": { "events": 100, "fatalities": 30 },
+        "violence_against_civilians": { "events": 400, "fatalities": 80 },
+        "protests": { "events": 1500, "fatalities": 40 },
+        "riots": { "events": 500, "fatalities": 30 },
+        "strategic_developments": { "events": 100, "fatalities": 10 }
+      },
+      "trend": [
+        { "year": 2023, "events": 1200, "fatalities": 120 },
+        { "year": 2024, "events": 900, "fatalities": 70 },
+        { "year": 2025, "events": 700, "fatalities": 60 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "BGD": {
+      "total_events": 5500,
+      "total_fatalities": 1200,
+      "by_type": {
+        "battles": { "events": 400, "fatalities": 200 },
+        "explosions_remote_violence": { "events": 200, "fatalities": 80 },
+        "violence_against_civilians": { "events": 1200, "fatalities": 400 },
+        "protests": { "events": 2500, "fatalities": 300 },
+        "riots": { "events": 1000, "fatalities": 180 },
+        "strategic_developments": { "events": 200, "fatalities": 40 }
+      },
+      "trend": [
+        { "year": 2023, "events": 1500, "fatalities": 250 },
+        { "year": 2024, "events": 2500, "fatalities": 650 },
+        { "year": 2025, "events": 1500, "fatalities": 300 }
+      ],
+      "conflict_intensity": "high"
+    },
+    "ZAF": {
+      "total_events": 5000,
+      "total_fatalities": 600,
+      "by_type": {
+        "battles": { "events": 200, "fatalities": 80 },
+        "explosions_remote_violence": { "events": 100, "fatalities": 20 },
+        "violence_against_civilians": { "events": 1500, "fatalities": 300 },
+        "protests": { "events": 2200, "fatalities": 80 },
+        "riots": { "events": 800, "fatalities": 100 },
+        "strategic_developments": { "events": 200, "fatalities": 20 }
+      },
+      "trend": [
+        { "year": 2023, "events": 1800, "fatalities": 220 },
+        { "year": 2024, "events": 1700, "fatalities": 200 },
+        { "year": 2025, "events": 1500, "fatalities": 180 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "TUR": {
+      "total_events": 5500,
+      "total_fatalities": 650,
+      "by_type": {
+        "battles": { "events": 800, "fatalities": 250 },
+        "explosions_remote_violence": { "events": 600, "fatalities": 150 },
+        "violence_against_civilians": { "events": 800, "fatalities": 100 },
+        "protests": { "events": 2200, "fatalities": 30 },
+        "riots": { "events": 800, "fatalities": 80 },
+        "strategic_developments": { "events": 300, "fatalities": 40 }
+      },
+      "trend": [
+        { "year": 2023, "events": 2000, "fatalities": 250 },
+        { "year": 2024, "events": 1800, "fatalities": 220 },
+        { "year": 2025, "events": 1700, "fatalities": 180 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "IRN": {
+      "total_events": 4000,
+      "total_fatalities": 550,
+      "by_type": {
+        "battles": { "events": 400, "fatalities": 150 },
+        "explosions_remote_violence": { "events": 300, "fatalities": 100 },
+        "violence_against_civilians": { "events": 500, "fatalities": 100 },
+        "protests": { "events": 2000, "fatalities": 120 },
+        "riots": { "events": 600, "fatalities": 60 },
+        "strategic_developments": { "events": 200, "fatalities": 20 }
+      },
+      "trend": [
+        { "year": 2023, "events": 1800, "fatalities": 280 },
+        { "year": 2024, "events": 1200, "fatalities": 150 },
+        { "year": 2025, "events": 1000, "fatalities": 120 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "GIN": {
+      "total_events": 1200,
+      "total_fatalities": 120,
+      "by_type": {
+        "battles": { "events": 100, "fatalities": 30 },
+        "explosions_remote_violence": { "events": 30, "fatalities": 10 },
+        "violence_against_civilians": { "events": 200, "fatalities": 40 },
+        "protests": { "events": 600, "fatalities": 20 },
+        "riots": { "events": 200, "fatalities": 15 },
+        "strategic_developments": { "events": 70, "fatalities": 5 }
+      },
+      "trend": [
+        { "year": 2023, "events": 450, "fatalities": 50 },
+        { "year": 2024, "events": 400, "fatalities": 40 },
+        { "year": 2025, "events": 350, "fatalities": 30 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "SEN": {
+      "total_events": 1800,
+      "total_fatalities": 150,
+      "by_type": {
+        "battles": { "events": 100, "fatalities": 30 },
+        "explosions_remote_violence": { "events": 50, "fatalities": 10 },
+        "violence_against_civilians": { "events": 200, "fatalities": 40 },
+        "protests": { "events": 1000, "fatalities": 30 },
+        "riots": { "events": 350, "fatalities": 30 },
+        "strategic_developments": { "events": 100, "fatalities": 10 }
+      },
+      "trend": [
+        { "year": 2023, "events": 800, "fatalities": 70 },
+        { "year": 2024, "events": 600, "fatalities": 50 },
+        { "year": 2025, "events": 400, "fatalities": 30 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "BDI": {
+      "total_events": 1400,
+      "total_fatalities": 280,
+      "by_type": {
+        "battles": { "events": 200, "fatalities": 100 },
+        "explosions_remote_violence": { "events": 80, "fatalities": 30 },
+        "violence_against_civilians": { "events": 500, "fatalities": 120 },
+        "protests": { "events": 300, "fatalities": 10 },
+        "riots": { "events": 200, "fatalities": 10 },
+        "strategic_developments": { "events": 120, "fatalities": 10 }
+      },
+      "trend": [
+        { "year": 2023, "events": 500, "fatalities": 100 },
+        { "year": 2024, "events": 480, "fatalities": 95 },
+        { "year": 2025, "events": 420, "fatalities": 85 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "RWA": {
+      "total_events": 800,
+      "total_fatalities": 60,
+      "by_type": {
+        "battles": { "events": 50, "fatalities": 15 },
+        "explosions_remote_violence": { "events": 30, "fatalities": 5 },
+        "violence_against_civilians": { "events": 100, "fatalities": 20 },
+        "protests": { "events": 400, "fatalities": 5 },
+        "riots": { "events": 150, "fatalities": 10 },
+        "strategic_developments": { "events": 70, "fatalities": 5 }
+      },
+      "trend": [
+        { "year": 2023, "events": 300, "fatalities": 25 },
+        { "year": 2024, "events": 270, "fatalities": 20 },
+        { "year": 2025, "events": 230, "fatalities": 15 }
+      ],
+      "conflict_intensity": "low"
+    },
+    "HND": {
+      "total_events": 2200,
+      "total_fatalities": 680,
+      "by_type": {
+        "battles": { "events": 300, "fatalities": 200 },
+        "explosions_remote_violence": { "events": 100, "fatalities": 30 },
+        "violence_against_civilians": { "events": 1000, "fatalities": 380 },
+        "protests": { "events": 500, "fatalities": 20 },
+        "riots": { "events": 200, "fatalities": 30 },
+        "strategic_developments": { "events": 100, "fatalities": 20 }
+      },
+      "trend": [
+        { "year": 2023, "events": 800, "fatalities": 250 },
+        { "year": 2024, "events": 750, "fatalities": 230 },
+        { "year": 2025, "events": 650, "fatalities": 200 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "GTM": {
+      "total_events": 1600,
+      "total_fatalities": 420,
+      "by_type": {
+        "battles": { "events": 200, "fatalities": 100 },
+        "explosions_remote_violence": { "events": 80, "fatalities": 30 },
+        "violence_against_civilians": { "events": 600, "fatalities": 230 },
+        "protests": { "events": 500, "fatalities": 20 },
+        "riots": { "events": 150, "fatalities": 30 },
+        "strategic_developments": { "events": 70, "fatalities": 10 }
+      },
+      "trend": [
+        { "year": 2023, "events": 600, "fatalities": 160 },
+        { "year": 2024, "events": 550, "fatalities": 140 },
+        { "year": 2025, "events": 450, "fatalities": 120 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "SLV": {
+      "total_events": 900,
+      "total_fatalities": 200,
+      "by_type": {
+        "battles": { "events": 100, "fatalities": 50 },
+        "explosions_remote_violence": { "events": 30, "fatalities": 10 },
+        "violence_against_civilians": { "events": 300, "fatalities": 100 },
+        "protests": { "events": 300, "fatalities": 10 },
+        "riots": { "events": 100, "fatalities": 20 },
+        "strategic_developments": { "events": 70, "fatalities": 10 }
+      },
+      "trend": [
+        { "year": 2023, "events": 400, "fatalities": 100 },
+        { "year": 2024, "events": 280, "fatalities": 60 },
+        { "year": 2025, "events": 220, "fatalities": 40 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "NIC": {
+      "total_events": 600,
+      "total_fatalities": 40,
+      "by_type": {
+        "battles": { "events": 30, "fatalities": 10 },
+        "explosions_remote_violence": { "events": 10, "fatalities": 2 },
+        "violence_against_civilians": { "events": 100, "fatalities": 15 },
+        "protests": { "events": 300, "fatalities": 5 },
+        "riots": { "events": 120, "fatalities": 5 },
+        "strategic_developments": { "events": 40, "fatalities": 3 }
+      },
+      "trend": [
+        { "year": 2023, "events": 220, "fatalities": 15 },
+        { "year": 2024, "events": 200, "fatalities": 13 },
+        { "year": 2025, "events": 180, "fatalities": 12 }
+      ],
+      "conflict_intensity": "low"
+    },
+    "ERI": {
+      "total_events": 800,
+      "total_fatalities": 350,
+      "by_type": {
+        "battles": { "events": 250, "fatalities": 180 },
+        "explosions_remote_violence": { "events": 100, "fatalities": 50 },
+        "violence_against_civilians": { "events": 200, "fatalities": 80 },
+        "protests": { "events": 100, "fatalities": 10 },
+        "riots": { "events": 80, "fatalities": 20 },
+        "strategic_developments": { "events": 70, "fatalities": 10 }
+      },
+      "trend": [
+        { "year": 2023, "events": 300, "fatalities": 140 },
+        { "year": 2024, "events": 270, "fatalities": 120 },
+        { "year": 2025, "events": 230, "fatalities": 90 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "DJI": {
+      "total_events": 200,
+      "total_fatalities": 15,
+      "by_type": {
+        "battles": { "events": 10, "fatalities": 3 },
+        "explosions_remote_violence": { "events": 5, "fatalities": 2 },
+        "violence_against_civilians": { "events": 20, "fatalities": 5 },
+        "protests": { "events": 120, "fatalities": 2 },
+        "riots": { "events": 30, "fatalities": 2 },
+        "strategic_developments": { "events": 15, "fatalities": 1 }
+      },
+      "trend": [
+        { "year": 2023, "events": 75, "fatalities": 6 },
+        { "year": 2024, "events": 70, "fatalities": 5 },
+        { "year": 2025, "events": 55, "fatalities": 4 }
+      ],
+      "conflict_intensity": "low"
+    },
+    "JOR": {
+      "total_events": 800,
+      "total_fatalities": 25,
+      "by_type": {
+        "battles": { "events": 20, "fatalities": 5 },
+        "explosions_remote_violence": { "events": 30, "fatalities": 5 },
+        "violence_against_civilians": { "events": 50, "fatalities": 5 },
+        "protests": { "events": 500, "fatalities": 3 },
+        "riots": { "events": 150, "fatalities": 5 },
+        "strategic_developments": { "events": 50, "fatalities": 2 }
+      },
+      "trend": [
+        { "year": 2023, "events": 250, "fatalities": 8 },
+        { "year": 2024, "events": 300, "fatalities": 10 },
+        { "year": 2025, "events": 250, "fatalities": 7 }
+      ],
+      "conflict_intensity": "low"
+    },
+    "SAU": {
+      "total_events": 600,
+      "total_fatalities": 80,
+      "by_type": {
+        "battles": { "events": 40, "fatalities": 20 },
+        "explosions_remote_violence": { "events": 80, "fatalities": 30 },
+        "violence_against_civilians": { "events": 100, "fatalities": 15 },
+        "protests": { "events": 200, "fatalities": 5 },
+        "riots": { "events": 80, "fatalities": 5 },
+        "strategic_developments": { "events": 100, "fatalities": 5 }
+      },
+      "trend": [
+        { "year": 2023, "events": 220, "fatalities": 30 },
+        { "year": 2024, "events": 200, "fatalities": 28 },
+        { "year": 2025, "events": 180, "fatalities": 22 }
+      ],
+      "conflict_intensity": "low"
+    },
+    "AGO": {
+      "total_events": 800,
+      "total_fatalities": 55,
+      "by_type": {
+        "battles": { "events": 40, "fatalities": 12 },
+        "explosions_remote_violence": { "events": 15, "fatalities": 3 },
+        "violence_against_civilians": { "events": 100, "fatalities": 15 },
+        "protests": { "events": 400, "fatalities": 10 },
+        "riots": { "events": 180, "fatalities": 10 },
+        "strategic_developments": { "events": 65, "fatalities": 5 }
+      },
+      "trend": [
+        { "year": 2023, "events": 290, "fatalities": 22 },
+        { "year": 2024, "events": 270, "fatalities": 18 },
+        { "year": 2025, "events": 240, "fatalities": 15 }
+      ],
+      "conflict_intensity": "low"
+    },
+    "GHA": {
+      "total_events": 1200,
+      "total_fatalities": 80,
+      "by_type": {
+        "battles": { "events": 50, "fatalities": 15 },
+        "explosions_remote_violence": { "events": 20, "fatalities": 5 },
+        "violence_against_civilians": { "events": 200, "fatalities": 30 },
+        "protests": { "events": 600, "fatalities": 10 },
+        "riots": { "events": 250, "fatalities": 15 },
+        "strategic_developments": { "events": 80, "fatalities": 5 }
+      },
+      "trend": [
+        { "year": 2023, "events": 420, "fatalities": 30 },
+        { "year": 2024, "events": 410, "fatalities": 28 },
+        { "year": 2025, "events": 370, "fatalities": 22 }
+      ],
+      "conflict_intensity": "low"
+    },
+    "TGO": {
+      "total_events": 700,
+      "total_fatalities": 110,
+      "by_type": {
+        "battles": { "events": 80, "fatalities": 40 },
+        "explosions_remote_violence": { "events": 40, "fatalities": 15 },
+        "violence_against_civilians": { "events": 100, "fatalities": 25 },
+        "protests": { "events": 300, "fatalities": 10 },
+        "riots": { "events": 130, "fatalities": 15 },
+        "strategic_developments": { "events": 50, "fatalities": 5 }
+      },
+      "trend": [
+        { "year": 2023, "events": 260, "fatalities": 45 },
+        { "year": 2024, "events": 240, "fatalities": 35 },
+        { "year": 2025, "events": 200, "fatalities": 30 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "BEN": {
+      "total_events": 900,
+      "total_fatalities": 250,
+      "by_type": {
+        "battles": { "events": 150, "fatalities": 100 },
+        "explosions_remote_violence": { "events": 100, "fatalities": 60 },
+        "violence_against_civilians": { "events": 150, "fatalities": 50 },
+        "protests": { "events": 300, "fatalities": 15 },
+        "riots": { "events": 130, "fatalities": 15 },
+        "strategic_developments": { "events": 70, "fatalities": 10 }
+      },
+      "trend": [
+        { "year": 2023, "events": 280, "fatalities": 70 },
+        { "year": 2024, "events": 330, "fatalities": 100 },
+        { "year": 2025, "events": 290, "fatalities": 80 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "CIV": {
+      "total_events": 900,
+      "total_fatalities": 60,
+      "by_type": {
+        "battles": { "events": 40, "fatalities": 10 },
+        "explosions_remote_violence": { "events": 20, "fatalities": 5 },
+        "violence_against_civilians": { "events": 150, "fatalities": 20 },
+        "protests": { "events": 400, "fatalities": 10 },
+        "riots": { "events": 220, "fatalities": 10 },
+        "strategic_developments": { "events": 70, "fatalities": 5 }
+      },
+      "trend": [
+        { "year": 2023, "events": 330, "fatalities": 22 },
+        { "year": 2024, "events": 300, "fatalities": 20 },
+        { "year": 2025, "events": 270, "fatalities": 18 }
+      ],
+      "conflict_intensity": "low"
+    },
+    "MRT": {
+      "total_events": 350,
+      "total_fatalities": 20,
+      "by_type": {
+        "battles": { "events": 15, "fatalities": 5 },
+        "explosions_remote_violence": { "events": 10, "fatalities": 2 },
+        "violence_against_civilians": { "events": 30, "fatalities": 5 },
+        "protests": { "events": 200, "fatalities": 3 },
+        "riots": { "events": 70, "fatalities": 3 },
+        "strategic_developments": { "events": 25, "fatalities": 2 }
+      },
+      "trend": [
+        { "year": 2023, "events": 130, "fatalities": 8 },
+        { "year": 2024, "events": 120, "fatalities": 7 },
+        { "year": 2025, "events": 100, "fatalities": 5 }
+      ],
+      "conflict_intensity": "low"
+    },
+    "NPL": {
+      "total_events": 1400,
+      "total_fatalities": 45,
+      "by_type": {
+        "battles": { "events": 30, "fatalities": 8 },
+        "explosions_remote_violence": { "events": 40, "fatalities": 7 },
+        "violence_against_civilians": { "events": 100, "fatalities": 10 },
+        "protests": { "events": 900, "fatalities": 10 },
+        "riots": { "events": 280, "fatalities": 8 },
+        "strategic_developments": { "events": 50, "fatalities": 2 }
+      },
+      "trend": [
+        { "year": 2023, "events": 500, "fatalities": 18 },
+        { "year": 2024, "events": 480, "fatalities": 15 },
+        { "year": 2025, "events": 420, "fatalities": 12 }
+      ],
+      "conflict_intensity": "low"
+    },
+    "LKA": {
+      "total_events": 900,
+      "total_fatalities": 30,
+      "by_type": {
+        "battles": { "events": 20, "fatalities": 5 },
+        "explosions_remote_violence": { "events": 10, "fatalities": 2 },
+        "violence_against_civilians": { "events": 80, "fatalities": 10 },
+        "protests": { "events": 550, "fatalities": 5 },
+        "riots": { "events": 180, "fatalities": 5 },
+        "strategic_developments": { "events": 60, "fatalities": 3 }
+      },
+      "trend": [
+        { "year": 2023, "events": 400, "fatalities": 15 },
+        { "year": 2024, "events": 280, "fatalities": 8 },
+        { "year": 2025, "events": 220, "fatalities": 7 }
+      ],
+      "conflict_intensity": "low"
+    },
+    "IDN": {
+      "total_events": 3500,
+      "total_fatalities": 280,
+      "by_type": {
+        "battles": { "events": 200, "fatalities": 60 },
+        "explosions_remote_violence": { "events": 100, "fatalities": 30 },
+        "violence_against_civilians": { "events": 500, "fatalities": 80 },
+        "protests": { "events": 1800, "fatalities": 30 },
+        "riots": { "events": 700, "fatalities": 60 },
+        "strategic_developments": { "events": 200, "fatalities": 20 }
+      },
+      "trend": [
+        { "year": 2023, "events": 1200, "fatalities": 100 },
+        { "year": 2024, "events": 1200, "fatalities": 95 },
+        { "year": 2025, "events": 1100, "fatalities": 85 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "PNG": {
+      "total_events": 1100,
+      "total_fatalities": 350,
+      "by_type": {
+        "battles": { "events": 250, "fatalities": 150 },
+        "explosions_remote_violence": { "events": 30, "fatalities": 10 },
+        "violence_against_civilians": { "events": 400, "fatalities": 150 },
+        "protests": { "events": 200, "fatalities": 10 },
+        "riots": { "events": 150, "fatalities": 20 },
+        "strategic_developments": { "events": 70, "fatalities": 10 }
+      },
+      "trend": [
+        { "year": 2023, "events": 380, "fatalities": 120 },
+        { "year": 2024, "events": 400, "fatalities": 130 },
+        { "year": 2025, "events": 320, "fatalities": 100 }
+      ],
+      "conflict_intensity": "medium"
+    },
+    "MWI": {
+      "total_events": 500,
+      "total_fatalities": 25,
+      "by_type": {
+        "battles": { "events": 15, "fatalities": 5 },
+        "explosions_remote_violence": { "events": 5, "fatalities": 2 },
+        "violence_against_civilians": { "events": 50, "fatalities": 8 },
+        "protests": { "events": 300, "fatalities": 5 },
+        "riots": { "events": 100, "fatalities": 3 },
+        "strategic_developments": { "events": 30, "fatalities": 2 }
+      },
+      "trend": [
+        { "year": 2023, "events": 200, "fatalities": 10 },
+        { "year": 2024, "events": 170, "fatalities": 8 },
+        { "year": 2025, "events": 130, "fatalities": 7 }
+      ],
+      "conflict_intensity": "low"
+    }
+  }
+}

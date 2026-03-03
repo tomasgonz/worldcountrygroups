@@ -1,0 +1,33 @@
+{
+  "gid": "msg",
+  "acronym": "MSG",
+  "name": "Melanesian Spearhead Group",
+  "description": "The Melanesian Spearhead Group is a subregional intergovernmental organization comprising four Melanesian states. It was established in 1988 to promote economic growth among its members.",
+  "classifier": "Regional",
+  "domains": [
+    "Pacific",
+    "Oceania"
+  ],
+  "countries": [
+    {
+      "name": "Fiji",
+      "iso2": "FJ",
+      "iso3": "FJI"
+    },
+    {
+      "name": "Papua New Guinea",
+      "iso2": "PG",
+      "iso3": "PNG"
+    },
+    {
+      "name": "Solomon Islands",
+      "iso2": "SB",
+      "iso3": "SLB"
+    },
+    {
+      "name": "Vanuatu",
+      "iso2": "VU",
+      "iso3": "VUT"
+    }
+  ]
+}

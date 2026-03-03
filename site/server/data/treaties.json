@@ -1,0 +1,125 @@
+{
+  "_meta": { "last_updated": "2026-03-03", "treaty_count": 12 },
+  "treaties": [
+    {
+      "id": "rome-statute",
+      "name": "Rome Statute of the International Criminal Court",
+      "short_name": "ICC Rome Statute",
+      "adopted": "1998-07-17",
+      "category": "International Law",
+      "parties": ["AFG","ALB","AND","ATG","ARG","AUS","AUT","BGD","BRB","BEL","BLZ","BEN","BOL","BWA","BRA","BGR","BFA","CPV","KHM","CMR","CAN","CAF","TCD","CHL","COL","COM","COG","COK","CRI","CIV","HRV","CYP","CZE","COD","DNK","DJI","DMA","DOM","ECU","TLS","EST","FJI","FIN","FRA","GAB","GMB","GEO","DEU","GHA","GRC","GRD","GTM","GIN","GUY","HND","HUN","ISL","IRL","ITA","JPN","JOR","KEN","KIR","LVA","LSO","LBR","LIE","LTU","LUX","MDG","MWI","MLI","MLT","MHL","MUS","MEX","FSM","MNG","MNE","MOZ","NAM","NRU","NLD","NZL","NER","NGA","MKD","NOR","PAN","PRY","PER","POL","PRT","KOR","MDA","ROU","SEN","SRB","SYC","SLE","SVK","SVN","ZAF","ESP","LKA","KNA","VCT","PSE","SUR","SWE","CHE","TJK","TZA","TTO","TUN","UGA","GBR","URY","VUT","VEN","ZMB"],
+      "signatories_only": ["EGY","IRN","ISR","RUS","USA","SYR","SDN","GNB","ARE","BHR","KWT","OMN","QAT","YEM","THA","UKR","UZB","MYS"],
+      "withdrawn": ["BDI","PHL"]
+    },
+    {
+      "id": "npt",
+      "name": "Treaty on the Non-Proliferation of Nuclear Weapons",
+      "short_name": "NPT",
+      "adopted": "1968-07-01",
+      "category": "Disarmament",
+      "parties": ["AFG","ALB","DZA","AND","AGO","ATG","ARG","ARM","AUS","AUT","AZE","BHS","BHR","BGD","BRB","BLR","BEL","BLZ","BEN","BTN","BOL","BWA","BRA","BRN","BGR","BFA","BDI","CPV","KHM","CMR","CAN","CAF","TCD","CHL","CHN","COL","COM","COG","COD","CRI","CIV","HRV","CUB","CYP","CZE","DNK","DJI","DMA","DOM","ECU","EGY","SLV","GNQ","ERI","EST","SWZ","ETH","FJI","FIN","FRA","GAB","GMB","GEO","DEU","GHA","GRC","GRD","GTM","GIN","GNB","GUY","HTI","HND","HUN","ISL","IDN","IRN","IRQ","IRL","ITA","JAM","JPN","JOR","KAZ","KEN","KIR","PRK","KOR","KWT","KGZ","LAO","LVA","LBN","LSO","LBR","LBY","LIE","LTU","LUX","MDG","MWI","MYS","MDV","MLI","MLT","MHL","MRT","MUS","MEX","FSM","MDA","MCO","MNG","MNE","MAR","MOZ","MMR","NAM","NRU","NPL","NLD","NZL","NIC","NER","NGA","MKD","NOR","OMN","PAK","PLW","PAN","PNG","PRY","PER","PHL","POL","PRT","QAT","ROU","RUS","RWA","KNA","LCA","VCT","WSM","SMR","STP","SAU","SEN","SRB","SYC","SLE","SGP","SVK","SVN","SLB","SOM","ZAF","ESP","LKA","SDN","SUR","SWE","CHE","SYR","TJK","TZA","THA","TGO","TON","TTO","TUN","TUR","TKM","TUV","UGA","UKR","ARE","GBR","USA","URY","UZB","VUT","VEN","VNM","YEM","ZMB","ZWE","PSE","TLS"],
+      "signatories_only": [],
+      "withdrawn": []
+    },
+    {
+      "id": "paris-agreement",
+      "name": "Paris Agreement on Climate Change",
+      "short_name": "Paris Agreement",
+      "adopted": "2015-12-12",
+      "category": "Environment",
+      "parties": ["AFG","ALB","DZA","AND","AGO","ATG","ARG","ARM","AUS","AUT","AZE","BHS","BHR","BGD","BRB","BLR","BEL","BLZ","BEN","BTN","BOL","BWA","BRA","BRN","BGR","BFA","BDI","CPV","KHM","CMR","CAN","CAF","TCD","CHL","CHN","COL","COM","COG","COD","CRI","CIV","HRV","CUB","CYP","CZE","DNK","DJI","DMA","DOM","ECU","EGY","SLV","GNQ","ERI","EST","SWZ","ETH","FJI","FIN","FRA","GAB","GMB","GEO","DEU","GHA","GRC","GRD","GTM","GIN","GNB","GUY","HTI","HND","HUN","ISL","IND","IDN","IRN","IRQ","IRL","ISR","ITA","JAM","JPN","JOR","KAZ","KEN","KIR","PRK","KOR","KWT","KGZ","LAO","LVA","LBN","LSO","LBR","LBY","LIE","LTU","LUX","MDG","MWI","MYS","MDV","MLI","MLT","MHL","MRT","MUS","MEX","FSM","MDA","MCO","MNG","MNE","MAR","MOZ","MMR","NAM","NRU","NPL","NLD","NZL","NIC","NER","NGA","MKD","NOR","OMN","PAK","PLW","PAN","PNG","PRY","PER","PHL","POL","PRT","QAT","ROU","RUS","RWA","KNA","LCA","VCT","WSM","SMR","STP","SAU","SEN","SRB","SYC","SLE","SGP","SVK","SVN","SLB","SOM","ZAF","ESP","LKA","SDN","SUR","SWE","CHE","SYR","TJK","TZA","THA","TGO","TON","TTO","TUN","TUR","TKM","TUV","UGA","UKR","ARE","GBR","URY","UZB","VUT","VEN","VNM","YEM","ZMB","ZWE","PSE","TLS"],
+      "signatories_only": [],
+      "withdrawn": ["USA"]
+    },
+    {
+      "id": "unclos",
+      "name": "United Nations Convention on the Law of the Sea",
+      "short_name": "UNCLOS",
+      "adopted": "1982-12-10",
+      "category": "Maritime Law",
+      "parties": ["ALB","DZA","AGO","ATG","ARG","ARM","AUS","AUT","BHS","BHR","BGD","BRB","BEL","BLZ","BEN","BOL","BWA","BRA","BRN","BGR","BFA","BDI","CPV","KHM","CMR","CAN","TCD","CHL","CHN","COM","COG","COD","CRI","CIV","HRV","CUB","CYP","CZE","DNK","DJI","DMA","DOM","ECU","EGY","GNQ","EST","SWZ","ETH","FJI","FIN","FRA","GAB","GMB","GEO","DEU","GHA","GRC","GRD","GTM","GIN","GNB","GUY","HTI","HND","HUN","ISL","IND","IDN","IRQ","IRL","ITA","JAM","JPN","JOR","KEN","KIR","KOR","KWT","LAO","LVA","LBN","LSO","LBR","LBY","LIE","LTU","LUX","MDG","MWI","MYS","MDV","MLI","MLT","MHL","MRT","MUS","MEX","FSM","MDA","MCO","MNG","MNE","MOZ","MMR","NAM","NRU","NPL","NLD","NZL","NIC","NER","NGA","MKD","NOR","OMN","PAK","PLW","PAN","PNG","PRY","PHL","POL","PRT","QAT","ROU","RUS","RWA","KNA","LCA","VCT","WSM","STP","SAU","SEN","SRB","SYC","SLE","SGP","SVK","SVN","SLB","SOM","ZAF","ESP","LKA","SDN","SUR","SWE","CHE","TJK","TZA","THA","TGO","TON","TTO","TUN","TUV","UGA","UKR","ARE","GBR","URY","VUT","VNM","YEM","ZMB","ZWE","PSE","TLS"],
+      "signatories_only": ["USA","IRN","AFG","CAF","COL","SLV","ERI","ETH","LBY","PRK","PER","SYR","TUR","UZB","VEN"],
+      "withdrawn": []
+    },
+    {
+      "id": "ctbt",
+      "name": "Comprehensive Nuclear-Test-Ban Treaty",
+      "short_name": "CTBT",
+      "adopted": "1996-09-10",
+      "category": "Disarmament",
+      "parties": ["ALB","DZA","AND","ATG","ARG","ARM","AUS","AUT","AZE","BHS","BHR","BGD","BRB","BEL","BLZ","BEN","BOL","BWA","BRA","BRN","BGR","BFA","BDI","KHM","CMR","CAN","CAF","TCD","CHL","COL","COG","COD","CRI","CIV","HRV","CYP","CZE","DNK","DJI","DOM","ECU","SLV","ERI","EST","SWZ","ETH","FJI","FIN","FRA","GAB","GEO","DEU","GHA","GRC","GRD","GTM","GIN","GUY","HTI","HND","HUN","ISL","IRL","ITA","JAM","JPN","JOR","KAZ","KEN","KIR","KOR","KWT","KGZ","LAO","LVA","LBN","LSO","LBR","LBY","LIE","LTU","LUX","MDG","MWI","MYS","MLI","MLT","MHL","MRT","MUS","MEX","FSM","MDA","MCO","MNG","MNE","MAR","MOZ","MMR","NAM","NRU","NPL","NLD","NZL","NIC","NER","NGA","MKD","NOR","OMN","PLW","PAN","PRY","PER","PHL","POL","PRT","QAT","ROU","RUS","RWA","KNA","LCA","VCT","WSM","SMR","SEN","SRB","SYC","SLE","SGP","SVK","SVN","ZAF","ESP","LKA","SDN","SUR","SWE","CHE","TJK","TZA","TGO","TON","TTO","TUN","TUR","TKM","UGA","UKR","ARE","GBR","URY","UZB","VUT","VNM","ZMB"],
+      "signatories_only": ["CHN","EGY","IRN","ISR","USA","YEM","COM","GNB","IDN","IRQ","MMR","PNG","STP","THA","TLS"],
+      "withdrawn": []
+    },
+    {
+      "id": "cluster-munitions",
+      "name": "Convention on Cluster Munitions",
+      "short_name": "Cluster Munitions Convention",
+      "adopted": "2008-05-30",
+      "category": "Humanitarian",
+      "parties": ["AFG","ALB","AND","ATG","AUS","AUT","BEL","BLZ","BEN","BOL","BWA","BGR","BFA","BDI","CMR","CAN","CPV","TCD","CHL","COL","COM","COG","COD","CRI","CIV","HRV","CUB","CZE","DNK","DOM","ECU","SLV","SWZ","FJI","FIN","FRA","DEU","GHA","GRD","GTM","GIN","GNB","GUY","HND","HUN","ISL","IRL","ITA","JPN","LAO","LBN","LSO","LBR","LIE","LTU","LUX","MDG","MWI","MLI","MLT","MRT","MUS","MEX","MDA","MCO","MNE","MOZ","NRU","NLD","NZL","NIC","NER","MKD","NOR","PLW","PAN","PRY","PER","PHL","PRT","SMR","SEN","SYC","SLE","SVK","SVN","SOM","ZAF","ESP","LKA","KNA","VCT","SWE","CHE","TGO","TTO","GBR","URY","ZMB"],
+      "signatories_only": ["AGO","CYP","DJI","GAB","GMB","GRC","HTI","IDN","IRQ","JAM","KEN","LBY","MNG","NAM","NGA","PNG","RWA","WSM","SGP","STP","SRB","SLB","TZA","TUN","UGA","UKR","ZWE"],
+      "withdrawn": []
+    },
+    {
+      "id": "arms-trade-treaty",
+      "name": "Arms Trade Treaty",
+      "short_name": "Arms Trade Treaty",
+      "adopted": "2013-04-02",
+      "category": "Disarmament",
+      "parties": ["ALB","ATG","ARG","AUS","AUT","BHS","BRB","BEL","BLZ","BEN","BWA","BGR","BFA","CPV","CMR","CAN","CAF","TCD","CHL","CRI","CIV","HRV","CYP","CZE","DNK","DMA","DOM","SLV","EST","FIN","FRA","GAB","DEU","GHA","GRC","GRD","GTM","GIN","GUY","HND","HUN","ISL","IRL","ITA","JAM","JPN","KAZ","KOR","LVA","LBR","LIE","LTU","LUX","MDG","MWI","MLI","MLT","MRT","MUS","MEX","MDA","MCO","MNE","MOZ","NAM","NRU","NLD","NZL","NER","NGA","MKD","NOR","PLW","PAN","PRY","PER","POL","PRT","ROU","KNA","LCA","VCT","WSM","SMR","SEN","SRB","SYC","SLE","SVK","SVN","ZAF","ESP","SUR","SWE","CHE","TGO","TTO","TUV","GBR","URY","ZMB"],
+      "signatories_only": ["AGO","BHR","BGD","BRA","BDI","KHM","COL","COM","COG","CUB","DJI","GNQ","ERI","SWZ","GEO","GNB","HTI","IDN","ISR","CIV","KIR","LBN","LBY","MYS","MNG","MMR","NRU","PNG","PHL","SGP","SLB","TZA","THA","TUR","UKR","ARE","USA","VUT","ZWE"],
+      "withdrawn": []
+    },
+    {
+      "id": "ottawa-treaty",
+      "name": "Convention on the Prohibition of Anti-Personnel Mines",
+      "short_name": "Ottawa Treaty (Mine Ban)",
+      "adopted": "1997-09-18",
+      "category": "Humanitarian",
+      "parties": ["AFG","ALB","DZA","AND","AGO","ATG","ARG","AUS","AUT","BHS","BGD","BRB","BEL","BLZ","BEN","BTN","BOL","BWA","BRA","BRN","BGR","BFA","BDI","CPV","KHM","CMR","CAN","CAF","TCD","CHL","COL","COM","COG","COD","CRI","CIV","HRV","CYP","CZE","DNK","DJI","DMA","DOM","ECU","SLV","GNQ","ERI","EST","SWZ","ETH","FJI","FIN","FRA","GAB","GMB","DEU","GHA","GRC","GRD","GTM","GIN","GNB","GUY","HTI","HND","HUN","ISL","IDN","IRQ","IRL","ITA","JAM","JPN","JOR","KEN","KIR","KWT","LVA","LSO","LBR","LIE","LTU","LUX","MDG","MWI","MYS","MDV","MLI","MLT","MRT","MUS","MEX","MDA","MCO","MNE","MOZ","NAM","NRU","NLD","NZL","NIC","NER","NGA","NIU","MKD","NOR","PLW","PAN","PNG","PRY","PER","PHL","POL","PRT","QAT","ROU","RWA","KNA","LCA","VCT","WSM","SMR","STP","SEN","SRB","SYC","SLE","SVK","SVN","SLB","SOM","ZAF","ESP","LKA","SDN","SUR","SWE","CHE","TJK","TZA","THA","TGO","TON","TTO","TUN","TUR","TKM","TUV","UGA","UKR","GBR","URY","VUT","VEN","ZMB","ZWE","PSE","TLS"],
+      "signatories_only": ["MHL"],
+      "withdrawn": []
+    },
+    {
+      "id": "cat",
+      "name": "Convention against Torture and Other Cruel, Inhuman or Degrading Treatment or Punishment",
+      "short_name": "Convention against Torture",
+      "adopted": "1984-12-10",
+      "category": "Human Rights",
+      "parties": ["AFG","ALB","DZA","AND","ATG","ARG","ARM","AUS","AUT","AZE","BHR","BGD","BLR","BEL","BLZ","BEN","BOL","BWA","BRA","BGR","BFA","BDI","CPV","KHM","CMR","CAN","TCD","CHL","CHN","COL","COM","COG","COD","CRI","CIV","HRV","CUB","CYP","CZE","DNK","DJI","DOM","ECU","EGY","SLV","GNQ","EST","SWZ","ETH","FIN","FRA","GAB","GEO","DEU","GHA","GRC","GTM","GIN","GUY","HND","HUN","ISL","IND","IDN","IRQ","IRL","ISR","ITA","JPN","JOR","KAZ","KEN","KOR","KWT","KGZ","LAO","LVA","LBN","LSO","LBR","LBY","LIE","LTU","LUX","MDG","MWI","MDV","MLI","MLT","MRT","MUS","MEX","MDA","MCO","MNG","MNE","MAR","MOZ","NAM","NPL","NLD","NZL","NIC","NER","NGA","MKD","NOR","PAK","PAN","PRY","PER","PHL","POL","PRT","QAT","ROU","RUS","RWA","KNA","VCT","STP","SAU","SEN","SRB","SYC","SLE","SVK","SVN","SOM","ZAF","ESP","LKA","SDN","SWE","CHE","SYR","TJK","THA","TLS","TGO","TUN","TUR","TKM","UGA","UKR","ARE","GBR","USA","URY","UZB","VEN","VNM","YEM","ZMB"],
+      "signatories_only": ["GNB","GMB","SUR","TZA"],
+      "withdrawn": []
+    },
+    {
+      "id": "crc",
+      "name": "Convention on the Rights of the Child",
+      "short_name": "Rights of the Child",
+      "adopted": "1989-11-20",
+      "category": "Human Rights",
+      "parties": ["AFG","ALB","DZA","AND","AGO","ATG","ARG","ARM","AUS","AUT","AZE","BHS","BHR","BGD","BRB","BLR","BEL","BLZ","BEN","BTN","BOL","BWA","BRA","BRN","BGR","BFA","BDI","CPV","KHM","CMR","CAN","CAF","TCD","CHL","CHN","COL","COM","COG","COD","CRI","CIV","HRV","CUB","CYP","CZE","PRK","DNK","DJI","DMA","DOM","ECU","EGY","SLV","GNQ","ERI","EST","SWZ","ETH","FJI","FIN","FRA","GAB","GMB","GEO","DEU","GHA","GRC","GRD","GTM","GIN","GNB","GUY","HTI","HND","HUN","ISL","IND","IDN","IRN","IRQ","IRL","ISR","ITA","JAM","JPN","JOR","KAZ","KEN","KIR","KOR","KWT","KGZ","LAO","LVA","LBN","LSO","LBR","LBY","LIE","LTU","LUX","MDG","MWI","MYS","MDV","MLI","MLT","MHL","MRT","MUS","MEX","FSM","MDA","MCO","MNG","MNE","MAR","MOZ","MMR","NAM","NRU","NPL","NLD","NZL","NIC","NER","NGA","MKD","NOR","OMN","PAK","PLW","PAN","PNG","PRY","PER","PHL","POL","PRT","QAT","ROU","RUS","RWA","KNA","LCA","VCT","WSM","SMR","STP","SAU","SEN","SRB","SYC","SLE","SGP","SVK","SVN","SLB","SOM","ZAF","ESP","LKA","SDN","SUR","SWE","CHE","SYR","TJK","TZA","THA","TLS","TGO","TON","TTO","TUN","TUR","TKM","TUV","UGA","UKR","ARE","GBR","URY","UZB","VUT","VEN","VNM","YEM","ZMB","ZWE","PSE"],
+      "signatories_only": ["USA"],
+      "withdrawn": []
+    },
+    {
+      "id": "refugee-convention",
+      "name": "Convention Relating to the Status of Refugees",
+      "short_name": "Refugee Convention",
+      "adopted": "1951-07-28",
+      "category": "Human Rights",
+      "parties": ["AFG","ALB","DZA","AGO","ATG","ARG","ARM","AUS","AUT","AZE","BHS","BEL","BLZ","BEN","BOL","BWA","BRA","BGR","BFA","BDI","KHM","CMR","CAN","CAF","TCD","CHL","CHN","COL","COG","COD","CRI","CIV","HRV","CYP","CZE","DNK","DJI","DMA","DOM","ECU","EGY","SLV","GNQ","EST","SWZ","ETH","FJI","FIN","FRA","GAB","GMB","GEO","DEU","GHA","GRC","GTM","GIN","GNB","HTI","HND","HUN","ISL","IRN","IRL","ISR","ITA","JAM","JPN","KAZ","KEN","KIR","KOR","KGZ","LVA","LSO","LBR","LIE","LTU","LUX","MDG","MWI","MLI","MLT","MRT","MUS","MEX","MDA","MCO","MNE","MAR","MOZ","NAM","NRU","NLD","NZL","NIC","NER","NGA","MKD","NOR","PAN","PNG","PRY","PER","PHL","POL","PRT","ROU","RUS","RWA","KNA","VCT","WSM","STP","SEN","SRB","SYC","SLE","SVK","SVN","SLB","SOM","ZAF","ESP","SDN","SUR","SWE","CHE","TJK","TZA","TLS","TGO","TTO","TUN","TUR","TKM","TUV","UGA","UKR","GBR","URY","VEN","YEM","ZMB","ZWE"],
+      "signatories_only": ["COL","IDN"],
+      "withdrawn": []
+    },
+    {
+      "id": "tpnw",
+      "name": "Treaty on the Prohibition of Nuclear Weapons",
+      "short_name": "TPNW",
+      "adopted": "2017-07-07",
+      "category": "Disarmament",
+      "parties": ["ATG","AUT","BGD","BLZ","BEN","BOL","BWA","CPV","KHM","CHL","COL","COM","COG","COK","CRI","CUB","COD","DMA","DOM","ECU","SLV","FJI","GMB","GRD","GTM","GNB","GUY","HND","IDN","IRL","JAM","KAZ","KIR","LAO","LSO","MYS","MDV","MLT","MEX","MNG","MOZ","NAM","NRU","NZL","NIC","NER","NGA","NIU","PLW","PAN","PRY","PER","PHL","KNA","LCA","VCT","WSM","STP","ZAF","LKA","PSE","THA","TLS","TGO","TTO","TUV","URY","VUT","VEN","VNM","ZMB"],
+      "signatories_only": ["AGO","BRA","BRN","CAF","GHA","GIN","LBR","LBY","MDG","MWI","MMR","NPL","PNG","SLE","SUR","TZA","UGA","ZWE"],
+      "withdrawn": []
+    }
+  ]
+}

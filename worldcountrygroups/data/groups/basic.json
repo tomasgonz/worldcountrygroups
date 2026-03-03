@@ -1,0 +1,35 @@
+{
+  "gid": "basic",
+  "acronym": "BASIC",
+  "name": "BASIC Countries",
+  "description": "BASIC is a bloc of four large newly industrialized countries — Brazil, South Africa, India, and China — formed in 2009 to act jointly at the Copenhagen climate summit and subsequent UN climate negotiations.",
+  "classifier": "Climate",
+  "domains": [
+    "Africa",
+    "Asia",
+    "South America",
+    "Environment"
+  ],
+  "countries": [
+    {
+      "name": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA"
+    },
+    {
+      "name": "China",
+      "iso2": "CN",
+      "iso3": "CHN"
+    },
+    {
+      "name": "India",
+      "iso2": "IN",
+      "iso3": "IND"
+    },
+    {
+      "name": "South Africa",
+      "iso2": "ZA",
+      "iso3": "ZAF"
+    }
+  ]
+}

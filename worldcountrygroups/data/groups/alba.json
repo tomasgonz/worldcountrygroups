@@ -1,0 +1,64 @@
+{
+  "gid": "alba",
+  "acronym": "ALBA-TCP",
+  "name": "Bolivarian Alliance for the Peoples of Our America",
+  "description": "ALBA-TCP (Alianza Bolivariana para los Pueblos de Nuestra América - Tratado de Comercio de los Pueblos) is an intergovernmental organization based on the idea of social, political, and economic integration of Latin American and Caribbean countries, founded in 2004.",
+  "classifier": "Regional Integration",
+  "domains": [
+    "Latin America",
+    "Caribbean",
+    "Trade"
+  ],
+  "countries": [
+    {
+      "name": "Antigua and Barbuda",
+      "iso2": "AG",
+      "iso3": "ATG"
+    },
+    {
+      "name": "Bolivia",
+      "iso2": "BO",
+      "iso3": "BOL"
+    },
+    {
+      "name": "Cuba",
+      "iso2": "CU",
+      "iso3": "CUB"
+    },
+    {
+      "name": "Dominica",
+      "iso2": "DM",
+      "iso3": "DMA"
+    },
+    {
+      "name": "Grenada",
+      "iso2": "GD",
+      "iso3": "GRD"
+    },
+    {
+      "name": "Nicaragua",
+      "iso2": "NI",
+      "iso3": "NIC"
+    },
+    {
+      "name": "Saint Kitts and Nevis",
+      "iso2": "KN",
+      "iso3": "KNA"
+    },
+    {
+      "name": "Saint Lucia",
+      "iso2": "LC",
+      "iso3": "LCA"
+    },
+    {
+      "name": "Saint Vincent and the Grenadines",
+      "iso2": "VC",
+      "iso3": "VCT"
+    },
+    {
+      "name": "Venezuela",
+      "iso2": "VE",
+      "iso3": "VEN"
+    }
+  ]
+}

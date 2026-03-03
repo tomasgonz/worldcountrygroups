@@ -1,0 +1,29 @@
+{
+  "gid": "ibsa",
+  "acronym": "IBSA",
+  "name": "IBSA Dialogue Forum",
+  "description": "The IBSA Dialogue Forum is an international tripartite grouping for promoting cooperation among India, Brazil, and South Africa. These three countries share common interests in South-South cooperation and multilateral diplomacy.",
+  "classifier": "South-South Cooperation",
+  "domains": [
+    "Africa",
+    "Asia",
+    "South America"
+  ],
+  "countries": [
+    {
+      "name": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA"
+    },
+    {
+      "name": "India",
+      "iso2": "IN",
+      "iso3": "IND"
+    },
+    {
+      "name": "South Africa",
+      "iso2": "ZA",
+      "iso3": "ZAF"
+    }
+  ]
+}
