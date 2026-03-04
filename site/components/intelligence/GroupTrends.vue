@@ -139,7 +139,7 @@
           </div>
           <div v-if="c.stances?.length" class="flex flex-wrap gap-1">
             <span v-for="(s, i) in c.stances.slice(0, 8)" :key="i" class="px-1.5 py-0.5 rounded text-[10px] bg-white border border-primary-100 text-primary-600">
-              {{ s.iso3 }}: {{ s.stance }}
+              {{ s.name || s.iso3 }}: {{ s.stance }}
             </span>
           </div>
         </div>
@@ -154,7 +154,7 @@
       <div v-if="data.memberDivergence?.length" class="space-y-2">
         <div v-for="m in data.memberDivergence.slice(0, 10)" :key="m.iso3">
           <div class="flex items-center justify-between text-sm mb-0.5">
-            <span class="text-primary-700">{{ m.iso3 }}</span>
+            <span class="text-primary-700">{{ m.name || m.iso3 }}</span>
             <span :class="m.divergenceScore >= 0.3 ? 'text-red-600' : m.divergenceScore >= 0.15 ? 'text-amber-600' : 'text-emerald-600'" class="font-medium">
               {{ (m.divergenceScore * 100).toFixed(0) }}% divergent
             </span>

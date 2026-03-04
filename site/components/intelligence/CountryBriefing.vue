@@ -117,14 +117,14 @@
         <div>
           <h5 class="text-xs font-medium text-primary-500 mb-2">Most Aligned</h5>
           <div v-for="a in data.votingAlignment.mostAligned" :key="a.iso3" class="flex items-center justify-between py-1 text-sm">
-            <span class="text-primary-700">{{ a.iso3 }}</span>
+            <span class="text-primary-700">{{ a.name || a.iso3 }}</span>
             <span class="text-emerald-600 font-medium">{{ (a.agreement * 100).toFixed(0) }}%</span>
           </div>
         </div>
         <div>
           <h5 class="text-xs font-medium text-primary-500 mb-2">Least Aligned</h5>
           <div v-for="a in data.votingAlignment.leastAligned" :key="a.iso3" class="flex items-center justify-between py-1 text-sm">
-            <span class="text-primary-700">{{ a.iso3 }}</span>
+            <span class="text-primary-700">{{ a.name || a.iso3 }}</span>
             <span class="text-red-600 font-medium">{{ (a.agreement * 100).toFixed(0) }}%</span>
           </div>
         </div>
@@ -139,7 +139,7 @@
         <h5 class="text-xs font-medium text-primary-500 mb-2">Most Referenced Countries (in speeches)</h5>
         <div class="space-y-2">
           <div v-for="m in data.speechMentions.slice(0, 10)" :key="m.iso3" class="flex items-center justify-between">
-            <span class="text-sm text-primary-700">{{ m.iso3 }}</span>
+            <span class="text-sm text-primary-700">{{ m.name || m.iso3 }}</span>
             <span class="text-xs text-primary-400">{{ m.count }}x &mdash; {{ truncate(m.context, 60) }}</span>
           </div>
         </div>

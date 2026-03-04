@@ -30,16 +30,21 @@ export default defineEventHandler((event) => {
   // Emerging topics
   const emergingTopics = getGroupEmergingTopics(iso3Codes, 3)
 
+  // ISO3 → country name lookup
+  const nameMap = new Map(group.countries.map((c: any) => [c.iso3, c.name]))
+
   // Conflict mentions filtered to group members' speeches
   const allConflicts = getConflictMentions()
   const memberSet = new Set(iso3Codes.map((c: string) => c.toUpperCase()))
   const filteredConflicts = allConflicts.map(c => {
     const memberStances = c.stances.filter(s => memberSet.has(s.iso3))
+      .map(s => ({ ...s, name: nameMap.get(s.iso3) || s.iso3 }))
     return { ...c, stances: memberStances, memberMentions: memberStances.length }
   }).filter(c => c.memberMentions > 0).sort((a, b) => b.memberMentions - a.memberMentions).slice(0, 10)
 
-  // Member divergence
+  // Member divergence — enrich with country names
   const memberDivergence = getGroupMemberDivergence(iso3Codes)
+    .map(m => ({ ...m, name: nameMap.get(m.iso3) || m.iso3 }))
 
   // Cohesion trend (extract session-level cohesion)
   const cohesionEntries = Object.entries(votingData.cohesion)

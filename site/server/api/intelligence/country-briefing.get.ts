@@ -24,6 +24,9 @@ export default defineEventHandler((event) => {
   const iso3 = membership.iso3
   const iso2 = membership.iso2
 
+  // ISO3 → name lookup helper
+  const countryName = (code: string) => registry.getCountryMembership(code)?.name || code
+
   // Gather all data in parallel-style (all sync in-memory)
   const speeches = getCountrySpeeches(iso3)
   const p5Codes = ['USA', 'GBR', 'FRA', 'RUS', 'CHN']
@@ -94,12 +97,12 @@ export default defineEventHandler((event) => {
     themeStats: themeStats.slice(0, 15),
     themeTrends: themeTrends.slice(0, 10),
     votingAlignment: {
-      p5: p5Alignment,
-      mostAligned: alignment.mostAligned.slice(0, 5),
-      leastAligned: alignment.leastAligned.slice(0, 5),
+      p5: p5Alignment.map(a => ({ ...a, name: countryName(a.iso3) })),
+      mostAligned: alignment.mostAligned.slice(0, 5).map(a => ({ ...a, name: countryName(a.iso3) })),
+      leastAligned: alignment.leastAligned.slice(0, 5).map(a => ({ ...a, name: countryName(a.iso3) })),
       sessionsUsed: alignment.sessionsUsed,
     },
-    speechMentions: mentionedByUs.slice(0, 15),
+    speechMentions: mentionedByUs.slice(0, 15).map(m => ({ ...m, name: countryName(m.iso3) })),
     gdelt: gdelt ? {
       media: gdelt.media,
       events: gdelt.events,
