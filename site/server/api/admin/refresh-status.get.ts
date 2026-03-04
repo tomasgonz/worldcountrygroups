@@ -1,5 +1,5 @@
 import { requireAdmin } from '~/server/utils/auth'
-import { getRefreshStatus, getUNRefreshStatus, getThemeRefreshStatus } from '~/server/utils/data-fetcher'
+import { getRefreshStatus, getUNRefreshStatus, getThemeRefreshStatus, getGDELTRefreshStatus, getSpeechesRefreshStatus } from '~/server/utils/data-fetcher'
 
 export default defineEventHandler((event) => {
   requireAdmin(event)
@@ -7,5 +7,7 @@ export default defineEventHandler((event) => {
     country: getRefreshStatus(),
     unvotes: getUNRefreshStatus(),
     themes: getThemeRefreshStatus(),
+    gdelt: getGDELTRefreshStatus(),
+    speeches: getSpeechesRefreshStatus(),
   }
 })

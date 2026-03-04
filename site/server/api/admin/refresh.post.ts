@@ -1,5 +1,5 @@
 import { requireAdmin } from '~/server/utils/auth'
-import { refreshAllData, refreshUNVotingData, refreshThemeClassification } from '~/server/utils/data-fetcher'
+import { refreshAllData, refreshUNVotingData, refreshThemeClassification, refreshGDELTData, refreshSpeechesData } from '~/server/utils/data-fetcher'
 
 export default defineEventHandler(async (event) => {
   requireAdmin(event)
@@ -19,16 +19,28 @@ export default defineEventHandler(async (event) => {
     return await refreshThemeClassification()
   }
 
-  // Default: refresh all three
-  const [countryResult, unResult, themeResult] = await Promise.all([
+  if (target === 'gdelt') {
+    return await refreshGDELTData()
+  }
+
+  if (target === 'speeches') {
+    return await refreshSpeechesData()
+  }
+
+  // Default: refresh all five
+  const [countryResult, unResult, themeResult, gdeltResult, speechesResult] = await Promise.all([
     refreshAllData(),
     refreshUNVotingData(),
     refreshThemeClassification(),
+    refreshGDELTData(),
+    refreshSpeechesData(),
   ])
 
   return {
     country_data: countryResult,
     un_votes: unResult,
     themes: themeResult,
+    gdelt: gdeltResult,
+    speeches: speechesResult,
   }
 })

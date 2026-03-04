@@ -196,6 +196,56 @@
         </div>
       </section>
 
+      <!-- GDELT Events & Tone -->
+      <section class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 rounded-lg bg-indigo-100 flex items-center justify-center text-indigo-600">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" /></svg>
+          </span>
+          <h2 class="font-serif text-xl font-bold text-primary-900">GDELT Events &amp; Media Tone</h2>
+        </div>
+
+        <div class="space-y-4 text-sm text-primary-600">
+          <div>
+            <h3 class="font-semibold text-primary-800 mb-1">GDELT Event Database</h3>
+            <p>The <a href="https://www.gdeltproject.org/" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">GDELT Project</a> monitors news media worldwide and codes events using the <a href="http://data.gdeltproject.org/documentation/CAMEO.Manual.1.1b3.pdf" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">CAMEO coding system</a> (Conflict and Mediation Event Observations). Events are classified into 20 root codes ranging from cooperative (codes 01-10: statements, appeals, cooperation, aid) to conflictual (codes 11-20: disapproval, threats, coercion, assault).</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-primary-800 mb-1">GDELT DOC API</h3>
+            <p>Media tone data is sourced from the <a href="https://blog.gdeltproject.org/gdelt-doc-2-0-api-discovering-the-patterns-of-our-global-world/" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">GDELT DOC 2.0 API</a>, which provides timeline-based aggregate sentiment analysis from global news coverage over the past 12 months.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-primary-800 mb-1">Goldstein Scale</h3>
+            <p>Each CAMEO event type has an associated Goldstein Scale score ranging from -10 (most conflictual) to +10 (most cooperative). Average Goldstein scores per country reflect the overall cooperative vs. conflictual balance of events involving that country.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-primary-800 mb-1">Data Period &amp; Processing</h3>
+            <p>Event data is sourced from GDELT v1 daily export CSVs. Each daily file is stream-parsed to extract actor country codes, event types, Goldstein scores, and tone values. Per-country and per-bilateral-pair aggregates are computed for event counts, cooperative/conflictual breakdowns, and average tone.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- UN General Debate Speeches -->
+      <section class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 rounded-lg bg-cyan-100 flex items-center justify-center text-cyan-600">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+          </span>
+          <h2 class="font-serif text-xl font-bold text-primary-900">UN General Debate Speeches</h2>
+        </div>
+
+        <div class="space-y-4 text-sm text-primary-600">
+          <div>
+            <h3 class="font-semibold text-primary-800 mb-1">GA High-Level General Debate</h3>
+            <p>Full-text speeches from the <a href="https://gadebate.un.org/" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">UN General Assembly General Debate</a> (High-Level Week), covering sessions 75&ndash;79 (2020&ndash;2024). PDF statements are downloaded and converted to text using pdf-parse.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-primary-800 mb-1">Keyword Extraction</h3>
+            <p>Keywords are extracted from each speech using frequency analysis of unigrams and bigrams, with common English stopwords and UN procedural language filtered out. The top 15 keywords per speech surface the most prominent topics discussed by each country's delegation.</p>
+          </div>
+        </div>
+      </section>
+
       <!-- Country Groups -->
       <section class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8">
         <div class="flex items-center gap-3 mb-5">
@@ -352,6 +402,37 @@
             </div>
           </div>
 
+          <!-- GDELT Events & Tone -->
+          <div>
+            <h3 class="font-semibold text-primary-900 mb-2">GDELT Events &amp; Media Tone</h3>
+            <div class="text-sm text-primary-600 space-y-2">
+              <p>GDELT data is processed in two phases:</p>
+              <ol class="list-decimal list-inside space-y-1 ml-2">
+                <li><strong>Event data</strong>: Daily GDELT v1 export CSVs are stream-parsed. Each event record provides actor country codes (CAMEO format), event root codes, Goldstein Scale scores, mention counts, and average tone. Events are classified as cooperative (CAMEO codes 01-10), conflictual (11-20), or neutral.</li>
+                <li><strong>Media tone</strong>: For the top countries by event volume, the GDELT DOC API provides 12-month timeline tone data, which captures aggregate media sentiment weighted by article volume.</li>
+              </ol>
+              <p><strong>Cooperation ratio</strong> is computed as <code class="bg-primary-100 px-1.5 py-0.5 rounded text-xs">cooperative_events / (cooperative_events + conflictual_events)</code>. Neutral events are excluded from this ratio. A ratio above 0.5 indicates more cooperative than conflictual events.</p>
+              <p>Bilateral relationship data pairs countries by co-occurrence in GDELT events and computes per-pair cooperation ratios and tone averages. Only the top 10 partners by event volume are retained per country.</p>
+              <p>At the group level, tone is weighted by article volume, and cooperation ratio is computed from aggregate cooperative and conflictual event counts. Intra-group pairs show bilateral relationships where both actors are group members.</p>
+            </div>
+          </div>
+
+          <!-- UN General Debate Speeches -->
+          <div>
+            <h3 class="font-semibold text-primary-900 mb-2">UN General Debate Speeches</h3>
+            <div class="text-sm text-primary-600 space-y-2">
+              <p>Speech PDFs are downloaded from <strong>gadebate.un.org</strong> for each country and session. Text is extracted using <code class="bg-primary-100 px-1.5 py-0.5 rounded text-xs">pdf-parse</code> (based on Mozilla PDF.js). PDFs that yield fewer than 100 characters of text (likely scanned images) are skipped.</p>
+              <p><strong>Keyword extraction</strong> uses frequency-based analysis:</p>
+              <ol class="list-decimal list-inside space-y-1 ml-2">
+                <li>Text is lowercased and split into words (minimum 4 characters).</li>
+                <li>Common English stopwords and UN procedural language (~200 terms) are removed.</li>
+                <li>Unigram and bigram frequencies are counted. Bigrams appearing 3+ times are included.</li>
+                <li>The top 15 terms by frequency are retained as keywords.</li>
+              </ol>
+              <p>Country-to-URL mapping uses a slug-based lookup built from the country registry, with fallback to parsing the ISO2 code from the PDF URL embedded in each country's page HTML.</p>
+            </div>
+          </div>
+
           <!-- Diplomatic Recognition -->
           <div>
             <h3 class="font-semibold text-primary-900 mb-2">Diplomatic Recognition</h3>
@@ -402,6 +483,7 @@
                 <li><strong>Conflict intensity:</strong> ACLED intensity levels are pre-computed aggregates. They do not capture the full context of each conflict (duration, scale of displacement, strategic significance).</li>
                 <li><strong>Military data discrepancies:</strong> SIPRI and Global Firepower use different methodologies. Defense budgets may differ between sources for the same country and year.</li>
                 <li><strong>Recognition data:</strong> Diplomatic recognition is fluid. States may have ambiguous or evolving positions that are not fully captured by a binary recognizes/does-not-recognize classification.</li>
+                <li><strong>GDELT data:</strong> GDELT captures media-reported events, not all real-world events. Countries with more English-language media coverage are overrepresented. Tone scores reflect media framing, not objective reality. The cooperation ratio is a rough proxy and should not be interpreted as a measure of actual diplomatic relationships.</li>
               </ul>
             </div>
           </div>

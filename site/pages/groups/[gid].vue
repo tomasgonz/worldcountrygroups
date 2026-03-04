@@ -6,6 +6,12 @@
     </div>
 
     <template v-else-if="group">
+      <SectionNav
+        :sections="visibleSections"
+        :active-section="activeSection"
+        @navigate="sectionScrollTo"
+      />
+
       <!-- Breadcrumb -->
       <nav class="flex items-center gap-2 text-sm text-primary-400 mb-8">
         <NuxtLink to="/groups" class="hover:text-primary-900 transition-colors">Groups</NuxtLink>
@@ -53,7 +59,7 @@
       </div>
 
       <!-- Dynamic Aggregate Stats -->
-      <div class="mb-16">
+      <div id="sec-aggregate-stats" class="mb-16 scroll-mt-24">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-5">Aggregate Statistics</h2>
         <div v-if="breakdownPending" class="grid grid-cols-1 sm:grid-cols-3 gap-5">
           <div v-for="i in 3" :key="i" class="skeleton h-24 rounded-xl" />
@@ -71,7 +77,7 @@
       </div>
 
       <!-- Country Breakdown -->
-      <div class="mb-16">
+      <div id="sec-country-breakdown" class="mb-16 scroll-mt-24">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
           <h2 class="font-serif text-xl font-bold text-primary-900">Country Breakdown</h2>
           <div v-if="dataCoverage" class="text-xs text-primary-400 bg-primary-50 px-3 py-1.5 rounded-lg">
@@ -186,7 +192,7 @@
       </div>
 
       <!-- UN Voting -->
-      <div class="mb-16">
+      <div id="sec-unga-voting" class="mb-16 scroll-mt-24">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-5">UN General Assembly Voting</h2>
 
         <template v-if="votesPending">
@@ -391,14 +397,7 @@
         <!-- Voting by Theme -->
         <template v-if="votesData?.available">
           <div class="mt-8">
-            <button
-              class="flex items-center gap-2 font-serif text-lg font-bold text-primary-900 mb-4 hover:text-primary-600 transition-colors"
-              @click="showThemeStats = !showThemeStats"
-            >
-              Voting by Theme
-              <svg class="w-4 h-4 text-primary-400 transition-transform" :class="showThemeStats ? 'rotate-180' : ''" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
-            </button>
-            <template v-if="showThemeStats">
+            <h3 class="font-serif text-lg font-bold text-primary-900 mb-4">Voting by Theme</h3>
               <div v-if="themeStatsPending" class="space-y-3">
                 <div v-for="i in 5" :key="i" class="skeleton h-10 rounded-lg" />
               </div>
@@ -429,13 +428,82 @@
               <div v-else class="bg-primary-50 rounded-2xl border border-primary-100 p-6 text-center">
                 <p class="text-primary-400 text-sm">No theme stats available.</p>
               </div>
-            </template>
+          </div>
+        </template>
+
+        <!-- Theme Voting Trends -->
+        <template v-if="votesData?.available">
+          <div class="mt-8">
+            <h3 class="font-serif text-lg font-bold text-primary-900 mb-4">Theme Voting Trends</h3>
+            <div v-if="groupThemeTrendsPending" class="space-y-3">
+              <div v-for="i in 5" :key="i" class="skeleton h-8 rounded-lg" />
+            </div>
+            <div v-else-if="groupTrendsThemes.length" class="bg-white rounded-2xl border border-primary-100 p-6">
+              <!-- Theme selector -->
+              <div class="mb-5">
+                <select
+                  v-model="selectedGroupTrendTheme"
+                  class="text-sm border border-primary-200 rounded-lg px-3 py-2 bg-white text-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-300"
+                >
+                  <option v-for="t in groupTrendsThemes" :key="t" :value="t">{{ t }}</option>
+                </select>
+              </div>
+
+              <!-- Decade bars -->
+              <div v-if="selectedGroupTrendData" class="space-y-3">
+                <div class="text-xs text-primary-400 mb-1">Aggregate votes across all member countries per resolution</div>
+                <div v-for="d in selectedGroupTrendData.decades" :key="d.decade" class="flex items-center gap-3">
+                  <span class="text-xs text-primary-400 tabular-nums w-12 text-right font-medium">{{ d.decade }}</span>
+                  <div
+                    class="flex h-5 rounded-full overflow-hidden bg-gray-100"
+                    :style="{ width: groupDecadeBarWidth(d.resolutions) + '%', minWidth: '40px' }"
+                  >
+                    <div
+                      v-if="d.yes > 0"
+                      class="bg-emerald-400 transition-all"
+                      :style="{ width: (d.yes / (d.yes + d.no + d.abstain || 1) * 100) + '%' }"
+                      :title="`Yes: ${d.yes}`"
+                    />
+                    <div
+                      v-if="d.no > 0"
+                      class="bg-red-400 transition-all"
+                      :style="{ width: (d.no / (d.yes + d.no + d.abstain || 1) * 100) + '%' }"
+                      :title="`No: ${d.no}`"
+                    />
+                    <div
+                      v-if="d.abstain > 0"
+                      class="bg-amber-400 transition-all"
+                      :style="{ width: (d.abstain / (d.yes + d.no + d.abstain || 1) * 100) + '%' }"
+                      :title="`Abstain: ${d.abstain}`"
+                    />
+                  </div>
+                  <span class="text-xs text-primary-400 tabular-nums whitespace-nowrap">
+                    {{ d.resolutions }} res &middot; {{ (d.yes + d.no + d.abstain) > 0 ? Math.round(d.yes / (d.yes + d.no + d.abstain) * 100) : 0 }}% Yes
+                  </span>
+                </div>
+
+                <!-- Low-data warning -->
+                <p v-if="selectedGroupTrendData.decades.some((d: any) => d.resolutions > 0 && d.resolutions < 5)" class="text-xs text-amber-600 mt-2">
+                  * Some decades have fewer than 5 resolutions — trends may not be representative.
+                </p>
+              </div>
+
+              <!-- Legend -->
+              <div class="flex flex-wrap gap-4 mt-4 text-xs text-primary-500">
+                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-sm bg-emerald-400"></span> Yes</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-sm bg-red-400"></span> No</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-sm bg-amber-400"></span> Abstain</span>
+              </div>
+            </div>
+            <div v-else class="bg-primary-50 rounded-2xl border border-primary-100 p-6 text-center">
+              <p class="text-primary-400 text-sm">No theme trend data available.</p>
+            </div>
           </div>
         </template>
       </div>
 
       <!-- UNSC Veto History (unsc group only) -->
-      <div v-if="gid === 'unsc' && vetoStatsData" class="mb-16">
+      <div v-if="gid === 'unsc' && vetoStatsData" id="sec-veto-history" class="mb-16 scroll-mt-24">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-5">Veto History</h2>
         <div class="grid grid-cols-1 sm:grid-cols-5 gap-4 mb-6">
           <div v-for="(count, code) in vetoStatsData.stats?.byCountry" :key="code" class="bg-white rounded-2xl border border-primary-100 p-4 text-center">
@@ -462,7 +530,7 @@
       </div>
 
       <!-- UNSC Resolutions Browser (unsc group only) -->
-      <div v-if="gid === 'unsc' && unscResData" class="mb-16">
+      <div v-if="gid === 'unsc' && unscResData" id="sec-sc-resolutions" class="mb-16 scroll-mt-24">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-5">Security Council Resolutions</h2>
         <div class="bg-white rounded-2xl border border-primary-100 overflow-hidden">
           <div class="flex flex-col sm:flex-row sm:items-center gap-3 p-4 border-b border-primary-100">
@@ -527,7 +595,7 @@
       </div>
 
       <!-- Treaty Coverage -->
-      <div v-if="groupTreatiesData?.treaties?.length" class="mb-16">
+      <div v-if="groupTreatiesData?.treaties?.length" id="sec-treaties" class="mb-16 scroll-mt-24">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-5">Treaty Coverage</h2>
         <div class="bg-white rounded-2xl border border-primary-100 overflow-hidden">
           <div class="overflow-x-auto">
@@ -571,7 +639,7 @@
       </div>
 
       <!-- Group Sanctions -->
-      <div v-if="groupSanctionsData?.totalSanctioned > 0" class="mb-16">
+      <div v-if="groupSanctionsData?.totalSanctioned > 0" id="sec-sanctions" class="mb-16 scroll-mt-24">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-5">
           Sanctions
           <span class="text-base font-normal text-primary-400">({{ groupSanctionsData.totalSanctioned }} member{{ groupSanctionsData.totalSanctioned > 1 ? 's' : '' }} affected)</span>
@@ -596,7 +664,7 @@
       </div>
 
       <!-- Group Recognition Profile -->
-      <div v-if="groupRecognitionData?.entities?.length" class="mb-16">
+      <div v-if="groupRecognitionData?.entities?.length" id="sec-recognition" class="mb-16 scroll-mt-24">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-5">Diplomatic Recognition</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div v-for="e in groupRecognitionData.entities" :key="e.entity.id" class="bg-white rounded-2xl border border-primary-100 p-5">
@@ -634,7 +702,7 @@
       </div>
 
       <!-- Military & Defense -->
-      <div v-if="groupMilitaryData?.has_data || groupConflictData?.has_data" class="mb-16">
+      <div v-if="groupMilitaryData?.has_data || groupConflictData?.has_data" id="sec-military" class="mb-16 scroll-mt-24">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-5">Military &amp; Defense</h2>
 
         <!-- Military Capabilities -->
@@ -731,8 +799,293 @@
         </div>
       </div>
 
+      <!-- GDELT Events & Tone -->
+      <div v-if="groupGdeltData?.has_data" id="sec-gdelt" class="mb-16 scroll-mt-24">
+        <h2 class="font-serif text-xl font-bold text-primary-900 mb-5">GDELT Events &amp; Media Tone</h2>
+
+        <!-- Group Overview cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+          <div class="bg-white rounded-2xl border border-primary-100 p-5">
+            <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Aggregate Tone</div>
+            <div
+              class="text-2xl font-serif font-bold"
+              :class="groupGdeltData.avg_tone >= 0 ? 'text-emerald-600' : 'text-red-600'"
+            >{{ groupGdeltData.avg_tone.toFixed(2) }}</div>
+            <div class="text-xs text-primary-400 mt-1">Weighted by article volume</div>
+          </div>
+          <div class="bg-white rounded-2xl border border-primary-100 p-5">
+            <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Total Events</div>
+            <div class="text-2xl font-serif font-bold text-primary-900">{{ groupGdeltData.total_events.toLocaleString() }}</div>
+            <div class="text-xs text-primary-400 mt-1">CAMEO-coded events</div>
+          </div>
+          <div class="bg-white rounded-2xl border border-primary-100 p-5">
+            <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Cooperation Ratio</div>
+            <div class="text-2xl font-serif font-bold text-primary-900">{{ (groupGdeltData.cooperation_ratio * 100).toFixed(1) }}%</div>
+            <div class="text-xs text-primary-400 mt-1">Of cooperative + conflictual</div>
+          </div>
+        </div>
+
+        <!-- Most Covered Members -->
+        <div v-if="groupGdeltData.most_covered?.length" class="mb-6">
+          <div class="bg-white rounded-2xl border border-primary-100 overflow-hidden">
+            <div class="px-5 py-3 border-b border-primary-100">
+              <span class="text-xs text-primary-400 font-medium uppercase tracking-wider">Most Covered Members (by Article Volume)</span>
+            </div>
+            <div class="divide-y divide-primary-50">
+              <NuxtLink
+                v-for="(m, idx) in groupGdeltData.most_covered"
+                :key="m.iso3"
+                :to="`/countries/${m.iso3}`"
+                class="px-5 py-3 flex items-center gap-3 hover:bg-primary-50/50 transition-colors"
+              >
+                <span class="text-xs text-primary-400 font-semibold w-6">#{{ idx + 1 }}</span>
+                <span v-if="countryIso2(m.iso3)" class="text-base">{{ isoToFlag(countryIso2(m.iso3)!) }}</span>
+                <span class="text-sm text-primary-800 flex-1">{{ countryName(m.iso3) || m.iso3 }}</span>
+                <span class="text-xs text-primary-400 tabular-nums">{{ formatGdeltVolume(m.article_volume) }} articles</span>
+              </NuxtLink>
+            </div>
+          </div>
+        </div>
+
+        <!-- Most Conflictual Members -->
+        <div v-if="groupGdeltData.most_conflictual?.length" class="mb-6">
+          <div class="bg-white rounded-2xl border border-primary-100 overflow-hidden">
+            <div class="px-5 py-3 border-b border-primary-100">
+              <span class="text-xs text-primary-400 font-medium uppercase tracking-wider">Members with Lowest Cooperation Ratio (most conflictual news coverage)</span>
+            </div>
+            <div class="divide-y divide-primary-50">
+              <NuxtLink
+                v-for="(m, idx) in groupGdeltData.most_conflictual"
+                :key="m.iso3"
+                :to="`/countries/${m.iso3}`"
+                class="px-5 py-3 flex items-center gap-3 hover:bg-primary-50/50 transition-colors"
+              >
+                <span class="text-xs text-primary-400 font-semibold w-6">#{{ idx + 1 }}</span>
+                <span v-if="countryIso2(m.iso3)" class="text-base">{{ isoToFlag(countryIso2(m.iso3)!) }}</span>
+                <span class="text-sm text-primary-800 flex-1">{{ countryName(m.iso3) || m.iso3 }}</span>
+                <div class="flex items-center gap-2">
+                  <div class="w-16 h-3 rounded-full overflow-hidden bg-gray-100 hidden sm:block">
+                    <div
+                      class="h-full rounded-full bg-emerald-400"
+                      :style="{ width: (m.cooperation_ratio * 100) + '%' }"
+                    />
+                  </div>
+                  <span class="text-xs text-primary-500 tabular-nums">{{ (m.cooperation_ratio * 100).toFixed(1) }}%</span>
+                </div>
+              </NuxtLink>
+            </div>
+          </div>
+        </div>
+
+        <!-- Intra-Group Relations -->
+        <div v-if="groupGdeltData.intra_group_pairs?.length">
+          <div class="bg-white rounded-2xl border border-primary-100 overflow-hidden">
+            <div class="px-5 py-3 border-b border-primary-100">
+              <span class="text-xs text-primary-400 font-medium uppercase tracking-wider">Intra-Group Co-mentions (news event pairs between members)</span>
+            </div>
+            <div class="divide-y divide-primary-50">
+              <div
+                v-for="p in groupGdeltData.intra_group_pairs.slice(0, 10)"
+                :key="`${p.source}-${p.target}`"
+                class="px-5 py-3 flex items-center gap-3"
+              >
+                <div class="flex items-center gap-1 flex-1 min-w-0">
+                  <span v-if="countryIso2(p.source)" class="text-sm">{{ isoToFlag(countryIso2(p.source)!) }}</span>
+                  <NuxtLink :to="`/countries/${p.source}`" class="text-sm text-primary-800 hover:text-primary-600 transition-colors">{{ countryName(p.source) || p.source }}</NuxtLink>
+                  <span class="text-primary-300 mx-1">&harr;</span>
+                  <span v-if="countryIso2(p.target)" class="text-sm">{{ isoToFlag(countryIso2(p.target)!) }}</span>
+                  <NuxtLink :to="`/countries/${p.target}`" class="text-sm text-primary-800 hover:text-primary-600 transition-colors">{{ countryName(p.target) || p.target }}</NuxtLink>
+                </div>
+                <div class="flex items-center gap-2">
+                  <div class="w-16 h-3 rounded-full overflow-hidden bg-gray-100 hidden sm:block">
+                    <div
+                      class="h-full rounded-full bg-emerald-400"
+                      :style="{ width: (p.cooperation_ratio * 100) + '%' }"
+                    />
+                  </div>
+                  <span class="text-xs tabular-nums" :class="p.avg_tone >= 0 ? 'text-emerald-600' : 'text-red-600'">
+                    {{ p.avg_tone >= 0 ? '+' : '' }}{{ p.avg_tone.toFixed(1) }}
+                  </span>
+                  <span class="text-xs text-primary-400 tabular-nums whitespace-nowrap">{{ p.events.toLocaleString() }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Speeches -->
+      <div v-if="groupSpeechesData?.available" id="sec-speeches" class="mb-16 scroll-mt-24">
+        <h2 class="font-serif text-xl font-bold text-primary-900 mb-5">UN General Debate Speeches</h2>
+
+        <!-- Overview row -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8">
+          <div class="bg-white rounded-2xl border border-primary-100 p-6">
+            <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-3">Total Speeches</div>
+            <div class="text-2xl font-serif font-bold text-primary-900">{{ groupSpeechesData.totalSpeeches }}</div>
+            <div class="text-xs text-primary-400 mt-1.5">{{ groupSpeechesData.membersWithSpeeches }} of {{ groupSpeechesData.totalMembers }} members</div>
+          </div>
+          <div class="bg-white rounded-2xl border border-primary-100 p-6">
+            <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-3">Sentiment</div>
+            <div class="flex flex-wrap gap-1.5 mt-1">
+              <span v-if="groupSpeechesData.sentiment.positive" class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">positive {{ groupSpeechesData.sentiment.positive }}</span>
+              <span v-if="groupSpeechesData.sentiment.negative" class="text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-800 font-medium">negative {{ groupSpeechesData.sentiment.negative }}</span>
+              <span v-if="groupSpeechesData.sentiment.mixed" class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-medium">mixed {{ groupSpeechesData.sentiment.mixed }}</span>
+              <span v-if="groupSpeechesData.sentiment.neutral" class="text-xs px-2 py-0.5 rounded-full bg-primary-100 text-primary-600 font-medium">neutral {{ groupSpeechesData.sentiment.neutral }}</span>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl border border-primary-100 p-6">
+            <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-3">Emerging Topics</div>
+            <div class="flex flex-wrap gap-1.5 mt-1">
+              <span v-for="t in groupSpeechesData.emergingTopics?.slice(0, 6)" :key="t.topic" class="text-xs px-2 py-0.5 rounded-full bg-violet-50 text-violet-700 border border-violet-100">{{ t.topic }} ({{ t.count }})</span>
+              <span v-if="!groupSpeechesData.emergingTopics?.length" class="text-xs text-primary-400">None detected</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Theme bars -->
+        <div v-if="speechThemeBars.length" class="bg-white rounded-2xl border border-primary-100 p-6 mb-8">
+          <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-4">Theme Relevance (% of speeches rated high)</div>
+          <div class="space-y-3">
+            <div v-for="t in speechThemeBars" :key="t.theme" class="flex items-center gap-3">
+              <span class="text-xs text-primary-600 w-40 truncate flex-shrink-0" :title="t.theme.replace(/_/g, ' ')">{{ t.theme.replace(/_/g, ' ') }}</span>
+              <div class="flex-1 h-5 bg-primary-50 rounded-full overflow-hidden">
+                <div class="h-full rounded-full bg-emerald-400 transition-all" :style="{ width: t.highPct + '%' }" />
+              </div>
+              <span class="text-xs text-primary-400 tabular-nums w-10 text-right flex-shrink-0">{{ t.highPct }}%</span>
+              <span class="text-xs text-primary-300 tabular-nums w-14 text-right flex-shrink-0">({{ t.count }})</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Country speech accordion -->
+        <div v-if="groupSpeechesData.countries?.length" class="space-y-3">
+          <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Speeches by Country</div>
+          <div
+            v-for="c in groupSpeechesData.countries"
+            :key="c.iso3"
+            class="bg-white rounded-2xl border border-primary-100 overflow-hidden"
+          >
+            <!-- Country header -->
+            <button
+              class="w-full text-left px-5 py-4 flex items-center gap-3 hover:bg-primary-50/50 transition-colors"
+              @click="toggleSpeechCountry(c.iso3)"
+            >
+              <span v-if="c.iso2" class="text-lg">{{ isoToFlag(c.iso2) }}</span>
+              <div class="flex-1 min-w-0">
+                <span class="text-sm font-medium text-primary-800">{{ c.name }}</span>
+                <span class="text-xs text-primary-400 ml-2">{{ c.speechCount }} {{ c.speechCount === 1 ? 'speech' : 'speeches' }}</span>
+              </div>
+              <svg
+                class="w-5 h-5 text-primary-300 transition-transform flex-shrink-0"
+                :class="expandedSpeechCountry === c.iso3 ? 'rotate-180' : ''"
+                viewBox="0 0 20 20" fill="currentColor"
+              >
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+              </svg>
+            </button>
+
+            <!-- Expanded: list of speeches for this country -->
+            <div v-if="expandedSpeechCountry === c.iso3" class="border-t border-primary-100">
+              <div v-for="sp in c.speeches" :key="`${c.iso3}_${sp.session}`" class="border-b border-primary-50 last:border-b-0">
+                <!-- Speech row -->
+                <button
+                  class="w-full text-left px-5 py-3 flex items-center gap-3 hover:bg-primary-50/30 transition-colors"
+                  @click="toggleSpeechDetail(c.iso3, sp.session)"
+                >
+                  <span class="text-sm font-serif font-bold text-primary-900 w-12 flex-shrink-0">{{ sp.year }}</span>
+                  <div class="flex-1 min-w-0">
+                    <span v-if="sp.speaker" class="text-xs text-primary-600">{{ sp.speaker }}</span>
+                    <span v-if="sp.speaker_title" class="text-xs text-primary-400"> &middot; {{ sp.speaker_title }}</span>
+                  </div>
+                  <span v-if="sp.analysis?.sentiment?.overall" class="text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0" :class="speechSentimentClass(sp.analysis.sentiment.overall)">
+                    {{ sp.analysis.sentiment.overall }}
+                  </span>
+                  <svg
+                    class="w-4 h-4 text-primary-300 transition-transform flex-shrink-0"
+                    :class="expandedSpeechSession?.iso === c.iso3 && expandedSpeechSession?.session === sp.session ? 'rotate-180' : ''"
+                    viewBox="0 0 20 20" fill="currentColor"
+                  >
+                    <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+
+                <!-- Expanded speech detail: AI analysis + text -->
+                <div v-if="expandedSpeechSession?.iso === c.iso3 && expandedSpeechSession?.session === sp.session" class="border-t border-primary-100">
+                  <!-- AI Analysis -->
+                  <div v-if="sp.analysis" class="px-5 py-5 bg-gradient-to-b from-amber-50/40 to-transparent border-b border-primary-100">
+                    <div class="flex items-center gap-2 mb-3">
+                      <span class="text-xs font-semibold uppercase tracking-wider text-amber-700">AI Analysis</span>
+                      <span v-if="sp.analysis._model" class="text-xs text-primary-300">{{ sp.analysis._model }}</span>
+                    </div>
+                    <p class="text-sm text-primary-700 leading-relaxed mb-4">{{ sp.analysis.summary }}</p>
+
+                    <!-- Themes -->
+                    <div v-if="sp.analysis.themes?.length" class="mb-4">
+                      <span class="text-xs font-medium text-primary-500 block mb-1.5">Themes:</span>
+                      <div class="flex flex-wrap gap-1.5">
+                        <span v-for="t in sp.analysis.themes" :key="t.name"
+                          class="text-xs px-2 py-0.5 rounded-full"
+                          :class="t.relevance === 'high' ? 'bg-emerald-100 text-emerald-800 font-medium' : t.relevance === 'medium' ? 'bg-sky-50 text-sky-700' : 'bg-primary-50 text-primary-400'"
+                        >{{ t.name.replace(/_/g, ' ') }}</span>
+                      </div>
+                    </div>
+
+                    <!-- Key Quotes -->
+                    <div v-if="sp.analysis.key_quotes?.length" class="mb-4">
+                      <span class="text-xs font-medium text-primary-500 block mb-1.5">Key Quotes:</span>
+                      <div class="space-y-2">
+                        <blockquote v-for="(q, i) in sp.analysis.key_quotes" :key="i"
+                          class="border-l-2 border-amber-300 pl-3 text-xs text-primary-600 italic leading-relaxed"
+                        >"{{ q }}"</blockquote>
+                      </div>
+                    </div>
+
+                    <!-- Policy Positions -->
+                    <div v-if="sp.analysis.policy_positions?.length" class="mb-4">
+                      <span class="text-xs font-medium text-primary-500 block mb-1.5">Policy Positions:</span>
+                      <div class="space-y-1">
+                        <div v-for="p in sp.analysis.policy_positions" :key="p.topic" class="text-xs text-primary-600">
+                          <span class="font-medium">{{ p.topic }}:</span> {{ p.position }}
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Conflicts -->
+                    <div v-if="sp.analysis.mentioned_conflicts?.length" class="mb-4">
+                      <span class="text-xs font-medium text-primary-500 block mb-1.5">Conflicts Referenced:</span>
+                      <div class="space-y-1">
+                        <div v-for="cf in sp.analysis.mentioned_conflicts" :key="cf.name" class="text-xs text-primary-600">
+                          <span class="font-medium">{{ cf.name }}:</span> {{ cf.stance }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Speech text (on-demand) -->
+                  <div class="px-5 py-5">
+                    <div v-if="speechTextIso === c.iso3 && speechTextSession === sp.session && groupSpeechTextPending" class="space-y-2">
+                      <div v-for="i in 5" :key="i" class="skeleton h-4 rounded" />
+                    </div>
+                    <div v-else-if="speechTextIso === c.iso3 && speechTextSession === sp.session && groupSpeechTextContent" class="prose prose-sm max-w-none text-primary-700 leading-relaxed whitespace-pre-wrap">{{ groupSpeechTextContent }}</div>
+                    <div v-else class="text-sm text-primary-400">Speech text not available.</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Link to full country speeches page -->
+              <div class="px-5 py-3 bg-primary-50/50">
+                <NuxtLink :to="`/countries/${c.iso3}/speeches`" class="text-xs text-accent-600 hover:text-accent-700 transition-colors">
+                  View all {{ c.speechCount }} speeches for {{ c.name }} &rarr;
+                </NuxtLink>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Countries -->
-      <div>
+      <div id="sec-member-countries" class="scroll-mt-24">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-5">
           Member Countries
           <span class="text-base font-normal text-primary-300">({{ (group as any).countries.length }})</span>
@@ -829,6 +1182,61 @@ const groupMilitaryData = computed(() => groupMilitaryRaw.value as any)
 const { conflict: groupConflictRaw } = useGroupConflict(gid)
 const groupConflictData = computed(() => groupConflictRaw.value as any)
 
+// GDELT Events & Tone
+const { gdelt: groupGdeltRaw } = useGroupGDELT(gid)
+const groupGdeltData = computed(() => groupGdeltRaw.value as any)
+
+// --- Group Speeches ---
+const { speeches: groupSpeechesRaw } = useGroupSpeeches(gid)
+const groupSpeechesData = computed(() => groupSpeechesRaw.value as any)
+
+const speechThemeBars = computed(() => {
+  const themes = groupSpeechesData.value?.themes
+  if (!themes?.length) return []
+  return themes.slice(0, 12)
+})
+
+const expandedSpeechCountry = ref<string | null>(null)
+const expandedSpeechSession = ref<{ iso: string; session: number } | null>(null)
+const speechTextIso = ref('')
+const speechTextSession = ref<number | null>(null)
+
+function toggleSpeechCountry(iso3: string) {
+  expandedSpeechCountry.value = expandedSpeechCountry.value === iso3 ? null : iso3
+  expandedSpeechSession.value = null
+}
+
+function toggleSpeechDetail(iso3: string, session: number) {
+  if (expandedSpeechSession.value?.iso === iso3 && expandedSpeechSession.value?.session === session) {
+    expandedSpeechSession.value = null
+  } else {
+    expandedSpeechSession.value = { iso: iso3, session }
+    speechTextIso.value = iso3
+    speechTextSession.value = session
+  }
+}
+
+const { speechText: groupSpeechTextRaw, pending: groupSpeechTextPending } = useCountrySpeechText(speechTextIso, speechTextSession)
+const groupSpeechTextContent = computed(() => {
+  if (!groupSpeechTextRaw.value) return null
+  return (groupSpeechTextRaw.value as any)?.text || null
+})
+
+function speechSentimentClass(sentiment: string): string {
+  switch (sentiment) {
+    case 'positive': return 'bg-emerald-100 text-emerald-800'
+    case 'negative': return 'bg-red-100 text-red-800'
+    case 'mixed': return 'bg-amber-100 text-amber-800'
+    default: return 'bg-primary-100 text-primary-600'
+  }
+}
+
+function formatGdeltVolume(n: number): string {
+  if (n >= 1e6) return `${(n / 1e6).toFixed(1)}M`
+  if (n >= 1e3) return `${(n / 1e3).toFixed(0)}K`
+  return n.toLocaleString()
+}
+
 // Resolution browser state
 const resPage = ref(1)
 const resSession = ref<number | undefined>(undefined)
@@ -887,7 +1295,27 @@ const availableThemes = computed(() => resData.value?.themes ?? [])
 // Theme stats
 const { themeStats: themeStatsRaw, pending: themeStatsPending } = useGroupThemeStats(gid)
 const themeStatsData = computed(() => (themeStatsRaw.value as any)?.stats ?? [])
-const showThemeStats = ref(false)
+
+// Theme trends
+const { themeTrends: groupThemeTrendsRaw, pending: groupThemeTrendsPending } = useGroupThemeTrends(gid)
+const groupThemeTrendsData = computed(() => (groupThemeTrendsRaw.value as any)?.trends ?? [])
+const groupTrendsThemes = computed(() => groupThemeTrendsData.value.map((t: any) => t.theme))
+const selectedGroupTrendTheme = ref<string>('')
+watch(groupTrendsThemes, (themes) => {
+  if (themes.length && !selectedGroupTrendTheme.value) {
+    selectedGroupTrendTheme.value = themes[0]
+  }
+}, { immediate: true })
+const selectedGroupTrendData = computed(() => {
+  if (!selectedGroupTrendTheme.value) return null
+  return groupThemeTrendsData.value.find((t: any) => t.theme === selectedGroupTrendTheme.value) ?? null
+})
+function groupDecadeBarWidth(resolutions: number): number {
+  if (!selectedGroupTrendData.value) return 0
+  const maxRes = Math.max(...selectedGroupTrendData.value.decades.map((d: any) => d.resolutions))
+  if (maxRes === 0) return 0
+  return Math.max(15, Math.round((resolutions / maxRes) * 100))
+}
 
 // Helper: build country name lookup from group data
 const countryMap = computed(() => {
@@ -1122,4 +1550,21 @@ useHead({
     return g ? `${g.acronym} — ${g.name} — World Country Groups` : 'Loading...'
   }),
 })
+
+// Section navigation
+const groupSections = [
+  { id: 'sec-aggregate-stats', label: 'Statistics' },
+  { id: 'sec-country-breakdown', label: 'Country Breakdown' },
+  { id: 'sec-unga-voting', label: 'UNGA Voting' },
+  { id: 'sec-veto-history', label: 'Veto History' },
+  { id: 'sec-sc-resolutions', label: 'SC Resolutions' },
+  { id: 'sec-treaties', label: 'Treaties' },
+  { id: 'sec-sanctions', label: 'Sanctions' },
+  { id: 'sec-recognition', label: 'Recognition' },
+  { id: 'sec-military', label: 'Military' },
+  { id: 'sec-gdelt', label: 'GDELT' },
+  { id: 'sec-speeches', label: 'Speeches' },
+  { id: 'sec-member-countries', label: 'Members' },
+]
+const { visibleSections, activeSection, scrollTo: sectionScrollTo } = useSectionNav(groupSections)
 </script>

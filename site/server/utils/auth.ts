@@ -1,50 +1,70 @@
 import { createHmac } from 'crypto'
 import type { H3Event } from 'h3'
+import { getSessionSecret, getUserById, type User } from './users'
 
 const SESSION_TTL = 24 * 60 * 60 * 1000 // 24 hours
-const COOKIE_NAME = 'admin_session'
+const COOKIE_NAME = 'wcg_session'
 
-function getAdminPassword(): string {
-  return useRuntimeConfig().adminPassword as string
-}
-
-export function createSessionToken(password: string): string | null {
-  const adminPassword = getAdminPassword()
-  if (!adminPassword || password !== adminPassword) return null
+export function createSessionToken(userId: string, role: string): string {
+  const secret = getSessionSecret()
   const timestamp = Date.now().toString()
-  const hmac = createHmac('sha256', adminPassword).update(timestamp).digest('hex')
-  return `${timestamp}.${hmac}`
+  const payload = `${userId}.${role}.${timestamp}`
+  const hmac = createHmac('sha256', secret).update(payload).digest('hex')
+  return `${payload}.${hmac}`
 }
 
-export function verifySessionToken(token: string): boolean {
-  const adminPassword = getAdminPassword()
-  if (!adminPassword || !token) return false
+export function verifySessionToken(token: string): { userId: string; role: string; timestamp: number } | null {
+  if (!token) return null
+  const secret = getSessionSecret()
 
-  const dotIndex = token.indexOf('.')
-  if (dotIndex === -1) return false
+  const parts = token.split('.')
+  if (parts.length !== 4) return null
 
-  const timestamp = token.substring(0, dotIndex)
-  const hmac = token.substring(dotIndex + 1)
+  const [userId, role, timestampStr, hmac] = parts
+  const timestamp = parseInt(timestampStr, 10)
+  if (isNaN(timestamp) || Date.now() - timestamp > SESSION_TTL) return null
 
-  // Check TTL
-  const ts = parseInt(timestamp, 10)
-  if (isNaN(ts) || Date.now() - ts > SESSION_TTL) return false
+  const payload = `${userId}.${role}.${timestampStr}`
+  const expected = createHmac('sha256', secret).update(payload).digest('hex')
+  if (hmac !== expected) return null
 
-  // Verify HMAC
-  const expected = createHmac('sha256', adminPassword).update(timestamp).digest('hex')
-  return hmac === expected
+  return { userId, role, timestamp }
 }
 
-export function requireAdmin(event: H3Event): void {
-  const adminPassword = getAdminPassword()
-  if (!adminPassword) {
-    throw createError({ statusCode: 503, statusMessage: 'Admin not configured' })
-  }
-
+export function getSession(event: H3Event): { userId: string; role: string; timestamp: number; user: User } | null {
   const token = getCookie(event, COOKIE_NAME)
-  if (!token || !verifySessionToken(token)) {
-    throw createError({ statusCode: 401, statusMessage: 'Unauthorized' })
+  if (!token) return null
+
+  const session = verifySessionToken(token)
+  if (!session) return null
+
+  const user = getUserById(session.userId)
+  if (!user) return null
+
+  return { ...session, user }
+}
+
+export function requireAuth(event: H3Event): { userId: string; role: string; user: User } {
+  const session = getSession(event)
+  if (!session) {
+    throw createError({ statusCode: 401, statusMessage: 'Authentication required' })
   }
+  if (session.user.status !== 'approved') {
+    throw createError({ statusCode: 403, statusMessage: 'Account not approved' })
+  }
+  return session
+}
+
+export function requireAdmin(event: H3Event): { userId: string; role: string; user: User } {
+  const session = requireAuth(event)
+  if (session.role !== 'admin') {
+    throw createError({ statusCode: 403, statusMessage: 'Admin access required' })
+  }
+  return session
+}
+
+export function isAuthenticated(event: H3Event): boolean {
+  return getSession(event) !== null
 }
 
 export function setSessionCookie(event: H3Event, token: string): void {
@@ -59,11 +79,4 @@ export function setSessionCookie(event: H3Event, token: string): void {
 
 export function clearSessionCookie(event: H3Event): void {
   deleteCookie(event, COOKIE_NAME, { path: '/' })
-}
-
-export function isAuthenticated(event: H3Event): boolean {
-  const adminPassword = getAdminPassword()
-  if (!adminPassword) return false
-  const token = getCookie(event, COOKIE_NAME)
-  return !!token && verifySessionToken(token)
 }

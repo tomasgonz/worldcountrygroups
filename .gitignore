@@ -15,3 +15,18 @@ site/node_modules/
 site/.nuxt/
 site/.output/
 site/*.log
+
+# API keys
+scripts/.env
+
+# Speech text files (~10K files, reproducible via scripts/import_ungdc.py)
+site/server/data/speeches/
+
+# Speech PDFs (large, reproducible)
+site/server/data/pdfs-80/
+
+# Speech index (large, reproducible via scripts)
+site/server/data/un-speeches-index.json
+
+# User data
+site/server/data/users.json

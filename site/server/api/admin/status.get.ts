@@ -1,13 +1,8 @@
-import { isAuthenticated } from '~/server/utils/auth'
-import { getDataMeta } from '~/server/utils/countrydata'
+import { getSession } from '~/server/utils/auth'
 
 export default defineEventHandler((event) => {
-  const authenticated = isAuthenticated(event)
-  const meta = getDataMeta()
-
+  const session = getSession(event)
   return {
-    authenticated,
-    data_updated_at: meta?.updated_at ?? null,
-    configured: !!(useRuntimeConfig().adminPassword),
+    authenticated: !!session && session.user.role === 'admin',
   }
 })

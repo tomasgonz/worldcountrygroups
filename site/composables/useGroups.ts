@@ -98,10 +98,22 @@ export function useGroupThemeStats(gid: string | Ref<string>) {
   return { themeStats, pending, error }
 }
 
+export function useGroupThemeTrends(gid: string | Ref<string>) {
+  const id = toRef(gid)
+  const { data: themeTrends, pending, error } = useFetch(() => `/api/groups/${id.value}/theme-trends`, { lazy: true })
+  return { themeTrends, pending, error }
+}
+
 export function useCountryThemeStats(iso: string | Ref<string>) {
   const code = toRef(iso)
   const { data: themeStats, pending, error } = useFetch(() => `/api/countries/${code.value}/theme-stats`, { lazy: true })
   return { themeStats, pending, error }
+}
+
+export function useCountryThemeTrends(iso: string | Ref<string>) {
+  const code = toRef(iso)
+  const { data: themeTrends, pending, error } = useFetch(() => `/api/countries/${code.value}/theme-trends`, { lazy: true })
+  return { themeTrends, pending, error }
 }
 
 export function useCountryVotes(iso: string | Ref<string>) {
@@ -276,6 +288,80 @@ export function useGroupConflict(gid: string | Ref<string>) {
   const id = toRef(gid)
   const { data: conflict, pending, error } = useFetch(() => `/api/groups/${id.value}/conflict`, { lazy: true })
   return { conflict, pending, error }
+}
+
+// --- UN General Debate Speeches ---
+export function useCountrySpeeches(iso: string | Ref<string>) {
+  const code = toRef(iso)
+  const { data: speeches, pending, error } = useFetch(() => `/api/countries/${code.value}/speeches`, { lazy: true })
+  return { speeches, pending, error }
+}
+
+export function useCountrySpeechText(iso: string | Ref<string>, session: Ref<number | null>) {
+  const code = toRef(iso)
+  const { data: speechText, pending, error, refresh } = useFetch(() => {
+    if (session.value == null) return null
+    return `/api/countries/${code.value}/speech/${session.value}`
+  }, { lazy: true, watch: [session] })
+  return { speechText, pending, error, refresh }
+}
+
+export function useSpeechSessions() {
+  const { data, pending, error } = useFetch('/api/speeches/sessions')
+  const sessions = computed(() => (data.value as any)?.sessions ?? [])
+  const latestSession = computed(() => (data.value as any)?.latest ?? null)
+  const analysisSessions = computed(() => (data.value as any)?.analysisSessions ?? [])
+  return { sessions, latestSession, analysisSessions, pending, error }
+}
+
+export function useSpeechGroupPriorities(session?: Ref<number | undefined>) {
+  const { data: priorities, pending, error } = useFetch(() => {
+    const params = new URLSearchParams()
+    if (session?.value != null) params.set('session', String(session.value))
+    const qs = params.toString()
+    return `/api/speeches/group-priorities${qs ? '?' + qs : ''}`
+  })
+  return { priorities, pending, error }
+}
+
+export function useSpeechTopics(session?: Ref<number | undefined>) {
+  const { data: topics, pending, error } = useFetch(() => {
+    const params = new URLSearchParams()
+    if (session?.value != null) params.set('session', String(session.value))
+    const qs = params.toString()
+    return `/api/speeches/topics${qs ? '?' + qs : ''}`
+  }, { lazy: true })
+  return { topics, pending, error }
+}
+
+export function useSpeechAnalysis(session?: Ref<number | undefined>) {
+  const { data: analysis, pending, error } = useFetch(() => {
+    const params = new URLSearchParams()
+    if (session?.value != null) params.set('session', String(session.value))
+    const qs = params.toString()
+    return `/api/speeches/analysis${qs ? '?' + qs : ''}`
+  }, { lazy: true })
+  return { analysis, pending, error }
+}
+
+// --- Group Speeches ---
+export function useGroupSpeeches(gid: string | Ref<string>) {
+  const id = toRef(gid)
+  const { data: speeches, pending, error } = useFetch(() => `/api/groups/${id.value}/speeches`, { lazy: true })
+  return { speeches, pending, error }
+}
+
+// --- GDELT Events & Tone ---
+export function useCountryGDELT(iso: string | Ref<string>) {
+  const code = toRef(iso)
+  const { data: gdelt, pending, error } = useFetch(() => `/api/countries/${code.value}/gdelt`, { lazy: true })
+  return { gdelt, pending, error }
+}
+
+export function useGroupGDELT(gid: string | Ref<string>) {
+  const id = toRef(gid)
+  const { data: gdelt, pending, error } = useFetch(() => `/api/groups/${id.value}/gdelt`, { lazy: true })
+  return { gdelt, pending, error }
 }
 
 export function formatMilitary(n: number | null | undefined): string {

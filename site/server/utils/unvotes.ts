@@ -440,6 +440,64 @@ export function getThemeCounts(): Record<string, number> {
   return _themes?.theme_counts ?? {}
 }
 
+export function getGroupThemeTrends(
+  iso3Codes: string[],
+): { theme: string; total_resolutions: number; decades: { decade: string; year_start: number; resolutions: number; yes: number; no: number; abstain: number }[] }[] {
+  ensureLoaded()
+  if (!_themes || !_resolutions) return []
+  const codes = new Set(iso3Codes.map(c => c.toUpperCase()))
+  const results: { theme: string; total_resolutions: number; decades: { decade: string; year_start: number; resolutions: number; yes: number; no: number; abstain: number }[] }[] = []
+
+  for (const theme of _themes.themes) {
+    const themeResolutions = _resolutions.filter(r => _themes!.map[r.id]?.includes(theme))
+    if (themeResolutions.length === 0) continue
+
+    // Bucket by decade, aggregating all member country votes
+    const buckets = new Map<number, { resolutions: number; yes: number; no: number; abstain: number }>()
+    for (const r of themeResolutions) {
+      const year = parseInt(r.d.substring(0, 4))
+      if (isNaN(year)) continue
+      // Check if any group member voted on this resolution
+      let anyVoted = false
+      for (const code of codes) {
+        if (r.v[code] != null) { anyVoted = true; break }
+      }
+      if (!anyVoted) continue
+
+      const decadeStart = Math.floor(year / 10) * 10
+      let bucket = buckets.get(decadeStart)
+      if (!bucket) {
+        bucket = { resolutions: 0, yes: 0, no: 0, abstain: 0 }
+        buckets.set(decadeStart, bucket)
+      }
+      bucket.resolutions++
+      for (const code of codes) {
+        const vote = r.v[code]
+        if (vote === 'Y') bucket.yes++
+        else if (vote === 'N') bucket.no++
+        else if (vote === 'A') bucket.abstain++
+      }
+    }
+
+    if (buckets.size === 0) continue
+
+    const decades = [...buckets.entries()]
+      .sort((a, b) => a[0] - b[0])
+      .map(([yearStart, b]) => ({
+        decade: `${yearStart}s`,
+        year_start: yearStart,
+        resolutions: b.resolutions,
+        yes: b.yes,
+        no: b.no,
+        abstain: b.abstain,
+      }))
+
+    results.push({ theme, total_resolutions: themeResolutions.length, decades })
+  }
+
+  return results.sort((a, b) => b.total_resolutions - a.total_resolutions)
+}
+
 export function getGroupThemeStats(
   iso3Codes: string[],
 ): { theme: string; resolutions: number; cohesion: number }[] {
@@ -509,6 +567,55 @@ export function getCountryThemeStats(
   }
 
   return results.sort((a, b) => b.resolutions - a.resolutions)
+}
+
+export function getCountryThemeTrends(
+  iso3: string,
+): { theme: string; total_resolutions: number; decades: { decade: string; year_start: number; resolutions: number; yes: number; no: number; abstain: number }[] }[] {
+  ensureLoaded()
+  if (!_themes || !_resolutions) return []
+  const code = iso3.toUpperCase()
+  const results: { theme: string; total_resolutions: number; decades: { decade: string; year_start: number; resolutions: number; yes: number; no: number; abstain: number }[] }[] = []
+
+  for (const theme of _themes.themes) {
+    const themeResolutions = _resolutions.filter(r =>
+      _themes!.map[r.id]?.includes(theme) && r.v[code] != null
+    )
+    if (themeResolutions.length === 0) continue
+
+    // Bucket by decade
+    const buckets = new Map<number, { resolutions: number; yes: number; no: number; abstain: number }>()
+    for (const r of themeResolutions) {
+      const year = parseInt(r.d.substring(0, 4))
+      if (isNaN(year)) continue
+      const decadeStart = Math.floor(year / 10) * 10
+      let bucket = buckets.get(decadeStart)
+      if (!bucket) {
+        bucket = { resolutions: 0, yes: 0, no: 0, abstain: 0 }
+        buckets.set(decadeStart, bucket)
+      }
+      bucket.resolutions++
+      const vote = r.v[code]
+      if (vote === 'Y') bucket.yes++
+      else if (vote === 'N') bucket.no++
+      else if (vote === 'A') bucket.abstain++
+    }
+
+    const decades = [...buckets.entries()]
+      .sort((a, b) => a[0] - b[0])
+      .map(([yearStart, b]) => ({
+        decade: `${yearStart}s`,
+        year_start: yearStart,
+        resolutions: b.resolutions,
+        yes: b.yes,
+        no: b.no,
+        abstain: b.abstain,
+      }))
+
+    results.push({ theme, total_resolutions: themeResolutions.length, decades })
+  }
+
+  return results.sort((a, b) => b.total_resolutions - a.total_resolutions)
 }
 
 // Alignment cache: iso3 -> alignment result
@@ -590,6 +697,131 @@ export function getCountryAlignmentScores(
     leastAligned: leastAligned.slice(0, limit),
     sessionsUsed,
   }
+}
+
+// --- Intelligence bilateral/divergence ---
+
+export function getBilateralVotingAlignment(iso3A: string, iso3B: string): {
+  overall: number
+  resolutionsCompared: number
+  perTheme: { theme: string; alignment: number; resolutions: number }[]
+} {
+  ensureLoaded()
+  const codeA = iso3A.toUpperCase()
+  const codeB = iso3B.toUpperCase()
+
+  if (!_resolutions || _resolutions.length === 0) {
+    return { overall: 0, resolutionsCompared: 0, perTheme: [] }
+  }
+
+  let agree = 0
+  let compared = 0
+  const themeAgreements = new Map<string, { agree: number; total: number }>()
+
+  for (const r of _resolutions) {
+    const va = r.v[codeA]
+    const vb = r.v[codeB]
+    if (!va || !vb || va === 'X' || vb === 'X') continue
+
+    compared++
+    const match = va === vb
+    if (match) agree++
+
+    // Per-theme breakdown
+    const themes = _themes?.map[r.id] ?? []
+    for (const theme of themes) {
+      let entry = themeAgreements.get(theme)
+      if (!entry) {
+        entry = { agree: 0, total: 0 }
+        themeAgreements.set(theme, entry)
+      }
+      entry.total++
+      if (match) entry.agree++
+    }
+  }
+
+  const perTheme = [...themeAgreements.entries()]
+    .filter(([, v]) => v.total >= 5)
+    .map(([theme, v]) => ({
+      theme,
+      alignment: Math.round((v.agree / v.total) * 1000) / 1000,
+      resolutions: v.total,
+    }))
+    .sort((a, b) => b.resolutions - a.resolutions)
+
+  return {
+    overall: compared > 0 ? Math.round((agree / compared) * 1000) / 1000 : 0,
+    resolutionsCompared: compared,
+    perTheme,
+  }
+}
+
+export function getGroupMemberDivergence(iso3Codes: string[]): {
+  iso3: string; divergenceScore: number; totalVotes: number
+}[] {
+  ensureLoaded()
+  if (!_resolutions || _resolutions.length === 0) return []
+
+  const codes = iso3Codes.map(c => c.toUpperCase())
+  const codesSet = new Set(codes)
+
+  // For each resolution, determine the group majority vote
+  // Then measure how often each member deviates from majority
+  const memberStats = new Map<string, { divergences: number; total: number }>()
+  for (const code of codes) {
+    memberStats.set(code, { divergences: 0, total: 0 })
+  }
+
+  // Use recent 5 sessions only for performance
+  const allSessions = new Set<number>()
+  for (const r of _resolutions) allSessions.add(r.s)
+  const sortedSessions = [...allSessions].sort((a, b) => b - a)
+  const recentSessions = new Set(sortedSessions.slice(0, 5))
+
+  const recentResolutions = _resolutions.filter(r => recentSessions.has(r.s))
+
+  for (const r of recentResolutions) {
+    // Collect group votes for this resolution
+    const voteCounts: Record<string, number> = {}
+    const memberVotes: { code: string; vote: string }[] = []
+
+    for (const code of codes) {
+      const vote = r.v[code]
+      if (!vote || vote === 'X') continue
+      voteCounts[vote] = (voteCounts[vote] || 0) + 1
+      memberVotes.push({ code, vote })
+    }
+
+    if (memberVotes.length < 2) continue
+
+    // Find majority vote
+    let majorityVote = ''
+    let maxCount = 0
+    for (const [vote, count] of Object.entries(voteCounts)) {
+      if (count > maxCount) {
+        maxCount = count
+        majorityVote = vote
+      }
+    }
+
+    // Count divergences
+    for (const { code, vote } of memberVotes) {
+      const stats = memberStats.get(code)!
+      stats.total++
+      if (vote !== majorityVote) stats.divergences++
+    }
+  }
+
+  return codes
+    .map(iso3 => {
+      const stats = memberStats.get(iso3)!
+      return {
+        iso3,
+        divergenceScore: stats.total > 0 ? Math.round((stats.divergences / stats.total) * 1000) / 1000 : 0,
+        totalVotes: stats.total,
+      }
+    })
+    .sort((a, b) => b.divergenceScore - a.divergenceScore)
 }
 
 export function getGroupVotingData(

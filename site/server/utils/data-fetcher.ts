@@ -2,9 +2,12 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync, renameSync } from '
 import { join, dirname } from 'path'
 import { Readable } from 'stream'
 import { createInterface } from 'readline'
+import { createUnzip } from 'zlib'
 import { getRegistry } from '~/server/utils/wcg'
 import { reloadData } from '~/server/utils/countrydata'
 import { reloadUNVotes } from '~/server/utils/unvotes'
+import { reloadGDELT } from '~/server/utils/gdelt'
+import { reloadSpeeches, extractKeywords } from '~/server/utils/speeches'
 import { classify, ALL_THEMES } from '~/server/utils/classify'
 import type { CountryData } from '~/server/utils/countrydata'
 
@@ -669,5 +672,880 @@ export async function refreshThemeClassification(): Promise<{
     return { ok: false, updated_at: '', resolutions_classified: 0, themes_found: 0, errors }
   } finally {
     _themeRefreshing = false
+  }
+}
+
+// --- GDELT Data Refresh ---
+
+const GDELT_FILE = join(process.cwd(), 'server', 'data', 'gdelt-data.json')
+const GDELT_FILE_ALT = join(process.env.HOME || '/home', 'worldcountrygroups', 'site', 'server', 'data', 'gdelt-data.json')
+
+let _gdeltRefreshing = false
+let _gdeltProgress = ''
+let _gdeltLastRefresh: string | null = null
+let _gdeltLastError: string | null = null
+
+export function getGDELTRefreshStatus() {
+  return {
+    refreshing: _gdeltRefreshing,
+    progress: _gdeltProgress,
+    last_refresh: _gdeltLastRefresh,
+    last_error: _gdeltLastError,
+  }
+}
+
+// CAMEO actor country code → ISO3 exceptions
+const CAMEO_TO_ISO3: Record<string, string> = {
+  'USS': 'RUS', 'SUN': 'RUS', 'YUG': 'SRB', 'DDR': 'DEU', 'CSK': 'CZE',
+  'ROM': 'ROU', 'ZAR': 'COD', 'BUR': 'MMR', 'TMP': 'TLS', 'SCG': 'SRB',
+  'ANT': 'NLD', 'GBD': 'GBR', 'GBN': 'GBR', 'GBP': 'GBR', 'GBS': 'GBR',
+  'HKG': 'CHN', 'MAC': 'CHN', 'TWN': 'TWN', 'PSE': 'PSE', 'XKX': 'XKX',
+}
+
+function resolveCAMEO(code: string): string | null {
+  if (!code || code.length < 3) return null
+  const upper = code.toUpperCase().substring(0, 3)
+  if (CAMEO_TO_ISO3[upper]) return CAMEO_TO_ISO3[upper]
+  // Most CAMEO country codes are already ISO3
+  if (/^[A-Z]{3}$/.test(upper)) return upper
+  return null
+}
+
+// CAMEO root codes: 01-10 are cooperative, 11-20 are conflictual
+function isCooperative(rootCode: string): boolean {
+  const n = parseInt(rootCode, 10)
+  return n >= 1 && n <= 10
+}
+
+function isConflictual(rootCode: string): boolean {
+  const n = parseInt(rootCode, 10)
+  return n >= 11 && n <= 20
+}
+
+async function fetchGDELTDailyCSV(dateStr: string): Promise<{
+  perCountry: Map<string, {
+    events: number; cooperative: number; conflictual: number; neutral: number
+    goldsteinSum: number; toneSum: number; mentionsSum: number
+    byCameo: Map<string, number>
+  }>
+  pairs: Map<string, {
+    events: number; cooperative: number; conflictual: number; toneSum: number; mentionsSum: number
+  }>
+} | null> {
+  const url = `http://data.gdeltproject.org/events/${dateStr}.export.CSV.zip`
+  try {
+    const resp = await fetch(url)
+    if (!resp.ok || !resp.body) return null
+
+    const perCountry = new Map<string, {
+      events: number; cooperative: number; conflictual: number; neutral: number
+      goldsteinSum: number; toneSum: number; mentionsSum: number
+      byCameo: Map<string, number>
+    }>()
+    const pairs = new Map<string, {
+      events: number; cooperative: number; conflictual: number; toneSum: number; mentionsSum: number
+    }>()
+
+    const nodeStream = Readable.fromWeb(resp.body as any)
+    const unzip = createUnzip()
+    nodeStream.pipe(unzip)
+    const rl = createInterface({ input: unzip, crlfDelay: Infinity })
+
+    for await (const line of rl) {
+      const fields = line.split('\t')
+      if (fields.length < 35) continue
+
+      const actor1Code = fields[7] || ''
+      const actor2Code = fields[17] || ''
+      const eventRootCode = fields[26] || ''
+      const goldstein = parseFloat(fields[30]) || 0
+      const numMentions = parseInt(fields[31], 10) || 0
+      const avgTone = parseFloat(fields[34]) || 0
+
+      const iso1 = resolveCAMEO(actor1Code)
+      const iso2 = resolveCAMEO(actor2Code)
+      const rootCode = eventRootCode.substring(0, 2).padStart(2, '0')
+      const coop = isCooperative(rootCode)
+      const confl = isConflictual(rootCode)
+
+      // Per-country aggregation
+      for (const iso of [iso1, iso2]) {
+        if (!iso) continue
+        if (!perCountry.has(iso)) {
+          perCountry.set(iso, {
+            events: 0, cooperative: 0, conflictual: 0, neutral: 0,
+            goldsteinSum: 0, toneSum: 0, mentionsSum: 0,
+            byCameo: new Map(),
+          })
+        }
+        const c = perCountry.get(iso)!
+        c.events++
+        if (coop) c.cooperative++
+        else if (confl) c.conflictual++
+        else c.neutral++
+        c.goldsteinSum += goldstein
+        c.toneSum += avgTone * numMentions
+        c.mentionsSum += numMentions
+        c.byCameo.set(rootCode, (c.byCameo.get(rootCode) || 0) + 1)
+      }
+
+      // Bilateral pair
+      if (iso1 && iso2 && iso1 !== iso2) {
+        const pairKey = iso1 < iso2 ? `${iso1}:${iso2}` : `${iso2}:${iso1}`
+        if (!pairs.has(pairKey)) {
+          pairs.set(pairKey, { events: 0, cooperative: 0, conflictual: 0, toneSum: 0, mentionsSum: 0 })
+        }
+        const p = pairs.get(pairKey)!
+        p.events++
+        if (coop) p.cooperative++
+        else if (confl) p.conflictual++
+        p.toneSum += avgTone * numMentions
+        p.mentionsSum += numMentions
+      }
+    }
+
+    return { perCountry, pairs }
+  } catch {
+    return null
+  }
+}
+
+async function fetchGDELTDocTone(countryName: string): Promise<{ avg_tone: number; volume: number; monthly: number[] } | null> {
+  try {
+    const encodedName = encodeURIComponent(countryName)
+    const url = `https://api.gdeltproject.org/api/v2/doc/doc?query=${encodedName}&mode=timelinetone&timespan=12m&format=json`
+    const resp = await fetch(url)
+    if (!resp.ok) return null
+    const data = await resp.json()
+    if (!data?.timeline?.length) return null
+
+    const series = data.timeline[0]?.data || []
+    let toneSum = 0
+    let totalVolume = 0
+    const monthly: number[] = []
+
+    for (const point of series) {
+      const vol = point.value || 0
+      const tone = point.norm || 0
+      toneSum += tone * vol
+      totalVolume += vol
+      monthly.push(vol)
+    }
+
+    // Aggregate into 12 monthly buckets
+    const monthlyBuckets: number[] = new Array(12).fill(0)
+    const bucketSize = Math.ceil(monthly.length / 12)
+    for (let i = 0; i < monthly.length; i++) {
+      const bucket = Math.min(Math.floor(i / bucketSize), 11)
+      monthlyBuckets[bucket] += monthly[i]
+    }
+
+    return {
+      avg_tone: totalVolume > 0 ? toneSum / totalVolume : 0,
+      volume: totalVolume,
+      monthly: monthlyBuckets,
+    }
+  } catch {
+    return null
+  }
+}
+
+// Country name lookup for GDELT DOC API queries
+const ISO3_TO_NAME: Record<string, string> = {
+  USA: 'United States', CHN: 'China', RUS: 'Russia', GBR: 'United Kingdom',
+  FRA: 'France', DEU: 'Germany', JPN: 'Japan', IND: 'India', BRA: 'Brazil',
+  CAN: 'Canada', AUS: 'Australia', KOR: 'South Korea', ISR: 'Israel',
+  IRN: 'Iran', SAU: 'Saudi Arabia', TUR: 'Turkey', UKR: 'Ukraine',
+  PAK: 'Pakistan', EGY: 'Egypt', NGA: 'Nigeria', ZAF: 'South Africa',
+  MEX: 'Mexico', IDN: 'Indonesia', ARG: 'Argentina', COL: 'Colombia',
+  ITA: 'Italy', ESP: 'Spain', NLD: 'Netherlands', POL: 'Poland',
+  SWE: 'Sweden', NOR: 'Norway', TWN: 'Taiwan', PRK: 'North Korea',
+  IRQ: 'Iraq', SYR: 'Syria', AFG: 'Afghanistan', YEM: 'Yemen',
+  LBY: 'Libya', SDN: 'Sudan', ETH: 'Ethiopia', MMR: 'Myanmar',
+  VEN: 'Venezuela', CUB: 'Cuba', THA: 'Thailand', VNM: 'Vietnam',
+  PHL: 'Philippines', MYS: 'Malaysia', SGP: 'Singapore', QAT: 'Qatar',
+  ARE: 'United Arab Emirates', KWT: 'Kuwait', JOR: 'Jordan', LBN: 'Lebanon',
+  GRC: 'Greece', BEL: 'Belgium', CHE: 'Switzerland', AUT: 'Austria',
+  KEN: 'Kenya', DZA: 'Algeria', MAR: 'Morocco', PRT: 'Portugal',
+  ROU: 'Romania', HUN: 'Hungary', CZE: 'Czech Republic', FIN: 'Finland',
+  DNK: 'Denmark', IRL: 'Ireland', NZL: 'New Zealand', CHL: 'Chile',
+  PER: 'Peru', ECU: 'Ecuador', BOL: 'Bolivia', URY: 'Uruguay',
+  PRY: 'Paraguay', GEO: 'Georgia', ARM: 'Armenia', AZE: 'Azerbaijan',
+  KAZ: 'Kazakhstan', UZB: 'Uzbekistan', TKM: 'Turkmenistan',
+}
+
+export async function refreshGDELTData(): Promise<{
+  ok: boolean
+  updated_at: string
+  countries_processed: number
+  errors: string[]
+}> {
+  if (_gdeltRefreshing) {
+    return { ok: false, updated_at: '', countries_processed: 0, errors: ['GDELT refresh already in progress'] }
+  }
+
+  _gdeltRefreshing = true
+  _gdeltProgress = 'Starting GDELT refresh...'
+  const errors: string[] = []
+
+  try {
+    // Phase A: Download last 7 days of GDELT event CSVs
+    _gdeltProgress = 'Phase A: Downloading GDELT daily event CSVs...'
+
+    const mergedCountry = new Map<string, {
+      events: number; cooperative: number; conflictual: number; neutral: number
+      goldsteinSum: number; toneSum: number; mentionsSum: number
+      byCameo: Map<string, number>
+    }>()
+    const mergedPairs = new Map<string, {
+      events: number; cooperative: number; conflictual: number; toneSum: number; mentionsSum: number
+    }>()
+
+    const today = new Date()
+    let daysProcessed = 0
+    for (let i = 1; i <= 7; i++) {
+      const d = new Date(today)
+      d.setDate(d.getDate() - i)
+      const dateStr = d.toISOString().slice(0, 10).replace(/-/g, '')
+      _gdeltProgress = `Phase A: Processing ${dateStr} (${i}/7)...`
+
+      const result = await fetchGDELTDailyCSV(dateStr)
+      if (!result) {
+        errors.push(`Failed to fetch GDELT CSV for ${dateStr}`)
+        continue
+      }
+
+      // Merge per-country data
+      for (const [iso, data] of result.perCountry) {
+        if (!mergedCountry.has(iso)) {
+          mergedCountry.set(iso, {
+            events: 0, cooperative: 0, conflictual: 0, neutral: 0,
+            goldsteinSum: 0, toneSum: 0, mentionsSum: 0,
+            byCameo: new Map(),
+          })
+        }
+        const m = mergedCountry.get(iso)!
+        m.events += data.events
+        m.cooperative += data.cooperative
+        m.conflictual += data.conflictual
+        m.neutral += data.neutral
+        m.goldsteinSum += data.goldsteinSum
+        m.toneSum += data.toneSum
+        m.mentionsSum += data.mentionsSum
+        for (const [code, count] of data.byCameo) {
+          m.byCameo.set(code, (m.byCameo.get(code) || 0) + count)
+        }
+      }
+
+      // Merge pair data
+      for (const [key, data] of result.pairs) {
+        if (!mergedPairs.has(key)) {
+          mergedPairs.set(key, { events: 0, cooperative: 0, conflictual: 0, toneSum: 0, mentionsSum: 0 })
+        }
+        const m = mergedPairs.get(key)!
+        m.events += data.events
+        m.cooperative += data.cooperative
+        m.conflictual += data.conflictual
+        m.toneSum += data.toneSum
+        m.mentionsSum += data.mentionsSum
+      }
+
+      daysProcessed++
+    }
+
+    // Phase B: Media tone for top countries
+    _gdeltProgress = 'Phase B: Fetching media tone from GDELT DOC API...'
+
+    const sortedCountries = [...mergedCountry.entries()]
+      .sort((a, b) => b[1].events - a[1].events)
+      .slice(0, 80)
+
+    const mediaTone = new Map<string, { avg_tone: number; volume: number; monthly: number[] }>()
+    const CONCURRENCY = 3
+    const DELAY_MS = 300
+
+    for (let i = 0; i < sortedCountries.length; i += CONCURRENCY) {
+      const batch = sortedCountries.slice(i, i + CONCURRENCY)
+      _gdeltProgress = `Phase B: Media tone ${i + 1}/${sortedCountries.length}...`
+
+      const results = await Promise.all(
+        batch.map(async ([iso]) => {
+          const name = ISO3_TO_NAME[iso]
+          if (!name) return { iso, data: null }
+          const data = await fetchGDELTDocTone(name)
+          return { iso, data }
+        })
+      )
+
+      for (const { iso, data } of results) {
+        if (data) mediaTone.set(iso, data)
+      }
+
+      if (i + CONCURRENCY < sortedCountries.length) {
+        await new Promise(r => setTimeout(r, DELAY_MS))
+      }
+    }
+
+    // Build final output
+    _gdeltProgress = 'Building output data...'
+
+    const countries: Record<string, any> = {}
+
+    for (const [iso, data] of mergedCountry) {
+      const tone = mediaTone.get(iso)
+      const byCameo: Record<string, number> = {}
+      for (const [code, count] of data.byCameo) {
+        byCameo[code] = count
+      }
+
+      // Build bilateral list for this country
+      const bilateral: Array<{
+        partner: string; events: number; cooperative: number; conflictual: number
+        avg_tone: number; cooperation_ratio: number
+      }> = []
+
+      for (const [key, pData] of mergedPairs) {
+        const [a, b] = key.split(':')
+        let partner: string | null = null
+        if (a === iso) partner = b
+        else if (b === iso) partner = a
+        if (!partner) continue
+
+        const coopConfl = pData.cooperative + pData.conflictual
+        bilateral.push({
+          partner,
+          events: pData.events,
+          cooperative: pData.cooperative,
+          conflictual: pData.conflictual,
+          avg_tone: pData.mentionsSum > 0 ? pData.toneSum / pData.mentionsSum : 0,
+          cooperation_ratio: coopConfl > 0 ? pData.cooperative / coopConfl : 0.5,
+        })
+      }
+
+      bilateral.sort((a, b) => b.events - a.events)
+
+      const coopConfl = data.cooperative + data.conflictual
+      countries[iso] = {
+        media: {
+          avg_tone: tone?.avg_tone ?? (data.mentionsSum > 0 ? data.toneSum / data.mentionsSum : 0),
+          article_volume: tone?.volume ?? data.mentionsSum,
+          monthly_trend: tone?.monthly ?? new Array(12).fill(0),
+        },
+        events: {
+          total: data.events,
+          cooperative: data.cooperative,
+          neutral: data.neutral,
+          conflictual: data.conflictual,
+          goldstein_avg: data.events > 0 ? data.goldsteinSum / data.events : 0,
+          cooperation_ratio: coopConfl > 0 ? data.cooperative / coopConfl : 0.5,
+          by_cameo: byCameo,
+        },
+        bilateral: bilateral.slice(0, 10),
+      }
+    }
+
+    // Atomic write
+    _gdeltProgress = 'Writing GDELT data file...'
+    const now = new Date().toISOString()
+    const output = {
+      _meta: {
+        last_updated: now,
+        source: 'GDELT Project',
+        period: `${daysProcessed} days ending ${today.toISOString().slice(0, 10)}`,
+        country_count: Object.keys(countries).length,
+      },
+      countries,
+    }
+
+    const filePath = existsSync(dirname(GDELT_FILE)) ? GDELT_FILE : GDELT_FILE_ALT
+    const dir = dirname(filePath)
+    if (!existsSync(dir)) mkdirSync(dir, { recursive: true })
+    const tmpFile = filePath + '.tmp'
+    writeFileSync(tmpFile, JSON.stringify(output, null, 2), 'utf-8')
+    renameSync(tmpFile, filePath)
+
+    reloadGDELT()
+
+    _gdeltLastRefresh = now
+    _gdeltLastError = errors.length > 0 ? errors.join('; ') : null
+    _gdeltProgress = 'Done'
+
+    return {
+      ok: true,
+      updated_at: now,
+      countries_processed: Object.keys(countries).length,
+      errors,
+    }
+  } catch (e: any) {
+    const msg = e?.message || String(e)
+    _gdeltLastError = msg
+    errors.push(msg)
+    return { ok: false, updated_at: '', countries_processed: 0, errors }
+  } finally {
+    _gdeltRefreshing = false
+  }
+}
+
+// --- UN General Debate Speeches ---
+
+const SPEECHES_INDEX_FILE = join(process.cwd(), 'server', 'data', 'un-speeches-index.json')
+const SPEECHES_INDEX_FILE_ALT = join(process.env.HOME || '/home', 'worldcountrygroups', 'site', 'server', 'data', 'un-speeches-index.json')
+const SPEECHES_TEXT_DIR = join(process.cwd(), 'server', 'data', 'speeches')
+const SPEECHES_TEXT_DIR_ALT = join(process.env.HOME || '/home', 'worldcountrygroups', 'site', 'server', 'data', 'speeches')
+
+let _speechesRefreshing = false
+let _speechesProgress = ''
+let _speechesLastRefresh: string | null = null
+let _speechesLastError: string | null = null
+
+export function getSpeechesRefreshStatus() {
+  return {
+    refreshing: _speechesRefreshing,
+    progress: _speechesProgress,
+    last_refresh: _speechesLastRefresh,
+    last_error: _speechesLastError,
+  }
+}
+
+// Session number → year mapping
+const SESSION_YEARS: Record<number, number> = {
+  75: 2020, 76: 2021, 77: 2022, 78: 2023, 79: 2024, 80: 2025,
+}
+
+// Build slug → ISO mapping from registry
+function buildSlugToIsoMap(): Map<string, { iso2: string; iso3: string; name: string }> {
+  const registry = getRegistry()
+  const allIso2 = registry.getAllIso2Codes()
+  const map = new Map<string, { iso2: string; iso3: string; name: string }>()
+
+  for (const code of allIso2) {
+    const membership = registry.getCountryMembership(code)
+    if (!membership) continue
+    const name = membership.name
+    const iso2 = membership.iso2.toLowerCase()
+    const iso3 = membership.iso3.toUpperCase()
+
+    // Generate slug variants from the country name
+    const slug = name.toLowerCase()
+      .replace(/['']/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '')
+
+    map.set(slug, { iso2, iso3, name })
+
+    // Common edge-case slugs
+    const nameLC = name.toLowerCase()
+    if (nameLC.includes('united states')) {
+      map.set('united-states-america', { iso2, iso3, name })
+      map.set('united-states', { iso2, iso3, name })
+    }
+    if (nameLC.includes('united kingdom')) {
+      map.set('united-kingdom', { iso2, iso3, name })
+      map.set('united-kingdom-great-britain-and-northern-ireland', { iso2, iso3, name })
+    }
+    if (nameLC.includes('korea') && nameLC.includes('republic') && !nameLC.includes('democratic')) {
+      map.set('republic-korea', { iso2, iso3, name })
+      map.set('korea-republic', { iso2, iso3, name })
+    }
+    if (nameLC.includes('korea') && (nameLC.includes('democratic') || nameLC.includes("people"))) {
+      map.set('democratic-peoples-republic-korea', { iso2, iso3, name })
+      map.set('korea-democratic-peoples-republic', { iso2, iso3, name })
+    }
+    if (nameLC.includes('iran')) {
+      map.set('iran-islamic-republic', { iso2, iso3, name })
+      map.set('iran', { iso2, iso3, name })
+    }
+    if (nameLC.includes('venezuela')) {
+      map.set('venezuela-bolivarian-republic', { iso2, iso3, name })
+      map.set('venezuela', { iso2, iso3, name })
+    }
+    if (nameLC.includes('bolivia')) {
+      map.set('bolivia-plurinational-state', { iso2, iso3, name })
+      map.set('bolivia', { iso2, iso3, name })
+    }
+    if (nameLC.includes('tanzania')) {
+      map.set('united-republic-tanzania', { iso2, iso3, name })
+      map.set('tanzania', { iso2, iso3, name })
+    }
+    if (nameLC.includes('syria')) {
+      map.set('syrian-arab-republic', { iso2, iso3, name })
+      map.set('syria', { iso2, iso3, name })
+    }
+    if (nameLC.includes('laos') || nameLC.includes("lao")) {
+      map.set('lao-peoples-democratic-republic', { iso2, iso3, name })
+      map.set('laos', { iso2, iso3, name })
+    }
+    if (nameLC.includes('congo') && nameLC.includes('democratic')) {
+      map.set('democratic-republic-congo', { iso2, iso3, name })
+    }
+    if (nameLC.includes('congo') && !nameLC.includes('democratic')) {
+      map.set('republic-congo', { iso2, iso3, name })
+      map.set('congo', { iso2, iso3, name })
+    }
+    if (nameLC.includes("côte d'ivoire") || nameLC.includes('ivory coast') || nameLC.includes('cote divoire')) {
+      map.set('cote-divoire', { iso2, iso3, name })
+      map.set('cote-d-ivoire', { iso2, iso3, name })
+    }
+    if (nameLC.includes('timor-leste') || nameLC.includes('east timor')) {
+      map.set('timor-leste', { iso2, iso3, name })
+    }
+    if (nameLC.includes('micronesia')) {
+      map.set('micronesia-federated-states', { iso2, iso3, name })
+      map.set('micronesia', { iso2, iso3, name })
+    }
+    if (nameLC.includes('moldova')) {
+      map.set('republic-moldova', { iso2, iso3, name })
+      map.set('moldova', { iso2, iso3, name })
+    }
+    if (nameLC.includes('north macedonia') || nameLC.includes('macedonia')) {
+      map.set('north-macedonia', { iso2, iso3, name })
+    }
+    if (nameLC.includes('türkiye') || nameLC.includes('turkey')) {
+      map.set('turkiye', { iso2, iso3, name })
+      map.set('turkey', { iso2, iso3, name })
+    }
+    if (nameLC.includes('brunei')) {
+      map.set('brunei-darussalam', { iso2, iso3, name })
+      map.set('brunei', { iso2, iso3, name })
+    }
+    if (nameLC.includes('vietnam') || nameLC.includes('viet nam')) {
+      map.set('viet-nam', { iso2, iso3, name })
+      map.set('vietnam', { iso2, iso3, name })
+    }
+    if (nameLC.includes('eswatini') || nameLC.includes('swaziland')) {
+      map.set('eswatini', { iso2, iso3, name })
+    }
+    if (nameLC.includes('palestine')) {
+      map.set('state-palestine', { iso2, iso3, name })
+      map.set('palestine', { iso2, iso3, name })
+    }
+  }
+
+  return map
+}
+
+function extractIso2FromPdfUrl(html: string): string | null {
+  // Look for PDF URL pattern: /gastatements/{session}/{iso2}_en.pdf
+  const match = html.match(/\/gastatements\/\d+\/([a-z]{2})_en\.pdf/i)
+  return match ? match[1].toLowerCase() : null
+}
+
+function extractSpeakerInfo(html: string): { name: string; title: string } {
+  // Try to extract speaker name and title from the page HTML
+  // Common patterns in gadebate.un.org pages
+  let name = ''
+  let title = ''
+
+  // Look for speaker name in heading or meta
+  const nameMatch = html.match(/<h1[^>]*class="[^"]*field-name[^"]*"[^>]*>(.*?)<\/h1>/is)
+    || html.match(/<div[^>]*class="[^"]*field-name-field-speaker[^"]*"[^>]*>[\s\S]*?<div[^>]*class="field-item[^"]*"[^>]*>(.*?)<\/div>/is)
+    || html.match(/Speaker[:\s]*<[^>]+>(.*?)<\//is)
+  if (nameMatch) {
+    name = nameMatch[1].replace(/<[^>]+>/g, '').trim()
+  }
+
+  const titleMatch = html.match(/<div[^>]*class="[^"]*field-name-field-title[^"]*"[^>]*>[\s\S]*?<div[^>]*class="field-item[^"]*"[^>]*>(.*?)<\/div>/is)
+    || html.match(/Title[:\s]*<[^>]+>(.*?)<\//is)
+  if (titleMatch) {
+    title = titleMatch[1].replace(/<[^>]+>/g, '').trim()
+  }
+
+  return { name, title }
+}
+
+async function fetchWithRetry(url: string, maxRetries = 3): Promise<Response | null> {
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      const resp = await fetch(url)
+      if (resp.ok) return resp
+      if (resp.status === 429 || resp.status === 503) {
+        await new Promise(r => setTimeout(r, 2000 * (attempt + 1)))
+        continue
+      }
+      return null
+    } catch {
+      if (attempt < maxRetries - 1) {
+        await new Promise(r => setTimeout(r, 1000 * (attempt + 1)))
+      }
+    }
+  }
+  return null
+}
+
+export async function refreshSpeechesData(): Promise<{
+  ok: boolean
+  updated_at: string
+  speeches_processed: number
+  errors: string[]
+}> {
+  if (_speechesRefreshing) {
+    return { ok: false, updated_at: '', speeches_processed: 0, errors: ['Speeches refresh already in progress'] }
+  }
+
+  _speechesRefreshing = true
+  _speechesProgress = 'Starting speeches refresh...'
+  const errors: string[] = []
+
+  try {
+    const slugMap = buildSlugToIsoMap()
+    const registry = getRegistry()
+
+    // Build iso2 → iso3 lookup
+    const iso2ToIso3 = new Map<string, string>()
+    const allIso2 = registry.getAllIso2Codes()
+    for (const code of allIso2) {
+      const membership = registry.getCountryMembership(code)
+      if (membership) {
+        iso2ToIso3.set(code.toLowerCase(), membership.iso3.toUpperCase())
+      }
+    }
+
+    // Setup output directory
+    const indexPath = existsSync(dirname(SPEECHES_INDEX_FILE)) ? SPEECHES_INDEX_FILE : SPEECHES_INDEX_FILE_ALT
+    const speechDir = existsSync(dirname(SPEECHES_TEXT_DIR)) ? SPEECHES_TEXT_DIR : SPEECHES_TEXT_DIR_ALT
+    if (!existsSync(speechDir)) mkdirSync(speechDir, { recursive: true })
+    const indexDir = dirname(indexPath)
+    if (!existsSync(indexDir)) mkdirSync(indexDir, { recursive: true })
+
+    // Phase 1: Discover country/session URLs from sitemap
+    _speechesProgress = 'Fetching sitemap...'
+    const pageUrls: { session: number; slug: string; url: string }[] = []
+
+    for (let page = 0; page <= 5; page++) {
+      const sitemapUrl = page === 0
+        ? 'https://gadebate.un.org/sitemap.xml'
+        : `https://gadebate.un.org/sitemap.xml?page=${page}`
+
+      const resp = await fetchWithRetry(sitemapUrl)
+      if (!resp) {
+        if (page === 0) {
+          errors.push('Failed to fetch main sitemap')
+        }
+        continue
+      }
+
+      const xml = await resp.text()
+
+      // Parse URLs from sitemap XML
+      const urlMatches = xml.matchAll(/<loc>(https?:\/\/gadebate\.un\.org\/en\/(\d+)\/([^<]+))<\/loc>/g)
+      for (const m of urlMatches) {
+        const url = m[1]
+        const session = parseInt(m[2], 10)
+        const slug = m[3].replace(/\/$/, '')
+
+        // Only sessions 75-80
+        if (session >= 75 && session <= 80) {
+          pageUrls.push({ session, slug, url })
+        }
+      }
+    }
+
+    if (pageUrls.length === 0) {
+      // Fallback: generate URLs from known countries and sessions
+      _speechesProgress = 'Sitemap empty, generating URLs from registry...'
+      for (const session of [75, 76, 77, 78, 79]) {
+        for (const [slug, info] of slugMap) {
+          pageUrls.push({
+            session,
+            slug,
+            url: `https://gadebate.un.org/en/${session}/${slug}`,
+          })
+        }
+      }
+    }
+
+    _speechesProgress = `Found ${pageUrls.length} potential speeches to process...`
+
+    // Phase 2: Process each country/session
+    const speeches: Array<{
+      iso3: string
+      iso2: string
+      session: number
+      year: number
+      speaker: string
+      speaker_title: string
+      date: string
+      word_count: number
+      keywords: string[]
+      file: string
+    }> = []
+
+    let processed = 0
+    let downloaded = 0
+    const DELAY_MS = 300
+
+    // Group by session for orderly processing
+    const bySession = new Map<number, typeof pageUrls>()
+    for (const entry of pageUrls) {
+      if (!bySession.has(entry.session)) bySession.set(entry.session, [])
+      bySession.get(entry.session)!.push(entry)
+    }
+
+    for (const [session, entries] of [...bySession.entries()].sort((a, b) => a[0] - b[0])) {
+      const year = SESSION_YEARS[session] || (2020 + (session - 75))
+      _speechesProgress = `Session ${session} (${year}): processing ${entries.length} countries...`
+
+      for (const entry of entries) {
+        processed++
+        if (processed % 20 === 0) {
+          _speechesProgress = `Session ${session}: ${processed}/${pageUrls.length} processed, ${downloaded} downloaded...`
+        }
+
+        // Try to resolve ISO codes from slug
+        let iso2: string | null = null
+        let iso3: string | null = null
+        const slugInfo = slugMap.get(entry.slug)
+        if (slugInfo) {
+          iso2 = slugInfo.iso2
+          iso3 = slugInfo.iso3
+        }
+
+        // Fetch the country page to get PDF URL and speaker info
+        const pageResp = await fetchWithRetry(entry.url)
+        if (!pageResp) {
+          await new Promise(r => setTimeout(r, DELAY_MS))
+          continue
+        }
+
+        const html = await pageResp.text()
+
+        // If we didn't resolve ISO from slug, try from PDF URL in HTML
+        if (!iso2) {
+          iso2 = extractIso2FromPdfUrl(html)
+          if (iso2) {
+            iso3 = iso2ToIso3.get(iso2) || null
+          }
+        }
+
+        if (!iso2 || !iso3) {
+          // Can't identify country, skip
+          await new Promise(r => setTimeout(r, DELAY_MS))
+          continue
+        }
+
+        // Check if we already have the text file
+        const fileName = `${iso3}_${session}_${year}.txt`
+        const textPath = join(speechDir, fileName)
+        if (existsSync(textPath)) {
+          // Already downloaded, read and recompute keywords
+          try {
+            const text = readFileSync(textPath, 'utf-8')
+            if (text.length > 100) {
+              const { name, title } = extractSpeakerInfo(html)
+              const keywords = extractKeywords(text)
+              const wordCount = text.split(/\s+/).length
+
+              speeches.push({
+                iso3,
+                iso2,
+                session,
+                year,
+                speaker: name,
+                speaker_title: title,
+                date: `${year}-09-20`,
+                word_count: wordCount,
+                keywords,
+                file: fileName,
+              })
+              downloaded++
+            }
+          } catch {
+            // Skip
+          }
+          await new Promise(r => setTimeout(r, 100))
+          continue
+        }
+
+        // Try to download the PDF
+        const pdfUrl = `https://gadebate.un.org/sites/default/files/gastatements/${session}/${iso2}_en.pdf`
+        const pdfResp = await fetchWithRetry(pdfUrl)
+
+        if (!pdfResp) {
+          await new Promise(r => setTimeout(r, DELAY_MS))
+          continue
+        }
+
+        try {
+          const pdfBuffer = Buffer.from(await pdfResp.arrayBuffer())
+
+          // Extract text using pdf-parse
+          const pdfParse = (await import('pdf-parse')).default
+          const pdfData = await pdfParse(pdfBuffer)
+          const text = pdfData.text?.trim() || ''
+
+          if (text.length < 100) {
+            // Likely a scanned image or empty PDF
+            await new Promise(r => setTimeout(r, DELAY_MS))
+            continue
+          }
+
+          // Write text file
+          writeFileSync(textPath, text, 'utf-8')
+
+          const { name, title } = extractSpeakerInfo(html)
+          const keywords = extractKeywords(text)
+          const wordCount = text.split(/\s+/).length
+
+          speeches.push({
+            iso3,
+            iso2,
+            session,
+            year,
+            speaker: name,
+            speaker_title: title,
+            date: `${year}-09-20`,
+            word_count: wordCount,
+            keywords,
+            file: fileName,
+          })
+          downloaded++
+        } catch (e: any) {
+          errors.push(`PDF parse error for ${iso3} session ${session}: ${e?.message || e}`)
+        }
+
+        await new Promise(r => setTimeout(r, DELAY_MS))
+      }
+    }
+
+    // Phase 3: Build and write the index
+    _speechesProgress = `Writing index (${speeches.length} speeches)...`
+    const now = new Date().toISOString()
+    const sessions = [...new Set(speeches.map(s => s.session))].sort()
+    const countries = new Set(speeches.map(s => s.iso3))
+
+    const index = {
+      _meta: {
+        updated_at: now,
+        source: 'gadebate.un.org',
+        total_speeches: speeches.length,
+        sessions,
+        country_count: countries.size,
+      },
+      speeches: speeches.sort((a, b) => b.year - a.year || a.iso3.localeCompare(b.iso3)),
+    }
+
+    const tmpFile = indexPath + '.tmp'
+    writeFileSync(tmpFile, JSON.stringify(index, null, 2), 'utf-8')
+    renameSync(tmpFile, indexPath)
+
+    reloadSpeeches()
+
+    _speechesLastRefresh = now
+    _speechesLastError = errors.length > 0 ? errors.join('; ') : null
+    _speechesProgress = 'Done'
+
+    return {
+      ok: true,
+      updated_at: now,
+      speeches_processed: speeches.length,
+      errors,
+    }
+  } catch (e: any) {
+    const msg = e?.message || String(e)
+    _speechesLastError = msg
+    errors.push(msg)
+    return { ok: false, updated_at: '', speeches_processed: 0, errors }
+  } finally {
+    _speechesRefreshing = false
   }
 }

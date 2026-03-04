@@ -15,9 +15,7 @@ export default defineNuxtConfig({
       ],
     },
   },
-  runtimeConfig: {
-    adminPassword: process.env.ADMIN_PASSWORD || '',
-  },
+  runtimeConfig: {},
   vite: {
     server: {
       allowedHosts: ['worldcountrygroups.whereistomas.org'],

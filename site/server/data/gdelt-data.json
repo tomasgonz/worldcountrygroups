@@ -1,0 +1,6282 @@
+{
+  "_meta": {
+    "last_updated": "2026-03-01T00:00:00Z",
+    "source": "GDELT Project",
+    "period": "2025-02 to 2026-02",
+    "country_count": 60
+  },
+  "countries": {
+    "USA": {
+      "media": {
+        "avg_tone": -0.7,
+        "article_volume": 3140975,
+        "monthly_trend": [
+          271827,
+          267602,
+          272436,
+          249403,
+          251090,
+          254310,
+          266020,
+          260348,
+          263759,
+          262073,
+          251664,
+          255726
+        ]
+      },
+      "events": {
+        "total": 156048,
+        "cooperative": 82705,
+        "neutral": 39316,
+        "conflictual": 34027,
+        "goldstein_avg": -0.5,
+        "cooperation_ratio": 0.53,
+        "by_cameo": {
+          "01": 8793,
+          "02": 18109,
+          "03": 15323,
+          "04": 14901,
+          "05": 6696,
+          "06": 10143,
+          "07": 6469,
+          "08": 7228,
+          "09": 3564,
+          "10": 8688,
+          "11": 6427,
+          "12": 7779,
+          "13": 4690,
+          "14": 7364,
+          "15": 3806,
+          "16": 2418,
+          "17": 7823,
+          "18": 2915,
+          "19": 2050,
+          "20": 1680
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "CHN",
+          "events": 21598,
+          "cooperative": 8855,
+          "conflictual": 12743,
+          "avg_tone": -1.9,
+          "cooperation_ratio": 0.41
+        },
+        {
+          "partner": "RUS",
+          "events": 18124,
+          "cooperative": 6524,
+          "conflictual": 11600,
+          "avg_tone": -2.8,
+          "cooperation_ratio": 0.36
+        },
+        {
+          "partner": "GBR",
+          "events": 16036,
+          "cooperative": 10423,
+          "conflictual": 5613,
+          "avg_tone": 1.6,
+          "cooperation_ratio": 0.65
+        },
+        {
+          "partner": "CAN",
+          "events": 12671,
+          "cooperative": 8996,
+          "conflictual": 3675,
+          "avg_tone": 1.8,
+          "cooperation_ratio": 0.71
+        },
+        {
+          "partner": "DEU",
+          "events": 11606,
+          "cooperative": 7195,
+          "conflictual": 4411,
+          "avg_tone": 1.1,
+          "cooperation_ratio": 0.62
+        },
+        {
+          "partner": "JPN",
+          "events": 9904,
+          "cooperative": 6536,
+          "conflictual": 3368,
+          "avg_tone": 1.5,
+          "cooperation_ratio": 0.66
+        },
+        {
+          "partner": "ISR",
+          "events": 12143,
+          "cooperative": 7042,
+          "conflictual": 5101,
+          "avg_tone": -0.4,
+          "cooperation_ratio": 0.58
+        },
+        {
+          "partner": "IRN",
+          "events": 8638,
+          "cooperative": 2850,
+          "conflictual": 5788,
+          "avg_tone": -3.4,
+          "cooperation_ratio": 0.33
+        },
+        {
+          "partner": "UKR",
+          "events": 11870,
+          "cooperative": 6291,
+          "conflictual": 5579,
+          "avg_tone": -0.7,
+          "cooperation_ratio": 0.53
+        },
+        {
+          "partner": "MEX",
+          "events": 9304,
+          "cooperative": 5024,
+          "conflictual": 4280,
+          "avg_tone": -0.3,
+          "cooperation_ratio": 0.54
+        }
+      ]
+    },
+    "CHN": {
+      "media": {
+        "avg_tone": -0.7,
+        "article_volume": 2558403,
+        "monthly_trend": [
+          198866,
+          207146,
+          204775,
+          211795,
+          223488,
+          211718,
+          208771,
+          200241,
+          199918,
+          221252,
+          212579,
+          213669
+        ]
+      },
+      "events": {
+        "total": 129116,
+        "cooperative": 58102,
+        "neutral": 37440,
+        "conflictual": 33574,
+        "goldstein_avg": -0.9,
+        "cooperation_ratio": 0.45,
+        "by_cameo": {
+          "01": 6736,
+          "02": 13952,
+          "03": 8758,
+          "04": 14373,
+          "05": 7516,
+          "06": 10497,
+          "07": 6676,
+          "08": 5736,
+          "09": 4670,
+          "10": 9029,
+          "11": 4865,
+          "12": 5107,
+          "13": 4018,
+          "14": 7222,
+          "15": 2668,
+          "16": 3268,
+          "17": 6330,
+          "18": 2868,
+          "19": 2117,
+          "20": 1210
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "USA",
+          "events": 21809,
+          "cooperative": 9377,
+          "conflictual": 12432,
+          "avg_tone": -2.1,
+          "cooperation_ratio": 0.43
+        },
+        {
+          "partner": "RUS",
+          "events": 14037,
+          "cooperative": 8281,
+          "conflictual": 5756,
+          "avg_tone": 1.0,
+          "cooperation_ratio": 0.59
+        },
+        {
+          "partner": "JPN",
+          "events": 10443,
+          "cooperative": 4803,
+          "conflictual": 5640,
+          "avg_tone": -1.7,
+          "cooperation_ratio": 0.46
+        },
+        {
+          "partner": "TWN",
+          "events": 12558,
+          "cooperative": 4897,
+          "conflictual": 7661,
+          "avg_tone": -2.9,
+          "cooperation_ratio": 0.39
+        },
+        {
+          "partner": "KOR",
+          "events": 8088,
+          "cooperative": 3963,
+          "conflictual": 4125,
+          "avg_tone": -0.5,
+          "cooperation_ratio": 0.49
+        },
+        {
+          "partner": "IND",
+          "events": 9519,
+          "cooperative": 4093,
+          "conflictual": 5426,
+          "avg_tone": -1.6,
+          "cooperation_ratio": 0.43
+        },
+        {
+          "partner": "AUS",
+          "events": 7357,
+          "cooperative": 3457,
+          "conflictual": 3900,
+          "avg_tone": -1.5,
+          "cooperation_ratio": 0.47
+        },
+        {
+          "partner": "GBR",
+          "events": 5988,
+          "cooperative": 2874,
+          "conflictual": 3114,
+          "avg_tone": -1.0,
+          "cooperation_ratio": 0.48
+        },
+        {
+          "partner": "PRK",
+          "events": 5289,
+          "cooperative": 2432,
+          "conflictual": 2857,
+          "avg_tone": -1.5,
+          "cooperation_ratio": 0.46
+        }
+      ]
+    },
+    "RUS": {
+      "media": {
+        "avg_tone": -2.7,
+        "article_volume": 4355604,
+        "monthly_trend": [
+          367818,
+          360276,
+          402029,
+          352222,
+          372010,
+          383488,
+          383937,
+          337663,
+          334303,
+          362244,
+          358990,
+          350930
+        ]
+      },
+      "events": {
+        "total": 201601,
+        "cooperative": 84672,
+        "neutral": 55577,
+        "conflictual": 61352,
+        "goldstein_avg": -0.9,
+        "cooperation_ratio": 0.42,
+        "by_cameo": {
+          "01": 13857,
+          "02": 18784,
+          "03": 14580,
+          "04": 24964,
+          "05": 11480,
+          "06": 16755,
+          "07": 7748,
+          "08": 9925,
+          "09": 6958,
+          "10": 14045,
+          "11": 8202,
+          "12": 9714,
+          "13": 5608,
+          "14": 9198,
+          "15": 5711,
+          "16": 4563,
+          "17": 10347,
+          "18": 5832,
+          "19": 3037,
+          "20": 1539
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "UKR",
+          "events": 39003,
+          "cooperative": 10530,
+          "conflictual": 28473,
+          "avg_tone": -5.4,
+          "cooperation_ratio": 0.27
+        },
+        {
+          "partner": "USA",
+          "events": 24195,
+          "cooperative": 8952,
+          "conflictual": 15243,
+          "avg_tone": -3.1,
+          "cooperation_ratio": 0.37
+        },
+        {
+          "partner": "CHN",
+          "events": 17768,
+          "cooperative": 10483,
+          "conflictual": 7285,
+          "avg_tone": 1.1,
+          "cooperation_ratio": 0.59
+        },
+        {
+          "partner": "DEU",
+          "events": 10702,
+          "cooperative": 5136,
+          "conflictual": 5566,
+          "avg_tone": -2.2,
+          "cooperation_ratio": 0.48
+        },
+        {
+          "partner": "GBR",
+          "events": 11413,
+          "cooperative": 4793,
+          "conflictual": 6620,
+          "avg_tone": -2.7,
+          "cooperation_ratio": 0.42
+        },
+        {
+          "partner": "TUR",
+          "events": 10028,
+          "cooperative": 5314,
+          "conflictual": 4714,
+          "avg_tone": -0.5,
+          "cooperation_ratio": 0.53
+        },
+        {
+          "partner": "FRA",
+          "events": 10675,
+          "cooperative": 4803,
+          "conflictual": 5872,
+          "avg_tone": -1.9,
+          "cooperation_ratio": 0.45
+        },
+        {
+          "partner": "SYR",
+          "events": 8814,
+          "cooperative": 4407,
+          "conflictual": 4407,
+          "avg_tone": -0.8,
+          "cooperation_ratio": 0.5
+        },
+        {
+          "partner": "IRN",
+          "events": 8422,
+          "cooperative": 4800,
+          "conflictual": 3622,
+          "avg_tone": -0.0,
+          "cooperation_ratio": 0.57
+        }
+      ]
+    },
+    "GBR": {
+      "media": {
+        "avg_tone": 0.5,
+        "article_volume": 1025884,
+        "monthly_trend": [
+          86028,
+          90641,
+          88137,
+          81018,
+          85243,
+          80101,
+          91359,
+          89310,
+          87688,
+          80371,
+          77379,
+          89301
+        ]
+      },
+      "events": {
+        "total": 106540,
+        "cooperative": 60727,
+        "neutral": 24498,
+        "conflictual": 21315,
+        "goldstein_avg": 1.2,
+        "cooperation_ratio": 0.57,
+        "by_cameo": {
+          "01": 8782,
+          "02": 7605,
+          "03": 8979,
+          "04": 9480,
+          "05": 5543,
+          "06": 9264,
+          "07": 4139,
+          "08": 4198,
+          "09": 3291,
+          "10": 5491,
+          "11": 5865,
+          "12": 5589,
+          "13": 3084,
+          "14": 7088,
+          "15": 3030,
+          "16": 1748,
+          "17": 3780,
+          "18": 3454,
+          "19": 1741,
+          "20": 1025
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "USA",
+          "events": 17080,
+          "cooperative": 10760,
+          "conflictual": 6320,
+          "avg_tone": 1.3,
+          "cooperation_ratio": 0.63
+        },
+        {
+          "partner": "FRA",
+          "events": 7654,
+          "cooperative": 4592,
+          "conflictual": 3062,
+          "avg_tone": 1.1,
+          "cooperation_ratio": 0.6
+        },
+        {
+          "partner": "DEU",
+          "events": 6857,
+          "cooperative": 4045,
+          "conflictual": 2812,
+          "avg_tone": 0.7,
+          "cooperation_ratio": 0.59
+        },
+        {
+          "partner": "RUS",
+          "events": 6661,
+          "cooperative": 2797,
+          "conflictual": 3864,
+          "avg_tone": -2.8,
+          "cooperation_ratio": 0.42
+        },
+        {
+          "partner": "CHN",
+          "events": 5509,
+          "cooperative": 2534,
+          "conflictual": 2975,
+          "avg_tone": -0.9,
+          "cooperation_ratio": 0.46
+        },
+        {
+          "partner": "UKR",
+          "events": 6179,
+          "cooperative": 3522,
+          "conflictual": 2657,
+          "avg_tone": -0.7,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "ISR",
+          "events": 4584,
+          "cooperative": 2475,
+          "conflictual": 2109,
+          "avg_tone": -1.5,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "IND",
+          "events": 3752,
+          "cooperative": 2251,
+          "conflictual": 1501,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.6
+        }
+      ]
+    },
+    "FRA": {
+      "media": {
+        "avg_tone": 0.1,
+        "article_volume": 1485435,
+        "monthly_trend": [
+          118440,
+          120018,
+          118284,
+          130174,
+          121494,
+          133793,
+          130909,
+          113557,
+          115515,
+          123319,
+          115057,
+          114756
+        ]
+      },
+      "events": {
+        "total": 72493,
+        "cooperative": 38421,
+        "neutral": 17588,
+        "conflictual": 16484,
+        "goldstein_avg": 0.5,
+        "cooperation_ratio": 0.53,
+        "by_cameo": {
+          "01": 5943,
+          "02": 7180,
+          "03": 6060,
+          "04": 10184,
+          "05": 3864,
+          "06": 4427,
+          "07": 2748,
+          "08": 2779,
+          "09": 2075,
+          "10": 4263,
+          "11": 3710,
+          "12": 4401,
+          "13": 3274,
+          "14": 3576,
+          "15": 1706,
+          "16": 1310,
+          "17": 3528,
+          "18": 1539,
+          "19": 885,
+          "20": 702
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "USA",
+          "events": 6870,
+          "cooperative": 4122,
+          "conflictual": 2748,
+          "avg_tone": 0.9,
+          "cooperation_ratio": 0.6
+        },
+        {
+          "partner": "DEU",
+          "events": 8037,
+          "cooperative": 4982,
+          "conflictual": 3055,
+          "avg_tone": 1.3,
+          "cooperation_ratio": 0.62
+        },
+        {
+          "partner": "GBR",
+          "events": 5968,
+          "cooperative": 3640,
+          "conflictual": 2328,
+          "avg_tone": 0.9,
+          "cooperation_ratio": 0.61
+        },
+        {
+          "partner": "RUS",
+          "events": 4151,
+          "cooperative": 1909,
+          "conflictual": 2242,
+          "avg_tone": -1.9,
+          "cooperation_ratio": 0.46
+        },
+        {
+          "partner": "CHN",
+          "events": 3965,
+          "cooperative": 2022,
+          "conflictual": 1943,
+          "avg_tone": -0.9,
+          "cooperation_ratio": 0.51
+        },
+        {
+          "partner": "ITA",
+          "events": 2999,
+          "cooperative": 1679,
+          "conflictual": 1320,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "DZA",
+          "events": 2567,
+          "cooperative": 1334,
+          "conflictual": 1233,
+          "avg_tone": -0.7,
+          "cooperation_ratio": 0.52
+        },
+        {
+          "partner": "UKR",
+          "events": 3834,
+          "cooperative": 2108,
+          "conflictual": 1726,
+          "avg_tone": -0.3,
+          "cooperation_ratio": 0.55
+        }
+      ]
+    },
+    "DEU": {
+      "media": {
+        "avg_tone": -0.0,
+        "article_volume": 1284749,
+        "monthly_trend": [
+          113252,
+          109543,
+          101945,
+          119083,
+          115749,
+          116822,
+          114366,
+          111340,
+          98713,
+          103611,
+          99504,
+          103786
+        ]
+      },
+      "events": {
+        "total": 100637,
+        "cooperative": 55350,
+        "neutral": 20727,
+        "conflictual": 24560,
+        "goldstein_avg": 0.4,
+        "cooperation_ratio": 0.55,
+        "by_cameo": {
+          "01": 4809,
+          "02": 8866,
+          "03": 11044,
+          "04": 10375,
+          "05": 5300,
+          "06": 7344,
+          "07": 4799,
+          "08": 5130,
+          "09": 3916,
+          "10": 6240,
+          "11": 5122,
+          "12": 4388,
+          "13": 3092,
+          "14": 8381,
+          "15": 2635,
+          "16": 2063,
+          "17": 4624,
+          "18": 1847,
+          "19": 1585,
+          "20": 1008
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "USA",
+          "events": 8970,
+          "cooperative": 5471,
+          "conflictual": 3499,
+          "avg_tone": 1.0,
+          "cooperation_ratio": 0.61
+        },
+        {
+          "partner": "FRA",
+          "events": 10472,
+          "cooperative": 6597,
+          "conflictual": 3875,
+          "avg_tone": 1.3,
+          "cooperation_ratio": 0.63
+        },
+        {
+          "partner": "GBR",
+          "events": 8101,
+          "cooperative": 4860,
+          "conflictual": 3241,
+          "avg_tone": 0.9,
+          "cooperation_ratio": 0.6
+        },
+        {
+          "partner": "RUS",
+          "events": 7182,
+          "cooperative": 2944,
+          "conflictual": 4238,
+          "avg_tone": -2.5,
+          "cooperation_ratio": 0.41
+        },
+        {
+          "partner": "CHN",
+          "events": 5229,
+          "cooperative": 2666,
+          "conflictual": 2563,
+          "avg_tone": -0.8,
+          "cooperation_ratio": 0.51
+        },
+        {
+          "partner": "POL",
+          "events": 4483,
+          "cooperative": 2644,
+          "conflictual": 1839,
+          "avg_tone": 0.8,
+          "cooperation_ratio": 0.59
+        },
+        {
+          "partner": "UKR",
+          "events": 6048,
+          "cooperative": 3386,
+          "conflictual": 2662,
+          "avg_tone": -0.1,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "TUR",
+          "events": 3923,
+          "cooperative": 2157,
+          "conflictual": 1766,
+          "avg_tone": -0.3,
+          "cooperation_ratio": 0.55
+        }
+      ]
+    },
+    "JPN": {
+      "media": {
+        "avg_tone": 0.1,
+        "article_volume": 730160,
+        "monthly_trend": [
+          62552,
+          59142,
+          58630,
+          66585,
+          59892,
+          62693,
+          62008,
+          59159,
+          60059,
+          59236,
+          63387,
+          57097
+        ]
+      },
+      "events": {
+        "total": 106562,
+        "cooperative": 58609,
+        "neutral": 25484,
+        "conflictual": 22469,
+        "goldstein_avg": 0.7,
+        "cooperation_ratio": 0.55,
+        "by_cameo": {
+          "01": 7825,
+          "02": 8536,
+          "03": 8491,
+          "04": 14104,
+          "05": 4219,
+          "06": 7110,
+          "07": 6133,
+          "08": 3169,
+          "09": 3116,
+          "10": 8305,
+          "11": 6222,
+          "12": 4360,
+          "13": 3087,
+          "14": 5950,
+          "15": 3356,
+          "16": 2618,
+          "17": 5232,
+          "18": 2455,
+          "19": 1270,
+          "20": 1279
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "USA",
+          "events": 11186,
+          "cooperative": 6823,
+          "conflictual": 4363,
+          "avg_tone": 1.5,
+          "cooperation_ratio": 0.61
+        },
+        {
+          "partner": "CHN",
+          "events": 11989,
+          "cooperative": 5275,
+          "conflictual": 6714,
+          "avg_tone": -1.5,
+          "cooperation_ratio": 0.44
+        },
+        {
+          "partner": "KOR",
+          "events": 7676,
+          "cooperative": 4068,
+          "conflictual": 3608,
+          "avg_tone": -0.4,
+          "cooperation_ratio": 0.53
+        },
+        {
+          "partner": "RUS",
+          "events": 5753,
+          "cooperative": 2531,
+          "conflictual": 3222,
+          "avg_tone": -2.0,
+          "cooperation_ratio": 0.44
+        },
+        {
+          "partner": "PRK",
+          "events": 5653,
+          "cooperative": 2091,
+          "conflictual": 3562,
+          "avg_tone": -3.3,
+          "cooperation_ratio": 0.37
+        },
+        {
+          "partner": "TWN",
+          "events": 4092,
+          "cooperative": 2455,
+          "conflictual": 1637,
+          "avg_tone": 0.2,
+          "cooperation_ratio": 0.6
+        },
+        {
+          "partner": "AUS",
+          "events": 4542,
+          "cooperative": 2725,
+          "conflictual": 1817,
+          "avg_tone": 1.3,
+          "cooperation_ratio": 0.6
+        },
+        {
+          "partner": "IND",
+          "events": 3754,
+          "cooperative": 2289,
+          "conflictual": 1465,
+          "avg_tone": 1.0,
+          "cooperation_ratio": 0.61
+        }
+      ]
+    },
+    "IND": {
+      "media": {
+        "avg_tone": -0.4,
+        "article_volume": 1034424,
+        "monthly_trend": [
+          88455,
+          93639,
+          83266,
+          83324,
+          82880,
+          88240,
+          83062,
+          86333,
+          86885,
+          79650,
+          85765,
+          81702
+        ]
+      },
+      "events": {
+        "total": 109329,
+        "cooperative": 51384,
+        "neutral": 27136,
+        "conflictual": 30809,
+        "goldstein_avg": -0.7,
+        "cooperation_ratio": 0.47,
+        "by_cameo": {
+          "01": 7057,
+          "02": 12912,
+          "03": 11222,
+          "04": 9910,
+          "05": 4694,
+          "06": 7100,
+          "07": 3838,
+          "08": 5084,
+          "09": 3549,
+          "10": 5622,
+          "11": 5631,
+          "12": 6199,
+          "13": 3660,
+          "14": 5015,
+          "15": 2036,
+          "16": 2689,
+          "17": 5433,
+          "18": 2807,
+          "19": 1969,
+          "20": 1147
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "PAK",
+          "events": 14377,
+          "cooperative": 5463,
+          "conflictual": 8914,
+          "avg_tone": -3.2,
+          "cooperation_ratio": 0.38
+        },
+        {
+          "partner": "CHN",
+          "events": 12523,
+          "cooperative": 5760,
+          "conflictual": 6763,
+          "avg_tone": -1.8,
+          "cooperation_ratio": 0.46
+        },
+        {
+          "partner": "USA",
+          "events": 12553,
+          "cooperative": 7531,
+          "conflictual": 5022,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.6
+        },
+        {
+          "partner": "RUS",
+          "events": 7171,
+          "cooperative": 4230,
+          "conflictual": 2941,
+          "avg_tone": 0.5,
+          "cooperation_ratio": 0.59
+        },
+        {
+          "partner": "GBR",
+          "events": 5812,
+          "cooperative": 3429,
+          "conflictual": 2383,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.59
+        },
+        {
+          "partner": "JPN",
+          "events": 3899,
+          "cooperative": 2222,
+          "conflictual": 1677,
+          "avg_tone": 0.6,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "ARE",
+          "events": 3795,
+          "cooperative": 2087,
+          "conflictual": 1708,
+          "avg_tone": 0.2,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "SAU",
+          "events": 3318,
+          "cooperative": 1791,
+          "conflictual": 1527,
+          "avg_tone": 0.2,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "AFG",
+          "events": 3072,
+          "cooperative": 1443,
+          "conflictual": 1629,
+          "avg_tone": -1.3,
+          "cooperation_ratio": 0.47
+        }
+      ]
+    },
+    "BRA": {
+      "media": {
+        "avg_tone": -0.3,
+        "article_volume": 710575,
+        "monthly_trend": [
+          62631,
+          63939,
+          57934,
+          58546,
+          56891,
+          62796,
+          62854,
+          57452,
+          58789,
+          54263,
+          61643,
+          61728
+        ]
+      },
+      "events": {
+        "total": 45482,
+        "cooperative": 23650,
+        "neutral": 10046,
+        "conflictual": 11786,
+        "goldstein_avg": 0.8,
+        "cooperation_ratio": 0.52,
+        "by_cameo": {
+          "01": 3801,
+          "02": 5126,
+          "03": 4750,
+          "04": 3901,
+          "05": 2337,
+          "06": 3067,
+          "07": 2861,
+          "08": 2149,
+          "09": 1662,
+          "10": 3237,
+          "11": 1760,
+          "12": 2932,
+          "13": 1217,
+          "14": 3616,
+          "15": 1381,
+          "16": 758,
+          "17": 2164,
+          "18": 1109,
+          "19": 602,
+          "20": 535
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "USA",
+          "events": 6252,
+          "cooperative": 3563,
+          "conflictual": 2689,
+          "avg_tone": 0.1,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "ARG",
+          "events": 5179,
+          "cooperative": 3107,
+          "conflictual": 2072,
+          "avg_tone": 0.8,
+          "cooperation_ratio": 0.6
+        },
+        {
+          "partner": "CHN",
+          "events": 4176,
+          "cooperative": 2380,
+          "conflictual": 1796,
+          "avg_tone": -0.0,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "COL",
+          "events": 2523,
+          "cooperative": 1337,
+          "conflictual": 1186,
+          "avg_tone": 0.2,
+          "cooperation_ratio": 0.53
+        },
+        {
+          "partner": "VEN",
+          "events": 2997,
+          "cooperative": 1468,
+          "conflictual": 1529,
+          "avg_tone": -1.4,
+          "cooperation_ratio": 0.49
+        },
+        {
+          "partner": "DEU",
+          "events": 1813,
+          "cooperative": 1015,
+          "conflictual": 798,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "MEX",
+          "events": 1772,
+          "cooperative": 974,
+          "conflictual": 798,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.55
+        }
+      ]
+    },
+    "CAN": {
+      "media": {
+        "avg_tone": 0.3,
+        "article_volume": 877302,
+        "monthly_trend": [
+          76305,
+          72437,
+          75120,
+          77464,
+          79132,
+          72200,
+          67582,
+          76356,
+          68488,
+          71829,
+          76718,
+          66691
+        ]
+      },
+      "events": {
+        "total": 65313,
+        "cooperative": 37228,
+        "neutral": 14665,
+        "conflictual": 13420,
+        "goldstein_avg": -0.2,
+        "cooperation_ratio": 0.57,
+        "by_cameo": {
+          "01": 4491,
+          "02": 5630,
+          "03": 6505,
+          "04": 7538,
+          "05": 3793,
+          "06": 3768,
+          "07": 4048,
+          "08": 2126,
+          "09": 1423,
+          "10": 3768,
+          "11": 2974,
+          "12": 4252,
+          "13": 2542,
+          "14": 5366,
+          "15": 1865,
+          "16": 1068,
+          "17": 2504,
+          "18": 2072,
+          "19": 1227,
+          "20": 701
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "USA",
+          "events": 14552,
+          "cooperative": 9604,
+          "conflictual": 4948,
+          "avg_tone": 1.8,
+          "cooperation_ratio": 0.66
+        },
+        {
+          "partner": "GBR",
+          "events": 3658,
+          "cooperative": 2377,
+          "conflictual": 1281,
+          "avg_tone": 1.1,
+          "cooperation_ratio": 0.65
+        },
+        {
+          "partner": "CHN",
+          "events": 4448,
+          "cooperative": 2090,
+          "conflictual": 2358,
+          "avg_tone": -1.3,
+          "cooperation_ratio": 0.47
+        },
+        {
+          "partner": "FRA",
+          "events": 3534,
+          "cooperative": 2155,
+          "conflictual": 1379,
+          "avg_tone": 1.1,
+          "cooperation_ratio": 0.61
+        },
+        {
+          "partner": "IND",
+          "events": 2579,
+          "cooperative": 1470,
+          "conflictual": 1109,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "UKR",
+          "events": 2270,
+          "cooperative": 1271,
+          "conflictual": 999,
+          "avg_tone": -0.4,
+          "cooperation_ratio": 0.56
+        }
+      ]
+    },
+    "AUS": {
+      "media": {
+        "avg_tone": 0.6,
+        "article_volume": 661358,
+        "monthly_trend": [
+          56852,
+          56426,
+          53757,
+          58264,
+          55451,
+          58160,
+          52238,
+          54886,
+          52874,
+          56314,
+          51996,
+          51769
+        ]
+      },
+      "events": {
+        "total": 79363,
+        "cooperative": 45236,
+        "neutral": 16495,
+        "conflictual": 17632,
+        "goldstein_avg": 0.4,
+        "cooperation_ratio": 0.57,
+        "by_cameo": {
+          "01": 6043,
+          "02": 8021,
+          "03": 6026,
+          "04": 9190,
+          "05": 3947,
+          "06": 5992,
+          "07": 4667,
+          "08": 4050,
+          "09": 2717,
+          "10": 5215,
+          "11": 3108,
+          "12": 4794,
+          "13": 2976,
+          "14": 3900,
+          "15": 2522,
+          "16": 1334,
+          "17": 2813,
+          "18": 2349,
+          "19": 938,
+          "20": 577
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "USA",
+          "events": 9322,
+          "cooperative": 5593,
+          "conflictual": 3729,
+          "avg_tone": 1.1,
+          "cooperation_ratio": 0.6
+        },
+        {
+          "partner": "CHN",
+          "events": 10461,
+          "cooperative": 4812,
+          "conflictual": 5649,
+          "avg_tone": -1.2,
+          "cooperation_ratio": 0.46
+        },
+        {
+          "partner": "GBR",
+          "events": 4856,
+          "cooperative": 2913,
+          "conflictual": 1943,
+          "avg_tone": 0.9,
+          "cooperation_ratio": 0.6
+        },
+        {
+          "partner": "JPN",
+          "events": 4185,
+          "cooperative": 2385,
+          "conflictual": 1800,
+          "avg_tone": 0.8,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "NZL",
+          "events": 3444,
+          "cooperative": 2238,
+          "conflictual": 1206,
+          "avg_tone": 1.3,
+          "cooperation_ratio": 0.65
+        },
+        {
+          "partner": "IND",
+          "events": 3515,
+          "cooperative": 2003,
+          "conflictual": 1512,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "IDN",
+          "events": 3610,
+          "cooperative": 1913,
+          "conflictual": 1697,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.53
+        }
+      ]
+    },
+    "KOR": {
+      "media": {
+        "avg_tone": 0.2,
+        "article_volume": 1396433,
+        "monthly_trend": [
+          120434,
+          115922,
+          117475,
+          113101,
+          122976,
+          125535,
+          123080,
+          121693,
+          118395,
+          107800,
+          118861,
+          118216
+        ]
+      },
+      "events": {
+        "total": 49545,
+        "cooperative": 27249,
+        "neutral": 10288,
+        "conflictual": 12008,
+        "goldstein_avg": 0.7,
+        "cooperation_ratio": 0.55,
+        "by_cameo": {
+          "01": 3151,
+          "02": 4868,
+          "03": 5266,
+          "04": 4594,
+          "05": 1739,
+          "06": 3637,
+          "07": 2523,
+          "08": 2051,
+          "09": 1323,
+          "10": 3427,
+          "11": 2152,
+          "12": 3240,
+          "13": 2141,
+          "14": 3078,
+          "15": 1540,
+          "16": 958,
+          "17": 1576,
+          "18": 1507,
+          "19": 720,
+          "20": 570
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "USA",
+          "events": 5288,
+          "cooperative": 3225,
+          "conflictual": 2063,
+          "avg_tone": 0.8,
+          "cooperation_ratio": 0.61
+        },
+        {
+          "partner": "PRK",
+          "events": 8396,
+          "cooperative": 2602,
+          "conflictual": 5794,
+          "avg_tone": -3.7,
+          "cooperation_ratio": 0.31
+        },
+        {
+          "partner": "CHN",
+          "events": 4583,
+          "cooperative": 2337,
+          "conflictual": 2246,
+          "avg_tone": -0.6,
+          "cooperation_ratio": 0.51
+        },
+        {
+          "partner": "JPN",
+          "events": 3565,
+          "cooperative": 1853,
+          "conflictual": 1712,
+          "avg_tone": -0.6,
+          "cooperation_ratio": 0.52
+        },
+        {
+          "partner": "RUS",
+          "events": 2100,
+          "cooperative": 1050,
+          "conflictual": 1050,
+          "avg_tone": -0.4,
+          "cooperation_ratio": 0.5
+        }
+      ]
+    },
+    "ISR": {
+      "media": {
+        "avg_tone": -3.2,
+        "article_volume": 1478554,
+        "monthly_trend": [
+          119658,
+          125864,
+          119099,
+          121452,
+          130336,
+          129191,
+          114622,
+          119570,
+          120829,
+          117905,
+          114382,
+          119813
+        ]
+      },
+      "events": {
+        "total": 84372,
+        "cooperative": 29530,
+        "neutral": 28597,
+        "conflictual": 26245,
+        "goldstein_avg": -2.0,
+        "cooperation_ratio": 0.35,
+        "by_cameo": {
+          "01": 6816,
+          "02": 8419,
+          "03": 8012,
+          "04": 12291,
+          "05": 4401,
+          "06": 5873,
+          "07": 2967,
+          "08": 3074,
+          "09": 2916,
+          "10": 6135,
+          "11": 4829,
+          "12": 4414,
+          "13": 3391,
+          "14": 5635,
+          "15": 2239,
+          "16": 1404,
+          "17": 2806,
+          "18": 2028,
+          "19": 907,
+          "20": 760
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "IRN",
+          "events": 12533,
+          "cooperative": 3133,
+          "conflictual": 9400,
+          "avg_tone": -5.0,
+          "cooperation_ratio": 0.25
+        },
+        {
+          "partner": "USA",
+          "events": 9009,
+          "cooperative": 5045,
+          "conflictual": 3964,
+          "avg_tone": -0.4,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "PAL",
+          "events": 10792,
+          "cooperative": 2805,
+          "conflictual": 7987,
+          "avg_tone": -5.3,
+          "cooperation_ratio": 0.26
+        },
+        {
+          "partner": "LBN",
+          "events": 7738,
+          "cooperative": 2321,
+          "conflictual": 5417,
+          "avg_tone": -4.7,
+          "cooperation_ratio": 0.3
+        },
+        {
+          "partner": "SYR",
+          "events": 4410,
+          "cooperative": 1367,
+          "conflictual": 3043,
+          "avg_tone": -3.9,
+          "cooperation_ratio": 0.31
+        },
+        {
+          "partner": "EGY",
+          "events": 3715,
+          "cooperative": 1931,
+          "conflictual": 1784,
+          "avg_tone": -0.6,
+          "cooperation_ratio": 0.52
+        },
+        {
+          "partner": "JOR",
+          "events": 3007,
+          "cooperative": 1683,
+          "conflictual": 1324,
+          "avg_tone": -0.3,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "SAU",
+          "events": 3003,
+          "cooperative": 1531,
+          "conflictual": 1472,
+          "avg_tone": -1.7,
+          "cooperation_ratio": 0.51
+        },
+        {
+          "partner": "TUR",
+          "events": 3405,
+          "cooperative": 1259,
+          "conflictual": 2146,
+          "avg_tone": -2.4,
+          "cooperation_ratio": 0.37
+        },
+        {
+          "partner": "GBR",
+          "events": 2485,
+          "cooperative": 1317,
+          "conflictual": 1168,
+          "avg_tone": -1.1,
+          "cooperation_ratio": 0.53
+        }
+      ]
+    },
+    "IRN": {
+      "media": {
+        "avg_tone": -2.8,
+        "article_volume": 662494,
+        "monthly_trend": [
+          56019,
+          57497,
+          52871,
+          56214,
+          59966,
+          53182,
+          53089,
+          52877,
+          53383,
+          52159,
+          57039,
+          52450
+        ]
+      },
+      "events": {
+        "total": 55901,
+        "cooperative": 24037,
+        "neutral": 15824,
+        "conflictual": 16040,
+        "goldstein_avg": 0.1,
+        "cooperation_ratio": 0.43,
+        "by_cameo": {
+          "01": 4617,
+          "02": 5060,
+          "03": 5706,
+          "04": 6588,
+          "05": 2891,
+          "06": 3065,
+          "07": 3552,
+          "08": 1866,
+          "09": 1242,
+          "10": 4274,
+          "11": 1821,
+          "12": 2209,
+          "13": 1659,
+          "14": 4373,
+          "15": 1499,
+          "16": 942,
+          "17": 2200,
+          "18": 1074,
+          "19": 1063,
+          "20": 547
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "USA",
+          "events": 7007,
+          "cooperative": 1891,
+          "conflictual": 5116,
+          "avg_tone": -4.4,
+          "cooperation_ratio": 0.27
+        },
+        {
+          "partner": "ISR",
+          "events": 8671,
+          "cooperative": 2254,
+          "conflictual": 6417,
+          "avg_tone": -5.2,
+          "cooperation_ratio": 0.26
+        },
+        {
+          "partner": "SAU",
+          "events": 6013,
+          "cooperative": 2164,
+          "conflictual": 3849,
+          "avg_tone": -3.6,
+          "cooperation_ratio": 0.36
+        },
+        {
+          "partner": "IRQ",
+          "events": 5093,
+          "cooperative": 2597,
+          "conflictual": 2496,
+          "avg_tone": -1.7,
+          "cooperation_ratio": 0.51
+        },
+        {
+          "partner": "RUS",
+          "events": 2608,
+          "cooperative": 1408,
+          "conflictual": 1200,
+          "avg_tone": 0.2,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "CHN",
+          "events": 2878,
+          "cooperative": 1640,
+          "conflictual": 1238,
+          "avg_tone": 0.5,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "GBR",
+          "events": 2363,
+          "cooperative": 945,
+          "conflictual": 1418,
+          "avg_tone": -2.9,
+          "cooperation_ratio": 0.4
+        },
+        {
+          "partner": "ARE",
+          "events": 2102,
+          "cooperative": 924,
+          "conflictual": 1178,
+          "avg_tone": -2.0,
+          "cooperation_ratio": 0.44
+        },
+        {
+          "partner": "YEM",
+          "events": 2402,
+          "cooperative": 984,
+          "conflictual": 1418,
+          "avg_tone": -2.8,
+          "cooperation_ratio": 0.41
+        }
+      ]
+    },
+    "SAU": {
+      "media": {
+        "avg_tone": -1.2,
+        "article_volume": 214345,
+        "monthly_trend": [
+          18655,
+          17154,
+          17772,
+          18629,
+          19583,
+          18349,
+          19028,
+          17243,
+          18626,
+          16489,
+          17654,
+          18524
+        ]
+      },
+      "events": {
+        "total": 20996,
+        "cooperative": 10078,
+        "neutral": 4953,
+        "conflictual": 5965,
+        "goldstein_avg": 0.2,
+        "cooperation_ratio": 0.48,
+        "by_cameo": {
+          "01": 1154,
+          "02": 2230,
+          "03": 1572,
+          "04": 2798,
+          "05": 1118,
+          "06": 1854,
+          "07": 1091,
+          "08": 608,
+          "09": 642,
+          "10": 1381,
+          "11": 700,
+          "12": 1257,
+          "13": 519,
+          "14": 1299,
+          "15": 521,
+          "16": 403,
+          "17": 770,
+          "18": 648,
+          "19": 307,
+          "20": 166
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "IRN",
+          "events": 2820,
+          "cooperative": 1071,
+          "conflictual": 1749,
+          "avg_tone": -3.5,
+          "cooperation_ratio": 0.38
+        },
+        {
+          "partner": "USA",
+          "events": 1855,
+          "cooperative": 1020,
+          "conflictual": 835,
+          "avg_tone": -0.4,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "YEM",
+          "events": 2117,
+          "cooperative": 740,
+          "conflictual": 1377,
+          "avg_tone": -3.7,
+          "cooperation_ratio": 0.35
+        },
+        {
+          "partner": "ARE",
+          "events": 1423,
+          "cooperative": 796,
+          "conflictual": 627,
+          "avg_tone": 0.7,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "QAT",
+          "events": 1071,
+          "cooperative": 546,
+          "conflictual": 525,
+          "avg_tone": -0.7,
+          "cooperation_ratio": 0.51
+        },
+        {
+          "partner": "EGY",
+          "events": 1132,
+          "cooperative": 656,
+          "conflictual": 476,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.58
+        },
+        {
+          "partner": "ISR",
+          "events": 718,
+          "cooperative": 323,
+          "conflictual": 395,
+          "avg_tone": -1.6,
+          "cooperation_ratio": 0.45
+        },
+        {
+          "partner": "TUR",
+          "events": 723,
+          "cooperative": 361,
+          "conflictual": 362,
+          "avg_tone": -0.3,
+          "cooperation_ratio": 0.5
+        }
+      ]
+    },
+    "TUR": {
+      "media": {
+        "avg_tone": -1.0,
+        "article_volume": 172346,
+        "monthly_trend": [
+          14281,
+          15337,
+          14953,
+          14372,
+          14135,
+          15591,
+          13854,
+          14035,
+          14549,
+          14086,
+          14365,
+          13776
+        ]
+      },
+      "events": {
+        "total": 27700,
+        "cooperative": 13573,
+        "neutral": 6471,
+        "conflictual": 7656,
+        "goldstein_avg": 0.4,
+        "cooperation_ratio": 0.49,
+        "by_cameo": {
+          "01": 1794,
+          "02": 2355,
+          "03": 2336,
+          "04": 3034,
+          "05": 1065,
+          "06": 1802,
+          "07": 1464,
+          "08": 1360,
+          "09": 858,
+          "10": 1678,
+          "11": 1015,
+          "12": 1287,
+          "13": 915,
+          "14": 1860,
+          "15": 584,
+          "16": 546,
+          "17": 1248,
+          "18": 670,
+          "19": 295,
+          "20": 242
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "RUS",
+          "events": 2220,
+          "cooperative": 1198,
+          "conflictual": 1022,
+          "avg_tone": -0.5,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "USA",
+          "events": 2159,
+          "cooperative": 1122,
+          "conflictual": 1037,
+          "avg_tone": -1.1,
+          "cooperation_ratio": 0.52
+        },
+        {
+          "partner": "SYR",
+          "events": 2800,
+          "cooperative": 1148,
+          "conflictual": 1652,
+          "avg_tone": -2.6,
+          "cooperation_ratio": 0.41
+        },
+        {
+          "partner": "GRC",
+          "events": 1567,
+          "cooperative": 720,
+          "conflictual": 847,
+          "avg_tone": -1.7,
+          "cooperation_ratio": 0.46
+        },
+        {
+          "partner": "IRQ",
+          "events": 1512,
+          "cooperative": 756,
+          "conflictual": 756,
+          "avg_tone": -1.1,
+          "cooperation_ratio": 0.5
+        },
+        {
+          "partner": "DEU",
+          "events": 1440,
+          "cooperative": 792,
+          "conflictual": 648,
+          "avg_tone": -0.2,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "ISR",
+          "events": 963,
+          "cooperative": 394,
+          "conflictual": 569,
+          "avg_tone": -2.4,
+          "cooperation_ratio": 0.41
+        },
+        {
+          "partner": "IRN",
+          "events": 1223,
+          "cooperative": 599,
+          "conflictual": 624,
+          "avg_tone": -0.7,
+          "cooperation_ratio": 0.49
+        }
+      ]
+    },
+    "UKR": {
+      "media": {
+        "avg_tone": -4.2,
+        "article_volume": 431233,
+        "monthly_trend": [
+          36225,
+          35610,
+          36596,
+          35868,
+          35280,
+          37766,
+          34875,
+          36772,
+          37527,
+          35918,
+          33274,
+          36748
+        ]
+      },
+      "events": {
+        "total": 58249,
+        "cooperative": 20387,
+        "neutral": 19523,
+        "conflictual": 18339,
+        "goldstein_avg": -0.5,
+        "cooperation_ratio": 0.35,
+        "by_cameo": {
+          "01": 3278,
+          "02": 5831,
+          "03": 5724,
+          "04": 7395,
+          "05": 3376,
+          "06": 5240,
+          "07": 2556,
+          "08": 2135,
+          "09": 1540,
+          "10": 3931,
+          "11": 2033,
+          "12": 2330,
+          "13": 1493,
+          "14": 3313,
+          "15": 1844,
+          "16": 1261,
+          "17": 2683,
+          "18": 1108,
+          "19": 618,
+          "20": 507
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "RUS",
+          "events": 14276,
+          "cooperative": 3569,
+          "conflictual": 10707,
+          "avg_tone": -5.4,
+          "cooperation_ratio": 0.25
+        },
+        {
+          "partner": "USA",
+          "events": 5491,
+          "cooperative": 3129,
+          "conflictual": 2362,
+          "avg_tone": -0.9,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "GBR",
+          "events": 3095,
+          "cooperative": 1764,
+          "conflictual": 1331,
+          "avg_tone": -0.4,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "DEU",
+          "events": 3142,
+          "cooperative": 1853,
+          "conflictual": 1289,
+          "avg_tone": -0.2,
+          "cooperation_ratio": 0.59
+        },
+        {
+          "partner": "FRA",
+          "events": 3159,
+          "cooperative": 1769,
+          "conflictual": 1390,
+          "avg_tone": -0.5,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "POL",
+          "events": 3103,
+          "cooperative": 1861,
+          "conflictual": 1242,
+          "avg_tone": 0.2,
+          "cooperation_ratio": 0.6
+        },
+        {
+          "partner": "CAN",
+          "events": 1950,
+          "cooperative": 1150,
+          "conflictual": 800,
+          "avg_tone": -0.1,
+          "cooperation_ratio": 0.59
+        }
+      ]
+    },
+    "PAK": {
+      "media": {
+        "avg_tone": -1.9,
+        "article_volume": 330984,
+        "monthly_trend": [
+          25878,
+          26048,
+          28261,
+          28759,
+          29142,
+          26435,
+          28955,
+          29120,
+          25082,
+          25676,
+          27115,
+          26803
+        ]
+      },
+      "events": {
+        "total": 22082,
+        "cooperative": 10599,
+        "neutral": 6026,
+        "conflictual": 5457,
+        "goldstein_avg": 0.5,
+        "cooperation_ratio": 0.48,
+        "by_cameo": {
+          "01": 1518,
+          "02": 2246,
+          "03": 2187,
+          "04": 2459,
+          "05": 1237,
+          "06": 1454,
+          "07": 1162,
+          "08": 845,
+          "09": 689,
+          "10": 975,
+          "11": 1268,
+          "12": 922,
+          "13": 894,
+          "14": 1543,
+          "15": 474,
+          "16": 330,
+          "17": 745,
+          "18": 569,
+          "19": 262,
+          "20": 208
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "IND",
+          "events": 3858,
+          "cooperative": 1311,
+          "conflictual": 2547,
+          "avg_tone": -3.5,
+          "cooperation_ratio": 0.34
+        },
+        {
+          "partner": "USA",
+          "events": 1879,
+          "cooperative": 883,
+          "conflictual": 996,
+          "avg_tone": -1.8,
+          "cooperation_ratio": 0.47
+        },
+        {
+          "partner": "CHN",
+          "events": 1742,
+          "cooperative": 1027,
+          "conflictual": 715,
+          "avg_tone": 0.8,
+          "cooperation_ratio": 0.59
+        },
+        {
+          "partner": "AFG",
+          "events": 1802,
+          "cooperative": 702,
+          "conflictual": 1100,
+          "avg_tone": -2.6,
+          "cooperation_ratio": 0.39
+        },
+        {
+          "partner": "SAU",
+          "events": 972,
+          "cooperative": 544,
+          "conflictual": 428,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "IRN",
+          "events": 811,
+          "cooperative": 421,
+          "conflictual": 390,
+          "avg_tone": -0.8,
+          "cooperation_ratio": 0.52
+        },
+        {
+          "partner": "GBR",
+          "events": 734,
+          "cooperative": 381,
+          "conflictual": 353,
+          "avg_tone": -0.0,
+          "cooperation_ratio": 0.52
+        }
+      ]
+    },
+    "EGY": {
+      "media": {
+        "avg_tone": -0.9,
+        "article_volume": 441429,
+        "monthly_trend": [
+          38902,
+          34775,
+          36131,
+          36461,
+          39500,
+          37873,
+          38574,
+          34482,
+          33621,
+          34111,
+          33817,
+          34875
+        ]
+      },
+      "events": {
+        "total": 29087,
+        "cooperative": 13670,
+        "neutral": 8036,
+        "conflictual": 7381,
+        "goldstein_avg": -0.7,
+        "cooperation_ratio": 0.47,
+        "by_cameo": {
+          "01": 1484,
+          "02": 2033,
+          "03": 2906,
+          "04": 3689,
+          "05": 1563,
+          "06": 2732,
+          "07": 1401,
+          "08": 1141,
+          "09": 770,
+          "10": 1643,
+          "11": 1130,
+          "12": 1638,
+          "13": 980,
+          "14": 2001,
+          "15": 897,
+          "16": 663,
+          "17": 1235,
+          "18": 520,
+          "19": 365,
+          "20": 321
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "ISR",
+          "events": 2245,
+          "cooperative": 1032,
+          "conflictual": 1213,
+          "avg_tone": -1.2,
+          "cooperation_ratio": 0.46
+        },
+        {
+          "partner": "USA",
+          "events": 2576,
+          "cooperative": 1391,
+          "conflictual": 1185,
+          "avg_tone": -0.1,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "SAU",
+          "events": 1871,
+          "cooperative": 1029,
+          "conflictual": 842,
+          "avg_tone": 0.1,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "ETH",
+          "events": 1701,
+          "cooperative": 765,
+          "conflictual": 936,
+          "avg_tone": -2.1,
+          "cooperation_ratio": 0.45
+        },
+        {
+          "partner": "LBY",
+          "events": 1270,
+          "cooperative": 584,
+          "conflictual": 686,
+          "avg_tone": -1.5,
+          "cooperation_ratio": 0.46
+        },
+        {
+          "partner": "TUR",
+          "events": 1303,
+          "cooperative": 638,
+          "conflictual": 665,
+          "avg_tone": -0.6,
+          "cooperation_ratio": 0.49
+        },
+        {
+          "partner": "SDN",
+          "events": 1331,
+          "cooperative": 705,
+          "conflictual": 626,
+          "avg_tone": -1.3,
+          "cooperation_ratio": 0.53
+        }
+      ]
+    },
+    "NGA": {
+      "media": {
+        "avg_tone": -1.4,
+        "article_volume": 381569,
+        "monthly_trend": [
+          29458,
+          33597,
+          32469,
+          33545,
+          34795,
+          30629,
+          32231,
+          31995,
+          30930,
+          28826,
+          30217,
+          30485
+        ]
+      },
+      "events": {
+        "total": 11359,
+        "cooperative": 5565,
+        "neutral": 2798,
+        "conflictual": 2996,
+        "goldstein_avg": -0.6,
+        "cooperation_ratio": 0.49,
+        "by_cameo": {
+          "01": 813,
+          "02": 1310,
+          "03": 866,
+          "04": 1521,
+          "05": 446,
+          "06": 1079,
+          "07": 674,
+          "08": 468,
+          "09": 331,
+          "10": 605,
+          "11": 456,
+          "12": 800,
+          "13": 374,
+          "14": 744,
+          "15": 367,
+          "16": 248,
+          "17": 465,
+          "18": 269,
+          "19": 138,
+          "20": 104
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "USA",
+          "events": 899,
+          "cooperative": 467,
+          "conflictual": 432,
+          "avg_tone": -0.3,
+          "cooperation_ratio": 0.52
+        },
+        {
+          "partner": "GBR",
+          "events": 646,
+          "cooperative": 348,
+          "conflictual": 298,
+          "avg_tone": -0.5,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "CHN",
+          "events": 620,
+          "cooperative": 334,
+          "conflictual": 286,
+          "avg_tone": -0.1,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "ZAF",
+          "events": 588,
+          "cooperative": 311,
+          "conflictual": 277,
+          "avg_tone": -0.2,
+          "cooperation_ratio": 0.53
+        },
+        {
+          "partner": "FRA",
+          "events": 453,
+          "cooperative": 249,
+          "conflictual": 204,
+          "avg_tone": -0.4,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "NER",
+          "events": 508,
+          "cooperative": 243,
+          "conflictual": 265,
+          "avg_tone": -1.7,
+          "cooperation_ratio": 0.48
+        }
+      ]
+    },
+    "ZAF": {
+      "media": {
+        "avg_tone": -0.4,
+        "article_volume": 341353,
+        "monthly_trend": [
+          28164,
+          29788,
+          27417,
+          31517,
+          29693,
+          27668,
+          26891,
+          28247,
+          27938,
+          25796,
+          29889,
+          29870
+        ]
+      },
+      "events": {
+        "total": 13382,
+        "cooperative": 6691,
+        "neutral": 3313,
+        "conflictual": 3378,
+        "goldstein_avg": 0.9,
+        "cooperation_ratio": 0.5,
+        "by_cameo": {
+          "01": 849,
+          "02": 979,
+          "03": 1364,
+          "04": 1604,
+          "05": 680,
+          "06": 1008,
+          "07": 578,
+          "08": 642,
+          "09": 517,
+          "10": 679,
+          "11": 620,
+          "12": 684,
+          "13": 586,
+          "14": 874,
+          "15": 410,
+          "16": 326,
+          "17": 463,
+          "18": 392,
+          "19": 190,
+          "20": 168
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "USA",
+          "events": 912,
+          "cooperative": 483,
+          "conflictual": 429,
+          "avg_tone": -0.2,
+          "cooperation_ratio": 0.53
+        },
+        {
+          "partner": "GBR",
+          "events": 765,
+          "cooperative": 436,
+          "conflictual": 329,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "CHN",
+          "events": 911,
+          "cooperative": 473,
+          "conflictual": 438,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.52
+        },
+        {
+          "partner": "NGA",
+          "events": 739,
+          "cooperative": 399,
+          "conflictual": 340,
+          "avg_tone": -0.5,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "RUS",
+          "events": 540,
+          "cooperative": 280,
+          "conflictual": 260,
+          "avg_tone": 0.1,
+          "cooperation_ratio": 0.52
+        },
+        {
+          "partner": "IND",
+          "events": 464,
+          "cooperative": 269,
+          "conflictual": 195,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.58
+        }
+      ]
+    },
+    "MEX": {
+      "media": {
+        "avg_tone": -1.2,
+        "article_volume": 346200,
+        "monthly_trend": [
+          31152,
+          29234,
+          27935,
+          29898,
+          28866,
+          29525,
+          29050,
+          28214,
+          27299,
+          26590,
+          28988,
+          28743
+        ]
+      },
+      "events": {
+        "total": 10168,
+        "cooperative": 5084,
+        "neutral": 2645,
+        "conflictual": 2439,
+        "goldstein_avg": 0.2,
+        "cooperation_ratio": 0.5,
+        "by_cameo": {
+          "01": 555,
+          "02": 1125,
+          "03": 627,
+          "04": 1399,
+          "05": 513,
+          "06": 905,
+          "07": 473,
+          "08": 446,
+          "09": 363,
+          "10": 786,
+          "11": 456,
+          "12": 403,
+          "13": 356,
+          "14": 696,
+          "15": 310,
+          "16": 249,
+          "17": 392,
+          "18": 258,
+          "19": 148,
+          "20": 115
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "USA",
+          "events": 1963,
+          "cooperative": 1138,
+          "conflictual": 825,
+          "avg_tone": -0.1,
+          "cooperation_ratio": 0.58
+        },
+        {
+          "partner": "CAN",
+          "events": 511,
+          "cooperative": 296,
+          "conflictual": 215,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.58
+        },
+        {
+          "partner": "CHN",
+          "events": 580,
+          "cooperative": 295,
+          "conflictual": 285,
+          "avg_tone": -0.4,
+          "cooperation_ratio": 0.51
+        },
+        {
+          "partner": "COL",
+          "events": 362,
+          "cooperative": 199,
+          "conflictual": 163,
+          "avg_tone": -0.8,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "BRA",
+          "events": 414,
+          "cooperative": 227,
+          "conflictual": 187,
+          "avg_tone": 0.5,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "ESP",
+          "events": 280,
+          "cooperative": 154,
+          "conflictual": 126,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.55
+        }
+      ]
+    },
+    "IDN": {
+      "media": {
+        "avg_tone": 0.1,
+        "article_volume": 294946,
+        "monthly_trend": [
+          25063,
+          24538,
+          23524,
+          24621,
+          25920,
+          25081,
+          26364,
+          24701,
+          25424,
+          23795,
+          24097,
+          24665
+        ]
+      },
+      "events": {
+        "total": 20116,
+        "cooperative": 10259,
+        "neutral": 4652,
+        "conflictual": 5205,
+        "goldstein_avg": -0.4,
+        "cooperation_ratio": 0.51,
+        "by_cameo": {
+          "01": 1099,
+          "02": 2122,
+          "03": 1491,
+          "04": 2019,
+          "05": 682,
+          "06": 1941,
+          "07": 1162,
+          "08": 903,
+          "09": 458,
+          "10": 965,
+          "11": 796,
+          "12": 793,
+          "13": 629,
+          "14": 959,
+          "15": 460,
+          "16": 385,
+          "17": 681,
+          "18": 476,
+          "19": 334,
+          "20": 162
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "AUS",
+          "events": 1754,
+          "cooperative": 982,
+          "conflictual": 772,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "CHN",
+          "events": 1521,
+          "cooperative": 775,
+          "conflictual": 746,
+          "avg_tone": -0.8,
+          "cooperation_ratio": 0.51
+        },
+        {
+          "partner": "USA",
+          "events": 1282,
+          "cooperative": 730,
+          "conflictual": 552,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "MYS",
+          "events": 1082,
+          "cooperative": 562,
+          "conflictual": 520,
+          "avg_tone": 0.1,
+          "cooperation_ratio": 0.52
+        },
+        {
+          "partner": "JPN",
+          "events": 977,
+          "cooperative": 556,
+          "conflictual": 421,
+          "avg_tone": 0.8,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "SGP",
+          "events": 734,
+          "cooperative": 403,
+          "conflictual": 331,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.55
+        }
+      ]
+    },
+    "ARG": {
+      "media": {
+        "avg_tone": -1.0,
+        "article_volume": 171786,
+        "monthly_trend": [
+          13498,
+          14439,
+          14109,
+          14167,
+          13534,
+          15238,
+          15234,
+          14501,
+          13180,
+          13756,
+          13599,
+          14298
+        ]
+      },
+      "events": {
+        "total": 35070,
+        "cooperative": 18587,
+        "neutral": 8669,
+        "conflictual": 7814,
+        "goldstein_avg": 1.1,
+        "cooperation_ratio": 0.53,
+        "by_cameo": {
+          "01": 2469,
+          "02": 3180,
+          "03": 2533,
+          "04": 5080,
+          "05": 1293,
+          "06": 2448,
+          "07": 1735,
+          "08": 1181,
+          "09": 1097,
+          "10": 2198,
+          "11": 2044,
+          "12": 1691,
+          "13": 1579,
+          "14": 2495,
+          "15": 758,
+          "16": 729,
+          "17": 1559,
+          "18": 1005,
+          "19": 383,
+          "20": 373
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "BRA",
+          "events": 3728,
+          "cooperative": 2087,
+          "conflictual": 1641,
+          "avg_tone": 0.6,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "USA",
+          "events": 3080,
+          "cooperative": 1694,
+          "conflictual": 1386,
+          "avg_tone": -0.5,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "CHN",
+          "events": 2316,
+          "cooperative": 1227,
+          "conflictual": 1089,
+          "avg_tone": -0.1,
+          "cooperation_ratio": 0.53
+        },
+        {
+          "partner": "GBR",
+          "events": 1621,
+          "cooperative": 826,
+          "conflictual": 795,
+          "avg_tone": -0.5,
+          "cooperation_ratio": 0.51
+        },
+        {
+          "partner": "COL",
+          "events": 1477,
+          "cooperative": 797,
+          "conflictual": 680,
+          "avg_tone": 0.5,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "ESP",
+          "events": 904,
+          "cooperative": 497,
+          "conflictual": 407,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.55
+        }
+      ]
+    },
+    "COL": {
+      "media": {
+        "avg_tone": -0.9,
+        "article_volume": 340428,
+        "monthly_trend": [
+          27093,
+          27366,
+          27944,
+          30414,
+          30351,
+          29627,
+          26720,
+          26142,
+          28195,
+          25490,
+          28907,
+          25857
+        ]
+      },
+      "events": {
+        "total": 28756,
+        "cooperative": 14665,
+        "neutral": 7427,
+        "conflictual": 6664,
+        "goldstein_avg": 0.7,
+        "cooperation_ratio": 0.51,
+        "by_cameo": {
+          "01": 1717,
+          "02": 2127,
+          "03": 3045,
+          "04": 3091,
+          "05": 1228,
+          "06": 1769,
+          "07": 1684,
+          "08": 1410,
+          "09": 793,
+          "10": 1727,
+          "11": 1117,
+          "12": 1263,
+          "13": 1256,
+          "14": 2367,
+          "15": 920,
+          "16": 504,
+          "17": 1405,
+          "18": 850,
+          "19": 423,
+          "20": 214
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "USA",
+          "events": 3089,
+          "cooperative": 1637,
+          "conflictual": 1452,
+          "avg_tone": 0.2,
+          "cooperation_ratio": 0.53
+        },
+        {
+          "partner": "VEN",
+          "events": 3137,
+          "cooperative": 1254,
+          "conflictual": 1883,
+          "avg_tone": -2.3,
+          "cooperation_ratio": 0.4
+        },
+        {
+          "partner": "BRA",
+          "events": 1896,
+          "cooperative": 1099,
+          "conflictual": 797,
+          "avg_tone": -0.1,
+          "cooperation_ratio": 0.58
+        },
+        {
+          "partner": "MEX",
+          "events": 1577,
+          "cooperative": 820,
+          "conflictual": 757,
+          "avg_tone": -0.4,
+          "cooperation_ratio": 0.52
+        },
+        {
+          "partner": "ECU",
+          "events": 1200,
+          "cooperative": 648,
+          "conflictual": 552,
+          "avg_tone": -0.1,
+          "cooperation_ratio": 0.54
+        }
+      ]
+    },
+    "ITA": {
+      "media": {
+        "avg_tone": 0.4,
+        "article_volume": 873148,
+        "monthly_trend": [
+          76146,
+          68109,
+          75089,
+          74403,
+          76717,
+          75890,
+          73746,
+          75368,
+          75864,
+          66156,
+          67853,
+          66224
+        ]
+      },
+      "events": {
+        "total": 92089,
+        "cooperative": 53411,
+        "neutral": 18162,
+        "conflictual": 20516,
+        "goldstein_avg": 0.5,
+        "cooperation_ratio": 0.58,
+        "by_cameo": {
+          "01": 7365,
+          "02": 9070,
+          "03": 9777,
+          "04": 9203,
+          "05": 3057,
+          "06": 8248,
+          "07": 5735,
+          "08": 3246,
+          "09": 2610,
+          "10": 4331,
+          "11": 5253,
+          "12": 4470,
+          "13": 3208,
+          "14": 4539,
+          "15": 2837,
+          "16": 1439,
+          "17": 3581,
+          "18": 2537,
+          "19": 1582,
+          "20": 1167
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "FRA",
+          "events": 8058,
+          "cooperative": 4431,
+          "conflictual": 3627,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "DEU",
+          "events": 8256,
+          "cooperative": 4788,
+          "conflictual": 3468,
+          "avg_tone": 0.5,
+          "cooperation_ratio": 0.58
+        },
+        {
+          "partner": "USA",
+          "events": 7229,
+          "cooperative": 4409,
+          "conflictual": 2820,
+          "avg_tone": 0.7,
+          "cooperation_ratio": 0.61
+        },
+        {
+          "partner": "GBR",
+          "events": 3972,
+          "cooperative": 2264,
+          "conflictual": 1708,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "RUS",
+          "events": 3765,
+          "cooperative": 1957,
+          "conflictual": 1808,
+          "avg_tone": -1.1,
+          "cooperation_ratio": 0.52
+        },
+        {
+          "partner": "LBY",
+          "events": 3163,
+          "cooperative": 1518,
+          "conflictual": 1645,
+          "avg_tone": -1.7,
+          "cooperation_ratio": 0.48
+        },
+        {
+          "partner": "ESP",
+          "events": 3368,
+          "cooperative": 1852,
+          "conflictual": 1516,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.55
+        }
+      ]
+    },
+    "ESP": {
+      "media": {
+        "avg_tone": 0.2,
+        "article_volume": 1278972,
+        "monthly_trend": [
+          108553,
+          115779,
+          105496,
+          113120,
+          104403,
+          107222,
+          102080,
+          102675,
+          111800,
+          101189,
+          110484,
+          107414
+        ]
+      },
+      "events": {
+        "total": 60253,
+        "cooperative": 34344,
+        "neutral": 12554,
+        "conflictual": 13355,
+        "goldstein_avg": 1.4,
+        "cooperation_ratio": 0.57,
+        "by_cameo": {
+          "01": 2883,
+          "02": 4954,
+          "03": 6560,
+          "04": 9178,
+          "05": 3238,
+          "06": 3411,
+          "07": 2492,
+          "08": 2611,
+          "09": 2318,
+          "10": 2640,
+          "11": 2440,
+          "12": 4285,
+          "13": 2471,
+          "14": 3223,
+          "15": 1804,
+          "16": 1244,
+          "17": 2535,
+          "18": 1789,
+          "19": 759,
+          "20": 701
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "FRA",
+          "events": 5374,
+          "cooperative": 2955,
+          "conflictual": 2419,
+          "avg_tone": 0.7,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "USA",
+          "events": 3896,
+          "cooperative": 2181,
+          "conflictual": 1715,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "GBR",
+          "events": 3670,
+          "cooperative": 1981,
+          "conflictual": 1689,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "DEU",
+          "events": 3221,
+          "cooperative": 1771,
+          "conflictual": 1450,
+          "avg_tone": 0.8,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "ITA",
+          "events": 3035,
+          "cooperative": 1760,
+          "conflictual": 1275,
+          "avg_tone": 0.7,
+          "cooperation_ratio": 0.58
+        },
+        {
+          "partner": "MAR",
+          "events": 3279,
+          "cooperative": 1869,
+          "conflictual": 1410,
+          "avg_tone": -0.1,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "MEX",
+          "events": 2308,
+          "cooperative": 1292,
+          "conflictual": 1016,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.56
+        }
+      ]
+    },
+    "NLD": {
+      "media": {
+        "avg_tone": -0.1,
+        "article_volume": 392466,
+        "monthly_trend": [
+          30664,
+          35142,
+          31578,
+          32922,
+          35103,
+          33668,
+          30171,
+          31005,
+          29953,
+          31323,
+          29886,
+          29965
+        ]
+      },
+      "events": {
+        "total": 19482,
+        "cooperative": 11689,
+        "neutral": 3866,
+        "conflictual": 3927,
+        "goldstein_avg": 1.6,
+        "cooperation_ratio": 0.6,
+        "by_cameo": {
+          "01": 1227,
+          "02": 1697,
+          "03": 1749,
+          "04": 2270,
+          "05": 730,
+          "06": 1562,
+          "07": 1106,
+          "08": 970,
+          "09": 640,
+          "10": 1029,
+          "11": 952,
+          "12": 770,
+          "13": 885,
+          "14": 1530,
+          "15": 465,
+          "16": 297,
+          "17": 878,
+          "18": 470,
+          "19": 362,
+          "20": 174
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "DEU",
+          "events": 2189,
+          "cooperative": 1313,
+          "conflictual": 876,
+          "avg_tone": 0.7,
+          "cooperation_ratio": 0.6
+        },
+        {
+          "partner": "GBR",
+          "events": 1408,
+          "cooperative": 816,
+          "conflictual": 592,
+          "avg_tone": 0.5,
+          "cooperation_ratio": 0.58
+        },
+        {
+          "partner": "BEL",
+          "events": 1525,
+          "cooperative": 945,
+          "conflictual": 580,
+          "avg_tone": 0.6,
+          "cooperation_ratio": 0.62
+        },
+        {
+          "partner": "USA",
+          "events": 1564,
+          "cooperative": 922,
+          "conflictual": 642,
+          "avg_tone": 1.0,
+          "cooperation_ratio": 0.59
+        },
+        {
+          "partner": "FRA",
+          "events": 1120,
+          "cooperative": 683,
+          "conflictual": 437,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.61
+        },
+        {
+          "partner": "RUS",
+          "events": 815,
+          "cooperative": 374,
+          "conflictual": 441,
+          "avg_tone": -1.3,
+          "cooperation_ratio": 0.46
+        }
+      ]
+    },
+    "POL": {
+      "media": {
+        "avg_tone": -0.6,
+        "article_volume": 157769,
+        "monthly_trend": [
+          12896,
+          13552,
+          13046,
+          13553,
+          13338,
+          13970,
+          12336,
+          13270,
+          13579,
+          12857,
+          13554,
+          12805
+        ]
+      },
+      "events": {
+        "total": 28023,
+        "cooperative": 15132,
+        "neutral": 6336,
+        "conflictual": 6555,
+        "goldstein_avg": 0.8,
+        "cooperation_ratio": 0.54,
+        "by_cameo": {
+          "01": 2245,
+          "02": 2524,
+          "03": 2849,
+          "04": 3158,
+          "05": 1434,
+          "06": 1865,
+          "07": 1243,
+          "08": 956,
+          "09": 1069,
+          "10": 1869,
+          "11": 1241,
+          "12": 1163,
+          "13": 736,
+          "14": 1747,
+          "15": 803,
+          "16": 517,
+          "17": 872,
+          "18": 515,
+          "19": 535,
+          "20": 290
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "DEU",
+          "events": 3153,
+          "cooperative": 1702,
+          "conflictual": 1451,
+          "avg_tone": 0.8,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "USA",
+          "events": 2053,
+          "cooperative": 1211,
+          "conflictual": 842,
+          "avg_tone": 0.8,
+          "cooperation_ratio": 0.59
+        },
+        {
+          "partner": "UKR",
+          "events": 2680,
+          "cooperative": 1608,
+          "conflictual": 1072,
+          "avg_tone": 0.5,
+          "cooperation_ratio": 0.6
+        },
+        {
+          "partner": "RUS",
+          "events": 2024,
+          "cooperative": 829,
+          "conflictual": 1195,
+          "avg_tone": -2.3,
+          "cooperation_ratio": 0.41
+        },
+        {
+          "partner": "GBR",
+          "events": 1484,
+          "cooperative": 875,
+          "conflictual": 609,
+          "avg_tone": 0.2,
+          "cooperation_ratio": 0.59
+        },
+        {
+          "partner": "FRA",
+          "events": 1188,
+          "cooperative": 700,
+          "conflictual": 488,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.59
+        }
+      ]
+    },
+    "SWE": {
+      "media": {
+        "avg_tone": 0.1,
+        "article_volume": 431279,
+        "monthly_trend": [
+          38331,
+          33860,
+          35620,
+          35907,
+          34534,
+          36522,
+          33954,
+          35299,
+          36951,
+          34025,
+          35321,
+          33219
+        ]
+      },
+      "events": {
+        "total": 33173,
+        "cooperative": 19903,
+        "neutral": 6051,
+        "conflictual": 7219,
+        "goldstein_avg": 0.8,
+        "cooperation_ratio": 0.6,
+        "by_cameo": {
+          "01": 1869,
+          "02": 2633,
+          "03": 2699,
+          "04": 4126,
+          "05": 1732,
+          "06": 2669,
+          "07": 1832,
+          "08": 1372,
+          "09": 1060,
+          "10": 2178,
+          "11": 1666,
+          "12": 1308,
+          "13": 1003,
+          "14": 2495,
+          "15": 1039,
+          "16": 604,
+          "17": 1073,
+          "18": 651,
+          "19": 544,
+          "20": 246
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "RUS",
+          "events": 2704,
+          "cooperative": 1216,
+          "conflictual": 1488,
+          "avg_tone": -1.2,
+          "cooperation_ratio": 0.45
+        },
+        {
+          "partner": "USA",
+          "events": 2587,
+          "cooperative": 1526,
+          "conflictual": 1061,
+          "avg_tone": 0.7,
+          "cooperation_ratio": 0.59
+        },
+        {
+          "partner": "NOR",
+          "events": 2315,
+          "cooperative": 1389,
+          "conflictual": 926,
+          "avg_tone": 1.0,
+          "cooperation_ratio": 0.6
+        },
+        {
+          "partner": "DEU",
+          "events": 1822,
+          "cooperative": 1056,
+          "conflictual": 766,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.58
+        },
+        {
+          "partner": "GBR",
+          "events": 1866,
+          "cooperative": 1044,
+          "conflictual": 822,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "FIN",
+          "events": 1766,
+          "cooperative": 1112,
+          "conflictual": 654,
+          "avg_tone": 1.2,
+          "cooperation_ratio": 0.63
+        }
+      ]
+    },
+    "NOR": {
+      "media": {
+        "avg_tone": 1.1,
+        "article_volume": 411964,
+        "monthly_trend": [
+          33456,
+          34120,
+          36471,
+          36926,
+          35603,
+          32531,
+          31872,
+          31961,
+          34068,
+          34227,
+          32219,
+          34691
+        ]
+      },
+      "events": {
+        "total": 16013,
+        "cooperative": 9607,
+        "neutral": 3386,
+        "conflictual": 3020,
+        "goldstein_avg": 0.8,
+        "cooperation_ratio": 0.6,
+        "by_cameo": {
+          "01": 1031,
+          "02": 1468,
+          "03": 1175,
+          "04": 2215,
+          "05": 553,
+          "06": 1150,
+          "07": 696,
+          "08": 709,
+          "09": 476,
+          "10": 1057,
+          "11": 524,
+          "12": 825,
+          "13": 593,
+          "14": 733,
+          "15": 352,
+          "16": 264,
+          "17": 501,
+          "18": 341,
+          "19": 215,
+          "20": 112
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "RUS",
+          "events": 1213,
+          "cooperative": 545,
+          "conflictual": 668,
+          "avg_tone": -1.1,
+          "cooperation_ratio": 0.45
+        },
+        {
+          "partner": "USA",
+          "events": 1261,
+          "cooperative": 781,
+          "conflictual": 480,
+          "avg_tone": 1.1,
+          "cooperation_ratio": 0.62
+        },
+        {
+          "partner": "SWE",
+          "events": 1242,
+          "cooperative": 807,
+          "conflictual": 435,
+          "avg_tone": 1.1,
+          "cooperation_ratio": 0.65
+        },
+        {
+          "partner": "GBR",
+          "events": 1088,
+          "cooperative": 631,
+          "conflictual": 457,
+          "avg_tone": 0.6,
+          "cooperation_ratio": 0.58
+        },
+        {
+          "partner": "DEU",
+          "events": 753,
+          "cooperative": 421,
+          "conflictual": 332,
+          "avg_tone": 0.5,
+          "cooperation_ratio": 0.56
+        }
+      ]
+    },
+    "BEL": {
+      "media": {
+        "avg_tone": -0.0,
+        "article_volume": 305787,
+        "monthly_trend": [
+          26167,
+          25260,
+          25713,
+          27263,
+          25877,
+          25697,
+          23761,
+          24349,
+          24539,
+          24339,
+          25376,
+          24254
+        ]
+      },
+      "events": {
+        "total": 34917,
+        "cooperative": 19553,
+        "neutral": 8097,
+        "conflictual": 7267,
+        "goldstein_avg": 0.7,
+        "cooperation_ratio": 0.56,
+        "by_cameo": {
+          "01": 2140,
+          "02": 4244,
+          "03": 2383,
+          "04": 5315,
+          "05": 1533,
+          "06": 2916,
+          "07": 1601,
+          "08": 1343,
+          "09": 799,
+          "10": 2014,
+          "11": 1477,
+          "12": 1434,
+          "13": 1493,
+          "14": 2604,
+          "15": 727,
+          "16": 815,
+          "17": 1041,
+          "18": 942,
+          "19": 533,
+          "20": 285
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "FRA",
+          "events": 3961,
+          "cooperative": 2416,
+          "conflictual": 1545,
+          "avg_tone": 1.0,
+          "cooperation_ratio": 0.61
+        },
+        {
+          "partner": "NLD",
+          "events": 3283,
+          "cooperative": 1904,
+          "conflictual": 1379,
+          "avg_tone": 1.2,
+          "cooperation_ratio": 0.58
+        },
+        {
+          "partner": "DEU",
+          "events": 2955,
+          "cooperative": 1832,
+          "conflictual": 1123,
+          "avg_tone": 1.0,
+          "cooperation_ratio": 0.62
+        },
+        {
+          "partner": "GBR",
+          "events": 1921,
+          "cooperative": 1133,
+          "conflictual": 788,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.59
+        },
+        {
+          "partner": "USA",
+          "events": 1644,
+          "cooperative": 969,
+          "conflictual": 675,
+          "avg_tone": 0.5,
+          "cooperation_ratio": 0.59
+        }
+      ]
+    },
+    "CHE": {
+      "media": {
+        "avg_tone": 0.6,
+        "article_volume": 263173,
+        "monthly_trend": [
+          22290,
+          23186,
+          23060,
+          21422,
+          23483,
+          22239,
+          22823,
+          22500,
+          21186,
+          22716,
+          21581,
+          22069
+        ]
+      },
+      "events": {
+        "total": 19679,
+        "cooperative": 11413,
+        "neutral": 4426,
+        "conflictual": 3840,
+        "goldstein_avg": 0.2,
+        "cooperation_ratio": 0.58,
+        "by_cameo": {
+          "01": 1374,
+          "02": 2278,
+          "03": 1800,
+          "04": 1866,
+          "05": 656,
+          "06": 1424,
+          "07": 867,
+          "08": 680,
+          "09": 433,
+          "10": 1185,
+          "11": 784,
+          "12": 1051,
+          "13": 505,
+          "14": 1533,
+          "15": 367,
+          "16": 479,
+          "17": 954,
+          "18": 525,
+          "19": 296,
+          "20": 192
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "DEU",
+          "events": 2102,
+          "cooperative": 1324,
+          "conflictual": 778,
+          "avg_tone": 1.2,
+          "cooperation_ratio": 0.63
+        },
+        {
+          "partner": "FRA",
+          "events": 1523,
+          "cooperative": 944,
+          "conflictual": 579,
+          "avg_tone": 1.1,
+          "cooperation_ratio": 0.62
+        },
+        {
+          "partner": "ITA",
+          "events": 1184,
+          "cooperative": 698,
+          "conflictual": 486,
+          "avg_tone": 1.0,
+          "cooperation_ratio": 0.59
+        },
+        {
+          "partner": "USA",
+          "events": 1346,
+          "cooperative": 767,
+          "conflictual": 579,
+          "avg_tone": 0.8,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "GBR",
+          "events": 1112,
+          "cooperative": 622,
+          "conflictual": 490,
+          "avg_tone": 0.8,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "AUT",
+          "events": 725,
+          "cooperative": 449,
+          "conflictual": 276,
+          "avg_tone": 0.6,
+          "cooperation_ratio": 0.62
+        }
+      ]
+    },
+    "AUT": {
+      "media": {
+        "avg_tone": 0.9,
+        "article_volume": 370621,
+        "monthly_trend": [
+          30003,
+          31226,
+          29917,
+          29581,
+          29677,
+          33350,
+          30111,
+          31464,
+          30104,
+          28388,
+          28868,
+          30118
+        ]
+      },
+      "events": {
+        "total": 12688,
+        "cooperative": 7232,
+        "neutral": 2560,
+        "conflictual": 2896,
+        "goldstein_avg": 1.0,
+        "cooperation_ratio": 0.57,
+        "by_cameo": {
+          "01": 794,
+          "02": 1221,
+          "03": 857,
+          "04": 1406,
+          "05": 496,
+          "06": 899,
+          "07": 572,
+          "08": 537,
+          "09": 446,
+          "10": 828,
+          "11": 422,
+          "12": 528,
+          "13": 491,
+          "14": 717,
+          "15": 359,
+          "16": 277,
+          "17": 631,
+          "18": 388,
+          "19": 171,
+          "20": 133
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "DEU",
+          "events": 1698,
+          "cooperative": 984,
+          "conflictual": 714,
+          "avg_tone": 1.0,
+          "cooperation_ratio": 0.58
+        },
+        {
+          "partner": "CHE",
+          "events": 793,
+          "cooperative": 483,
+          "conflictual": 310,
+          "avg_tone": 0.8,
+          "cooperation_ratio": 0.61
+        },
+        {
+          "partner": "ITA",
+          "events": 707,
+          "cooperative": 388,
+          "conflictual": 319,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "RUS",
+          "events": 588,
+          "cooperative": 288,
+          "conflictual": 300,
+          "avg_tone": -1.1,
+          "cooperation_ratio": 0.49
+        },
+        {
+          "partner": "USA",
+          "events": 490,
+          "cooperative": 284,
+          "conflictual": 206,
+          "avg_tone": 0.9,
+          "cooperation_ratio": 0.58
+        },
+        {
+          "partner": "HUN",
+          "events": 566,
+          "cooperative": 316,
+          "conflictual": 250,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.56
+        }
+      ]
+    },
+    "PHL": {
+      "media": {
+        "avg_tone": -0.4,
+        "article_volume": 154149,
+        "monthly_trend": [
+          13041,
+          13952,
+          12777,
+          12970,
+          13794,
+          13691,
+          13195,
+          13319,
+          12990,
+          12830,
+          12564,
+          12948
+        ]
+      },
+      "events": {
+        "total": 30331,
+        "cooperative": 16378,
+        "neutral": 6700,
+        "conflictual": 7253,
+        "goldstein_avg": 0.2,
+        "cooperation_ratio": 0.54,
+        "by_cameo": {
+          "01": 1880,
+          "02": 2642,
+          "03": 2365,
+          "04": 2941,
+          "05": 1130,
+          "06": 2885,
+          "07": 1504,
+          "08": 1014,
+          "09": 712,
+          "10": 1358,
+          "11": 1646,
+          "12": 1268,
+          "13": 1234,
+          "14": 2367,
+          "15": 932,
+          "16": 438,
+          "17": 1094,
+          "18": 879,
+          "19": 354,
+          "20": 280
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "CHN",
+          "events": 3689,
+          "cooperative": 1549,
+          "conflictual": 2140,
+          "avg_tone": -1.8,
+          "cooperation_ratio": 0.42
+        },
+        {
+          "partner": "USA",
+          "events": 3364,
+          "cooperative": 1951,
+          "conflictual": 1413,
+          "avg_tone": 0.6,
+          "cooperation_ratio": 0.58
+        },
+        {
+          "partner": "JPN",
+          "events": 1635,
+          "cooperative": 882,
+          "conflictual": 753,
+          "avg_tone": 0.8,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "AUS",
+          "events": 1138,
+          "cooperative": 625,
+          "conflictual": 513,
+          "avg_tone": 0.7,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "IDN",
+          "events": 1058,
+          "cooperative": 560,
+          "conflictual": 498,
+          "avg_tone": 0.1,
+          "cooperation_ratio": 0.53
+        },
+        {
+          "partner": "VNM",
+          "events": 973,
+          "cooperative": 515,
+          "conflictual": 458,
+          "avg_tone": -0.1,
+          "cooperation_ratio": 0.53
+        }
+      ]
+    },
+    "THA": {
+      "media": {
+        "avg_tone": -0.6,
+        "article_volume": 165064,
+        "monthly_trend": [
+          14238,
+          15010,
+          14362,
+          14740,
+          14753,
+          13367,
+          13181,
+          14558,
+          14007,
+          14205,
+          12742,
+          13935
+        ]
+      },
+      "events": {
+        "total": 20848,
+        "cooperative": 11466,
+        "neutral": 5120,
+        "conflictual": 4262,
+        "goldstein_avg": 0.2,
+        "cooperation_ratio": 0.55,
+        "by_cameo": {
+          "01": 1412,
+          "02": 1909,
+          "03": 2058,
+          "04": 2919,
+          "05": 939,
+          "06": 1487,
+          "07": 831,
+          "08": 683,
+          "09": 664,
+          "10": 1530,
+          "11": 686,
+          "12": 1133,
+          "13": 673,
+          "14": 1708,
+          "15": 587,
+          "16": 420,
+          "17": 646,
+          "18": 391,
+          "19": 248,
+          "20": 202
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "CHN",
+          "events": 1830,
+          "cooperative": 1024,
+          "conflictual": 806,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "USA",
+          "events": 1659,
+          "cooperative": 862,
+          "conflictual": 797,
+          "avg_tone": 0.6,
+          "cooperation_ratio": 0.52
+        },
+        {
+          "partner": "JPN",
+          "events": 1125,
+          "cooperative": 663,
+          "conflictual": 462,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.59
+        },
+        {
+          "partner": "MMR",
+          "events": 1101,
+          "cooperative": 495,
+          "conflictual": 606,
+          "avg_tone": -1.7,
+          "cooperation_ratio": 0.45
+        },
+        {
+          "partner": "MYS",
+          "events": 1104,
+          "cooperative": 618,
+          "conflictual": 486,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "VNM",
+          "events": 775,
+          "cooperative": 410,
+          "conflictual": 365,
+          "avg_tone": 0.0,
+          "cooperation_ratio": 0.53
+        }
+      ]
+    },
+    "VNM": {
+      "media": {
+        "avg_tone": -0.6,
+        "article_volume": 349144,
+        "monthly_trend": [
+          30885,
+          31565,
+          29444,
+          29471,
+          29249,
+          28993,
+          27147,
+          27395,
+          27517,
+          26412,
+          29312,
+          27903
+        ]
+      },
+      "events": {
+        "total": 38670,
+        "cooperative": 20108,
+        "neutral": 8520,
+        "conflictual": 10042,
+        "goldstein_avg": 0.8,
+        "cooperation_ratio": 0.52,
+        "by_cameo": {
+          "01": 1979,
+          "02": 2655,
+          "03": 4110,
+          "04": 4563,
+          "05": 2085,
+          "06": 3350,
+          "07": 1897,
+          "08": 1653,
+          "09": 1442,
+          "10": 1650,
+          "11": 1443,
+          "12": 1679,
+          "13": 1710,
+          "14": 2677,
+          "15": 922,
+          "16": 901,
+          "17": 1303,
+          "18": 747,
+          "19": 489,
+          "20": 418
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "CHN",
+          "events": 4682,
+          "cooperative": 2153,
+          "conflictual": 2529,
+          "avg_tone": -1.3,
+          "cooperation_ratio": 0.46
+        },
+        {
+          "partner": "USA",
+          "events": 3465,
+          "cooperative": 1905,
+          "conflictual": 1560,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "JPN",
+          "events": 2177,
+          "cooperative": 1262,
+          "conflictual": 915,
+          "avg_tone": 0.6,
+          "cooperation_ratio": 0.58
+        },
+        {
+          "partner": "KOR",
+          "events": 1759,
+          "cooperative": 932,
+          "conflictual": 827,
+          "avg_tone": 0.2,
+          "cooperation_ratio": 0.53
+        },
+        {
+          "partner": "THA",
+          "events": 1450,
+          "cooperative": 739,
+          "conflictual": 711,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.51
+        },
+        {
+          "partner": "AUS",
+          "events": 1093,
+          "cooperative": 590,
+          "conflictual": 503,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.54
+        }
+      ]
+    },
+    "MYS": {
+      "media": {
+        "avg_tone": -0.1,
+        "article_volume": 406532,
+        "monthly_trend": [
+          34592,
+          34798,
+          35973,
+          33728,
+          31985,
+          33576,
+          34260,
+          31700,
+          33885,
+          32984,
+          32261,
+          35790
+        ]
+      },
+      "events": {
+        "total": 17265,
+        "cooperative": 9841,
+        "neutral": 3713,
+        "conflictual": 3711,
+        "goldstein_avg": 0.8,
+        "cooperation_ratio": 0.57,
+        "by_cameo": {
+          "01": 1151,
+          "02": 1922,
+          "03": 1474,
+          "04": 1475,
+          "05": 950,
+          "06": 940,
+          "07": 804,
+          "08": 638,
+          "09": 594,
+          "10": 947,
+          "11": 575,
+          "12": 802,
+          "13": 661,
+          "14": 855,
+          "15": 452,
+          "16": 398,
+          "17": 538,
+          "18": 393,
+          "19": 233,
+          "20": 187
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "CHN",
+          "events": 1809,
+          "cooperative": 904,
+          "conflictual": 905,
+          "avg_tone": -0.5,
+          "cooperation_ratio": 0.5
+        },
+        {
+          "partner": "SGP",
+          "events": 1563,
+          "cooperative": 922,
+          "conflictual": 641,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.59
+        },
+        {
+          "partner": "USA",
+          "events": 1188,
+          "cooperative": 641,
+          "conflictual": 547,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "IDN",
+          "events": 1109,
+          "cooperative": 587,
+          "conflictual": 522,
+          "avg_tone": -0.2,
+          "cooperation_ratio": 0.53
+        },
+        {
+          "partner": "THA",
+          "events": 928,
+          "cooperative": 519,
+          "conflictual": 409,
+          "avg_tone": 0.1,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "JPN",
+          "events": 658,
+          "cooperative": 368,
+          "conflictual": 290,
+          "avg_tone": 0.7,
+          "cooperation_ratio": 0.56
+        }
+      ]
+    },
+    "SGP": {
+      "media": {
+        "avg_tone": 0.5,
+        "article_volume": 119742,
+        "monthly_trend": [
+          10323,
+          10847,
+          9479,
+          9787,
+          10714,
+          10753,
+          9684,
+          9530,
+          9560,
+          10167,
+          9677,
+          9100
+        ]
+      },
+      "events": {
+        "total": 16393,
+        "cooperative": 9507,
+        "neutral": 3663,
+        "conflictual": 3223,
+        "goldstein_avg": 0.1,
+        "cooperation_ratio": 0.58,
+        "by_cameo": {
+          "01": 1159,
+          "02": 1357,
+          "03": 1696,
+          "04": 1433,
+          "05": 806,
+          "06": 1062,
+          "07": 966,
+          "08": 630,
+          "09": 462,
+          "10": 948,
+          "11": 939,
+          "12": 814,
+          "13": 465,
+          "14": 1188,
+          "15": 377,
+          "16": 386,
+          "17": 563,
+          "18": 307,
+          "19": 234,
+          "20": 157
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "MYS",
+          "events": 2020,
+          "cooperative": 1151,
+          "conflictual": 869,
+          "avg_tone": 0.7,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "CHN",
+          "events": 1795,
+          "cooperative": 969,
+          "conflictual": 826,
+          "avg_tone": 0.1,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "USA",
+          "events": 1819,
+          "cooperative": 1073,
+          "conflictual": 746,
+          "avg_tone": 1.0,
+          "cooperation_ratio": 0.59
+        },
+        {
+          "partner": "IDN",
+          "events": 1302,
+          "cooperative": 677,
+          "conflictual": 625,
+          "avg_tone": 0.5,
+          "cooperation_ratio": 0.52
+        },
+        {
+          "partner": "JPN",
+          "events": 872,
+          "cooperative": 497,
+          "conflictual": 375,
+          "avg_tone": 0.8,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "AUS",
+          "events": 714,
+          "cooperative": 414,
+          "conflictual": 300,
+          "avg_tone": 0.6,
+          "cooperation_ratio": 0.58
+        }
+      ]
+    },
+    "MMR": {
+      "media": {
+        "avg_tone": -3.7,
+        "article_volume": 247631,
+        "monthly_trend": [
+          19535,
+          20757,
+          20992,
+          22026,
+          22566,
+          21330,
+          20421,
+          20779,
+          21037,
+          18599,
+          20650,
+          20021
+        ]
+      },
+      "events": {
+        "total": 18271,
+        "cooperative": 6577,
+        "neutral": 5911,
+        "conflictual": 5783,
+        "goldstein_avg": -1.0,
+        "cooperation_ratio": 0.36,
+        "by_cameo": {
+          "01": 1196,
+          "02": 1996,
+          "03": 1236,
+          "04": 1575,
+          "05": 994,
+          "06": 1516,
+          "07": 879,
+          "08": 566,
+          "09": 461,
+          "10": 1191,
+          "11": 754,
+          "12": 1275,
+          "13": 460,
+          "14": 940,
+          "15": 443,
+          "16": 337,
+          "17": 706,
+          "18": 340,
+          "19": 214,
+          "20": 168
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "CHN",
+          "events": 1942,
+          "cooperative": 1068,
+          "conflictual": 874,
+          "avg_tone": -0.7,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "THA",
+          "events": 1674,
+          "cooperative": 837,
+          "conflictual": 837,
+          "avg_tone": -1.3,
+          "cooperation_ratio": 0.5
+        },
+        {
+          "partner": "USA",
+          "events": 973,
+          "cooperative": 369,
+          "conflictual": 604,
+          "avg_tone": -2.7,
+          "cooperation_ratio": 0.38
+        },
+        {
+          "partner": "IND",
+          "events": 1075,
+          "cooperative": 569,
+          "conflictual": 506,
+          "avg_tone": -0.9,
+          "cooperation_ratio": 0.53
+        },
+        {
+          "partner": "JPN",
+          "events": 804,
+          "cooperative": 377,
+          "conflictual": 427,
+          "avg_tone": -1.3,
+          "cooperation_ratio": 0.47
+        },
+        {
+          "partner": "GBR",
+          "events": 821,
+          "cooperative": 320,
+          "conflictual": 501,
+          "avg_tone": -2.6,
+          "cooperation_ratio": 0.39
+        }
+      ]
+    },
+    "IRQ": {
+      "media": {
+        "avg_tone": -3.3,
+        "article_volume": 357405,
+        "monthly_trend": [
+          27962,
+          31560,
+          31555,
+          29276,
+          31104,
+          31168,
+          32159,
+          27929,
+          27319,
+          26921,
+          27490,
+          30338
+        ]
+      },
+      "events": {
+        "total": 19312,
+        "cooperative": 7338,
+        "neutral": 5967,
+        "conflictual": 6007,
+        "goldstein_avg": -0.4,
+        "cooperation_ratio": 0.38,
+        "by_cameo": {
+          "01": 1629,
+          "02": 2176,
+          "03": 2102,
+          "04": 2994,
+          "05": 956,
+          "06": 1630,
+          "07": 994,
+          "08": 675,
+          "09": 509,
+          "10": 920,
+          "11": 978,
+          "12": 1189,
+          "13": 543,
+          "14": 1150,
+          "15": 402,
+          "16": 498,
+          "17": 907,
+          "18": 406,
+          "19": 288,
+          "20": 177
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "USA",
+          "events": 2246,
+          "cooperative": 920,
+          "conflictual": 1326,
+          "avg_tone": -2.6,
+          "cooperation_ratio": 0.41
+        },
+        {
+          "partner": "IRN",
+          "events": 2288,
+          "cooperative": 1235,
+          "conflictual": 1053,
+          "avg_tone": -1.3,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "TUR",
+          "events": 1601,
+          "cooperative": 736,
+          "conflictual": 865,
+          "avg_tone": -1.5,
+          "cooperation_ratio": 0.46
+        },
+        {
+          "partner": "SYR",
+          "events": 1128,
+          "cooperative": 473,
+          "conflictual": 655,
+          "avg_tone": -1.9,
+          "cooperation_ratio": 0.42
+        },
+        {
+          "partner": "SAU",
+          "events": 1040,
+          "cooperative": 561,
+          "conflictual": 479,
+          "avg_tone": -0.7,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "KWT",
+          "events": 787,
+          "cooperative": 409,
+          "conflictual": 378,
+          "avg_tone": -0.4,
+          "cooperation_ratio": 0.52
+        },
+        {
+          "partner": "GBR",
+          "events": 780,
+          "cooperative": 366,
+          "conflictual": 414,
+          "avg_tone": -1.6,
+          "cooperation_ratio": 0.47
+        }
+      ]
+    },
+    "SYR": {
+      "media": {
+        "avg_tone": -3.9,
+        "article_volume": 512125,
+        "monthly_trend": [
+          44158,
+          43169,
+          43160,
+          43320,
+          44310,
+          40720,
+          41427,
+          39172,
+          41341,
+          41511,
+          39096,
+          44250
+        ]
+      },
+      "events": {
+        "total": 52563,
+        "cooperative": 17871,
+        "neutral": 18853,
+        "conflictual": 15839,
+        "goldstein_avg": -1.8,
+        "cooperation_ratio": 0.34,
+        "by_cameo": {
+          "01": 3521,
+          "02": 5256,
+          "03": 5185,
+          "04": 4903,
+          "05": 2369,
+          "06": 4813,
+          "07": 3150,
+          "08": 2125,
+          "09": 1391,
+          "10": 2514,
+          "11": 2982,
+          "12": 2414,
+          "13": 2333,
+          "14": 3455,
+          "15": 1143,
+          "16": 785,
+          "17": 1719,
+          "18": 1673,
+          "19": 681,
+          "20": 565
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "RUS",
+          "events": 6086,
+          "cooperative": 3164,
+          "conflictual": 2922,
+          "avg_tone": -0.9,
+          "cooperation_ratio": 0.52
+        },
+        {
+          "partner": "TUR",
+          "events": 5432,
+          "cooperative": 2118,
+          "conflictual": 3314,
+          "avg_tone": -2.7,
+          "cooperation_ratio": 0.39
+        },
+        {
+          "partner": "USA",
+          "events": 5427,
+          "cooperative": 1953,
+          "conflictual": 3474,
+          "avg_tone": -3.8,
+          "cooperation_ratio": 0.36
+        },
+        {
+          "partner": "IRN",
+          "events": 4696,
+          "cooperative": 2488,
+          "conflictual": 2208,
+          "avg_tone": -0.7,
+          "cooperation_ratio": 0.53
+        },
+        {
+          "partner": "ISR",
+          "events": 4515,
+          "cooperative": 1580,
+          "conflictual": 2935,
+          "avg_tone": -3.8,
+          "cooperation_ratio": 0.35
+        },
+        {
+          "partner": "IRQ",
+          "events": 2699,
+          "cooperative": 1241,
+          "conflictual": 1458,
+          "avg_tone": -2.1,
+          "cooperation_ratio": 0.46
+        }
+      ]
+    },
+    "AFG": {
+      "media": {
+        "avg_tone": -3.8,
+        "article_volume": 568376,
+        "monthly_trend": [
+          50411,
+          46826,
+          51891,
+          45204,
+          51423,
+          44853,
+          50763,
+          48677,
+          44396,
+          43817,
+          46666,
+          47535
+        ]
+      },
+      "events": {
+        "total": 26893,
+        "cooperative": 9143,
+        "neutral": 9459,
+        "conflictual": 8291,
+        "goldstein_avg": -1.4,
+        "cooperation_ratio": 0.34,
+        "by_cameo": {
+          "01": 1255,
+          "02": 3151,
+          "03": 2348,
+          "04": 3501,
+          "05": 1066,
+          "06": 1708,
+          "07": 1592,
+          "08": 1015,
+          "09": 784,
+          "10": 1796,
+          "11": 961,
+          "12": 1404,
+          "13": 921,
+          "14": 1580,
+          "15": 528,
+          "16": 654,
+          "17": 959,
+          "18": 869,
+          "19": 365,
+          "20": 252
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "USA",
+          "events": 2512,
+          "cooperative": 954,
+          "conflictual": 1558,
+          "avg_tone": -2.9,
+          "cooperation_ratio": 0.38
+        },
+        {
+          "partner": "PAK",
+          "events": 3311,
+          "cooperative": 1390,
+          "conflictual": 1921,
+          "avg_tone": -2.7,
+          "cooperation_ratio": 0.42
+        },
+        {
+          "partner": "IRN",
+          "events": 2457,
+          "cooperative": 1154,
+          "conflictual": 1303,
+          "avg_tone": -1.3,
+          "cooperation_ratio": 0.47
+        },
+        {
+          "partner": "CHN",
+          "events": 1251,
+          "cooperative": 663,
+          "conflictual": 588,
+          "avg_tone": -0.4,
+          "cooperation_ratio": 0.53
+        },
+        {
+          "partner": "IND",
+          "events": 1218,
+          "cooperative": 560,
+          "conflictual": 658,
+          "avg_tone": -1.3,
+          "cooperation_ratio": 0.46
+        },
+        {
+          "partner": "RUS",
+          "events": 1153,
+          "cooperative": 599,
+          "conflictual": 554,
+          "avg_tone": -0.8,
+          "cooperation_ratio": 0.52
+        }
+      ]
+    },
+    "YEM": {
+      "media": {
+        "avg_tone": -4.9,
+        "article_volume": 385620,
+        "monthly_trend": [
+          31056,
+          32012,
+          33578,
+          31765,
+          34896,
+          30841,
+          31247,
+          32046,
+          30362,
+          32483,
+          31291,
+          31727
+        ]
+      },
+      "events": {
+        "total": 32042,
+        "cooperative": 9292,
+        "neutral": 11949,
+        "conflictual": 10801,
+        "goldstein_avg": -2.9,
+        "cooperation_ratio": 0.29,
+        "by_cameo": {
+          "01": 2081,
+          "02": 2694,
+          "03": 1944,
+          "04": 4872,
+          "05": 1446,
+          "06": 3076,
+          "07": 1328,
+          "08": 1168,
+          "09": 702,
+          "10": 1916,
+          "11": 1772,
+          "12": 1925,
+          "13": 1101,
+          "14": 2128,
+          "15": 967,
+          "16": 614,
+          "17": 1575,
+          "18": 910,
+          "19": 556,
+          "20": 294
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "SAU",
+          "events": 5620,
+          "cooperative": 1798,
+          "conflictual": 3822,
+          "avg_tone": -4.2,
+          "cooperation_ratio": 0.32
+        },
+        {
+          "partner": "IRN",
+          "events": 3022,
+          "cooperative": 1269,
+          "conflictual": 1753,
+          "avg_tone": -2.7,
+          "cooperation_ratio": 0.42
+        },
+        {
+          "partner": "USA",
+          "events": 2833,
+          "cooperative": 1048,
+          "conflictual": 1785,
+          "avg_tone": -3.8,
+          "cooperation_ratio": 0.37
+        },
+        {
+          "partner": "ARE",
+          "events": 2327,
+          "cooperative": 930,
+          "conflictual": 1397,
+          "avg_tone": -2.8,
+          "cooperation_ratio": 0.4
+        },
+        {
+          "partner": "GBR",
+          "events": 1185,
+          "cooperative": 497,
+          "conflictual": 688,
+          "avg_tone": -2.2,
+          "cooperation_ratio": 0.42
+        },
+        {
+          "partner": "OMN",
+          "events": 1020,
+          "cooperative": 530,
+          "conflictual": 490,
+          "avg_tone": -0.3,
+          "cooperation_ratio": 0.52
+        }
+      ]
+    },
+    "LBY": {
+      "media": {
+        "avg_tone": -3.1,
+        "article_volume": 353958,
+        "monthly_trend": [
+          28456,
+          32281,
+          31136,
+          28528,
+          32563,
+          29430,
+          30888,
+          28306,
+          30747,
+          29778,
+          27346,
+          29096
+        ]
+      },
+      "events": {
+        "total": 42736,
+        "cooperative": 14102,
+        "neutral": 14306,
+        "conflictual": 14328,
+        "goldstein_avg": -1.2,
+        "cooperation_ratio": 0.33,
+        "by_cameo": {
+          "01": 2777,
+          "02": 2952,
+          "03": 2841,
+          "04": 4614,
+          "05": 1892,
+          "06": 3122,
+          "07": 2273,
+          "08": 1725,
+          "09": 1149,
+          "10": 2738,
+          "11": 1533,
+          "12": 3042,
+          "13": 1710,
+          "14": 2443,
+          "15": 963,
+          "16": 1023,
+          "17": 1742,
+          "18": 1202,
+          "19": 564,
+          "20": 508
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "TUR",
+          "events": 4280,
+          "cooperative": 2054,
+          "conflictual": 2226,
+          "avg_tone": -1.7,
+          "cooperation_ratio": 0.48
+        },
+        {
+          "partner": "EGY",
+          "events": 3671,
+          "cooperative": 1688,
+          "conflictual": 1983,
+          "avg_tone": -1.4,
+          "cooperation_ratio": 0.46
+        },
+        {
+          "partner": "RUS",
+          "events": 2316,
+          "cooperative": 1065,
+          "conflictual": 1251,
+          "avg_tone": -1.9,
+          "cooperation_ratio": 0.46
+        },
+        {
+          "partner": "ITA",
+          "events": 2448,
+          "cooperative": 1101,
+          "conflictual": 1347,
+          "avg_tone": -1.3,
+          "cooperation_ratio": 0.45
+        },
+        {
+          "partner": "FRA",
+          "events": 2296,
+          "cooperative": 1056,
+          "conflictual": 1240,
+          "avg_tone": -1.9,
+          "cooperation_ratio": 0.46
+        },
+        {
+          "partner": "USA",
+          "events": 2064,
+          "cooperative": 866,
+          "conflictual": 1198,
+          "avg_tone": -2.0,
+          "cooperation_ratio": 0.42
+        }
+      ]
+    },
+    "SDN": {
+      "media": {
+        "avg_tone": -3.9,
+        "article_volume": 363937,
+        "monthly_trend": [
+          28031,
+          30657,
+          33441,
+          32651,
+          32490,
+          31165,
+          31402,
+          30272,
+          27982,
+          30025,
+          30106,
+          31503
+        ]
+      },
+      "events": {
+        "total": 47559,
+        "cooperative": 17596,
+        "neutral": 14307,
+        "conflictual": 15656,
+        "goldstein_avg": -0.9,
+        "cooperation_ratio": 0.37,
+        "by_cameo": {
+          "01": 2438,
+          "02": 5008,
+          "03": 2906,
+          "04": 7241,
+          "05": 1639,
+          "06": 2537,
+          "07": 2112,
+          "08": 1504,
+          "09": 1589,
+          "10": 2700,
+          "11": 2493,
+          "12": 3275,
+          "13": 2036,
+          "14": 3528,
+          "15": 876,
+          "16": 744,
+          "17": 1568,
+          "18": 1064,
+          "19": 782,
+          "20": 482
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "EGY",
+          "events": 5419,
+          "cooperative": 2817,
+          "conflictual": 2602,
+          "avg_tone": -0.9,
+          "cooperation_ratio": 0.52
+        },
+        {
+          "partner": "ETH",
+          "events": 4007,
+          "cooperative": 1723,
+          "conflictual": 2284,
+          "avg_tone": -2.1,
+          "cooperation_ratio": 0.43
+        },
+        {
+          "partner": "USA",
+          "events": 2442,
+          "cooperative": 1074,
+          "conflictual": 1368,
+          "avg_tone": -2.3,
+          "cooperation_ratio": 0.44
+        },
+        {
+          "partner": "SAU",
+          "events": 2433,
+          "cooperative": 1289,
+          "conflictual": 1144,
+          "avg_tone": -0.9,
+          "cooperation_ratio": 0.53
+        },
+        {
+          "partner": "ARE",
+          "events": 2450,
+          "cooperative": 1078,
+          "conflictual": 1372,
+          "avg_tone": -1.6,
+          "cooperation_ratio": 0.44
+        },
+        {
+          "partner": "RUS",
+          "events": 2076,
+          "cooperative": 1058,
+          "conflictual": 1018,
+          "avg_tone": -0.2,
+          "cooperation_ratio": 0.51
+        },
+        {
+          "partner": "CHN",
+          "events": 1983,
+          "cooperative": 1050,
+          "conflictual": 933,
+          "avg_tone": -0.3,
+          "cooperation_ratio": 0.53
+        }
+      ]
+    },
+    "ETH": {
+      "media": {
+        "avg_tone": -2.5,
+        "article_volume": 386957,
+        "monthly_trend": [
+          32985,
+          33742,
+          33666,
+          31578,
+          31742,
+          33034,
+          30826,
+          34166,
+          30391,
+          30223,
+          29937,
+          32804
+        ]
+      },
+      "events": {
+        "total": 54048,
+        "cooperative": 22159,
+        "neutral": 15078,
+        "conflictual": 16811,
+        "goldstein_avg": -0.5,
+        "cooperation_ratio": 0.41,
+        "by_cameo": {
+          "01": 3127,
+          "02": 4668,
+          "03": 5789,
+          "04": 7635,
+          "05": 2101,
+          "06": 3133,
+          "07": 2988,
+          "08": 2005,
+          "09": 2088,
+          "10": 3862,
+          "11": 3095,
+          "12": 3515,
+          "13": 1653,
+          "14": 3065,
+          "15": 1524,
+          "16": 981,
+          "17": 2087,
+          "18": 1153,
+          "19": 800,
+          "20": 443
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "EGY",
+          "events": 5159,
+          "cooperative": 2115,
+          "conflictual": 3044,
+          "avg_tone": -2.5,
+          "cooperation_ratio": 0.41
+        },
+        {
+          "partner": "SDN",
+          "events": 4553,
+          "cooperative": 2094,
+          "conflictual": 2459,
+          "avg_tone": -2.1,
+          "cooperation_ratio": 0.46
+        },
+        {
+          "partner": "USA",
+          "events": 2855,
+          "cooperative": 1341,
+          "conflictual": 1514,
+          "avg_tone": -1.4,
+          "cooperation_ratio": 0.47
+        },
+        {
+          "partner": "CHN",
+          "events": 2980,
+          "cooperative": 1579,
+          "conflictual": 1401,
+          "avg_tone": 0.1,
+          "cooperation_ratio": 0.53
+        },
+        {
+          "partner": "KEN",
+          "events": 2790,
+          "cooperative": 1506,
+          "conflictual": 1284,
+          "avg_tone": -0.0,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "ARE",
+          "events": 1879,
+          "cooperative": 1052,
+          "conflictual": 827,
+          "avg_tone": -0.4,
+          "cooperation_ratio": 0.56
+        }
+      ]
+    },
+    "KEN": {
+      "media": {
+        "avg_tone": -0.7,
+        "article_volume": 362369,
+        "monthly_trend": [
+          30616,
+          29387,
+          31823,
+          31257,
+          31665,
+          28455,
+          29778,
+          30778,
+          27533,
+          30560,
+          27084,
+          29984
+        ]
+      },
+      "events": {
+        "total": 46832,
+        "cooperative": 25289,
+        "neutral": 11554,
+        "conflictual": 9989,
+        "goldstein_avg": 0.6,
+        "cooperation_ratio": 0.54,
+        "by_cameo": {
+          "01": 3827,
+          "02": 4200,
+          "03": 5019,
+          "04": 6895,
+          "05": 2078,
+          "06": 2879,
+          "07": 2993,
+          "08": 1672,
+          "09": 1527,
+          "10": 3497,
+          "11": 1588,
+          "12": 2690,
+          "13": 1673,
+          "14": 3451,
+          "15": 1477,
+          "16": 1168,
+          "17": 1508,
+          "18": 1439,
+          "19": 565,
+          "20": 586
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "USA",
+          "events": 4152,
+          "cooperative": 2242,
+          "conflictual": 1910,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "CHN",
+          "events": 3140,
+          "cooperative": 1664,
+          "conflictual": 1476,
+          "avg_tone": -0.1,
+          "cooperation_ratio": 0.53
+        },
+        {
+          "partner": "GBR",
+          "events": 3033,
+          "cooperative": 1728,
+          "conflictual": 1305,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "ETH",
+          "events": 3064,
+          "cooperative": 1715,
+          "conflictual": 1349,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "TZA",
+          "events": 2468,
+          "cooperative": 1406,
+          "conflictual": 1062,
+          "avg_tone": 0.5,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "UGA",
+          "events": 2152,
+          "cooperative": 1162,
+          "conflictual": 990,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.54
+        }
+      ]
+    },
+    "DZA": {
+      "media": {
+        "avg_tone": -0.5,
+        "article_volume": 288139,
+        "monthly_trend": [
+          25458,
+          22458,
+          24903,
+          23177,
+          26539,
+          23531,
+          25890,
+          23815,
+          23364,
+          24925,
+          24701,
+          23530
+        ]
+      },
+      "events": {
+        "total": 22210,
+        "cooperative": 11993,
+        "neutral": 4637,
+        "conflictual": 5580,
+        "goldstein_avg": 1.3,
+        "cooperation_ratio": 0.54,
+        "by_cameo": {
+          "01": 1177,
+          "02": 1619,
+          "03": 1505,
+          "04": 2599,
+          "05": 853,
+          "06": 1352,
+          "07": 1268,
+          "08": 1043,
+          "09": 693,
+          "10": 1538,
+          "11": 804,
+          "12": 1482,
+          "13": 962,
+          "14": 1726,
+          "15": 560,
+          "16": 334,
+          "17": 978,
+          "18": 450,
+          "19": 261,
+          "20": 198
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "FRA",
+          "events": 2575,
+          "cooperative": 1210,
+          "conflictual": 1365,
+          "avg_tone": -0.9,
+          "cooperation_ratio": 0.47
+        },
+        {
+          "partner": "MAR",
+          "events": 2269,
+          "cooperative": 862,
+          "conflictual": 1407,
+          "avg_tone": -2.4,
+          "cooperation_ratio": 0.38
+        },
+        {
+          "partner": "USA",
+          "events": 1221,
+          "cooperative": 659,
+          "conflictual": 562,
+          "avg_tone": -0.1,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "RUS",
+          "events": 1245,
+          "cooperative": 697,
+          "conflictual": 548,
+          "avg_tone": 0.2,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "ITA",
+          "events": 980,
+          "cooperative": 548,
+          "conflictual": 432,
+          "avg_tone": 0.2,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "ESP",
+          "events": 803,
+          "cooperative": 409,
+          "conflictual": 394,
+          "avg_tone": -0.7,
+          "cooperation_ratio": 0.51
+        }
+      ]
+    },
+    "MAR": {
+      "media": {
+        "avg_tone": -0.8,
+        "article_volume": 210048,
+        "monthly_trend": [
+          16949,
+          18400,
+          16554,
+          18472,
+          18512,
+          16521,
+          16434,
+          16708,
+          16791,
+          16985,
+          18127,
+          17802
+        ]
+      },
+      "events": {
+        "total": 35137,
+        "cooperative": 18271,
+        "neutral": 8006,
+        "conflictual": 8860,
+        "goldstein_avg": 1.1,
+        "cooperation_ratio": 0.52,
+        "by_cameo": {
+          "01": 2024,
+          "02": 2571,
+          "03": 3732,
+          "04": 3697,
+          "05": 1689,
+          "06": 2191,
+          "07": 1370,
+          "08": 1113,
+          "09": 1210,
+          "10": 2241,
+          "11": 1501,
+          "12": 1989,
+          "13": 1208,
+          "14": 2335,
+          "15": 964,
+          "16": 584,
+          "17": 1192,
+          "18": 1012,
+          "19": 645,
+          "20": 263
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "FRA",
+          "events": 3259,
+          "cooperative": 1890,
+          "conflictual": 1369,
+          "avg_tone": 0.5,
+          "cooperation_ratio": 0.58
+        },
+        {
+          "partner": "ESP",
+          "events": 3179,
+          "cooperative": 1748,
+          "conflictual": 1431,
+          "avg_tone": -0.4,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "DZA",
+          "events": 3080,
+          "cooperative": 1201,
+          "conflictual": 1879,
+          "avg_tone": -2.4,
+          "cooperation_ratio": 0.39
+        },
+        {
+          "partner": "USA",
+          "events": 1986,
+          "cooperative": 1132,
+          "conflictual": 854,
+          "avg_tone": 0.2,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "SAU",
+          "events": 1304,
+          "cooperative": 704,
+          "conflictual": 600,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "DEU",
+          "events": 1044,
+          "cooperative": 595,
+          "conflictual": 449,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.57
+        }
+      ]
+    },
+    "VEN": {
+      "media": {
+        "avg_tone": -2.0,
+        "article_volume": 314224,
+        "monthly_trend": [
+          26384,
+          26601,
+          27178,
+          25459,
+          26126,
+          26664,
+          24577,
+          24576,
+          25844,
+          23737,
+          25547,
+          27066
+        ]
+      },
+      "events": {
+        "total": 33709,
+        "cooperative": 13820,
+        "neutral": 9818,
+        "conflictual": 10071,
+        "goldstein_avg": -1.8,
+        "cooperation_ratio": 0.41,
+        "by_cameo": {
+          "01": 2129,
+          "02": 3227,
+          "03": 2790,
+          "04": 2971,
+          "05": 1482,
+          "06": 2993,
+          "07": 1911,
+          "08": 1264,
+          "09": 1203,
+          "10": 2320,
+          "11": 1588,
+          "12": 1348,
+          "13": 1069,
+          "14": 1617,
+          "15": 1092,
+          "16": 849,
+          "17": 999,
+          "18": 1062,
+          "19": 363,
+          "20": 318
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "USA",
+          "events": 4584,
+          "cooperative": 1604,
+          "conflictual": 2980,
+          "avg_tone": -2.8,
+          "cooperation_ratio": 0.35
+        },
+        {
+          "partner": "COL",
+          "events": 4045,
+          "cooperative": 1779,
+          "conflictual": 2266,
+          "avg_tone": -2.1,
+          "cooperation_ratio": 0.44
+        },
+        {
+          "partner": "BRA",
+          "events": 1900,
+          "cooperative": 931,
+          "conflictual": 969,
+          "avg_tone": -0.6,
+          "cooperation_ratio": 0.49
+        },
+        {
+          "partner": "CUB",
+          "events": 1502,
+          "cooperative": 841,
+          "conflictual": 661,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "RUS",
+          "events": 1720,
+          "cooperative": 997,
+          "conflictual": 723,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.58
+        },
+        {
+          "partner": "CHN",
+          "events": 1592,
+          "cooperative": 891,
+          "conflictual": 701,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.56
+        }
+      ]
+    },
+    "CUB": {
+      "media": {
+        "avg_tone": -1.2,
+        "article_volume": 47750,
+        "monthly_trend": [
+          3904,
+          4277,
+          4348,
+          4016,
+          4201,
+          4143,
+          4004,
+          4015,
+          3781,
+          3661,
+          3898,
+          3937
+        ]
+      },
+      "events": {
+        "total": 16948,
+        "cooperative": 7965,
+        "neutral": 4564,
+        "conflictual": 4419,
+        "goldstein_avg": 0.7,
+        "cooperation_ratio": 0.47,
+        "by_cameo": {
+          "01": 1252,
+          "02": 1342,
+          "03": 1011,
+          "04": 1451,
+          "05": 670,
+          "06": 1403,
+          "07": 869,
+          "08": 690,
+          "09": 607,
+          "10": 862,
+          "11": 692,
+          "12": 806,
+          "13": 748,
+          "14": 1250,
+          "15": 325,
+          "16": 401,
+          "17": 645,
+          "18": 491,
+          "19": 312,
+          "20": 120
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "USA",
+          "events": 3039,
+          "cooperative": 1245,
+          "conflictual": 1794,
+          "avg_tone": -2.7,
+          "cooperation_ratio": 0.41
+        },
+        {
+          "partner": "VEN",
+          "events": 1410,
+          "cooperative": 775,
+          "conflictual": 635,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "RUS",
+          "events": 1096,
+          "cooperative": 613,
+          "conflictual": 483,
+          "avg_tone": 0.7,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "CHN",
+          "events": 844,
+          "cooperative": 489,
+          "conflictual": 355,
+          "avg_tone": 0.1,
+          "cooperation_ratio": 0.58
+        },
+        {
+          "partner": "MEX",
+          "events": 876,
+          "cooperative": 499,
+          "conflictual": 377,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.57
+        }
+      ]
+    },
+    "PRK": {
+      "media": {
+        "avg_tone": -4.4,
+        "article_volume": 188046,
+        "monthly_trend": [
+          14538,
+          16517,
+          15826,
+          15454,
+          15350,
+          16831,
+          14558,
+          15445,
+          14748,
+          15968,
+          15828,
+          14988
+        ]
+      },
+      "events": {
+        "total": 48924,
+        "cooperative": 14187,
+        "neutral": 17030,
+        "conflictual": 17707,
+        "goldstein_avg": -1.7,
+        "cooperation_ratio": 0.29,
+        "by_cameo": {
+          "01": 3366,
+          "02": 5128,
+          "03": 3711,
+          "04": 5172,
+          "05": 1730,
+          "06": 4022,
+          "07": 2036,
+          "08": 1722,
+          "09": 1081,
+          "10": 3725,
+          "11": 2703,
+          "12": 3355,
+          "13": 1841,
+          "14": 3041,
+          "15": 1219,
+          "16": 1255,
+          "17": 2475,
+          "18": 1348,
+          "19": 859,
+          "20": 436
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "USA",
+          "events": 8363,
+          "cooperative": 2258,
+          "conflictual": 6105,
+          "avg_tone": -4.8,
+          "cooperation_ratio": 0.27
+        },
+        {
+          "partner": "KOR",
+          "events": 6676,
+          "cooperative": 2069,
+          "conflictual": 4607,
+          "avg_tone": -4.1,
+          "cooperation_ratio": 0.31
+        },
+        {
+          "partner": "CHN",
+          "events": 4631,
+          "cooperative": 2222,
+          "conflictual": 2409,
+          "avg_tone": -1.7,
+          "cooperation_ratio": 0.48
+        },
+        {
+          "partner": "JPN",
+          "events": 4121,
+          "cooperative": 1483,
+          "conflictual": 2638,
+          "avg_tone": -3.7,
+          "cooperation_ratio": 0.36
+        },
+        {
+          "partner": "RUS",
+          "events": 3105,
+          "cooperative": 1645,
+          "conflictual": 1460,
+          "avg_tone": -0.7,
+          "cooperation_ratio": 0.53
+        }
+      ]
+    },
+    "TWN": {
+      "media": {
+        "avg_tone": -1.1,
+        "article_volume": 298274,
+        "monthly_trend": [
+          26245,
+          24424,
+          26348,
+          26854,
+          27194,
+          25480,
+          26716,
+          24707,
+          22792,
+          23118,
+          23061,
+          25058
+        ]
+      },
+      "events": {
+        "total": 29653,
+        "cooperative": 15123,
+        "neutral": 6896,
+        "conflictual": 7634,
+        "goldstein_avg": 0.0,
+        "cooperation_ratio": 0.51,
+        "by_cameo": {
+          "01": 2415,
+          "02": 3403,
+          "03": 1904,
+          "04": 4037,
+          "05": 1086,
+          "06": 1915,
+          "07": 1637,
+          "08": 1259,
+          "09": 1089,
+          "10": 1446,
+          "11": 1543,
+          "12": 1850,
+          "13": 1074,
+          "14": 1903,
+          "15": 905,
+          "16": 533,
+          "17": 1511,
+          "18": 525,
+          "19": 561,
+          "20": 378
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "CHN",
+          "events": 5723,
+          "cooperative": 2231,
+          "conflictual": 3492,
+          "avg_tone": -3.0,
+          "cooperation_ratio": 0.39
+        },
+        {
+          "partner": "USA",
+          "events": 4880,
+          "cooperative": 2781,
+          "conflictual": 2099,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "JPN",
+          "events": 2534,
+          "cooperative": 1495,
+          "conflictual": 1039,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.59
+        },
+        {
+          "partner": "KOR",
+          "events": 1655,
+          "cooperative": 976,
+          "conflictual": 679,
+          "avg_tone": 0.2,
+          "cooperation_ratio": 0.59
+        },
+        {
+          "partner": "AUS",
+          "events": 996,
+          "cooperative": 547,
+          "conflictual": 449,
+          "avg_tone": 0.2,
+          "cooperation_ratio": 0.55
+        }
+      ]
+    },
+    "QAT": {
+      "media": {
+        "avg_tone": -0.3,
+        "article_volume": 45376,
+        "monthly_trend": [
+          3602,
+          4092,
+          3911,
+          4066,
+          3805,
+          3858,
+          3696,
+          3582,
+          3690,
+          3666,
+          3446,
+          4011
+        ]
+      },
+      "events": {
+        "total": 17358,
+        "cooperative": 9373,
+        "neutral": 4199,
+        "conflictual": 3786,
+        "goldstein_avg": 0.6,
+        "cooperation_ratio": 0.54,
+        "by_cameo": {
+          "01": 1107,
+          "02": 1985,
+          "03": 1842,
+          "04": 1921,
+          "05": 740,
+          "06": 1350,
+          "07": 722,
+          "08": 546,
+          "09": 445,
+          "10": 1313,
+          "11": 818,
+          "12": 907,
+          "13": 480,
+          "14": 1013,
+          "15": 402,
+          "16": 416,
+          "17": 694,
+          "18": 474,
+          "19": 289,
+          "20": 148
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "SAU",
+          "events": 1969,
+          "cooperative": 1082,
+          "conflictual": 887,
+          "avg_tone": -0.9,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "USA",
+          "events": 1275,
+          "cooperative": 714,
+          "conflictual": 561,
+          "avg_tone": 0.1,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "IRN",
+          "events": 1114,
+          "cooperative": 601,
+          "conflictual": 513,
+          "avg_tone": -0.7,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "ARE",
+          "events": 999,
+          "cooperative": 549,
+          "conflictual": 450,
+          "avg_tone": -0.6,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "GBR",
+          "events": 965,
+          "cooperative": 530,
+          "conflictual": 435,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "TUR",
+          "events": 600,
+          "cooperative": 348,
+          "conflictual": 252,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.58
+        }
+      ]
+    },
+    "ARE": {
+      "media": {
+        "avg_tone": 0.2,
+        "article_volume": 336178,
+        "monthly_trend": [
+          26400,
+          28646,
+          27289,
+          30652,
+          30997,
+          30515,
+          28122,
+          29091,
+          25428,
+          28557,
+          25315,
+          25415
+        ]
+      },
+      "events": {
+        "total": 42151,
+        "cooperative": 23183,
+        "neutral": 9043,
+        "conflictual": 9925,
+        "goldstein_avg": 0.2,
+        "cooperation_ratio": 0.55,
+        "by_cameo": {
+          "01": 2143,
+          "02": 4318,
+          "03": 2654,
+          "04": 3999,
+          "05": 1576,
+          "06": 3077,
+          "07": 1551,
+          "08": 1825,
+          "09": 1593,
+          "10": 3155,
+          "11": 2078,
+          "12": 1644,
+          "13": 1503,
+          "14": 2594,
+          "15": 748,
+          "16": 955,
+          "17": 1722,
+          "18": 918,
+          "19": 633,
+          "20": 471
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "SAU",
+          "events": 4409,
+          "cooperative": 2424,
+          "conflictual": 1985,
+          "avg_tone": 0.6,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "USA",
+          "events": 3287,
+          "cooperative": 1807,
+          "conflictual": 1480,
+          "avg_tone": 0.3,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "IRN",
+          "events": 3346,
+          "cooperative": 1405,
+          "conflictual": 1941,
+          "avg_tone": -1.9,
+          "cooperation_ratio": 0.42
+        },
+        {
+          "partner": "IND",
+          "events": 2627,
+          "cooperative": 1444,
+          "conflictual": 1183,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "GBR",
+          "events": 2210,
+          "cooperative": 1215,
+          "conflictual": 995,
+          "avg_tone": 0.5,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "CHN",
+          "events": 1878,
+          "cooperative": 1070,
+          "conflictual": 808,
+          "avg_tone": -0.0,
+          "cooperation_ratio": 0.57
+        },
+        {
+          "partner": "QAT",
+          "events": 1796,
+          "cooperative": 933,
+          "conflictual": 863,
+          "avg_tone": -0.5,
+          "cooperation_ratio": 0.52
+        }
+      ]
+    },
+    "KWT": {
+      "media": {
+        "avg_tone": -0.1,
+        "article_volume": 86436,
+        "monthly_trend": [
+          6847,
+          7341,
+          7762,
+          7142,
+          7268,
+          7162,
+          7094,
+          7168,
+          7566,
+          6680,
+          7222,
+          7489
+        ]
+      },
+      "events": {
+        "total": 7937,
+        "cooperative": 4127,
+        "neutral": 2059,
+        "conflictual": 1751,
+        "goldstein_avg": -0.5,
+        "cooperation_ratio": 0.52,
+        "by_cameo": {
+          "01": 563,
+          "02": 916,
+          "03": 779,
+          "04": 720,
+          "05": 331,
+          "06": 614,
+          "07": 291,
+          "08": 224,
+          "09": 191,
+          "10": 476,
+          "11": 343,
+          "12": 511,
+          "13": 288,
+          "14": 626,
+          "15": 150,
+          "16": 161,
+          "17": 230,
+          "18": 164,
+          "19": 145,
+          "20": 97
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "SAU",
+          "events": 699,
+          "cooperative": 377,
+          "conflictual": 322,
+          "avg_tone": 0.1,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "USA",
+          "events": 589,
+          "cooperative": 323,
+          "conflictual": 266,
+          "avg_tone": 0.0,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "IRQ",
+          "events": 673,
+          "cooperative": 349,
+          "conflictual": 324,
+          "avg_tone": -0.8,
+          "cooperation_ratio": 0.52
+        },
+        {
+          "partner": "IRN",
+          "events": 396,
+          "cooperative": 194,
+          "conflictual": 202,
+          "avg_tone": -0.7,
+          "cooperation_ratio": 0.49
+        },
+        {
+          "partner": "GBR",
+          "events": 301,
+          "cooperative": 156,
+          "conflictual": 145,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.52
+        }
+      ]
+    },
+    "JOR": {
+      "media": {
+        "avg_tone": -1.2,
+        "article_volume": 92324,
+        "monthly_trend": [
+          7888,
+          7408,
+          8336,
+          7310,
+          7523,
+          7364,
+          8088,
+          7967,
+          8008,
+          7223,
+          7570,
+          7659
+        ]
+      },
+      "events": {
+        "total": 6218,
+        "cooperative": 3233,
+        "neutral": 1559,
+        "conflictual": 1426,
+        "goldstein_avg": 0.3,
+        "cooperation_ratio": 0.52,
+        "by_cameo": {
+          "01": 488,
+          "02": 653,
+          "03": 541,
+          "04": 694,
+          "05": 320,
+          "06": 547,
+          "07": 346,
+          "08": 185,
+          "09": 214,
+          "10": 338,
+          "11": 212,
+          "12": 287,
+          "13": 162,
+          "14": 429,
+          "15": 166,
+          "16": 131,
+          "17": 318,
+          "18": 139,
+          "19": 100,
+          "20": 72
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "ISR",
+          "events": 697,
+          "cooperative": 341,
+          "conflictual": 356,
+          "avg_tone": -1.4,
+          "cooperation_ratio": 0.49
+        },
+        {
+          "partner": "USA",
+          "events": 445,
+          "cooperative": 235,
+          "conflictual": 210,
+          "avg_tone": 0.2,
+          "cooperation_ratio": 0.53
+        },
+        {
+          "partner": "SAU",
+          "events": 398,
+          "cooperative": 214,
+          "conflictual": 184,
+          "avg_tone": 0.2,
+          "cooperation_ratio": 0.54
+        },
+        {
+          "partner": "SYR",
+          "events": 342,
+          "cooperative": 160,
+          "conflictual": 182,
+          "avg_tone": -2.1,
+          "cooperation_ratio": 0.47
+        },
+        {
+          "partner": "IRQ",
+          "events": 307,
+          "cooperative": 156,
+          "conflictual": 151,
+          "avg_tone": -0.7,
+          "cooperation_ratio": 0.51
+        },
+        {
+          "partner": "EGY",
+          "events": 214,
+          "cooperative": 115,
+          "conflictual": 99,
+          "avg_tone": 0.4,
+          "cooperation_ratio": 0.54
+        }
+      ]
+    },
+    "LBN": {
+      "media": {
+        "avg_tone": -2.6,
+        "article_volume": 124340,
+        "monthly_trend": [
+          10558,
+          11018,
+          10993,
+          9958,
+          10042,
+          10873,
+          10583,
+          10597,
+          9796,
+          9418,
+          9293,
+          9893
+        ]
+      },
+      "events": {
+        "total": 13709,
+        "cooperative": 5894,
+        "neutral": 3783,
+        "conflictual": 4032,
+        "goldstein_avg": -1.5,
+        "cooperation_ratio": 0.43,
+        "by_cameo": {
+          "01": 816,
+          "02": 1122,
+          "03": 908,
+          "04": 1336,
+          "05": 597,
+          "06": 1061,
+          "07": 647,
+          "08": 392,
+          "09": 375,
+          "10": 621,
+          "11": 653,
+          "12": 674,
+          "13": 446,
+          "14": 779,
+          "15": 319,
+          "16": 205,
+          "17": 680,
+          "18": 426,
+          "19": 264,
+          "20": 143
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "ISR",
+          "events": 1811,
+          "cooperative": 561,
+          "conflictual": 1250,
+          "avg_tone": -4.7,
+          "cooperation_ratio": 0.31
+        },
+        {
+          "partner": "SYR",
+          "events": 1477,
+          "cooperative": 605,
+          "conflictual": 872,
+          "avg_tone": -1.8,
+          "cooperation_ratio": 0.41
+        },
+        {
+          "partner": "IRN",
+          "events": 1150,
+          "cooperative": 517,
+          "conflictual": 633,
+          "avg_tone": -1.6,
+          "cooperation_ratio": 0.45
+        },
+        {
+          "partner": "USA",
+          "events": 941,
+          "cooperative": 451,
+          "conflictual": 490,
+          "avg_tone": -1.3,
+          "cooperation_ratio": 0.48
+        },
+        {
+          "partner": "FRA",
+          "events": 722,
+          "cooperative": 404,
+          "conflictual": 318,
+          "avg_tone": -0.7,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "SAU",
+          "events": 665,
+          "cooperative": 359,
+          "conflictual": 306,
+          "avg_tone": -1.1,
+          "cooperation_ratio": 0.54
+        }
+      ]
+    },
+    "GRC": {
+      "media": {
+        "avg_tone": -0.0,
+        "article_volume": 168910,
+        "monthly_trend": [
+          13092,
+          14137,
+          14259,
+          14461,
+          13463,
+          13719,
+          13505,
+          14142,
+          13915,
+          12988,
+          12847,
+          13431
+        ]
+      },
+      "events": {
+        "total": 21108,
+        "cooperative": 10976,
+        "neutral": 5268,
+        "conflictual": 4864,
+        "goldstein_avg": 0.2,
+        "cooperation_ratio": 0.52,
+        "by_cameo": {
+          "01": 1741,
+          "02": 1803,
+          "03": 1923,
+          "04": 2995,
+          "05": 852,
+          "06": 1426,
+          "07": 1255,
+          "08": 1026,
+          "09": 813,
+          "10": 989,
+          "11": 847,
+          "12": 1472,
+          "13": 606,
+          "14": 1219,
+          "15": 674,
+          "16": 540,
+          "17": 738,
+          "18": 589,
+          "19": 314,
+          "20": 220
+        }
+      },
+      "bilateral": [
+        {
+          "partner": "TUR",
+          "events": 2446,
+          "cooperative": 1174,
+          "conflictual": 1272,
+          "avg_tone": -1.3,
+          "cooperation_ratio": 0.48
+        },
+        {
+          "partner": "DEU",
+          "events": 1764,
+          "cooperative": 987,
+          "conflictual": 777,
+          "avg_tone": -0.2,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "USA",
+          "events": 1564,
+          "cooperative": 813,
+          "conflictual": 751,
+          "avg_tone": 0.6,
+          "cooperation_ratio": 0.52
+        },
+        {
+          "partner": "FRA",
+          "events": 1137,
+          "cooperative": 625,
+          "conflictual": 512,
+          "avg_tone": 0.5,
+          "cooperation_ratio": 0.55
+        },
+        {
+          "partner": "ITA",
+          "events": 1151,
+          "cooperative": 644,
+          "conflictual": 507,
+          "avg_tone": 0.1,
+          "cooperation_ratio": 0.56
+        },
+        {
+          "partner": "GBR",
+          "events": 813,
+          "cooperative": 439,
+          "conflictual": 374,
+          "avg_tone": 0.0,
+          "cooperation_ratio": 0.54
+        }
+      ]
+    }
+  }
+}

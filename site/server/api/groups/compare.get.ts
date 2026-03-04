@@ -1,5 +1,5 @@
 import { getRegistry } from '~/server/utils/wcg'
-import { getGroupStats } from '~/server/utils/countrydata'
+import { getGroupStats, getCountriesData } from '~/server/utils/countrydata'
 
 export default defineEventHandler((event) => {
   const query = getQuery(event)
@@ -22,6 +22,37 @@ export default defineEventHandler((event) => {
   const statsResults = groups.map(g =>
     getGroupStats(g.countries.map(c => c.iso2).filter(Boolean))
   )
+
+  // Compute extended stats per group
+  const extendedStats = groups.map(g => {
+    const iso2s = g.countries.map(c => c.iso2).filter(Boolean)
+    const countriesMap = getCountriesData(iso2s)
+    let gdpPerCapitaSum = 0, gdpPerCapitaWeight = 0
+    let lifeExpSum = 0, lifeExpCount = 0
+    let hdiSum = 0, hdiCount = 0
+    let areaSum = 0
+    let milPersonnel = 0
+    let defBudget = 0
+
+    for (const d of countriesMap.values()) {
+      if (d.gdp_per_capita != null && d.population != null) {
+        gdpPerCapitaSum += d.gdp_per_capita * d.population
+        gdpPerCapitaWeight += d.population
+      }
+      if (d.life_expectancy != null) { lifeExpSum += d.life_expectancy; lifeExpCount++ }
+      if (d.hdi != null) { hdiSum += d.hdi; hdiCount++ }
+      if (d.area_km2 != null) { areaSum += d.area_km2 }
+      if (d.military_expenditure != null) { defBudget += d.military_expenditure }
+    }
+
+    return {
+      gdp_per_capita: gdpPerCapitaWeight > 0 ? Math.round(gdpPerCapitaSum / gdpPerCapitaWeight) : null,
+      life_expectancy: lifeExpCount > 0 ? Math.round((lifeExpSum / lifeExpCount) * 10) / 10 : null,
+      hdi: hdiCount > 0 ? Math.round((hdiSum / hdiCount) * 1000) / 1000 : null,
+      area_km2: areaSum > 0 ? areaSum : null,
+      defense_budget: defBudget > 0 ? defBudget : null,
+    }
+  })
 
   // Build ISO2-keyed country sets per group
   const countrySets = new Map<string, Set<string>>()
@@ -89,6 +120,7 @@ export default defineEventHandler((event) => {
         .map(c => ({ name: c.name, iso2: c.iso2, iso3: c.iso3 }))
         .sort((a, b) => a.name.localeCompare(b.name)),
       stats: statsResults[i],
+      extended: extendedStats[i],
     })),
     overlap: {
       pairs,

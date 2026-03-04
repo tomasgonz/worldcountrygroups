@@ -6,6 +6,12 @@
     </div>
 
     <template v-else-if="country">
+      <SectionNav
+        :sections="visibleSections"
+        :active-section="activeSection"
+        @navigate="sectionScrollTo"
+      />
+
       <!-- Breadcrumb -->
       <nav class="flex items-center gap-2 text-sm text-primary-400 mb-8">
         <NuxtLink to="/groups" class="hover:text-primary-900 transition-colors">Groups</NuxtLink>
@@ -32,7 +38,7 @@
       <CountryInfoCard v-if="countryInfo" :info="countryInfo" />
 
       <!-- Stats -->
-      <div class="mb-12">
+      <div id="sec-statistics" class="mb-12 scroll-mt-24">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">Statistics</h2>
 
         <template v-if="statsPending">
@@ -86,7 +92,7 @@
       </div>
 
       <!-- UN Voting Record (Last Session) -->
-      <div class="mb-12">
+      <div id="sec-un-voting" class="mb-12 scroll-mt-24">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">UN Voting Record</h2>
 
         <template v-if="countryVotesPending">
@@ -225,7 +231,7 @@
       </div>
 
       <!-- UNSC Membership -->
-      <div v-if="unscData && (unscData.isPermanent || unscData.totalTerms > 0)" class="mb-12">
+      <div v-if="unscData && (unscData.isPermanent || unscData.totalTerms > 0)" id="sec-unsc-membership" class="mb-12 scroll-mt-24">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">UN Security Council</h2>
         <div class="bg-white rounded-2xl border border-primary-100 p-6">
           <template v-if="unscData.isPermanent">
@@ -255,7 +261,7 @@
       </div>
 
       <!-- UNSC Vetoes (P5 only) -->
-      <div v-if="vetoesData?.applicable" class="mb-12">
+      <div v-if="vetoesData?.applicable" id="sec-unsc-vetoes" class="mb-12 scroll-mt-24">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">
           UNSC Vetoes
           <span class="text-base font-normal text-primary-400">({{ vetoesData.total }})</span>
@@ -278,7 +284,7 @@
       </div>
 
       <!-- UNSC Votes (for countries that have voted on SC resolutions) -->
-      <div v-if="unscVotesData?.available" class="mb-12">
+      <div v-if="unscVotesData?.available" id="sec-unsc-voting-record" class="mb-12 scroll-mt-24">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">
           Security Council Voting Record
           <span class="text-base font-normal text-primary-400">({{ unscVotesData.stats?.total }} resolutions)</span>
@@ -314,7 +320,7 @@
       </div>
 
       <!-- Treaty Status -->
-      <div v-if="treatiesData?.treaties?.length" class="mb-12">
+      <div v-if="treatiesData?.treaties?.length" id="sec-treaties" class="mb-12 scroll-mt-24">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">Treaty Status</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <div
@@ -346,7 +352,7 @@
       </div>
 
       <!-- Sanctions -->
-      <div v-if="sanctionsData" class="mb-12">
+      <div v-if="sanctionsData" id="sec-sanctions" class="mb-12 scroll-mt-24">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">Sanctions</h2>
         <div v-if="sanctionsData.sanctioned" class="space-y-3">
           <div
@@ -374,7 +380,7 @@
       </div>
 
       <!-- Diplomatic Recognition -->
-      <div v-if="recognitionData?.entities?.length" class="mb-12">
+      <div v-if="recognitionData?.entities?.length" id="sec-recognition" class="mb-12 scroll-mt-24">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">Diplomatic Recognition</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div
@@ -406,7 +412,7 @@
       </div>
 
       <!-- Military & Defense -->
-      <div class="mb-12">
+      <div id="sec-military" class="mb-12 scroll-mt-24">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">Military &amp; Defense</h2>
           <!-- Military Capabilities (Global Firepower) -->
           <div class="mb-8">
@@ -512,23 +518,239 @@
             </div>
           </div>
 
-          <!-- View group-level data -->
-          <div v-if="(country as any).groups?.length" class="mt-8 bg-primary-50 rounded-2xl border border-primary-100 p-5">
-            <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-3">Compare with group data</div>
-            <p class="text-sm text-primary-500 mb-3">View combined military capabilities and conflict events for this country's groups:</p>
-            <div class="flex flex-wrap gap-2">
-              <NuxtLink
-                v-for="g in (country as any).groups"
-                :key="g.gid"
-                :to="`/groups/${g.gid}`"
-                class="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg bg-white text-primary-700 border border-primary-200 hover:bg-primary-100 hover:border-primary-300 transition-colors"
-              >{{ g.acronym || g.name }}</NuxtLink>
+      </div>
+
+      <!-- GDELT Events & Tone -->
+      <div id="sec-gdelt" class="mb-12 scroll-mt-24">
+        <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">GDELT Events &amp; Media Tone</h2>
+
+        <template v-if="gdeltPending">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="skeleton h-24 rounded-xl" />
+            <div class="skeleton h-24 rounded-xl" />
+            <div class="skeleton h-24 rounded-xl" />
+          </div>
+        </template>
+
+        <template v-else-if="gdeltData?.has_data">
+          <!-- Media Tone -->
+          <div class="mb-6">
+            <h3 class="font-serif text-lg font-bold text-primary-900 mb-3">Media Tone &amp; Coverage</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+              <div class="bg-white rounded-2xl border border-primary-100 p-5">
+                <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Average Tone</div>
+                <div
+                  class="text-2xl font-serif font-bold"
+                  :class="gdeltData.media.avg_tone >= 0 ? 'text-emerald-600' : 'text-red-600'"
+                >{{ gdeltData.media.avg_tone.toFixed(2) }}</div>
+                <div class="text-xs text-primary-400 mt-1">{{ gdeltData.media.avg_tone >= 0 ? 'Positive' : 'Negative' }} sentiment</div>
+              </div>
+              <div class="bg-white rounded-2xl border border-primary-100 p-5">
+                <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Article Volume</div>
+                <div class="text-2xl font-serif font-bold text-primary-900">{{ formatGdeltVolume(gdeltData.media.article_volume) }}</div>
+                <div class="text-xs text-primary-400 mt-1">Last 12 months</div>
+              </div>
+              <div class="bg-white rounded-2xl border border-primary-100 p-5">
+                <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Cooperation Ratio</div>
+                <div class="text-2xl font-serif font-bold text-primary-900">{{ (gdeltData.events.cooperation_ratio * 100).toFixed(1) }}%</div>
+                <div class="text-xs text-primary-400 mt-1">Of cooperative + conflictual</div>
+              </div>
+            </div>
+
+            <!-- Monthly Sparkline -->
+            <div v-if="gdeltData.media.monthly_trend?.length" class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-3">Monthly Article Volume</div>
+              <div class="flex items-end gap-1 h-16">
+                <div
+                  v-for="(vol, i) in gdeltData.media.monthly_trend"
+                  :key="i"
+                  class="flex-1 bg-indigo-200 rounded-t hover:bg-indigo-400 transition-colors"
+                  :style="{ height: Math.max((vol / maxMonthlyVolume) * 56, 4) + 'px' }"
+                  :title="`Month ${i + 1}: ${vol.toLocaleString()} articles`"
+                />
+              </div>
+              <div class="flex justify-between text-[10px] text-primary-400 mt-1">
+                <span>12 months ago</span>
+                <span>Now</span>
+              </div>
             </div>
           </div>
+
+          <!-- Event Breakdown -->
+          <div class="mb-6">
+            <h3 class="font-serif text-lg font-bold text-primary-900 mb-3">Event Breakdown</h3>
+            <div class="bg-white rounded-2xl border border-primary-100 p-5">
+              <!-- Cooperation vs Conflict split bar -->
+              <div class="mb-4">
+                <div class="flex items-center gap-3 mb-2">
+                  <div class="flex-1 flex h-6 rounded-full overflow-hidden bg-gray-100">
+                    <div
+                      class="bg-emerald-400 transition-all"
+                      :style="{ width: (gdeltData.events.cooperation_ratio * 100) + '%' }"
+                      :title="`Cooperative: ${gdeltData.events.cooperative.toLocaleString()}`"
+                    />
+                    <div
+                      class="bg-red-400 transition-all"
+                      :style="{ width: ((1 - gdeltData.events.cooperation_ratio) * 100) + '%' }"
+                      :title="`Conflictual: ${gdeltData.events.conflictual.toLocaleString()}`"
+                    />
+                  </div>
+                </div>
+                <div class="flex gap-4 text-xs text-primary-500">
+                  <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-sm bg-emerald-400"></span> Cooperative ({{ gdeltData.events.cooperative.toLocaleString() }})</span>
+                  <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-sm bg-red-400"></span> Conflictual ({{ gdeltData.events.conflictual.toLocaleString() }})</span>
+                </div>
+              </div>
+
+              <!-- Stat cards -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+                <div class="text-center p-3 bg-primary-50 rounded-xl">
+                  <div class="text-lg font-serif font-bold text-primary-900">{{ gdeltData.events.total.toLocaleString() }}</div>
+                  <div class="text-[10px] text-primary-400 uppercase">Total Events</div>
+                </div>
+                <div class="text-center p-3 bg-primary-50 rounded-xl">
+                  <div class="text-lg font-serif font-bold text-emerald-600">{{ gdeltData.events.cooperative.toLocaleString() }}</div>
+                  <div class="text-[10px] text-primary-400 uppercase">Cooperative</div>
+                </div>
+                <div class="text-center p-3 bg-primary-50 rounded-xl">
+                  <div class="text-lg font-serif font-bold text-red-600">{{ gdeltData.events.conflictual.toLocaleString() }}</div>
+                  <div class="text-[10px] text-primary-400 uppercase">Conflictual</div>
+                </div>
+                <div class="text-center p-3 bg-primary-50 rounded-xl">
+                  <div class="text-lg font-serif font-bold text-primary-900">{{ gdeltData.events.goldstein_avg.toFixed(1) }}</div>
+                  <div class="text-[10px] text-primary-400 uppercase">Avg Goldstein</div>
+                </div>
+              </div>
+
+              <!-- CAMEO root code bars -->
+              <div v-if="topCameoCodes.length" class="border-t border-primary-100 pt-4">
+                <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-3">CAMEO Event Types (Top 10)</div>
+                <div class="space-y-2">
+                  <div v-for="c in topCameoCodes" :key="c.code" class="flex items-center gap-3">
+                    <span class="text-xs text-primary-500 w-36 truncate">{{ cameoLabel(c.code) }}</span>
+                    <div class="flex-1 h-4 bg-primary-50 rounded-full overflow-hidden">
+                      <div
+                        class="h-full rounded-full"
+                        :class="parseInt(c.code) <= 10 ? 'bg-emerald-300' : 'bg-red-300'"
+                        :style="{ width: Math.max((c.count / topCameoCodes[0].count) * 100, 2) + '%' }"
+                      />
+                    </div>
+                    <span class="text-xs text-primary-400 tabular-nums w-16 text-right">{{ c.count.toLocaleString() }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Most Co-mentioned Countries -->
+          <div v-if="gdeltData.bilateral?.length">
+            <h3 class="font-serif text-lg font-bold text-primary-900 mb-1">Most Co-mentioned Countries</h3>
+            <p class="text-xs text-primary-400 mb-3">Countries that appear most often alongside this one in GDELT-coded news events. Reflects media attention, not formal diplomatic ties.</p>
+            <div class="bg-white rounded-2xl border border-primary-100 overflow-hidden">
+              <div class="divide-y divide-primary-50">
+                <NuxtLink
+                  v-for="bp in gdeltData.bilateral.slice(0, 5)"
+                  :key="bp.partner"
+                  :to="`/countries/${bp.partner}`"
+                  class="px-5 py-3 flex items-center gap-3 hover:bg-primary-50/50 transition-colors"
+                >
+                  <span v-if="partnerIso2(bp.partner)" class="text-base">{{ isoToFlag(partnerIso2(bp.partner)) }}</span>
+                  <span class="text-sm text-primary-800 flex-1">{{ partnerName(bp.partner) }}</span>
+                  <div class="flex items-center gap-2">
+                    <div class="w-16 h-3 rounded-full overflow-hidden bg-gray-100 hidden sm:block">
+                      <div
+                        class="h-full rounded-full bg-emerald-400"
+                        :style="{ width: (bp.cooperation_ratio * 100) + '%' }"
+                      />
+                    </div>
+                    <span class="text-xs tabular-nums" :class="bp.avg_tone >= 0 ? 'text-emerald-600' : 'text-red-600'">
+                      {{ bp.avg_tone >= 0 ? '+' : '' }}{{ bp.avg_tone.toFixed(1) }}
+                    </span>
+                    <span class="text-xs text-primary-400 tabular-nums whitespace-nowrap">{{ bp.events.toLocaleString() }} events</span>
+                  </div>
+                </NuxtLink>
+              </div>
+            </div>
+          </div>
+        </template>
+
+        <div v-else class="bg-primary-50 rounded-2xl border border-primary-100 p-8 text-center">
+          <p class="text-primary-400">No GDELT event data available for this country.</p>
+        </div>
+      </div>
+
+      <!-- UN General Debate Speeches -->
+      <div id="sec-speeches" class="mb-12 scroll-mt-24">
+        <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">UN General Debate Speeches</h2>
+
+        <template v-if="speechesPending">
+          <div class="skeleton h-28 rounded-xl" />
+        </template>
+
+        <template v-else-if="speechesData?.available && speechesData.speeches.length">
+          <div class="bg-white rounded-2xl border border-primary-100 p-6">
+            <div class="flex items-center justify-between mb-4">
+              <div class="text-sm text-primary-500">
+                {{ speechesData.total }} speech{{ speechesData.total !== 1 ? 'es' : '' }}
+                <span v-if="speechesData.speeches.length >= 2" class="text-primary-400">
+                  &middot; {{ speechesData.speeches[speechesData.speeches.length - 1].year }}&ndash;{{ speechesData.speeches[0].year }}
+                </span>
+              </div>
+              <NuxtLink
+                :to="`/countries/${iso}/speeches`"
+                class="text-xs font-medium px-3 py-1.5 rounded-lg bg-primary-900 text-white hover:bg-primary-800 transition-colors"
+              >View all speeches &rarr;</NuxtLink>
+            </div>
+
+            <!-- Recent speeches (clickable) -->
+            <div class="border-t border-primary-100 pt-4 space-y-3">
+              <NuxtLink
+                v-for="speech in speechesData.speeches.slice(0, 3)"
+                :key="speech.session"
+                :to="`/countries/${iso}/speeches?session=${speech.session}`"
+                class="block rounded-xl p-3 -mx-1 hover:bg-primary-50/70 transition-colors cursor-pointer"
+              >
+                <div class="flex items-start gap-3">
+                  <span class="text-lg font-serif font-bold text-primary-900">{{ speech.year }}</span>
+                  <div class="flex-1 min-w-0">
+                    <div v-if="speech.speaker" class="text-sm text-primary-700 font-medium">
+                      {{ speech.speaker }}
+                      <span v-if="speech.speaker_title" class="text-primary-400 font-normal"> &middot; {{ speech.speaker_title }}</span>
+                    </div>
+                    <!-- Analysis preview -->
+                    <div v-if="speech.analysis" class="mt-1.5">
+                      <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-xs px-2 py-0.5 rounded-full font-medium"
+                          :class="speech.analysis.sentiment?.overall === 'positive' ? 'bg-emerald-100 text-emerald-800' : speech.analysis.sentiment?.overall === 'negative' ? 'bg-red-100 text-red-800' : speech.analysis.sentiment?.overall === 'mixed' ? 'bg-amber-100 text-amber-800' : 'bg-primary-100 text-primary-600'"
+                        >{{ speech.analysis.sentiment?.overall }}</span>
+                        <span v-for="desc in speech.analysis.sentiment?.tone_descriptors?.slice(0, 2)" :key="desc" class="text-xs text-primary-400">{{ desc }}</span>
+                      </div>
+                      <p class="text-xs text-primary-600 leading-relaxed line-clamp-2">{{ speech.analysis.summary }}</p>
+                    </div>
+                    <div v-else class="flex flex-wrap gap-1 mt-1.5">
+                      <span
+                        v-for="kw in speech.keywords.slice(0, 8)"
+                        :key="kw"
+                        class="inline-block text-xs px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-100"
+                      >{{ kw }}</span>
+                    </div>
+                  </div>
+                  <svg class="w-4 h-4 text-primary-300 mt-1.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+              </NuxtLink>
+            </div>
+          </div>
+        </template>
+
+        <div v-else class="bg-primary-50 rounded-2xl border border-primary-100 p-8 text-center">
+          <p class="text-primary-400">No UN General Debate speech data available for this country.</p>
+        </div>
       </div>
 
       <!-- Memberships with Rankings -->
-      <div>
+      <div id="sec-memberships" class="scroll-mt-24">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">
           Group Memberships
           <span class="text-base font-normal text-primary-400">({{ (country as any).groups.length }})</span>
@@ -677,6 +899,68 @@ const militaryData = computed(() => militaryRaw.value as any)
 const { conflict: conflictRaw, pending: conflictPending } = useCountryConflict(iso)
 const conflictData = computed(() => conflictRaw.value as any)
 
+// GDELT Events & Tone
+const { gdelt: gdeltRaw, pending: gdeltPending } = useCountryGDELT(iso)
+const gdeltData = computed(() => gdeltRaw.value as any)
+
+// UN General Debate Speeches
+const { speeches: speechesRaw, pending: speechesPending } = useCountrySpeeches(iso)
+const speechesData = computed(() => speechesRaw.value as any)
+
+const maxMonthlyVolume = computed(() => {
+  const trend = gdeltData.value?.media?.monthly_trend
+  if (!trend?.length) return 1
+  return Math.max(...trend, 1)
+})
+
+const CAMEO_LABELS: Record<string, string> = {
+  '01': 'Make Statement', '02': 'Appeal', '03': 'Express Intent to Cooperate',
+  '04': 'Consult', '05': 'Diplomatic Cooperation', '06': 'Material Cooperation',
+  '07': 'Provide Aid', '08': 'Yield', '09': 'Investigate', '10': 'Demand',
+  '11': 'Disapprove', '12': 'Reject', '13': 'Threaten', '14': 'Protest',
+  '15': 'Exhibit Force Posture', '16': 'Reduce Relations', '17': 'Coerce',
+  '18': 'Assault', '19': 'Fight', '20': 'Unconventional Mass Violence',
+}
+
+function cameoLabel(code: string): string {
+  return CAMEO_LABELS[code] || `Code ${code}`
+}
+
+const topCameoCodes = computed(() => {
+  const byCameo = gdeltData.value?.events?.by_cameo
+  if (!byCameo) return []
+  return Object.entries(byCameo)
+    .map(([code, count]) => ({ code, count: count as number }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 10)
+})
+
+function formatGdeltVolume(n: number): string {
+  if (n >= 1e6) return `${(n / 1e6).toFixed(1)}M`
+  if (n >= 1e3) return `${(n / 1e3).toFixed(0)}K`
+  return n.toLocaleString()
+}
+
+// Country lookup for bilateral partners
+const { data: allCountriesRaw } = useFetch('/api/countries', { lazy: true })
+const countryLookup = computed(() => {
+  const m = new Map<string, { iso2: string; name: string }>()
+  const list = allCountriesRaw.value as any[]
+  if (!list) return m
+  for (const c of list) {
+    if (c.iso3) m.set(c.iso3, { iso2: c.iso2, name: c.name })
+  }
+  return m
+})
+
+function partnerIso2(iso3: string): string {
+  return countryLookup.value.get(iso3.toUpperCase())?.iso2 ?? ''
+}
+
+function partnerName(iso3: string): string {
+  return countryLookup.value.get(iso3.toUpperCase())?.name ?? iso3
+}
+
 const maxTrendFatalities = computed(() => {
   const trend = conflictData.value?.trend
   if (!trend?.length) return 1
@@ -817,4 +1101,21 @@ useHead({
     return c ? `${c.name} — World Country Groups` : 'Loading...'
   }),
 })
+
+// Section navigation
+const countrySections = [
+  { id: 'sec-statistics', label: 'Statistics' },
+  { id: 'sec-un-voting', label: 'UN Voting' },
+  { id: 'sec-unsc-membership', label: 'Security Council' },
+  { id: 'sec-unsc-vetoes', label: 'UNSC Vetoes' },
+  { id: 'sec-unsc-voting-record', label: 'SC Voting Record' },
+  { id: 'sec-treaties', label: 'Treaties' },
+  { id: 'sec-sanctions', label: 'Sanctions' },
+  { id: 'sec-recognition', label: 'Recognition' },
+  { id: 'sec-military', label: 'Military' },
+  { id: 'sec-gdelt', label: 'GDELT' },
+  { id: 'sec-speeches', label: 'Speeches' },
+  { id: 'sec-memberships', label: 'Memberships' },
+]
+const { visibleSections, activeSection, scrollTo: sectionScrollTo } = useSectionNav(countrySections)
 </script>

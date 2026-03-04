@@ -226,6 +226,80 @@
         </div>
       </div>
 
+      <!-- Theme Voting Trends -->
+      <div v-if="countryVotesData?.available" class="mb-12">
+        <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">Theme Voting Trends</h2>
+        <div v-if="themeTrendsPending" class="space-y-3">
+          <div v-for="i in 5" :key="i" class="skeleton h-8 rounded-lg" />
+        </div>
+        <div v-else-if="themeTrendsThemes.length" class="bg-white rounded-2xl border border-primary-100 p-6">
+          <!-- Theme selector -->
+          <div class="mb-5">
+            <select
+              v-model="selectedTrendTheme"
+              class="text-sm border border-primary-200 rounded-lg px-3 py-2 bg-white text-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-300"
+            >
+              <option v-for="t in themeTrendsThemes" :key="t" :value="t">{{ t }}</option>
+            </select>
+          </div>
+
+          <!-- Decade bars -->
+          <div v-if="selectedTrendData" class="space-y-3">
+            <div v-for="d in selectedTrendData.decades" :key="d.decade" class="flex items-center gap-3">
+              <span class="text-xs text-primary-400 tabular-nums w-12 text-right font-medium">{{ d.decade }}</span>
+              <div
+                class="flex h-5 rounded-full overflow-hidden bg-gray-100"
+                :style="{ width: decadeBarWidth(d.resolutions) + '%', minWidth: '40px' }"
+              >
+                <div
+                  v-if="d.yes > 0"
+                  class="bg-emerald-400 transition-all"
+                  :style="{ width: (d.yes / d.resolutions * 100) + '%' }"
+                  :title="`Yes: ${d.yes}`"
+                />
+                <div
+                  v-if="d.no > 0"
+                  class="bg-red-400 transition-all"
+                  :style="{ width: (d.no / d.resolutions * 100) + '%' }"
+                  :title="`No: ${d.no}`"
+                />
+                <div
+                  v-if="d.abstain > 0"
+                  class="bg-amber-400 transition-all"
+                  :style="{ width: (d.abstain / d.resolutions * 100) + '%' }"
+                  :title="`Abstain: ${d.abstain}`"
+                />
+                <div
+                  v-if="d.resolutions - d.yes - d.no - d.abstain > 0"
+                  class="bg-gray-300 transition-all"
+                  :style="{ width: ((d.resolutions - d.yes - d.no - d.abstain) / d.resolutions * 100) + '%' }"
+                  :title="`Non-voting: ${d.resolutions - d.yes - d.no - d.abstain}`"
+                />
+              </div>
+              <span class="text-xs text-primary-400 tabular-nums whitespace-nowrap">
+                {{ d.resolutions }} res &middot; {{ d.resolutions > 0 ? Math.round(d.yes / d.resolutions * 100) : 0 }}% Yes
+              </span>
+            </div>
+
+            <!-- Low-data warning -->
+            <p v-if="selectedTrendData.decades.some((d: any) => d.resolutions > 0 && d.resolutions < 5)" class="text-xs text-amber-600 mt-2">
+              * Some decades have fewer than 5 resolutions — trends may not be representative.
+            </p>
+          </div>
+
+          <!-- Legend -->
+          <div class="flex flex-wrap gap-4 mt-4 text-xs text-primary-500">
+            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-sm bg-emerald-400"></span> Yes</span>
+            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-sm bg-red-400"></span> No</span>
+            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-sm bg-amber-400"></span> Abstain</span>
+            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-sm bg-gray-300"></span> Non-voting</span>
+          </div>
+        </div>
+        <div v-else class="bg-primary-50 rounded-2xl border border-primary-100 p-6 text-center">
+          <p class="text-primary-400 text-sm">No theme trend data available.</p>
+        </div>
+      </div>
+
       <!-- Voting Alignment -->
       <div v-if="alignmentData?.mostAligned?.length" class="mb-12">
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">
@@ -334,6 +408,27 @@ function toggleSearchRes(id: string) {
 // Theme stats
 const { themeStats: countryThemeStatsRaw, pending: countryThemeStatsPending } = useCountryThemeStats(iso)
 const countryThemeStatsData = computed(() => (countryThemeStatsRaw.value as any)?.stats ?? [])
+
+// Theme trends
+const { themeTrends: themeTrendsRaw, pending: themeTrendsPending } = useCountryThemeTrends(iso)
+const themeTrendsData = computed(() => (themeTrendsRaw.value as any)?.trends ?? [])
+const themeTrendsThemes = computed(() => themeTrendsData.value.map((t: any) => t.theme))
+const selectedTrendTheme = ref<string>('')
+watch(themeTrendsThemes, (themes) => {
+  if (themes.length && !selectedTrendTheme.value) {
+    selectedTrendTheme.value = themes[0]
+  }
+}, { immediate: true })
+const selectedTrendData = computed(() => {
+  if (!selectedTrendTheme.value) return null
+  return themeTrendsData.value.find((t: any) => t.theme === selectedTrendTheme.value) ?? null
+})
+function decadeBarWidth(resolutions: number): number {
+  if (!selectedTrendData.value) return 0
+  const maxRes = Math.max(...selectedTrendData.value.decades.map((d: any) => d.resolutions))
+  if (maxRes === 0) return 0
+  return Math.max(15, Math.round((resolutions / maxRes) * 100))
+}
 
 // Session bar chart
 const votingSessions = computed(() => {
