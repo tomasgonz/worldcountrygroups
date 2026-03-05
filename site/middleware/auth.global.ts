@@ -16,6 +16,14 @@ export default defineNuxtRouteMiddleware(async (to) => {
     return
   }
 
+  // Auth-required pages (even in public mode)
+  const authRequiredPaths = ['/account', '/dashboard']
+  if (authRequiredPaths.some(p => to.path.startsWith(p))) {
+    if (!state.value.authenticated) return navigateTo('/login?redirect=' + encodeURIComponent(to.fullPath))
+    if (state.value.status !== 'approved') return navigateTo('/login')
+    return
+  }
+
   // Public mode: everything accessible
   if (state.value.siteMode === 'public') return
 

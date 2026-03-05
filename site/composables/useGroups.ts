@@ -378,3 +378,35 @@ export function formatDefenseBudget(n: number | null | undefined): string {
   if (n >= 1e6) return `$${(n / 1e6).toFixed(0)}M`
   return `$${n.toLocaleString()}`
 }
+
+// --- Speech Trend Charts ---
+export function useCountrySpeechTrends(iso: string | Ref<string>, opts?: {
+  startYear?: Ref<number | undefined>
+  endYear?: Ref<number | undefined>
+}) {
+  const code = toRef(iso)
+  const { data: trends, pending, error } = useFetch(() => {
+    const params = new URLSearchParams()
+    if (opts?.startYear?.value != null) params.set('startYear', String(opts.startYear.value))
+    if (opts?.endYear?.value != null) params.set('endYear', String(opts.endYear.value))
+    const qs = params.toString()
+    return `/api/countries/${code.value}/speech-trends${qs ? '?' + qs : ''}`
+  }, { lazy: true })
+  return { trends, pending, error }
+}
+
+export function useGroupSpeechTrends(gid: string | Ref<string>) {
+  const id = toRef(gid)
+  const { data: trends, pending, error } = useFetch(() => `/api/groups/${id.value}/speech-trends`, { lazy: true })
+  return { trends, pending, error }
+}
+
+export function useSpeechGroupComparison(selectedGroups?: Ref<string[]>) {
+  const { data: comparison, pending, error } = useFetch(() => {
+    if (selectedGroups?.value?.length) {
+      return `/api/speeches/group-comparison?groups=${selectedGroups.value.join(',')}`
+    }
+    return '/api/speeches/group-comparison'
+  }, { lazy: true })
+  return { comparison, pending, error }
+}

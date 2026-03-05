@@ -32,6 +32,51 @@
       </div>
 
       <template v-else-if="speechesData?.available && speechesData.speeches.length">
+        <!-- Year Range Slider -->
+        <div v-if="trendsData && sliderStart != null && sliderEnd != null && yearMax - yearMin > 1" class="bg-white rounded-2xl border border-primary-100 p-6 mb-6">
+          <ChartsChartRangeSlider
+            :min="yearMin"
+            :max="yearMax"
+            :start="sliderStart"
+            :end="sliderEnd"
+            @update:start="onSliderStartChange"
+            @update:end="onSliderEndChange"
+          />
+        </div>
+
+        <!-- Speech Trend Charts -->
+        <div v-if="trendsData" class="space-y-8 mb-10">
+          <!-- Sentiment Timeline -->
+          <div v-if="trendsData.sentimentTimeline?.length > 1" class="bg-white rounded-2xl border border-primary-100 p-6">
+            <h2 class="font-serif text-xl font-bold text-primary-900 mb-1">Sentiment Timeline</h2>
+            <p class="text-xs text-primary-400 mb-4">How this country's tone at the UN General Debate has evolved over time</p>
+            <ChartsChartLine
+              :data="sentimentChartData"
+              :series-names="['Sentiment']"
+              :colors="['#10b981']"
+              :y-min="0" :y-max="1"
+              :y-format="sentimentLabel"
+              :show-area="true"
+              :legend="false"
+              :height="200"
+            />
+          </div>
+
+          <!-- Theme Radar -->
+          <div v-if="radarAxes.length >= 3" class="bg-white rounded-2xl border border-primary-100 p-6">
+            <h2 class="font-serif text-xl font-bold text-primary-900 mb-1">Theme Profile</h2>
+            <p class="text-xs text-primary-400 mb-4">Share of speeches where each theme was rated as high relevance</p>
+            <ChartsChartRadar :axes="radarAxes" :size="320" />
+          </div>
+
+          <!-- Mention Network -->
+          <div v-if="mentionBars.length" class="bg-white rounded-2xl border border-primary-100 p-6">
+            <h2 class="font-serif text-xl font-bold text-primary-900 mb-1">Most-Mentioned Countries</h2>
+            <p class="text-xs text-primary-400 mb-4">Countries most frequently referenced in speeches, with context breakdown</p>
+            <ChartsChartBar :bars="mentionBars" :label-width="120" />
+          </div>
+        </div>
+
         <!-- Keyword cloud from all speeches -->
         <div class="mb-10">
           <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">Key Topics Across Sessions</h2>
@@ -40,9 +85,11 @@
               <span
                 v-for="kw in allKeywords"
                 :key="kw.keyword"
-                class="inline-block px-3 py-1.5 rounded-full text-sm font-medium transition-colors"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors"
                 :class="keywordSizeClass(kw.count)"
-              >{{ kw.keyword }}</span>
+              >{{ kw.keyword }}
+                <ChartsChartSparkline v-if="keywordSparkData[kw.keyword]?.length > 2" :data="keywordSparkData[kw.keyword]" :width="48" :height="14" :color="'#6366f1'" />
+              </span>
             </div>
           </div>
         </div>
@@ -177,7 +224,7 @@
                         :to="`/countries/${mc.iso3.toLowerCase()}`"
                         class="text-xs px-2 py-0.5 rounded-full border hover:bg-primary-50 transition-colors"
                         :class="mc.context === 'ally' || mc.context === 'partnership' ? 'bg-green-50 border-green-200 text-green-700' : mc.context === 'criticism' ? 'bg-red-50 border-red-200 text-red-700' : mc.context === 'concern' ? 'bg-amber-50 border-amber-200 text-amber-700' : 'bg-primary-50 border-primary-200 text-primary-600'"
-                      >{{ mc.iso3 }} <span class="opacity-60">{{ mc.context }}</span></NuxtLink>
+                      >{{ countryName(mc.iso3) }} <span class="opacity-60">{{ mc.context }}</span></NuxtLink>
                     </div>
                   </div>
 
@@ -246,8 +293,121 @@ const route = useRoute()
 const iso = route.params.iso as string
 
 const { country, error } = useCountry(iso)
+const { countries: allCountries } = useCountries()
+const countryNameMap = computed(() => {
+  const map = new Map<string, string>()
+  if (allCountries.value) {
+    for (const c of allCountries.value as any[]) {
+      map.set(c.iso3, c.name)
+    }
+  }
+  return map
+})
+function countryName(iso3: string): string {
+  return countryNameMap.value.get(iso3.toUpperCase()) || iso3
+}
+
 const { speeches: speechesRaw, pending: speechesPending } = useCountrySpeeches(iso)
 const speechesData = computed(() => speechesRaw.value as any)
+
+// Year range slider state
+const sliderStart = ref<number | undefined>(undefined)
+const sliderEnd = ref<number | undefined>(undefined)
+const debouncedStart = ref<number | undefined>(undefined)
+const debouncedEnd = ref<number | undefined>(undefined)
+let _debounceTimer: ReturnType<typeof setTimeout> | null = null
+
+function onSliderStartChange(v: number) {
+  sliderStart.value = v
+  scheduleDebounce()
+}
+function onSliderEndChange(v: number) {
+  sliderEnd.value = v
+  scheduleDebounce()
+}
+function scheduleDebounce() {
+  if (_debounceTimer) clearTimeout(_debounceTimer)
+  _debounceTimer = setTimeout(() => {
+    debouncedStart.value = sliderStart.value
+    debouncedEnd.value = sliderEnd.value
+  }, 400)
+}
+
+// Speech trend charts
+const { trends: trendsRaw } = useCountrySpeechTrends(iso, {
+  startYear: debouncedStart,
+  endYear: debouncedEnd,
+})
+const trendsData = computed(() => trendsRaw.value as any)
+
+// Compute year range bounds from initial (unfiltered) sentiment timeline
+const yearMin = ref(1946)
+const yearMax = ref(2025)
+watch(trendsData, (data) => {
+  if (!data?.sentimentTimeline?.length) return
+  // Only set once (on first load)
+  if (sliderStart.value != null) return
+  const years = data.sentimentTimeline.map((d: any) => d.year)
+  yearMin.value = Math.min(...years)
+  yearMax.value = Math.max(...years)
+  sliderStart.value = yearMin.value
+  sliderEnd.value = yearMax.value
+}, { immediate: true })
+
+const MENTION_COLORS: Record<string, string> = {
+  ally: '#10b981', partnership: '#10b981',
+  criticism: '#ef4444', concern: '#f59e0b',
+  general: '#94a3b8', diplomacy: '#6366f1',
+  cooperation: '#3b82f6', trade: '#8b5cf6',
+}
+
+const sentimentChartData = computed(() => {
+  if (!trendsData.value?.sentimentTimeline) return []
+  return trendsData.value.sentimentTimeline.map((d: any) => ({
+    x: d.year,
+    values: [d.sentiment],
+    label: `Session ${d.session} (${d.year})`,
+  }))
+})
+
+function sentimentLabel(v: number): string {
+  if (v >= 0.85) return 'Pos'
+  if (v >= 0.4) return 'Mix'
+  if (v >= 0.15) return 'Neu'
+  return 'Neg'
+}
+
+const radarAxes = computed(() => {
+  if (!trendsData.value?.themeRadar) return []
+  return trendsData.value.themeRadar.map((t: any) => ({
+    label: t.name.replace(/_/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase()).slice(0, 18),
+    value: t.value,
+    rawValue: `${(t.value * 100).toFixed(0)}% (${t.count})`,
+  }))
+})
+
+const mentionBars = computed(() => {
+  if (!trendsData.value?.mentionNetwork?.mentioned) return []
+  return trendsData.value.mentionNetwork.mentioned.slice(0, 12).map((m: any) => {
+    const topCtx = Object.entries(m.contexts || {}).sort((a: any, b: any) => b[1] - a[1])[0]
+    const ctx = topCtx ? topCtx[0] as string : 'general'
+    return {
+      label: m.name || m.iso3,
+      value: m.count,
+      color: MENTION_COLORS[ctx] || '#94a3b8',
+      tooltipLines: Object.entries(m.contexts || {}).map(([k, v]: any) => ({ label: k, value: v, color: MENTION_COLORS[k] || '#94a3b8' })),
+    }
+  })
+})
+
+const keywordSparkData = computed(() => {
+  if (!trendsData.value?.keywordTrends) return {} as Record<string, number[]>
+  const map: Record<string, number[]> = {}
+  for (const kt of trendsData.value.keywordTrends) {
+    map[kt.keyword] = kt.trend.map((t: any) => t.count)
+  }
+  return map
+})
 
 // Decade filter
 const selectedDecade = ref<number | null>(null)

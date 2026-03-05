@@ -115,6 +115,7 @@ class GroupRegistry {
       classifier: group.classifier,
       domains: group.domains,
       country_count: group.countries.length,
+      country_names: group.countries.map(c => c.name),
     }
     if (group.founded) summary.founded = group.founded
     if (group.headquarters) summary.headquarters = group.headquarters

@@ -121,6 +121,92 @@
       <div class="text-xs text-primary-400">
         Based on AI analysis of UN General Debate speeches. Theme relevance and policy topics are determined per-country speech analysis.
       </div>
+
+      <!-- Group Sentiment Comparison -->
+      <div class="mt-12">
+        <h2 class="font-serif text-xl font-bold text-primary-900 mb-2">Sentiment Across Blocs</h2>
+        <p class="text-primary-400 text-sm mb-4">Positive speech sentiment count over time for selected groups and countries.</p>
+
+        <!-- Bloc selector -->
+        <div class="mb-6">
+          <div class="flex flex-wrap gap-2 items-center">
+            <span
+              v-for="sel in selectedBlocs"
+              :key="sel"
+              class="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200"
+            >
+              {{ blocLabel(sel) }}
+              <button @click="removeBloc(sel)" class="ml-0.5 hover:text-red-600 transition-colors">&times;</button>
+            </span>
+            <div class="relative" ref="dropdownRef">
+              <button
+                @click="showBlocDropdown = !showBlocDropdown"
+                class="text-xs px-3 py-1 rounded-full border border-dashed border-primary-300 text-primary-500 hover:border-primary-500 hover:text-primary-700 transition-colors"
+              >+ Add</button>
+              <div
+                v-if="showBlocDropdown"
+                class="absolute z-20 top-8 left-0 w-64 bg-white border border-primary-200 rounded-xl shadow-lg max-h-72 overflow-y-auto"
+              >
+                <input
+                  v-model="blocSearchQuery"
+                  type="text"
+                  placeholder="Search groups or countries..."
+                  class="w-full text-xs px-3 py-2 border-b border-primary-100 focus:outline-none"
+                  @keydown.stop
+                />
+                <div v-if="filteredBlocOptions.length" class="py-1">
+                  <button
+                    v-for="opt in filteredBlocOptions"
+                    :key="opt.id"
+                    class="w-full text-left text-xs px-3 py-1.5 hover:bg-primary-50 transition-colors flex items-center justify-between"
+                    @click="addBloc(opt.id)"
+                  >
+                    <span>{{ opt.label }}</span>
+                    <span class="text-[10px] text-primary-400">{{ opt.type }}</span>
+                  </button>
+                </div>
+                <div v-else class="px-3 py-2 text-xs text-primary-400">No matches</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="comparisonData?.groups?.length" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div v-for="g in comparisonData.groups" :key="g.gid" class="bg-white rounded-xl border border-primary-100 p-4">
+            <div class="flex items-center justify-between mb-2">
+              <NuxtLink v-if="g.type !== 'country'" :to="`/groups/${g.gid}`" class="font-semibold text-sm text-primary-900 hover:text-primary-600 transition-colors">{{ g.name }}</NuxtLink>
+              <NuxtLink v-else :to="`/countries/${g.gid.toLowerCase()}`" class="font-semibold text-sm text-primary-900 hover:text-primary-600 transition-colors">{{ g.name }}</NuxtLink>
+            </div>
+            <ChartsChartLine
+              :data="groupComparisonLine(g.sentimentTimeline)"
+              :series-names="['Positive', 'Negative']"
+              :colors="['#10b981', '#ef4444']"
+              :show-area="true"
+              :legend="false"
+              :height="140"
+              :y-min="0"
+            />
+          </div>
+        </div>
+        <div v-else-if="comparisonPending" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div v-for="i in 3" :key="i" class="skeleton h-48 rounded-xl" />
+        </div>
+      </div>
+
+      <!-- Theme Heatmap -->
+      <div v-if="heatmapData" class="mt-12">
+        <h2 class="font-serif text-xl font-bold text-primary-900 mb-2">Global Theme Heatmap</h2>
+        <p class="text-primary-400 text-sm mb-6">Theme prevalence by decade across all speeches.</p>
+        <div class="bg-white rounded-xl border border-primary-100 p-6">
+          <ChartsChartHeatmap
+            :rows="heatmapData.themes"
+            :columns="heatmapData.decades"
+            :values="heatmapData.values"
+            :label-width="160"
+            :cell-size="48"
+          />
+        </div>
+      </div>
     </section>
 
     <!-- Keywords view (for sessions without analysis) -->
@@ -153,9 +239,98 @@
 </template>
 
 <script setup lang="ts">
-import { useSpeechSessions, useSpeechGroupPriorities, useSpeechTopics } from '~/composables/useGroups'
+import { useSpeechSessions, useSpeechGroupPriorities, useSpeechTopics, useSpeechGroupComparison, useGroups, useCountries } from '~/composables/useGroups'
 
 const sessionsData = useSpeechSessions()
+
+// Bloc selector state
+const DEFAULT_BLOCS = ['lldcs', 'g77', 'developing-ex-lldcs', 'eu', 'USA', 'canz']
+const selectedBlocs = ref<string[]>([...DEFAULT_BLOCS])
+const showBlocDropdown = ref(false)
+const blocSearchQuery = ref('')
+const dropdownRef = ref<HTMLElement | null>(null)
+
+const { groups: allGroups } = useGroups()
+const { countries: allCountries } = useCountries()
+
+const blocOptions = computed(() => {
+  const opts: { id: string; label: string; type: string }[] = []
+  if (allGroups.value) {
+    for (const g of allGroups.value as any[]) {
+      opts.push({ id: g.gid, label: `${g.acronym || g.gid} — ${g.name}`, type: 'group' })
+    }
+  }
+  if (allCountries.value) {
+    for (const c of allCountries.value as any[]) {
+      opts.push({ id: c.iso3, label: c.name, type: 'country' })
+    }
+  }
+  return opts
+})
+
+const filteredBlocOptions = computed(() => {
+  const selected = new Set(selectedBlocs.value.map(s => s.toLowerCase()))
+  const q = blocSearchQuery.value.toLowerCase()
+  return blocOptions.value
+    .filter(o => !selected.has(o.id.toLowerCase()) && (!q || o.label.toLowerCase().includes(q) || o.id.toLowerCase().includes(q)))
+    .slice(0, 20)
+})
+
+const blocLabelMap = computed(() => {
+  const map = new Map<string, string>()
+  for (const o of blocOptions.value) {
+    map.set(o.id.toLowerCase(), o.type === 'group' ? (o.label.split(' — ')[0] || o.id) : o.label)
+  }
+  return map
+})
+
+function blocLabel(id: string): string {
+  return blocLabelMap.value.get(id.toLowerCase()) || id
+}
+
+function addBloc(id: string) {
+  if (!selectedBlocs.value.some(s => s.toLowerCase() === id.toLowerCase())) {
+    selectedBlocs.value = [...selectedBlocs.value, id]
+  }
+  showBlocDropdown.value = false
+  blocSearchQuery.value = ''
+}
+
+function removeBloc(id: string) {
+  selectedBlocs.value = selectedBlocs.value.filter(s => s !== id)
+}
+
+// Close dropdown on click outside
+onMounted(() => {
+  document.addEventListener('click', (e: MouseEvent) => {
+    if (dropdownRef.value && !dropdownRef.value.contains(e.target as Node)) {
+      showBlocDropdown.value = false
+    }
+  })
+})
+
+// Group comparison charts
+const { comparison: comparisonRaw, pending: comparisonPending } = useSpeechGroupComparison(selectedBlocs)
+const comparisonData = computed(() => comparisonRaw.value as any)
+
+function groupComparisonLine(timeline: any[]) {
+  return timeline.map((s: any) => ({
+    x: s.year,
+    values: [s.positive, s.negative],
+    label: `Session ${s.session} (${s.year})`,
+  }))
+}
+
+// Theme heatmap from global data
+const heatmapData = computed(() => {
+  const hm = comparisonData.value?.themeHeatmap
+  if (!hm?.themes?.length) return null
+  return {
+    themes: hm.themes.map((t: string) => t.replace(/_/g, ' ')),
+    decades: hm.decades,
+    values: hm.values,
+  }
+})
 
 const selectedSession = ref<number | undefined>(undefined)
 

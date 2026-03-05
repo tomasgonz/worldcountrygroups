@@ -16,5 +16,18 @@ export default defineEventHandler((event) => {
   const limit = query.limit ? parseInt(query.limit as string, 10) : 20
 
   const result = getCountryAlignmentScores(iso3, { sessions, limit })
-  return { iso3, ...result }
+
+  // Resolve country names
+  const addNames = (list: { iso3: string; agreement: number }[]) =>
+    list.map(a => ({
+      ...a,
+      name: registry.getCountryMembership(a.iso3)?.name || a.iso3,
+    }))
+
+  return {
+    iso3,
+    sessionsUsed: result.sessionsUsed,
+    mostAligned: addNames(result.mostAligned),
+    leastAligned: addNames(result.leastAligned),
+  }
 })

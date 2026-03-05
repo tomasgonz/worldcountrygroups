@@ -98,7 +98,7 @@ def main():
             sys.exit(1)
 
     client = None if args.dry_run else OpenAI(api_key=api_key)
-    model = args.model or "gpt-4o"
+    model = args.model or os.environ.get("OPENAI_MODEL", "gpt-4o-mini")
 
     index = load_index()
     speeches = index["speeches"]

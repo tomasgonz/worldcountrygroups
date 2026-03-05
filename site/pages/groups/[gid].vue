@@ -958,6 +958,31 @@
           </div>
         </div>
 
+        <!-- Speech Trend Charts -->
+        <div v-if="groupTrendsData?.sentimentTimeline?.length > 1" class="bg-white rounded-2xl border border-primary-100 p-6 mb-8">
+          <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-4">Sentiment Over Time</div>
+          <ChartsChartLine
+            :data="groupSentimentLine"
+            :series-names="['Positive', 'Negative', 'Mixed', 'Neutral']"
+            :colors="['#10b981', '#ef4444', '#f59e0b', '#94a3b8']"
+            :y-min="0"
+            :show-area="false"
+            :legend="true"
+            :height="200"
+          />
+        </div>
+
+        <div v-if="groupHeatmapData" class="bg-white rounded-2xl border border-primary-100 p-6 mb-8">
+          <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-4">Theme Heatmap by Decade</div>
+          <ChartsChartHeatmap
+            :rows="groupHeatmapData.themes"
+            :columns="groupHeatmapData.decades"
+            :values="groupHeatmapData.values"
+            :label-width="140"
+            :cell-size="44"
+          />
+        </div>
+
         <!-- Country speech accordion -->
         <div v-if="groupSpeechesData.countries?.length" class="space-y-3">
           <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Speeches by Country</div>
@@ -1189,6 +1214,29 @@ const groupGdeltData = computed(() => groupGdeltRaw.value as any)
 // --- Group Speeches ---
 const { speeches: groupSpeechesRaw } = useGroupSpeeches(gid)
 const groupSpeechesData = computed(() => groupSpeechesRaw.value as any)
+
+// Group speech trend charts
+const { trends: groupTrendsRaw } = useGroupSpeechTrends(gid)
+const groupTrendsData = computed(() => groupTrendsRaw.value as any)
+
+const groupSentimentLine = computed(() => {
+  if (!groupTrendsData.value?.sentimentTimeline) return []
+  return groupTrendsData.value.sentimentTimeline.map((s: any) => ({
+    x: s.year,
+    values: [s.positive, s.negative, s.mixed, s.neutral],
+    label: `Session ${s.session} (${s.year})`,
+  }))
+})
+
+const groupHeatmapData = computed(() => {
+  const hm = groupTrendsData.value?.themeHeatmap
+  if (!hm?.themes?.length) return null
+  return {
+    themes: hm.themes.map((t: string) => t.replace(/_/g, ' ')),
+    decades: hm.decades,
+    values: hm.values,
+  }
+})
 
 const speechThemeBars = computed(() => {
   const themes = groupSpeechesData.value?.themes

@@ -318,7 +318,7 @@
                   :to="`/countries/${a.iso3}`"
                   class="px-4 py-2.5 flex items-center gap-3 hover:bg-primary-50/50 transition-colors"
                 >
-                  <span class="text-sm text-primary-700 flex-1">{{ a.iso3 }}</span>
+                  <span class="text-sm text-primary-700 flex-1">{{ a.name || a.iso3 }}</span>
                   <div class="w-24 h-2 bg-primary-100 rounded-full overflow-hidden">
                     <div class="h-full bg-emerald-400 rounded-full" :style="{ width: (a.agreement * 100) + '%' }" />
                   </div>
@@ -338,7 +338,7 @@
                   :to="`/countries/${a.iso3}`"
                   class="px-4 py-2.5 flex items-center gap-3 hover:bg-primary-50/50 transition-colors"
                 >
-                  <span class="text-sm text-primary-700 flex-1">{{ a.iso3 }}</span>
+                  <span class="text-sm text-primary-700 flex-1">{{ a.name || a.iso3 }}</span>
                   <div class="w-24 h-2 bg-primary-100 rounded-full overflow-hidden">
                     <div class="h-full bg-red-400 rounded-full" :style="{ width: (a.agreement * 100) + '%' }" />
                   </div>

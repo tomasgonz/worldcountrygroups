@@ -103,27 +103,19 @@
     <!-- Sentiment Shifts -->
     <section id="gt-sentiment" class="bg-white rounded-2xl border border-primary-100 p-6 mb-6">
       <h3 class="font-serif text-xl font-bold text-primary-900 mb-4">Sentiment Shifts</h3>
-      <div v-if="data.sentimentBySession?.length">
-        <div class="space-y-2">
-          <div v-for="s in data.sentimentBySession.slice(-15)" :key="s.session">
-            <div class="flex items-center gap-2">
-              <span class="text-[10px] text-primary-400 w-16 shrink-0">S{{ s.session }} ({{ s.year }})</span>
-              <div class="flex-1 h-4 rounded-sm overflow-hidden flex bg-primary-50">
-                <div class="bg-emerald-400" :style="{ width: pct(s.positive, s.speechCount) }" :title="`Positive: ${s.positive}`" />
-                <div class="bg-red-400" :style="{ width: pct(s.negative, s.speechCount) }" :title="`Negative: ${s.negative}`" />
-                <div class="bg-amber-300" :style="{ width: pct(s.mixed, s.speechCount) }" :title="`Mixed: ${s.mixed}`" />
-                <div class="bg-primary-200" :style="{ width: pct(s.neutral, s.speechCount) }" :title="`Neutral: ${s.neutral}`" />
-              </div>
-              <span class="text-[10px] text-primary-400 w-8 text-right">{{ s.speechCount }}</span>
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center gap-4 text-[10px] text-primary-400 mt-3">
-          <span class="flex items-center gap-1"><span class="w-2 h-2 bg-emerald-400 rounded-sm" /> Positive</span>
-          <span class="flex items-center gap-1"><span class="w-2 h-2 bg-red-400 rounded-sm" /> Negative</span>
-          <span class="flex items-center gap-1"><span class="w-2 h-2 bg-amber-300 rounded-sm" /> Mixed</span>
-          <span class="flex items-center gap-1"><span class="w-2 h-2 bg-primary-200 rounded-sm" /> Neutral</span>
-        </div>
+      <div v-if="sentimentLineData.length > 1">
+        <ChartsChartLine
+          :data="sentimentLineData"
+          :series-names="['Positive', 'Negative', 'Mixed', 'Neutral']"
+          :colors="['#10b981', '#ef4444', '#f59e0b', '#94a3b8']"
+          :y-min="0"
+          :show-area="false"
+          :legend="true"
+          :height="220"
+        />
+      </div>
+      <div v-else-if="data.sentimentBySession?.length === 1" class="text-sm text-primary-500">
+        Only 1 session of sentiment data — charts require 2+.
       </div>
       <p v-else class="text-primary-400 text-sm">No sentiment data available.</p>
     </section>
@@ -199,6 +191,15 @@ function cohesionColor(v: number | null) {
   if (v >= 0.6) return 'text-amber-600'
   return 'text-red-600'
 }
+
+const sentimentLineData = computed(() => {
+  if (!props.data?.sentimentBySession?.length) return []
+  return props.data.sentimentBySession.map((s: any) => ({
+    x: s.year,
+    values: [s.positive, s.negative, s.mixed, s.neutral],
+    label: `Session ${s.session} (${s.year})`,
+  }))
+})
 
 const cohesionDirection = computed(() => {
   const trend = props.data?.cohesion?.trend

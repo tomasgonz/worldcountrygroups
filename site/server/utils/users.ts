@@ -2,6 +2,11 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs'
 import { join, dirname } from 'path'
 import { randomBytes, scryptSync, timingSafeEqual, createHmac } from 'crypto'
 
+export interface UserPreferences {
+  bookmarkedCountries: string[]
+  bookmarkedGroups: string[]
+}
+
 export interface User {
   id: string
   username: string
@@ -14,6 +19,7 @@ export interface User {
   createdAt: string
   approvedAt?: string
   approvedBy?: string
+  preferences?: UserPreferences
 }
 
 interface UsersData {
@@ -140,6 +146,20 @@ export function setDisabledPages(pages: string[]): void {
 
 export function getSessionSecret(): string {
   return loadData().sessionSecret
+}
+
+export function getUserPreferences(id: string): UserPreferences {
+  const user = getUserById(id)
+  return user?.preferences ?? { bookmarkedCountries: [], bookmarkedGroups: [] }
+}
+
+export function updateUserPreferences(id: string, prefs: UserPreferences): UserPreferences | null {
+  const data = loadData()
+  const idx = data.users.findIndex((u) => u.id === id)
+  if (idx === -1) return null
+  data.users[idx].preferences = prefs
+  saveData(data)
+  return prefs
 }
 
 export function ensureAdminUser(): void {

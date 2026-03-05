@@ -409,3 +409,164 @@ export function extractKeywords(text: string): string[] {
     .slice(0, 15)
     .map(([kw]) => kw)
 }
+
+// --- Speech trend data for charts ---
+
+export function getCountrySentimentBySession(iso3: string, opts?: { startYear?: number; endYear?: number }): {
+  session: number; year: number; sentiment: number; speechCount: number
+}[] {
+  ensureLoaded()
+  const code = iso3.toUpperCase()
+  const speeches = _data!.speeches.filter(s => s.iso3 === code && s.analysis?.sentiment?.overall
+    && (!opts?.startYear || s.year >= opts.startYear)
+    && (!opts?.endYear || s.year <= opts.endYear))
+
+  const sentimentScore: Record<string, number> = { positive: 1, mixed: 0.5, neutral: 0.25, negative: 0 }
+
+  return speeches
+    .map(s => ({
+      session: s.session,
+      year: s.year,
+      sentiment: sentimentScore[s.analysis!.sentiment.overall] ?? 0.25,
+      speechCount: 1,
+    }))
+    .sort((a, b) => a.session - b.session)
+}
+
+export function getThemesByDecade(iso3?: string): {
+  themes: string[]
+  decades: string[]
+  values: number[][]  // [themeIdx][decadeIdx]
+} {
+  ensureLoaded()
+  const speeches = iso3
+    ? _data!.speeches.filter(s => s.iso3 === iso3.toUpperCase() && s.analysis?.themes)
+    : _data!.speeches.filter(s => s.analysis?.themes)
+
+  const decadeSet = new Set<number>()
+  const themeCounts = new Map<string, Map<number, number>>()
+
+  for (const s of speeches) {
+    const decade = Math.floor(s.year / 10) * 10
+    decadeSet.add(decade)
+    for (const t of s.analysis!.themes) {
+      if (!themeCounts.has(t.name)) themeCounts.set(t.name, new Map())
+      const dm = themeCounts.get(t.name)!
+      dm.set(decade, (dm.get(decade) || 0) + 1)
+    }
+  }
+
+  const decades = [...decadeSet].sort()
+  // Top themes by total count
+  const themesSorted = [...themeCounts.entries()]
+    .map(([theme, dm]) => ({ theme, total: [...dm.values()].reduce((s, v) => s + v, 0) }))
+    .sort((a, b) => b.total - a.total)
+    .slice(0, 15)
+
+  const themes = themesSorted.map(t => t.theme)
+  const values = themes.map(theme => {
+    const dm = themeCounts.get(theme)!
+    return decades.map(d => dm.get(d) || 0)
+  })
+
+  return { themes, decades: decades.map(String), values }
+}
+
+export function getCountryThemeProfile(iso3: string, opts?: { startYear?: number; endYear?: number }): { name: string; value: number; count: number }[] {
+  ensureLoaded()
+  const code = iso3.toUpperCase()
+  const speeches = _data!.speeches.filter(s => s.iso3 === code && s.analysis?.themes
+    && (!opts?.startYear || s.year >= opts.startYear)
+    && (!opts?.endYear || s.year <= opts.endYear))
+
+  const themeCounts = new Map<string, { high: number; total: number }>()
+  for (const s of speeches) {
+    for (const t of s.analysis!.themes) {
+      const entry = themeCounts.get(t.name) || { high: 0, total: 0 }
+      entry.total++
+      if (t.relevance === 'high') entry.high++
+      themeCounts.set(t.name, entry)
+    }
+  }
+
+  return [...themeCounts.entries()]
+    .map(([name, { high, total }]) => ({
+      name,
+      value: total > 0 ? high / total : 0,
+      count: total,
+    }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 10)
+}
+
+export function getCountryMentionNetwork(iso3: string, opts?: { startYear?: number; endYear?: number }): {
+  mentioned: { iso3: string; name: string; count: number; contexts: Record<string, number> }[]
+} {
+  ensureLoaded()
+  const code = iso3.toUpperCase()
+  const speeches = _data!.speeches.filter(s => s.iso3 === code && s.analysis?.mentioned_countries
+    && (!opts?.startYear || s.year >= opts.startYear)
+    && (!opts?.endYear || s.year <= opts.endYear))
+
+  const mentions = new Map<string, { count: number; contexts: Record<string, number> }>()
+  for (const s of speeches) {
+    for (const mc of s.analysis!.mentioned_countries) {
+      const mCode = mc.iso3.toUpperCase()
+      if (mCode === code) continue
+      const entry = mentions.get(mCode) || { count: 0, contexts: {} }
+      entry.count++
+      const ctx = mc.context || 'general'
+      entry.contexts[ctx] = (entry.contexts[ctx] || 0) + 1
+      mentions.set(mCode, entry)
+    }
+  }
+
+  // Resolve country names via group registry
+  const registry = getRegistry()
+
+  const mentioned = [...mentions.entries()]
+    .map(([iso3, data]) => ({
+      iso3,
+      name: registry.getCountryMembership(iso3)?.name || iso3,
+      count: data.count,
+      contexts: data.contexts,
+    }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 20)
+
+  return { mentioned }
+}
+
+export function getKeywordSessionTrend(iso3: string, opts?: { startYear?: number; endYear?: number }): {
+  keyword: string; trend: { session: number; year: number; count: number }[]
+}[] {
+  ensureLoaded()
+  const code = iso3.toUpperCase()
+  const speeches = _data!.speeches.filter(s => s.iso3 === code
+    && (!opts?.startYear || s.year >= opts.startYear)
+    && (!opts?.endYear || s.year <= opts.endYear))
+
+  const kwSessions = new Map<string, Map<number, { year: number; count: number }>>()
+  for (const s of speeches) {
+    for (const kw of s.keywords) {
+      if (!kwSessions.has(kw)) kwSessions.set(kw, new Map())
+      const m = kwSessions.get(kw)!
+      const entry = m.get(s.session) || { year: s.year, count: 0 }
+      entry.count++
+      m.set(s.session, entry)
+    }
+  }
+
+  // Get top keywords by total occurrences
+  return [...kwSessions.entries()]
+    .map(([keyword, sessionMap]) => ({
+      keyword,
+      totalCount: [...sessionMap.values()].reduce((s, v) => s + v.count, 0),
+      trend: [...sessionMap.entries()]
+        .map(([session, data]) => ({ session, year: data.year, count: data.count }))
+        .sort((a, b) => a.session - b.session),
+    }))
+    .sort((a, b) => b.totalCount - a.totalCount)
+    .slice(0, 20)
+    .map(({ keyword, trend }) => ({ keyword, trend }))
+}

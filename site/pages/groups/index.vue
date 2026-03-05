@@ -53,30 +53,34 @@ const domains = computed(() => {
   return [...set].sort()
 })
 
-const searchResults = ref<any[] | null>(null)
-let searchTimeout: ReturnType<typeof setTimeout> | null = null
-
-watch([query, domain, country], () => {
-  if (searchTimeout) clearTimeout(searchTimeout)
-  if (query.value || domain.value || country.value) {
-    searchTimeout = setTimeout(async () => {
-      const params = new URLSearchParams()
-      if (query.value) params.set('q', query.value)
-      if (domain.value) params.set('domain', domain.value)
-      if (country.value) params.set('country', country.value)
-      try {
-        searchResults.value = await $fetch(`/api/search?${params.toString()}`)
-      } catch {
-        searchResults.value = []
-      }
-    }, 300)
-  } else {
-    searchResults.value = null
-  }
-})
-
 const filteredGroups = computed(() => {
-  if (searchResults.value !== null) return searchResults.value
-  return (groups.value as any[]) || []
+  let result = (groups.value as any[]) || []
+
+  // Text search — filter by name, acronym, description, classifier
+  if (query.value) {
+    const q = query.value.toLowerCase()
+    result = result.filter((g: any) =>
+      g.name?.toLowerCase().includes(q) ||
+      g.acronym?.toLowerCase().includes(q) ||
+      g.gid?.toLowerCase().includes(q) ||
+      g.description?.toLowerCase().includes(q) ||
+      g.classifier?.toLowerCase().includes(q)
+    )
+  }
+
+  // Domain filter
+  if (domain.value) {
+    result = result.filter((g: any) => g.domains?.includes(domain.value))
+  }
+
+  // Country filter — match against member country names
+  if (country.value) {
+    const q = country.value.toLowerCase()
+    result = result.filter((g: any) =>
+      g.country_names?.some((n: string) => n.toLowerCase().includes(q))
+    )
+  }
+
+  return result
 })
 </script>

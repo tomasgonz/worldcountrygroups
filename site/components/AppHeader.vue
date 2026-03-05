@@ -27,13 +27,34 @@
           </div>
           <div class="hidden sm:flex items-center gap-3">
             <template v-if="auth.state.value.authenticated">
-              <NuxtLink v-if="auth.state.value.role === 'admin'" to="/admin" class="text-xs text-primary-400 hover:text-primary-900 transition-colors">
-                Admin
-              </NuxtLink>
-              <span class="text-xs text-primary-500">{{ auth.state.value.displayName || auth.state.value.username }}</span>
-              <button @click="handleLogout" class="text-xs text-primary-400 hover:text-primary-900 transition-colors">
-                Logout
-              </button>
+              <div class="relative" ref="dropdownRef">
+                <button @click="dropdownOpen = !dropdownOpen" class="flex items-center gap-2 group">
+                  <div class="w-8 h-8 rounded-full bg-primary-900 text-white flex items-center justify-center text-xs font-semibold">
+                    {{ initials }}
+                  </div>
+                  <span class="text-sm text-primary-700 group-hover:text-primary-900 transition-colors">
+                    {{ auth.state.value.displayName || auth.state.value.username }}
+                  </span>
+                  <svg class="w-3.5 h-3.5 text-primary-400 transition-transform" :class="{ 'rotate-180': dropdownOpen }" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                <div v-if="dropdownOpen" class="absolute right-0 mt-2 w-48 bg-white rounded-xl border border-primary-100 shadow-lg py-1 z-50">
+                  <NuxtLink to="/dashboard" @click="dropdownOpen = false" class="block px-4 py-2 text-sm text-primary-700 hover:bg-primary-50 transition-colors">
+                    Dashboard
+                  </NuxtLink>
+                  <NuxtLink to="/account" @click="dropdownOpen = false" class="block px-4 py-2 text-sm text-primary-700 hover:bg-primary-50 transition-colors">
+                    Account
+                  </NuxtLink>
+                  <NuxtLink v-if="auth.state.value.role === 'admin'" to="/admin" @click="dropdownOpen = false" class="block px-4 py-2 text-sm text-primary-700 hover:bg-primary-50 transition-colors">
+                    Admin
+                  </NuxtLink>
+                  <div class="border-t border-primary-100 my-1"></div>
+                  <button @click="handleLogout" class="block w-full text-left px-4 py-2 text-sm text-primary-400 hover:text-primary-900 hover:bg-primary-50 transition-colors">
+                    Logout
+                  </button>
+                </div>
+              </div>
             </template>
             <template v-else-if="auth.state.value.siteMode === 'restricted'">
               <NuxtLink to="/login" class="inline-flex items-center px-4 py-2 bg-primary-900 text-white text-sm rounded-lg hover:bg-primary-800 transition-colors">
@@ -58,6 +79,21 @@
 
 <script setup lang="ts">
 const auth = useAuth()
+const dropdownOpen = ref(false)
+const dropdownRef = ref<HTMLElement | null>(null)
+
+const initials = computed(() => {
+  const name = auth.state.value.displayName || auth.state.value.username || ''
+  const parts = name.trim().split(/\s+/)
+  if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase()
+  return name.slice(0, 2).toUpperCase()
+})
+
+function handleClickOutside(e: MouseEvent) {
+  if (dropdownRef.value && !dropdownRef.value.contains(e.target as Node)) {
+    dropdownOpen.value = false
+  }
+}
 
 const navLinks = [
   { to: '/groups', label: 'Groups' },
@@ -78,9 +114,14 @@ function isDisabled(path: string): boolean {
 }
 
 onMounted(async () => {
+  document.addEventListener('click', handleClickOutside)
   if (!auth.state.value.loaded) {
     await auth.fetchStatus()
   }
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside)
 })
 
 async function handleLogout() {
