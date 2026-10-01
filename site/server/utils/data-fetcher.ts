@@ -521,6 +521,19 @@ export async function refreshUNVotingData(): Promise<{
       }
     }
 
+    // Never replace the voting history with a smaller (partial or wrong) file
+    try {
+      const existingPath = getUNFilePath(UN_RESOLUTIONS_FILE, UN_RESOLUTIONS_FILE_ALT)
+      if (existsSync(existingPath)) {
+        const existing = JSON.parse(readFileSync(existingPath, 'utf-8'))?.resolutions?.length || 0
+        if (existing && resolutionMap.size < existing * 0.95) {
+          throw new Error(`${sourceFile} has ${resolutionMap.size} resolutions, fewer than the ${existing} already loaded; not replacing the data`)
+        }
+      }
+    } catch (e: any) {
+      if (String(e?.message || '').includes('not replacing')) throw e
+    }
+
     _unProgress = 'Writing summary file...'
     const now = new Date().toISOString()
     const sessions = new Set<number>()

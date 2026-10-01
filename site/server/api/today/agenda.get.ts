@@ -2,8 +2,6 @@ import { getRecentStatements, getStatementsFeedMeta } from '~/server/utils/state
 import { readDataFile, dataFileMtime } from '~/server/utils/data-file'
 import { getNYTodayKey, isInNYToday } from '~/server/utils/un-day'
 import { getRecentNews } from '~/server/utils/news-feed'
-import { getSpeechesMeta, getAllSpeeches } from '~/server/utils/speeches'
-import { getRegistry } from '~/server/utils/wcg'
 
 /**
  * Factual "what is happening at the UN" data for the Today page. No AI involved,
@@ -63,37 +61,6 @@ export default defineEventHandler(() => {
   const votes = readDataFile<any>('unsc-votes.json')
   const lastDecision = (votes?.resolutions || [])[0] || null
 
-  // --- General Assembly: General Debate speeches in the last 3 weeks ---
-  let debate: any = null
-  try {
-    const registry = getRegistry()
-    const meta = getSpeechesMeta()
-    const latest = Math.max(...(meta?.sessions || [0]))
-    const cutoff = new Date(now.getTime() - 21 * 24 * 3600 * 1000).toISOString().slice(0, 10)
-    const recent = getAllSpeeches().filter((s: any) => s.session === latest && (s.date || '') >= cutoff)
-    if (recent.length) {
-      // Most-discussed speakers: how often other delegations mentioned the country
-      const mentions = new Map<string, number>()
-      for (const s of recent) {
-        for (const m of (s as any).analysis?.mentioned_countries || []) {
-          if (m.iso3 !== s.iso3) mentions.set(m.iso3, (mentions.get(m.iso3) || 0) + 1)
-        }
-      }
-      const highlights = recent
-        .filter((s: any) => s.analysis?.key_quotes?.length)
-        .sort((a: any, b: any) => (mentions.get(b.iso3) || 0) - (mentions.get(a.iso3) || 0))
-        .slice(0, 5)
-        .map((s: any) => ({
-          iso3: s.iso3,
-          name: registry.getCountryMembership(s.iso3)?.name || s.iso3,
-          speaker: s.speaker,
-          date: s.date,
-          quote: s.analysis.key_quotes[0],
-        }))
-      debate = { session: latest, speeches: recent.length, highlights }
-    }
-  } catch {}
-
   // --- freshness of every feed this page relies on ---
   const statementsMeta = getStatementsFeedMeta() as any
   const newsMeta = readDataFile<any>('news-feed.json')?._meta
@@ -102,7 +69,6 @@ export default defineEventHandler(() => {
     { label: 'UN schedule & statements', updated: statementsMeta?.last_updated || null },
     { label: 'News', updated: newsLatest },
     { label: 'Security Council record', updated: dataFileMtime('unsc-activity.json') },
-    { label: 'General Debate speeches', updated: dataFileMtime('un-speeches-index.json') },
   ]
 
   // --- headline numbers for the summary strip ---
@@ -126,7 +92,6 @@ export default defineEventHandler(() => {
     tomorrowKey,
     schedule: { today: byBody(today), tomorrow: byBody(tomorrow), todayCount: today.length, tomorrowCount: tomorrow.length },
     securityCouncil: { meetings: scMeetings, lastDecision },
-    debate,
     freshness,
   }
 })

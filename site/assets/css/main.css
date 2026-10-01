@@ -1,18 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    @apply bg-[#f9fafb] text-primary-900 antialiased;
-    font-family: 'Space Grotesk', system-ui, sans-serif;
-  }
-  h1, h2, h3 {
-    font-family: 'Instrument Serif', Georgia, serif;
-  }
-}
+/* Fonts: the site uses the system sans-serif for text and Georgia for serif headings (font-serif). */
 
 @layer components {
   .skeleton {

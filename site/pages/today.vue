@@ -154,24 +154,6 @@
             </section>
           </article>
 
-          <!-- General Debate quotes -->
-          <section v-if="agenda?.debate?.highlights?.length" class="mt-8">
-            <div class="flex items-baseline justify-between mb-4">
-              <h2 class="font-serif text-3xl text-primary-900">From the General Debate</h2>
-              <span class="text-xs text-primary-400">Session {{ agenda.debate.session }} &middot; {{ agenda.debate.speeches }} speeches</span>
-            </div>
-            <div class="grid sm:grid-cols-2 gap-4">
-              <NuxtLink v-for="h in agenda.debate.highlights.slice(0, 4)" :key="h.iso3" :to="`/countries/${h.iso3.toLowerCase()}/speeches`"
-                class="group block bg-white rounded-2xl ring-1 ring-primary-200/70 p-5 hover:ring-accent-300 transition">
-                <blockquote class="font-serif text-lg leading-snug text-primary-800">&ldquo;{{ h.quote }}&rdquo;</blockquote>
-                <div class="mt-3 text-xs text-primary-500">
-                  <span class="mr-1">{{ flagFor(h.iso3) }}</span><span class="font-medium text-primary-700 group-hover:text-accent-700">{{ h.name }}</span>
-                  <span v-if="h.speaker"> &middot; {{ h.speaker }}</span>
-                </div>
-              </NuxtLink>
-            </div>
-          </section>
-
           <!-- Primary sources -->
           <section class="mt-8 bg-white rounded-2xl ring-1 ring-primary-200/70">
             <div class="flex flex-wrap items-center justify-between gap-3 px-6 pt-5 pb-3 border-b border-primary-100">
@@ -351,7 +333,8 @@ function promoteLabels(text: string): string {
     .replace(/^ {2,4}([-*] )/gm, '$1')
 }
 const md = (s: string) => (s ? (marked.parse(renderCitations(highlight(promoteLabels(s)))) as string) : '')
-const inline = (s: string) => (s ? (marked.parseInline(renderCitations(highlight(s))) as string) : '')
+// the headline stays plain: highlights are too heavy at display size
+const inline = (s: string) => (s ? (marked.parseInline(renderCitations(s)) as string) : '')
 
 // ---------- sources ----------
 const sourceTab = ref<'news' | 'statements'>('statements')

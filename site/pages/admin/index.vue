@@ -722,6 +722,28 @@
           >
             {{ refreshStatus?.unvotes?.refreshing ? 'Running...' : 'Refresh' }}
           </button>
+
+          <!-- Upload a voting CSV downloaded by hand from the UN Digital Library -->
+          <div class="mt-4 pt-3 border-t border-primary-100">
+            <div class="text-xs font-medium text-primary-700 mb-1">Upload a newer voting file</div>
+            <p class="text-[11px] text-primary-400 mb-2 leading-snug">
+              The UN Digital Library asks for a human check, so download the latest <code>…_ga_voting.csv</code> from
+              <a href="https://digitallibrary.un.org/record/4060887" target="_blank" rel="noopener" class="underline">record 4060887</a> in your browser, then upload it here (.csv or .csv.gz).
+            </p>
+            <input ref="votesFile" type="file" accept=".csv,.gz,text/csv" class="block w-full text-xs text-primary-600 file:mr-2 file:px-2.5 file:py-1 file:rounded-md file:border-0 file:bg-primary-100 file:text-primary-700" @change="votesPicked" />
+            <p v-if="votesFileName" class="mt-1 text-[11px] text-primary-600 break-all">{{ votesFileName }}</p>
+            <label class="flex items-center gap-1.5 mt-2 text-[11px] text-primary-500">
+              <input v-model="votesImport" type="checkbox" class="rounded"> Import it right after uploading
+            </label>
+            <button
+              class="mt-2 text-xs px-3 py-1.5 rounded-lg bg-primary-900 text-white hover:bg-primary-800 disabled:opacity-40"
+              :disabled="!votesFileName || votesUploading" @click="uploadVotes"
+            >{{ votesUploading ? (votesProgress < 100 ? `Uploading ${votesProgress}%` : 'Importing…') : 'Upload' }}</button>
+            <div v-if="votesUploading" class="mt-2 h-1.5 rounded-full bg-primary-100 overflow-hidden">
+              <div class="h-full bg-accent-600 transition-all" :style="{ width: votesProgress + '%' }" />
+            </div>
+            <p v-if="votesMsg" class="mt-2 text-[11px] leading-snug" :class="votesOk ? 'text-emerald-700' : 'text-red-600'">{{ votesMsg }}</p>
+          </div>
         </div>
 
         <!-- Theme Classification -->
@@ -1101,6 +1123,46 @@ function stopPolling() {
     clearInterval(pollInterval)
     pollInterval = null
   }
+}
+
+// ---------- UN voting CSV upload ----------
+const votesFile = ref<HTMLInputElement | null>(null)
+const votesFileName = ref('')
+const votesImport = ref(true)
+const votesUploading = ref(false)
+const votesProgress = ref(0)
+const votesMsg = ref('')
+const votesOk = ref(false)
+function votesPicked() { votesFileName.value = votesFile.value?.files?.[0]?.name || ''; votesMsg.value = '' }
+function uploadVotes() {
+  const file = votesFile.value?.files?.[0]
+  if (!file) return
+  votesUploading.value = true; votesProgress.value = 0; votesMsg.value = ''
+  // XHR (not fetch) so we can show upload progress; the raw file is the request body
+  const xhr = new XMLHttpRequest()
+  xhr.open('POST', `/api/admin/upload-votes?filename=${encodeURIComponent(file.name)}&import=${votesImport.value ? 1 : 0}`)
+  xhr.setRequestHeader('Content-Type', file.name.endsWith('.gz') ? 'application/gzip' : 'text/csv')
+  xhr.upload.onprogress = (e) => { if (e.lengthComputable) votesProgress.value = Math.round((e.loaded / e.total) * 100) }
+  xhr.onload = async () => {
+    votesUploading.value = false
+    let body: any = {}
+    try { body = JSON.parse(xhr.responseText) } catch {}
+    if (xhr.status >= 200 && xhr.status < 300) {
+      votesOk.value = body.imported ? body.imported.ok !== false : true
+      const mb = (body.size / 1024 / 1024).toFixed(0)
+      votesMsg.value = body.imported
+        ? (body.imported.ok !== false
+            ? `Saved ${body.file} (${mb} MB) and imported ${body.imported.resolutions_processed?.toLocaleString?.() ?? ''} resolutions.`
+            : `Saved ${body.file}, but the import failed: ${(body.imported.errors || []).join(', ')}`)
+        : `Saved ${body.file} (${mb} MB). Press Refresh to import it.`
+      await loadRefreshStatus(); await loadMeta()
+    } else {
+      votesOk.value = false
+      votesMsg.value = body.statusMessage || body.message || `Upload failed (HTTP ${xhr.status})`
+    }
+  }
+  xhr.onerror = () => { votesUploading.value = false; votesOk.value = false; votesMsg.value = 'Upload failed: connection error' }
+  xhr.send(file)
 }
 
 async function handleRefreshSource(target: string) {

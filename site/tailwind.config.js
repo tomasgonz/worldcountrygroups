@@ -32,7 +32,7 @@ export default {
         },
       },
       fontFamily: {
-        serif: ['"Instrument Serif"', 'Georgia', 'Cambria', '"Times New Roman"', 'serif'],
+        serif: ['Georgia', 'Cambria', '"Times New Roman"', 'serif'],
       },
     },
   },
