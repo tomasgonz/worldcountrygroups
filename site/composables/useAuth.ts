@@ -23,9 +23,13 @@ export function useAuth() {
     loaded: false,
   }))
 
+  // During server rendering, forward the incoming request's cookies so a logged-in
+  // user opening a protected page directly isn't treated as logged out.
+  const fetcher = import.meta.server ? useRequestFetch() : $fetch
+
   async function fetchStatus() {
     try {
-      const data = await $fetch<any>('/api/auth/status')
+      const data = await fetcher<any>('/api/auth/status')
       state.value = {
         authenticated: data.authenticated,
         userId: data.userId || null,

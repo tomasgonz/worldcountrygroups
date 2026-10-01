@@ -10,6 +10,513 @@
       </button>
     </div>
 
+    <!-- ═══ CONTENT MANAGEMENT ═══ -->
+    <div class="flex items-center gap-3 mb-4">
+      <div class="h-px flex-1 bg-primary-100"></div>
+      <span class="text-xs font-medium text-primary-400 uppercase tracking-widest">Content</span>
+      <div class="h-px flex-1 bg-primary-100"></div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+      <!-- Group Management -->
+      <NuxtLink to="/admin/groups" class="block bg-white rounded-2xl border border-primary-100 p-5 hover:border-primary-300 transition-colors group">
+        <h2 class="font-serif text-lg font-bold text-primary-900 group-hover:text-primary-700">Groups</h2>
+        <p class="text-sm text-primary-500 mt-1">{{ groupCount }} groups</p>
+      </NuxtLink>
+
+      <!-- News Sources card  -->
+      <div class="bg-white rounded-2xl border border-primary-100 p-5">
+        <h2 class="font-serif text-lg font-bold text-primary-900">News Feed</h2>
+        <p class="text-sm text-primary-500 mt-1">{{ newsFeedStats.articles }} articles &middot; {{ newsFeedStats.enabledSources }}/{{ newsFeedStats.totalSources }} sources</p>
+      </div>
+
+      <!-- Statement Sources card -->
+      <NuxtLink to="/admin/statements" class="block bg-white rounded-2xl border border-primary-100 p-5 hover:border-primary-300 transition-colors group">
+        <h2 class="font-serif text-lg font-bold text-primary-900 group-hover:text-primary-700">Statements</h2>
+        <p class="text-sm text-primary-500 mt-1">{{ stmtFeedStats.statements }} statements &middot; {{ stmtFeedStats.totalSources }} sources</p>
+      </NuxtLink>
+    </div>
+
+    <!-- ═══ AI & INTELLIGENCE ═══ -->
+    <div class="flex items-center gap-3 mb-4">
+      <div class="h-px flex-1 bg-primary-100"></div>
+      <span class="text-xs font-medium text-primary-400 uppercase tracking-widest">AI & Intelligence</span>
+      <div class="h-px flex-1 bg-primary-100"></div>
+    </div>
+
+    <!-- AI Configuration -->
+    <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
+      <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">AI Configuration</h2>
+      <div class="flex items-center gap-3 mb-4">
+        <span v-if="aiConfig?.activeProvider" class="inline-flex items-center gap-1.5 text-sm text-green-700 bg-green-50 px-3 py-1 rounded-full">
+          <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+          Active: {{ aiConfig.providers.find((p: any) => p.id === aiConfig.activeProvider)?.name || aiConfig.activeProvider }}
+        </span>
+        <span v-else class="inline-flex items-center gap-1.5 text-sm text-primary-400 bg-primary-50 px-3 py-1 rounded-full">
+          <span class="w-2 h-2 bg-primary-300 rounded-full"></span>
+          No provider configured
+        </span>
+      </div>
+
+      <!-- Provider List -->
+      <div v-if="aiConfig?.providers?.length" class="space-y-2 mb-4">
+        <div v-for="p in aiConfig.providers" :key="p.id" class="flex items-center justify-between border border-primary-100 rounded-lg p-3">
+          <div>
+            <span class="text-sm font-medium text-primary-800">{{ p.name }}</span>
+            <span class="text-xs text-primary-400 ml-2">{{ p.model }}</span>
+            <span v-if="p.id === aiConfig.activeProvider" class="text-xs text-green-600 ml-2">(active)</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button v-if="p.id !== aiConfig.activeProvider" @click="setActiveAI(p.id)" class="text-xs px-2.5 py-1 rounded bg-blue-50 text-blue-700 hover:bg-blue-100">Set Active</button>
+            <button @click="removeAIProvider(p.id)" class="text-xs px-2.5 py-1 rounded bg-red-50 text-red-700 hover:bg-red-100">Remove</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Provider Form -->
+      <div v-if="showAIForm" class="border border-primary-200 rounded-xl p-4 mb-4 space-y-3">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-primary-500 mb-1">Provider ID</label>
+            <input v-model="aiForm.id" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="openai">
+          </div>
+          <div>
+            <label class="block text-xs text-primary-500 mb-1">Display Name</label>
+            <input v-model="aiForm.name" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="OpenAI GPT-4o">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-primary-500 mb-1">Type</label>
+            <select v-model="aiForm.type" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm">
+              <option value="openai">OpenAI</option>
+              <option value="anthropic">Anthropic</option>
+              <option value="openai-compatible">OpenAI-Compatible</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs text-primary-500 mb-1">Model</label>
+            <input v-model="aiForm.model" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="gpt-4o">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-primary-500 mb-1">API Key</label>
+          <input v-model="aiForm.apiKey" type="password" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="sk-...">
+        </div>
+        <div v-if="aiForm.type === 'openai-compatible'">
+          <label class="block text-xs text-primary-500 mb-1">Base URL</label>
+          <input v-model="aiForm.baseUrl" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="https://api.example.com/v1">
+        </div>
+        <div class="flex gap-2">
+          <button @click="addAIProvider" class="text-sm px-4 py-2 rounded-lg bg-primary-900 text-white hover:bg-primary-800">Add Provider</button>
+          <button @click="showAIForm = false" class="text-sm px-4 py-2 rounded-lg bg-primary-100 text-primary-600">Cancel</button>
+        </div>
+      </div>
+
+      <button v-if="!showAIForm" @click="showAIForm = true" class="text-sm px-4 py-2 rounded-lg border border-primary-200 text-primary-600 hover:bg-primary-50">
+        + Add Provider
+      </button>
+
+      <!-- Prompt Configuration -->
+      <div class="border-t border-primary-100 mt-6 pt-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-sm font-semibold text-primary-800">Analysis Prompts</h3>
+          <button @click="showPromptEditor = !showPromptEditor" class="text-xs text-primary-400 hover:text-primary-600">
+            {{ showPromptEditor ? 'Hide' : 'Edit' }}
+          </button>
+        </div>
+        <p class="text-xs text-primary-400 mb-3">Customize the instructions sent to the AI for each analysis type. Leave blank to use defaults.</p>
+
+        <div v-if="showPromptEditor" class="space-y-6">
+          <div v-for="group in promptGroups" :key="group.label">
+            <button
+              @click="togglePromptGroup(group.label)"
+              class="flex items-center gap-2 w-full text-left text-xs font-semibold text-primary-600 uppercase tracking-wider mb-3 hover:text-primary-800"
+            >
+              <svg class="w-3 h-3 transition-transform" :class="expandedPromptGroups.includes(group.label) ? 'rotate-90' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              {{ group.label }}
+            </button>
+            <div v-if="expandedPromptGroups.includes(group.label)" class="space-y-4 pl-5 border-l-2 border-primary-100">
+              <div v-for="field in group.fields" :key="field.key">
+                <div class="flex items-center justify-between mb-1">
+                  <label class="text-xs font-medium text-primary-500">{{ field.label }}</label>
+                  <button
+                    @click="toggleDefaultView(field.key)"
+                    class="text-xs text-primary-400 hover:text-primary-600"
+                  >
+                    {{ showingDefaults.includes(field.key) ? 'Hide Default' : 'View Default' }}
+                  </button>
+                </div>
+                <textarea
+                  v-model="(promptForm as any)[field.key]"
+                  rows="4"
+                  class="w-full border border-primary-200 rounded-lg px-3 py-2 text-sm text-primary-700 font-mono"
+                  :placeholder="(promptDefaults as any)[field.key]?.slice(0, 80) + '...'"
+                ></textarea>
+                <pre
+                  v-if="showingDefaults.includes(field.key)"
+                  class="mt-2 p-3 bg-primary-50 border border-primary-100 rounded-lg text-xs text-primary-600 font-mono whitespace-pre-wrap max-h-48 overflow-y-auto"
+                >{{ (promptDefaults as any)[field.key] }}</pre>
+              </div>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <button @click="savePrompts" class="text-sm px-4 py-2 rounded-lg bg-primary-900 text-white hover:bg-primary-800">Save Prompts</button>
+            <button @click="resetPrompts" class="text-sm px-4 py-2 rounded-lg bg-primary-100 text-primary-600">Reset to Defaults</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pulse Briefing Style -->
+      <div class="border-t border-primary-100 mt-6 pt-6">
+        <h3 class="text-sm font-semibold text-primary-800 mb-3">Pulse Briefing Style</h3>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-medium text-primary-500 mb-2">Tone</label>
+            <div class="flex flex-wrap gap-2">
+              <button
+                v-for="t in pulseToneOptions"
+                :key="t.value"
+                class="px-3 py-1.5 rounded-lg text-xs border transition-colors"
+                :class="pulseStyle.tone === t.value ? 'bg-primary-900 text-white border-primary-900' : 'bg-white text-primary-700 border-primary-200 hover:border-primary-400'"
+                @click="pulseStyle.tone = t.value"
+              >
+                {{ t.label }}
+              </button>
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-primary-500 mb-1">
+              Temperature: {{ pulseStyle.temperature.toFixed(1) }}
+            </label>
+            <div class="flex items-center gap-3">
+              <span class="text-xs text-primary-400">Precise</span>
+              <input type="range" min="0" max="1.5" step="0.1" v-model.number="pulseStyle.temperature" class="flex-1 accent-primary-700" />
+              <span class="text-xs text-primary-400">Creative</span>
+            </div>
+          </div>
+          <button @click="savePulseStyle" class="text-sm px-4 py-2 rounded-lg bg-primary-900 text-white hover:bg-primary-800">Save Style</button>
+          <span v-if="pulseStyleMsg" class="text-xs ml-3" :class="pulseStyleMsg.startsWith('Error') ? 'text-red-500' : 'text-green-600'">{{ pulseStyleMsg }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Analysis Cache -->
+    <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
+      <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">AI Analysis Cache</h2>
+
+      <div class="flex items-center gap-4 mb-4">
+        <div class="flex items-center gap-2">
+          <label class="text-sm text-primary-600">Max age (hours):</label>
+          <input
+            v-model.number="cacheMaxAge"
+            type="number"
+            min="1"
+            class="w-20 border border-primary-200 rounded-lg px-2 py-1 text-sm"
+          >
+          <button @click="saveCacheMaxAge" class="text-xs px-3 py-1.5 rounded-lg bg-primary-900 text-white hover:bg-primary-800">Save</button>
+        </div>
+        <span class="text-xs text-primary-400">{{ cacheStats?.totalEntries || 0 }} cached entries</span>
+      </div>
+
+      <div v-if="cacheStats?.entries?.length" class="space-y-2 mb-4">
+        <div v-for="entry in cacheStats.entries" :key="entry.key" class="flex items-center justify-between border border-primary-100 rounded-lg p-3">
+          <div>
+            <span class="text-sm font-medium text-primary-800">{{ entry.key }}</span>
+            <span class="text-xs text-primary-400 ml-2">{{ entry.provider }} / {{ entry.model }}</span>
+            <span class="text-xs ml-2" :class="entry.expired ? 'text-red-500' : 'text-green-600'">
+              {{ entry.expired ? 'expired' : formatTime(entry.generatedAt) }}
+            </span>
+          </div>
+          <button @click="clearCacheEntry(entry.key)" class="text-xs px-2.5 py-1 rounded bg-red-50 text-red-700 hover:bg-red-100">Clear</button>
+        </div>
+      </div>
+      <div v-else class="text-sm text-primary-400 mb-4">No cached analyses.</div>
+
+      <div class="flex gap-2">
+        <button @click="clearAllCache" class="text-xs px-3 py-1.5 rounded-lg border border-red-200 text-red-600 hover:bg-red-50">Clear All</button>
+      </div>
+    </div>
+
+    <!-- ═══ SCHEDULING ═══ -->
+    <div class="flex items-center gap-3 mb-4">
+      <div class="h-px flex-1 bg-primary-100"></div>
+      <span class="text-xs font-medium text-primary-400 uppercase tracking-widest">Scheduling</span>
+      <div class="h-px flex-1 bg-primary-100"></div>
+    </div>
+
+    <!-- Scheduled Jobs -->
+    <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-serif text-xl font-bold text-primary-900">Scheduled Jobs</h2>
+        <button @click="showCronForm = true; editingCronId = null; Object.assign(cronForm, { id: '', label: '', script: '', schedule: '0 */6 * * *', logFile: '' })" v-if="!showCronForm" class="text-sm px-4 py-2 rounded-lg border border-primary-200 text-primary-600 hover:bg-primary-50">
+          + Add Job
+        </button>
+      </div>
+
+      <!-- Add/Edit Form -->
+      <div v-if="showCronForm" class="border border-primary-200 rounded-xl p-4 mb-4 space-y-3">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-primary-500 mb-1">Job ID</label>
+            <input v-model="cronForm.id" :disabled="!!editingCronId" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm disabled:bg-primary-50" placeholder="fetch-custom">
+          </div>
+          <div>
+            <label class="block text-xs text-primary-500 mb-1">Label</label>
+            <input v-model="cronForm.label" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="Custom Data Feed">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-primary-500 mb-1">Script Path</label>
+            <input v-model="cronForm.script" :disabled="!!editingCronId" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm disabled:bg-primary-50" placeholder="scripts/fetch_custom.py">
+          </div>
+          <div>
+            <label class="block text-xs text-primary-500 mb-1">Schedule (cron)</label>
+            <input v-model="cronForm.schedule" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm font-mono" placeholder="0 */6 * * *">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-primary-500 mb-1">Log File</label>
+          <input v-model="cronForm.logFile" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="/tmp/fetch-custom.log">
+        </div>
+        <div class="flex gap-2">
+          <button @click="saveCronJob" class="text-sm px-4 py-2 rounded-lg bg-primary-900 text-white hover:bg-primary-800">{{ editingCronId ? 'Update' : 'Add' }} Job</button>
+          <button @click="showCronForm = false" class="text-sm px-4 py-2 rounded-lg bg-primary-100 text-primary-600">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Jobs Table -->
+      <div v-if="cronJobs.length" class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-primary-100 text-left">
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Job</th>
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Schedule</th>
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Last Run</th>
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Status</th>
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="job in cronJobs" :key="job.id" class="border-b border-primary-50 last:border-0">
+              <td class="px-3 py-2.5">
+                <div class="text-primary-800 font-medium">{{ job.label }}</div>
+                <div class="text-xs text-primary-400">{{ job.script }}</div>
+              </td>
+              <td class="px-3 py-2.5 text-primary-600 font-mono text-xs">{{ job.schedule }}</td>
+              <td class="px-3 py-2.5">
+                <div v-if="job.lastRun" class="text-xs text-primary-500">{{ formatTime(job.lastRun) }}</div>
+                <div v-else class="text-xs text-primary-300">Never</div>
+                <div v-if="job.lastError" class="text-xs text-red-500 truncate max-w-[200px]" :title="job.lastError">{{ job.lastError }}</div>
+              </td>
+              <td class="px-3 py-2.5">
+                <span :class="job.enabled ? 'bg-green-100 text-green-700' : 'bg-primary-100 text-primary-400'" class="text-xs font-medium px-2 py-0.5 rounded-full">
+                  {{ job.enabled ? 'Enabled' : 'Disabled' }}
+                </span>
+              </td>
+              <td class="px-3 py-2.5">
+                <div class="flex items-center gap-2">
+                  <button
+                    @click="toggleCronJob(job.id, !job.enabled)"
+                    class="text-xs px-2.5 py-1 rounded transition-colors"
+                    :class="job.enabled ? 'bg-amber-50 text-amber-700 hover:bg-amber-100' : 'bg-green-50 text-green-700 hover:bg-green-100'"
+                  >
+                    {{ job.enabled ? 'Disable' : 'Enable' }}
+                  </button>
+                  <button
+                    @click="runCronJob(job.id)"
+                    :disabled="runningCronJob === job.id"
+                    class="text-xs px-2.5 py-1 rounded bg-blue-50 text-blue-700 hover:bg-blue-100 disabled:opacity-50 transition-colors"
+                  >
+                    {{ runningCronJob === job.id ? 'Running...' : 'Run Now' }}
+                  </button>
+                  <button
+                    @click="editCronJob(job)"
+                    class="text-xs px-2.5 py-1 rounded bg-primary-50 text-primary-600 hover:bg-primary-100 transition-colors"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    @click="deleteCronJob(job.id)"
+                    class="text-xs px-2.5 py-1 rounded bg-red-50 text-red-700 hover:bg-red-100 transition-colors"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div v-else class="text-sm text-primary-400">No scheduled jobs configured.</div>
+
+      <!-- Status message -->
+      <div v-if="cronMessage" class="mt-4 rounded-lg px-4 py-3 text-sm" :class="cronMessage.ok ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'">
+        {{ cronMessage.text }}
+      </div>
+    </div>
+
+    <!-- ═══ NEWS & FEEDS ═══ -->
+    <div class="flex items-center gap-3 mb-4">
+      <div class="h-px flex-1 bg-primary-100"></div>
+      <span class="text-xs font-medium text-primary-400 uppercase tracking-widest">News & Feeds</span>
+      <div class="h-px flex-1 bg-primary-100"></div>
+    </div>
+
+    <!-- News Feed Status -->
+    <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
+      <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">News Feed Status</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="border border-primary-100 rounded-xl p-4 text-center">
+          <div class="text-2xl font-serif font-bold text-primary-900">{{ newsFeedStats.articles }}</div>
+          <div class="text-xs text-primary-400 mt-1">Articles</div>
+        </div>
+        <div class="border border-primary-100 rounded-xl p-4 text-center">
+          <div class="text-2xl font-serif font-bold text-primary-900">{{ newsFeedStats.sources }}</div>
+          <div class="text-xs text-primary-400 mt-1">Active Sources</div>
+        </div>
+        <div class="border border-primary-100 rounded-xl p-4 text-center">
+          <div class="text-2xl font-serif font-bold text-primary-900">{{ newsFeedStats.countries }}</div>
+          <div class="text-xs text-primary-400 mt-1">Countries Covered</div>
+        </div>
+        <div class="border border-primary-100 rounded-xl p-4 text-center">
+          <div class="text-2xl font-serif font-bold text-primary-900">{{ newsFeedStats.sizeKB }} KB</div>
+          <div class="text-xs text-primary-400 mt-1">Feed Size</div>
+        </div>
+      </div>
+      <div class="flex items-center justify-between mt-4 text-xs text-primary-400">
+        <span v-if="newsFeedStats.lastUpdated">Last updated: {{ formatTime(newsFeedStats.lastUpdated) }}</span>
+        <span v-else>No data yet</span>
+        <span>{{ newsFeedStats.enabledSources }} of {{ newsFeedStats.totalSources }} sources enabled</span>
+      </div>
+    </div>
+
+    <!-- News Sources -->
+    <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-serif text-xl font-bold text-primary-900">News Sources</h2>
+        <button @click="showNewsForm = true; Object.assign(newsForm, { id: '', name: '', url: '', type: 'rss', category: 'wire' })" v-if="!showNewsForm" class="text-sm px-4 py-2 rounded-lg border border-primary-200 text-primary-600 hover:bg-primary-50">
+          + Add Source
+        </button>
+      </div>
+
+      <!-- Add Source Form -->
+      <div v-if="showNewsForm" class="border border-primary-200 rounded-xl p-4 mb-4 space-y-3">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-primary-500 mb-1">Source ID</label>
+            <input v-model="newsForm.id" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="my-source">
+          </div>
+          <div>
+            <label class="block text-xs text-primary-500 mb-1">Name</label>
+            <input v-model="newsForm.name" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="My News Source">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-primary-500 mb-1">URL</label>
+          <input v-model="newsForm.url" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="https://example.com/feed/">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-primary-500 mb-1">Type</label>
+            <select v-model="newsForm.type" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm">
+              <option value="rss">RSS</option>
+              <option value="atom">Atom</option>
+              <option value="json-api">JSON API</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs text-primary-500 mb-1">Category</label>
+            <select v-model="newsForm.category" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm">
+              <option value="government">Government</option>
+              <option value="wire">Wire / Diplomatic</option>
+              <option value="institutional">Institutional</option>
+              <option value="regional">Regional</option>
+              <option value="lldc-sids">LLDC / SIDS</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <button @click="addNewSource" class="text-sm px-4 py-2 rounded-lg bg-primary-900 text-white hover:bg-primary-800">Add Source</button>
+          <button @click="testNewsUrl" :disabled="testingNewsUrl" class="text-sm px-4 py-2 rounded-lg border border-primary-200 text-primary-600 hover:bg-primary-50 disabled:opacity-50">
+            {{ testingNewsUrl ? 'Testing...' : 'Test URL' }}
+          </button>
+          <button @click="showNewsForm = false" class="text-sm px-4 py-2 rounded-lg bg-primary-100 text-primary-600">Cancel</button>
+        </div>
+        <div v-if="newsTestResult" class="text-xs rounded-lg px-3 py-2" :class="newsTestResult.ok ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'">
+          {{ newsTestResult.ok ? `OK — ${newsTestResult.format} format, ${newsTestResult.size} bytes` : `Error: ${newsTestResult.error}` }}
+        </div>
+      </div>
+
+      <!-- Sources Table -->
+      <div v-if="newsSources.length" class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-primary-100 text-left">
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Source</th>
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Category</th>
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Articles</th>
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Last Fetch</th>
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Status</th>
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="src in newsSources" :key="src.id" class="border-b border-primary-50 last:border-0">
+              <td class="px-3 py-2.5">
+                <div class="text-primary-800 font-medium">{{ src.name }}</div>
+                <div class="text-xs text-primary-400 truncate max-w-[250px]" :title="src.url">{{ src.url }}</div>
+              </td>
+              <td class="px-3 py-2.5">
+                <span class="text-xs px-2 py-0.5 rounded-full" :class="newsCategoryClass(src.category)">{{ src.category }}</span>
+              </td>
+              <td class="px-3 py-2.5 text-primary-600 tabular-nums text-xs">{{ src.articleCount || 0 }}</td>
+              <td class="px-3 py-2.5">
+                <div v-if="src.lastFetch" class="text-xs text-primary-500">{{ formatTime(src.lastFetch) }}</div>
+                <div v-else class="text-xs text-primary-300">Never</div>
+                <div v-if="src.lastError" class="text-xs text-red-500 truncate max-w-[200px]" :title="src.lastError">{{ src.lastError }}</div>
+              </td>
+              <td class="px-3 py-2.5">
+                <span :class="src.enabled ? 'bg-green-100 text-green-700' : 'bg-primary-100 text-primary-400'" class="text-xs font-medium px-2 py-0.5 rounded-full">
+                  {{ src.enabled ? 'Enabled' : 'Disabled' }}
+                </span>
+              </td>
+              <td class="px-3 py-2.5">
+                <div class="flex items-center gap-2">
+                  <button
+                    @click="toggleNewsSource(src.id, !src.enabled)"
+                    class="text-xs px-2.5 py-1 rounded transition-colors"
+                    :class="src.enabled ? 'bg-amber-50 text-amber-700 hover:bg-amber-100' : 'bg-green-50 text-green-700 hover:bg-green-100'"
+                  >
+                    {{ src.enabled ? 'Disable' : 'Enable' }}
+                  </button>
+                  <button
+                    @click="deleteNewsSource(src.id)"
+                    class="text-xs px-2.5 py-1 rounded bg-red-50 text-red-700 hover:bg-red-100 transition-colors"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div v-else class="text-sm text-primary-400">No news sources configured.</div>
+
+      <div v-if="newsMessage" class="mt-4 rounded-lg px-4 py-3 text-sm" :class="newsMessage.ok ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'">
+        {{ newsMessage.text }}
+      </div>
+    </div>
+
+    <!-- ═══ SITE SETTINGS ═══ -->
+    <div class="flex items-center gap-3 mb-4">
+      <div class="h-px flex-1 bg-primary-100"></div>
+      <span class="text-xs font-medium text-primary-400 uppercase tracking-widest">Site Settings</span>
+      <div class="h-px flex-1 bg-primary-100"></div>
+    </div>
+
     <!-- Site Mode -->
     <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
       <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">Site Access Mode</h2>
@@ -55,6 +562,13 @@
           <span class="text-xs ml-1 opacity-60">{{ disabledPages.includes(page.path) ? 'OFF' : 'ON' }}</span>
         </button>
       </div>
+    </div>
+
+    <!-- ═══ USERS ═══ -->
+    <div class="flex items-center gap-3 mb-4">
+      <div class="h-px flex-1 bg-primary-100"></div>
+      <span class="text-xs font-medium text-primary-400 uppercase tracking-widest">Users</span>
+      <div class="h-px flex-1 bg-primary-100"></div>
     </div>
 
     <!-- User Management -->
@@ -140,6 +654,13 @@
           </tbody>
         </table>
       </div>
+    </div>
+
+    <!-- ═══ DATA ═══ -->
+    <div class="flex items-center gap-3 mb-4">
+      <div class="h-px flex-1 bg-primary-100"></div>
+      <span class="text-xs font-medium text-primary-400 uppercase tracking-widest">Data</span>
+      <div class="h-px flex-1 bg-primary-100"></div>
     </div>
 
     <!-- Data Refresh -->
@@ -334,6 +855,109 @@ const refreshResult = ref<{ ok: boolean; message: string } | null>(null)
 const users = ref<any[]>([])
 const siteMode = ref<'public' | 'restricted'>('restricted')
 const disabledPages = ref<string[]>([])
+const groupCount = ref(0)
+const aiConfig = ref<any>(null)
+const showAIForm = ref(false)
+const aiForm = reactive({ id: '', name: '', type: 'openai' as string, model: '', apiKey: '', baseUrl: '' })
+const cacheStats = ref<any>(null)
+const cacheMaxAge = ref(168)
+const cronJobs = ref<any[]>([])
+const cronMessage = ref<{ ok: boolean; text: string } | null>(null)
+const showCronForm = ref(false)
+const editingCronId = ref<string | null>(null)
+const runningCronJob = ref<string | null>(null)
+const cronForm = reactive({ id: '', label: '', script: '', schedule: '0 */6 * * *', logFile: '' })
+const newsSources = ref<any[]>([])
+const newsMessage = ref<{ ok: boolean; text: string } | null>(null)
+const showNewsForm = ref(false)
+const testingNewsUrl = ref(false)
+const newsTestResult = ref<any>(null)
+const newsForm = reactive({ id: '', name: '', url: '', type: 'rss' as string, category: 'wire' as string })
+const newsFeedStats = reactive({ articles: 0, sources: 0, countries: 0, sizeKB: 0, lastUpdated: '', enabledSources: 0, totalSources: 0 })
+const stmtFeedStats = reactive({ statements: 0, sources: 0, countries: 0, sizeKB: 0, lastUpdated: '', enabledSources: 0, totalSources: 0 })
+const pulseStyle = reactive({ tone: 'analytical' as string, temperature: 0.7 })
+const pulseStyleMsg = ref('')
+const pulseToneOptions = [
+  { value: 'formal-diplomatic', label: 'Diplomatic Cable' },
+  { value: 'analytical', label: 'Analytical' },
+  { value: 'journalistic', label: 'Journalistic' },
+]
+const showPromptEditor = ref(false)
+const promptDefaults = ref<Record<string, string>>({})
+const showingDefaults = ref<string[]>([])
+const expandedPromptGroups = ref<string[]>([])
+const promptForm = reactive({
+  systemBase: '',
+  countryInstructions: '',
+  bilateralInstructions: '',
+  groupInstructions: '',
+  newsBriefingInstructions: '',
+  speechSummaryInstructions: '',
+  anomalyDetectionInstructions: '',
+  compareAnalysisInstructions: '',
+  groupSuggestionsInstructions: '',
+  riskScoreInstructions: '',
+  meetingDocInstructions: '',
+  cableInstructions: '',
+  chatInstructions: '',
+  smartSearchInstructions: '',
+  pulseInstructions: '',
+})
+
+const promptGroups = [
+  {
+    label: 'Core',
+    fields: [
+      { key: 'systemBase', label: 'System Base Prompt' },
+    ],
+  },
+  {
+    label: 'Intelligence Briefings',
+    fields: [
+      { key: 'countryInstructions', label: 'Country Briefing' },
+      { key: 'bilateralInstructions', label: 'Bilateral Prep' },
+      { key: 'groupInstructions', label: 'Group Trends' },
+      { key: 'newsBriefingInstructions', label: 'News Briefing' },
+    ],
+  },
+  {
+    label: 'Analysis Tools',
+    fields: [
+      { key: 'speechSummaryInstructions', label: 'Speech Summary' },
+      { key: 'anomalyDetectionInstructions', label: 'Anomaly Detection' },
+      { key: 'compareAnalysisInstructions', label: 'Compare Analysis' },
+      { key: 'riskScoreInstructions', label: 'Risk Score' },
+    ],
+  },
+  {
+    label: 'Documents',
+    fields: [
+      { key: 'meetingDocInstructions', label: 'Meeting Document' },
+      { key: 'cableInstructions', label: 'Diplomatic Cable' },
+      { key: 'pulseInstructions', label: 'Diplomatic Pulse' },
+    ],
+  },
+  {
+    label: 'Interactive',
+    fields: [
+      { key: 'chatInstructions', label: 'Chat' },
+      { key: 'smartSearchInstructions', label: 'Smart Search' },
+      { key: 'groupSuggestionsInstructions', label: 'Group Suggestions' },
+    ],
+  },
+]
+
+function togglePromptGroup(label: string) {
+  const idx = expandedPromptGroups.value.indexOf(label)
+  if (idx >= 0) expandedPromptGroups.value.splice(idx, 1)
+  else expandedPromptGroups.value.push(label)
+}
+
+function toggleDefaultView(key: string) {
+  const idx = showingDefaults.value.indexOf(key)
+  if (idx >= 0) showingDefaults.value.splice(idx, 1)
+  else showingDefaults.value.push(key)
+}
 
 const toggleablePages = [
   { path: '/groups', label: 'Groups' },
@@ -513,6 +1137,316 @@ async function handleRefreshAll() {
   stopPolling()
 }
 
+async function loadAIConfig() {
+  try {
+    aiConfig.value = await $fetch<any>('/api/admin/ai-config')
+    if (aiConfig.value?.prompts) {
+      const p = aiConfig.value.prompts
+      for (const key of Object.keys(promptForm) as (keyof typeof promptForm)[]) {
+        (promptForm as any)[key] = p[key] || ''
+      }
+    }
+    if (aiConfig.value?.pulseStyle) {
+      pulseStyle.tone = aiConfig.value.pulseStyle.tone || 'analytical'
+      pulseStyle.temperature = aiConfig.value.pulseStyle.temperature ?? 0.7
+    }
+  } catch {}
+  try {
+    promptDefaults.value = await $fetch<Record<string, string>>('/api/admin/ai-config/prompt-defaults')
+  } catch {}
+}
+
+async function addAIProvider() {
+  try {
+    await $fetch('/api/admin/ai-config', {
+      method: 'POST',
+      body: { action: 'add', provider: { ...aiForm, enabled: true } },
+    })
+    showAIForm.value = false
+    Object.assign(aiForm, { id: '', name: '', type: 'openai', model: '', apiKey: '', baseUrl: '' })
+    await loadAIConfig()
+  } catch (e: any) {
+    alert(e?.data?.statusMessage || e?.message || 'Failed to add provider')
+  }
+}
+
+async function setActiveAI(id: string) {
+  try {
+    await $fetch('/api/admin/ai-config', { method: 'POST', body: { action: 'set-active', id } })
+    await loadAIConfig()
+  } catch (e: any) {
+    alert(e?.data?.statusMessage || 'Failed to set active provider')
+  }
+}
+
+async function removeAIProvider(id: string) {
+  if (!confirm('Remove this AI provider?')) return
+  try {
+    await $fetch(`/api/admin/ai-config/${id}`, { method: 'DELETE' })
+    await loadAIConfig()
+  } catch (e: any) {
+    alert(e?.data?.statusMessage || 'Failed to remove provider')
+  }
+}
+
+async function savePrompts() {
+  try {
+    const prompts: any = {}
+    for (const [key, value] of Object.entries(promptForm)) {
+      if (typeof value === 'string' && value.trim()) prompts[key] = value.trim()
+    }
+    await $fetch('/api/admin/ai-config', { method: 'POST', body: { action: 'save-prompts', prompts } })
+    await loadAIConfig()
+  } catch (e: any) {
+    alert(e?.data?.statusMessage || 'Failed to save prompts')
+  }
+}
+
+function resetPrompts() {
+  for (const key of Object.keys(promptForm) as (keyof typeof promptForm)[]) {
+    (promptForm as any)[key] = ''
+  }
+  savePrompts()
+}
+
+async function loadCacheStats() {
+  try {
+    cacheStats.value = await $fetch<any>('/api/admin/ai-cache')
+    cacheMaxAge.value = cacheStats.value?.maxAgeHours || 168
+  } catch {}
+}
+
+async function saveCacheMaxAge() {
+  try {
+    await $fetch('/api/admin/ai-cache', { method: 'POST', body: { action: 'set-max-age', hours: cacheMaxAge.value } })
+    await loadCacheStats()
+  } catch (e: any) {
+    alert(e?.data?.statusMessage || 'Failed to update max age')
+  }
+}
+
+async function clearCacheEntry(key: string) {
+  try {
+    await $fetch('/api/admin/ai-cache', { method: 'POST', body: { action: 'clear-entry', key } })
+    await loadCacheStats()
+  } catch (e: any) {
+    alert(e?.data?.statusMessage || 'Failed to clear entry')
+  }
+}
+
+async function clearAllCache() {
+  if (!confirm('Clear all cached analyses?')) return
+  try {
+    await $fetch('/api/admin/ai-cache', { method: 'POST', body: { action: 'clear-all' } })
+    await loadCacheStats()
+  } catch (e: any) {
+    alert(e?.data?.statusMessage || 'Failed to clear cache')
+  }
+}
+
+async function loadCronJobs() {
+  try {
+    const res = await $fetch<any>('/api/admin/cron-jobs')
+    cronJobs.value = res.jobs || []
+  } catch {}
+}
+
+async function toggleCronJob(id: string, enabled: boolean) {
+  cronMessage.value = null
+  try {
+    const res = await $fetch<any>('/api/admin/cron-jobs', { method: 'POST', body: { action: 'toggle', id, enabled } })
+    cronJobs.value = res.jobs || []
+    cronMessage.value = { ok: true, text: `Job ${enabled ? 'enabled' : 'disabled'} and crontab synced.` }
+  } catch (e: any) {
+    cronMessage.value = { ok: false, text: e?.data?.statusMessage || 'Failed to toggle job' }
+  }
+}
+
+async function runCronJob(id: string) {
+  cronMessage.value = null
+  runningCronJob.value = id
+  try {
+    const res = await $fetch<any>('/api/admin/cron-jobs', { method: 'POST', body: { action: 'run-now', id } })
+    cronJobs.value = res.jobs || []
+    if (res.ok) {
+      cronMessage.value = { ok: true, text: `Job "${id}" completed successfully.${res.output ? ' Output: ' + res.output.slice(0, 200) : ''}` }
+    } else {
+      cronMessage.value = { ok: false, text: `Job "${id}" failed: ${res.error}` }
+    }
+  } catch (e: any) {
+    cronMessage.value = { ok: false, text: e?.data?.statusMessage || 'Failed to run job' }
+  } finally {
+    runningCronJob.value = null
+  }
+}
+
+function editCronJob(job: any) {
+  editingCronId.value = job.id
+  Object.assign(cronForm, { id: job.id, label: job.label, script: job.script, schedule: job.schedule, logFile: job.logFile })
+  showCronForm.value = true
+}
+
+async function saveCronJob() {
+  cronMessage.value = null
+  try {
+    if (editingCronId.value) {
+      const res = await $fetch<any>('/api/admin/cron-jobs', {
+        method: 'POST',
+        body: { action: 'update', id: editingCronId.value, label: cronForm.label, schedule: cronForm.schedule, logFile: cronForm.logFile },
+      })
+      cronJobs.value = res.jobs || []
+      cronMessage.value = { ok: true, text: `Job "${editingCronId.value}" updated.` }
+    } else {
+      const res = await $fetch<any>('/api/admin/cron-jobs', {
+        method: 'POST',
+        body: { action: 'add', job: { ...cronForm } },
+      })
+      cronJobs.value = res.jobs || []
+      cronMessage.value = { ok: true, text: `Job "${cronForm.id}" added.` }
+    }
+    showCronForm.value = false
+    editingCronId.value = null
+  } catch (e: any) {
+    cronMessage.value = { ok: false, text: e?.data?.statusMessage || 'Failed to save job' }
+  }
+}
+
+async function deleteCronJob(id: string) {
+  if (!confirm(`Remove job "${id}"? This will also remove it from the system crontab.`)) return
+  cronMessage.value = null
+  try {
+    const res = await $fetch<any>('/api/admin/cron-jobs', { method: 'POST', body: { action: 'remove', id } })
+    cronJobs.value = res.jobs || []
+    cronMessage.value = { ok: true, text: `Job "${id}" removed.` }
+  } catch (e: any) {
+    cronMessage.value = { ok: false, text: e?.data?.statusMessage || 'Failed to remove job' }
+  }
+}
+
+async function loadNewsSources() {
+  try {
+    const res = await $fetch<any>('/api/admin/news-sources')
+    newsSources.value = res.sources || []
+    // Update stats
+    const sources = res.sources || []
+    newsFeedStats.totalSources = sources.length
+    newsFeedStats.enabledSources = sources.filter((s: any) => s.enabled).length
+    const lastFetches = sources.map((s: any) => s.lastFetch).filter(Boolean).sort().reverse()
+    newsFeedStats.lastUpdated = lastFetches[0] || ''
+  } catch {}
+}
+
+async function loadNewsFeedStats() {
+  try {
+    const res = await $fetch<any>('/api/news/stats')
+    newsFeedStats.articles = res.articleCount || 0
+    newsFeedStats.sources = res.sourceCount || 0
+    newsFeedStats.countries = res.countryCoverage || 0
+    newsFeedStats.sizeKB = res.sizeKB || 0
+  } catch {}
+}
+
+async function savePulseStyle() {
+  pulseStyleMsg.value = ''
+  try {
+    await $fetch('/api/admin/ai-config', {
+      method: 'POST',
+      body: {
+        action: 'save-pulse-style',
+        style: { tone: pulseStyle.tone, temperature: pulseStyle.temperature },
+      },
+    })
+    pulseStyleMsg.value = 'Saved'
+  } catch (e: any) {
+    pulseStyleMsg.value = 'Error: ' + (e.data?.message || e.message || 'Failed')
+  }
+}
+
+function newsCategoryClass(cat: string) {
+  switch (cat) {
+    case 'government': return 'bg-blue-100 text-blue-700'
+    case 'wire': return 'bg-purple-100 text-purple-700'
+    case 'institutional': return 'bg-teal-100 text-teal-700'
+    case 'regional': return 'bg-orange-100 text-orange-700'
+    case 'lldc-sids': return 'bg-emerald-100 text-emerald-700'
+    default: return 'bg-primary-100 text-primary-600'
+  }
+}
+
+async function addNewSource() {
+  newsMessage.value = null
+  try {
+    const res = await $fetch<any>('/api/admin/news-sources', {
+      method: 'POST',
+      body: { action: 'add', source: { ...newsForm } },
+    })
+    newsSources.value = res.sources || []
+    newsMessage.value = { ok: true, text: `Source "${newsForm.name}" added.` }
+    showNewsForm.value = false
+  } catch (e: any) {
+    newsMessage.value = { ok: false, text: e?.data?.statusMessage || 'Failed to add source' }
+  }
+}
+
+async function toggleNewsSource(id: string, enabled: boolean) {
+  newsMessage.value = null
+  try {
+    const res = await $fetch<any>('/api/admin/news-sources', {
+      method: 'POST',
+      body: { action: 'toggle', id, enabled },
+    })
+    newsSources.value = res.sources || []
+    newsMessage.value = { ok: true, text: `Source ${enabled ? 'enabled' : 'disabled'}.` }
+  } catch (e: any) {
+    newsMessage.value = { ok: false, text: e?.data?.statusMessage || 'Failed to toggle source' }
+  }
+}
+
+async function deleteNewsSource(id: string) {
+  if (!confirm(`Remove news source "${id}"?`)) return
+  newsMessage.value = null
+  try {
+    const res = await $fetch<any>('/api/admin/news-sources', {
+      method: 'POST',
+      body: { action: 'remove', id },
+    })
+    newsSources.value = res.sources || []
+    newsMessage.value = { ok: true, text: `Source "${id}" removed.` }
+  } catch (e: any) {
+    newsMessage.value = { ok: false, text: e?.data?.statusMessage || 'Failed to remove source' }
+  }
+}
+
+async function testNewsUrl() {
+  newsTestResult.value = null
+  testingNewsUrl.value = true
+  try {
+    newsTestResult.value = await $fetch<any>('/api/admin/news-sources', {
+      method: 'POST',
+      body: { action: 'test', url: newsForm.url },
+    })
+  } catch (e: any) {
+    newsTestResult.value = { ok: false, error: e?.data?.statusMessage || 'Test failed' }
+  }
+  testingNewsUrl.value = false
+}
+
+async function loadStmtFeedStats() {
+  try {
+    const res = await $fetch<any>('/api/statements/stats')
+    stmtFeedStats.statements = res.statementCount || 0
+    stmtFeedStats.sources = res.sourceCount || 0
+    stmtFeedStats.countries = res.countryCoverage || 0
+    stmtFeedStats.sizeKB = res.sizeKB || 0
+  } catch {}
+  try {
+    const res = await $fetch<any>('/api/admin/statement-sources')
+    const sources = res.sources || []
+    stmtFeedStats.totalSources = sources.length
+    stmtFeedStats.enabledSources = sources.filter((s: any) => s.enabled).length
+  } catch {}
+}
+
 async function handleLogout() {
   await logout()
   await navigateTo('/login')
@@ -530,7 +1464,18 @@ function formatTime(iso: string): string {
 onMounted(async () => {
   siteMode.value = authState.value.siteMode || 'restricted'
   disabledPages.value = authState.value.disabledPages || []
-  await Promise.all([loadUsers(), loadMeta(), loadRefreshStatus()])
+  await Promise.all([
+    loadUsers(),
+    loadMeta(),
+    loadRefreshStatus(),
+    loadAIConfig(),
+    loadCacheStats(),
+    loadCronJobs(),
+    loadNewsSources(),
+    loadNewsFeedStats(),
+    loadStmtFeedStats(),
+    $fetch<any[]>('/api/admin/groups').then(g => { groupCount.value = g.length }).catch(() => {}),
+  ])
 })
 
 onUnmounted(() => {

@@ -7,6 +7,14 @@ import { getMilitaryCapabilities } from '~/server/utils/military'
 import { getCountrySanctions } from '~/server/utils/sanctions'
 import { getCountryTreatyStatus } from '~/server/utils/treaties'
 import { getCountryData } from '~/server/utils/countrydata'
+import { getCountryVDem } from '~/server/utils/vdem'
+import { getCountrySIPRI } from '~/server/utils/sipri'
+import { getCountryODA } from '~/server/utils/oda'
+import { getCountryVisa } from '~/server/utils/visa'
+import { getCountryCables } from '~/server/utils/submarine-cables'
+import { getCountryAlliances } from '~/server/utils/alliances'
+import { getCountryNews } from '~/server/utils/news-feed'
+import { getCountryStatements } from '~/server/utils/statements-feed'
 
 export default defineEventHandler((event) => {
   const query = getQuery(event)
@@ -128,5 +136,21 @@ export default defineEventHandler((event) => {
     },
     treaties: treaties.slice(0, 20),
     groups: groups.map(g => ({ gid: g.gid, acronym: g.acronym, name: g.name })),
+    democracy: getCountryVDem(iso3) || null,
+    armsTrade: getCountrySIPRI(iso3) || null,
+    aid: getCountryODA(iso3) || null,
+    passport: getCountryVisa(iso3) || null,
+    connectivity: getCountryCables(iso3) || null,
+    alliances: getCountryAlliances(iso3) || null,
+    recentNews: getCountryNews(iso3, 10).map(a => ({
+      id: a.id,
+      title: a.title,
+      description: a.description,
+      url: a.url,
+      source: a.source,
+      publishedAt: a.publishedAt,
+      topics: a.topics,
+    })),
+    recentStatements: getCountryStatements(iso3, 5),
   }
 })

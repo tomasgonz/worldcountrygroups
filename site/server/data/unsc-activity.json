@@ -1,0 +1,1383 @@
+{
+  "_meta": {
+    "last_updated": "2026-10-01",
+    "days": 120,
+    "source": "Dag Hammarskjöld Library, Security Council meetings tables"
+  },
+  "meetings": [
+    {
+      "meeting": "S/PV.10232",
+      "date": "2026-09-29",
+      "topic": "The situation concerning the Democratic Republic of the Congo",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16466.doc.htm",
+      "record": "https://docs.un.org/S/PV.10232"
+    },
+    {
+      "meeting": "S/PV.10231",
+      "date": "2026-09-29",
+      "topic": "The question concerning Haiti",
+      "outcome": "S/RES/2829 (2026) 12-0-3",
+      "press_release": "https://www.un.org/press/en/2026/sc16465.doc.htm",
+      "record": "https://docs.un.org/S/PV.10231"
+    },
+    {
+      "meeting": "S/PV.10230",
+      "date": "2026-09-28",
+      "topic": "The situation in the Middle East, including the Palestinian question",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16464.doc.htm",
+      "record": "https://docs.un.org/S/PV.10230"
+    },
+    {
+      "meeting": "S/PV.10229",
+      "date": "2026-09-25",
+      "topic": "Briefing by the United Nations High Commissioner for Refugees",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16463.doc.htm",
+      "record": "https://docs.un.org/S/PV.10229"
+    },
+    {
+      "meeting": "S/PV.10228",
+      "date": "2026-09-23",
+      "topic": "Maintenance of international peace and security",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16461.doc.htm",
+      "record": "https://docs.un.org/S/PV.10228"
+    },
+    {
+      "meeting": "S/PV.10227 (Resumption 1)",
+      "date": "2026-09-23",
+      "topic": "Maintenance of peace and security of Ukraine",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16460.doc.htm",
+      "record": "https://docs.un.org/S/PV.10227 (Resumption 1)"
+    },
+    {
+      "meeting": "S/PV.10227",
+      "date": "2026-09-23",
+      "topic": "Maintenance of peace and security of Ukraine",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16460.doc.htm",
+      "record": "https://docs.un.org/S/PV.10227"
+    },
+    {
+      "meeting": "S/PV.10226",
+      "date": "2026-09-18",
+      "topic": "United Nations peacekeeping operations",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16457.doc.htm",
+      "record": "https://docs.un.org/S/PV.10226"
+    },
+    {
+      "meeting": "S/PV.10225",
+      "date": "2026-09-17",
+      "topic": "The situation in the Middle East",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16456.doc.htm",
+      "record": "https://docs.un.org/S/PV.10225"
+    },
+    {
+      "meeting": "S/PV.10224",
+      "date": "2026-09-17",
+      "topic": "Non-proliferation",
+      "outcome": "Draft resolution S/2026/740 vetoed by China, Russian Federation 11-2-2",
+      "press_release": "https://www.un.org/press/en/2026/sc16455.doc.htm",
+      "record": "https://docs.un.org/S/PV.10224"
+    },
+    {
+      "meeting": "S/PV.10223",
+      "date": "2026-09-16",
+      "topic": "The situation in Afghanistan",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16454.doc.htm",
+      "record": "https://docs.un.org/S/PV.10223"
+    },
+    {
+      "meeting": "S/PV.10222",
+      "date": "2026-09-15",
+      "topic": "The situation in the Middle East",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16453.doc.htm",
+      "record": "https://docs.un.org/S/PV.10222"
+    },
+    {
+      "meeting": "S/PV.10221",
+      "date": "2026-09-11",
+      "topic": "Threats to international peace and security caused by terrorist acts",
+      "outcome": "S/PRST/2026/3",
+      "press_release": "https://www.un.org/press/en/2026/sc16451.doc.htm",
+      "record": "https://docs.un.org/S/PV.10221"
+    },
+    {
+      "meeting": "S/PV.10220",
+      "date": "2026-09-11",
+      "topic": "Reports of the Secretary-General on the Sudan and South Sudan",
+      "outcome": "S/RES/2828(2026) 15-0-0",
+      "press_release": "https://www.un.org/press/en/2026/sc16450.doc.htm",
+      "record": "https://docs.un.org/S/PV.10220"
+    },
+    {
+      "meeting": "S/PV.10219",
+      "date": "2026-09-10",
+      "topic": "The situation in the Middle East",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16449.doc.htm",
+      "record": "https://docs.un.org/S/PV.10219"
+    },
+    {
+      "meeting": "S/PV.10218",
+      "date": "2026-09-10",
+      "topic": "Non-proliferation",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16448.doc.htm",
+      "record": "https://docs.un.org/S/PV.10218"
+    },
+    {
+      "meeting": "S/PV.10217",
+      "date": "2026-09-03",
+      "topic": "The situation in the Middle East",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16445.doc.htm",
+      "record": "https://docs.un.org/S/PV.10217"
+    },
+    {
+      "meeting": "S/PV.10216",
+      "date": "2026-08-28",
+      "topic": "The question concerning Haiti",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16444.doc.htm",
+      "record": "https://docs.un.org/S/PV.10216"
+    },
+    {
+      "meeting": "S/PV.10215",
+      "date": "2026-08-27",
+      "topic": "The situation in the Middle East",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16441.doc.htm",
+      "record": "https://docs.un.org/S/PV.10215"
+    },
+    {
+      "meeting": "S/PV.10214",
+      "date": "2026-08-26",
+      "topic": "The situation in the Middle East, including the Palestinian question",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16440.doc.htm",
+      "record": "https://docs.un.org/S/PV.10214"
+    },
+    {
+      "meeting": "S/PV.10213 (Resumption 2)",
+      "date": "2026-08-26",
+      "topic": "Maintenance of international peace and security",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16439.doc.htm",
+      "record": "https://docs.un.org/S/PV.10213 (Resumption 2)"
+    },
+    {
+      "meeting": "S/PV.10213 (Resumption 1)",
+      "date": "2026-08-25",
+      "topic": "Maintenance of international peace and security",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16439.doc.htm",
+      "record": "https://docs.un.org/S/PV.10213 (Resumption 1)"
+    },
+    {
+      "meeting": "S/PV.10213",
+      "date": "2026-08-25",
+      "topic": "Maintenance of international peace and security",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16439.doc.htm",
+      "record": "https://docs.un.org/S/PV.10213"
+    },
+    {
+      "meeting": "S/PV.10212",
+      "date": "2026-08-24",
+      "topic": "Maintenance of peace and security of Ukraine",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16438.doc.htm",
+      "record": "https://docs.un.org/S/PV.10212"
+    },
+    {
+      "meeting": "S/PV.10211",
+      "date": "2026-08-24",
+      "topic": "Reports of the Secretary-General on the Sudan and South Sudan",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16437.doc.htm",
+      "record": "https://docs.un.org/S/PV.10211"
+    },
+    {
+      "meeting": "S/PV.10210 (Resumption 1)",
+      "date": "2026-08-19",
+      "topic": "Implementation of the note by the President of the Security Council (S/2024/507)",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16436.doc.htm",
+      "record": "https://docs.un.org/S/PV.10210 (Resumption 1)"
+    },
+    {
+      "meeting": "S/PV.10210",
+      "date": "2026-08-19",
+      "topic": "Implementation of the note by the President of the Security Council (S/2024/507)",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16436.doc.htm",
+      "record": "https://docs.un.org/S/PV.10210"
+    },
+    {
+      "meeting": "S/PV.10209",
+      "date": "2026-08-18",
+      "topic": "The situation in Libya",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16434.doc.htm",
+      "record": "https://docs.un.org/S/PV.10209"
+    },
+    {
+      "meeting": "S/PV.10208",
+      "date": "2026-08-13",
+      "topic": "The situation in the Middle East",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16431.doc.htm",
+      "record": "https://docs.un.org/S/PV.10208"
+    },
+    {
+      "meeting": "S/PV.10207",
+      "date": "2026-08-11",
+      "topic": "The situation in the Middle East, including the Palestinian question",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16430.doc.htm",
+      "record": "https://docs.un.org/S/PV.10207"
+    },
+    {
+      "meeting": "S/PV.10206",
+      "date": "2026-08-06",
+      "topic": "Reports of the Secretary-General on the Sudan and South Sudan",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16427.doc.htm",
+      "record": "https://docs.un.org/S/PV.10206"
+    },
+    {
+      "meeting": "S/PV.10205",
+      "date": "2026-08-05",
+      "topic": "Threats to international peace and security caused by terrorist acts",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16426.doc.htm",
+      "record": "https://docs.un.org/S/PV.10205"
+    },
+    {
+      "meeting": "S/PV.10204",
+      "date": "2026-07-29",
+      "topic": "Peace and security in Africa",
+      "outcome": "S/RES/2827(2026) 15-0-0",
+      "press_release": "https://www.un.org/press/en/2026/sc16424.doc.htm",
+      "record": "https://docs.un.org/S/PV.10204"
+    },
+    {
+      "meeting": "S/PV.10203 (Resumption 1)",
+      "date": "2026-07-28",
+      "topic": "The situation in the Middle East, including the Palestinian question",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16423.doc.htm",
+      "record": "https://docs.un.org/S/PV.10203 (Resumption 1)"
+    },
+    {
+      "meeting": "S/PV.10203",
+      "date": "2026-07-28",
+      "topic": "The situation in the Middle East, including the Palestinian question",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16423.doc.htm",
+      "record": "https://docs.un.org/S/PV.10203"
+    },
+    {
+      "meeting": "S/PV.10202",
+      "date": "2026-07-27",
+      "topic": "Maintenance of peace and security of Ukraine",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16422.doc.htm",
+      "record": "https://docs.un.org/S/PV.10202"
+    },
+    {
+      "meeting": "S/PV.10201 (Resumption 1)",
+      "date": "2026-07-23",
+      "topic": "Maintenance of international peace and security",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16420.doc.htm",
+      "record": "https://docs.un.org/S/PV.10201 (Resumption 1)"
+    },
+    {
+      "meeting": "S/PV.10201",
+      "date": "2026-07-23",
+      "topic": "Maintenance of international peace and security",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16420.doc.htm",
+      "record": "https://docs.un.org/S/PV.10201"
+    },
+    {
+      "meeting": "S/PV.10200 (Resumption 1)",
+      "date": "2026-07-22",
+      "topic": "Maintenance of international peace and security",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16419.doc.htm",
+      "record": "https://docs.un.org/S/PV.10200 (Resumption 1)"
+    },
+    {
+      "meeting": "S/PV.10200",
+      "date": "2026-07-22",
+      "topic": "Maintenance of international peace and security",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16419.doc.htm",
+      "record": "https://docs.un.org/S/PV.10200"
+    },
+    {
+      "meeting": "S/PV.10199",
+      "date": "2026-07-21",
+      "topic": "The situation in the Middle East",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16418.doc.htm",
+      "record": "https://docs.un.org/S/PV.10199"
+    },
+    {
+      "meeting": "S/PV.10198",
+      "date": "2026-07-20",
+      "topic": "The question concerning Haiti",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16417.doc.htm",
+      "record": "https://docs.un.org/S/PV.10198"
+    },
+    {
+      "meeting": "S/PV.10197",
+      "date": "2026-07-15",
+      "topic": "Reports of the Secretary-General on the Sudan and South Sudan",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16415.doc.htm",
+      "record": "https://docs.un.org/S/PV.10197"
+    },
+    {
+      "meeting": "S/PV.10196",
+      "date": "2026-07-15",
+      "topic": "Identical letters dated 19 January 2016 from the Permanent Representative of Colombia to the United Nations addressed to the Secretary-General and the President of the Security Council (S/2016/53)",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16414.doc.htm",
+      "record": "https://docs.un.org/S/PV.10196"
+    },
+    {
+      "meeting": "S/PV.10195",
+      "date": "2026-07-14",
+      "topic": "Peace consolidation in West Africa",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16413.doc.htm",
+      "record": "https://docs.un.org/S/PV.10195"
+    },
+    {
+      "meeting": "S/PV.10194",
+      "date": "2026-07-14",
+      "topic": "Maintenance of international peace and security",
+      "outcome": "S/RES/2826 (2026) 13-0-2",
+      "press_release": "https://www.un.org/press/en/2026/sc16412.doc.htm",
+      "record": "https://docs.un.org/S/PV.10194"
+    },
+    {
+      "meeting": "S/PV.10193",
+      "date": "2026-07-13",
+      "topic": "The situation in the Middle East",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16411.doc.htm",
+      "record": "https://docs.un.org/S/PV.10193"
+    },
+    {
+      "meeting": "S/PV.10192",
+      "date": "2026-07-10",
+      "topic": "Non-proliferation",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16409.doc.htm",
+      "record": "https://docs.un.org/S/PV.10192"
+    },
+    {
+      "meeting": "S/PV.10190 (Resumption 2)",
+      "date": "2026-07-10",
+      "topic": "Women and peace and security",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16406.doc.htm",
+      "record": "https://docs.un.org/S/PV.10190 (Resumption 2)"
+    },
+    {
+      "meeting": "S/PV.10191",
+      "date": "2026-07-09",
+      "topic": "Maintenance of peace and security of Ukraine",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16408.doc.htm",
+      "record": "https://docs.un.org/S/PV.10191"
+    },
+    {
+      "meeting": "S/PV.10190 (Resumption 1)",
+      "date": "2026-07-08",
+      "topic": "Women and peace and security",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16406.doc.htm",
+      "record": "https://docs.un.org/S/PV.10190 (Resumption 1)"
+    },
+    {
+      "meeting": "S/PV.10190",
+      "date": "2026-07-08",
+      "topic": "Women and peace and security",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16406.doc.htm",
+      "record": "https://docs.un.org/S/PV.10190"
+    },
+    {
+      "meeting": "S/PV.10189",
+      "date": "2026-07-02",
+      "topic": "The situation in the Middle East",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16405.doc.htm",
+      "record": "https://docs.un.org/S/PV.10189"
+    },
+    {
+      "meeting": "S/PV.10188",
+      "date": "2026-06-29",
+      "topic": "The situation concerning the Democratic Republic of the Congo",
+      "outcome": "S/RES/2825(2026) 15-0-0",
+      "press_release": "https://www.un.org/press/en/2026/sc16403.doc.htm",
+      "record": "https://docs.un.org/S/PV.10188"
+    },
+    {
+      "meeting": "S/PV.10187",
+      "date": "2026-06-29",
+      "topic": "Maintenance of international peace and security",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16402.doc.htm",
+      "record": "https://docs.un.org/S/PV.10187"
+    },
+    {
+      "meeting": "S/PV.10186",
+      "date": "2026-06-29",
+      "topic": "The situation in the Middle East, including the Palestinian question",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16401.doc.htm",
+      "record": "https://docs.un.org/S/PV.10186"
+    },
+    {
+      "meeting": "S/PV.10185",
+      "date": "2026-06-26",
+      "topic": "The situation concerning the Democratic Republic of the Congo",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16400.doc.htm",
+      "record": "https://docs.un.org/S/PV.10185"
+    },
+    {
+      "meeting": "S/PV.10184",
+      "date": "2026-06-26",
+      "topic": "Reports of the Secretary-General on the Sudan and South Sudan",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16399.doc.htm",
+      "record": "https://docs.un.org/S/PV.10184"
+    },
+    {
+      "meeting": "S/PV.10183",
+      "date": "2026-06-25",
+      "topic": "The situation in the Middle East",
+      "outcome": "S/RES/2824(2026) 15-0-0",
+      "press_release": "https://www.un.org/press/en/2026/sc16398.doc.htm",
+      "record": "https://docs.un.org/S/PV.10183"
+    },
+    {
+      "meeting": "S/PV.10182 (Resumption 2)",
+      "date": "2026-06-25",
+      "topic": "Children and armed conflict",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16397.doc.htm",
+      "record": "https://docs.un.org/S/PV.10182 (Resumption 2)"
+    },
+    {
+      "meeting": "S/PV.10182 (Resumption 1)",
+      "date": "2026-06-24",
+      "topic": "Children and armed conflict",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16397.doc.htm",
+      "record": "https://docs.un.org/S/PV.10182 (Resumption 1)"
+    },
+    {
+      "meeting": "S/PV.10182",
+      "date": "2026-06-24",
+      "topic": "Children and armed conflict",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16397.doc.htm",
+      "record": "https://docs.un.org/S/PV.10182"
+    },
+    {
+      "meeting": "S/PV.10181",
+      "date": "2026-06-23",
+      "topic": "The situation in the Central African Republic",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16396.doc.htm",
+      "record": "https://docs.un.org/S/PV.10181"
+    },
+    {
+      "meeting": "S/PV.10180",
+      "date": "2026-06-23",
+      "topic": "United Nations peacekeeping operations",
+      "outcome": "S/RES/2823(2026) 15-0-0",
+      "press_release": "https://www.un.org/press/en/2026/sc16395.doc.htm",
+      "record": "https://docs.un.org/S/PV.10180"
+    },
+    {
+      "meeting": "S/PV.10179",
+      "date": "2026-06-22",
+      "topic": "Maintenance of peace and security of Ukraine",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16394.doc.htm",
+      "record": "https://docs.un.org/S/PV.10179"
+    },
+    {
+      "meeting": "S/PV.10178",
+      "date": "2026-06-22",
+      "topic": "The situation in the Middle East",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16393.doc.htm",
+      "record": "https://docs.un.org/S/PV.10178"
+    },
+    {
+      "meeting": "S/PV.10175 (Resumption 2)",
+      "date": "2026-06-19",
+      "topic": "Women and peace and security",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16388.doc.htm",
+      "record": "https://docs.un.org/S/PV.10175 (Resumption 2)"
+    },
+    {
+      "meeting": "S/PV.10177",
+      "date": "2026-06-18",
+      "topic": "The situation in the Middle East, including the Palestinian question",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16390.doc.htm",
+      "record": "https://docs.un.org/S/PV.10177"
+    },
+    {
+      "meeting": "S/PV.10176",
+      "date": "2026-06-18",
+      "topic": "The situation in Libya",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16389.doc.htm",
+      "record": "https://docs.un.org/S/PV.10176"
+    },
+    {
+      "meeting": "S/PV.10175 (Resumption 1)",
+      "date": "2026-06-17",
+      "topic": "Women and peace and security",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16388.doc.htm",
+      "record": "https://docs.un.org/S/PV.10175 (Resumption 1)"
+    },
+    {
+      "meeting": "S/PV.10175",
+      "date": "2026-06-17",
+      "topic": "Women and peace and security",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16388.doc.htm",
+      "record": "https://docs.un.org/S/PV.10175"
+    },
+    {
+      "meeting": "S/PV.10174",
+      "date": "2026-06-16",
+      "topic": "The situation in the Middle East",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16387.doc.htm",
+      "record": "https://docs.un.org/S/PV.10174"
+    },
+    {
+      "meeting": "S/PV.10173 (closed)",
+      "date": "2026-06-15",
+      "topic": "Meeting of the Security Council with the troop- and police-contributing countries pursuant to resolution 1353 (2001), annex II, sections A and B",
+      "outcome": "",
+      "press_release": null,
+      "record": "https://docs.un.org/S/PV.10173 (closed)"
+    },
+    {
+      "meeting": "S/PV.10172 (closed)",
+      "date": "2026-06-15",
+      "topic": "The situation in Somalia",
+      "outcome": "",
+      "press_release": null,
+      "record": "https://docs.un.org/S/PV.10172 (closed)"
+    },
+    {
+      "meeting": "S/PV.10171",
+      "date": "2026-06-15",
+      "topic": "The situation in Afghanistan",
+      "outcome": "S/RES/2822(2026) 15-0-0",
+      "press_release": "https://www.un.org/press/en/2026/sc16386.doc.htm",
+      "record": "https://docs.un.org/S/PV.10171"
+    },
+    {
+      "meeting": "S/PV.10170",
+      "date": "2026-06-12",
+      "topic": "International Residual Mechanism for Criminal Tribunals",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16384.doc.htm",
+      "record": "https://docs.un.org/S/PV.10170"
+    },
+    {
+      "meeting": "S/PV.10169 (Resumption 2)",
+      "date": "2026-06-11",
+      "topic": "Maintenance of international peace and security",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16383.doc.htm",
+      "record": "https://docs.un.org/S/PV.10169 (Resumption 2)"
+    },
+    {
+      "meeting": "S/PV.10169 (Resumption 1)",
+      "date": "2026-06-10",
+      "topic": "Maintenance of international peace and security",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16383.doc.htm",
+      "record": "https://docs.un.org/S/PV.10169 (Resumption 1)"
+    },
+    {
+      "meeting": "S/PV.10169",
+      "date": "2026-06-10",
+      "topic": "Maintenance of international peace and security",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16383.doc.htm",
+      "record": "https://docs.un.org/S/PV.10169"
+    },
+    {
+      "meeting": "S/PV.10168",
+      "date": "2026-06-09",
+      "topic": "Non-proliferation",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16382.doc.htm",
+      "record": "https://docs.un.org/S/PV.10168"
+    },
+    {
+      "meeting": "S/PV.10167",
+      "date": "2026-06-09",
+      "topic": "Central African region",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16381.doc.htm",
+      "record": "https://docs.un.org/S/PV.10167"
+    },
+    {
+      "meeting": "S/PV.10166",
+      "date": "2026-06-08",
+      "topic": "Maintenance of peace and security of Ukraine",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16380.doc.htm",
+      "record": "https://docs.un.org/S/PV.10166"
+    },
+    {
+      "meeting": "S/PV.10165",
+      "date": "2026-06-08",
+      "topic": "The situation in Afghanistan",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16379.doc.htm",
+      "record": "https://docs.un.org/S/PV.10165"
+    },
+    {
+      "meeting": "S/PV.10164",
+      "date": "2026-06-04",
+      "topic": "The situation in the Middle East",
+      "outcome": "",
+      "press_release": "https://www.un.org/press/en/2026/sc16377.doc.htm",
+      "record": "https://docs.un.org/S/PV.10164"
+    }
+  ],
+  "presidential_statements": [
+    {
+      "id": "S/PRST/2026/3",
+      "date": "2026-09-11",
+      "topic": "Threats to international peace and security caused by terrorist acts",
+      "meeting": "S/PV.10221",
+      "press_release": "https://www.un.org/press/en/2026/sc16451.doc.htm"
+    },
+    {
+      "id": "S/PRST/2026/2",
+      "date": "2026-04-02",
+      "topic": "Cooperation between the United Nations and regional and subregional organizations in maintaining international peace and security",
+      "meeting": "S/PV.10129",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2026/1",
+      "date": "2026-04-02",
+      "topic": "Cooperation between the United Nations and regional and subregional organizations in maintaining international peace and security",
+      "meeting": "S/PV.10128",
+      "press_release": "https://www.un.org/press/en/2026/sc16328.doc.htm"
+    },
+    {
+      "id": "S/PRST/2025/8",
+      "date": "2025-12-29",
+      "topic": "The situation in Bosnia and Herzegovina",
+      "meeting": "S/PV.10082",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2025/7",
+      "date": "2025-10-24",
+      "topic": "Maintenance of international peace and security",
+      "meeting": "S/PV.10024",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2025/6",
+      "date": "2025-08-10",
+      "topic": "The situation in the Middle East",
+      "meeting": "S/PV.9976",
+      "press_release": "https://www.un.org/press/en/2025/sc16141.doc.htm"
+    },
+    {
+      "id": "S/PRST/2025/5",
+      "date": "2025-07-24",
+      "topic": "Cooperation between the United Nations and regional and subregional organizations in maintaining international peace and security",
+      "meeting": "S/PV.9964",
+      "press_release": "https://www.un.org/press/en/2025/sc16127.doc.htm"
+    },
+    {
+      "id": "S/PRST/2025/4",
+      "date": "2025-03-14",
+      "topic": "The situation in the Middle East",
+      "meeting": "S/PV.9879",
+      "press_release": "https://press.un.org/en/2025/sc16020.doc.htm"
+    },
+    {
+      "id": "S/PRST/2025/3",
+      "date": "2025-01-27",
+      "topic": "Peacebuilding and sustaining peace",
+      "meeting": "S/PV.9850",
+      "press_release": "https://press.un.org/en/2025/sc15983.doc.htm"
+    },
+    {
+      "id": "S/PRST/2025/2",
+      "date": "2025-01-24",
+      "topic": "Maintenance of international peace and security",
+      "meeting": "S/PV.9848",
+      "press_release": "https://press.un.org/en/2025/sc15978.doc.htm"
+    },
+    {
+      "id": "S/PRST/2025/1",
+      "date": "2025-01-16",
+      "topic": "The situation in the Middle East",
+      "meeting": "S/PV.9837",
+      "press_release": "https://press.un.org/en/2025/sc15966.doc.htm"
+    },
+    {
+      "id": "S/PRST/2024/7",
+      "date": "2024-11-01",
+      "topic": "Central African region",
+      "meeting": "S/PV.9773",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2024/6",
+      "date": "2024-10-21",
+      "topic": "Maintenance of international peace and security",
+      "meeting": "S/PV.9754",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2024/5",
+      "date": "2024-09-25",
+      "topic": "Maintenance of international peace and security",
+      "meeting": "S/PV.9732",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2024/4",
+      "date": "2024-06-28",
+      "topic": "Protection of civilians in armed conflict",
+      "meeting": "S/PV.9675",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2024/3",
+      "date": "2024-05-24",
+      "topic": "Peace consolidation in West Africa",
+      "meeting": "S/PV.9635",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2024/2",
+      "date": "2024-05-23",
+      "topic": "Maintenance of international peace and security",
+      "meeting": "S/PV.9633",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2024/1",
+      "date": "2024-03-04",
+      "topic": "International Residual Mechanism for Criminal Tribunals",
+      "meeting": "S/PV.9561",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2023/6",
+      "date": "2023-12-07",
+      "topic": "Threats to international peace and security",
+      "meeting": "S/PV.9497",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2023/5",
+      "date": "2023-10-16",
+      "topic": "The situation concerning the Democratic Republic of the Congo",
+      "meeting": "S/PV.9437",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2023/4",
+      "date": "2023-08-03",
+      "topic": "Maintenance of international peace and security",
+      "meeting": "S/PV.9392",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2023/3",
+      "date": "2023-03-29",
+      "topic": "The situation concerning the Democratic Republic of the Congo",
+      "meeting": "S/PV.9298",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2023/2",
+      "date": "2023-03-16",
+      "topic": "The situation in Libya",
+      "meeting": "S/PV.9284",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2023/1",
+      "date": "2023-02-20",
+      "topic": "The situation in the Middle East, including the Palestinian question",
+      "meeting": "S/PV.9263",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2022/7",
+      "date": "2022-12-15",
+      "topic": "Threats to international peace and security caused by terrorist acts",
+      "meeting": "S/PV.9221",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2022/6",
+      "date": "2022-08-31",
+      "topic": "Peace and security in Africa",
+      "meeting": "S/PV.9122",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2022/5",
+      "date": "2022-07-12",
+      "topic": "United Nations peacekeeping operations",
+      "meeting": "S/PV.9090",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2022/4",
+      "date": "2022-06-03",
+      "topic": "The situation concerning the Democratic Republic of the Congo",
+      "meeting": "S/PV.9055",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2022/3",
+      "date": "2022-05-06",
+      "topic": "Maintenance of peace and security of Ukraine",
+      "meeting": "S/PV.9028",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2022/2",
+      "date": "2022-03-31",
+      "topic": "International Residual Mechanism for Criminal Tribunals",
+      "meeting": "S/PV.9010",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2022/1",
+      "date": "2022-03-23",
+      "topic": "Cooperation between the United Nations and regional and subregional organizations in maintaining international peace and security",
+      "meeting": "S/PV.9001",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2021/24",
+      "date": "2021-11-24",
+      "topic": "The situation in Libya",
+      "meeting": "S/PV.8912",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2021/23",
+      "date": "2021-11-16",
+      "topic": "Maintenance of international peace and security",
+      "meeting": "S/PV.8906",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2021/22",
+      "date": "2021-11-09",
+      "topic": "Maintenance of international peace and security",
+      "meeting": "S/PV.8900 (Resumption 1)",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2021/20",
+      "date": "2021-10-27",
+      "topic": "Reports of the Secretary-General on the Sudan and South Sudan",
+      "meeting": "S/PV.8887",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2021/19",
+      "date": "2021-10-20",
+      "topic": "The situation in the Great Lakes region",
+      "meeting": "S/PV.8884",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2021/18",
+      "date": "2021-09-15",
+      "topic": "Peace and security in Africa",
+      "meeting": "S/PV.8860",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2021/17",
+      "date": "2021-08-18",
+      "topic": "United Nations peacekeeping operations",
+      "meeting": "S/PV.8838",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2021/16",
+      "date": "2021-08-17",
+      "topic": "Peace consolidation in West Africa",
+      "meeting": "S/PV.8836",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2021/14",
+      "date": "2021-08-02",
+      "topic": "Reports of the Secretary-General on the Sudan and South Sudan",
+      "meeting": "S/PV.8829",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2021/13",
+      "date": "2021-07-23",
+      "topic": "The situation in Cyprus",
+      "meeting": "S/PV.8824",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2021/12",
+      "date": "2021-07-15",
+      "topic": "The situation in Libya",
+      "meeting": "S/PV.8820",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2020/10",
+      "date": "2020-10-15",
+      "topic": "The situation in Mali",
+      "meeting": "S/PV.8769",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2020/9",
+      "date": "2020-10-09",
+      "topic": "The situation in Cyprus",
+      "meeting": "S/PV.8766",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2020/8",
+      "date": "2020-09-10",
+      "topic": "Children and armed conflict",
+      "meeting": "S/PV.8756",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2020/7",
+      "date": "2020-07-28",
+      "topic": "Peace consolidation in West Africa",
+      "meeting": "S/PV.8752",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2020/5",
+      "date": "2020-03-11",
+      "topic": "Peace and security in Africa",
+      "meeting": "S/PV.8743",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2020/4",
+      "date": "2020-02-28",
+      "topic": "International Residual Mechanism for Criminal Tribunals",
+      "meeting": "S/PV.8737",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2020/3",
+      "date": "2020-02-12",
+      "topic": "Children and armed conflict",
+      "meeting": "S/PV.8721",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2020/2",
+      "date": "2020-02-11",
+      "topic": "Peace consolidation in West Africa",
+      "meeting": "S/PV.8720",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2020/1",
+      "date": "2020-01-09",
+      "topic": "Maintenance of international peace and security",
+      "meeting": "S/PV.8699",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2019/15",
+      "date": "2019-12-12",
+      "topic": "Peace and security in Africa",
+      "meeting": "S/PV.8683",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2019/14",
+      "date": "2019-11-22",
+      "topic": "Maintenance of international peace and security",
+      "meeting": "S/PV.8673",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2019/13",
+      "date": "2019-11-04",
+      "topic": "The situation in Guinea-Bissau",
+      "meeting": "S/PV.8656",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2019/12",
+      "date": "2019-10-08",
+      "topic": "The situation in the Middle East",
+      "meeting": "S/PV.8635",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2019/11",
+      "date": "2019-10-08",
+      "topic": "Reports of the Secretary-General on the Sudan and South Sudan",
+      "meeting": "S/PV.8634",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2019/10",
+      "date": "2019-09-12",
+      "topic": "Central African region",
+      "meeting": "S/PV.8618",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2019/9",
+      "date": "2019-08-29",
+      "topic": "The situation in the Middle East",
+      "meeting": "S/PV.8608",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2019/8",
+      "date": "2019-08-20",
+      "topic": "The promotion and strengthening of the rule of law in the maintenance of international peace and security",
+      "meeting": "S/PV.8599",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2019/7",
+      "date": "2019-08-07",
+      "topic": "Peace consolidation in West Africa",
+      "meeting": "S/PV.8592",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2019/6",
+      "date": "2019-08-02",
+      "topic": "Peace and security in Africa",
+      "meeting": "S/PV.8590",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2019/5",
+      "date": "2019-06-13",
+      "topic": "Cooperation between the United Nations and regional and subregional organizations in maintaining international peace and security",
+      "meeting": "S/PV.8548",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2019/4",
+      "date": "2019-05-07",
+      "topic": "United Nations peacekeeping operations",
+      "meeting": "S/PV.8521",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2019/3",
+      "date": "2019-04-09",
+      "topic": "The situation in the Central African Republic",
+      "meeting": "S/PV.8503",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2019/2",
+      "date": "2019-04-03",
+      "topic": "The situation in Mali",
+      "meeting": "S/PV.8501",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2019/1",
+      "date": "2019-02-19",
+      "topic": "The situation between Iraq and Kuwait",
+      "meeting": "S/PV.8463",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/21",
+      "date": "2018-12-21",
+      "topic": "Threats to international peace and security caused by terrorist acts",
+      "meeting": "S/PV.8437",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/20",
+      "date": "2018-12-18",
+      "topic": "Peacebuilding and sustaining peace",
+      "meeting": "S/PV.8430",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/19",
+      "date": "2018-12-11",
+      "topic": "Reports of the Secretary-General on the Sudan and South Sudan",
+      "meeting": "S/PV.8415",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/18",
+      "date": "2018-09-21",
+      "topic": "Protection of civilians in armed conflict",
+      "meeting": "S/PV.8359",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/17",
+      "date": "2018-08-10",
+      "topic": "Central African region",
+      "meeting": "S/PV.8328",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/16",
+      "date": "2018-08-10",
+      "topic": "Peace consolidation in West Africa",
+      "meeting": "S/PV.8327",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/15",
+      "date": "2018-07-23",
+      "topic": "The situation in Afghanistan",
+      "meeting": "S/PV.8315",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/14",
+      "date": "2018-07-13",
+      "topic": "The situation in the Central African Republic",
+      "meeting": "S/PV.8309",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/13",
+      "date": "2018-06-07",
+      "topic": "The situation in Somalia",
+      "meeting": "S/PV.8280",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/12",
+      "date": "2018-06-06",
+      "topic": "Letter dated 28 February 2014 from the Permanent Representative of Ukraine to the United Nations addressed to the President of the Security Council (S/2014/136)",
+      "meeting": "S/PV.8276",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/11",
+      "date": "2018-06-06",
+      "topic": "The situation in Libya",
+      "meeting": "S/PV.8275",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/10",
+      "date": "2018-05-14",
+      "topic": "United Nations peacekeeping operations",
+      "meeting": "S/PV.8253",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/9",
+      "date": "2018-05-08",
+      "topic": "Threats to international peace and security",
+      "meeting": "S/PV.8247",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/8",
+      "date": "2018-04-19",
+      "topic": "The situation in Liberia",
+      "meeting": "S/PV.8239",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/7",
+      "date": "2018-04-05",
+      "topic": "The situation in Burundi",
+      "meeting": "S/PV.8223",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/6",
+      "date": "2018-03-19",
+      "topic": "International Residual Mechanism for Criminal Tribunals",
+      "meeting": "S/PV.8208",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/5",
+      "date": "2018-03-15",
+      "topic": "The situation in the Middle East",
+      "meeting": "S/PV.8205",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/4",
+      "date": "2018-01-31",
+      "topic": "Reports of the Secretary-General on the Sudan and South Sudan",
+      "meeting": "S/PV.8172",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/3",
+      "date": "2018-01-30",
+      "topic": "Peace consolidation in West Africa",
+      "meeting": "S/PV.8170",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/2",
+      "date": "2018-01-19",
+      "topic": "Maintenance of international peace and security",
+      "meeting": "S/PV.8162",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2018/1",
+      "date": "2018-01-18",
+      "topic": "Maintenance of international peace and security",
+      "meeting": "S/PV.8161",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2017/27",
+      "date": "2017-12-21",
+      "topic": "United Nations peacekeeping operations",
+      "meeting": "S/PV.8149",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2017/26",
+      "date": "2017-12-14",
+      "topic": "The situation in Libya",
+      "meeting": "S/PV.8136",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2017/25",
+      "date": "2017-12-14",
+      "topic": "Reports of the Secretary-General on the Sudan and South Sudan",
+      "meeting": "S/PV.8135",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2017/24",
+      "date": "2017-12-07",
+      "topic": "Maintenance of international peace and security",
+      "meeting": "S/PV.8122",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2017/23",
+      "date": "2017-11-07",
+      "topic": "The situation concerning the Democratic Republic of the Congo",
+      "meeting": "S/PV.8087",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2017/22",
+      "date": "2017-11-06",
+      "topic": "The situation in Myanmar",
+      "meeting": "S/PV.8085",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2017/21",
+      "date": "2017-10-31",
+      "topic": "Children and armed conflict",
+      "meeting": "S/PV.8082",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2017/20",
+      "date": "2017-10-17",
+      "topic": "The question concerning Haiti",
+      "meeting": "S/PV.8070",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2017/19",
+      "date": "2017-10-10",
+      "topic": "The situation in Libya",
+      "meeting": "S/PV.8065",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2017/18",
+      "date": "2017-10-05",
+      "topic": "Identical letters dated 19 January 2016 from the Permanent Representative of Colombia to the United Nations addressed to the Secretary-General and the President of the Security Council (S/2016/53)",
+      "meeting": "S/PV.8063",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2017/17",
+      "date": "2017-09-13",
+      "topic": "The situation in Guinea-Bissau",
+      "meeting": "S/PV.8045",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2017/16",
+      "date": "2017-08-29",
+      "topic": "Non-proliferation/Democratic People's Republic of Korea",
+      "meeting": "S/PV.8034",
+      "press_release": null
+    },
+    {
+      "id": "S/PRST/2017/15",
+      "date": "2017-08-24",
+      "topic": "Threats to international peace and security caused by terrorist acts",
+      "meeting": "S/PV.8029",
+      "press_release": null
+    }
+  ]
+}

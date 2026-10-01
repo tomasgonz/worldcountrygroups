@@ -77,6 +77,16 @@
           </div>
         </div>
 
+        <!-- Year-over-year comparison -->
+        <div v-if="speechesData.speeches.filter((s: any) => s.analysis).length >= 2" class="mb-10">
+          <SpeechesSpeechComparison :speeches="speechesData.speeches" :country-name="countryName" />
+        </div>
+
+        <!-- Say vs vote -->
+        <div class="mb-10">
+          <SpeechesSayVsVote :iso="iso" :country-name="countryName" />
+        </div>
+
         <!-- Keyword cloud from all speeches -->
         <div class="mb-10">
           <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">Key Topics Across Sessions</h2>
@@ -166,6 +176,23 @@
 
               <!-- Expanded speech content -->
               <div v-if="expandedSession === speech.session" class="border-t border-primary-100">
+                <!-- Sources -->
+                <div v-if="speech.source_url || speech.text_source" class="px-5 py-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs border-b border-primary-100 bg-primary-50/40">
+                  <span v-if="speech.date" class="text-primary-500">Delivered {{ speech.date }}</span>
+                  <span v-if="speech.text_source" class="px-2 py-0.5 rounded-full border" :class="textSourceInfo(speech.text_source).cls" :title="textSourceInfo(speech.text_source).hint">{{ textSourceInfo(speech.text_source).label }}</span>
+                  <a v-if="speech.source_url" :href="speech.source_url" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">Official page &amp; video</a>
+                  <a v-for="u in speech.pdf_urls || []" :key="u" :href="u" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">PDF ({{ pdfLang(u) }})</a>
+                  <a v-if="speech.un_news" :href="speech.un_news.url" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">UN News</a>
+                  <a v-if="speech.press_release" :href="speech.press_release" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">Meetings coverage</a>
+                </div>
+
+                <!-- UN Meetings Coverage summary -->
+                <div v-if="speech.un_summary" class="px-5 py-5 border-b border-primary-100">
+                  <div class="text-xs font-semibold uppercase tracking-wider text-sky-700 mb-2">UN Meetings Coverage summary</div>
+                  <div class="text-sm text-primary-700 leading-relaxed space-y-2">
+                    <p v-for="(para, i) in speech.un_summary.split('\n')" :key="i" :class="i === 0 ? 'font-semibold text-primary-900' : ''">{{ para }}</p>
+                  </div>
+                </div>
                 <!-- AI Analysis Panel -->
                 <div v-if="speech.analysis" class="px-5 py-5 bg-gradient-to-b from-amber-50/40 to-transparent border-b border-primary-100">
                   <div class="flex items-center gap-2 mb-3">
@@ -293,6 +320,17 @@ const route = useRoute()
 const iso = route.params.iso as string
 
 const { country, error } = useCountry(iso)
+
+const LANG_NAMES: Record<string, string> = { en: 'English', fr: 'French', es: 'Spanish', ar: 'Arabic', ru: 'Russian', zh: 'Chinese', pt: 'Portuguese', de: 'German' }
+function pdfLang(url: string): string {
+  const code = url.match(/_([a-z]+)\.pdf$/i)?.[1]?.toLowerCase() || ''
+  return LANG_NAMES[code] || code.toUpperCase()
+}
+function textSourceInfo(src: string): { label: string; hint: string; cls: string } {
+  if (src === 'pdf_en') return { label: 'Official English text', hint: 'Text extracted from the official statement PDF', cls: 'bg-emerald-50 border-emerald-200 text-emerald-700' }
+  if (src === 'transcript_en') return { label: 'UN AI transcript', hint: 'Auto-generated English transcript of the delivered speech; may contain errors', cls: 'bg-amber-50 border-amber-200 text-amber-700' }
+  return { label: `Original language (${pdfLang('_' + src.replace('pdf_', '') + '.pdf')})`, hint: 'Text extracted from the original-language statement PDF', cls: 'bg-primary-50 border-primary-200 text-primary-600' }
+}
 const { countries: allCountries } = useCountries()
 const countryNameMap = computed(() => {
   const map = new Map<string, string>()

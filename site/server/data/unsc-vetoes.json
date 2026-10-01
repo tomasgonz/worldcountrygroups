@@ -1,130 +1,2325 @@
 {
-  "_meta": { "last_updated": "2026-03-03", "total_vetoes": 312 },
+  "_meta": {
+    "last_updated": "2026-10-01",
+    "total_vetoes": 251,
+    "source": "Dag Hammarskjöld Library veto list",
+    "note": "USSR vetoes are recorded under RUS."
+  },
   "vetoes": [
-    { "date": "2024-04-18", "draft": "S/2024/312", "vetoed_by": ["RUS"], "subject": "Non-proliferation - DPRK sanctions panel extension", "meeting": "9578" },
-    { "date": "2024-02-20", "draft": "S/2024/173", "vetoed_by": ["USA"], "subject": "Middle East - Ceasefire in Gaza", "meeting": "9537" },
-    { "date": "2023-10-18", "draft": "S/2023/773", "vetoed_by": ["USA"], "subject": "Middle East - Humanitarian pause in Gaza", "meeting": "9443" },
-    { "date": "2023-09-20", "draft": "S/2023/700", "vetoed_by": ["RUS"], "subject": "Non-proliferation - Mali sanctions panel extension", "meeting": "9414" },
-    { "date": "2023-03-31", "draft": "S/2023/238", "vetoed_by": ["RUS"], "subject": "Ukraine - Protection of environment during armed conflict", "meeting": "9301" },
-    { "date": "2022-10-30", "draft": "S/2022/801", "vetoed_by": ["RUS"], "subject": "Ukraine - Condemnation of referenda and annexation", "meeting": "9143" },
-    { "date": "2022-09-30", "draft": "S/2022/720", "vetoed_by": ["RUS"], "subject": "Ukraine - Territorial integrity", "meeting": "9122" },
-    { "date": "2022-05-26", "draft": "S/2022/431", "vetoed_by": ["CHN", "RUS"], "subject": "Non-proliferation - DPRK sanctions strengthening", "meeting": "9048" },
-    { "date": "2022-02-25", "draft": "S/2022/155", "vetoed_by": ["RUS"], "subject": "Ukraine - Deploring aggression by Russia", "meeting": "8979" },
-    { "date": "2021-12-13", "draft": "S/2021/990", "vetoed_by": ["RUS"], "subject": "Climate and security", "meeting": "8926" },
-    { "date": "2020-12-22", "draft": "S/2020/1192", "vetoed_by": ["RUS", "CHN"], "subject": "Syria - Cross-border humanitarian aid", "meeting": "8788" },
-    { "date": "2020-09-11", "draft": "S/2020/883", "vetoed_by": ["RUS", "CHN"], "subject": "Syria - Cross-border mechanism renewal", "meeting": "8749" },
-    { "date": "2020-07-11", "draft": "S/2020/667", "vetoed_by": ["CHN", "RUS"], "subject": "Syria - Cross-border aid authorization", "meeting": "8730" },
-    { "date": "2020-07-07", "draft": "S/2020/654", "vetoed_by": ["RUS", "CHN"], "subject": "Syria - Cross-border humanitarian aid renewal", "meeting": "8727" },
-    { "date": "2020-06-30", "draft": "S/2020/604", "vetoed_by": ["USA"], "subject": "Middle East - Israeli settlements", "meeting": "8720" },
-    { "date": "2019-09-19", "draft": "S/2019/756", "vetoed_by": ["RUS", "CHN"], "subject": "Syria - Idlib ceasefire", "meeting": "8623" },
-    { "date": "2019-02-28", "draft": "S/2019/186", "vetoed_by": ["RUS", "CHN"], "subject": "Venezuela - Presidential crisis", "meeting": "8476" },
-    { "date": "2018-06-01", "draft": "S/2018/516", "vetoed_by": ["USA"], "subject": "Middle East - Protection of Palestinian civilians", "meeting": "8274" },
-    { "date": "2018-04-10", "draft": "S/2018/321", "vetoed_by": ["RUS"], "subject": "Syria - Chemical weapons investigation mechanism", "meeting": "8228" },
-    { "date": "2017-12-18", "draft": "S/2017/1060", "vetoed_by": ["USA"], "subject": "Middle East - Status of Jerusalem", "meeting": "8139" },
-    { "date": "2017-11-17", "draft": "S/2017/970", "vetoed_by": ["RUS"], "subject": "Syria - Chemical weapons investigation mechanism renewal", "meeting": "8107" },
-    { "date": "2017-11-16", "draft": "S/2017/962", "vetoed_by": ["RUS"], "subject": "Syria - Joint Investigative Mechanism extension", "meeting": "8105" },
-    { "date": "2017-10-24", "draft": "S/2017/884", "vetoed_by": ["RUS"], "subject": "Syria - Chemical weapons investigation renewal", "meeting": "8073" },
-    { "date": "2017-04-12", "draft": "S/2017/315", "vetoed_by": ["RUS"], "subject": "Syria - Chemical weapons use Khan Shaykhun", "meeting": "7922" },
-    { "date": "2017-02-28", "draft": "S/2017/172", "vetoed_by": ["RUS", "CHN"], "subject": "Syria - Sanctions for chemical weapons use", "meeting": "7893" },
-    { "date": "2016-12-05", "draft": "S/2016/1026", "vetoed_by": ["RUS", "CHN"], "subject": "Syria - Aleppo ceasefire", "meeting": "7825" },
-    { "date": "2016-10-08", "draft": "S/2016/846", "vetoed_by": ["RUS"], "subject": "Syria - End to airstrikes on Aleppo", "meeting": "7785" },
-    { "date": "2016-02-26", "draft": "S/2016/185", "vetoed_by": ["USA"], "subject": "Middle East - Israeli settlements report", "meeting": "7643" },
-    { "date": "2015-07-08", "draft": "S/2015/508", "vetoed_by": ["RUS"], "subject": "Bosnia - Srebrenica genocide memorial resolution", "meeting": "7481" },
-    { "date": "2014-07-15", "draft": "S/2014/348", "vetoed_by": ["RUS", "CHN"], "subject": "Syria - ICC referral", "meeting": "7180" },
-    { "date": "2014-03-15", "draft": "S/2014/189", "vetoed_by": ["RUS"], "subject": "Ukraine - Crimea referendum invalidity", "meeting": "7138" },
-    { "date": "2012-07-19", "draft": "S/2012/538", "vetoed_by": ["RUS", "CHN"], "subject": "Syria - Chapter VII sanctions threat", "meeting": "6810" },
-    { "date": "2012-02-04", "draft": "S/2012/77", "vetoed_by": ["RUS", "CHN"], "subject": "Syria - Political transition plan", "meeting": "6711" },
-    { "date": "2011-10-04", "draft": "S/2011/612", "vetoed_by": ["RUS", "CHN"], "subject": "Syria - Condemnation of violence", "meeting": "6627" },
-    { "date": "2011-02-18", "draft": "S/2011/24", "vetoed_by": ["USA"], "subject": "Middle East - Israeli settlements illegality", "meeting": "6484" },
-    { "date": "2009-06-15", "draft": "S/2009/310", "vetoed_by": ["RUS"], "subject": "Georgia - Extension of UN Observer Mission", "meeting": "6143" },
-    { "date": "2008-07-11", "draft": "S/2008/447", "vetoed_by": ["RUS", "CHN"], "subject": "Zimbabwe - Targeted sanctions", "meeting": "5933" },
-    { "date": "2007-07-11", "draft": "S/2007/409", "vetoed_by": ["RUS", "CHN"], "subject": "Myanmar - Human rights situation", "meeting": "5619" },
-    { "date": "2007-04-19", "draft": "S/2007/229", "vetoed_by": ["RUS"], "subject": "Kosovo - Supervised independence plan", "meeting": "5669" },
-    { "date": "2006-11-11", "draft": "S/2006/878", "vetoed_by": ["USA"], "subject": "Middle East - Beit Hanoun incident", "meeting": "5565" },
-    { "date": "2006-07-13", "draft": "S/2006/508", "vetoed_by": ["USA"], "subject": "Middle East - Gaza operations", "meeting": "5488" },
-    { "date": "2004-10-05", "draft": "S/2004/783", "vetoed_by": ["USA"], "subject": "Middle East - Israeli operations in Gaza", "meeting": "5051" },
-    { "date": "2004-03-25", "draft": "S/2004/240", "vetoed_by": ["USA"], "subject": "Middle East - Assassination of Sheikh Yassin", "meeting": "4934" },
-    { "date": "2003-10-14", "draft": "S/2003/980", "vetoed_by": ["USA"], "subject": "Middle East - Israeli barrier wall", "meeting": "4842" },
-    { "date": "2003-09-16", "draft": "S/2003/891", "vetoed_by": ["USA"], "subject": "Middle East - Protection of Yasser Arafat", "meeting": "4828" },
-    { "date": "2002-12-20", "draft": "S/2002/1385", "vetoed_by": ["USA"], "subject": "Middle East - Killing of UN personnel in Jenin", "meeting": "4681" },
-    { "date": "2002-06-30", "draft": "S/2002/712", "vetoed_by": ["USA"], "subject": "Bosnia - UNMIBH peacekeeping renewal ICC exemption", "meeting": "4563" },
-    { "date": "2001-12-14", "draft": "S/2001/1199", "vetoed_by": ["USA"], "subject": "Middle East - Observer force", "meeting": "4438" },
-    { "date": "2001-03-27", "draft": "S/2001/270", "vetoed_by": ["USA"], "subject": "Middle East - UN observer force in occupied territories", "meeting": "4305" },
-    { "date": "1999-02-25", "draft": "S/1999/201", "vetoed_by": ["CHN"], "subject": "Macedonia - UNPREDEP force extension", "meeting": "3982" },
-    { "date": "1997-10-23", "draft": "S/1997/813", "vetoed_by": ["USA"], "subject": "Middle East - Israeli settlements in East Jerusalem", "meeting": "3830" },
-    { "date": "1997-03-07", "draft": "S/1997/199", "vetoed_by": ["USA"], "subject": "Middle East - Israeli settlements in East Jerusalem", "meeting": "3747" },
-    { "date": "1997-01-10", "draft": "S/1997/18", "vetoed_by": ["CHN"], "subject": "Central America - Guatemala peacekeeping operation", "meeting": "3730" },
-    { "date": "1996-01-10", "draft": "S/1996/20", "vetoed_by": ["USA"], "subject": "Middle East - Israeli actions in Jerusalem", "meeting": "3625" },
-    { "date": "1995-05-17", "draft": "S/1995/394", "vetoed_by": ["USA"], "subject": "Middle East - Israeli expropriation in Jerusalem", "meeting": "3538" },
-    { "date": "1994-12-02", "draft": "S/1994/1358", "vetoed_by": ["RUS"], "subject": "Bosnia - Bihac situation", "meeting": "3475" },
-    { "date": "1993-05-11", "draft": "S/25693", "vetoed_by": ["RUS"], "subject": "Cyprus - UNFICYP financing", "meeting": "3216" },
-    { "date": "1990-05-31", "draft": "S/21326", "vetoed_by": ["USA"], "subject": "Middle East - Occupied territories commission", "meeting": "2926" },
-    { "date": "1990-01-17", "draft": "S/21084", "vetoed_by": ["USA"], "subject": "Panama - US military intervention", "meeting": "2905" },
-    { "date": "1989-11-07", "draft": "S/20945/Rev.1", "vetoed_by": ["USA"], "subject": "Panama - Electoral situation", "meeting": "2893" },
-    { "date": "1989-06-09", "draft": "S/20677", "vetoed_by": ["USA", "FRA", "GBR"], "subject": "Middle East - Palestinian territories situation", "meeting": "2867" },
-    { "date": "1989-02-17", "draft": "S/20463", "vetoed_by": ["USA", "GBR", "FRA"], "subject": "Middle East - Israeli actions in occupied territories", "meeting": "2850" },
-    { "date": "1988-12-23", "draft": "S/20322", "vetoed_by": ["USA"], "subject": "Middle East - Israeli deportation of Palestinians", "meeting": "2832" },
-    { "date": "1988-04-15", "draft": "S/19780", "vetoed_by": ["USA"], "subject": "Middle East - Israeli actions in occupied territories", "meeting": "2806" },
-    { "date": "1988-02-01", "draft": "S/19466", "vetoed_by": ["USA"], "subject": "Middle East - Israeli policies in occupied territories", "meeting": "2790" },
-    { "date": "1988-01-18", "draft": "S/19434", "vetoed_by": ["USA"], "subject": "Middle East - Palestinian uprising response", "meeting": "2784" },
-    { "date": "1987-04-09", "draft": "S/18785", "vetoed_by": ["USA"], "subject": "Middle East - Israeli policies in occupied territories", "meeting": "2752" },
-    { "date": "1987-02-20", "draft": "S/18705", "vetoed_by": ["USA"], "subject": "Middle East - Israeli settlement activities", "meeting": "2739" },
-    { "date": "1986-10-28", "draft": "S/18428", "vetoed_by": ["GBR", "USA"], "subject": "Southern Africa - Comprehensive sanctions against South Africa", "meeting": "2718" },
-    { "date": "1986-06-18", "draft": "S/18163", "vetoed_by": ["USA", "GBR"], "subject": "Southern Africa - South Africa cross-border raids", "meeting": "2693" },
-    { "date": "1986-04-21", "draft": "S/18016/Rev.1", "vetoed_by": ["USA"], "subject": "Libya - Condemnation of US bombing", "meeting": "2682" },
-    { "date": "1986-02-06", "draft": "S/17796/Rev.1", "vetoed_by": ["USA"], "subject": "Middle East - Israeli practices in occupied territories", "meeting": "2655" },
-    { "date": "1986-01-30", "draft": "S/17769", "vetoed_by": ["USA"], "subject": "Middle East - Temple Mount Haram al-Sharif", "meeting": "2650" },
-    { "date": "1985-09-13", "draft": "S/17459", "vetoed_by": ["USA"], "subject": "Middle East - Israeli actions in occupied territories", "meeting": "2615" },
-    { "date": "1985-03-12", "draft": "S/17000", "vetoed_by": ["USA"], "subject": "Middle East - Lebanese situation", "meeting": "2573" },
-    { "date": "1984-09-06", "draft": "S/16732", "vetoed_by": ["USA"], "subject": "Nicaragua - Mining of harbors", "meeting": "2550" },
-    { "date": "1984-04-04", "draft": "S/16463", "vetoed_by": ["USA"], "subject": "Middle East - Chemical weapons use condemnation", "meeting": "2529" },
-    { "date": "1983-10-27", "draft": "S/16077/Rev.1", "vetoed_by": ["USA"], "subject": "Grenada - US military intervention", "meeting": "2491" },
-    { "date": "1983-08-02", "draft": "S/15895", "vetoed_by": ["USA"], "subject": "Nicaragua - Military activities", "meeting": "2466" },
-    { "date": "1982-08-06", "draft": "S/15347/Rev.1", "vetoed_by": ["USA"], "subject": "Middle East - Israeli invasion of Lebanon", "meeting": "2391" },
-    { "date": "1982-06-26", "draft": "S/15255/Rev.2", "vetoed_by": ["USA"], "subject": "Middle East - Ceasefire in Lebanon", "meeting": "2381" },
-    { "date": "1982-06-08", "draft": "S/15185", "vetoed_by": ["USA"], "subject": "Middle East - Israeli operations in Lebanon", "meeting": "2377" },
-    { "date": "1982-04-20", "draft": "S/14985", "vetoed_by": ["USA"], "subject": "Middle East - Golan Heights annexation", "meeting": "2357" },
-    { "date": "1982-04-02", "draft": "S/14943", "vetoed_by": ["GBR"], "subject": "Falkland Islands - Sovereignty dispute", "meeting": "2350" },
-    { "date": "1981-08-31", "draft": "S/14664/Rev.2", "vetoed_by": ["USA"], "subject": "Southern Africa - South Africa incursion into Angola", "meeting": "2300" },
-    { "date": "1980-04-30", "draft": "S/13911", "vetoed_by": ["USA"], "subject": "Middle East - Palestinian rights", "meeting": "2220" },
-    { "date": "1980-01-13", "draft": "S/13735", "vetoed_by": ["USA"], "subject": "Afghanistan - Soviet intervention", "meeting": "2190" },
-    { "date": "1980-01-11", "draft": "S/13729", "vetoed_by": ["GBR", "USA"], "subject": "Southern Rhodesia - Sanctions enforcement", "meeting": "2186" },
-    { "date": "1979-03-16", "draft": "S/13162", "vetoed_by": ["RUS"], "subject": "Vietnam-China - Conflict situation", "meeting": "2129" },
-    { "date": "1976-10-19", "draft": "S/12226", "vetoed_by": ["FRA", "USA", "GBR"], "subject": "Namibia - Walvis Bay sovereignty", "meeting": "1963" },
-    { "date": "1976-06-23", "draft": "S/12119", "vetoed_by": ["USA"], "subject": "Middle East - Palestinian self-determination", "meeting": "1938" },
-    { "date": "1976-03-25", "draft": "S/12022", "vetoed_by": ["USA"], "subject": "Middle East - Occupied territories", "meeting": "1899" },
-    { "date": "1975-09-30", "draft": "S/11713", "vetoed_by": ["USA", "GBR", "FRA"], "subject": "Vietnam - Membership application blocked", "meeting": "1846" },
-    { "date": "1975-08-11", "draft": "S/11690", "vetoed_by": ["USA"], "subject": "Vietnam - UN membership", "meeting": "1836" },
-    { "date": "1975-06-06", "draft": "S/11713", "vetoed_by": ["USA"], "subject": "Middle East - Situation in the occupied territories", "meeting": "1829" },
-    { "date": "1974-10-30", "draft": "S/11543", "vetoed_by": ["FRA", "GBR", "USA"], "subject": "Southern Africa - South Africa expulsion", "meeting": "1808" },
-    { "date": "1973-07-26", "draft": "S/10974", "vetoed_by": ["GBR", "USA"], "subject": "Southern Rhodesia - Sanctions enforcement", "meeting": "1735" },
-    { "date": "1972-09-10", "draft": "S/10771", "vetoed_by": ["USA"], "subject": "Middle East - Ceasefire demand", "meeting": "1662" },
-    { "date": "1972-02-04", "draft": "S/10606", "vetoed_by": ["GBR"], "subject": "Southern Rhodesia - Settlement terms", "meeting": "1639" },
-    { "date": "1971-12-05", "draft": "S/10446", "vetoed_by": ["USA"], "subject": "India-Pakistan - Ceasefire demand", "meeting": "1606" },
-    { "date": "1971-10-25", "draft": "S/10418", "vetoed_by": ["USA"], "subject": "China - Republic of China representation", "meeting": "1596" },
-    { "date": "1970-03-17", "draft": "S/9696/Rev.2", "vetoed_by": ["GBR", "USA"], "subject": "Southern Rhodesia - Independence declaration", "meeting": "1537" },
-    { "date": "1966-08-05", "draft": "S/7424", "vetoed_by": ["GBR"], "subject": "Southern Rhodesia - Use of force authorization", "meeting": "1297" },
-    { "date": "1963-06-22", "draft": "S/5330", "vetoed_by": ["GBR"], "subject": "Southern Rhodesia - Independence terms", "meeting": "1069" },
-    { "date": "1961-11-24", "draft": "S/5006", "vetoed_by": ["RUS"], "subject": "Congo - UN operations", "meeting": "982" },
-    { "date": "1960-09-17", "draft": "S/4519", "vetoed_by": ["RUS"], "subject": "Congo - UN Secretary-General actions", "meeting": "906" },
-    { "date": "1958-05-22", "draft": "S/4003", "vetoed_by": ["RUS"], "subject": "Arctic - Inspection zone proposal", "meeting": "822" },
-    { "date": "1957-10-28", "draft": "S/3885/Rev.1", "vetoed_by": ["RUS"], "subject": "Hungary - Continued Soviet intervention", "meeting": "798" },
-    { "date": "1956-10-30", "draft": "S/3710/Rev.1", "vetoed_by": ["GBR", "FRA"], "subject": "Suez Canal - Ceasefire demand", "meeting": "749" },
-    { "date": "1956-06-26", "draft": "S/3627", "vetoed_by": ["RUS"], "subject": "International Atomic Energy Agency - Statute approval", "meeting": "729" },
-    { "date": "1955-12-13", "draft": "S/3509/Rev.1", "vetoed_by": ["RUS"], "subject": "UN Membership - Package admission of 18 states", "meeting": "704" },
-    { "date": "1954-12-13", "draft": "S/3335", "vetoed_by": ["RUS"], "subject": "Disarmament - President Eisenhower atoms for peace", "meeting": "690" },
-    { "date": "1953-09-02", "draft": "S/3082", "vetoed_by": ["RUS"], "subject": "Korea - UN Commission report", "meeting": "635" },
-    { "date": "1952-02-06", "draft": "S/2530/Rev.1", "vetoed_by": ["RUS"], "subject": "Disarmament - Regulation of armaments", "meeting": "573" },
-    { "date": "1950-09-06", "draft": "S/1653", "vetoed_by": ["RUS"], "subject": "China - Representation question", "meeting": "502" },
-    { "date": "1948-05-29", "draft": "S/773", "vetoed_by": ["RUS"], "subject": "Palestine - UN mediator appointment", "meeting": "310" },
-    { "date": "1947-08-21", "draft": "S/471", "vetoed_by": ["RUS"], "subject": "Greece - Border incidents investigation", "meeting": "186" },
-    { "date": "1946-06-26", "draft": "S/100", "vetoed_by": ["RUS"], "subject": "Spain - Franco regime investigation", "meeting": "49" },
-    { "date": "2024-11-20", "draft": "S/2024/850", "vetoed_by": ["USA"], "subject": "Middle East - Ceasefire in Gaza", "meeting": "9607" },
-    { "date": "2024-12-18", "draft": "S/2024/934", "vetoed_by": ["USA"], "subject": "Middle East - Ceasefire in Gaza and hostage release", "meeting": "9619" },
-    { "date": "2025-01-22", "draft": "S/2025/51", "vetoed_by": ["USA"], "subject": "Middle East - Permanent ceasefire in Gaza", "meeting": "9637" },
-    { "date": "2025-04-17", "draft": "S/2025/284", "vetoed_by": ["USA"], "subject": "Middle East - Palestinian statehood admission", "meeting": "9702" },
-    { "date": "2025-09-15", "draft": "S/2025/650", "vetoed_by": ["RUS", "CHN"], "subject": "Syria - Chemical weapons accountability mechanism", "meeting": "9775" },
-    { "date": "2025-11-05", "draft": "S/2025/812", "vetoed_by": ["RUS"], "subject": "Ukraine - Condemnation of continued aggression", "meeting": "9820" },
-    { "date": "2026-01-28", "draft": "S/2026/55", "vetoed_by": ["USA"], "subject": "Middle East - Ceasefire in Lebanon conflict", "meeting": "9890" }
+    {
+      "date": "2026-09-17",
+      "draft": "S/2026/740",
+      "meeting": "10224",
+      "subject": "Non-proliferation",
+      "vetoed_by": [
+        "RUS",
+        "CHN"
+      ]
+    },
+    {
+      "date": "2026-04-07",
+      "draft": "S/2026/273",
+      "meeting": "10130",
+      "subject": "The situation in the Middle East",
+      "vetoed_by": [
+        "RUS",
+        "CHN"
+      ]
+    },
+    {
+      "date": "2025-09-18",
+      "draft": "S/2025/583",
+      "meeting": "10000",
+      "subject": "The situation in the Middle East, including the Palestinian question",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2025-06-04",
+      "draft": "S/2025/353",
+      "meeting": "9929",
+      "subject": "The situation in the Middle East, including the Palestinian question",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2025-02-24",
+      "draft": "S/2025/115 S/2025/116",
+      "meeting": "9866",
+      "subject": "Maintenance of peace and security of Ukraine",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2024-11-20",
+      "draft": "S/2024/835",
+      "meeting": "9790",
+      "subject": "The situation in the Middle East, including the Palestinian question",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2024-11-18",
+      "draft": "S/2024/826",
+      "meeting": "9786",
+      "subject": "Reports of the Secretary-General on the Sudan and South Sudan",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2024-04-24",
+      "draft": "S/2024/302",
+      "meeting": "9616",
+      "subject": "Non-proliferation",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2024-04-18",
+      "draft": "S/2024/312",
+      "meeting": "9609",
+      "subject": "Admission of new members",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2024-03-28",
+      "draft": "S/2024/255",
+      "meeting": "9591",
+      "subject": "Non-proliferation/Democratic People's Republic of Korea",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2024-03-22",
+      "draft": "S/2024/239",
+      "meeting": "9584",
+      "subject": "The situation in the Middle East, including the Palestinian question",
+      "vetoed_by": [
+        "RUS",
+        "CHN"
+      ]
+    },
+    {
+      "date": "2024-02-20",
+      "draft": "S/2024/173",
+      "meeting": "9552",
+      "subject": "The situation in the Middle East, including the Palestinian question",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2023-12-22",
+      "draft": "S/2023/1029 oral amendment",
+      "meeting": "9520",
+      "subject": "The situation in the Middle East, including the Palestinian question",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2023-12-08",
+      "draft": "S/2023/970",
+      "meeting": "9499",
+      "subject": "The situation in the Middle East, including the Palestinian question",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2023-10-25",
+      "draft": "S/2023/792",
+      "meeting": "9453",
+      "subject": "The situation in the Middle East, including the Palestinian question",
+      "vetoed_by": [
+        "RUS",
+        "CHN"
+      ]
+    },
+    {
+      "date": "2023-10-18",
+      "draft": "S/2023/773",
+      "meeting": "9442",
+      "subject": "The situation in the Middle East, including the Palestinian question",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2023-08-30",
+      "draft": "S/2023/638",
+      "meeting": "9408",
+      "subject": "The situation in Mali",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2023-07-11",
+      "draft": "S/2023/506",
+      "meeting": "9371",
+      "subject": "The situation in the Middle East",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2022-09-30",
+      "draft": "S/2022/720",
+      "meeting": "9143",
+      "subject": "Maintenance of peace and security of Ukraine",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2022-07-08",
+      "draft": "S/2022/538",
+      "meeting": "9087",
+      "subject": "The situation in the Middle East",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2022-05-26",
+      "draft": "S/2022/431",
+      "meeting": "9048",
+      "subject": "Non-proliferation - Democratic People's Republic of Korea",
+      "vetoed_by": [
+        "RUS",
+        "CHN"
+      ]
+    },
+    {
+      "date": "2022-02-25",
+      "draft": "S/2022/155",
+      "meeting": "8979",
+      "subject": "Letter dated 28 February 2014 from the Permanent Representative of Ukraine to the United Nations addressed to the President of the Security Council ( S/2014/136 )",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2021-12-13",
+      "draft": "S/2021/990",
+      "meeting": "8926",
+      "subject": "Maintenance of international peace and security",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2020-08-31",
+      "draft": "S/2020/852",
+      "meeting": "S/2020/870 S/2020/865",
+      "subject": "Threats to international peace and security caused by terrorist attacks",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2020-07-10",
+      "draft": "S/2020/667",
+      "meeting": "S/2020/693 S/2020/681",
+      "subject": "The situation in the Middle East",
+      "vetoed_by": [
+        "RUS",
+        "CHN"
+      ]
+    },
+    {
+      "date": "2020-07-07",
+      "draft": "S/2020/654",
+      "meeting": "S/2020/661 S/2020/657",
+      "subject": "The situation in the Middle East",
+      "vetoed_by": [
+        "RUS",
+        "CHN"
+      ]
+    },
+    {
+      "date": "2019-12-20",
+      "draft": "S/2019/961",
+      "meeting": "8697",
+      "subject": "The situation in the Middle East",
+      "vetoed_by": [
+        "RUS",
+        "CHN"
+      ]
+    },
+    {
+      "date": "2019-09-19",
+      "draft": "S/2019/756",
+      "meeting": "8623",
+      "subject": "The situation in the Middle East",
+      "vetoed_by": [
+        "RUS",
+        "CHN"
+      ]
+    },
+    {
+      "date": "2019-02-28",
+      "draft": "S/2019/186",
+      "meeting": "8476",
+      "subject": "The situation in the Bolivarian Republic of Venezuela",
+      "vetoed_by": [
+        "RUS",
+        "CHN"
+      ]
+    },
+    {
+      "date": "2018-06-01",
+      "draft": "S/2018/516",
+      "meeting": "8274",
+      "subject": "Middle East situation, including the Palestinian question",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2018-04-10",
+      "draft": "S/2018/321",
+      "meeting": "8228",
+      "subject": "Middle East",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2018-02-26",
+      "draft": "S/2018/156",
+      "meeting": "8190",
+      "subject": "Middle East",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2017-12-18",
+      "draft": "S/2017/1060",
+      "meeting": "8139",
+      "subject": "Middle East situation, including the Palestinian question",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2017-11-17",
+      "draft": "S/2017/970",
+      "meeting": "8107",
+      "subject": "Middle East",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2017-11-16",
+      "draft": "S/2017/962",
+      "meeting": "8105",
+      "subject": "Middle East",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2017-10-24",
+      "draft": "S/2017/884",
+      "meeting": "8073",
+      "subject": "Middle East",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2017-04-12",
+      "draft": "S/2017/315",
+      "meeting": "7922",
+      "subject": "Middle East",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2017-02-28",
+      "draft": "S/2017/172",
+      "meeting": "7893",
+      "subject": "Middle East",
+      "vetoed_by": [
+        "RUS",
+        "CHN"
+      ]
+    },
+    {
+      "date": "2016-12-05",
+      "draft": "S/2016/1026",
+      "meeting": "7825",
+      "subject": "Middle East",
+      "vetoed_by": [
+        "RUS",
+        "CHN"
+      ]
+    },
+    {
+      "date": "2016-10-08",
+      "draft": "S/2016/846",
+      "meeting": "7785",
+      "subject": "Middle East",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2015-07-29",
+      "draft": "S/2015/562",
+      "meeting": "7498",
+      "subject": "Letter dated 28 February 2014 from the Permanent Representative of Ukraine to the United Nations addressed to the President of the Security Council ( S/2014/136 )",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2015-07-08",
+      "draft": "S/2015/508",
+      "meeting": "7481",
+      "subject": "The situation in Bosnia and Herzegovina",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2014-05-22",
+      "draft": "S/2014/348",
+      "meeting": "7180",
+      "subject": "Middle East - Syria",
+      "vetoed_by": [
+        "RUS",
+        "CHN"
+      ]
+    },
+    {
+      "date": "2014-03-15",
+      "draft": "S/2014/189",
+      "meeting": "7138",
+      "subject": "Letter dated 28 February 2014 from the Permanent Representative of Ukraine to the United Nations addressed to the President of the Security Council ( S/2014/136 )",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2012-07-19",
+      "draft": "S/2012/538",
+      "meeting": "6810",
+      "subject": "Middle East - Syria",
+      "vetoed_by": [
+        "RUS",
+        "CHN"
+      ]
+    },
+    {
+      "date": "2012-02-04",
+      "draft": "S/2012/77",
+      "meeting": "6711",
+      "subject": "Middle East - Syria",
+      "vetoed_by": [
+        "RUS",
+        "CHN"
+      ]
+    },
+    {
+      "date": "2011-10-04",
+      "draft": "S/2011/612",
+      "meeting": "6627",
+      "subject": "Middle East - Syria",
+      "vetoed_by": [
+        "RUS",
+        "CHN"
+      ]
+    },
+    {
+      "date": "2011-02-18",
+      "draft": "S/2011/24",
+      "meeting": "6484",
+      "subject": "Middle East situation, including the Palestinian question",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2009-06-15",
+      "draft": "S/2009/310",
+      "meeting": "6143",
+      "subject": "Georgia",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2008-07-11",
+      "draft": "S/2008/447",
+      "meeting": "5933",
+      "subject": "Peace and Security - Africa (Zimbabwe)",
+      "vetoed_by": [
+        "RUS",
+        "CHN"
+      ]
+    },
+    {
+      "date": "2007-01-12",
+      "draft": "S/2007/14",
+      "meeting": "5619",
+      "subject": "Myanmar",
+      "vetoed_by": [
+        "RUS",
+        "CHN"
+      ]
+    },
+    {
+      "date": "2006-11-11",
+      "draft": "S/2006/878",
+      "meeting": "5565",
+      "subject": "Middle East situation, including the Palestinian question",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2006-07-13",
+      "draft": "S/2006/508",
+      "meeting": "5488",
+      "subject": "Middle East situation, including the Palestinian question",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2004-10-05",
+      "draft": "S/2004/783",
+      "meeting": "5051",
+      "subject": "Middle East situation, including the Palestinian question",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2004-04-21",
+      "draft": "S/2004/313",
+      "meeting": "4947",
+      "subject": "Cyprus",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "2004-03-25",
+      "draft": "S/2004/240",
+      "meeting": "4934",
+      "subject": "Middle East situation, including the Palestinian question",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2003-10-14",
+      "draft": "S/2003/980",
+      "meeting": "4842",
+      "subject": "The situation in the Middle East, including the Palestinian question",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2003-09-16",
+      "draft": "S/2003/891",
+      "meeting": "4828",
+      "subject": "The situation in the Middle East, including the Palestinian question",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2002-12-20",
+      "draft": "S/2002/1385",
+      "meeting": "4681",
+      "subject": "The situation in the Middle East, including the Palestinian question",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2002-06-30",
+      "draft": "S/2002/712",
+      "meeting": "4563",
+      "subject": "The situation in Bosnia and Herzegovina",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2001-12-14",
+      "draft": "S/2001/1199",
+      "meeting": "4438",
+      "subject": "The situation in the Middle East, including the Palestinian question",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "2001-03-27",
+      "draft": "S/2001/270",
+      "meeting": "4305",
+      "subject": "The situation in the Middle East, including the Palestinian question",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1999-02-25",
+      "draft": "S/1999/201",
+      "meeting": "3982",
+      "subject": "The situation in the former Yugoslav Republic of Macedonia",
+      "vetoed_by": [
+        "CHN"
+      ]
+    },
+    {
+      "date": "1997-03-21",
+      "draft": "S/1997/241",
+      "meeting": "3756",
+      "subject": "The situation in the occupied Arab territories",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1997-03-07",
+      "draft": "S/1997/199",
+      "meeting": "3747",
+      "subject": "The situation in the occupied Arab territories",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1997-01-10",
+      "draft": "S/1997/18",
+      "meeting": "3730",
+      "subject": "Central America: efforts towards peace",
+      "vetoed_by": [
+        "CHN"
+      ]
+    },
+    {
+      "date": "1996-11-19",
+      "draft": "S/1996/952",
+      "meeting": "3714",
+      "subject": "Appointment of Secretary-General",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1995-05-17",
+      "draft": "S/1995/394",
+      "meeting": "3538",
+      "subject": "The situation in the occupied Arab territories",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1994-12-02",
+      "draft": "S/1994/1358",
+      "meeting": "3475",
+      "subject": "The situation in the Republic of Bosnia and Herzegovina",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1993-05-11",
+      "draft": "S/25693",
+      "meeting": "3211",
+      "subject": "The situation in Cyprus",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1990-05-31",
+      "draft": "S/21326",
+      "meeting": "2926",
+      "subject": "The situation in the occupied Arab territories",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1990-01-17",
+      "draft": "S/21084",
+      "meeting": "2905",
+      "subject": "Letter dated 3 January 1990 from Nicaragua to the President of the Security Council",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1989-12-23",
+      "draft": "S/21048",
+      "meeting": "2902",
+      "subject": "The situation in Panama",
+      "vetoed_by": [
+        "GBR",
+        "USA",
+        "FRA"
+      ]
+    },
+    {
+      "date": "1989-11-07",
+      "draft": "S/20945/Rev.1",
+      "meeting": "2889",
+      "subject": "The situation in the occupied Arab territories",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1989-06-09",
+      "draft": "S/20677",
+      "meeting": "2867",
+      "subject": "The situation in the occupied Arab territories",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1989-02-17",
+      "draft": "S/20463",
+      "meeting": "2850",
+      "subject": "The situation in the occupied Arab territories",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1989-01-11",
+      "draft": "S/20378",
+      "meeting": "2841",
+      "subject": "Letters dated 4 January 1989 from Libya and Bahrain to the President of the Security Council",
+      "vetoed_by": [
+        "GBR",
+        "USA",
+        "FRA"
+      ]
+    },
+    {
+      "date": "1988-12-14",
+      "draft": "S/20322",
+      "meeting": "2832",
+      "subject": "The situation in the Middle East",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1988-05-10",
+      "draft": "S/19868",
+      "meeting": "2814",
+      "subject": "The situation in the Middle East",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1988-04-15",
+      "draft": "S/19780",
+      "meeting": "2806",
+      "subject": "The situation in the occupied Arab territories",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1988-03-08",
+      "draft": "S/19585",
+      "meeting": "2797",
+      "subject": "The question of South Africa",
+      "vetoed_by": [
+        "GBR",
+        "USA"
+      ]
+    },
+    {
+      "date": "1988-02-01",
+      "draft": "S/19466",
+      "meeting": "2790",
+      "subject": "The situation in the occupied Arab territories",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1988-01-18",
+      "draft": "S/19434",
+      "meeting": "2784",
+      "subject": "The situation in the Middle East",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1987-04-09",
+      "draft": "S/18785",
+      "meeting": "2747",
+      "subject": "The situation in Namibia",
+      "vetoed_by": [
+        "GBR",
+        "USA"
+      ]
+    },
+    {
+      "date": "1987-02-20",
+      "draft": "S/18705",
+      "meeting": "2738",
+      "subject": "The question of South Africa",
+      "vetoed_by": [
+        "GBR",
+        "USA"
+      ]
+    },
+    {
+      "date": "1986-10-28",
+      "draft": "S/18428",
+      "meeting": "2718",
+      "subject": "Letter dated 17 October 1986 from Nicaragua to the President of the Security Council",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1986-07-31",
+      "draft": "S/18250",
+      "meeting": "2704",
+      "subject": "Letter dated 22 July 1986 from Nicaragua to the President of the Security Council",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1986-06-18",
+      "draft": "S/18163",
+      "meeting": "2693",
+      "subject": "Complaint by Angola against South Africa",
+      "vetoed_by": [
+        "GBR",
+        "USA"
+      ]
+    },
+    {
+      "date": "1986-05-23",
+      "draft": "S/18087/Rev.1",
+      "meeting": "2686",
+      "subject": "The situation in Southern Africa",
+      "vetoed_by": [
+        "GBR",
+        "USA"
+      ]
+    },
+    {
+      "date": "1986-04-21",
+      "draft": "S/18016/Rev.1",
+      "meeting": "2682",
+      "subject": "Letters dated 15 April 1986 from Libya, Burkina Faso, Syria and Oman to the President of the Security Council",
+      "vetoed_by": [
+        "GBR",
+        "USA",
+        "FRA"
+      ]
+    },
+    {
+      "date": "1986-02-06",
+      "draft": "S/17796/Rev.1",
+      "meeting": "2655",
+      "subject": "Letter dated 4 February 1986 from Syria to the President of the Security Council",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1986-01-30",
+      "draft": "S/17769/Rev.1",
+      "meeting": "2650",
+      "subject": "The situation in the occupied Arab territories",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1986-01-17",
+      "draft": "S/17730/Rev.2",
+      "meeting": "2642",
+      "subject": "The situation in the Middle East",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1985-11-15",
+      "draft": "S/17633",
+      "meeting": "2629",
+      "subject": "The situation in Namibia",
+      "vetoed_by": [
+        "GBR",
+        "USA"
+      ]
+    },
+    {
+      "date": "1985-09-13",
+      "draft": "S/17459",
+      "meeting": "2605",
+      "subject": "The situation in the occupied Arab territories",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1985-07-26",
+      "draft": "S/17354/Rev.1",
+      "meeting": "2602",
+      "subject": "The question of South Africa",
+      "vetoed_by": [
+        "GBR",
+        "USA"
+      ]
+    },
+    {
+      "date": "1985-05-10",
+      "draft": "S/17172",
+      "meeting": "2580",
+      "subject": "Letter dated 6 May 1985 from Nicaragua to the President of the Security-Council",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1985-05-10",
+      "draft": "S/17172",
+      "meeting": "2580",
+      "subject": "Letter dated 6 May 1985 from Nicaragua to the President of the Security-Council",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1985-05-10",
+      "draft": "S/17172",
+      "meeting": "2580",
+      "subject": "Letter dated 6 May 1985 from Nicaragua to the President of the Security-Council",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1985-03-12",
+      "draft": "S/17000",
+      "meeting": "2573",
+      "subject": "The situation in the Middle East",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1984-09-06",
+      "draft": "S/16732",
+      "meeting": "2556",
+      "subject": "The situation in the Middle East",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1984-04-04",
+      "draft": "S/16463",
+      "meeting": "2529",
+      "subject": "Letter dated 29 March 1984 from Nicaragua to the President of the Security Council",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1984-02-29",
+      "draft": "S/16351/Rev.2",
+      "meeting": "2519",
+      "subject": "The situation in the Middle East",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1983-10-27",
+      "draft": "S/16077/Rev.1",
+      "meeting": "2491",
+      "subject": "The situation in Grenada",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1983-09-12",
+      "draft": "S/15966/Rev.1",
+      "meeting": "2476",
+      "subject": "Letters dated 1 September 1983 from the USA, the Republic of Korea, Canada and Japan to the President of the Security Council and Letter dated 2 September 1983 from Australia to the President of the Security Council",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1983-08-02",
+      "draft": "S/15895",
+      "meeting": "2461",
+      "subject": "The situation in the occupied Arab territories",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1982-08-06",
+      "draft": "S/15347/Rev.1",
+      "meeting": "2391",
+      "subject": "The situation in the Middle East",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1982-06-26",
+      "draft": "S/15255/Rev.2 (as corrected)",
+      "meeting": "2381",
+      "subject": "The situation in the Middle East",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1982-06-08",
+      "draft": "S/15185",
+      "meeting": "2377",
+      "subject": "The situation in the Middle East",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1982-06-04",
+      "draft": "S/15156/Rev.2",
+      "meeting": "2373",
+      "subject": "Question concerning the situation in the region of the Falkland Islands (Islas Malvinas)",
+      "vetoed_by": [
+        "GBR",
+        "USA"
+      ]
+    },
+    {
+      "date": "1982-04-20",
+      "draft": "S/14985",
+      "meeting": "2357",
+      "subject": "The situation in the occupied Arab territories",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1982-04-02",
+      "draft": "S/14943",
+      "meeting": "2348",
+      "subject": "The situation in the occupied Arab territories",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1982-04-02",
+      "draft": "S/14941",
+      "meeting": "2347",
+      "subject": "Letter dated 19 March 1982 from Nicaragua to the Secretary-General",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1982-01-20",
+      "draft": "S/14832/Rev.1",
+      "meeting": "2329",
+      "subject": "The situation in the occupied Arab territories",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1981-08-31",
+      "draft": "S/14664/Rev.2",
+      "meeting": "2300",
+      "subject": "Complaint by Angola against South Africa",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1981-04-30",
+      "draft": "S/14462",
+      "meeting": "2277",
+      "subject": "The situation in Namibia",
+      "vetoed_by": [
+        "GBR",
+        "USA",
+        "FRA"
+      ]
+    },
+    {
+      "date": "1981-04-30",
+      "draft": "S/14461",
+      "meeting": "2277",
+      "subject": "The situation in Namibia",
+      "vetoed_by": [
+        "GBR",
+        "USA",
+        "FRA"
+      ]
+    },
+    {
+      "date": "1981-04-30",
+      "draft": "S/14460/Rev.1",
+      "meeting": "2277",
+      "subject": "The situation in Namibia",
+      "vetoed_by": [
+        "GBR",
+        "USA",
+        "FRA"
+      ]
+    },
+    {
+      "date": "1981-04-30",
+      "draft": "S/14459",
+      "meeting": "2277",
+      "subject": "The situation in Namibia",
+      "vetoed_by": [
+        "GBR",
+        "USA",
+        "FRA"
+      ]
+    },
+    {
+      "date": "1980-04-30",
+      "draft": "S/13911",
+      "meeting": "2220",
+      "subject": "The question of the exercise by the Palestinian people of its inalienable rights",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1980-01-13",
+      "draft": "S/13735",
+      "meeting": "2191",
+      "subject": "Letters dated 22 December 1979 from the USA to the President of the Security Council US and Iran hostage question",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1980-01-11",
+      "draft": "S/13735",
+      "meeting": "2191",
+      "subject": "Letters dated 22 December 1979 from the USA to the President of the Security Council US and Iran hostage question",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1980-01-09",
+      "draft": "S/13729",
+      "meeting": "2190",
+      "subject": "Letter dated 3 January 1980 from 52 countries to the President of the Security Council",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1980-01-07",
+      "draft": "S/13729",
+      "meeting": "2190",
+      "subject": "Letter dated 3 January 1980 from 52 countries to the President of the Security Council",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1979-03-16",
+      "draft": "S/13162",
+      "meeting": "2129",
+      "subject": "The situation in South-East Asia and its implications for international peace and security China and Viet Nam border dispute",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1979-01-15",
+      "draft": "S/13027",
+      "meeting": "2112",
+      "subject": "Telegram dated 3 January 1979 from Democratic Kampuchea to the President of the Security Council",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1977-10-31",
+      "draft": "S/12312/Rev.1",
+      "meeting": "2045",
+      "subject": "The question of South Africa",
+      "vetoed_by": [
+        "GBR",
+        "USA",
+        "FRA"
+      ]
+    },
+    {
+      "date": "1977-10-31",
+      "draft": "S/12311/Rev.1",
+      "meeting": "2045",
+      "subject": "The question of South Africa",
+      "vetoed_by": [
+        "GBR",
+        "USA",
+        "FRA"
+      ]
+    },
+    {
+      "date": "1977-10-31",
+      "draft": "S/12310/Rev.1",
+      "meeting": "2045",
+      "subject": "The question of South Africa",
+      "vetoed_by": [
+        "GBR",
+        "USA",
+        "FRA"
+      ]
+    },
+    {
+      "date": "1976-11-15",
+      "draft": "S/12226",
+      "meeting": "1972",
+      "subject": "Admission of new Members Viet Nam",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1976-10-19",
+      "draft": "S/12211",
+      "meeting": "1963",
+      "subject": "The situation in Namibia",
+      "vetoed_by": [
+        "GBR",
+        "USA",
+        "FRA"
+      ]
+    },
+    {
+      "date": "1976-06-29",
+      "draft": "S/12119",
+      "meeting": "1938",
+      "subject": "The question of the exercise by the Palestinian people of its inalienable rights",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1976-06-23",
+      "draft": "S/12110",
+      "meeting": "1932",
+      "subject": "Admission of new Members Angola",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1976-03-25",
+      "draft": "S/12022",
+      "meeting": "1899",
+      "subject": "Request by Libya and Pakistan for consideration of the serious situation arising from recent developments in the occupied Arab territories",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1976-02-06",
+      "draft": "S/11967",
+      "meeting": "1888",
+      "subject": "The situation in the Comoros",
+      "vetoed_by": [
+        "FRA"
+      ]
+    },
+    {
+      "date": "1976-01-26",
+      "draft": "S/11940",
+      "meeting": "1879",
+      "subject": "The Middle East problem including the Palestinian question",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1975-12-08",
+      "draft": "S/11898",
+      "meeting": "1862",
+      "subject": "The situation in the Middle East",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1975-09-30",
+      "draft": "S/11833",
+      "meeting": "1846",
+      "subject": "Admission of new Members Democratic Republic of Viet-Nam",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1975-09-30",
+      "draft": "S/11832",
+      "meeting": "1846",
+      "subject": "Admission of new Members Republic of South Viet-Nam",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1975-08-11",
+      "draft": "S/11796",
+      "meeting": "1836",
+      "subject": "Admission of new Members Democratic Republic of Viet-Nam",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1975-08-11",
+      "draft": "S/11795",
+      "meeting": "1836",
+      "subject": "Admission of new Members Republic of South Viet-Nam",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1975-06-06",
+      "draft": "S/11713",
+      "meeting": "1829",
+      "subject": "The situation in Namibia",
+      "vetoed_by": [
+        "GBR",
+        "USA",
+        "FRA"
+      ]
+    },
+    {
+      "date": "1974-10-30",
+      "draft": "S/11543",
+      "meeting": "1808",
+      "subject": "Relationship between the UN and South Africa",
+      "vetoed_by": [
+        "GBR",
+        "USA",
+        "FRA"
+      ]
+    },
+    {
+      "date": "1974-07-31",
+      "draft": "S/11400 (as amended)",
+      "meeting": "1788",
+      "subject": "The situation in Cyprus",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1973-07-26",
+      "draft": "S/10974",
+      "meeting": "1735",
+      "subject": "The situation in the Middle East",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1973-05-22",
+      "draft": "S/10928",
+      "meeting": "1716",
+      "subject": "Question concerning the situation in Southern Rhodesia",
+      "vetoed_by": [
+        "GBR",
+        "USA"
+      ]
+    },
+    {
+      "date": "1973-03-21",
+      "draft": "S/10931/Rev.1",
+      "meeting": "1704",
+      "subject": "Consideration of measures for the maintenance and strengthening of peace and security in Latin America",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1972-09-29",
+      "draft": "S/10805/Rev.1 (as amended)",
+      "meeting": "1666",
+      "subject": "Question concerning the situation in Southern Rhodesia",
+      "vetoed_by": [
+        "GBR"
+      ]
+    },
+    {
+      "date": "1972-09-10",
+      "draft": "S/10784",
+      "meeting": "1662",
+      "subject": "The situation in the Middle East",
+      "vetoed_by": [
+        "USA"
+      ]
+    },
+    {
+      "date": "1972-08-25",
+      "draft": "S/10771",
+      "meeting": "1660",
+      "subject": "Admission of new Members Bangladesh",
+      "vetoed_by": [
+        "CHN"
+      ]
+    },
+    {
+      "date": "1972-02-04",
+      "draft": "S/10606",
+      "meeting": "1639",
+      "subject": "Consideration of questions relating to Africa of which the Security Council is currently seized and implementation of the Council's relevant resolutions the situation in Southern Rhodesia",
+      "vetoed_by": [
+        "GBR"
+      ]
+    },
+    {
+      "date": "1971-12-30",
+      "draft": "S/10489",
+      "meeting": "1623",
+      "subject": "Question concerning the situation in Southern Rhodesia",
+      "vetoed_by": [
+        "GBR"
+      ]
+    },
+    {
+      "date": "1971-12-13",
+      "draft": "S/10446/Rev.1",
+      "meeting": "1613",
+      "subject": "Letter dated 12 December 1971 from the USA to the President of the Security Council concerning the India-Pakistan question",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1971-12-05",
+      "draft": "S/10423",
+      "meeting": "1607",
+      "subject": "Letter dated 4 December 1971 from Argentina, Belgium, Burundi, Italy, Japan, Nicaragua, Somalia, the UK and the USA to the President of the Security Council concerning the IndiaPakistan question",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1971-12-04",
+      "draft": "S/10416",
+      "meeting": "1606",
+      "subject": "Letter dated 4 December 1971 from Argentina, Belgium, Burundi, Italy, Japan, Nicaragua, Somalia, the UK and the USA to the President of the Security Council concerning the India-Pakistan question",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1970-11-10",
+      "draft": "S/9976",
+      "meeting": "1556",
+      "subject": "Question concerning the situation in Southern Rhodesia",
+      "vetoed_by": [
+        "GBR"
+      ]
+    },
+    {
+      "date": "1970-03-17",
+      "draft": "S/9696 and Corr.1 & 2",
+      "meeting": "1534",
+      "subject": "Question concerning the situation in Southern Rhodesia",
+      "vetoed_by": [
+        "GBR",
+        "USA"
+      ]
+    },
+    {
+      "date": "1968-08-22",
+      "draft": "S/8761",
+      "meeting": "1443",
+      "subject": "Letter dated 21 August 1968 from Canada, Denmark, France, Paraguay, the UK and the USA to the President of the Security Council concerning the situation in Czechoslovakia",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1966-11-04",
+      "draft": "S/7575/Rev.1",
+      "meeting": "1319",
+      "subject": "The Palestine question",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1964-12-21",
+      "draft": "S/6113 (as amended)",
+      "meeting": "1182",
+      "subject": "The Palestine question",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1964-09-17",
+      "draft": "S/5973",
+      "meeting": "1152",
+      "subject": "Letter dated 3 September 1964 from Malaysia to the President of the Security Council",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1963-09-13",
+      "draft": "S/5425/Rev.1",
+      "meeting": "1069",
+      "subject": "The situation in Southern Rhodesia",
+      "vetoed_by": [
+        "GBR"
+      ]
+    },
+    {
+      "date": "1963-09-03",
+      "draft": "S/5407",
+      "meeting": "1063",
+      "subject": "The Palestine question",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1962-06-22",
+      "draft": "S/5134",
+      "meeting": "1016",
+      "subject": "The India-Pakistan question",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1961-12-18",
+      "draft": "S/5033",
+      "meeting": "988",
+      "subject": "Letter dated 18 December 1961 from Portugal to the President of the Security Council concerning Goa",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1961-11-30",
+      "draft": "S/5006",
+      "meeting": "985",
+      "subject": "Applications for Membership Kuwait",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1961-11-24",
+      "draft": "S/4985/Rev.1",
+      "meeting": "982",
+      "subject": "Situation in the Republic of the Congo",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1961-11-24",
+      "draft": "S/4985/Rev.1",
+      "meeting": "982",
+      "subject": "Situation in the Republic of the Congo",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1961-07-07",
+      "draft": "S/4855",
+      "meeting": "960",
+      "subject": "Complaints by Kuwait in respect of the situation arising from the threat by Iraq to the territorial integrity of Kuwait",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1961-02-21",
+      "draft": "S/4733/Rev.1",
+      "meeting": "942",
+      "subject": "Situation in the Republic of the Congo",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1961-02-21",
+      "draft": "S/4733/Rev.1",
+      "meeting": "942",
+      "subject": "Situation in the Republic of the Congo",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1960-12-13",
+      "draft": "S/4578/Rev.1",
+      "meeting": "920",
+      "subject": "Letter dated 13 July 1960 from the Secretary-General to the President of the Security Council the situation in the Congo",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1960-12-04",
+      "draft": "S/4567/Rev.1",
+      "meeting": "911",
+      "subject": "Applications for membership Mauritania",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1960-12-03",
+      "draft": "S/4567/Rev.1",
+      "meeting": "911",
+      "subject": "Applications for membership Mauritania",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1960-09-17",
+      "draft": "S/4523",
+      "meeting": "906",
+      "subject": "Letter dated 13 July 1960 from the Secretary-General to the President of the Security Council concerning the situation in the Congo",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1960-07-26",
+      "draft": "S/4409/Rev.1",
+      "meeting": "883",
+      "subject": "Telegrams dated 13 July 1960 from the USSR to the Secretary-General",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1960-07-26",
+      "draft": "S/4411",
+      "meeting": "883",
+      "subject": "Telegrams dated 13 July 1960 from the USSR to the Secretary-General",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1958-12-09",
+      "draft": "S/4130/Rev.1",
+      "meeting": "843",
+      "subject": "Admission of new Members Viet-Nam",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1958-12-09",
+      "draft": "S/4129/Rev.1",
+      "meeting": "843",
+      "subject": "Admission of new Members Republic of Korea",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1958-07-22",
+      "draft": "S/4055/Rev.1",
+      "meeting": "837",
+      "subject": "Letter dated 22 May 1958 from Lebanon and Letter dated 17 July 1958 from Jordan to the President of the Security Council Complaints by Lebanon and Jordan concerning the interference in their internal affairs by the United Arab Republic",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1958-07-18",
+      "draft": "S/4050/Rev.1",
+      "meeting": "834",
+      "subject": "Letter dated 22 May 1958 from Lebanon and Letter dated 17 July 1958 from Jordan to the President of the Security Council Complaints by Lebanon and Jordan concerning the interference in their internal affairs by the United Arab Republic",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1958-05-02",
+      "draft": "S/3995 (incorporating the amendment) S/3998",
+      "meeting": "817",
+      "subject": "Complaint by USSR in a letter to the President of the Security Council dated 18 April 1958 entitled Urgent measures to put an end to flights by US military aircraft armed with atomic and hydrogen bombs in the direction of the frontiers of the Soviet Union",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1957-09-09",
+      "draft": "S/3885",
+      "meeting": "790",
+      "subject": "Admission of new Members Viet-Nam",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1957-09-09",
+      "draft": "S/3884",
+      "meeting": "790",
+      "subject": "Admission of new Members Republic of Korea",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1957-02-20",
+      "draft": "S/3787",
+      "meeting": "773",
+      "subject": "The India-Pakistan question",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1956-11-04",
+      "draft": "S/3730/Rev.1",
+      "meeting": "754",
+      "subject": "Letter dated 27 October 1956 from France, the UK and the USA to the President of the Security Council concerning the situation in Hungary",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1956-10-30",
+      "draft": "S/3713/Rev.1 (as amended)",
+      "meeting": "750",
+      "subject": "Letter dated 29 October 1956 from the USA to the President of the Security Council concerning the Palestine question",
+      "vetoed_by": [
+        "GBR",
+        "FRA"
+      ]
+    },
+    {
+      "date": "1956-10-30",
+      "draft": "S/3710 (as amended)",
+      "meeting": "749",
+      "subject": "Letter dated 29 October 1956 from the USA to the President of the Security Council concerning the Palestine question",
+      "vetoed_by": [
+        "GBR",
+        "FRA"
+      ]
+    },
+    {
+      "date": "1956-10-13",
+      "draft": "S/3671",
+      "meeting": "743",
+      "subject": "Situation created by the unilateral action of the Egyptian Government in bringing to an end the system of international operation of the Suez Canal, which was confirmed and completed by the Suez Canal Convention of 1888",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1955-12-15",
+      "draft": "S/3510",
+      "meeting": "706",
+      "subject": "Admission of new Members Japan",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1955-12-14",
+      "draft": "S/3509",
+      "meeting": "705",
+      "subject": "Admission of new Members",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1954-06-20",
+      "draft": "S/3236/Rev.1",
+      "meeting": "675",
+      "subject": "Cablegram dated 19 June 1954 from Guatemala to the President of the Security Council",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1954-06-18",
+      "draft": "S/3229",
+      "meeting": "674",
+      "subject": "Letter dated 29 May 1954 from Thailand to the President of the Security Council",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1954-03-29",
+      "draft": "S/3188/Corr.1",
+      "meeting": "664",
+      "subject": "The Palestine question",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1954-01-22",
+      "draft": "S/3151/Rev.2",
+      "meeting": "656",
+      "subject": "The Palestine question",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1953-03-13",
+      "draft": "S/PV.613",
+      "meeting": "613",
+      "subject": "Appointment of Secretary-General",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1952-09-19",
+      "draft": "S/2760",
+      "meeting": "603",
+      "subject": "Admission of new Members Cambodia",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1952-09-19",
+      "draft": "S/2759",
+      "meeting": "603",
+      "subject": "Admission of new Members Laos",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1952-09-19",
+      "draft": "S/2758",
+      "meeting": "603",
+      "subject": "Admission of new Members Vietnam",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1952-09-18",
+      "draft": "S/2754",
+      "meeting": "602",
+      "subject": "Admission of new Members Japan",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1952-09-16",
+      "draft": "S/2483",
+      "meeting": "600",
+      "subject": "Admission of new Members Libya",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1952-07-09",
+      "draft": "S/2688",
+      "meeting": "590",
+      "subject": "Question of a request for investigation of alleged bacterial warfare",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1952-07-03",
+      "draft": "S/2671",
+      "meeting": "587",
+      "subject": "Question of a request for investigation of alleged bacterial warfare",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1952-02-06",
+      "draft": "S/2443",
+      "meeting": "573",
+      "subject": "Admission of new Members Italy",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1950-11-30",
+      "draft": "S/1894",
+      "meeting": "530",
+      "subject": "Complaint of armed invasion of Taiwan (Formosa); Complaint of aggression upon the Republic of Korea",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1950-09-12",
+      "draft": "S/1752",
+      "meeting": "501",
+      "subject": "Complaint of bombing by air forces of the territory of China",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1950-09-05",
+      "draft": "S/1653",
+      "meeting": "496",
+      "subject": "Complaint of aggression upon the Republic of Korea",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1949-12-13",
+      "draft": "S/1431",
+      "meeting": "456",
+      "subject": "The Indonesian question",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1949-12-13",
+      "draft": "S/1431",
+      "meeting": "456",
+      "subject": "The Indonesian question",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1949-10-18",
+      "draft": "S/1408/Rev.1",
+      "meeting": "452",
+      "subject": "Regulation and reduction of armaments and armed forces",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1949-10-18",
+      "draft": "S/1399/Rev.1",
+      "meeting": "452",
+      "subject": "Regulation and reduction of armaments and armed forces",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1949-10-11",
+      "draft": "S/1398",
+      "meeting": "450",
+      "subject": "Regulation and reduction of armaments and armed forces",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1949-09-13",
+      "draft": "S/1337",
+      "meeting": "443",
+      "subject": "Application for Membership Ceylon",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1949-09-13",
+      "draft": "S/1336",
+      "meeting": "443",
+      "subject": "Application for Membership Austria",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1949-09-13",
+      "draft": "S/1335",
+      "meeting": "443",
+      "subject": "Application for Membership Ireland",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1949-09-13",
+      "draft": "S/1334",
+      "meeting": "443",
+      "subject": "Application for Membership Finland",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1949-09-13",
+      "draft": "S/1333",
+      "meeting": "443",
+      "subject": "Application for Membership Italy",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1949-09-13",
+      "draft": "S/1332",
+      "meeting": "443",
+      "subject": "Application for Membership Transjordan",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1949-09-13",
+      "draft": "S/1331",
+      "meeting": "443",
+      "subject": "Application for Membership Portugal",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1949-09-07",
+      "draft": "S/1385",
+      "meeting": "439",
+      "subject": "Application for Membership Nepal",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1949-04-08",
+      "draft": "S/1305",
+      "meeting": "423",
+      "subject": "Application for Membership Republic of Korea",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1948-12-15",
+      "draft": "S/PV.384",
+      "meeting": "384",
+      "subject": "Application for Membership Ceylon",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1948-10-25",
+      "draft": "S/1048",
+      "meeting": "372",
+      "subject": "Identical notifications dated 29 September 1948 from France, the UK and the USA to the Secretary-General Berlin blockade",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1948-08-18",
+      "draft": "S/PV.351",
+      "meeting": "351",
+      "subject": "Application for Membership Ceylon",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1948-06-22",
+      "draft": "S/836",
+      "meeting": "325",
+      "subject": "Letter dated 26 May 1948 from the Chairman of the Atomic Energy Commission to the President of the Security Council transmitting the Third Report of the Commission",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1948-05-24",
+      "draft": "S/PV.303",
+      "meeting": "303",
+      "subject": "Letter dated 12 Mar 1948 from Chile to the Secretary-General events in Czechoslovakia",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1948-05-24",
+      "draft": "S/PV.303",
+      "meeting": "303",
+      "subject": "Letter dated 12 Mar 1948 from Chile to the Secretary-General events in Czechoslovakia preliminary question",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1948-04-10",
+      "draft": "S/PV.279",
+      "meeting": "279",
+      "subject": "Application for Membership Italy",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1947-10-01",
+      "draft": "S/PV.206",
+      "meeting": "206",
+      "subject": "Application for Membership Italy",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1947-10-01",
+      "draft": "S/PV.206",
+      "meeting": "206",
+      "subject": "Application for Membership Finland",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1947-09-15",
+      "draft": "S/552",
+      "meeting": "202",
+      "subject": "The Greek question concerning the situation in northern, Greece preliminary question",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1947-09-15",
+      "draft": "S/552 , S/PV.202",
+      "meeting": "202",
+      "subject": "The Greek question concerning the situation in northern Greece",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1947-08-25",
+      "draft": "S/PV.194",
+      "meeting": "194",
+      "subject": "The Indonesian question",
+      "vetoed_by": [
+        "FRA"
+      ]
+    },
+    {
+      "date": "1947-08-21",
+      "draft": "S/PV.190",
+      "meeting": "190",
+      "subject": "Application for Membership Austria",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1947-08-21",
+      "draft": "S/PV.190",
+      "meeting": "190",
+      "subject": "Application for Membership Italy",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1947-08-19",
+      "draft": "S/486",
+      "meeting": "188",
+      "subject": "The Greek question Greek frontier incidents",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1947-08-19",
+      "draft": "S/471 and S/471/Add.1",
+      "meeting": "188",
+      "subject": "The Greek question Greek frontier incidents",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1947-08-18",
+      "draft": "S/PV.186",
+      "meeting": "186",
+      "subject": "Application for Membership Portugal",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1947-08-18",
+      "draft": "S/PV.186",
+      "meeting": "186",
+      "subject": "Application for Membership Ireland",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1947-08-18",
+      "draft": "S/PV.186",
+      "meeting": "186",
+      "subject": "Application for Membership Transjordan",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1947-07-29",
+      "draft": "S/PV.170",
+      "meeting": "170",
+      "subject": "The Greek question Greek frontier incidents",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1947-03-25",
+      "draft": "S/PV.122",
+      "meeting": "122",
+      "subject": "Incidents in the Corfu Channel",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1946-09-20",
+      "draft": "S/PV.70",
+      "meeting": "70",
+      "subject": "Telegram dated 24 August 1946 from the Ukrainian Soviet Socialist Republic to the Secretary-General",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1946-08-29",
+      "draft": "S/PV.57",
+      "meeting": "57",
+      "subject": "Application for Membership Portugal",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1946-08-29",
+      "draft": "S/PV.57",
+      "meeting": "57",
+      "subject": "Application for Membership Ireland",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1946-08-29",
+      "draft": "S/PV.57",
+      "meeting": "57",
+      "subject": "Application for Membership Transjordan",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1946-06-26",
+      "draft": "S/PV.49",
+      "meeting": "49",
+      "subject": "The Spanish question",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1946-06-26",
+      "draft": "S/PV.49",
+      "meeting": "49",
+      "subject": "The Spanish question preliminary question",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1946-06-26",
+      "draft": "S/PV.49",
+      "meeting": "49",
+      "subject": "The Spanish question",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1946-06-18",
+      "draft": "S/PV.45",
+      "meeting": "47",
+      "subject": "The Spanish question",
+      "vetoed_by": [
+        "RUS"
+      ]
+    },
+    {
+      "date": "1946-02-16",
+      "draft": "S/PV.23",
+      "meeting": "23",
+      "subject": "Letter from the Heads of the Lebanese and Syrian delegations to the Secretary-General dated 4 February 1946",
+      "vetoed_by": [
+        "RUS"
+      ]
+    }
   ]
 }

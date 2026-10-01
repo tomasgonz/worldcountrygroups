@@ -139,6 +139,191 @@
       <p v-else class="text-primary-400 text-sm">No conflict references found in member speeches.</p>
     </section>
 
+    <!-- Democracy Distribution -->
+    <section v-if="data.democracy" id="gt-democracy" class="bg-white rounded-2xl border border-primary-100 p-6 mb-6">
+      <h3 class="font-serif text-xl font-bold text-primary-900 mb-4">Democracy Distribution</h3>
+      <div v-if="data.democracy.regime_distribution" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+        <div v-for="(count, regime) in data.democracy.regime_distribution" :key="regime" class="text-center p-3 bg-primary-50 rounded-xl">
+          <span class="block text-xl font-bold text-primary-900">{{ count }}</span>
+          <span class="text-xs text-primary-500">{{ regime }}</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div v-if="data.democracy.most_democratic?.length">
+          <h5 class="text-xs font-medium text-emerald-600 mb-2">Most Democratic</h5>
+          <div v-for="m in data.democracy.most_democratic.slice(0, 5)" :key="m.iso3" class="flex items-center justify-between text-xs py-1">
+            <span class="text-primary-700">{{ m.iso3 }}</span>
+            <span class="font-medium text-emerald-600">{{ m.v2x_polyarchy?.toFixed(3) }}</span>
+          </div>
+        </div>
+        <div v-if="data.democracy.least_democratic?.length">
+          <h5 class="text-xs font-medium text-red-600 mb-2">Least Democratic</h5>
+          <div v-for="m in data.democracy.least_democratic.slice(0, 5)" :key="m.iso3" class="flex items-center justify-between text-xs py-1">
+            <span class="text-primary-700">{{ m.iso3 }}</span>
+            <span class="font-medium text-red-600">{{ m.v2x_polyarchy?.toFixed(3) }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Arms Trade Flows -->
+    <section v-if="data.armsTrade?.has_data" id="gt-arms" class="bg-white rounded-2xl border border-primary-100 p-6 mb-6">
+      <h3 class="font-serif text-xl font-bold text-primary-900 mb-4">Arms Trade Flows</h3>
+      <div class="grid grid-cols-2 gap-4 mb-4">
+        <div class="bg-primary-50 rounded-xl p-4 text-center">
+          <span class="block text-lg font-bold text-primary-900">{{ formatTIV(data.armsTrade.total_exports) }}</span>
+          <span class="text-xs text-primary-400">Total Exports (TIV)</span>
+        </div>
+        <div class="bg-primary-50 rounded-xl p-4 text-center">
+          <span class="block text-lg font-bold text-primary-900">{{ formatTIV(data.armsTrade.total_imports) }}</span>
+          <span class="text-xs text-primary-400">Total Imports (TIV)</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div v-if="data.armsTrade.top_exporters?.length">
+          <h5 class="text-xs font-medium text-primary-500 mb-2">Top Exporters</h5>
+          <ChartsChartBar :bars="data.armsTrade.top_exporters.slice(0, 5).map((e: any) => ({ label: e.iso3, value: e.total || e.value }))" default-color="#3b82f6" :label-width="60" />
+        </div>
+        <div v-if="data.armsTrade.top_importers?.length">
+          <h5 class="text-xs font-medium text-primary-500 mb-2">Top Importers</h5>
+          <ChartsChartBar :bars="data.armsTrade.top_importers.slice(0, 5).map((e: any) => ({ label: e.iso3, value: e.total || e.value }))" default-color="#f59e0b" :label-width="60" />
+        </div>
+      </div>
+      <div v-if="data.armsTrade.intra_group_transfers?.length" class="mt-4">
+        <h5 class="text-xs font-medium text-primary-500 mb-2">Intra-Group Transfers</h5>
+        <div class="space-y-1">
+          <div v-for="t in data.armsTrade.intra_group_transfers.slice(0, 8)" :key="`${t.supplier}-${t.recipient}`" class="flex items-center justify-between text-xs py-1">
+            <span class="text-primary-700">{{ t.supplier }} → {{ t.recipient }}</span>
+            <span class="text-primary-500">{{ formatTIV(t.value) }} TIV</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Aid Dynamics -->
+    <section v-if="data.aid?.has_data" id="gt-aid" class="bg-white rounded-2xl border border-primary-100 p-6 mb-6">
+      <h3 class="font-serif text-xl font-bold text-primary-900 mb-4">Aid Dynamics</h3>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+        <div class="bg-primary-50 rounded-xl p-3 text-center">
+          <span class="block text-xl font-bold text-primary-900">{{ data.aid.donor_count }}</span>
+          <span class="text-xs text-primary-400">Donors</span>
+        </div>
+        <div class="bg-primary-50 rounded-xl p-3 text-center">
+          <span class="block text-xl font-bold text-primary-900">{{ data.aid.recipient_count }}</span>
+          <span class="text-xs text-primary-400">Recipients</span>
+        </div>
+        <div class="bg-primary-50 rounded-xl p-3 text-center">
+          <span class="block text-lg font-bold text-primary-900">${{ formatNumber(data.aid.total_given) }}</span>
+          <span class="text-xs text-primary-400">Total Given</span>
+        </div>
+        <div class="bg-primary-50 rounded-xl p-3 text-center">
+          <span class="block text-lg font-bold text-primary-900">${{ formatNumber(data.aid.total_received) }}</span>
+          <span class="text-xs text-primary-400">Total Received</span>
+        </div>
+      </div>
+      <div v-if="data.aid.intra_group_flows?.length">
+        <h5 class="text-xs font-medium text-primary-500 mb-2">Intra-Group Flows</h5>
+        <div class="space-y-1">
+          <div v-for="f in data.aid.intra_group_flows.slice(0, 6)" :key="`${f.donor}-${f.recipient}`" class="flex items-center justify-between text-xs py-1">
+            <span class="text-primary-700">{{ f.donor }} → {{ f.recipient }}</span>
+            <span class="text-primary-500">${{ formatNumber(f.value) }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visa Freedom -->
+    <section v-if="data.visaFreedom?.has_data" id="gt-visa" class="bg-white rounded-2xl border border-primary-100 p-6 mb-6">
+      <h3 class="font-serif text-xl font-bold text-primary-900 mb-4">Visa Freedom</h3>
+      <div class="flex items-center gap-6 mb-4">
+        <div class="text-center">
+          <span class="block text-4xl font-bold text-primary-900">{{ (data.visaFreedom.intra_group_visa_freedom_pct * 100).toFixed(0) }}%</span>
+          <span class="text-xs text-primary-400">Intra-Group Visa Freedom</span>
+        </div>
+        <div class="text-center">
+          <span class="block text-2xl font-bold text-primary-900">{{ data.visaFreedom.avg_mobility_score?.toFixed(0) }}</span>
+          <span class="text-xs text-primary-400">Avg Mobility Score</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div v-if="data.visaFreedom.most_open?.length">
+          <h5 class="text-xs font-medium text-emerald-600 mb-2">Most Open</h5>
+          <div v-for="m in data.visaFreedom.most_open.slice(0, 5)" :key="m.iso3" class="flex items-center justify-between text-xs py-1">
+            <span class="text-primary-700">{{ m.iso3 }}</span>
+            <span class="font-medium text-emerald-600">Score {{ m.mobility_score }}</span>
+          </div>
+        </div>
+        <div v-if="data.visaFreedom.least_open?.length">
+          <h5 class="text-xs font-medium text-red-600 mb-2">Least Open</h5>
+          <div v-for="m in data.visaFreedom.least_open.slice(0, 5)" :key="m.iso3" class="flex items-center justify-between text-xs py-1">
+            <span class="text-primary-700">{{ m.iso3 }}</span>
+            <span class="font-medium text-red-600">Score {{ m.mobility_score }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Connectivity -->
+    <section v-if="data.connectivity?.has_data" id="gt-connectivity" class="bg-white rounded-2xl border border-primary-100 p-6 mb-6">
+      <h3 class="font-serif text-xl font-bold text-primary-900 mb-4">Connectivity</h3>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+        <div class="bg-primary-50 rounded-xl p-3 text-center">
+          <span class="block text-xl font-bold text-primary-900">{{ data.connectivity.total_cables }}</span>
+          <span class="text-xs text-primary-400">Total Cables</span>
+        </div>
+        <div class="bg-primary-50 rounded-xl p-3 text-center">
+          <span class="block text-xl font-bold text-primary-900">{{ data.connectivity.avg_cables_per_country?.toFixed(1) }}</span>
+          <span class="text-xs text-primary-400">Avg per Country</span>
+        </div>
+        <div class="bg-primary-50 rounded-xl p-3 text-center">
+          <span class="block text-xl font-bold text-primary-900">{{ data.connectivity.intra_group_connections }}</span>
+          <span class="text-xs text-primary-400">Intra-Group</span>
+        </div>
+        <div class="bg-primary-50 rounded-xl p-3 text-center">
+          <span class="block text-xl font-bold text-primary-900">{{ data.connectivity.shared_cables?.length || 0 }}</span>
+          <span class="text-xs text-primary-400">Shared Cables</span>
+        </div>
+      </div>
+      <div v-if="data.connectivity.hub_countries?.length">
+        <h5 class="text-xs font-medium text-primary-500 mb-2">Hub Countries</h5>
+        <div class="flex flex-wrap gap-2">
+          <span v-for="h in data.connectivity.hub_countries.slice(0, 8)" :key="h.iso3" class="px-2.5 py-1 bg-blue-50 border border-blue-100 rounded-lg text-xs text-blue-700">
+            {{ h.iso3 }} ({{ h.cable_count }} cables)
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alliance Density -->
+    <section v-if="data.alliances?.has_data" id="gt-alliances" class="bg-white rounded-2xl border border-primary-100 p-6 mb-6">
+      <h3 class="font-serif text-xl font-bold text-primary-900 mb-4">Alliance Density</h3>
+      <div class="flex items-center gap-6 mb-4">
+        <div class="text-center">
+          <span class="block text-4xl font-bold text-primary-900">{{ (data.alliances.intra_group.alliance_density * 100).toFixed(0) }}%</span>
+          <span class="text-xs text-primary-400">Alliance Density</span>
+        </div>
+        <div class="text-center">
+          <span class="block text-2xl font-bold text-primary-900">{{ data.alliances.intra_group.total_shared_alliances }}</span>
+          <span class="text-xs text-primary-400">Shared Alliances</span>
+        </div>
+      </div>
+      <div v-if="data.alliances.intra_group.shared_defense_pacts?.length">
+        <h5 class="text-xs font-medium text-primary-500 mb-2">Shared Defense Pacts</h5>
+        <div class="flex flex-wrap gap-2">
+          <span v-for="p in data.alliances.intra_group.shared_defense_pacts" :key="p.name || p" class="px-2.5 py-1 bg-red-50 border border-red-100 rounded-lg text-xs text-red-700">
+            {{ p.name || p }}
+          </span>
+        </div>
+      </div>
+      <div v-if="data.alliances.external_partners?.length" class="mt-4">
+        <h5 class="text-xs font-medium text-primary-500 mb-2">Top External Partners</h5>
+        <div v-for="p in data.alliances.external_partners.slice(0, 5)" :key="p.iso3" class="flex items-center justify-between text-xs py-1">
+          <span class="text-primary-700">{{ p.iso3 }}</span>
+          <span class="text-primary-500">{{ p.shared_alliances }} shared</span>
+        </div>
+      </div>
+    </section>
+
     <!-- Member Spotlight -->
     <section id="gt-members" class="bg-white rounded-2xl border border-primary-100 p-6 mb-6">
       <h3 class="font-serif text-xl font-bold text-primary-900 mb-4">Member Spotlight</h3>
@@ -167,16 +352,27 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{ data: any }>()
+const props = defineProps<{ data: any; aiConfigured?: boolean }>()
 
-const sections = [
-  { id: 'gt-themes', label: 'Themes' },
-  { id: 'gt-cohesion', label: 'Cohesion' },
-  { id: 'gt-emerging', label: 'Emerging' },
-  { id: 'gt-sentiment', label: 'Sentiment' },
-  { id: 'gt-conflicts', label: 'Conflicts' },
-  { id: 'gt-members', label: 'Members' },
-]
+const sections = computed(() => {
+  const base: { id: string; label: string }[] = []
+  if (props.aiConfigured) base.push({ id: 'gt-overview', label: 'Overview' })
+  base.push(
+    { id: 'gt-themes', label: 'Themes' },
+    { id: 'gt-cohesion', label: 'Cohesion' },
+    { id: 'gt-emerging', label: 'Emerging' },
+    { id: 'gt-sentiment', label: 'Sentiment' },
+    { id: 'gt-conflicts', label: 'Conflicts' },
+  )
+  if (props.data?.democracy) base.push({ id: 'gt-democracy', label: 'Democracy' })
+  if (props.data?.armsTrade?.has_data) base.push({ id: 'gt-arms', label: 'Arms' })
+  if (props.data?.aid?.has_data) base.push({ id: 'gt-aid', label: 'Aid' })
+  if (props.data?.visaFreedom?.has_data) base.push({ id: 'gt-visa', label: 'Visa' })
+  if (props.data?.connectivity?.has_data) base.push({ id: 'gt-connectivity', label: 'Connectivity' })
+  if (props.data?.alliances?.has_data) base.push({ id: 'gt-alliances', label: 'Alliances' })
+  base.push({ id: 'gt-members', label: 'Members' })
+  return base
+})
 
 const { activeSection, scrollTo } = useSectionNav(sections)
 

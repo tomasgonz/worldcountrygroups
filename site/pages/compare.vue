@@ -21,6 +21,25 @@
 
     <!-- Results -->
     <template v-if="hasResult">
+      <!-- AI Narrative -->
+      <div v-if="aiConfigured && (aiNarrativeLoading || aiNarrativeContent)" class="bg-white rounded-2xl border border-primary-100 p-6 mb-6">
+        <h3 class="font-serif text-lg font-bold text-primary-900 mb-3">AI Comparative Analysis</h3>
+        <div v-if="aiNarrativeLoading" class="space-y-3">
+          <div class="h-3 bg-primary-100 rounded-full w-full animate-pulse"></div>
+          <div class="h-3 bg-primary-100 rounded-full w-11/12 animate-pulse"></div>
+          <div class="h-3 bg-primary-100 rounded-full w-4/5 animate-pulse"></div>
+        </div>
+        <div
+          v-else-if="aiNarrativeContent"
+          class="prose prose-sm prose-primary max-w-none prose-headings:font-serif prose-headings:text-primary-900 prose-h2:text-base prose-h2:mt-5 prose-h2:mb-2 prose-p:text-primary-700 prose-p:leading-relaxed prose-p:mb-3 prose-ul:my-2 prose-li:text-primary-700 prose-li:my-0.5"
+          v-html="renderedNarrative"
+        ></div>
+        <div v-if="aiNarrativeGeneratedAt" class="flex items-center justify-between mt-3 pt-2 border-t border-primary-50">
+          <span class="text-xs text-primary-300">Updated {{ narrativeTimeAgo }}</span>
+          <button @click="fetchAINarrative(true)" class="text-xs text-primary-300 hover:text-primary-500 transition-colors">Refresh</button>
+        </div>
+      </div>
+
       <!-- Tab bar -->
       <div class="bg-primary-50 rounded-lg p-1 flex overflow-x-auto mb-8">
         <button
@@ -91,6 +110,10 @@
 </template>
 
 <script setup lang="ts">
+import { marked } from 'marked'
+
+marked.setOptions({ breaks: true, gfm: true })
+
 const route = useRoute()
 const router = useRouter()
 
@@ -166,6 +189,38 @@ const statsEntities = computed(() => {
   return []
 })
 
+// AI narrative
+const aiConfigured = ref(false)
+const aiNarrativeContent = ref('')
+const aiNarrativeLoading = ref(false)
+const aiNarrativeGeneratedAt = ref('')
+
+const renderedNarrative = computed(() => aiNarrativeContent.value ? marked.parse(aiNarrativeContent.value) as string : '')
+const narrativeTimeAgo = computed(() => {
+  if (!aiNarrativeGeneratedAt.value) return ''
+  const ms = Date.now() - new Date(aiNarrativeGeneratedAt.value).getTime()
+  const mins = Math.floor(ms / 60000)
+  if (mins < 1) return 'just now'
+  if (mins < 60) return `${mins}m ago`
+  const hours = Math.floor(mins / 60)
+  if (hours < 24) return `${hours}h ago`
+  return `${Math.floor(hours / 24)}d ago`
+})
+
+async function fetchAINarrative(force = false) {
+  if (!aiConfigured.value || selected.value.length < 2) return
+  aiNarrativeLoading.value = true
+  try {
+    const identifiers = selected.value.map(s => s.id).join(',')
+    const params: Record<string, string> = { mode: mode.value, identifiers }
+    if (force) params.force = 'true'
+    const res = await $fetch<any>('/api/intelligence/ai/compare-analysis', { query: params })
+    aiNarrativeContent.value = res.content
+    aiNarrativeGeneratedAt.value = res.generatedAt
+  } catch {}
+  aiNarrativeLoading.value = false
+}
+
 function switchMode(newMode: 'groups' | 'countries') {
   if (newMode === mode.value) return
   mode.value = newMode
@@ -214,10 +269,21 @@ async function doCompare() {
   } finally {
     loading.value = false
   }
+
+  // Fetch AI narrative after comparison
+  if (hasResult.value) {
+    fetchAINarrative()
+  }
 }
 
 // Deep-link: auto-load from URL query
 onMounted(async () => {
+  // Check AI status
+  try {
+    const status = await $fetch<any>('/api/intelligence/ai/status')
+    aiConfigured.value = status?.configured || false
+  } catch {}
+
   const modeParam = route.query.mode as string
   const groupsParam = route.query.groups as string
   const countriesParam = route.query.countries as string

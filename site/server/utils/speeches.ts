@@ -1,4 +1,4 @@
-import { readFileSync, existsSync } from 'fs'
+import { readFileSync, existsSync, statSync } from 'fs'
 import { join } from 'path'
 
 const INDEX_FILE = join(process.cwd(), 'server', 'data', 'un-speeches-index.json')
@@ -38,6 +38,15 @@ export interface SpeechMeta {
   keywords: string[]
   file: string
   analysis?: SpeechAnalysis
+  // Populated for sessions scraped from gadebate.un.org (80+)
+  speaker_honorific?: string
+  source_url?: string
+  pdf_urls?: string[]
+  un_summary?: string
+  un_news?: { url: string; title: string }
+  press_release?: string
+  text_source?: 'pdf_en' | 'transcript_en' | string
+  language?: string
 }
 
 interface SpeechesIndex {
@@ -52,6 +61,8 @@ interface SpeechesIndex {
 }
 
 let _data: SpeechesIndex | null = null
+let _loadedMtime = 0
+let _lastStatCheck = 0
 
 function resolve(primary: string, alt: string): string | null {
   if (existsSync(primary)) return primary
@@ -60,8 +71,19 @@ function resolve(primary: string, alt: string): string | null {
 }
 
 function ensureLoaded(): void {
+  // Pick up index changes written by the scheduled updater (checked at most every 30s)
+  if (_data !== null && Date.now() - _lastStatCheck > 30_000) {
+    _lastStatCheck = Date.now()
+    const p = resolve(INDEX_FILE, INDEX_FILE_ALT)
+    try {
+      if (p && statSync(p).mtimeMs !== _loadedMtime) _data = null
+    } catch {}
+  }
   if (_data !== null) return
   const filePath = resolve(INDEX_FILE, INDEX_FILE_ALT)
+  if (filePath) {
+    try { _loadedMtime = statSync(filePath).mtimeMs } catch {}
+  }
   if (!filePath) {
     _data = { _meta: { updated_at: '', source: '', total_speeches: 0, sessions: [], country_count: 0 }, speeches: [] }
     return

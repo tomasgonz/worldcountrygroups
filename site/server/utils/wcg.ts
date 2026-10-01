@@ -218,6 +218,21 @@ class GroupRegistry {
     this.ensureLoaded()
     return [...this.iso2ToCountry.keys()].sort()
   }
+
+  getAllCountries(): Country[] {
+    this.ensureLoaded()
+    return [...this.iso2ToCountry.values()].sort((a, b) => a.name.localeCompare(b.name))
+  }
+
+  reload(): void {
+    this.groups.clear()
+    this.iso2ToGids.clear()
+    this.iso3ToGids.clear()
+    this.iso2ToCountry.clear()
+    this.iso3ToCountry.clear()
+    this.loaded = false
+    this.load()
+  }
 }
 
 // Module-level singleton
@@ -227,3 +242,11 @@ export function getRegistry(): GroupRegistry {
   if (!_registry) _registry = new GroupRegistry()
   return _registry
 }
+
+export function reloadRegistry(): void {
+  if (_registry) {
+    _registry.reload()
+  }
+}
+
+export { DATA_DIR }

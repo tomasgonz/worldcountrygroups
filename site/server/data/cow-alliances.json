@@ -1,0 +1,9800 @@
+{
+  "_meta": {
+    "updated_at": "2026-10-01",
+    "source": "Correlates of War Formal Alliances v4.1 (1816-2012). Active = in force at the end of 2012; later changes are not included.",
+    "url": "https://correlatesofwar.org/data-sets/formal-alliances/",
+    "years": "1816-2012",
+    "data_end_year": 2012,
+    "total_alliances": 404
+  },
+  "alliances": [
+    {
+      "id": "cow_1",
+      "name": "Anglo-Portuguese Alliance",
+      "type": "defense",
+      "start_year": 1386,
+      "end_year": null,
+      "members": [
+        "GBR",
+        "PRT"
+      ]
+    },
+    {
+      "id": "cow_2",
+      "name": null,
+      "type": "entente",
+      "start_year": 1766,
+      "end_year": 1911,
+      "members": [
+        "GBR",
+        "SWE"
+      ]
+    },
+    {
+      "id": "cow_3",
+      "name": "German Confederation",
+      "type": "defense",
+      "start_year": 1815,
+      "end_year": 1866,
+      "members": [
+        "AUT",
+        "BAV",
+        "DEU",
+        "HAN"
+      ]
+    },
+    {
+      "id": "cow_4",
+      "name": null,
+      "type": "defense",
+      "start_year": 1815,
+      "end_year": 1820,
+      "members": [
+        "AUT",
+        "SAN"
+      ]
+    },
+    {
+      "id": "cow_6",
+      "name": null,
+      "type": "defense",
+      "start_year": 1815,
+      "end_year": 1822,
+      "members": [
+        "AUT",
+        "DEU",
+        "GBR",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_7",
+      "name": null,
+      "type": "defense",
+      "start_year": 1816,
+      "end_year": 1820,
+      "members": [
+        "ESP",
+        "NLD"
+      ]
+    },
+    {
+      "id": "cow_8",
+      "name": null,
+      "type": "entente",
+      "start_year": 1827,
+      "end_year": 1829,
+      "members": [
+        "FRA",
+        "GBR",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_9",
+      "name": null,
+      "type": "defense",
+      "start_year": 1831,
+      "end_year": 1848,
+      "members": [
+        "AUT",
+        "ITA"
+      ]
+    },
+    {
+      "id": "cow_10",
+      "name": null,
+      "type": "defense",
+      "start_year": 1832,
+      "end_year": 1833,
+      "members": [
+        "FRA",
+        "GBR"
+      ]
+    },
+    {
+      "id": "cow_11",
+      "name": null,
+      "type": "defense",
+      "start_year": 1832,
+      "end_year": 1833,
+      "members": [
+        "BEL",
+        "FRA"
+      ]
+    },
+    {
+      "id": "cow_12",
+      "name": null,
+      "type": "defense",
+      "start_year": 1833,
+      "end_year": 1839,
+      "members": [
+        "AUT",
+        "DEU",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_13",
+      "name": null,
+      "type": "defense",
+      "start_year": 1833,
+      "end_year": 1848,
+      "members": [
+        "ITA",
+        "SAN"
+      ]
+    },
+    {
+      "id": "cow_14",
+      "name": null,
+      "type": "defense",
+      "start_year": 1833,
+      "end_year": 1841,
+      "members": [
+        "RUS",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_15",
+      "name": null,
+      "type": "entente",
+      "start_year": 1833,
+      "end_year": 1853,
+      "members": [
+        "AUT",
+        "DEU",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_16",
+      "name": null,
+      "type": "defense",
+      "start_year": 1833,
+      "end_year": 1853,
+      "members": [
+        "AUT",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_17",
+      "name": null,
+      "type": "defense",
+      "start_year": 1833,
+      "end_year": 1848,
+      "members": [
+        "AUT",
+        "DEU",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_18",
+      "name": null,
+      "type": "defense",
+      "start_year": 1833,
+      "end_year": 1848,
+      "members": [
+        "DEU",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_19",
+      "name": null,
+      "type": "defense",
+      "start_year": 1834,
+      "end_year": 1839,
+      "members": [
+        "ESP",
+        "FRA",
+        "GBR",
+        "PRT"
+      ]
+    },
+    {
+      "id": "cow_20",
+      "name": null,
+      "type": "defense",
+      "start_year": 1840,
+      "end_year": 1840,
+      "members": [
+        "AUT",
+        "DEU",
+        "GBR",
+        "RUS",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_21",
+      "name": null,
+      "type": "entente",
+      "start_year": 1844,
+      "end_year": 1846,
+      "members": [
+        "GBR",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_22",
+      "name": null,
+      "type": "defense",
+      "start_year": 1847,
+      "end_year": 1847,
+      "members": [
+        "ESP",
+        "FRA",
+        "GBR",
+        "PRT"
+      ]
+    },
+    {
+      "id": "cow_25",
+      "name": null,
+      "type": "defense",
+      "start_year": 1849,
+      "end_year": 1849,
+      "members": [
+        "DEU",
+        "HAN"
+      ]
+    },
+    {
+      "id": "cow_26",
+      "name": null,
+      "type": "defense",
+      "start_year": 1850,
+      "end_year": 1850,
+      "members": [
+        "AUT",
+        "BAV"
+      ]
+    },
+    {
+      "id": "cow_27",
+      "name": null,
+      "type": "defense",
+      "start_year": 1851,
+      "end_year": 1854,
+      "members": [
+        "AUT",
+        "DEU"
+      ]
+    },
+    {
+      "id": "cow_28",
+      "name": null,
+      "type": "defense",
+      "start_year": 1854,
+      "end_year": 1856,
+      "members": [
+        "FRA",
+        "GBR",
+        "ITA",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_29",
+      "name": null,
+      "type": "defense",
+      "start_year": 1854,
+      "end_year": 1856,
+      "members": [
+        "FRA",
+        "GBR",
+        "ITA"
+      ]
+    },
+    {
+      "id": "cow_30",
+      "name": null,
+      "type": "defense",
+      "start_year": 1854,
+      "end_year": 1856,
+      "members": [
+        "AUT",
+        "DEU"
+      ]
+    },
+    {
+      "id": "cow_31",
+      "name": null,
+      "type": "defense",
+      "start_year": 1854,
+      "end_year": 1856,
+      "members": [
+        "AUT",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_32",
+      "name": null,
+      "type": "defense",
+      "start_year": 1854,
+      "end_year": 1856,
+      "members": [
+        "AUT",
+        "FRA",
+        "GBR"
+      ]
+    },
+    {
+      "id": "cow_33",
+      "name": null,
+      "type": "entente",
+      "start_year": 1854,
+      "end_year": 1856,
+      "members": [
+        "AUT",
+        "FRA"
+      ]
+    },
+    {
+      "id": "cow_34",
+      "name": null,
+      "type": "defense",
+      "start_year": 1855,
+      "end_year": 1856,
+      "members": [
+        "FRA",
+        "GBR",
+        "SWE"
+      ]
+    },
+    {
+      "id": "cow_35",
+      "name": null,
+      "type": "defense",
+      "start_year": 1856,
+      "end_year": 1877,
+      "members": [
+        "AUT",
+        "FRA",
+        "GBR"
+      ]
+    },
+    {
+      "id": "cow_36",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1856,
+      "end_year": 1862,
+      "members": [
+        "ARG",
+        "PRY"
+      ]
+    },
+    {
+      "id": "cow_37",
+      "name": null,
+      "type": "defense",
+      "start_year": 1859,
+      "end_year": 1864,
+      "members": [
+        "ARG",
+        "BRA"
+      ]
+    },
+    {
+      "id": "cow_38",
+      "name": null,
+      "type": "defense",
+      "start_year": 1859,
+      "end_year": 1859,
+      "members": [
+        "FRA",
+        "ITA"
+      ]
+    },
+    {
+      "id": "cow_39",
+      "name": null,
+      "type": "entente",
+      "start_year": 1859,
+      "end_year": 1859,
+      "members": [
+        "FRA",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_40",
+      "name": null,
+      "type": "defense",
+      "start_year": 1860,
+      "end_year": 1860,
+      "members": [
+        "ECU",
+        "PER"
+      ]
+    },
+    {
+      "id": "cow_41",
+      "name": null,
+      "type": "entente",
+      "start_year": 1861,
+      "end_year": 1862,
+      "members": [
+        "ESP",
+        "FRA",
+        "GBR"
+      ]
+    },
+    {
+      "id": "cow_42",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1862,
+      "end_year": 1866,
+      "members": [
+        "AUT",
+        "BAV",
+        "HAN"
+      ]
+    },
+    {
+      "id": "cow_43",
+      "name": null,
+      "type": "defense",
+      "start_year": 1863,
+      "end_year": 1863,
+      "members": [
+        "DEU",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_44",
+      "name": null,
+      "type": "defense",
+      "start_year": 1863,
+      "end_year": 1873,
+      "members": [
+        "BOL",
+        "PER"
+      ]
+    },
+    {
+      "id": "cow_45",
+      "name": null,
+      "type": "defense",
+      "start_year": 1864,
+      "end_year": 1866,
+      "members": [
+        "COL",
+        "ECU"
+      ]
+    },
+    {
+      "id": "cow_46",
+      "name": null,
+      "type": "defense",
+      "start_year": 1864,
+      "end_year": 1866,
+      "members": [
+        "AUT",
+        "DEU"
+      ]
+    },
+    {
+      "id": "cow_47",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1864,
+      "end_year": 1870,
+      "members": [
+        "FRA",
+        "ITA"
+      ]
+    },
+    {
+      "id": "cow_48",
+      "name": null,
+      "type": "defense",
+      "start_year": 1865,
+      "end_year": 1882,
+      "members": [
+        "ARG",
+        "BRA",
+        "URY"
+      ]
+    },
+    {
+      "id": "cow_49",
+      "name": null,
+      "type": "defense",
+      "start_year": 1865,
+      "end_year": 1871,
+      "members": [
+        "BOL",
+        "CHL",
+        "ECU",
+        "PER"
+      ]
+    },
+    {
+      "id": "cow_50",
+      "name": null,
+      "type": "defense",
+      "start_year": 1866,
+      "end_year": 1866,
+      "members": [
+        "DEU",
+        "ITA"
+      ]
+    },
+    {
+      "id": "cow_51",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1866,
+      "end_year": 1866,
+      "members": [
+        "AUT",
+        "FRA"
+      ]
+    },
+    {
+      "id": "cow_55",
+      "name": null,
+      "type": "defense",
+      "start_year": 1866,
+      "end_year": 1870,
+      "members": [
+        "BAV",
+        "DEU"
+      ]
+    },
+    {
+      "id": "cow_57",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1870,
+      "end_year": 1872,
+      "members": [
+        "DEU",
+        "GBR"
+      ]
+    },
+    {
+      "id": "cow_58",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1870,
+      "end_year": 1872,
+      "members": [
+        "FRA",
+        "GBR"
+      ]
+    },
+    {
+      "id": "cow_59",
+      "name": null,
+      "type": "defense",
+      "start_year": 1873,
+      "end_year": 1883,
+      "members": [
+        "BOL",
+        "PER"
+      ]
+    },
+    {
+      "id": "cow_60",
+      "name": null,
+      "type": "defense",
+      "start_year": 1873,
+      "end_year": 1878,
+      "members": [
+        "DEU",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_61",
+      "name": null,
+      "type": "entente",
+      "start_year": 1873,
+      "end_year": 1878,
+      "members": [
+        "AUT",
+        "DEU",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_62",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1877,
+      "end_year": 1878,
+      "members": [
+        "AUT",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_63",
+      "name": null,
+      "type": "defense",
+      "start_year": 1878,
+      "end_year": 1880,
+      "members": [
+        "GBR",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_64",
+      "name": null,
+      "type": "defense",
+      "start_year": 1879,
+      "end_year": 1918,
+      "members": [
+        "AUT",
+        "DEU"
+      ]
+    },
+    {
+      "id": "cow_65",
+      "name": null,
+      "type": "entente",
+      "start_year": 1881,
+      "end_year": 1895,
+      "members": [
+        "AUT",
+        "SRB"
+      ]
+    },
+    {
+      "id": "cow_66",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1881,
+      "end_year": 1887,
+      "members": [
+        "AUT",
+        "DEU",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_67",
+      "name": null,
+      "type": "defense",
+      "start_year": 1882,
+      "end_year": 1918,
+      "members": [
+        "AUT",
+        "DEU",
+        "ITA"
+      ]
+    },
+    {
+      "id": "cow_68",
+      "name": null,
+      "type": "defense",
+      "start_year": 1883,
+      "end_year": 1918,
+      "members": [
+        "AUT",
+        "DEU",
+        "ITA",
+        "ROU"
+      ]
+    },
+    {
+      "id": "cow_69",
+      "name": null,
+      "type": "entente",
+      "start_year": 1887,
+      "end_year": 1897,
+      "members": [
+        "AUT",
+        "GBR",
+        "ITA"
+      ]
+    },
+    {
+      "id": "cow_70",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1887,
+      "end_year": 1895,
+      "members": [
+        "AUT",
+        "DEU",
+        "ESP",
+        "ITA"
+      ]
+    },
+    {
+      "id": "cow_71",
+      "name": null,
+      "type": "entente",
+      "start_year": 1887,
+      "end_year": 1890,
+      "members": [
+        "DEU",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_72",
+      "name": null,
+      "type": "entente",
+      "start_year": 1887,
+      "end_year": 1897,
+      "members": [
+        "AUT",
+        "GBR",
+        "ITA"
+      ]
+    },
+    {
+      "id": "cow_73",
+      "name": null,
+      "type": "entente",
+      "start_year": 1891,
+      "end_year": 1893,
+      "members": [
+        "FRA",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_74",
+      "name": null,
+      "type": "defense",
+      "start_year": 1893,
+      "end_year": 1917,
+      "members": [
+        "FRA",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_75",
+      "name": null,
+      "type": "defense",
+      "start_year": 1894,
+      "end_year": 1895,
+      "members": [
+        "JPN",
+        "KOR"
+      ]
+    },
+    {
+      "id": "cow_76",
+      "name": null,
+      "type": "defense",
+      "start_year": 1896,
+      "end_year": 1900,
+      "members": [
+        "CHN",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_77",
+      "name": null,
+      "type": "defense",
+      "start_year": 1902,
+      "end_year": 1921,
+      "members": [
+        "GBR",
+        "JPN"
+      ]
+    },
+    {
+      "id": "cow_78",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1902,
+      "end_year": 1918,
+      "members": [
+        "FRA",
+        "ITA"
+      ]
+    },
+    {
+      "id": "cow_79",
+      "name": null,
+      "type": "defense",
+      "start_year": 1904,
+      "end_year": 1909,
+      "members": [
+        "BGR",
+        "SRB"
+      ]
+    },
+    {
+      "id": "cow_80",
+      "name": null,
+      "type": "entente",
+      "start_year": 1904,
+      "end_year": 1907,
+      "members": [
+        "ESP",
+        "FRA"
+      ]
+    },
+    {
+      "id": "cow_81",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1904,
+      "end_year": 1908,
+      "members": [
+        "AUT",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_82",
+      "name": null,
+      "type": "defense",
+      "start_year": 1905,
+      "end_year": 1905,
+      "members": [
+        "DEU",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_83",
+      "name": null,
+      "type": "entente",
+      "start_year": 1907,
+      "end_year": 1915,
+      "members": [
+        "ESP",
+        "FRA",
+        "GBR"
+      ]
+    },
+    {
+      "id": "cow_84",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1907,
+      "end_year": 1918,
+      "members": [
+        "CRI",
+        "GTM",
+        "HND",
+        "NIC",
+        "SLV"
+      ]
+    },
+    {
+      "id": "cow_85",
+      "name": null,
+      "type": "entente",
+      "start_year": 1908,
+      "end_year": 1910,
+      "members": [
+        "JPN",
+        "USA"
+      ]
+    },
+    {
+      "id": "cow_86",
+      "name": null,
+      "type": "entente",
+      "start_year": 1909,
+      "end_year": 1917,
+      "members": [
+        "ITA",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_87",
+      "name": null,
+      "type": "entente",
+      "start_year": 1910,
+      "end_year": 1916,
+      "members": [
+        "JPN",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_88",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1911,
+      "end_year": null,
+      "members": [
+        "BOL",
+        "ECU"
+      ]
+    },
+    {
+      "id": "cow_89",
+      "name": null,
+      "type": "defense",
+      "start_year": 1912,
+      "end_year": 1913,
+      "members": [
+        "BGR",
+        "SRB"
+      ]
+    },
+    {
+      "id": "cow_90",
+      "name": null,
+      "type": "defense",
+      "start_year": 1912,
+      "end_year": 1913,
+      "members": [
+        "BGR",
+        "GRC"
+      ]
+    },
+    {
+      "id": "cow_91",
+      "name": null,
+      "type": "entente",
+      "start_year": 1912,
+      "end_year": 1918,
+      "members": [
+        "FRA",
+        "GBR"
+      ]
+    },
+    {
+      "id": "cow_92",
+      "name": null,
+      "type": "defense",
+      "start_year": 1913,
+      "end_year": 1918,
+      "members": [
+        "GRC",
+        "SRB"
+      ]
+    },
+    {
+      "id": "cow_93",
+      "name": null,
+      "type": "defense",
+      "start_year": 1914,
+      "end_year": 1918,
+      "members": [
+        "DEU",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_94",
+      "name": null,
+      "type": "defense",
+      "start_year": 1914,
+      "end_year": 1918,
+      "members": [
+        "BGR",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_95",
+      "name": null,
+      "type": "defense",
+      "start_year": 1914,
+      "end_year": 1918,
+      "members": [
+        "AUT",
+        "BGR"
+      ]
+    },
+    {
+      "id": "cow_96",
+      "name": null,
+      "type": "defense",
+      "start_year": 1914,
+      "end_year": 1918,
+      "members": [
+        "BGR",
+        "DEU"
+      ]
+    },
+    {
+      "id": "cow_97",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1914,
+      "end_year": 1916,
+      "members": [
+        "ROU",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_98",
+      "name": null,
+      "type": "defense",
+      "start_year": 1915,
+      "end_year": 1918,
+      "members": [
+        "FRA",
+        "GBR",
+        "ITA",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_99",
+      "name": null,
+      "type": "defense",
+      "start_year": 1915,
+      "end_year": 1918,
+      "members": [
+        "AUT",
+        "BGR",
+        "DEU"
+      ]
+    },
+    {
+      "id": "cow_100",
+      "name": null,
+      "type": "defense",
+      "start_year": 1916,
+      "end_year": 1917,
+      "members": [
+        "JPN",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_101",
+      "name": null,
+      "type": "defense",
+      "start_year": 1916,
+      "end_year": 1918,
+      "members": [
+        "FRA",
+        "GBR",
+        "ITA",
+        "ROU",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_102",
+      "name": null,
+      "type": "defense",
+      "start_year": 1920,
+      "end_year": 1930,
+      "members": [
+        "CZE",
+        "SRB"
+      ]
+    },
+    {
+      "id": "cow_103",
+      "name": null,
+      "type": "defense",
+      "start_year": 1920,
+      "end_year": 1936,
+      "members": [
+        "BEL",
+        "FRA"
+      ]
+    },
+    {
+      "id": "cow_104",
+      "name": null,
+      "type": "defense",
+      "start_year": 1921,
+      "end_year": 1939,
+      "members": [
+        "FRA",
+        "POL"
+      ]
+    },
+    {
+      "id": "cow_105",
+      "name": null,
+      "type": "defense",
+      "start_year": 1921,
+      "end_year": 1941,
+      "members": [
+        "IRN",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_106",
+      "name": null,
+      "type": "defense",
+      "start_year": 1921,
+      "end_year": 1928,
+      "members": [
+        "AFG",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_107",
+      "name": null,
+      "type": "defense",
+      "start_year": 1921,
+      "end_year": 1939,
+      "members": [
+        "POL",
+        "ROU"
+      ]
+    },
+    {
+      "id": "cow_108",
+      "name": null,
+      "type": "defense",
+      "start_year": 1921,
+      "end_year": 1939,
+      "members": [
+        "CZE",
+        "ROU"
+      ]
+    },
+    {
+      "id": "cow_109",
+      "name": null,
+      "type": "defense",
+      "start_year": 1921,
+      "end_year": 1940,
+      "members": [
+        "ROU",
+        "SRB"
+      ]
+    },
+    {
+      "id": "cow_110",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1921,
+      "end_year": 1937,
+      "members": [
+        "AFG",
+        "IRN"
+      ]
+    },
+    {
+      "id": "cow_111",
+      "name": null,
+      "type": "entente",
+      "start_year": 1921,
+      "end_year": 1931,
+      "members": [
+        "FRA",
+        "GBR",
+        "JPN",
+        "USA"
+      ]
+    },
+    {
+      "id": "cow_112",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1921,
+      "end_year": 1927,
+      "members": [
+        "AUT",
+        "CZE"
+      ]
+    },
+    {
+      "id": "cow_113",
+      "name": "Central American Treaty of Peace and Amity (1923)",
+      "type": "nonaggression",
+      "start_year": 1923,
+      "end_year": 1932,
+      "members": [
+        "CRI",
+        "GTM",
+        "HND",
+        "NIC",
+        "SLV"
+      ]
+    },
+    {
+      "id": "cow_114",
+      "name": null,
+      "type": "defense",
+      "start_year": 1923,
+      "end_year": 1940,
+      "members": [
+        "EST",
+        "LVA"
+      ]
+    },
+    {
+      "id": "cow_115",
+      "name": null,
+      "type": "entente",
+      "start_year": 1924,
+      "end_year": 1938,
+      "members": [
+        "CZE",
+        "FRA"
+      ]
+    },
+    {
+      "id": "cow_116",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1924,
+      "end_year": 1929,
+      "members": [
+        "ITA",
+        "SRB"
+      ]
+    },
+    {
+      "id": "cow_117",
+      "name": null,
+      "type": "entente",
+      "start_year": 1924,
+      "end_year": 1929,
+      "members": [
+        "CZE",
+        "ITA"
+      ]
+    },
+    {
+      "id": "cow_118",
+      "name": null,
+      "type": "defense",
+      "start_year": 1925,
+      "end_year": 1936,
+      "members": [
+        "BEL",
+        "DEU",
+        "FRA",
+        "GBR",
+        "ITA"
+      ]
+    },
+    {
+      "id": "cow_119",
+      "name": null,
+      "type": "defense",
+      "start_year": 1925,
+      "end_year": 1939,
+      "members": [
+        "FRA",
+        "POL"
+      ]
+    },
+    {
+      "id": "cow_120",
+      "name": null,
+      "type": "defense",
+      "start_year": 1925,
+      "end_year": 1938,
+      "members": [
+        "CZE",
+        "FRA"
+      ]
+    },
+    {
+      "id": "cow_121",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1925,
+      "end_year": 1939,
+      "members": [
+        "RUS",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_122",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1926,
+      "end_year": 1937,
+      "members": [
+        "IRN",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_123",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1926,
+      "end_year": 1933,
+      "members": [
+        "DEU",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_124",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1926,
+      "end_year": 1940,
+      "members": [
+        "FRA",
+        "ROU"
+      ]
+    },
+    {
+      "id": "cow_125",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1926,
+      "end_year": 1936,
+      "members": [
+        "ESP",
+        "ITA"
+      ]
+    },
+    {
+      "id": "cow_126",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1926,
+      "end_year": 1979,
+      "members": [
+        "AFG",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_127",
+      "name": null,
+      "type": "entente",
+      "start_year": 1926,
+      "end_year": 1932,
+      "members": [
+        "ITA",
+        "ROU"
+      ]
+    },
+    {
+      "id": "cow_128",
+      "name": null,
+      "type": "entente",
+      "start_year": 1926,
+      "end_year": 1939,
+      "members": [
+        "POL",
+        "SRB"
+      ]
+    },
+    {
+      "id": "cow_129",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1926,
+      "end_year": 1939,
+      "members": [
+        "LTU",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_130",
+      "name": null,
+      "type": "entente",
+      "start_year": 1926,
+      "end_year": 1927,
+      "members": [
+        "ALB",
+        "ITA"
+      ]
+    },
+    {
+      "id": "cow_131",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1927,
+      "end_year": 1941,
+      "members": [
+        "IRN",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_132",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1927,
+      "end_year": 1940,
+      "members": [
+        "FRA",
+        "SRB"
+      ]
+    },
+    {
+      "id": "cow_133",
+      "name": null,
+      "type": "defense",
+      "start_year": 1927,
+      "end_year": 1939,
+      "members": [
+        "ALB",
+        "ITA"
+      ]
+    },
+    {
+      "id": "cow_134",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1928,
+      "end_year": 1934,
+      "members": [
+        "GRC",
+        "ROU"
+      ]
+    },
+    {
+      "id": "cow_135",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1928,
+      "end_year": 1948,
+      "members": [
+        "AFG",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_136",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1928,
+      "end_year": 1935,
+      "members": [
+        "ITA",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_137",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1928,
+      "end_year": 1935,
+      "members": [
+        "ETH",
+        "ITA"
+      ]
+    },
+    {
+      "id": "cow_138",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1928,
+      "end_year": 1935,
+      "members": [
+        "GRC",
+        "ITA"
+      ]
+    },
+    {
+      "id": "cow_139",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1929,
+      "end_year": 1945,
+      "members": [
+        "HUN",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_140",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1929,
+      "end_year": 1939,
+      "members": [
+        "BGR",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_141",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1929,
+      "end_year": 1941,
+      "members": [
+        "GRC",
+        "SRB"
+      ]
+    },
+    {
+      "id": "cow_142",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1930,
+      "end_year": 1940,
+      "members": [
+        "FRA",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_143",
+      "name": null,
+      "type": "defense",
+      "start_year": 1930,
+      "end_year": 1955,
+      "members": [
+        "GBR",
+        "IRQ"
+      ]
+    },
+    {
+      "id": "cow_144",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1930,
+      "end_year": 1941,
+      "members": [
+        "GRC",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_145",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1932,
+      "end_year": 1939,
+      "members": [
+        "FIN",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_146",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1932,
+      "end_year": 1939,
+      "members": [
+        "LVA",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_147",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1932,
+      "end_year": 1939,
+      "members": [
+        "EST",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_148",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1932,
+      "end_year": 1939,
+      "members": [
+        "POL",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_149",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1932,
+      "end_year": 1935,
+      "members": [
+        "FRA",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_150",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1933,
+      "end_year": 1941,
+      "members": [
+        "ITA",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_151",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1933,
+      "end_year": 1944,
+      "members": [
+        "ROU",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_152",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1933,
+      "end_year": 1941,
+      "members": [
+        "SRB",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_153",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1934,
+      "end_year": 1939,
+      "members": [
+        "DEU",
+        "POL"
+      ]
+    },
+    {
+      "id": "cow_154",
+      "name": null,
+      "type": "defense",
+      "start_year": 1934,
+      "end_year": 1940,
+      "members": [
+        "GRC",
+        "ROU",
+        "SRB",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_155",
+      "name": null,
+      "type": "entente",
+      "start_year": 1934,
+      "end_year": 1938,
+      "members": [
+        "AUT",
+        "HUN",
+        "ITA"
+      ]
+    },
+    {
+      "id": "cow_156",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1934,
+      "end_year": 1962,
+      "members": [
+        "SAU",
+        "YEM"
+      ]
+    },
+    {
+      "id": "cow_157",
+      "name": null,
+      "type": "entente",
+      "start_year": 1934,
+      "end_year": 1940,
+      "members": [
+        "EST",
+        "LTU",
+        "LVA"
+      ]
+    },
+    {
+      "id": "cow_158",
+      "name": null,
+      "type": "entente",
+      "start_year": 1935,
+      "end_year": 1935,
+      "members": [
+        "FRA",
+        "ITA"
+      ]
+    },
+    {
+      "id": "cow_159",
+      "name": null,
+      "type": "defense",
+      "start_year": 1935,
+      "end_year": 1939,
+      "members": [
+        "FRA",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_160",
+      "name": null,
+      "type": "defense",
+      "start_year": 1935,
+      "end_year": 1989,
+      "members": [
+        "CZE",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_161",
+      "name": null,
+      "type": "defense",
+      "start_year": 1936,
+      "end_year": 1991,
+      "members": [
+        "MNG",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_162",
+      "name": null,
+      "type": "entente",
+      "start_year": 1936,
+      "end_year": 1956,
+      "members": [
+        "IRQ",
+        "SAU",
+        "YEM"
+      ]
+    },
+    {
+      "id": "cow_163",
+      "name": null,
+      "type": "defense",
+      "start_year": 1936,
+      "end_year": 1951,
+      "members": [
+        "EGY",
+        "GBR"
+      ]
+    },
+    {
+      "id": "cow_164",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1936,
+      "end_year": 1939,
+      "members": [
+        "DEU",
+        "ESP",
+        "HUN",
+        "ITA",
+        "JPN"
+      ]
+    },
+    {
+      "id": "cow_165",
+      "name": null,
+      "type": "entente",
+      "start_year": 1936,
+      "end_year": 1945,
+      "members": [
+        "ARG",
+        "BOL",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI",
+        "CUB",
+        "DOM",
+        "ECU",
+        "GTM",
+        "HND",
+        "HTI",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "URY",
+        "USA",
+        "VEN"
+      ]
+    },
+    {
+      "id": "cow_166",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1937,
+      "end_year": 1941,
+      "members": [
+        "ITA",
+        "SRB"
+      ]
+    },
+    {
+      "id": "cow_167",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1937,
+      "end_year": 1955,
+      "members": [
+        "AFG",
+        "IRN",
+        "IRQ",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_168",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1937,
+      "end_year": 1945,
+      "members": [
+        "CHN",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_169",
+      "name": null,
+      "type": "defense",
+      "start_year": 1937,
+      "end_year": 1939,
+      "members": [
+        "BGR",
+        "EGY",
+        "FRA",
+        "GBR",
+        "GRC",
+        "ROU",
+        "RUS",
+        "SRB",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_170",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1938,
+      "end_year": null,
+      "members": [
+        "BOL",
+        "PRY"
+      ]
+    },
+    {
+      "id": "cow_171",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1938,
+      "end_year": 1940,
+      "members": [
+        "BGR",
+        "GRC",
+        "ROU",
+        "SRB",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_172",
+      "name": null,
+      "type": "entente",
+      "start_year": 1938,
+      "end_year": 1939,
+      "members": [
+        "DEU",
+        "FRA"
+      ]
+    },
+    {
+      "id": "cow_173",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1939,
+      "end_year": 1977,
+      "members": [
+        "ESP",
+        "PRT"
+      ]
+    },
+    {
+      "id": "cow_174",
+      "name": null,
+      "type": "defense",
+      "start_year": 1939,
+      "end_year": 1939,
+      "members": [
+        "GBR",
+        "POL"
+      ]
+    },
+    {
+      "id": "cow_175",
+      "name": null,
+      "type": "defense",
+      "start_year": 1939,
+      "end_year": 1943,
+      "members": [
+        "DEU",
+        "ITA"
+      ]
+    },
+    {
+      "id": "cow_176",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1939,
+      "end_year": 1940,
+      "members": [
+        "DEU",
+        "DNK"
+      ]
+    },
+    {
+      "id": "cow_177",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1939,
+      "end_year": 1940,
+      "members": [
+        "DEU",
+        "EST"
+      ]
+    },
+    {
+      "id": "cow_178",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1939,
+      "end_year": 1940,
+      "members": [
+        "DEU",
+        "LVA"
+      ]
+    },
+    {
+      "id": "cow_179",
+      "name": null,
+      "type": "defense",
+      "start_year": 1939,
+      "end_year": 1939,
+      "members": [
+        "FRA",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_180",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1939,
+      "end_year": 1941,
+      "members": [
+        "DEU",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_181",
+      "name": null,
+      "type": "defense",
+      "start_year": 1939,
+      "end_year": 1940,
+      "members": [
+        "EST",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_182",
+      "name": null,
+      "type": "defense",
+      "start_year": 1939,
+      "end_year": 1940,
+      "members": [
+        "LVA",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_183",
+      "name": null,
+      "type": "defense",
+      "start_year": 1939,
+      "end_year": 1940,
+      "members": [
+        "LTU",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_184",
+      "name": null,
+      "type": "defense",
+      "start_year": 1939,
+      "end_year": 1945,
+      "members": [
+        "FRA",
+        "GBR",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_185",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1939,
+      "end_year": null,
+      "members": [
+        "COL",
+        "VEN"
+      ]
+    },
+    {
+      "id": "cow_186",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1940,
+      "end_year": 1941,
+      "members": [
+        "FIN",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_187",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1940,
+      "end_year": 1940,
+      "members": [
+        "GBR",
+        "KHM"
+      ]
+    },
+    {
+      "id": "cow_188",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1940,
+      "end_year": 1941,
+      "members": [
+        "JPN",
+        "KHM"
+      ]
+    },
+    {
+      "id": "cow_189",
+      "name": "Tripartite Pact (Axis)",
+      "type": "defense",
+      "start_year": 1940,
+      "end_year": 1941,
+      "members": [
+        "BGR",
+        "DEU",
+        "HUN",
+        "ITA",
+        "JPN",
+        "ROU"
+      ]
+    },
+    {
+      "id": "cow_190",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1941,
+      "end_year": 1941,
+      "members": [
+        "RUS",
+        "SRB"
+      ]
+    },
+    {
+      "id": "cow_191",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1941,
+      "end_year": 1945,
+      "members": [
+        "JPN",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_192",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1941,
+      "end_year": 1945,
+      "members": [
+        "DEU",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_193",
+      "name": null,
+      "type": "defense",
+      "start_year": 1941,
+      "end_year": 1955,
+      "members": [
+        "GBR",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_194",
+      "name": null,
+      "type": "defense",
+      "start_year": 1941,
+      "end_year": 1945,
+      "members": [
+        "JPN",
+        "KHM"
+      ]
+    },
+    {
+      "id": "cow_195",
+      "name": null,
+      "type": "defense",
+      "start_year": 1942,
+      "end_year": 1946,
+      "members": [
+        "GBR",
+        "IRN",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_196",
+      "name": null,
+      "type": "defense",
+      "start_year": 1944,
+      "end_year": 1951,
+      "members": [
+        "AUS",
+        "NZL"
+      ]
+    },
+    {
+      "id": "cow_197",
+      "name": null,
+      "type": "defense",
+      "start_year": 1944,
+      "end_year": 1955,
+      "members": [
+        "FRA",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_198",
+      "name": "Act of Chapultepec",
+      "type": "defense",
+      "start_year": 1945,
+      "end_year": 1947,
+      "members": [
+        "ARG",
+        "BOL",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI",
+        "CUB",
+        "DOM",
+        "ECU",
+        "GTM",
+        "HND",
+        "HTI",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "URY",
+        "USA",
+        "VEN"
+      ]
+    },
+    {
+      "id": "cow_199",
+      "name": "Arab League",
+      "type": "nonaggression",
+      "start_year": 1945,
+      "end_year": null,
+      "members": [
+        "ARE",
+        "BHR",
+        "DJI",
+        "DZA",
+        "EGY",
+        "IRQ",
+        "JOR",
+        "KWT",
+        "LBN",
+        "LBY",
+        "MAR",
+        "MRT",
+        "OMN",
+        "QAT",
+        "SAU",
+        "SDN",
+        "SOM",
+        "SYR",
+        "TUN",
+        "YEM"
+      ]
+    },
+    {
+      "id": "cow_200",
+      "name": null,
+      "type": "defense",
+      "start_year": 1945,
+      "end_year": 1949,
+      "members": [
+        "RUS",
+        "SRB"
+      ]
+    },
+    {
+      "id": "cow_201",
+      "name": null,
+      "type": "defense",
+      "start_year": 1945,
+      "end_year": 1989,
+      "members": [
+        "POL",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_202",
+      "name": null,
+      "type": "defense",
+      "start_year": 1945,
+      "end_year": 1949,
+      "members": [
+        "CHN",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_203",
+      "name": null,
+      "type": "defense",
+      "start_year": 1946,
+      "end_year": 1949,
+      "members": [
+        "POL",
+        "SRB"
+      ]
+    },
+    {
+      "id": "cow_204",
+      "name": null,
+      "type": "defense",
+      "start_year": 1946,
+      "end_year": 1956,
+      "members": [
+        "GBR",
+        "JOR"
+      ]
+    },
+    {
+      "id": "cow_205",
+      "name": null,
+      "type": "defense",
+      "start_year": 1946,
+      "end_year": 1949,
+      "members": [
+        "CZE",
+        "SRB"
+      ]
+    },
+    {
+      "id": "cow_206",
+      "name": null,
+      "type": "defense",
+      "start_year": 1946,
+      "end_year": 1949,
+      "members": [
+        "ALB",
+        "SRB"
+      ]
+    },
+    {
+      "id": "cow_207",
+      "name": null,
+      "type": "defense",
+      "start_year": 1947,
+      "end_year": 1948,
+      "members": [
+        "FRA",
+        "GBR"
+      ]
+    },
+    {
+      "id": "cow_208",
+      "name": null,
+      "type": "defense",
+      "start_year": 1947,
+      "end_year": 1989,
+      "members": [
+        "CZE",
+        "POL"
+      ]
+    },
+    {
+      "id": "cow_209",
+      "name": null,
+      "type": "entente",
+      "start_year": 1947,
+      "end_year": 1958,
+      "members": [
+        "IRQ",
+        "JOR"
+      ]
+    },
+    {
+      "id": "cow_210",
+      "name": "Rio Treaty (TIAR)",
+      "type": "defense",
+      "start_year": 1947,
+      "end_year": null,
+      "members": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ]
+    },
+    {
+      "id": "cow_211",
+      "name": null,
+      "type": "defense",
+      "start_year": 1947,
+      "end_year": 1949,
+      "members": [
+        "HUN",
+        "SRB"
+      ]
+    },
+    {
+      "id": "cow_212",
+      "name": null,
+      "type": "defense",
+      "start_year": 1947,
+      "end_year": 1967,
+      "members": [
+        "ALB",
+        "BGR"
+      ]
+    },
+    {
+      "id": "cow_213",
+      "name": null,
+      "type": "defense",
+      "start_year": 1947,
+      "end_year": 1949,
+      "members": [
+        "ROU",
+        "SRB"
+      ]
+    },
+    {
+      "id": "cow_214",
+      "name": null,
+      "type": "defense",
+      "start_year": 1948,
+      "end_year": 1989,
+      "members": [
+        "BGR",
+        "ROU"
+      ]
+    },
+    {
+      "id": "cow_215",
+      "name": null,
+      "type": "defense",
+      "start_year": 1948,
+      "end_year": 1989,
+      "members": [
+        "HUN",
+        "ROU"
+      ]
+    },
+    {
+      "id": "cow_216",
+      "name": null,
+      "type": "defense",
+      "start_year": 1948,
+      "end_year": 1989,
+      "members": [
+        "ROU",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_217",
+      "name": null,
+      "type": "defense",
+      "start_year": 1948,
+      "end_year": 1989,
+      "members": [
+        "HUN",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_218",
+      "name": "Brussels Treaty / Western European Union",
+      "type": "defense",
+      "start_year": 1948,
+      "end_year": null,
+      "members": [
+        "BEL",
+        "DEU",
+        "ESP",
+        "FRA",
+        "GBR",
+        "GRC",
+        "ITA",
+        "LUX",
+        "NLD",
+        "PRT"
+      ]
+    },
+    {
+      "id": "cow_219",
+      "name": null,
+      "type": "defense",
+      "start_year": 1948,
+      "end_year": 1989,
+      "members": [
+        "BGR",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_220",
+      "name": null,
+      "type": "defense",
+      "start_year": 1948,
+      "end_year": 1991,
+      "members": [
+        "FIN",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_221",
+      "name": null,
+      "type": "defense",
+      "start_year": 1948,
+      "end_year": 1989,
+      "members": [
+        "BGR",
+        "CZE"
+      ]
+    },
+    {
+      "id": "cow_222",
+      "name": null,
+      "type": "defense",
+      "start_year": 1948,
+      "end_year": 1989,
+      "members": [
+        "BGR",
+        "POL"
+      ]
+    },
+    {
+      "id": "cow_223",
+      "name": null,
+      "type": "defense",
+      "start_year": 1948,
+      "end_year": 1989,
+      "members": [
+        "HUN",
+        "POL"
+      ]
+    },
+    {
+      "id": "cow_224",
+      "name": null,
+      "type": "defense",
+      "start_year": 1948,
+      "end_year": 1989,
+      "members": [
+        "BGR",
+        "HUN"
+      ]
+    },
+    {
+      "id": "cow_225",
+      "name": null,
+      "type": "defense",
+      "start_year": 1948,
+      "end_year": 1989,
+      "members": [
+        "CZE",
+        "ROU"
+      ]
+    },
+    {
+      "id": "cow_226",
+      "name": null,
+      "type": "defense",
+      "start_year": 1949,
+      "end_year": 1989,
+      "members": [
+        "POL",
+        "ROU"
+      ]
+    },
+    {
+      "id": "cow_227",
+      "name": "NATO",
+      "type": "defense",
+      "start_year": 1949,
+      "end_year": null,
+      "members": [
+        "BEL",
+        "CAN",
+        "CZE",
+        "DEU",
+        "DNK",
+        "ESP",
+        "FRA",
+        "GBR",
+        "GRC",
+        "HUN",
+        "ISL",
+        "ITA",
+        "LUX",
+        "NLD",
+        "NOR",
+        "POL",
+        "PRT",
+        "TUR",
+        "USA"
+      ]
+    },
+    {
+      "id": "cow_228",
+      "name": null,
+      "type": "defense",
+      "start_year": 1949,
+      "end_year": 1989,
+      "members": [
+        "CZE",
+        "HUN"
+      ]
+    },
+    {
+      "id": "cow_229",
+      "name": null,
+      "type": "defense",
+      "start_year": 1950,
+      "end_year": 1980,
+      "members": [
+        "CHN",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_230",
+      "name": "Arab League Joint Defence Treaty",
+      "type": "defense",
+      "start_year": 1950,
+      "end_year": null,
+      "members": [
+        "ARE",
+        "BHR",
+        "DZA",
+        "EGY",
+        "IRQ",
+        "JOR",
+        "KWT",
+        "LBN",
+        "LBY",
+        "MAR",
+        "QAT",
+        "SAU",
+        "SDN",
+        "SOM",
+        "SYR",
+        "TUN",
+        "YEM"
+      ]
+    },
+    {
+      "id": "cow_231",
+      "name": "US-Philippines Mutual Defense Treaty",
+      "type": "defense",
+      "start_year": 1951,
+      "end_year": null,
+      "members": [
+        "PHL",
+        "USA"
+      ]
+    },
+    {
+      "id": "cow_232",
+      "name": "ANZUS",
+      "type": "defense",
+      "start_year": 1951,
+      "end_year": null,
+      "members": [
+        "AUS",
+        "USA"
+      ]
+    },
+    {
+      "id": "cow_233",
+      "name": "US-Japan Security Treaty",
+      "type": "defense",
+      "start_year": 1951,
+      "end_year": null,
+      "members": [
+        "JPN",
+        "USA"
+      ]
+    },
+    {
+      "id": "cow_234",
+      "name": "Balkan Pact (1953)",
+      "type": "nonaggression",
+      "start_year": 1953,
+      "end_year": 1964,
+      "members": [
+        "GRC",
+        "SRB",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_235",
+      "name": null,
+      "type": "defense",
+      "start_year": 1953,
+      "end_year": 1969,
+      "members": [
+        "GBR",
+        "LBY"
+      ]
+    },
+    {
+      "id": "cow_236",
+      "name": "US-ROK Mutual Defense Treaty",
+      "type": "defense",
+      "start_year": 1953,
+      "end_year": null,
+      "members": [
+        "KOR",
+        "USA"
+      ]
+    },
+    {
+      "id": "cow_237",
+      "name": null,
+      "type": "entente",
+      "start_year": 1954,
+      "end_year": 1955,
+      "members": [
+        "BGD",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_238",
+      "name": "SEATO",
+      "type": "entente",
+      "start_year": 1954,
+      "end_year": 1977,
+      "members": [
+        "AUS",
+        "BGD",
+        "FRA",
+        "GBR",
+        "KHM",
+        "NZL",
+        "PHL",
+        "USA"
+      ]
+    },
+    {
+      "id": "cow_239",
+      "name": "Anglo-Egyptian Agreement (1954)",
+      "type": "entente",
+      "start_year": 1954,
+      "end_year": 1956,
+      "members": [
+        "EGY",
+        "GBR"
+      ]
+    },
+    {
+      "id": "cow_240",
+      "name": null,
+      "type": "defense",
+      "start_year": 1954,
+      "end_year": 1980,
+      "members": [
+        "TWN",
+        "USA"
+      ]
+    },
+    {
+      "id": "cow_241",
+      "name": "Baghdad Pact / CENTO",
+      "type": "nonaggression",
+      "start_year": 1955,
+      "end_year": 1979,
+      "members": [
+        "BGD",
+        "GBR",
+        "IRN",
+        "IRQ",
+        "TUR",
+        "USA"
+      ]
+    },
+    {
+      "id": "cow_242",
+      "name": null,
+      "type": "defense",
+      "start_year": 1955,
+      "end_year": 1959,
+      "members": [
+        "GBR",
+        "IRQ"
+      ]
+    },
+    {
+      "id": "cow_243",
+      "name": "Warsaw Pact",
+      "type": "defense",
+      "start_year": 1955,
+      "end_year": 1991,
+      "members": [
+        "ALB",
+        "BGR",
+        "CZE",
+        "DDR",
+        "HUN",
+        "POL",
+        "ROU",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_244",
+      "name": null,
+      "type": "entente",
+      "start_year": 1955,
+      "end_year": 2011,
+      "members": [
+        "FRA",
+        "LBY"
+      ]
+    },
+    {
+      "id": "cow_245",
+      "name": null,
+      "type": "defense",
+      "start_year": 1955,
+      "end_year": 1961,
+      "members": [
+        "EGY",
+        "JOR",
+        "SYR"
+      ]
+    },
+    {
+      "id": "cow_246",
+      "name": null,
+      "type": "defense",
+      "start_year": 1955,
+      "end_year": 1956,
+      "members": [
+        "EGY",
+        "SAU"
+      ]
+    },
+    {
+      "id": "cow_247",
+      "name": null,
+      "type": "defense",
+      "start_year": 1956,
+      "end_year": 1962,
+      "members": [
+        "EGY",
+        "SAU",
+        "YEM"
+      ]
+    },
+    {
+      "id": "cow_248",
+      "name": null,
+      "type": "entente",
+      "start_year": 1956,
+      "end_year": 1966,
+      "members": [
+        "FRA",
+        "MAR"
+      ]
+    },
+    {
+      "id": "cow_249",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1956,
+      "end_year": 1956,
+      "members": [
+        "FRA",
+        "GBR",
+        "ISR"
+      ]
+    },
+    {
+      "id": "cow_250",
+      "name": null,
+      "type": "defense",
+      "start_year": 1957,
+      "end_year": 1974,
+      "members": [
+        "LBY",
+        "TUN"
+      ]
+    },
+    {
+      "id": "cow_251",
+      "name": null,
+      "type": "defense",
+      "start_year": 1957,
+      "end_year": 1971,
+      "members": [
+        "GBR",
+        "MYS"
+      ]
+    },
+    {
+      "id": "cow_252",
+      "name": null,
+      "type": "defense",
+      "start_year": 1958,
+      "end_year": null,
+      "members": [
+        "CAN",
+        "USA"
+      ]
+    },
+    {
+      "id": "cow_253",
+      "name": null,
+      "type": "entente",
+      "start_year": 1959,
+      "end_year": 1979,
+      "members": [
+        "IRN",
+        "USA"
+      ]
+    },
+    {
+      "id": "cow_254",
+      "name": null,
+      "type": "defense",
+      "start_year": 1959,
+      "end_year": null,
+      "members": [
+        "BGD",
+        "USA"
+      ]
+    },
+    {
+      "id": "cow_255",
+      "name": null,
+      "type": "defense",
+      "start_year": 1959,
+      "end_year": null,
+      "members": [
+        "TUR",
+        "USA"
+      ]
+    },
+    {
+      "id": "cow_256",
+      "name": null,
+      "type": "entente",
+      "start_year": 1959,
+      "end_year": null,
+      "members": [
+        "LBR",
+        "USA"
+      ]
+    },
+    {
+      "id": "cow_257",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1960,
+      "end_year": 1967,
+      "members": [
+        "CHN",
+        "LKA"
+      ]
+    },
+    {
+      "id": "cow_258",
+      "name": null,
+      "type": "defense",
+      "start_year": 1960,
+      "end_year": 1978,
+      "members": [
+        "CAF",
+        "COG",
+        "FRA",
+        "TCD"
+      ]
+    },
+    {
+      "id": "cow_259",
+      "name": null,
+      "type": "defense",
+      "start_year": 1960,
+      "end_year": 1974,
+      "members": [
+        "CYP",
+        "GRC",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_260",
+      "name": null,
+      "type": "defense",
+      "start_year": 1960,
+      "end_year": null,
+      "members": [
+        "FRA",
+        "GAB"
+      ]
+    },
+    {
+      "id": "cow_261",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1960,
+      "end_year": 1979,
+      "members": [
+        "AFG",
+        "CHN"
+      ]
+    },
+    {
+      "id": "cow_262",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1960,
+      "end_year": 1970,
+      "members": [
+        "CHN",
+        "LAO"
+      ]
+    },
+    {
+      "id": "cow_263",
+      "name": null,
+      "type": "defense",
+      "start_year": 1961,
+      "end_year": 1963,
+      "members": [
+        "GHA",
+        "MLI"
+      ]
+    },
+    {
+      "id": "cow_264",
+      "name": null,
+      "type": "defense",
+      "start_year": 1961,
+      "end_year": 1995,
+      "members": [
+        "PRK",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_265",
+      "name": null,
+      "type": "defense",
+      "start_year": 1961,
+      "end_year": null,
+      "members": [
+        "CHN",
+        "PRK"
+      ]
+    },
+    {
+      "id": "cow_266",
+      "name": "African and Malagasy Union Defence Pact",
+      "type": "defense",
+      "start_year": 1961,
+      "end_year": 1964,
+      "members": [
+        "BEN",
+        "BFA",
+        "CAF",
+        "CIV",
+        "CMR",
+        "COG",
+        "GAB",
+        "MDG",
+        "MRT",
+        "NER",
+        "RWA",
+        "SEN",
+        "TCD",
+        "TGO"
+      ]
+    },
+    {
+      "id": "cow_267",
+      "name": "Declaration on the Neutrality of Laos (1962)",
+      "type": "neutrality",
+      "start_year": 1962,
+      "end_year": 1964,
+      "members": [
+        "CAN",
+        "CHN",
+        "FRA",
+        "GBR",
+        "IND",
+        "KHM",
+        "LAO",
+        "LKA",
+        "POL",
+        "RUS",
+        "USA",
+        "VNM"
+      ]
+    },
+    {
+      "id": "cow_268",
+      "name": null,
+      "type": "entente",
+      "start_year": 1962,
+      "end_year": 1967,
+      "members": [
+        "JOR",
+        "SAU"
+      ]
+    },
+    {
+      "id": "cow_269",
+      "name": null,
+      "type": "defense",
+      "start_year": 1962,
+      "end_year": 1967,
+      "members": [
+        "EGY",
+        "YEM"
+      ]
+    },
+    {
+      "id": "cow_270",
+      "name": null,
+      "type": "defense",
+      "start_year": 1963,
+      "end_year": null,
+      "members": [
+        "ETH",
+        "KEN"
+      ]
+    },
+    {
+      "id": "cow_271",
+      "name": "Central American Defense Council (CONDECA)",
+      "type": "defense",
+      "start_year": 1963,
+      "end_year": 1969,
+      "members": [
+        "CRI",
+        "GTM",
+        "HND",
+        "NIC",
+        "PAN",
+        "SLV"
+      ]
+    },
+    {
+      "id": "cow_272",
+      "name": null,
+      "type": "defense",
+      "start_year": 1964,
+      "end_year": 1989,
+      "members": [
+        "DDR",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_273",
+      "name": null,
+      "type": "defense",
+      "start_year": 1966,
+      "end_year": 1994,
+      "members": [
+        "BDI",
+        "COD",
+        "RWA"
+      ]
+    },
+    {
+      "id": "cow_274",
+      "name": null,
+      "type": "defense",
+      "start_year": 1966,
+      "end_year": 1967,
+      "members": [
+        "EGY",
+        "SYR"
+      ]
+    },
+    {
+      "id": "cow_275",
+      "name": null,
+      "type": "defense",
+      "start_year": 1967,
+      "end_year": 1989,
+      "members": [
+        "DDR",
+        "POL"
+      ]
+    },
+    {
+      "id": "cow_276",
+      "name": null,
+      "type": "defense",
+      "start_year": 1967,
+      "end_year": 1989,
+      "members": [
+        "CZE",
+        "DDR"
+      ]
+    },
+    {
+      "id": "cow_277",
+      "name": null,
+      "type": "defense",
+      "start_year": 1967,
+      "end_year": 1989,
+      "members": [
+        "DDR",
+        "HUN"
+      ]
+    },
+    {
+      "id": "cow_278",
+      "name": null,
+      "type": "defense",
+      "start_year": 1967,
+      "end_year": 1979,
+      "members": [
+        "EGY",
+        "IRQ",
+        "JOR"
+      ]
+    },
+    {
+      "id": "cow_279",
+      "name": null,
+      "type": "defense",
+      "start_year": 1967,
+      "end_year": 1989,
+      "members": [
+        "BGR",
+        "DDR"
+      ]
+    },
+    {
+      "id": "cow_280",
+      "name": null,
+      "type": "entente",
+      "start_year": 1968,
+      "end_year": 1976,
+      "members": [
+        "GBR",
+        "MUS"
+      ]
+    },
+    {
+      "id": "cow_281",
+      "name": null,
+      "type": "defense",
+      "start_year": 1968,
+      "end_year": 1968,
+      "members": [
+        "CAF",
+        "COG",
+        "TCD"
+      ]
+    },
+    {
+      "id": "cow_282",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1969,
+      "end_year": 1975,
+      "members": [
+        "DZA",
+        "MAR"
+      ]
+    },
+    {
+      "id": "cow_283",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1970,
+      "end_year": 1983,
+      "members": [
+        "DZA",
+        "TUN"
+      ]
+    },
+    {
+      "id": "cow_284",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1970,
+      "end_year": 1981,
+      "members": [
+        "MAR",
+        "MRT"
+      ]
+    },
+    {
+      "id": "cow_285",
+      "name": null,
+      "type": "entente",
+      "start_year": 1970,
+      "end_year": 1981,
+      "members": [
+        "ESP",
+        "USA"
+      ]
+    },
+    {
+      "id": "cow_286",
+      "name": null,
+      "type": "entente",
+      "start_year": 1970,
+      "end_year": 1990,
+      "members": [
+        "FRA",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_287",
+      "name": null,
+      "type": "entente",
+      "start_year": 1971,
+      "end_year": 1992,
+      "members": [
+        "CAN",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_288",
+      "name": null,
+      "type": "entente",
+      "start_year": 1971,
+      "end_year": 1976,
+      "members": [
+        "EGY",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_289",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1971,
+      "end_year": 1991,
+      "members": [
+        "IND",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_290",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1972,
+      "end_year": 1997,
+      "members": [
+        "IND",
+        "MMR"
+      ]
+    },
+    {
+      "id": "cow_291",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1972,
+      "end_year": 1990,
+      "members": [
+        "IRQ",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_292",
+      "name": null,
+      "type": "defense",
+      "start_year": 1972,
+      "end_year": 1989,
+      "members": [
+        "DDR",
+        "ROU"
+      ]
+    },
+    {
+      "id": "cow_293",
+      "name": null,
+      "type": "defense",
+      "start_year": 1972,
+      "end_year": 1979,
+      "members": [
+        "SDN",
+        "UGA"
+      ]
+    },
+    {
+      "id": "cow_294",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1972,
+      "end_year": null,
+      "members": [
+        "BGD",
+        "IND"
+      ]
+    },
+    {
+      "id": "cow_295",
+      "name": null,
+      "type": "defense",
+      "start_year": 1974,
+      "end_year": 1981,
+      "members": [
+        "LBY",
+        "NER"
+      ]
+    },
+    {
+      "id": "cow_296",
+      "name": null,
+      "type": "defense",
+      "start_year": 1975,
+      "end_year": 1984,
+      "members": [
+        "DZA",
+        "LBY"
+      ]
+    },
+    {
+      "id": "cow_297",
+      "name": null,
+      "type": "defense",
+      "start_year": 1976,
+      "end_year": 1989,
+      "members": [
+        "EGY",
+        "SDN"
+      ]
+    },
+    {
+      "id": "cow_298",
+      "name": null,
+      "type": "entente",
+      "start_year": 1976,
+      "end_year": 1991,
+      "members": [
+        "AGO",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_299",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1977,
+      "end_year": 1991,
+      "members": [
+        "MOZ",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_300",
+      "name": "ECOWAS Protocol on Non-Aggression",
+      "type": "nonaggression",
+      "start_year": 1977,
+      "end_year": 1981,
+      "members": [
+        "BEN",
+        "BFA",
+        "CIV",
+        "CPV",
+        "GHA",
+        "GMB",
+        "GNB",
+        "LBR",
+        "MLI",
+        "MRT",
+        "NER",
+        "NGA",
+        "SEN",
+        "SLE",
+        "TGO"
+      ]
+    },
+    {
+      "id": "cow_301",
+      "name": null,
+      "type": "entente",
+      "start_year": 1978,
+      "end_year": 1991,
+      "members": [
+        "RUS",
+        "VNM"
+      ]
+    },
+    {
+      "id": "cow_302",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1978,
+      "end_year": 1991,
+      "members": [
+        "ETH",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_303",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1979,
+      "end_year": null,
+      "members": [
+        "ARG",
+        "CHL"
+      ]
+    },
+    {
+      "id": "cow_304",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1979,
+      "end_year": null,
+      "members": [
+        "GHA",
+        "LBR"
+      ]
+    },
+    {
+      "id": "cow_305",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1979,
+      "end_year": 1989,
+      "members": [
+        "AGO",
+        "DDR"
+      ]
+    },
+    {
+      "id": "cow_306",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1979,
+      "end_year": 1989,
+      "members": [
+        "DDR",
+        "MOZ"
+      ]
+    },
+    {
+      "id": "cow_307",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1979,
+      "end_year": 1982,
+      "members": [
+        "AGO",
+        "COD",
+        "ZMB"
+      ]
+    },
+    {
+      "id": "cow_309",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1979,
+      "end_year": 1989,
+      "members": [
+        "DDR",
+        "ETH"
+      ]
+    },
+    {
+      "id": "cow_312",
+      "name": null,
+      "type": "defense",
+      "start_year": 1980,
+      "end_year": 1999,
+      "members": [
+        "GHA",
+        "GNB"
+      ]
+    },
+    {
+      "id": "cow_313",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1980,
+      "end_year": 1982,
+      "members": [
+        "LBY",
+        "TCD"
+      ]
+    },
+    {
+      "id": "cow_314",
+      "name": null,
+      "type": "defense",
+      "start_year": 1980,
+      "end_year": 1980,
+      "members": [
+        "LBY",
+        "SYR"
+      ]
+    },
+    {
+      "id": "cow_315",
+      "name": null,
+      "type": "defense",
+      "start_year": 1980,
+      "end_year": 1984,
+      "members": [
+        "ITA",
+        "MLT"
+      ]
+    },
+    {
+      "id": "cow_316",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1980,
+      "end_year": 1991,
+      "members": [
+        "RUS",
+        "SYR"
+      ]
+    },
+    {
+      "id": "cow_317",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1981,
+      "end_year": 1991,
+      "members": [
+        "COG",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_318",
+      "name": "ECOWAS Protocol on Mutual Assistance in Defence",
+      "type": "defense",
+      "start_year": 1981,
+      "end_year": null,
+      "members": [
+        "BEN",
+        "BFA",
+        "CIV",
+        "CPV",
+        "GHA",
+        "GMB",
+        "GNB",
+        "LBR",
+        "MLI",
+        "NER",
+        "NGA",
+        "SEN",
+        "SLE",
+        "TGO"
+      ]
+    },
+    {
+      "id": "cow_319",
+      "name": "Organisation of Eastern Caribbean States (OECS)",
+      "type": "defense",
+      "start_year": 1981,
+      "end_year": null,
+      "members": [
+        "ATG",
+        "DMA",
+        "KNA",
+        "LCA",
+        "VCT"
+      ]
+    },
+    {
+      "id": "cow_320",
+      "name": null,
+      "type": "defense",
+      "start_year": 1981,
+      "end_year": 1986,
+      "members": [
+        "ETH",
+        "LBY"
+      ]
+    },
+    {
+      "id": "cow_321",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1981,
+      "end_year": 1989,
+      "members": [
+        "AGO",
+        "HUN"
+      ]
+    },
+    {
+      "id": "cow_322",
+      "name": null,
+      "type": "defense",
+      "start_year": 1981,
+      "end_year": 1989,
+      "members": [
+        "GMB",
+        "SEN"
+      ]
+    },
+    {
+      "id": "cow_323",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1982,
+      "end_year": null,
+      "members": [
+        "SWZ",
+        "ZAF"
+      ]
+    },
+    {
+      "id": "cow_324",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1982,
+      "end_year": 1989,
+      "members": [
+        "CZE",
+        "LBY"
+      ]
+    },
+    {
+      "id": "cow_325",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1983,
+      "end_year": 1989,
+      "members": [
+        "BGR",
+        "LBY"
+      ]
+    },
+    {
+      "id": "cow_326",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1983,
+      "end_year": 1989,
+      "members": [
+        "DZA",
+        "MRT",
+        "TUN"
+      ]
+    },
+    {
+      "id": "cow_327",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1983,
+      "end_year": 1984,
+      "members": [
+        "ISR",
+        "LBN"
+      ]
+    },
+    {
+      "id": "cow_328",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1984,
+      "end_year": 1994,
+      "members": [
+        "MOZ",
+        "ZAF"
+      ]
+    },
+    {
+      "id": "cow_329",
+      "name": null,
+      "type": "entente",
+      "start_year": 1984,
+      "end_year": 1986,
+      "members": [
+        "LBY",
+        "MAR"
+      ]
+    },
+    {
+      "id": "cow_330",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1984,
+      "end_year": 1989,
+      "members": [
+        "LBY",
+        "MLT"
+      ]
+    },
+    {
+      "id": "cow_331",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1984,
+      "end_year": null,
+      "members": [
+        "ARG",
+        "CHL"
+      ]
+    },
+    {
+      "id": "cow_332",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1986,
+      "end_year": 1991,
+      "members": [
+        "GHA",
+        "LBR",
+        "SLE"
+      ]
+    },
+    {
+      "id": "cow_333",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1988,
+      "end_year": 1989,
+      "members": [
+        "AFG",
+        "BGD"
+      ]
+    },
+    {
+      "id": "cow_334",
+      "name": null,
+      "type": "defense",
+      "start_year": 1989,
+      "end_year": null,
+      "members": [
+        "DZA",
+        "LBY",
+        "MAR",
+        "MRT",
+        "TUN"
+      ]
+    },
+    {
+      "id": "cow_335",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1989,
+      "end_year": 1990,
+      "members": [
+        "IRQ",
+        "SAU"
+      ]
+    },
+    {
+      "id": "cow_336",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1990,
+      "end_year": 1991,
+      "members": [
+        "FRA",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_337",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1990,
+      "end_year": null,
+      "members": [
+        "DEU",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_338",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1990,
+      "end_year": 1991,
+      "members": [
+        "ITA",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_339",
+      "name": null,
+      "type": "entente",
+      "start_year": 1991,
+      "end_year": null,
+      "members": [
+        "LBN",
+        "SYR"
+      ]
+    },
+    {
+      "id": "cow_340",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1991,
+      "end_year": null,
+      "members": [
+        "ROU",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_341",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1991,
+      "end_year": null,
+      "members": [
+        "BGR",
+        "GRC"
+      ]
+    },
+    {
+      "id": "cow_342",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1991,
+      "end_year": null,
+      "members": [
+        "GRC",
+        "ROU"
+      ]
+    },
+    {
+      "id": "cow_343",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1991,
+      "end_year": null,
+      "members": [
+        "HUN",
+        "UKR"
+      ]
+    },
+    {
+      "id": "cow_344",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1991,
+      "end_year": null,
+      "members": [
+        "KOR",
+        "PRK"
+      ]
+    },
+    {
+      "id": "cow_345",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "FIN",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_346",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "BGR",
+        "ROU"
+      ]
+    },
+    {
+      "id": "cow_347",
+      "name": null,
+      "type": "entente",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "FRA",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_348",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "BGR",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_349",
+      "name": null,
+      "type": "defense",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "ARM",
+        "AZE",
+        "BLR",
+        "GEO",
+        "KAZ",
+        "KGZ",
+        "MDA",
+        "RUS",
+        "TJK",
+        "TKM",
+        "UKR",
+        "UZB"
+      ]
+    },
+    {
+      "id": "cow_350",
+      "name": "Collective Security Treaty (Tashkent, later CSTO)",
+      "type": "defense",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "ARM",
+        "AZE",
+        "BLR",
+        "GEO",
+        "KAZ",
+        "KGZ",
+        "RUS",
+        "TJK",
+        "UZB"
+      ]
+    },
+    {
+      "id": "cow_351",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "POL",
+        "UKR"
+      ]
+    },
+    {
+      "id": "cow_352",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "POL",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_353",
+      "name": null,
+      "type": "defense",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "KAZ",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_354",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "RUS",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_355",
+      "name": null,
+      "type": "defense",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "RUS",
+        "UZB"
+      ]
+    },
+    {
+      "id": "cow_356",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "ALB",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_357",
+      "name": null,
+      "type": "defense",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "KGZ",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_358",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "CAN",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_359",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "BLR",
+        "POL"
+      ]
+    },
+    {
+      "id": "cow_360",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "LVA",
+        "POL"
+      ]
+    },
+    {
+      "id": "cow_361",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "EST",
+        "POL"
+      ]
+    },
+    {
+      "id": "cow_362",
+      "name": null,
+      "type": "defense",
+      "start_year": 1992,
+      "end_year": 1999,
+      "members": [
+        "BIH",
+        "HRV"
+      ]
+    },
+    {
+      "id": "cow_363",
+      "name": null,
+      "type": "defense",
+      "start_year": 1992,
+      "end_year": 2002,
+      "members": [
+        "RUS",
+        "TKM"
+      ]
+    },
+    {
+      "id": "cow_364",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "BGR",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_365",
+      "name": null,
+      "type": "defense",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "KGZ",
+        "UZB"
+      ]
+    },
+    {
+      "id": "cow_366",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "MDA",
+        "UKR"
+      ]
+    },
+    {
+      "id": "cow_367",
+      "name": null,
+      "type": "defense",
+      "start_year": 1992,
+      "end_year": null,
+      "members": [
+        "CZE",
+        "SVK"
+      ]
+    },
+    {
+      "id": "cow_368",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1993,
+      "end_year": null,
+      "members": [
+        "MNG",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_369",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1993,
+      "end_year": null,
+      "members": [
+        "ALB",
+        "BGR"
+      ]
+    },
+    {
+      "id": "cow_370",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1993,
+      "end_year": null,
+      "members": [
+        "GEO",
+        "POL"
+      ]
+    },
+    {
+      "id": "cow_371",
+      "name": null,
+      "type": "defense",
+      "start_year": 1993,
+      "end_year": null,
+      "members": [
+        "RUS",
+        "TJK"
+      ]
+    },
+    {
+      "id": "cow_372",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1993,
+      "end_year": null,
+      "members": [
+        "SVK",
+        "UKR"
+      ]
+    },
+    {
+      "id": "cow_373",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1993,
+      "end_year": null,
+      "members": [
+        "ROU",
+        "SVK"
+      ]
+    },
+    {
+      "id": "cow_374",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1993,
+      "end_year": null,
+      "members": [
+        "BGR",
+        "BLR"
+      ]
+    },
+    {
+      "id": "cow_375",
+      "name": null,
+      "type": "entente",
+      "start_year": 1994,
+      "end_year": null,
+      "members": [
+        "FRA",
+        "GEO"
+      ]
+    },
+    {
+      "id": "cow_376",
+      "name": null,
+      "type": "neutrality",
+      "start_year": 1994,
+      "end_year": null,
+      "members": [
+        "LTU",
+        "UKR"
+      ]
+    },
+    {
+      "id": "cow_377",
+      "name": null,
+      "type": "defense",
+      "start_year": 1994,
+      "end_year": null,
+      "members": [
+        "AZE",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_378",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1994,
+      "end_year": null,
+      "members": [
+        "LTU",
+        "POL"
+      ]
+    },
+    {
+      "id": "cow_379",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1994,
+      "end_year": null,
+      "members": [
+        "HRV",
+        "TUR"
+      ]
+    },
+    {
+      "id": "cow_380",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1994,
+      "end_year": null,
+      "members": [
+        "ISR",
+        "JOR"
+      ]
+    },
+    {
+      "id": "cow_381",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1994,
+      "end_year": null,
+      "members": [
+        "MDA",
+        "POL"
+      ]
+    },
+    {
+      "id": "cow_382",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1995,
+      "end_year": null,
+      "members": [
+        "BLR",
+        "LTU"
+      ]
+    },
+    {
+      "id": "cow_383",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1995,
+      "end_year": null,
+      "members": [
+        "LTU",
+        "MDA"
+      ]
+    },
+    {
+      "id": "cow_384",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1995,
+      "end_year": null,
+      "members": [
+        "LVA",
+        "UKR"
+      ]
+    },
+    {
+      "id": "cow_385",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1995,
+      "end_year": null,
+      "members": [
+        "LVA",
+        "UZB"
+      ]
+    },
+    {
+      "id": "cow_386",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1995,
+      "end_year": null,
+      "members": [
+        "BIH",
+        "HRV",
+        "SRB"
+      ]
+    },
+    {
+      "id": "cow_387",
+      "name": null,
+      "type": "entente",
+      "start_year": 1995,
+      "end_year": 1999,
+      "members": [
+        "AUS",
+        "IDN"
+      ]
+    },
+    {
+      "id": "cow_388",
+      "name": "Regional Security System (Eastern Caribbean)",
+      "type": "defense",
+      "start_year": 1996,
+      "end_year": null,
+      "members": [
+        "ATG",
+        "BRB",
+        "DMA",
+        "GRD",
+        "KNA",
+        "LCA",
+        "VCT"
+      ]
+    },
+    {
+      "id": "cow_389",
+      "name": "Shanghai Five",
+      "type": "nonaggression",
+      "start_year": 1996,
+      "end_year": null,
+      "members": [
+        "CHN",
+        "KAZ",
+        "KGZ",
+        "RUS",
+        "TJK",
+        "UZB"
+      ]
+    },
+    {
+      "id": "cow_390",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1996,
+      "end_year": null,
+      "members": [
+        "ARM",
+        "UKR"
+      ]
+    },
+    {
+      "id": "cow_391",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1996,
+      "end_year": null,
+      "members": [
+        "GRC",
+        "POL"
+      ]
+    },
+    {
+      "id": "cow_392",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1997,
+      "end_year": null,
+      "members": [
+        "SVK",
+        "UZB"
+      ]
+    },
+    {
+      "id": "cow_393",
+      "name": null,
+      "type": "defense",
+      "start_year": 1997,
+      "end_year": null,
+      "members": [
+        "BLR",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_394",
+      "name": null,
+      "type": "defense",
+      "start_year": 1998,
+      "end_year": null,
+      "members": [
+        "CAF",
+        "COG"
+      ]
+    },
+    {
+      "id": "cow_395",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1998,
+      "end_year": null,
+      "members": [
+        "COD",
+        "COG"
+      ]
+    },
+    {
+      "id": "cow_396",
+      "name": null,
+      "type": "defense",
+      "start_year": 1999,
+      "end_year": 2001,
+      "members": [
+        "AGO",
+        "COG",
+        "NAM",
+        "ZWE"
+      ]
+    },
+    {
+      "id": "cow_397",
+      "name": null,
+      "type": "entente",
+      "start_year": 2000,
+      "end_year": null,
+      "members": [
+        "PRK",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_398",
+      "name": "ECCAS Mutual Assistance Pact",
+      "type": "defense",
+      "start_year": 2000,
+      "end_year": null,
+      "members": [
+        "AGO",
+        "BDI",
+        "CAF",
+        "CMR",
+        "COD",
+        "COG",
+        "GAB",
+        "GIN",
+        "RWA",
+        "STP",
+        "TCD"
+      ]
+    },
+    {
+      "id": "cow_399",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 2000,
+      "end_year": null,
+      "members": [
+        "ERI",
+        "ETH"
+      ]
+    },
+    {
+      "id": "cow_400",
+      "name": "GCC Joint Defence Agreement",
+      "type": "defense",
+      "start_year": 2000,
+      "end_year": null,
+      "members": [
+        "ARE",
+        "BHR",
+        "KWT",
+        "OMN",
+        "QAT",
+        "SAU"
+      ]
+    },
+    {
+      "id": "cow_401",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 2002,
+      "end_year": null,
+      "members": [
+        "RUS",
+        "TKM"
+      ]
+    },
+    {
+      "id": "cow_402",
+      "name": "Kabul Declaration on Good-Neighbourly Relations",
+      "type": "nonaggression",
+      "start_year": 2002,
+      "end_year": null,
+      "members": [
+        "AFG",
+        "BGD",
+        "CHN",
+        "IRN",
+        "TJK",
+        "TKM",
+        "UZB"
+      ]
+    },
+    {
+      "id": "cow_403",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 2004,
+      "end_year": 2008,
+      "members": [
+        "GEO",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_404",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 2005,
+      "end_year": null,
+      "members": [
+        "AZE",
+        "IRN"
+      ]
+    },
+    {
+      "id": "cow_405",
+      "name": null,
+      "type": "defense",
+      "start_year": 2005,
+      "end_year": null,
+      "members": [
+        "RUS",
+        "UZB"
+      ]
+    },
+    {
+      "id": "cow_406",
+      "name": null,
+      "type": "entente",
+      "start_year": 2006,
+      "end_year": null,
+      "members": [
+        "IRN",
+        "SYR"
+      ]
+    },
+    {
+      "id": "cow_407",
+      "name": "Great Lakes Pact on Security, Stability and Development",
+      "type": "defense",
+      "start_year": 2006,
+      "end_year": null,
+      "members": [
+        "AGO",
+        "BDI",
+        "CAF",
+        "COD",
+        "COG",
+        "KEN",
+        "RWA",
+        "SDN",
+        "TZA",
+        "UGA",
+        "ZMB"
+      ]
+    },
+    {
+      "id": "cow_408",
+      "name": null,
+      "type": "defense",
+      "start_year": 2007,
+      "end_year": null,
+      "members": [
+        "DNK",
+        "ISL"
+      ]
+    },
+    {
+      "id": "cow_409",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 2008,
+      "end_year": null,
+      "members": [
+        "SDN",
+        "TCD"
+      ]
+    },
+    {
+      "id": "cow_410",
+      "name": null,
+      "type": "defense",
+      "start_year": 2009,
+      "end_year": null,
+      "members": [
+        "BLR",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_411",
+      "name": null,
+      "type": "defense",
+      "start_year": 2010,
+      "end_year": null,
+      "members": [
+        "ARM",
+        "RUS"
+      ]
+    },
+    {
+      "id": "cow_412",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 2012,
+      "end_year": 2012,
+      "members": [
+        "SDN",
+        "SSD"
+      ]
+    },
+    {
+      "id": "cow_413",
+      "name": null,
+      "type": "nonaggression",
+      "start_year": 1979,
+      "end_year": null,
+      "members": [
+        "EGY",
+        "ISR"
+      ]
+    },
+    {
+      "id": "cow_414",
+      "name": null,
+      "type": "entente",
+      "start_year": 1981,
+      "end_year": 1991,
+      "members": [
+        "ISR",
+        "USA"
+      ]
+    }
+  ],
+  "countries": {
+    "GBR": {
+      "total_alliances": 48,
+      "active_alliances": 3,
+      "defense_pacts": 30,
+      "ententes": 12,
+      "non_aggression": 2,
+      "neutrality": 4,
+      "allies": [
+        "BEL",
+        "CAN",
+        "CZE",
+        "DEU",
+        "DNK",
+        "ESP",
+        "FRA",
+        "GRC",
+        "HUN",
+        "ISL",
+        "ITA",
+        "LUX",
+        "NLD",
+        "NOR",
+        "POL",
+        "PRT",
+        "TUR",
+        "USA"
+      ],
+      "historical_allies": [
+        "AUS",
+        "AUT",
+        "BGD",
+        "BGR",
+        "CHN",
+        "EGY",
+        "IND",
+        "IRN",
+        "IRQ",
+        "ISR",
+        "JOR",
+        "JPN",
+        "KHM",
+        "LAO",
+        "LBY",
+        "LKA",
+        "MUS",
+        "MYS",
+        "NZL",
+        "PHL",
+        "ROU",
+        "RUS",
+        "SRB",
+        "SWE",
+        "VNM"
+      ]
+    },
+    "PRT": {
+      "total_alliances": 6,
+      "active_alliances": 3,
+      "defense_pacts": 5,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "BEL",
+        "CAN",
+        "CZE",
+        "DEU",
+        "DNK",
+        "ESP",
+        "FRA",
+        "GBR",
+        "GRC",
+        "HUN",
+        "ISL",
+        "ITA",
+        "LUX",
+        "NLD",
+        "NOR",
+        "POL",
+        "TUR",
+        "USA"
+      ],
+      "historical_allies": []
+    },
+    "SWE": {
+      "total_alliances": 2,
+      "active_alliances": 0,
+      "defense_pacts": 1,
+      "ententes": 1,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [],
+      "historical_allies": [
+        "FRA",
+        "GBR"
+      ]
+    },
+    "AUT": {
+      "total_alliances": 34,
+      "active_alliances": 0,
+      "defense_pacts": 20,
+      "ententes": 7,
+      "non_aggression": 1,
+      "neutrality": 6,
+      "allies": [],
+      "historical_allies": [
+        "BAV",
+        "BGR",
+        "CZE",
+        "DEU",
+        "ESP",
+        "FRA",
+        "GBR",
+        "HAN",
+        "HUN",
+        "ITA",
+        "ROU",
+        "RUS",
+        "SAN",
+        "SRB",
+        "TUR"
+      ]
+    },
+    "BAV": {
+      "total_alliances": 4,
+      "active_alliances": 0,
+      "defense_pacts": 3,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 1,
+      "allies": [],
+      "historical_allies": [
+        "AUT",
+        "DEU",
+        "HAN"
+      ]
+    },
+    "DEU": {
+      "total_alliances": 42,
+      "active_alliances": 3,
+      "defense_pacts": 26,
+      "ententes": 4,
+      "non_aggression": 8,
+      "neutrality": 4,
+      "allies": [
+        "BEL",
+        "CAN",
+        "CZE",
+        "DNK",
+        "ESP",
+        "FRA",
+        "GBR",
+        "GRC",
+        "HUN",
+        "ISL",
+        "ITA",
+        "LUX",
+        "NLD",
+        "NOR",
+        "POL",
+        "PRT",
+        "RUS",
+        "TUR",
+        "USA"
+      ],
+      "historical_allies": [
+        "AUT",
+        "BAV",
+        "BGR",
+        "EST",
+        "HAN",
+        "JPN",
+        "LVA",
+        "ROU"
+      ]
+    },
+    "HAN": {
+      "total_alliances": 3,
+      "active_alliances": 0,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 1,
+      "allies": [],
+      "historical_allies": [
+        "AUT",
+        "BAV",
+        "DEU"
+      ]
+    },
+    "SAN": {
+      "total_alliances": 2,
+      "active_alliances": 0,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [],
+      "historical_allies": [
+        "AUT",
+        "ITA"
+      ]
+    },
+    "RUS": {
+      "total_alliances": 103,
+      "active_alliances": 21,
+      "defense_pacts": 48,
+      "ententes": 16,
+      "non_aggression": 32,
+      "neutrality": 7,
+      "allies": [
+        "ARM",
+        "AZE",
+        "BGR",
+        "BLR",
+        "CAN",
+        "CHN",
+        "DEU",
+        "FIN",
+        "FRA",
+        "GEO",
+        "KAZ",
+        "KGZ",
+        "MDA",
+        "MNG",
+        "POL",
+        "PRK",
+        "TJK",
+        "TKM",
+        "TUR",
+        "UKR",
+        "UZB"
+      ],
+      "historical_allies": [
+        "AFG",
+        "AGO",
+        "ALB",
+        "AUT",
+        "COG",
+        "CZE",
+        "DDR",
+        "EGY",
+        "EST",
+        "ETH",
+        "GBR",
+        "GRC",
+        "HUN",
+        "IND",
+        "IRN",
+        "IRQ",
+        "ITA",
+        "JPN",
+        "KHM",
+        "LAO",
+        "LKA",
+        "LTU",
+        "LVA",
+        "MOZ",
+        "ROU",
+        "SRB",
+        "SYR",
+        "USA",
+        "VNM"
+      ]
+    },
+    "ESP": {
+      "total_alliances": 13,
+      "active_alliances": 2,
+      "defense_pacts": 5,
+      "ententes": 4,
+      "non_aggression": 2,
+      "neutrality": 2,
+      "allies": [
+        "BEL",
+        "CAN",
+        "CZE",
+        "DEU",
+        "DNK",
+        "FRA",
+        "GBR",
+        "GRC",
+        "HUN",
+        "ISL",
+        "ITA",
+        "LUX",
+        "NLD",
+        "NOR",
+        "POL",
+        "PRT",
+        "TUR",
+        "USA"
+      ],
+      "historical_allies": [
+        "AUT",
+        "JPN"
+      ]
+    },
+    "NLD": {
+      "total_alliances": 3,
+      "active_alliances": 2,
+      "defense_pacts": 3,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "BEL",
+        "CAN",
+        "CZE",
+        "DEU",
+        "DNK",
+        "ESP",
+        "FRA",
+        "GBR",
+        "GRC",
+        "HUN",
+        "ISL",
+        "ITA",
+        "LUX",
+        "NOR",
+        "POL",
+        "PRT",
+        "TUR",
+        "USA"
+      ],
+      "historical_allies": []
+    },
+    "FRA": {
+      "total_alliances": 57,
+      "active_alliances": 5,
+      "defense_pacts": 28,
+      "ententes": 18,
+      "non_aggression": 4,
+      "neutrality": 7,
+      "allies": [
+        "BEL",
+        "CAN",
+        "CZE",
+        "DEU",
+        "DNK",
+        "ESP",
+        "GAB",
+        "GBR",
+        "GEO",
+        "GRC",
+        "HUN",
+        "ISL",
+        "ITA",
+        "LUX",
+        "NLD",
+        "NOR",
+        "POL",
+        "PRT",
+        "RUS",
+        "TUR",
+        "USA"
+      ],
+      "historical_allies": [
+        "AUS",
+        "AUT",
+        "BGD",
+        "BGR",
+        "CAF",
+        "CHN",
+        "COG",
+        "EGY",
+        "IND",
+        "ISR",
+        "JPN",
+        "KHM",
+        "LAO",
+        "LBY",
+        "LKA",
+        "MAR",
+        "NZL",
+        "PHL",
+        "ROU",
+        "SRB",
+        "SWE",
+        "TCD",
+        "VNM"
+      ]
+    },
+    "ITA": {
+      "total_alliances": 37,
+      "active_alliances": 2,
+      "defense_pacts": 17,
+      "ententes": 8,
+      "non_aggression": 6,
+      "neutrality": 6,
+      "allies": [
+        "BEL",
+        "CAN",
+        "CZE",
+        "DEU",
+        "DNK",
+        "ESP",
+        "FRA",
+        "GBR",
+        "GRC",
+        "HUN",
+        "ISL",
+        "LUX",
+        "NLD",
+        "NOR",
+        "POL",
+        "PRT",
+        "TUR",
+        "USA"
+      ],
+      "historical_allies": [
+        "ALB",
+        "AUT",
+        "BGR",
+        "ETH",
+        "JPN",
+        "MLT",
+        "ROU",
+        "RUS",
+        "SAN",
+        "SRB"
+      ]
+    },
+    "BEL": {
+      "total_alliances": 5,
+      "active_alliances": 2,
+      "defense_pacts": 5,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "CAN",
+        "CZE",
+        "DEU",
+        "DNK",
+        "ESP",
+        "FRA",
+        "GBR",
+        "GRC",
+        "HUN",
+        "ISL",
+        "ITA",
+        "LUX",
+        "NLD",
+        "NOR",
+        "POL",
+        "PRT",
+        "TUR",
+        "USA"
+      ],
+      "historical_allies": []
+    },
+    "TUR": {
+      "total_alliances": 37,
+      "active_alliances": 8,
+      "defense_pacts": 16,
+      "ententes": 1,
+      "non_aggression": 14,
+      "neutrality": 6,
+      "allies": [
+        "ALB",
+        "AZE",
+        "BEL",
+        "BGR",
+        "CAN",
+        "CZE",
+        "DEU",
+        "DNK",
+        "ESP",
+        "FRA",
+        "GBR",
+        "GRC",
+        "HRV",
+        "HUN",
+        "ISL",
+        "ITA",
+        "LUX",
+        "NLD",
+        "NOR",
+        "POL",
+        "PRT",
+        "ROU",
+        "RUS",
+        "USA"
+      ],
+      "historical_allies": [
+        "AFG",
+        "AUT",
+        "BGD",
+        "CYP",
+        "EGY",
+        "IRN",
+        "IRQ",
+        "SRB"
+      ]
+    },
+    "ARG": {
+      "total_alliances": 8,
+      "active_alliances": 3,
+      "defense_pacts": 4,
+      "ententes": 1,
+      "non_aggression": 2,
+      "neutrality": 1,
+      "allies": [
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": [
+        "CUB"
+      ]
+    },
+    "PRY": {
+      "total_alliances": 5,
+      "active_alliances": 2,
+      "defense_pacts": 2,
+      "ententes": 1,
+      "non_aggression": 1,
+      "neutrality": 1,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": [
+        "CUB"
+      ]
+    },
+    "BRA": {
+      "total_alliances": 5,
+      "active_alliances": 1,
+      "defense_pacts": 4,
+      "ententes": 1,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": [
+        "CUB"
+      ]
+    },
+    "ECU": {
+      "total_alliances": 7,
+      "active_alliances": 2,
+      "defense_pacts": 5,
+      "ententes": 1,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": [
+        "CUB"
+      ]
+    },
+    "PER": {
+      "total_alliances": 7,
+      "active_alliances": 1,
+      "defense_pacts": 6,
+      "ententes": 1,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": [
+        "CUB"
+      ]
+    },
+    "BOL": {
+      "total_alliances": 8,
+      "active_alliances": 3,
+      "defense_pacts": 5,
+      "ententes": 1,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": [
+        "CUB"
+      ]
+    },
+    "COL": {
+      "total_alliances": 5,
+      "active_alliances": 2,
+      "defense_pacts": 3,
+      "ententes": 1,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": [
+        "CUB"
+      ]
+    },
+    "URY": {
+      "total_alliances": 4,
+      "active_alliances": 1,
+      "defense_pacts": 3,
+      "ententes": 1,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": [
+        "CUB"
+      ]
+    },
+    "CHL": {
+      "total_alliances": 6,
+      "active_alliances": 3,
+      "defense_pacts": 3,
+      "ententes": 1,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": [
+        "CUB"
+      ]
+    },
+    "SRB": {
+      "total_alliances": 24,
+      "active_alliances": 1,
+      "defense_pacts": 13,
+      "ententes": 2,
+      "non_aggression": 7,
+      "neutrality": 2,
+      "allies": [
+        "BIH",
+        "HRV"
+      ],
+      "historical_allies": [
+        "ALB",
+        "AUT",
+        "BGR",
+        "CZE",
+        "EGY",
+        "FRA",
+        "GBR",
+        "GRC",
+        "HUN",
+        "ITA",
+        "POL",
+        "ROU",
+        "RUS",
+        "TUR"
+      ]
+    },
+    "ROU": {
+      "total_alliances": 26,
+      "active_alliances": 4,
+      "defense_pacts": 16,
+      "ententes": 1,
+      "non_aggression": 5,
+      "neutrality": 4,
+      "allies": [
+        "BGR",
+        "GRC",
+        "SVK",
+        "TUR"
+      ],
+      "historical_allies": [
+        "ALB",
+        "AUT",
+        "CZE",
+        "DDR",
+        "DEU",
+        "EGY",
+        "FRA",
+        "GBR",
+        "HUN",
+        "ITA",
+        "JPN",
+        "POL",
+        "RUS",
+        "SRB"
+      ]
+    },
+    "JPN": {
+      "total_alliances": 12,
+      "active_alliances": 1,
+      "defense_pacts": 6,
+      "ententes": 3,
+      "non_aggression": 0,
+      "neutrality": 3,
+      "allies": [
+        "USA"
+      ],
+      "historical_allies": [
+        "BGR",
+        "DEU",
+        "ESP",
+        "FRA",
+        "GBR",
+        "HUN",
+        "ITA",
+        "KHM",
+        "KOR",
+        "ROU",
+        "RUS"
+      ]
+    },
+    "KOR": {
+      "total_alliances": 3,
+      "active_alliances": 2,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "PRK",
+        "USA"
+      ],
+      "historical_allies": [
+        "JPN"
+      ]
+    },
+    "CHN": {
+      "total_alliances": 11,
+      "active_alliances": 3,
+      "defense_pacts": 4,
+      "ententes": 0,
+      "non_aggression": 6,
+      "neutrality": 1,
+      "allies": [
+        "AFG",
+        "BGD",
+        "IRN",
+        "KAZ",
+        "KGZ",
+        "PRK",
+        "RUS",
+        "TJK",
+        "TKM",
+        "UZB"
+      ],
+      "historical_allies": [
+        "CAN",
+        "FRA",
+        "GBR",
+        "IND",
+        "KHM",
+        "LAO",
+        "LKA",
+        "POL",
+        "USA",
+        "VNM"
+      ]
+    },
+    "BGR": {
+      "total_alliances": 26,
+      "active_alliances": 6,
+      "defense_pacts": 17,
+      "ententes": 0,
+      "non_aggression": 7,
+      "neutrality": 2,
+      "allies": [
+        "ALB",
+        "BLR",
+        "GRC",
+        "ROU",
+        "RUS",
+        "TUR"
+      ],
+      "historical_allies": [
+        "AUT",
+        "CZE",
+        "DDR",
+        "DEU",
+        "EGY",
+        "FRA",
+        "GBR",
+        "HUN",
+        "ITA",
+        "JPN",
+        "LBY",
+        "POL",
+        "SRB"
+      ]
+    },
+    "CRI": {
+      "total_alliances": 6,
+      "active_alliances": 1,
+      "defense_pacts": 3,
+      "ententes": 1,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": [
+        "CUB"
+      ]
+    },
+    "GTM": {
+      "total_alliances": 6,
+      "active_alliances": 1,
+      "defense_pacts": 3,
+      "ententes": 1,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": [
+        "CUB"
+      ]
+    },
+    "HND": {
+      "total_alliances": 6,
+      "active_alliances": 1,
+      "defense_pacts": 3,
+      "ententes": 1,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": [
+        "CUB"
+      ]
+    },
+    "NIC": {
+      "total_alliances": 6,
+      "active_alliances": 1,
+      "defense_pacts": 3,
+      "ententes": 1,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": [
+        "CUB"
+      ]
+    },
+    "SLV": {
+      "total_alliances": 5,
+      "active_alliances": 1,
+      "defense_pacts": 2,
+      "ententes": 1,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": [
+        "CUB"
+      ]
+    },
+    "USA": {
+      "total_alliances": 21,
+      "active_alliances": 10,
+      "defense_pacts": 11,
+      "ententes": 8,
+      "non_aggression": 1,
+      "neutrality": 1,
+      "allies": [
+        "ARG",
+        "ATG",
+        "AUS",
+        "BEL",
+        "BGD",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "CZE",
+        "DEU",
+        "DMA",
+        "DNK",
+        "DOM",
+        "ECU",
+        "ESP",
+        "FRA",
+        "GBR",
+        "GRC",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "HUN",
+        "ISL",
+        "ITA",
+        "JAM",
+        "JPN",
+        "KNA",
+        "KOR",
+        "LBR",
+        "LCA",
+        "LUX",
+        "MEX",
+        "NIC",
+        "NLD",
+        "NOR",
+        "PAN",
+        "PER",
+        "PHL",
+        "POL",
+        "PRT",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "TUR",
+        "URY",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": [
+        "CHN",
+        "CUB",
+        "IND",
+        "IRN",
+        "IRQ",
+        "ISR",
+        "KHM",
+        "LAO",
+        "LKA",
+        "NZL",
+        "RUS",
+        "TWN",
+        "VNM"
+      ]
+    },
+    "GRC": {
+      "total_alliances": 16,
+      "active_alliances": 5,
+      "defense_pacts": 7,
+      "ententes": 0,
+      "non_aggression": 4,
+      "neutrality": 5,
+      "allies": [
+        "BEL",
+        "BGR",
+        "CAN",
+        "CZE",
+        "DEU",
+        "DNK",
+        "ESP",
+        "FRA",
+        "GBR",
+        "HUN",
+        "ISL",
+        "ITA",
+        "LUX",
+        "NLD",
+        "NOR",
+        "POL",
+        "PRT",
+        "ROU",
+        "TUR",
+        "USA"
+      ],
+      "historical_allies": [
+        "CYP",
+        "EGY",
+        "RUS",
+        "SRB"
+      ]
+    },
+    "CZE": {
+      "total_alliances": 17,
+      "active_alliances": 2,
+      "defense_pacts": 13,
+      "ententes": 2,
+      "non_aggression": 1,
+      "neutrality": 1,
+      "allies": [
+        "BEL",
+        "CAN",
+        "DEU",
+        "DNK",
+        "ESP",
+        "FRA",
+        "GBR",
+        "GRC",
+        "HUN",
+        "ISL",
+        "ITA",
+        "LUX",
+        "NLD",
+        "NOR",
+        "POL",
+        "PRT",
+        "SVK",
+        "TUR",
+        "USA"
+      ],
+      "historical_allies": [
+        "ALB",
+        "AUT",
+        "BGR",
+        "DDR",
+        "LBY",
+        "ROU",
+        "RUS",
+        "SRB"
+      ]
+    },
+    "POL": {
+      "total_alliances": 26,
+      "active_alliances": 10,
+      "defense_pacts": 13,
+      "ententes": 1,
+      "non_aggression": 8,
+      "neutrality": 4,
+      "allies": [
+        "BEL",
+        "BLR",
+        "CAN",
+        "CZE",
+        "DEU",
+        "DNK",
+        "ESP",
+        "EST",
+        "FRA",
+        "GBR",
+        "GEO",
+        "GRC",
+        "HUN",
+        "ISL",
+        "ITA",
+        "LTU",
+        "LUX",
+        "LVA",
+        "MDA",
+        "NLD",
+        "NOR",
+        "PRT",
+        "RUS",
+        "TUR",
+        "UKR",
+        "USA"
+      ],
+      "historical_allies": [
+        "ALB",
+        "BGR",
+        "CHN",
+        "DDR",
+        "IND",
+        "KHM",
+        "LAO",
+        "LKA",
+        "ROU",
+        "SRB",
+        "VNM"
+      ]
+    },
+    "IRN": {
+      "total_alliances": 11,
+      "active_alliances": 3,
+      "defense_pacts": 2,
+      "ententes": 2,
+      "non_aggression": 6,
+      "neutrality": 1,
+      "allies": [
+        "AFG",
+        "AZE",
+        "BGD",
+        "CHN",
+        "SYR",
+        "TJK",
+        "TKM",
+        "UZB"
+      ],
+      "historical_allies": [
+        "GBR",
+        "IRQ",
+        "RUS",
+        "TUR",
+        "USA"
+      ]
+    },
+    "AFG": {
+      "total_alliances": 8,
+      "active_alliances": 1,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 6,
+      "neutrality": 1,
+      "allies": [
+        "BGD",
+        "CHN",
+        "IRN",
+        "TJK",
+        "TKM",
+        "UZB"
+      ],
+      "historical_allies": [
+        "IRQ",
+        "RUS",
+        "TUR"
+      ]
+    },
+    "EST": {
+      "total_alliances": 6,
+      "active_alliances": 1,
+      "defense_pacts": 2,
+      "ententes": 1,
+      "non_aggression": 2,
+      "neutrality": 1,
+      "allies": [
+        "POL"
+      ],
+      "historical_allies": [
+        "DEU",
+        "LTU",
+        "LVA",
+        "RUS"
+      ]
+    },
+    "LVA": {
+      "total_alliances": 8,
+      "active_alliances": 3,
+      "defense_pacts": 2,
+      "ententes": 1,
+      "non_aggression": 4,
+      "neutrality": 1,
+      "allies": [
+        "POL",
+        "UKR",
+        "UZB"
+      ],
+      "historical_allies": [
+        "DEU",
+        "EST",
+        "LTU",
+        "RUS"
+      ]
+    },
+    "LTU": {
+      "total_alliances": 7,
+      "active_alliances": 4,
+      "defense_pacts": 1,
+      "ententes": 1,
+      "non_aggression": 4,
+      "neutrality": 1,
+      "allies": [
+        "BLR",
+        "MDA",
+        "POL",
+        "UKR"
+      ],
+      "historical_allies": [
+        "EST",
+        "LVA",
+        "RUS"
+      ]
+    },
+    "ALB": {
+      "total_alliances": 7,
+      "active_alliances": 2,
+      "defense_pacts": 4,
+      "ententes": 1,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "BGR",
+        "TUR"
+      ],
+      "historical_allies": [
+        "CZE",
+        "DDR",
+        "HUN",
+        "ITA",
+        "POL",
+        "ROU",
+        "RUS",
+        "SRB"
+      ]
+    },
+    "ETH": {
+      "total_alliances": 6,
+      "active_alliances": 2,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 4,
+      "neutrality": 0,
+      "allies": [
+        "ERI",
+        "KEN"
+      ],
+      "historical_allies": [
+        "DDR",
+        "ITA",
+        "LBY",
+        "RUS"
+      ]
+    },
+    "HUN": {
+      "total_alliances": 15,
+      "active_alliances": 2,
+      "defense_pacts": 10,
+      "ententes": 1,
+      "non_aggression": 1,
+      "neutrality": 3,
+      "allies": [
+        "BEL",
+        "CAN",
+        "CZE",
+        "DEU",
+        "DNK",
+        "ESP",
+        "FRA",
+        "GBR",
+        "GRC",
+        "ISL",
+        "ITA",
+        "LUX",
+        "NLD",
+        "NOR",
+        "POL",
+        "PRT",
+        "TUR",
+        "UKR",
+        "USA"
+      ],
+      "historical_allies": [
+        "AGO",
+        "ALB",
+        "AUT",
+        "BGR",
+        "DDR",
+        "JPN",
+        "ROU",
+        "RUS",
+        "SRB"
+      ]
+    },
+    "IRQ": {
+      "total_alliances": 11,
+      "active_alliances": 2,
+      "defense_pacts": 4,
+      "ententes": 2,
+      "non_aggression": 5,
+      "neutrality": 0,
+      "allies": [
+        "ARE",
+        "BHR",
+        "DJI",
+        "DZA",
+        "EGY",
+        "JOR",
+        "KWT",
+        "LBN",
+        "LBY",
+        "MAR",
+        "MRT",
+        "OMN",
+        "QAT",
+        "SAU",
+        "SDN",
+        "SOM",
+        "SYR",
+        "TUN",
+        "YEM"
+      ],
+      "historical_allies": [
+        "AFG",
+        "BGD",
+        "GBR",
+        "IRN",
+        "RUS",
+        "TUR",
+        "USA"
+      ]
+    },
+    "FIN": {
+      "total_alliances": 4,
+      "active_alliances": 1,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 3,
+      "neutrality": 0,
+      "allies": [
+        "RUS"
+      ],
+      "historical_allies": []
+    },
+    "SAU": {
+      "total_alliances": 9,
+      "active_alliances": 3,
+      "defense_pacts": 4,
+      "ententes": 2,
+      "non_aggression": 3,
+      "neutrality": 0,
+      "allies": [
+        "ARE",
+        "BHR",
+        "DJI",
+        "DZA",
+        "EGY",
+        "IRQ",
+        "JOR",
+        "KWT",
+        "LBN",
+        "LBY",
+        "MAR",
+        "MRT",
+        "OMN",
+        "QAT",
+        "SDN",
+        "SOM",
+        "SYR",
+        "TUN",
+        "YEM"
+      ],
+      "historical_allies": []
+    },
+    "YEM": {
+      "total_alliances": 6,
+      "active_alliances": 2,
+      "defense_pacts": 3,
+      "ententes": 1,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "ARE",
+        "BHR",
+        "DJI",
+        "DZA",
+        "EGY",
+        "IRQ",
+        "JOR",
+        "KWT",
+        "LBN",
+        "LBY",
+        "MAR",
+        "MRT",
+        "OMN",
+        "QAT",
+        "SAU",
+        "SDN",
+        "SOM",
+        "SYR",
+        "TUN"
+      ],
+      "historical_allies": []
+    },
+    "MNG": {
+      "total_alliances": 2,
+      "active_alliances": 1,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "RUS"
+      ],
+      "historical_allies": []
+    },
+    "EGY": {
+      "total_alliances": 14,
+      "active_alliances": 3,
+      "defense_pacts": 10,
+      "ententes": 2,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "ARE",
+        "BHR",
+        "DJI",
+        "DZA",
+        "IRQ",
+        "ISR",
+        "JOR",
+        "KWT",
+        "LBN",
+        "LBY",
+        "MAR",
+        "MRT",
+        "OMN",
+        "QAT",
+        "SAU",
+        "SDN",
+        "SOM",
+        "SYR",
+        "TUN",
+        "YEM"
+      ],
+      "historical_allies": [
+        "BGR",
+        "FRA",
+        "GBR",
+        "GRC",
+        "ROU",
+        "RUS",
+        "SRB",
+        "TUR"
+      ]
+    },
+    "CUB": {
+      "total_alliances": 2,
+      "active_alliances": 0,
+      "defense_pacts": 1,
+      "ententes": 1,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [],
+      "historical_allies": [
+        "ARG",
+        "BOL",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI",
+        "DOM",
+        "ECU",
+        "GTM",
+        "HND",
+        "HTI",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "URY",
+        "USA",
+        "VEN"
+      ]
+    },
+    "DOM": {
+      "total_alliances": 3,
+      "active_alliances": 1,
+      "defense_pacts": 2,
+      "ententes": 1,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": [
+        "CUB"
+      ]
+    },
+    "HTI": {
+      "total_alliances": 3,
+      "active_alliances": 1,
+      "defense_pacts": 2,
+      "ententes": 1,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": [
+        "CUB"
+      ]
+    },
+    "MEX": {
+      "total_alliances": 3,
+      "active_alliances": 1,
+      "defense_pacts": 2,
+      "ententes": 1,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": [
+        "CUB"
+      ]
+    },
+    "PAN": {
+      "total_alliances": 4,
+      "active_alliances": 1,
+      "defense_pacts": 3,
+      "ententes": 1,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": [
+        "CUB"
+      ]
+    },
+    "VEN": {
+      "total_alliances": 4,
+      "active_alliances": 2,
+      "defense_pacts": 2,
+      "ententes": 1,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT"
+      ],
+      "historical_allies": [
+        "CUB"
+      ]
+    },
+    "DNK": {
+      "total_alliances": 3,
+      "active_alliances": 2,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "BEL",
+        "CAN",
+        "CZE",
+        "DEU",
+        "ESP",
+        "FRA",
+        "GBR",
+        "GRC",
+        "HUN",
+        "ISL",
+        "ITA",
+        "LUX",
+        "NLD",
+        "NOR",
+        "POL",
+        "PRT",
+        "TUR",
+        "USA"
+      ],
+      "historical_allies": []
+    },
+    "KHM": {
+      "total_alliances": 5,
+      "active_alliances": 0,
+      "defense_pacts": 1,
+      "ententes": 1,
+      "non_aggression": 1,
+      "neutrality": 2,
+      "allies": [],
+      "historical_allies": [
+        "AUS",
+        "BGD",
+        "CAN",
+        "CHN",
+        "FRA",
+        "GBR",
+        "IND",
+        "JPN",
+        "LAO",
+        "LKA",
+        "NZL",
+        "PHL",
+        "POL",
+        "RUS",
+        "USA",
+        "VNM"
+      ]
+    },
+    "AUS": {
+      "total_alliances": 4,
+      "active_alliances": 1,
+      "defense_pacts": 2,
+      "ententes": 2,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "USA"
+      ],
+      "historical_allies": [
+        "BGD",
+        "FRA",
+        "GBR",
+        "IDN",
+        "KHM",
+        "NZL",
+        "PHL"
+      ]
+    },
+    "NZL": {
+      "total_alliances": 2,
+      "active_alliances": 0,
+      "defense_pacts": 1,
+      "ententes": 1,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [],
+      "historical_allies": [
+        "AUS",
+        "BGD",
+        "FRA",
+        "GBR",
+        "KHM",
+        "PHL",
+        "USA"
+      ]
+    },
+    "ARE": {
+      "total_alliances": 3,
+      "active_alliances": 3,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "BHR",
+        "DJI",
+        "DZA",
+        "EGY",
+        "IRQ",
+        "JOR",
+        "KWT",
+        "LBN",
+        "LBY",
+        "MAR",
+        "MRT",
+        "OMN",
+        "QAT",
+        "SAU",
+        "SDN",
+        "SOM",
+        "SYR",
+        "TUN",
+        "YEM"
+      ],
+      "historical_allies": []
+    },
+    "BHR": {
+      "total_alliances": 3,
+      "active_alliances": 3,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "ARE",
+        "DJI",
+        "DZA",
+        "EGY",
+        "IRQ",
+        "JOR",
+        "KWT",
+        "LBN",
+        "LBY",
+        "MAR",
+        "MRT",
+        "OMN",
+        "QAT",
+        "SAU",
+        "SDN",
+        "SOM",
+        "SYR",
+        "TUN",
+        "YEM"
+      ],
+      "historical_allies": []
+    },
+    "DJI": {
+      "total_alliances": 1,
+      "active_alliances": 1,
+      "defense_pacts": 0,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "ARE",
+        "BHR",
+        "DZA",
+        "EGY",
+        "IRQ",
+        "JOR",
+        "KWT",
+        "LBN",
+        "LBY",
+        "MAR",
+        "MRT",
+        "OMN",
+        "QAT",
+        "SAU",
+        "SDN",
+        "SOM",
+        "SYR",
+        "TUN",
+        "YEM"
+      ],
+      "historical_allies": []
+    },
+    "DZA": {
+      "total_alliances": 7,
+      "active_alliances": 3,
+      "defense_pacts": 3,
+      "ententes": 0,
+      "non_aggression": 4,
+      "neutrality": 0,
+      "allies": [
+        "ARE",
+        "BHR",
+        "DJI",
+        "EGY",
+        "IRQ",
+        "JOR",
+        "KWT",
+        "LBN",
+        "LBY",
+        "MAR",
+        "MRT",
+        "OMN",
+        "QAT",
+        "SAU",
+        "SDN",
+        "SOM",
+        "SYR",
+        "TUN",
+        "YEM"
+      ],
+      "historical_allies": []
+    },
+    "JOR": {
+      "total_alliances": 8,
+      "active_alliances": 3,
+      "defense_pacts": 4,
+      "ententes": 2,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "ARE",
+        "BHR",
+        "DJI",
+        "DZA",
+        "EGY",
+        "IRQ",
+        "ISR",
+        "KWT",
+        "LBN",
+        "LBY",
+        "MAR",
+        "MRT",
+        "OMN",
+        "QAT",
+        "SAU",
+        "SDN",
+        "SOM",
+        "SYR",
+        "TUN",
+        "YEM"
+      ],
+      "historical_allies": [
+        "GBR"
+      ]
+    },
+    "KWT": {
+      "total_alliances": 3,
+      "active_alliances": 3,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "ARE",
+        "BHR",
+        "DJI",
+        "DZA",
+        "EGY",
+        "IRQ",
+        "JOR",
+        "LBN",
+        "LBY",
+        "MAR",
+        "MRT",
+        "OMN",
+        "QAT",
+        "SAU",
+        "SDN",
+        "SOM",
+        "SYR",
+        "TUN",
+        "YEM"
+      ],
+      "historical_allies": []
+    },
+    "LBN": {
+      "total_alliances": 4,
+      "active_alliances": 3,
+      "defense_pacts": 1,
+      "ententes": 1,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "ARE",
+        "BHR",
+        "DJI",
+        "DZA",
+        "EGY",
+        "IRQ",
+        "JOR",
+        "KWT",
+        "LBY",
+        "MAR",
+        "MRT",
+        "OMN",
+        "QAT",
+        "SAU",
+        "SDN",
+        "SOM",
+        "SYR",
+        "TUN",
+        "YEM"
+      ],
+      "historical_allies": [
+        "ISR"
+      ]
+    },
+    "LBY": {
+      "total_alliances": 15,
+      "active_alliances": 3,
+      "defense_pacts": 8,
+      "ententes": 2,
+      "non_aggression": 4,
+      "neutrality": 1,
+      "allies": [
+        "ARE",
+        "BHR",
+        "DJI",
+        "DZA",
+        "EGY",
+        "IRQ",
+        "JOR",
+        "KWT",
+        "LBN",
+        "MAR",
+        "MRT",
+        "OMN",
+        "QAT",
+        "SAU",
+        "SDN",
+        "SOM",
+        "SYR",
+        "TUN",
+        "YEM"
+      ],
+      "historical_allies": [
+        "BGR",
+        "CZE",
+        "ETH",
+        "FRA",
+        "GBR",
+        "MLT",
+        "NER",
+        "TCD"
+      ]
+    },
+    "MAR": {
+      "total_alliances": 7,
+      "active_alliances": 3,
+      "defense_pacts": 2,
+      "ententes": 2,
+      "non_aggression": 3,
+      "neutrality": 0,
+      "allies": [
+        "ARE",
+        "BHR",
+        "DJI",
+        "DZA",
+        "EGY",
+        "IRQ",
+        "JOR",
+        "KWT",
+        "LBN",
+        "LBY",
+        "MRT",
+        "OMN",
+        "QAT",
+        "SAU",
+        "SDN",
+        "SOM",
+        "SYR",
+        "TUN",
+        "YEM"
+      ],
+      "historical_allies": [
+        "FRA"
+      ]
+    },
+    "MRT": {
+      "total_alliances": 6,
+      "active_alliances": 2,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 4,
+      "neutrality": 0,
+      "allies": [
+        "ARE",
+        "BHR",
+        "DJI",
+        "DZA",
+        "EGY",
+        "IRQ",
+        "JOR",
+        "KWT",
+        "LBN",
+        "LBY",
+        "MAR",
+        "OMN",
+        "QAT",
+        "SAU",
+        "SDN",
+        "SOM",
+        "SYR",
+        "TUN",
+        "YEM"
+      ],
+      "historical_allies": [
+        "BEN",
+        "BFA",
+        "CAF",
+        "CIV",
+        "CMR",
+        "COG",
+        "CPV",
+        "GAB",
+        "GHA",
+        "GMB",
+        "GNB",
+        "LBR",
+        "MDG",
+        "MLI",
+        "NER",
+        "NGA",
+        "RWA",
+        "SEN",
+        "SLE",
+        "TCD",
+        "TGO"
+      ]
+    },
+    "OMN": {
+      "total_alliances": 2,
+      "active_alliances": 2,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "ARE",
+        "BHR",
+        "DJI",
+        "DZA",
+        "EGY",
+        "IRQ",
+        "JOR",
+        "KWT",
+        "LBN",
+        "LBY",
+        "MAR",
+        "MRT",
+        "QAT",
+        "SAU",
+        "SDN",
+        "SOM",
+        "SYR",
+        "TUN",
+        "YEM"
+      ],
+      "historical_allies": []
+    },
+    "QAT": {
+      "total_alliances": 3,
+      "active_alliances": 3,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "ARE",
+        "BHR",
+        "DJI",
+        "DZA",
+        "EGY",
+        "IRQ",
+        "JOR",
+        "KWT",
+        "LBN",
+        "LBY",
+        "MAR",
+        "MRT",
+        "OMN",
+        "SAU",
+        "SDN",
+        "SOM",
+        "SYR",
+        "TUN",
+        "YEM"
+      ],
+      "historical_allies": []
+    },
+    "SDN": {
+      "total_alliances": 7,
+      "active_alliances": 4,
+      "defense_pacts": 4,
+      "ententes": 0,
+      "non_aggression": 3,
+      "neutrality": 0,
+      "allies": [
+        "AGO",
+        "ARE",
+        "BDI",
+        "BHR",
+        "CAF",
+        "COD",
+        "COG",
+        "DJI",
+        "DZA",
+        "EGY",
+        "IRQ",
+        "JOR",
+        "KEN",
+        "KWT",
+        "LBN",
+        "LBY",
+        "MAR",
+        "MRT",
+        "OMN",
+        "QAT",
+        "RWA",
+        "SAU",
+        "SOM",
+        "SYR",
+        "TCD",
+        "TUN",
+        "TZA",
+        "UGA",
+        "YEM",
+        "ZMB"
+      ],
+      "historical_allies": [
+        "SSD"
+      ]
+    },
+    "SOM": {
+      "total_alliances": 2,
+      "active_alliances": 2,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "ARE",
+        "BHR",
+        "DJI",
+        "DZA",
+        "EGY",
+        "IRQ",
+        "JOR",
+        "KWT",
+        "LBN",
+        "LBY",
+        "MAR",
+        "MRT",
+        "OMN",
+        "QAT",
+        "SAU",
+        "SDN",
+        "SYR",
+        "TUN",
+        "YEM"
+      ],
+      "historical_allies": []
+    },
+    "SYR": {
+      "total_alliances": 8,
+      "active_alliances": 4,
+      "defense_pacts": 4,
+      "ententes": 2,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "ARE",
+        "BHR",
+        "DJI",
+        "DZA",
+        "EGY",
+        "IRN",
+        "IRQ",
+        "JOR",
+        "KWT",
+        "LBN",
+        "LBY",
+        "MAR",
+        "MRT",
+        "OMN",
+        "QAT",
+        "SAU",
+        "SDN",
+        "SOM",
+        "TUN",
+        "YEM"
+      ],
+      "historical_allies": [
+        "RUS"
+      ]
+    },
+    "TUN": {
+      "total_alliances": 6,
+      "active_alliances": 3,
+      "defense_pacts": 3,
+      "ententes": 0,
+      "non_aggression": 3,
+      "neutrality": 0,
+      "allies": [
+        "ARE",
+        "BHR",
+        "DJI",
+        "DZA",
+        "EGY",
+        "IRQ",
+        "JOR",
+        "KWT",
+        "LBN",
+        "LBY",
+        "MAR",
+        "MRT",
+        "OMN",
+        "QAT",
+        "SAU",
+        "SDN",
+        "SOM",
+        "SYR",
+        "YEM"
+      ],
+      "historical_allies": []
+    },
+    "ATG": {
+      "total_alliances": 3,
+      "active_alliances": 3,
+      "defense_pacts": 3,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": []
+    },
+    "BHS": {
+      "total_alliances": 1,
+      "active_alliances": 1,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": []
+    },
+    "BLZ": {
+      "total_alliances": 1,
+      "active_alliances": 1,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": []
+    },
+    "BRB": {
+      "total_alliances": 2,
+      "active_alliances": 2,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": []
+    },
+    "CAN": {
+      "total_alliances": 6,
+      "active_alliances": 4,
+      "defense_pacts": 3,
+      "ententes": 1,
+      "non_aggression": 1,
+      "neutrality": 1,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BEL",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CHL",
+        "COL",
+        "CRI",
+        "CZE",
+        "DEU",
+        "DMA",
+        "DNK",
+        "DOM",
+        "ECU",
+        "ESP",
+        "FRA",
+        "GBR",
+        "GRC",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "HUN",
+        "ISL",
+        "ITA",
+        "JAM",
+        "KNA",
+        "LCA",
+        "LUX",
+        "MEX",
+        "NIC",
+        "NLD",
+        "NOR",
+        "PAN",
+        "PER",
+        "POL",
+        "PRT",
+        "PRY",
+        "RUS",
+        "SLV",
+        "SUR",
+        "TTO",
+        "TUR",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": [
+        "CHN",
+        "IND",
+        "KHM",
+        "LAO",
+        "LKA",
+        "VNM"
+      ]
+    },
+    "DMA": {
+      "total_alliances": 3,
+      "active_alliances": 3,
+      "defense_pacts": 3,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": []
+    },
+    "GRD": {
+      "total_alliances": 2,
+      "active_alliances": 2,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": []
+    },
+    "GUY": {
+      "total_alliances": 1,
+      "active_alliances": 1,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": []
+    },
+    "JAM": {
+      "total_alliances": 1,
+      "active_alliances": 1,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": []
+    },
+    "KNA": {
+      "total_alliances": 3,
+      "active_alliances": 3,
+      "defense_pacts": 3,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": []
+    },
+    "LCA": {
+      "total_alliances": 3,
+      "active_alliances": 3,
+      "defense_pacts": 3,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": []
+    },
+    "SUR": {
+      "total_alliances": 1,
+      "active_alliances": 1,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "TTO",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": []
+    },
+    "TTO": {
+      "total_alliances": 1,
+      "active_alliances": 1,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "URY",
+        "USA",
+        "VCT",
+        "VEN"
+      ],
+      "historical_allies": []
+    },
+    "VCT": {
+      "total_alliances": 3,
+      "active_alliances": 3,
+      "defense_pacts": 3,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "ARG",
+        "ATG",
+        "BHS",
+        "BLZ",
+        "BOL",
+        "BRA",
+        "BRB",
+        "CAN",
+        "CHL",
+        "COL",
+        "CRI",
+        "DMA",
+        "DOM",
+        "ECU",
+        "GRD",
+        "GTM",
+        "GUY",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MEX",
+        "NIC",
+        "PAN",
+        "PER",
+        "PRY",
+        "SLV",
+        "SUR",
+        "TTO",
+        "URY",
+        "USA",
+        "VEN"
+      ],
+      "historical_allies": []
+    },
+    "LUX": {
+      "total_alliances": 2,
+      "active_alliances": 2,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "BEL",
+        "CAN",
+        "CZE",
+        "DEU",
+        "DNK",
+        "ESP",
+        "FRA",
+        "GBR",
+        "GRC",
+        "HUN",
+        "ISL",
+        "ITA",
+        "NLD",
+        "NOR",
+        "POL",
+        "PRT",
+        "TUR",
+        "USA"
+      ],
+      "historical_allies": []
+    },
+    "ISL": {
+      "total_alliances": 2,
+      "active_alliances": 2,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "BEL",
+        "CAN",
+        "CZE",
+        "DEU",
+        "DNK",
+        "ESP",
+        "FRA",
+        "GBR",
+        "GRC",
+        "HUN",
+        "ITA",
+        "LUX",
+        "NLD",
+        "NOR",
+        "POL",
+        "PRT",
+        "TUR",
+        "USA"
+      ],
+      "historical_allies": []
+    },
+    "NOR": {
+      "total_alliances": 1,
+      "active_alliances": 1,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "BEL",
+        "CAN",
+        "CZE",
+        "DEU",
+        "DNK",
+        "ESP",
+        "FRA",
+        "GBR",
+        "GRC",
+        "HUN",
+        "ISL",
+        "ITA",
+        "LUX",
+        "NLD",
+        "POL",
+        "PRT",
+        "TUR",
+        "USA"
+      ],
+      "historical_allies": []
+    },
+    "PHL": {
+      "total_alliances": 2,
+      "active_alliances": 1,
+      "defense_pacts": 1,
+      "ententes": 1,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "USA"
+      ],
+      "historical_allies": [
+        "AUS",
+        "BGD",
+        "FRA",
+        "GBR",
+        "KHM",
+        "NZL"
+      ]
+    },
+    "BGD": {
+      "total_alliances": 7,
+      "active_alliances": 3,
+      "defense_pacts": 1,
+      "ententes": 2,
+      "non_aggression": 4,
+      "neutrality": 0,
+      "allies": [
+        "AFG",
+        "CHN",
+        "IND",
+        "IRN",
+        "TJK",
+        "TKM",
+        "USA",
+        "UZB"
+      ],
+      "historical_allies": [
+        "AUS",
+        "FRA",
+        "GBR",
+        "IRQ",
+        "KHM",
+        "NZL",
+        "PHL",
+        "TUR"
+      ]
+    },
+    "TWN": {
+      "total_alliances": 1,
+      "active_alliances": 0,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [],
+      "historical_allies": [
+        "USA"
+      ]
+    },
+    "DDR": {
+      "total_alliances": 10,
+      "active_alliances": 0,
+      "defense_pacts": 7,
+      "ententes": 0,
+      "non_aggression": 2,
+      "neutrality": 1,
+      "allies": [],
+      "historical_allies": [
+        "AGO",
+        "ALB",
+        "BGR",
+        "CZE",
+        "ETH",
+        "HUN",
+        "MOZ",
+        "POL",
+        "ROU",
+        "RUS"
+      ]
+    },
+    "ISR": {
+      "total_alliances": 5,
+      "active_alliances": 2,
+      "defense_pacts": 0,
+      "ententes": 1,
+      "non_aggression": 3,
+      "neutrality": 1,
+      "allies": [
+        "EGY",
+        "JOR"
+      ],
+      "historical_allies": [
+        "FRA",
+        "GBR",
+        "LBN",
+        "USA"
+      ]
+    },
+    "MYS": {
+      "total_alliances": 1,
+      "active_alliances": 0,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [],
+      "historical_allies": [
+        "GBR"
+      ]
+    },
+    "LBR": {
+      "total_alliances": 5,
+      "active_alliances": 3,
+      "defense_pacts": 1,
+      "ententes": 1,
+      "non_aggression": 2,
+      "neutrality": 1,
+      "allies": [
+        "BEN",
+        "BFA",
+        "CIV",
+        "CPV",
+        "GHA",
+        "GMB",
+        "GNB",
+        "MLI",
+        "NER",
+        "NGA",
+        "SEN",
+        "SLE",
+        "TGO",
+        "USA"
+      ],
+      "historical_allies": [
+        "MRT"
+      ]
+    },
+    "LKA": {
+      "total_alliances": 2,
+      "active_alliances": 0,
+      "defense_pacts": 0,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 1,
+      "allies": [],
+      "historical_allies": [
+        "CAN",
+        "CHN",
+        "FRA",
+        "GBR",
+        "IND",
+        "KHM",
+        "LAO",
+        "POL",
+        "RUS",
+        "USA",
+        "VNM"
+      ]
+    },
+    "CAF": {
+      "total_alliances": 6,
+      "active_alliances": 3,
+      "defense_pacts": 6,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "AGO",
+        "BDI",
+        "CMR",
+        "COD",
+        "COG",
+        "GAB",
+        "GIN",
+        "KEN",
+        "RWA",
+        "SDN",
+        "STP",
+        "TCD",
+        "TZA",
+        "UGA",
+        "ZMB"
+      ],
+      "historical_allies": [
+        "BEN",
+        "BFA",
+        "CIV",
+        "FRA",
+        "MDG",
+        "MRT",
+        "NER",
+        "SEN",
+        "TGO"
+      ]
+    },
+    "COG": {
+      "total_alliances": 9,
+      "active_alliances": 4,
+      "defense_pacts": 7,
+      "ententes": 0,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "AGO",
+        "BDI",
+        "CAF",
+        "CMR",
+        "COD",
+        "GAB",
+        "GIN",
+        "KEN",
+        "RWA",
+        "SDN",
+        "STP",
+        "TCD",
+        "TZA",
+        "UGA",
+        "ZMB"
+      ],
+      "historical_allies": [
+        "BEN",
+        "BFA",
+        "CIV",
+        "FRA",
+        "MDG",
+        "MRT",
+        "NAM",
+        "NER",
+        "RUS",
+        "SEN",
+        "TGO",
+        "ZWE"
+      ]
+    },
+    "TCD": {
+      "total_alliances": 6,
+      "active_alliances": 2,
+      "defense_pacts": 4,
+      "ententes": 0,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "AGO",
+        "BDI",
+        "CAF",
+        "CMR",
+        "COD",
+        "COG",
+        "GAB",
+        "GIN",
+        "RWA",
+        "SDN",
+        "STP"
+      ],
+      "historical_allies": [
+        "BEN",
+        "BFA",
+        "CIV",
+        "FRA",
+        "LBY",
+        "MDG",
+        "MRT",
+        "NER",
+        "SEN",
+        "TGO"
+      ]
+    },
+    "CYP": {
+      "total_alliances": 1,
+      "active_alliances": 0,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [],
+      "historical_allies": [
+        "GRC",
+        "TUR"
+      ]
+    },
+    "GAB": {
+      "total_alliances": 3,
+      "active_alliances": 2,
+      "defense_pacts": 3,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "AGO",
+        "BDI",
+        "CAF",
+        "CMR",
+        "COD",
+        "COG",
+        "FRA",
+        "GIN",
+        "RWA",
+        "STP",
+        "TCD"
+      ],
+      "historical_allies": [
+        "BEN",
+        "BFA",
+        "CIV",
+        "MDG",
+        "MRT",
+        "NER",
+        "SEN",
+        "TGO"
+      ]
+    },
+    "LAO": {
+      "total_alliances": 2,
+      "active_alliances": 0,
+      "defense_pacts": 0,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 1,
+      "allies": [],
+      "historical_allies": [
+        "CAN",
+        "CHN",
+        "FRA",
+        "GBR",
+        "IND",
+        "KHM",
+        "LKA",
+        "POL",
+        "RUS",
+        "USA",
+        "VNM"
+      ]
+    },
+    "GHA": {
+      "total_alliances": 6,
+      "active_alliances": 2,
+      "defense_pacts": 3,
+      "ententes": 0,
+      "non_aggression": 2,
+      "neutrality": 1,
+      "allies": [
+        "BEN",
+        "BFA",
+        "CIV",
+        "CPV",
+        "GMB",
+        "GNB",
+        "LBR",
+        "MLI",
+        "NER",
+        "NGA",
+        "SEN",
+        "SLE",
+        "TGO"
+      ],
+      "historical_allies": [
+        "MRT"
+      ]
+    },
+    "MLI": {
+      "total_alliances": 3,
+      "active_alliances": 1,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "BEN",
+        "BFA",
+        "CIV",
+        "CPV",
+        "GHA",
+        "GMB",
+        "GNB",
+        "LBR",
+        "NER",
+        "NGA",
+        "SEN",
+        "SLE",
+        "TGO"
+      ],
+      "historical_allies": [
+        "MRT"
+      ]
+    },
+    "PRK": {
+      "total_alliances": 4,
+      "active_alliances": 3,
+      "defense_pacts": 2,
+      "ententes": 1,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "CHN",
+        "KOR",
+        "RUS"
+      ],
+      "historical_allies": []
+    },
+    "BEN": {
+      "total_alliances": 3,
+      "active_alliances": 1,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "BFA",
+        "CIV",
+        "CPV",
+        "GHA",
+        "GMB",
+        "GNB",
+        "LBR",
+        "MLI",
+        "NER",
+        "NGA",
+        "SEN",
+        "SLE",
+        "TGO"
+      ],
+      "historical_allies": [
+        "CAF",
+        "CMR",
+        "COG",
+        "GAB",
+        "MDG",
+        "MRT",
+        "RWA",
+        "TCD"
+      ]
+    },
+    "BFA": {
+      "total_alliances": 3,
+      "active_alliances": 1,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "BEN",
+        "CIV",
+        "CPV",
+        "GHA",
+        "GMB",
+        "GNB",
+        "LBR",
+        "MLI",
+        "NER",
+        "NGA",
+        "SEN",
+        "SLE",
+        "TGO"
+      ],
+      "historical_allies": [
+        "CAF",
+        "CMR",
+        "COG",
+        "GAB",
+        "MDG",
+        "MRT",
+        "RWA",
+        "TCD"
+      ]
+    },
+    "CIV": {
+      "total_alliances": 3,
+      "active_alliances": 1,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "BEN",
+        "BFA",
+        "CPV",
+        "GHA",
+        "GMB",
+        "GNB",
+        "LBR",
+        "MLI",
+        "NER",
+        "NGA",
+        "SEN",
+        "SLE",
+        "TGO"
+      ],
+      "historical_allies": [
+        "CAF",
+        "CMR",
+        "COG",
+        "GAB",
+        "MDG",
+        "MRT",
+        "RWA",
+        "TCD"
+      ]
+    },
+    "CMR": {
+      "total_alliances": 2,
+      "active_alliances": 1,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "AGO",
+        "BDI",
+        "CAF",
+        "COD",
+        "COG",
+        "GAB",
+        "GIN",
+        "RWA",
+        "STP",
+        "TCD"
+      ],
+      "historical_allies": [
+        "BEN",
+        "BFA",
+        "CIV",
+        "MDG",
+        "MRT",
+        "NER",
+        "SEN",
+        "TGO"
+      ]
+    },
+    "MDG": {
+      "total_alliances": 1,
+      "active_alliances": 0,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [],
+      "historical_allies": [
+        "BEN",
+        "BFA",
+        "CAF",
+        "CIV",
+        "CMR",
+        "COG",
+        "GAB",
+        "MRT",
+        "NER",
+        "RWA",
+        "SEN",
+        "TCD",
+        "TGO"
+      ]
+    },
+    "NER": {
+      "total_alliances": 4,
+      "active_alliances": 1,
+      "defense_pacts": 3,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "BEN",
+        "BFA",
+        "CIV",
+        "CPV",
+        "GHA",
+        "GMB",
+        "GNB",
+        "LBR",
+        "MLI",
+        "NGA",
+        "SEN",
+        "SLE",
+        "TGO"
+      ],
+      "historical_allies": [
+        "CAF",
+        "CMR",
+        "COG",
+        "GAB",
+        "LBY",
+        "MDG",
+        "MRT",
+        "RWA",
+        "TCD"
+      ]
+    },
+    "RWA": {
+      "total_alliances": 4,
+      "active_alliances": 2,
+      "defense_pacts": 4,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "AGO",
+        "BDI",
+        "CAF",
+        "CMR",
+        "COD",
+        "COG",
+        "GAB",
+        "GIN",
+        "KEN",
+        "SDN",
+        "STP",
+        "TCD",
+        "TZA",
+        "UGA",
+        "ZMB"
+      ],
+      "historical_allies": [
+        "BEN",
+        "BFA",
+        "CIV",
+        "MDG",
+        "MRT",
+        "NER",
+        "SEN",
+        "TGO"
+      ]
+    },
+    "SEN": {
+      "total_alliances": 4,
+      "active_alliances": 1,
+      "defense_pacts": 3,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "BEN",
+        "BFA",
+        "CIV",
+        "CPV",
+        "GHA",
+        "GMB",
+        "GNB",
+        "LBR",
+        "MLI",
+        "NER",
+        "NGA",
+        "SLE",
+        "TGO"
+      ],
+      "historical_allies": [
+        "CAF",
+        "CMR",
+        "COG",
+        "GAB",
+        "MDG",
+        "MRT",
+        "RWA",
+        "TCD"
+      ]
+    },
+    "TGO": {
+      "total_alliances": 3,
+      "active_alliances": 1,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "BEN",
+        "BFA",
+        "CIV",
+        "CPV",
+        "GHA",
+        "GMB",
+        "GNB",
+        "LBR",
+        "MLI",
+        "NER",
+        "NGA",
+        "SEN",
+        "SLE"
+      ],
+      "historical_allies": [
+        "CAF",
+        "CMR",
+        "COG",
+        "GAB",
+        "MDG",
+        "MRT",
+        "RWA",
+        "TCD"
+      ]
+    },
+    "IND": {
+      "total_alliances": 4,
+      "active_alliances": 1,
+      "defense_pacts": 0,
+      "ententes": 0,
+      "non_aggression": 3,
+      "neutrality": 1,
+      "allies": [
+        "BGD"
+      ],
+      "historical_allies": [
+        "CAN",
+        "CHN",
+        "FRA",
+        "GBR",
+        "KHM",
+        "LAO",
+        "LKA",
+        "MMR",
+        "POL",
+        "RUS",
+        "USA",
+        "VNM"
+      ]
+    },
+    "VNM": {
+      "total_alliances": 2,
+      "active_alliances": 0,
+      "defense_pacts": 0,
+      "ententes": 1,
+      "non_aggression": 0,
+      "neutrality": 1,
+      "allies": [],
+      "historical_allies": [
+        "CAN",
+        "CHN",
+        "FRA",
+        "GBR",
+        "IND",
+        "KHM",
+        "LAO",
+        "LKA",
+        "POL",
+        "RUS",
+        "USA"
+      ]
+    },
+    "KEN": {
+      "total_alliances": 2,
+      "active_alliances": 2,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "AGO",
+        "BDI",
+        "CAF",
+        "COD",
+        "COG",
+        "ETH",
+        "RWA",
+        "SDN",
+        "TZA",
+        "UGA",
+        "ZMB"
+      ],
+      "historical_allies": []
+    },
+    "BDI": {
+      "total_alliances": 3,
+      "active_alliances": 2,
+      "defense_pacts": 3,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "AGO",
+        "CAF",
+        "CMR",
+        "COD",
+        "COG",
+        "GAB",
+        "GIN",
+        "KEN",
+        "RWA",
+        "SDN",
+        "STP",
+        "TCD",
+        "TZA",
+        "UGA",
+        "ZMB"
+      ],
+      "historical_allies": []
+    },
+    "COD": {
+      "total_alliances": 5,
+      "active_alliances": 3,
+      "defense_pacts": 3,
+      "ententes": 0,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "AGO",
+        "BDI",
+        "CAF",
+        "CMR",
+        "COG",
+        "GAB",
+        "GIN",
+        "KEN",
+        "RWA",
+        "SDN",
+        "STP",
+        "TCD",
+        "TZA",
+        "UGA",
+        "ZMB"
+      ],
+      "historical_allies": []
+    },
+    "MUS": {
+      "total_alliances": 1,
+      "active_alliances": 0,
+      "defense_pacts": 0,
+      "ententes": 1,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [],
+      "historical_allies": [
+        "GBR"
+      ]
+    },
+    "MMR": {
+      "total_alliances": 1,
+      "active_alliances": 0,
+      "defense_pacts": 0,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [],
+      "historical_allies": [
+        "IND"
+      ]
+    },
+    "UGA": {
+      "total_alliances": 2,
+      "active_alliances": 1,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "AGO",
+        "BDI",
+        "CAF",
+        "COD",
+        "COG",
+        "KEN",
+        "RWA",
+        "SDN",
+        "TZA",
+        "ZMB"
+      ],
+      "historical_allies": []
+    },
+    "AGO": {
+      "total_alliances": 7,
+      "active_alliances": 2,
+      "defense_pacts": 3,
+      "ententes": 1,
+      "non_aggression": 2,
+      "neutrality": 1,
+      "allies": [
+        "BDI",
+        "CAF",
+        "CMR",
+        "COD",
+        "COG",
+        "GAB",
+        "GIN",
+        "KEN",
+        "RWA",
+        "SDN",
+        "STP",
+        "TCD",
+        "TZA",
+        "UGA",
+        "ZMB"
+      ],
+      "historical_allies": [
+        "DDR",
+        "HUN",
+        "NAM",
+        "RUS",
+        "ZWE"
+      ]
+    },
+    "MOZ": {
+      "total_alliances": 3,
+      "active_alliances": 0,
+      "defense_pacts": 0,
+      "ententes": 0,
+      "non_aggression": 3,
+      "neutrality": 0,
+      "allies": [],
+      "historical_allies": [
+        "DDR",
+        "RUS",
+        "ZAF"
+      ]
+    },
+    "CPV": {
+      "total_alliances": 2,
+      "active_alliances": 1,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "BEN",
+        "BFA",
+        "CIV",
+        "GHA",
+        "GMB",
+        "GNB",
+        "LBR",
+        "MLI",
+        "NER",
+        "NGA",
+        "SEN",
+        "SLE",
+        "TGO"
+      ],
+      "historical_allies": [
+        "MRT"
+      ]
+    },
+    "GMB": {
+      "total_alliances": 3,
+      "active_alliances": 1,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "BEN",
+        "BFA",
+        "CIV",
+        "CPV",
+        "GHA",
+        "GNB",
+        "LBR",
+        "MLI",
+        "NER",
+        "NGA",
+        "SEN",
+        "SLE",
+        "TGO"
+      ],
+      "historical_allies": [
+        "MRT"
+      ]
+    },
+    "GNB": {
+      "total_alliances": 3,
+      "active_alliances": 1,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "BEN",
+        "BFA",
+        "CIV",
+        "CPV",
+        "GHA",
+        "GMB",
+        "LBR",
+        "MLI",
+        "NER",
+        "NGA",
+        "SEN",
+        "SLE",
+        "TGO"
+      ],
+      "historical_allies": [
+        "MRT"
+      ]
+    },
+    "NGA": {
+      "total_alliances": 2,
+      "active_alliances": 1,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "BEN",
+        "BFA",
+        "CIV",
+        "CPV",
+        "GHA",
+        "GMB",
+        "GNB",
+        "LBR",
+        "MLI",
+        "NER",
+        "SEN",
+        "SLE",
+        "TGO"
+      ],
+      "historical_allies": [
+        "MRT"
+      ]
+    },
+    "SLE": {
+      "total_alliances": 3,
+      "active_alliances": 1,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 1,
+      "allies": [
+        "BEN",
+        "BFA",
+        "CIV",
+        "CPV",
+        "GHA",
+        "GMB",
+        "GNB",
+        "LBR",
+        "MLI",
+        "NER",
+        "NGA",
+        "SEN",
+        "TGO"
+      ],
+      "historical_allies": [
+        "MRT"
+      ]
+    },
+    "ZMB": {
+      "total_alliances": 2,
+      "active_alliances": 1,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "AGO",
+        "BDI",
+        "CAF",
+        "COD",
+        "COG",
+        "KEN",
+        "RWA",
+        "SDN",
+        "TZA",
+        "UGA"
+      ],
+      "historical_allies": []
+    },
+    "MLT": {
+      "total_alliances": 2,
+      "active_alliances": 0,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 1,
+      "allies": [],
+      "historical_allies": [
+        "ITA",
+        "LBY"
+      ]
+    },
+    "SWZ": {
+      "total_alliances": 1,
+      "active_alliances": 1,
+      "defense_pacts": 0,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "ZAF"
+      ],
+      "historical_allies": []
+    },
+    "ZAF": {
+      "total_alliances": 2,
+      "active_alliances": 1,
+      "defense_pacts": 0,
+      "ententes": 0,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "SWZ"
+      ],
+      "historical_allies": [
+        "MOZ"
+      ]
+    },
+    "UKR": {
+      "total_alliances": 8,
+      "active_alliances": 8,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 5,
+      "neutrality": 2,
+      "allies": [
+        "ARM",
+        "AZE",
+        "BLR",
+        "GEO",
+        "HUN",
+        "KAZ",
+        "KGZ",
+        "LTU",
+        "LVA",
+        "MDA",
+        "POL",
+        "RUS",
+        "SVK",
+        "TJK",
+        "TKM",
+        "UZB"
+      ],
+      "historical_allies": []
+    },
+    "ARM": {
+      "total_alliances": 4,
+      "active_alliances": 4,
+      "defense_pacts": 3,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "AZE",
+        "BLR",
+        "GEO",
+        "KAZ",
+        "KGZ",
+        "MDA",
+        "RUS",
+        "TJK",
+        "TKM",
+        "UKR",
+        "UZB"
+      ],
+      "historical_allies": []
+    },
+    "AZE": {
+      "total_alliances": 4,
+      "active_alliances": 4,
+      "defense_pacts": 3,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "ARM",
+        "BLR",
+        "GEO",
+        "IRN",
+        "KAZ",
+        "KGZ",
+        "MDA",
+        "RUS",
+        "TJK",
+        "TKM",
+        "TUR",
+        "UKR",
+        "UZB"
+      ],
+      "historical_allies": []
+    },
+    "BLR": {
+      "total_alliances": 7,
+      "active_alliances": 7,
+      "defense_pacts": 4,
+      "ententes": 0,
+      "non_aggression": 2,
+      "neutrality": 1,
+      "allies": [
+        "ARM",
+        "AZE",
+        "BGR",
+        "GEO",
+        "KAZ",
+        "KGZ",
+        "LTU",
+        "MDA",
+        "POL",
+        "RUS",
+        "TJK",
+        "TKM",
+        "UKR",
+        "UZB"
+      ],
+      "historical_allies": []
+    },
+    "GEO": {
+      "total_alliances": 5,
+      "active_alliances": 4,
+      "defense_pacts": 2,
+      "ententes": 1,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "ARM",
+        "AZE",
+        "BLR",
+        "FRA",
+        "KAZ",
+        "KGZ",
+        "MDA",
+        "POL",
+        "RUS",
+        "TJK",
+        "TKM",
+        "UKR",
+        "UZB"
+      ],
+      "historical_allies": []
+    },
+    "KAZ": {
+      "total_alliances": 4,
+      "active_alliances": 4,
+      "defense_pacts": 3,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "ARM",
+        "AZE",
+        "BLR",
+        "CHN",
+        "GEO",
+        "KGZ",
+        "MDA",
+        "RUS",
+        "TJK",
+        "TKM",
+        "UKR",
+        "UZB"
+      ],
+      "historical_allies": []
+    },
+    "KGZ": {
+      "total_alliances": 5,
+      "active_alliances": 5,
+      "defense_pacts": 4,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "ARM",
+        "AZE",
+        "BLR",
+        "CHN",
+        "GEO",
+        "KAZ",
+        "MDA",
+        "RUS",
+        "TJK",
+        "TKM",
+        "UKR",
+        "UZB"
+      ],
+      "historical_allies": []
+    },
+    "MDA": {
+      "total_alliances": 4,
+      "active_alliances": 4,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 3,
+      "neutrality": 0,
+      "allies": [
+        "ARM",
+        "AZE",
+        "BLR",
+        "GEO",
+        "KAZ",
+        "KGZ",
+        "LTU",
+        "POL",
+        "RUS",
+        "TJK",
+        "TKM",
+        "UKR",
+        "UZB"
+      ],
+      "historical_allies": []
+    },
+    "TJK": {
+      "total_alliances": 5,
+      "active_alliances": 5,
+      "defense_pacts": 3,
+      "ententes": 0,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "AFG",
+        "ARM",
+        "AZE",
+        "BGD",
+        "BLR",
+        "CHN",
+        "GEO",
+        "IRN",
+        "KAZ",
+        "KGZ",
+        "MDA",
+        "RUS",
+        "TKM",
+        "UKR",
+        "UZB"
+      ],
+      "historical_allies": []
+    },
+    "TKM": {
+      "total_alliances": 4,
+      "active_alliances": 3,
+      "defense_pacts": 2,
+      "ententes": 0,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "AFG",
+        "ARM",
+        "AZE",
+        "BGD",
+        "BLR",
+        "CHN",
+        "GEO",
+        "IRN",
+        "KAZ",
+        "KGZ",
+        "MDA",
+        "RUS",
+        "TJK",
+        "UKR",
+        "UZB"
+      ],
+      "historical_allies": []
+    },
+    "UZB": {
+      "total_alliances": 9,
+      "active_alliances": 9,
+      "defense_pacts": 5,
+      "ententes": 0,
+      "non_aggression": 4,
+      "neutrality": 0,
+      "allies": [
+        "AFG",
+        "ARM",
+        "AZE",
+        "BGD",
+        "BLR",
+        "CHN",
+        "GEO",
+        "IRN",
+        "KAZ",
+        "KGZ",
+        "LVA",
+        "MDA",
+        "RUS",
+        "SVK",
+        "TJK",
+        "TKM",
+        "UKR"
+      ],
+      "historical_allies": []
+    },
+    "BIH": {
+      "total_alliances": 2,
+      "active_alliances": 1,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "HRV",
+        "SRB"
+      ],
+      "historical_allies": []
+    },
+    "HRV": {
+      "total_alliances": 3,
+      "active_alliances": 2,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 2,
+      "neutrality": 0,
+      "allies": [
+        "BIH",
+        "SRB",
+        "TUR"
+      ],
+      "historical_allies": []
+    },
+    "SVK": {
+      "total_alliances": 4,
+      "active_alliances": 4,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 3,
+      "neutrality": 0,
+      "allies": [
+        "CZE",
+        "ROU",
+        "UKR",
+        "UZB"
+      ],
+      "historical_allies": []
+    },
+    "IDN": {
+      "total_alliances": 1,
+      "active_alliances": 0,
+      "defense_pacts": 0,
+      "ententes": 1,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [],
+      "historical_allies": [
+        "AUS"
+      ]
+    },
+    "NAM": {
+      "total_alliances": 1,
+      "active_alliances": 0,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [],
+      "historical_allies": [
+        "AGO",
+        "COG",
+        "ZWE"
+      ]
+    },
+    "ZWE": {
+      "total_alliances": 1,
+      "active_alliances": 0,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [],
+      "historical_allies": [
+        "AGO",
+        "COG",
+        "NAM"
+      ]
+    },
+    "GIN": {
+      "total_alliances": 1,
+      "active_alliances": 1,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "AGO",
+        "BDI",
+        "CAF",
+        "CMR",
+        "COD",
+        "COG",
+        "GAB",
+        "RWA",
+        "STP",
+        "TCD"
+      ],
+      "historical_allies": []
+    },
+    "STP": {
+      "total_alliances": 1,
+      "active_alliances": 1,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "AGO",
+        "BDI",
+        "CAF",
+        "CMR",
+        "COD",
+        "COG",
+        "GAB",
+        "GIN",
+        "RWA",
+        "TCD"
+      ],
+      "historical_allies": []
+    },
+    "ERI": {
+      "total_alliances": 1,
+      "active_alliances": 1,
+      "defense_pacts": 0,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [
+        "ETH"
+      ],
+      "historical_allies": []
+    },
+    "TZA": {
+      "total_alliances": 1,
+      "active_alliances": 1,
+      "defense_pacts": 1,
+      "ententes": 0,
+      "non_aggression": 0,
+      "neutrality": 0,
+      "allies": [
+        "AGO",
+        "BDI",
+        "CAF",
+        "COD",
+        "COG",
+        "KEN",
+        "RWA",
+        "SDN",
+        "UGA",
+        "ZMB"
+      ],
+      "historical_allies": []
+    },
+    "SSD": {
+      "total_alliances": 1,
+      "active_alliances": 0,
+      "defense_pacts": 0,
+      "ententes": 0,
+      "non_aggression": 1,
+      "neutrality": 0,
+      "allies": [],
+      "historical_allies": [
+        "SDN"
+      ]
+    }
+  }
+}

@@ -1,6 +1,12 @@
 import { getRegistry } from '~/server/utils/wcg'
 import { getGroupThemeTrends, getGroupVotingData, getGroupMemberDivergence } from '~/server/utils/unvotes'
 import { getGroupSentimentBySession, getGroupEmergingTopics, getConflictMentions } from '~/server/utils/speeches'
+import { getGroupVDemOverview } from '~/server/utils/vdem'
+import { getGroupSIPRIOverview } from '~/server/utils/sipri'
+import { getGroupODAOverview } from '~/server/utils/oda'
+import { getGroupVisaOverview } from '~/server/utils/visa'
+import { getGroupCablesOverview } from '~/server/utils/submarine-cables'
+import { getGroupAllianceOverview } from '~/server/utils/alliances'
 
 export default defineEventHandler((event) => {
   const query = getQuery(event)
@@ -68,5 +74,11 @@ export default defineEventHandler((event) => {
     sentimentBySession,
     conflicts: filteredConflicts,
     memberDivergence: memberDivergence.slice(0, 15),
+    democracy: getGroupVDemOverview(iso3Codes) || null,
+    armsTrade: getGroupSIPRIOverview(iso3Codes) || null,
+    aid: getGroupODAOverview(iso3Codes) || null,
+    visaFreedom: getGroupVisaOverview(iso3Codes) || null,
+    connectivity: getGroupCablesOverview(iso3Codes) || null,
+    alliances: getGroupAllianceOverview(iso3Codes) || null,
   }
 })

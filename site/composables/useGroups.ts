@@ -410,3 +410,95 @@ export function useSpeechGroupComparison(selectedGroups?: Ref<string[]>) {
   }, { lazy: true })
   return { comparison, pending, error }
 }
+
+// --- SIPRI Arms Transfers ---
+export function useCountryArmsTrade(iso: string | Ref<string>) {
+  const code = toRef(iso)
+  const { data: armsTrade, pending, error } = useFetch(() => `/api/countries/${code.value}/arms-trade`, { lazy: true })
+  return { armsTrade, pending, error }
+}
+
+export function useGroupArmsTrade(gid: string | Ref<string>) {
+  const id = toRef(gid)
+  const { data: armsTrade, pending, error } = useFetch(() => `/api/groups/${id.value}/arms-trade`, { lazy: true })
+  return { armsTrade, pending, error }
+}
+
+// --- V-Dem Democracy ---
+export function useCountryDemocracy(iso: string | Ref<string>) {
+  const code = toRef(iso)
+  const { data: democracy, pending, error } = useFetch(() => `/api/countries/${code.value}/democracy`, { lazy: true })
+  return { democracy, pending, error }
+}
+
+export function useGroupDemocracy(gid: string | Ref<string>) {
+  const id = toRef(gid)
+  const { data: democracy, pending, error } = useFetch(() => `/api/groups/${id.value}/democracy`, { lazy: true })
+  return { democracy, pending, error }
+}
+
+// --- OECD ODA ---
+export function useCountryODA(iso: string | Ref<string>) {
+  const code = toRef(iso)
+  const { data: oda, pending, error } = useFetch(() => `/api/countries/${code.value}/oda`, { lazy: true })
+  return { oda, pending, error }
+}
+
+export function useGroupODA(gid: string | Ref<string>) {
+  const id = toRef(gid)
+  const { data: oda, pending, error } = useFetch(() => `/api/groups/${id.value}/oda`, { lazy: true })
+  return { oda, pending, error }
+}
+
+// --- Submarine Cables ---
+export function useCountryCables(iso: string | Ref<string>) {
+  const code = toRef(iso)
+  const { data: cables, pending, error } = useFetch(() => `/api/countries/${code.value}/cables`, { lazy: true })
+  return { cables, pending, error }
+}
+
+export function useGroupCables(gid: string | Ref<string>) {
+  const id = toRef(gid)
+  const { data: cables, pending, error } = useFetch(() => `/api/groups/${id.value}/cables`, { lazy: true })
+  return { cables, pending, error }
+}
+
+// --- Visa Restrictions ---
+export function useCountryVisa(iso: string | Ref<string>) {
+  const code = toRef(iso)
+  const { data: visa, pending, error } = useFetch(() => `/api/countries/${code.value}/visa`, { lazy: true })
+  return { visa, pending, error }
+}
+
+export function useGroupVisa(gid: string | Ref<string>) {
+  const id = toRef(gid)
+  const { data: visa, pending, error } = useFetch(() => `/api/groups/${id.value}/visa`, { lazy: true })
+  return { visa, pending, error }
+}
+
+// --- COW Alliances ---
+export function useCountryAlliances(iso: string | Ref<string>) {
+  const code = toRef(iso)
+  const { data: alliances, pending, error } = useFetch(() => `/api/countries/${code.value}/alliances`, { lazy: true })
+  return { alliances, pending, error }
+}
+
+export function useGroupAlliances(gid: string | Ref<string>) {
+  const id = toRef(gid)
+  const { data: alliances, pending, error } = useFetch(() => `/api/groups/${id.value}/alliances`, { lazy: true })
+  return { alliances, pending, error }
+}
+
+export function formatODA(n: number | null | undefined): string {
+  if (n == null) return 'N/A'
+  if (n >= 1e9) return `$${(n / 1e9).toFixed(1)}B`
+  if (n >= 1e6) return `$${(n / 1e6).toFixed(0)}M`
+  if (n >= 1e3) return `$${(n / 1e3).toFixed(0)}K`
+  return `$${n.toLocaleString()}`
+}
+
+export function formatTIV(n: number | null | undefined): string {
+  if (n == null) return 'N/A'
+  if (n >= 1e3) return `${(n / 1e3).toFixed(1)}K TIV`
+  return `${Math.round(n)} TIV`
+}

@@ -30,3 +30,17 @@ site/server/data/un-speeches-index.json
 
 # User data
 site/server/data/users.json
+
+# Secrets and per-user / runtime state (never commit)
+site/server/data/ai-config.json
+site/server/data/digest-state.json
+site/server/data/ai-analysis-cache.json
+site/server/data/cron-config.json
+site/server/data/*.tmp
+
+# Feeds regenerated every few hours by cron (reproducible via scripts/fetch_*.py)
+site/server/data/news-feed.json
+site/server/data/statements-feed.json
+
+# Downloaded speech PDFs for every session (large, reproducible)
+site/server/data/pdfs-*/

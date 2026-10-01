@@ -3,13 +3,14 @@ export interface SectionDef {
   label: string
 }
 
-export function useSectionNav(sections: SectionDef[]) {
+export function useSectionNav(sectionsInput: SectionDef[] | Ref<SectionDef[]> | ComputedRef<SectionDef[]>) {
+  const sections = computed(() => isRef(sectionsInput) ? sectionsInput.value : sectionsInput)
   const activeSection = ref('')
   const visibleSections = ref<SectionDef[]>([])
 
   // Track which section ids exist in the DOM
   function updateVisibleSections() {
-    visibleSections.value = sections.filter(s => document.getElementById(s.id))
+    visibleSections.value = sections.value.filter(s => document.getElementById(s.id))
   }
 
   function scrollTo(id: string) {
@@ -84,7 +85,7 @@ export function useSectionNav(sections: SectionDef[]) {
       }
       observedEls.clear()
 
-      for (const s of sections) {
+      for (const s of sections.value) {
         const el = document.getElementById(s.id)
         if (el) {
           observedEls.set(el, s.id)
@@ -101,8 +102,12 @@ export function useSectionNav(sections: SectionDef[]) {
     // Initial observe
     observeSections()
 
-    // Re-observe when visible sections change
+    // Re-observe when visible sections change or sections list changes
     watch(visibleSections, () => {
+      observeSections()
+    })
+    watch(sections, () => {
+      updateVisibleSections()
       observeSections()
     })
 

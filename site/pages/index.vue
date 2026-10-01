@@ -38,6 +38,27 @@
 
     <!-- Search results -->
     <section v-if="searchQuery" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <!-- AI Smart Search Answer -->
+      <div v-if="isSmartQuery && (smartSearchLoading || smartSearchContent)" class="mb-8">
+        <div class="bg-white rounded-2xl border border-indigo-100 p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+            </svg>
+            <h3 class="font-serif text-lg font-bold text-primary-900">AI Answer</h3>
+          </div>
+          <div v-if="smartSearchLoading" class="space-y-3">
+            <div class="h-3 bg-primary-100 rounded-full w-full animate-pulse"></div>
+            <div class="h-3 bg-primary-100 rounded-full w-11/12 animate-pulse"></div>
+            <div class="h-3 bg-primary-100 rounded-full w-3/4 animate-pulse"></div>
+          </div>
+          <div
+            v-else-if="smartSearchContent"
+            class="prose prose-sm prose-primary max-w-none prose-p:text-primary-700 prose-p:leading-relaxed prose-ul:my-2 prose-li:text-primary-700"
+            v-html="renderedSmartSearch"
+          ></div>
+        </div>
+      </div>
       <div v-if="searchPending" class="space-y-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           <div v-for="i in 6" :key="i" class="skeleton h-20 rounded-xl" />
@@ -77,7 +98,10 @@
 </template>
 
 <script setup lang="ts">
+import { marked } from 'marked'
 import { isoToFlag } from '~/composables/useGroups'
+
+marked.setOptions({ breaks: true, gfm: true })
 
 useHead({ title: 'World Country Groups — International Organizations Reference' })
 
@@ -95,8 +119,20 @@ const searchData = ref<{ groups: any[]; countries: any[] }>({ groups: [], countr
 const searchPending = ref(false)
 let searchTimeout: ReturnType<typeof setTimeout> | null = null
 
+// Smart Search
+const smartSearchContent = ref('')
+const smartSearchLoading = ref(false)
+
+const isSmartQuery = computed(() => {
+  const q = searchQuery.value.trim()
+  return q.includes('?') || q.length > 50
+})
+
+const renderedSmartSearch = computed(() => smartSearchContent.value ? marked.parse(smartSearchContent.value) as string : '')
+
 watch(searchQuery, (q) => {
   if (searchTimeout) clearTimeout(searchTimeout)
+  smartSearchContent.value = ''
   if (!q) {
     searchData.value = { groups: [], countries: [] }
     return
@@ -110,6 +146,17 @@ watch(searchQuery, (q) => {
     } finally {
       searchPending.value = false
     }
+
+    // Smart search for NL queries
+    if (isSmartQuery.value) {
+      smartSearchLoading.value = true
+      try {
+        const res = await $fetch<any>('/api/intelligence/ai/smart-search', { query: { q } })
+        smartSearchContent.value = res.content
+      } catch {}
+      smartSearchLoading.value = false
+    }
   }, 300)
 })
+
 </script>

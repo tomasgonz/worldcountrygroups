@@ -1,10 +1,12 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs'
-import { join, dirname } from 'path'
+import { join } from 'path'
 import { randomBytes, scryptSync, timingSafeEqual, createHmac } from 'crypto'
 
 export interface UserPreferences {
   bookmarkedCountries: string[]
   bookmarkedGroups: string[]
+  /** Watchlist email digest, sent by scripts/send_digests.py */
+  emailDigest?: 'off' | 'daily' | 'weekly'
 }
 
 export interface User {
@@ -29,7 +31,9 @@ interface UsersData {
   users: User[]
 }
 
-const DATA_PATH = join(dirname(new URL(import.meta.url).pathname), '../data/users.json')
+const DATA_DIR = process.env.WCG_SITE_DATA
+  || join(process.env.HOME || '/home/exedev', 'worldcountrygroups/site/server/data')
+const DATA_PATH = join(DATA_DIR, 'users.json')
 
 let cache: UsersData | null = null
 
@@ -63,8 +67,7 @@ function loadData(): UsersData {
 }
 
 function saveData(data: UsersData): void {
-  const dir = dirname(DATA_PATH)
-  if (!existsSync(dir)) mkdirSync(dir, { recursive: true })
+  if (!existsSync(DATA_DIR)) mkdirSync(DATA_DIR, { recursive: true })
   writeFileSync(DATA_PATH, JSON.stringify(data, null, 2), 'utf-8')
   cache = data
 }

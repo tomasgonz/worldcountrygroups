@@ -60,6 +60,40 @@
       </div>
     </div>
 
+    <!-- Watchlist Email Digest -->
+    <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
+      <h2 class="font-serif text-xl font-bold text-primary-900 mb-2">Watchlist Email Digest</h2>
+      <p class="text-sm text-primary-500 mb-5">
+        Get an email about the countries you follow: General Debate speeches, votes where they broke with their blocs,
+        drops in democracy scores, and new statements and news.
+      </p>
+      <div v-if="digest">
+        <div class="flex flex-wrap gap-2 mb-4" role="radiogroup" aria-label="Digest frequency">
+          <button v-for="opt in digestOptions" :key="opt.value" type="button" role="radio" :aria-checked="digest.frequency === opt.value"
+            class="text-sm px-4 py-1.5 rounded-full border transition-colors"
+            :class="digest.frequency === opt.value ? 'bg-primary-900 text-white border-primary-900' : 'bg-white text-primary-600 border-primary-200 hover:border-primary-400'"
+            @click="setDigest(opt.value)">{{ opt.label }}</button>
+        </div>
+        <p class="text-sm text-primary-600 mb-1">
+          <template v-if="digest.countries?.length">Following {{ digest.countries.length }} {{ digest.countries.length === 1 ? 'country' : 'countries' }}.</template>
+          <template v-else>You don't follow any countries yet. Bookmark countries from their pages to add them.</template>
+          <NuxtLink to="/dashboard" class="text-accent-600 hover:text-accent-700 underline ml-1">Manage watchlist</NuxtLink>
+        </p>
+        <p v-if="!digest.email" class="text-sm text-amber-700 mb-1">Add an email address in your profile above to receive digests.</p>
+        <p v-else class="text-xs text-primary-400 mb-1">Sent to {{ digest.email }}<span v-if="digest.lastSent"> &middot; last sent {{ new Date(digest.lastSent).toLocaleString() }}</span></p>
+        <p v-if="digest.lastError" class="text-xs text-red-600 mb-1">Last delivery failed: {{ digest.lastError }}</p>
+        <p class="text-xs text-primary-400 mb-4">Delivery only works for addresses this server is allowed to email. If a test fails, email this site's address with the subject <code>subscribe</code>, or ask the administrator.</p>
+        <div class="flex items-center gap-3">
+          <button type="button" class="text-sm px-4 py-2 rounded-lg border border-primary-200 text-primary-700 hover:bg-primary-50 disabled:opacity-50"
+            :disabled="testing || !digest.email || !digest.countries?.length" @click="sendTest">
+            {{ testing ? 'Sending…' : 'Send me a digest now' }}
+          </button>
+          <span v-if="digestMsg" class="text-sm" :class="digestOk ? 'text-green-600' : 'text-red-600'">{{ digestMsg }}</span>
+        </div>
+      </div>
+      <div v-else class="skeleton h-20 rounded-xl" />
+    </div>
+
     <!-- Change Password Card -->
     <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8">
       <h2 class="font-serif text-xl font-bold text-primary-900 mb-6">Change Password</h2>
@@ -121,6 +155,51 @@ const pw = reactive({ current: '', newPw: '', confirm: '' })
 const changingPw = ref(false)
 const pwMsg = ref('')
 const pwOk = ref(false)
+
+const digest = ref<any>(null)
+const testing = ref(false)
+const digestMsg = ref('')
+const digestOk = ref(false)
+const digestOptions = [
+  { value: 'off', label: 'Off' },
+  { value: 'daily', label: 'Daily' },
+  { value: 'weekly', label: 'Weekly' },
+]
+
+async function loadDigest() {
+  try {
+    digest.value = await $fetch<any>('/api/account/digest')
+  } catch {}
+}
+
+async function setDigest(frequency: string) {
+  digestMsg.value = ''
+  try {
+    await $fetch('/api/account/digest', { method: 'PUT', body: { frequency } })
+    digest.value.frequency = frequency
+    digestOk.value = true
+    digestMsg.value = frequency === 'off' ? 'Digest turned off' : `You'll get a ${frequency} digest`
+  } catch (e: any) {
+    digestOk.value = false
+    digestMsg.value = e?.data?.statusMessage || 'Could not save'
+  }
+}
+
+async function sendTest() {
+  testing.value = true
+  digestMsg.value = ''
+  try {
+    const r = await $fetch<any>('/api/account/digest/test', { method: 'POST' })
+    digestOk.value = r.ok || r.status === 'nothing new'
+    digestMsg.value = r.ok ? 'Digest sent' : r.status === 'nothing new' ? 'Nothing new to report yet' : (r.error || 'Delivery failed')
+    digest.value = { ...digest.value, lastSent: r.lastSent, lastError: r.lastError }
+  } catch (e: any) {
+    digestOk.value = false
+    digestMsg.value = e?.data?.statusMessage || 'Delivery failed'
+  } finally {
+    testing.value = false
+  }
+}
 
 async function loadProfile() {
   try {
@@ -190,5 +269,6 @@ function formatDate(iso?: string): string {
 
 onMounted(() => {
   loadProfile()
+  loadDigest()
 })
 </script>

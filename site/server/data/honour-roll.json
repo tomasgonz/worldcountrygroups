@@ -1,0 +1,1416 @@
+{
+ "_meta": {
+  "generated": "2026-09-28T07:00:01.613242+00:00",
+  "source": "https://www.un.org/en/ga/contributions/honourroll.shtml",
+  "asOfDate": "2026-09-21",
+  "budgetYear": 2026,
+  "totalPaidReported": 141,
+  "totalPaidMatched": 141,
+  "unmatchedNames": []
+ },
+ "paid": {
+  "ARM": {
+   "name": "Armenia",
+   "officialName": "Armenia",
+   "section": "within-30-days",
+   "amountUsd": 222702,
+   "datePaid": "2026-01-09"
+  },
+  "": {
+   "name": "Congo, Dem. Rep.",
+   "officialName": "Democratic Republic of the Congo",
+   "section": "within-30-days",
+   "amountUsd": 317897,
+   "datePaid": "2026-01-09"
+  },
+  "DOM": {
+   "name": "Dominican Republic",
+   "officialName": "Dominican Republic",
+   "section": "within-30-days",
+   "amountUsd": 2195211,
+   "datePaid": "2026-01-09"
+  },
+  "HUN": {
+   "name": "Hungary",
+   "officialName": "Hungary",
+   "section": "within-30-days",
+   "amountUsd": 7105816,
+   "datePaid": "2026-01-09"
+  },
+  "KAZ": {
+   "name": "Kazakhstan",
+   "officialName": "Kazakhstan",
+   "section": "within-30-days",
+   "amountUsd": 4167718,
+   "datePaid": "2026-01-09"
+  },
+  "KWT": {
+   "name": "Kuwait",
+   "officialName": "Kuwait",
+   "section": "within-30-days",
+   "amountUsd": 7103088,
+   "datePaid": "2026-01-09"
+  },
+  "POL": {
+   "name": "Poland",
+   "officialName": "Poland",
+   "section": "within-30-days",
+   "amountUsd": 26458745,
+   "datePaid": "2026-01-09"
+  },
+  "PRT": {
+   "name": "Portugal",
+   "officialName": "Portugal",
+   "section": "within-30-days",
+   "amountUsd": 10500804,
+   "datePaid": "2026-01-09"
+  },
+  "UKR": {
+   "name": "Ukraine",
+   "officialName": "Ukraine",
+   "section": "within-30-days",
+   "amountUsd": 2354284,
+   "datePaid": "2026-01-09"
+  },
+  "CAN": {
+   "name": "Canada",
+   "officialName": "Canada",
+   "section": "within-30-days",
+   "amountUsd": 81413242,
+   "datePaid": "2026-01-14"
+  },
+  "ISL": {
+   "name": "Iceland",
+   "officialName": "Iceland",
+   "section": "within-30-days",
+   "amountUsd": 1120513,
+   "datePaid": "2026-01-14"
+  },
+  "LVA": {
+   "name": "Latvia",
+   "officialName": "Latvia",
+   "section": "within-30-days",
+   "amountUsd": 1595732,
+   "datePaid": "2026-01-14"
+  },
+  "LUX": {
+   "name": "Luxembourg",
+   "officialName": "Luxembourg",
+   "section": "within-30-days",
+   "amountUsd": 2337069,
+   "datePaid": "2026-01-14"
+  },
+  "GBR": {
+   "name": "United Kingdom",
+   "officialName": "United Kingdom",
+   "section": "within-30-days",
+   "amountUsd": 127958073,
+   "datePaid": "2026-01-14"
+  },
+  "LIE": {
+   "name": "Liechtenstein",
+   "officialName": "Liechtenstein",
+   "section": "within-30-days",
+   "amountUsd": 288132,
+   "datePaid": "2026-01-15"
+  },
+  "BRB": {
+   "name": "Barbados",
+   "officialName": "Barbados",
+   "section": "within-30-days",
+   "amountUsd": 223052,
+   "datePaid": "2026-01-16"
+  },
+  "NLD": {
+   "name": "Netherlands",
+   "officialName": "Netherlands",
+   "section": "within-30-days",
+   "amountUsd": 41555009,
+   "datePaid": "2026-01-16"
+  },
+  "DNK": {
+   "name": "Denmark",
+   "officialName": "Denmark",
+   "section": "within-30-days",
+   "amountUsd": 16999777,
+   "datePaid": "2026-01-20"
+  },
+  "EST": {
+   "name": "Estonia",
+   "officialName": "Estonia",
+   "section": "within-30-days",
+   "amountUsd": 1440659,
+   "datePaid": "2026-01-20"
+  },
+  "FIN": {
+   "name": "Finland",
+   "officialName": "Finland",
+   "section": "within-30-days",
+   "amountUsd": 12357653,
+   "datePaid": "2026-01-20"
+  },
+  "NOR": {
+   "name": "Norway",
+   "officialName": "Norway",
+   "section": "within-30-days",
+   "amountUsd": 20905563,
+   "datePaid": "2026-01-20"
+  },
+  "CHE": {
+   "name": "Switzerland",
+   "officialName": "Switzerland",
+   "section": "within-30-days",
+   "amountUsd": 32943070,
+   "datePaid": "2026-01-20"
+  },
+  "NRU": {
+   "name": "Nauru",
+   "officialName": "Nauru",
+   "section": "within-30-days",
+   "amountUsd": 31865,
+   "datePaid": "2026-01-21"
+  },
+  "AZE": {
+   "name": "Azerbaijan",
+   "officialName": "Azerbaijan",
+   "section": "within-30-days",
+   "amountUsd": 1081698,
+   "datePaid": "2026-01-22"
+  },
+  "SGP": {
+   "name": "Singapore",
+   "officialName": "Singapore",
+   "section": "within-30-days",
+   "amountUsd": 15326034,
+   "datePaid": "2026-01-23"
+  },
+  "SVK": {
+   "name": "Slovakia",
+   "officialName": "Slovakia",
+   "section": "within-30-days",
+   "amountUsd": 4755282,
+   "datePaid": "2026-01-23"
+  },
+  "ARE": {
+   "name": "United Arab Emirates",
+   "officialName": "United Arab Emirates",
+   "section": "within-30-days",
+   "amountUsd": 18365644,
+   "datePaid": "2026-01-23"
+  },
+  "IRL": {
+   "name": "Ireland",
+   "officialName": "Ireland",
+   "section": "within-30-days",
+   "amountUsd": 15110912,
+   "datePaid": "2026-01-26"
+  },
+  "MYS": {
+   "name": "Malaysia",
+   "officialName": "Malaysia",
+   "section": "within-30-days",
+   "amountUsd": 10371574,
+   "datePaid": "2026-01-26"
+  },
+  "BIH": {
+   "name": "Bosnia and Herzegovina",
+   "officialName": "Bosnia and Herzegovina",
+   "section": "within-30-days",
+   "amountUsd": 445405,
+   "datePaid": "2026-01-27"
+  },
+  "NZL": {
+   "name": "New Zealand",
+   "officialName": "New Zealand",
+   "section": "within-30-days",
+   "amountUsd": 9668423,
+   "datePaid": "2026-01-27"
+  },
+  "PHL": {
+   "name": "Philippines",
+   "officialName": "Philippines",
+   "section": "within-30-days",
+   "amountUsd": 6299300,
+   "datePaid": "2026-01-28"
+  },
+  "KOR": {
+   "name": "Korea, Rep.",
+   "officialName": "Republic of Korea",
+   "section": "within-30-days",
+   "amountUsd": 75202401,
+   "datePaid": "2026-01-28"
+  },
+  "LCA": {
+   "name": "Saint Lucia",
+   "officialName": "Saint Lucia",
+   "section": "within-30-days",
+   "amountUsd": 63629,
+   "datePaid": "2026-01-28"
+  },
+  "SWE": {
+   "name": "Sweden",
+   "officialName": "Sweden",
+   "section": "within-30-days",
+   "amountUsd": 26316038,
+   "datePaid": "2026-01-28"
+  },
+  "ATG": {
+   "name": "Antigua and Barbuda",
+   "officialName": "Antigua and Barbuda",
+   "section": "within-30-days",
+   "amountUsd": 63729,
+   "datePaid": "2026-01-29"
+  },
+  "BTN": {
+   "name": "Bhutan",
+   "officialName": "Bhutan",
+   "section": "within-30-days",
+   "amountUsd": 31815,
+   "datePaid": "2026-01-30"
+  },
+  "ETH": {
+   "name": "Ethiopia",
+   "officialName": "Ethiopia",
+   "section": "within-30-days",
+   "amountUsd": 317897,
+   "datePaid": "2026-01-30"
+  },
+  "GEO": {
+   "name": "Georgia",
+   "officialName": "Georgia",
+   "section": "within-30-days",
+   "amountUsd": 286332,
+   "datePaid": "2026-01-30"
+  },
+  "BGR": {
+   "name": "Bulgaria",
+   "officialName": "Bulgaria",
+   "section": "within-30-days",
+   "amountUsd": 2260615,
+   "datePaid": "2026-02-02"
+  },
+  "CZE": {
+   "name": "Czech Republic",
+   "officialName": "Czech Republic",
+   "section": "within-30-days",
+   "amountUsd": 11001571,
+   "datePaid": "2026-02-02"
+  },
+  "BEL": {
+   "name": "Belgium",
+   "officialName": "Belgium",
+   "section": "within-30-days",
+   "amountUsd": 24747321,
+   "datePaid": "2026-02-03"
+  },
+  "CPV": {
+   "name": "Cabo Verde",
+   "officialName": "Cabo Verde",
+   "section": "within-30-days",
+   "amountUsd": 31815,
+   "datePaid": "2026-02-03"
+  },
+  "DEU": {
+   "name": "Germany",
+   "officialName": "Germany",
+   "section": "within-30-days",
+   "amountUsd": 182227359,
+   "datePaid": "2026-02-03"
+  },
+  "IND": {
+   "name": "India",
+   "officialName": "India",
+   "section": "within-30-days",
+   "amountUsd": 35186997,
+   "datePaid": "2026-02-03"
+  },
+  "MAR": {
+   "name": "Morocco",
+   "officialName": "Morocco",
+   "section": "within-30-days",
+   "amountUsd": 1877064,
+   "datePaid": "2026-02-03"
+  },
+  "SVN": {
+   "name": "Slovenia",
+   "officialName": "Slovenia",
+   "section": "within-30-days",
+   "amountUsd": 2465128,
+   "datePaid": "2026-02-03"
+  },
+  "AUS": {
+   "name": "Australia",
+   "officialName": "Australia",
+   "section": "within-30-days",
+   "amountUsd": 65309876,
+   "datePaid": "2026-02-04"
+  },
+  "AUT": {
+   "name": "Austria",
+   "officialName": "Austria",
+   "section": "within-30-days",
+   "amountUsd": 20041168,
+   "datePaid": "2026-02-04"
+  },
+  "HRV": {
+   "name": "Croatia",
+   "officialName": "Croatia",
+   "section": "within-30-days",
+   "amountUsd": 2801889,
+   "datePaid": "2026-02-04"
+  },
+  "CYP": {
+   "name": "Cyprus",
+   "officialName": "Cyprus",
+   "section": "within-30-days",
+   "amountUsd": 1120513,
+   "datePaid": "2026-02-04"
+  },
+  "VNM": {
+   "name": "Viet Nam",
+   "officialName": "Viet Nam",
+   "section": "within-30-days",
+   "amountUsd": 5058529,
+   "datePaid": "2026-02-05"
+  },
+  "BRN": {
+   "name": "Brunei Darussalam",
+   "officialName": "Brunei Darussalam",
+   "section": "within-30-days",
+   "amountUsd": 607922,
+   "datePaid": "2026-02-06"
+  },
+  "GHA": {
+   "name": "Ghana",
+   "officialName": "Ghana",
+   "section": "within-30-days",
+   "amountUsd": 795366,
+   "datePaid": "2026-02-06"
+  },
+  "MCO": {
+   "name": "Monaco",
+   "officialName": "Monaco",
+   "section": "within-30-days",
+   "amountUsd": 352161,
+   "datePaid": "2026-02-06"
+  },
+  "KEN": {
+   "name": "Kenya",
+   "officialName": "Kenya",
+   "section": "later-in-full",
+   "amountUsd": 1177142,
+   "datePaid": "2026-02-09"
+  },
+  "LTU": {
+   "name": "Lithuania",
+   "officialName": "Lithuania",
+   "section": "later-in-full",
+   "amountUsd": 2585086,
+   "datePaid": "2026-02-09"
+  },
+  "MNE": {
+   "name": "Montenegro",
+   "officialName": "Montenegro",
+   "section": "later-in-full",
+   "amountUsd": 127258,
+   "datePaid": "2026-02-09"
+  },
+  "NPL": {
+   "name": "Nepal",
+   "officialName": "Nepal",
+   "section": "later-in-full",
+   "amountUsd": 317897,
+   "datePaid": "2026-02-09"
+  },
+  "KNA": {
+   "name": "Saint Kitts and Nevis",
+   "officialName": "Saint Kitts and Nevis",
+   "section": "later-in-full",
+   "amountUsd": 31915,
+   "datePaid": "2026-02-09"
+  },
+  "ESP": {
+   "name": "Spain",
+   "officialName": "Spain",
+   "section": "later-in-full",
+   "amountUsd": 60667752,
+   "datePaid": "2026-02-09"
+  },
+  "ALB": {
+   "name": "Albania",
+   "officialName": "Albania",
+   "section": "later-in-full",
+   "amountUsd": 318147,
+   "datePaid": "2026-02-10"
+  },
+  "TGO": {
+   "name": "Togo",
+   "officialName": "Togo",
+   "section": "later-in-full",
+   "amountUsd": 63579,
+   "datePaid": "2026-02-10"
+  },
+  "TUR": {
+   "name": "Turkey",
+   "officialName": "Türkiye",
+   "section": "later-in-full",
+   "amountUsd": 21793032,
+   "datePaid": "2026-02-10"
+  },
+  "TKM": {
+   "name": "Turkmenistan",
+   "officialName": "Turkmenistan",
+   "section": "later-in-full",
+   "amountUsd": 1145327,
+   "datePaid": "2026-02-11"
+  },
+  "FRA": {
+   "name": "France",
+   "officialName": "France",
+   "section": "later-in-full",
+   "amountUsd": 123693873,
+   "datePaid": "2026-02-12"
+  },
+  "ITA": {
+   "name": "Italy",
+   "officialName": "Italy",
+   "section": "later-in-full",
+   "amountUsd": 90057196,
+   "datePaid": "2026-02-13"
+  },
+  "QAT": {
+   "name": "Qatar",
+   "officialName": "Qatar",
+   "section": "later-in-full",
+   "amountUsd": 7838994,
+   "datePaid": "2026-02-13"
+  },
+  "KIR": {
+   "name": "Kiribati",
+   "officialName": "Kiribati",
+   "section": "later-in-full",
+   "amountUsd": 31790,
+   "datePaid": "2026-02-17"
+  },
+  "MLT": {
+   "name": "Malta",
+   "officialName": "Malta",
+   "section": "later-in-full",
+   "amountUsd": 640293,
+   "datePaid": "2026-02-19"
+  },
+  "MUS": {
+   "name": "Mauritius",
+   "officialName": "Mauritius",
+   "section": "later-in-full",
+   "amountUsd": 318147,
+   "datePaid": "2026-02-19"
+  },
+  "GRC": {
+   "name": "Greece",
+   "officialName": "Greece",
+   "section": "later-in-full",
+   "amountUsd": 8936100,
+   "datePaid": "2026-02-26"
+  },
+  "GTM": {
+   "name": "Guatemala",
+   "officialName": "Guatemala",
+   "section": "later-in-full",
+   "amountUsd": 1463474,
+   "datePaid": "2026-02-26"
+  },
+  "BLZ": {
+   "name": "Belize",
+   "officialName": "Belize",
+   "section": "later-in-full",
+   "amountUsd": 31815,
+   "datePaid": "2026-02-27"
+  },
+  "SRB": {
+   "name": "Serbia",
+   "officialName": "Serbia",
+   "section": "later-in-full",
+   "amountUsd": 1272586,
+   "datePaid": "2026-03-02"
+  },
+  "PER": {
+   "name": "Peru",
+   "officialName": "Peru",
+   "section": "later-in-full",
+   "amountUsd": 4613123,
+   "datePaid": "2026-03-03"
+  },
+  "MNG": {
+   "name": "Mongolia",
+   "officialName": "Mongolia",
+   "section": "later-in-full",
+   "amountUsd": 127258,
+   "datePaid": "2026-03-05"
+  },
+  "CIV": {
+   "name": "Cote d'Ivoire",
+   "officialName": "Côte d'Ivoire",
+   "section": "later-in-full",
+   "amountUsd": 763551,
+   "datePaid": "2026-03-06"
+  },
+  "LAO": {
+   "name": "Lao People’s Democratic Republic",
+   "officialName": "Lao People's Democratic Republic",
+   "section": "later-in-full",
+   "amountUsd": 190738,
+   "datePaid": "2026-03-06"
+  },
+  "KGZ": {
+   "name": "Kyrgyz Republic",
+   "officialName": "Kyrgyzstan",
+   "section": "later-in-full",
+   "amountUsd": 95444,
+   "datePaid": "2026-03-10"
+  },
+  "MDA": {
+   "name": "Republic of Moldova",
+   "officialName": "Republic of Moldova",
+   "section": "later-in-full",
+   "amountUsd": 190888,
+   "datePaid": "2026-03-10"
+  },
+  "BDI": {
+   "name": "Burundi",
+   "officialName": "Burundi",
+   "section": "later-in-full",
+   "amountUsd": 31790,
+   "datePaid": "2026-03-11"
+  },
+  "BRA": {
+   "name": "Brazil",
+   "officialName": "Brazil",
+   "section": "later-in-full",
+   "amountUsd": 44890464,
+   "datePaid": "2026-03-12"
+  },
+  "THA": {
+   "name": "Thailand",
+   "officialName": "Thailand",
+   "section": "later-in-full",
+   "amountUsd": 10848794,
+   "datePaid": "2026-03-12"
+  },
+  "IDN": {
+   "name": "Indonesia",
+   "officialName": "Indonesia",
+   "section": "later-in-full",
+   "amountUsd": 18420679,
+   "datePaid": "2026-03-13"
+  },
+  "JAM": {
+   "name": "Jamaica",
+   "officialName": "Jamaica",
+   "section": "later-in-full",
+   "amountUsd": 222702,
+   "datePaid": "2026-03-13"
+  },
+  "MKD": {
+   "name": "North Macedonia",
+   "officialName": "North Macedonia",
+   "section": "later-in-full",
+   "amountUsd": 254517,
+   "datePaid": "2026-03-16"
+  },
+  "WSM": {
+   "name": "Samoa",
+   "officialName": "Samoa",
+   "section": "later-in-full",
+   "amountUsd": 31815,
+   "datePaid": "2026-03-17"
+  },
+  "LKA": {
+   "name": "Sri Lanka",
+   "officialName": "Sri Lanka",
+   "section": "later-in-full",
+   "amountUsd": 1208956,
+   "datePaid": "2026-03-17"
+  },
+  "UZB": {
+   "name": "Uzbekistan",
+   "officialName": "Uzbekistan",
+   "section": "later-in-full",
+   "amountUsd": 763551,
+   "datePaid": "2026-03-17"
+  },
+  "TJK": {
+   "name": "Tajikistan",
+   "officialName": "Tajikistan",
+   "section": "later-in-full",
+   "amountUsd": 95444,
+   "datePaid": "2026-03-18"
+  },
+  "FJI": {
+   "name": "Fiji",
+   "officialName": "Fiji",
+   "section": "later-in-full",
+   "amountUsd": 95444,
+   "datePaid": "2026-03-19"
+  },
+  "ZAF": {
+   "name": "South Africa",
+   "officialName": "South Africa",
+   "section": "later-in-full",
+   "amountUsd": 7985476,
+   "datePaid": "2026-03-20"
+  },
+  "HTI": {
+   "name": "Haiti",
+   "officialName": "Haiti",
+   "section": "later-in-full",
+   "amountUsd": 190738,
+   "datePaid": "2026-03-24"
+  },
+  "RUS": {
+   "name": "Russian Federation",
+   "officialName": "Russian Federation",
+   "section": "later-in-full",
+   "amountUsd": 67137109,
+   "datePaid": "2026-03-25"
+  },
+  "GUY": {
+   "name": "Guyana",
+   "officialName": "Guyana",
+   "section": "later-in-full",
+   "amountUsd": 349961,
+   "datePaid": "2026-03-27"
+  },
+  "ROU": {
+   "name": "Romania",
+   "officialName": "Romania",
+   "section": "later-in-full",
+   "amountUsd": 11398593,
+   "datePaid": "2026-03-30"
+  },
+  "BGD": {
+   "name": "Bangladesh",
+   "officialName": "Bangladesh",
+   "section": "later-in-full",
+   "amountUsd": 317897,
+   "datePaid": "2026-04-01"
+  },
+  "NAM": {
+   "name": "Namibia",
+   "officialName": "Namibia",
+   "section": "later-in-full",
+   "amountUsd": 222702,
+   "datePaid": "2026-04-02"
+  },
+  "BWA": {
+   "name": "Botswana",
+   "officialName": "Botswana",
+   "section": "later-in-full",
+   "amountUsd": 413590,
+   "datePaid": "2026-04-09"
+  },
+  "FSM": {
+   "name": "Micronesia (Federated States of)",
+   "officialName": "Micronesia",
+   "section": "later-in-full",
+   "amountUsd": 31815,
+   "datePaid": "2026-04-17"
+  },
+  "TZA": {
+   "name": "Tanzania",
+   "officialName": "United Republic of Tanzania",
+   "section": "later-in-full",
+   "amountUsd": 317897,
+   "datePaid": "2026-04-17"
+  },
+  "MDG": {
+   "name": "Madagascar",
+   "officialName": "Madagascar",
+   "section": "later-in-full",
+   "amountUsd": 127158,
+   "datePaid": "2026-04-24"
+  },
+  "ISR": {
+   "name": "Israel",
+   "officialName": "Israel",
+   "section": "later-in-full",
+   "amountUsd": 19496919,
+   "datePaid": "2026-04-27"
+  },
+  "KHM": {
+   "name": "Cambodia",
+   "officialName": "Cambodia",
+   "section": "later-in-full",
+   "amountUsd": 254317,
+   "datePaid": "2026-04-30"
+  },
+  "COL": {
+   "name": "Colombia",
+   "officialName": "Colombia",
+   "section": "later-in-full",
+   "amountUsd": 6267485,
+   "datePaid": "2026-04-30"
+  },
+  "SOM": {
+   "name": "Somalia",
+   "officialName": "Somalia",
+   "section": "later-in-full",
+   "amountUsd": 63579,
+   "datePaid": "2026-05-04"
+  },
+  "SEN": {
+   "name": "Senegal",
+   "officialName": "Senegal",
+   "section": "later-in-full",
+   "amountUsd": 222527,
+   "datePaid": "2026-05-11"
+  },
+  "AND": {
+   "name": "Andorra",
+   "officialName": "Andorra",
+   "section": "later-in-full",
+   "amountUsd": 128058,
+   "datePaid": "2026-05-18"
+  },
+  "JPN": {
+   "name": "Japan",
+   "officialName": "Japan",
+   "section": "later-in-full",
+   "amountUsd": 221861490,
+   "datePaid": "2026-05-20"
+  },
+  "TLS": {
+   "name": "Timor-Leste",
+   "officialName": "Timor-Leste",
+   "section": "later-in-full",
+   "amountUsd": 31790,
+   "datePaid": "2026-05-28"
+  },
+  "EGY": {
+   "name": "Egypt, Arab Rep.",
+   "officialName": "Egypt",
+   "section": "later-in-full",
+   "amountUsd": 5790265,
+   "datePaid": "2026-06-08"
+  },
+  "SMR": {
+   "name": "San Marino",
+   "officialName": "San Marino",
+   "section": "later-in-full",
+   "amountUsd": 64029,
+   "datePaid": "2026-06-10"
+  },
+  "PAK": {
+   "name": "Pakistan",
+   "officialName": "Pakistan",
+   "section": "later-in-full",
+   "amountUsd": 3913201,
+   "datePaid": "2026-06-11"
+  },
+  "ZWE": {
+   "name": "Zimbabwe",
+   "officialName": "Zimbabwe",
+   "section": "later-in-full",
+   "amountUsd": 222702,
+   "datePaid": "2026-06-12"
+  },
+  "ARG": {
+   "name": "Argentina",
+   "officialName": "Argentina",
+   "section": "later-in-full",
+   "amountUsd": 15589176,
+   "datePaid": "2026-06-22"
+  },
+  "DZA": {
+   "name": "Algeria",
+   "officialName": "Algeria",
+   "section": "later-in-full",
+   "amountUsd": 2767874,
+   "datePaid": "2026-06-26"
+  },
+  "GMB": {
+   "name": "Gambia (Republic of The)",
+   "officialName": "Gambia",
+   "section": "later-in-full",
+   "amountUsd": 31790,
+   "datePaid": "2026-06-29"
+  },
+  "BHR": {
+   "name": "Bahrain",
+   "officialName": "Bahrain",
+   "section": "later-in-full",
+   "amountUsd": 1599795,
+   "datePaid": "2026-06-30"
+  },
+  "LBY": {
+   "name": "Libya",
+   "officialName": "Libya",
+   "section": "later-in-full",
+   "amountUsd": 1272586,
+   "datePaid": "2026-07-13"
+  },
+  "CRI": {
+   "name": "Costa Rica",
+   "officialName": "Costa Rica",
+   "section": "later-in-full",
+   "amountUsd": 2004323,
+   "datePaid": "2026-07-21"
+  },
+  "TUV": {
+   "name": "Tuvalu",
+   "officialName": "Tuvalu",
+   "section": "later-in-full",
+   "amountUsd": 31790,
+   "datePaid": "2026-07-28"
+  },
+  "HND": {
+   "name": "Honduras",
+   "officialName": "Honduras",
+   "section": "later-in-full",
+   "amountUsd": 318147,
+   "datePaid": "2026-07-31"
+  },
+  "NIC": {
+   "name": "Nicaragua",
+   "officialName": "Nicaragua",
+   "section": "later-in-full",
+   "amountUsd": 127258,
+   "datePaid": "2026-08-06"
+  },
+  "PRK": {
+   "name": "Democratic People's Republic of Korea",
+   "officialName": "Democratic People’s Republic of Korea",
+   "section": "later-in-full",
+   "amountUsd": 159073,
+   "datePaid": "2026-08-07"
+  },
+  "MDV": {
+   "name": "Maldives",
+   "officialName": "Maldives",
+   "section": "later-in-full",
+   "amountUsd": 127258,
+   "datePaid": "2026-08-10"
+  },
+  "SYC": {
+   "name": "Seychelles",
+   "officialName": "Seychelles",
+   "section": "later-in-full",
+   "amountUsd": 63629,
+   "datePaid": "2026-08-11"
+  },
+  "TUN": {
+   "name": "Tunisia",
+   "officialName": "Tunisia",
+   "section": "later-in-full",
+   "amountUsd": 572664,
+   "datePaid": "2026-08-11"
+  },
+  "PAN": {
+   "name": "Panama",
+   "officialName": "Panama",
+   "section": "later-in-full",
+   "amountUsd": 2738209,
+   "datePaid": "2026-08-18"
+  },
+  "MOZ": {
+   "name": "Mozambique",
+   "officialName": "Mozambique",
+   "section": "later-in-full",
+   "amountUsd": 63579,
+   "datePaid": "2026-08-24"
+  },
+  "URY": {
+   "name": "Uruguay",
+   "officialName": "Uruguay",
+   "section": "later-in-full",
+   "amountUsd": 2517307,
+   "datePaid": "2026-08-28"
+  },
+  "MRT": {
+   "name": "Mauritania",
+   "officialName": "Mauritania",
+   "section": "later-in-full",
+   "amountUsd": 95369,
+   "datePaid": "2026-08-31"
+  },
+  "CHN": {
+   "name": "China",
+   "officialName": "China",
+   "section": "later-in-full",
+   "amountUsd": 641361387,
+   "datePaid": "2026-09-01"
+  },
+  "AGO": {
+   "name": "Angola",
+   "officialName": "Angola",
+   "section": "later-in-full",
+   "amountUsd": 317897,
+   "datePaid": "2026-09-02"
+  },
+  "PRY": {
+   "name": "Paraguay",
+   "officialName": "Paraguay",
+   "section": "later-in-full",
+   "amountUsd": 731737,
+   "datePaid": "2026-09-08"
+  },
+  "RWA": {
+   "name": "Rwanda",
+   "officialName": "Rwanda",
+   "section": "later-in-full",
+   "amountUsd": 95369,
+   "datePaid": "2026-09-09"
+  },
+  "SLE": {
+   "name": "Sierra Leone",
+   "officialName": "Sierra Leone",
+   "section": "later-in-full",
+   "amountUsd": 31790,
+   "datePaid": "2026-09-09"
+  },
+  "TCD": {
+   "name": "Chad",
+   "officialName": "Chad",
+   "section": "later-in-full",
+   "amountUsd": 158948,
+   "datePaid": "2026-09-11"
+  },
+  "GIN": {
+   "name": "Guinea",
+   "officialName": "Guinea",
+   "section": "later-in-full",
+   "amountUsd": 127158,
+   "datePaid": "2026-09-14"
+  },
+  "LSO": {
+   "name": "Lesotho",
+   "officialName": "Lesotho",
+   "section": "later-in-full",
+   "amountUsd": 31790,
+   "datePaid": "2026-09-16"
+  },
+  "ZMB": {
+   "name": "Zambia",
+   "officialName": "Zambia",
+   "section": "later-in-full",
+   "amountUsd": 190738,
+   "datePaid": "2026-09-21"
+  }
+ },
+ "unpaidIso3": [
+  "AFG",
+  "BEN",
+  "BFA",
+  "BHS",
+  "BLR",
+  "BOL",
+  "CAF",
+  "CHL",
+  "CMR",
+  "COG",
+  "COM",
+  "CUB",
+  "DJI",
+  "DMA",
+  "ECU",
+  "ERI",
+  "GAB",
+  "GNB",
+  "GNQ",
+  "GRD",
+  "IRN",
+  "IRQ",
+  "JOR",
+  "LBN",
+  "LBR",
+  "MEX",
+  "MHL",
+  "MLI",
+  "MMR",
+  "MWI",
+  "NER",
+  "NGA",
+  "OMN",
+  "PLW",
+  "PNG",
+  "SAU",
+  "SDN",
+  "SLB",
+  "SLV",
+  "SSD",
+  "STP",
+  "SUR",
+  "SWZ",
+  "SYR",
+  "TON",
+  "TTO",
+  "UGA",
+  "USA",
+  "VCT",
+  "VEN",
+  "VUT",
+  "YEM"
+ ],
+ "historyMonthEndCounts": {
+  "2026": {
+   "January": 39,
+   "February": 74,
+   "March": 97,
+   "April": 106,
+   "May": 111,
+   "June": 119,
+   "July": 123,
+   "August": 132
+  },
+  "2025": {
+   "January": 35,
+   "February": 70,
+   "March": 85,
+   "April": 101,
+   "May": 110,
+   "June": 112,
+   "July": 117,
+   "August": 123,
+   "September": 136,
+   "October": 142,
+   "November": 145,
+   "December": 151
+  },
+  "2024": {
+   "January": 36,
+   "February": 72,
+   "March": 96,
+   "April": 105,
+   "May": 112,
+   "June": 121,
+   "July": 122,
+   "August": 128,
+   "September": 141,
+   "October": 144,
+   "November": 148,
+   "December": 152
+  },
+  "2023": {
+   "January": 25,
+   "February": 59,
+   "March": 86,
+   "April": 97,
+   "May": 114,
+   "June": 121,
+   "July": 126,
+   "August": 133,
+   "September": 137,
+   "October": 137,
+   "November": 139,
+   "December": 142
+  },
+  "2022": {
+   "January": 41,
+   "February": 65,
+   "March": 81,
+   "April": 96,
+   "May": 104,
+   "June": 109,
+   "July": 113,
+   "August": 120,
+   "September": 131,
+   "October": 135,
+   "November": 137,
+   "December": 146
+  },
+  "2021": {
+   "January": 25,
+   "February": 63,
+   "March": 83,
+   "April": 98,
+   "May": 103,
+   "June": 113,
+   "July": 117,
+   "August": 124,
+   "September": 130,
+   "October": 135,
+   "November": 138,
+   "December": 153
+  },
+  "2020": {
+   "January": 35,
+   "February": 62,
+   "March": 77,
+   "April": 87,
+   "May": 92,
+   "June": 101,
+   "July": 107,
+   "August": 112,
+   "September": 124,
+   "October": 131,
+   "November": 135,
+   "December": 144
+  },
+  "2019": {
+   "January": 34,
+   "February": 69,
+   "March": 79,
+   "April": 89,
+   "May": 102,
+   "June": 105,
+   "July": 109,
+   "August": 116,
+   "September": 127,
+   "October": 134,
+   "November": 138,
+   "December": 146
+  },
+  "2018": {
+   "January": 35,
+   "February": 62,
+   "March": 73,
+   "April": 88,
+   "May": 102,
+   "June": 107,
+   "July": 114,
+   "August": 125,
+   "September": 141,
+   "October": 146,
+   "November": 149,
+   "December": 152
+  },
+  "2017": {
+   "January": 25,
+   "February": 49,
+   "March": 73,
+   "April": 92,
+   "May": 102,
+   "June": 110,
+   "July": 116,
+   "August": 124,
+   "September": 134,
+   "October": 137,
+   "November": 143,
+   "December": 145
+  },
+  "2016": {
+   "January": 25,
+   "February": 42,
+   "March": 62,
+   "April": 79,
+   "May": 85,
+   "June": 93,
+   "July": 98,
+   "August": 105,
+   "September": 126,
+   "October": 134,
+   "November": 138,
+   "December": 145
+  },
+  "2015": {
+   "January": 25,
+   "February": 50,
+   "March": 67,
+   "April": 84,
+   "May": 94,
+   "June": 102,
+   "July": 108,
+   "August": 115,
+   "September": 128,
+   "October": 138,
+   "November": 139,
+   "December": 142
+  },
+  "2014": {
+   "January": 20,
+   "February": 45,
+   "March": 61,
+   "April": 79,
+   "May": 93,
+   "June": 102,
+   "July": 109,
+   "August": 114,
+   "September": 124,
+   "October": 131,
+   "November": 135,
+   "December": 144
+  },
+  "2013": {
+   "January": 23,
+   "February": 42,
+   "March": 56,
+   "April": 76,
+   "May": 90,
+   "June": 103,
+   "July": 113,
+   "August": 122,
+   "September": 134,
+   "October": 137,
+   "November": 140,
+   "December": 146
+  },
+  "2012": {
+   "January": 26,
+   "February": 48,
+   "March": 69,
+   "April": 89,
+   "May": 96,
+   "June": 108,
+   "July": 111,
+   "August": 114,
+   "September": 128,
+   "October": 134,
+   "November": 135,
+   "December": 143
+  },
+  "2011": {
+   "January": 25,
+   "February": 47,
+   "March": 67,
+   "April": 83,
+   "May": 97,
+   "June": 108,
+   "July": 111,
+   "August": 118,
+   "September": 131,
+   "October": 137,
+   "November": 137,
+   "December": 142
+  },
+  "2010": {
+   "January": 26,
+   "February": 53,
+   "March": 66,
+   "April": 73,
+   "May": 86,
+   "June": 93,
+   "July": 101,
+   "August": 107,
+   "September": 119,
+   "October": 125,
+   "November": 130,
+   "December": 138
+  },
+  "2009": {
+   "January": 21,
+   "February": 44,
+   "March": 55,
+   "April": 76,
+   "May": 81,
+   "June": 94,
+   "July": 100,
+   "August": 106,
+   "September": 115,
+   "October": 126,
+   "November": 128,
+   "December": 136
+  },
+  "2008": {
+   "January": 36,
+   "February": 61,
+   "March": 77,
+   "April": 81,
+   "May": 90,
+   "June": 98,
+   "July": 105,
+   "August": 116,
+   "September": 124,
+   "October": 129,
+   "November": 132,
+   "December": 146
+  },
+  "2007": {
+   "January": 31,
+   "February": 50,
+   "March": 65,
+   "April": 75,
+   "May": 79,
+   "June": 85,
+   "July": 90,
+   "August": 97,
+   "September": 112,
+   "October": 123,
+   "November": 130,
+   "December": 140
+  },
+  "2006": {
+   "January": 41,
+   "February": 59,
+   "March": 72,
+   "April": 83,
+   "May": 87,
+   "June": 94,
+   "July": 101,
+   "August": 104,
+   "September": 113,
+   "October": 117,
+   "November": 122,
+   "December": 139
+  },
+  "2005": {
+   "January": 34,
+   "February": 51,
+   "March": 62,
+   "April": 71,
+   "May": 76,
+   "June": 88,
+   "July": 97,
+   "August": 110,
+   "September": 125,
+   "October": 130,
+   "November": 130,
+   "December": 140
+  },
+  "2004": {
+   "January": 32,
+   "February": 46,
+   "March": 59,
+   "April": 75,
+   "May": 82,
+   "June": 89,
+   "July": 92,
+   "August": 99,
+   "September": 106,
+   "October": 111,
+   "November": 118,
+   "December": 121
+  },
+  "2003": {
+   "January": 40,
+   "February": 56,
+   "March": 69,
+   "April": 76,
+   "May": 86,
+   "June": 91,
+   "July": 97,
+   "August": 101,
+   "September": 109,
+   "October": 120,
+   "November": 123,
+   "December": 127
+  },
+  "2002": {
+   "January": 42,
+   "February": 50,
+   "March": 63,
+   "April": 70,
+   "May": 79,
+   "June": 82,
+   "July": 88,
+   "August": 95,
+   "September": 104,
+   "October": 112,
+   "November": 115,
+   "December": 117
+  },
+  "2001": {
+   "January": 39,
+   "February": 54,
+   "March": 64,
+   "April": 69,
+   "May": 85,
+   "June": 92,
+   "July": 101,
+   "August": 112,
+   "September": 122,
+   "October": 126,
+   "November": 130,
+   "December": 135
+  }
+ }
+}

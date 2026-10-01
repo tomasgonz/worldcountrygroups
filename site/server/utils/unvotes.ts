@@ -955,3 +955,12 @@ export function getGroupVotingData(
 
   return { cohesion, countries, pairwise }
 }
+
+/** Resolutions from the most recent `count` sessions that have recorded votes. */
+export function getRecentResolutions(count: number): Resolution[] {
+  ensureLoaded()
+  if (!_resolutions) return []
+  const sessions = [...new Set(_resolutions.map(r => r.s))].sort((a, b) => b - a).slice(0, count)
+  const keep = new Set(sessions)
+  return _resolutions.filter(r => keep.has(r.s))
+}

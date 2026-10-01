@@ -18,6 +18,38 @@
   .skeleton {
     @apply animate-pulse bg-primary-100 rounded-xl;
   }
+
+  /* Prose overrides for AI-generated markdown */
+  .prose table {
+    @apply w-full text-sm border-collapse my-4;
+  }
+  .prose thead th {
+    @apply bg-primary-50 text-left text-xs font-semibold text-primary-700 px-3 py-2 border-b border-primary-200;
+  }
+  .prose tbody td {
+    @apply px-3 py-2 border-b border-primary-100 text-primary-700;
+  }
+  .prose tbody tr:hover {
+    @apply bg-primary-50/50;
+  }
+  .prose pre {
+    @apply bg-primary-50 rounded-lg border border-primary-100 text-sm overflow-x-auto my-4;
+  }
+  .prose code {
+    @apply text-sm bg-primary-50 px-1.5 py-0.5 rounded text-primary-800;
+  }
+  .prose pre code {
+    @apply bg-transparent px-0 py-0;
+  }
+  .prose blockquote {
+    @apply border-l-4 border-primary-300 pl-4 italic text-primary-600 my-4;
+  }
+  .prose ul ul, .prose ol ol, .prose ul ol, .prose ol ul {
+    @apply my-1;
+  }
+  .prose hr {
+    @apply border-primary-200 my-6;
+  }
 }
 
 .page-enter-active,

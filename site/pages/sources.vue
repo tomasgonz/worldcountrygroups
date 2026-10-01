@@ -237,7 +237,7 @@
         <div class="space-y-4 text-sm text-primary-600">
           <div>
             <h3 class="font-semibold text-primary-800 mb-1">GA High-Level General Debate</h3>
-            <p>Full-text speeches from the <a href="https://gadebate.un.org/" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">UN General Assembly General Debate</a> (High-Level Week), covering sessions 75&ndash;79 (2020&ndash;2024). PDF statements are downloaded and converted to text using pdf-parse.</p>
+            <p>Full-text speeches from the <a href="https://gadebate.un.org/" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">UN General Assembly General Debate</a> (High-Level Week), covering 1946&ndash;2026. Sessions 25&ndash;79 come from the Harvard Dataverse UN General Debate Corpus. Sessions 80&ndash;81 (2025&ndash;2026) come directly from gadebate.un.org, with speaker names, dates and UN Meetings Coverage summaries.</p>
           </div>
           <div>
             <h3 class="font-semibold text-primary-800 mb-1">Keyword Extraction</h3>
@@ -421,7 +421,7 @@
           <div>
             <h3 class="font-semibold text-primary-900 mb-2">UN General Debate Speeches</h3>
             <div class="text-sm text-primary-600 space-y-2">
-              <p>Speech PDFs are downloaded from <strong>gadebate.un.org</strong> for each country and session. Text is extracted using <code class="bg-primary-100 px-1.5 py-0.5 rounded text-xs">pdf-parse</code> (based on Mozilla PDF.js). PDFs that yield fewer than 100 characters of text (likely scanned images) are skipped.</p>
+              <p>Speech PDFs are downloaded from <strong>gadebate.un.org</strong> for each country and session. The official English PDF is used when it extracts as readable English. Otherwise the UN&rsquo;s AI-generated English transcript of the delivered speech is used, and the original-language PDF is the last resort. Each speech records which source was used.</p>
               <p><strong>Keyword extraction</strong> uses frequency-based analysis:</p>
               <ol class="list-decimal list-inside space-y-1 ml-2">
                 <li>Text is lowercased and split into words (minimum 4 characters).</li>

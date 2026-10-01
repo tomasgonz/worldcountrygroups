@@ -11,6 +11,8 @@ interface CountryMedia {
   avg_tone: number
   article_volume: number
   monthly_trend: MonthlyTrend
+  /** What article_volume measures, e.g. "Last 12 months" or "Event mentions, last 7 days" */
+  volume_period?: string
 }
 
 interface CountryEvents {

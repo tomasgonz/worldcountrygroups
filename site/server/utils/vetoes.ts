@@ -1,3 +1,4 @@
+import { readDataFile } from '~/server/utils/data-file'
 import { readFileSync, existsSync } from 'fs'
 import { join } from 'path'
 
@@ -27,17 +28,8 @@ function resolve(primary: string, alt: string): string | null {
 }
 
 function ensureLoaded(): void {
-  if (_data !== null) return
-  const filePath = resolve(DATA_FILE, DATA_FILE_ALT)
-  if (!filePath) {
-    _data = { _meta: { last_updated: '', total_vetoes: 0 }, vetoes: [] }
-    return
-  }
-  try {
-    _data = JSON.parse(readFileSync(filePath, 'utf-8'))
-  } catch {
-    _data = { _meta: { last_updated: '', total_vetoes: 0 }, vetoes: [] }
-  }
+  // Re-read when the scheduled fetcher rewrites the file
+  _data = readDataFile('unsc-vetoes.json') ?? { _meta: { last_updated: '', total_vetoes: 0 }, vetoes: [] }
 }
 
 export function getAllVetoes(): VetoData {

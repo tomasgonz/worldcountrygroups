@@ -1,0 +1,873 @@
+#!/usr/bin/env python3
+"""Fetch diplomatic news from configurable sources.
+
+Reads source list from site/server/data/news-config.json.
+Supports RSS, Atom, GDELT JSON API, and the state.gov sitemap scraper.
+Tags articles with country ISO3 codes.
+
+Output: site/server/data/news-feed.json
+"""
+
+import gzip
+import hashlib
+import json
+import os
+import re
+import sys
+from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
+from urllib.request import urlopen, Request
+from xml.etree import ElementTree
+
+DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "site", "server", "data")
+OUTPUT_FILE = os.path.join(DATA_DIR, "news-feed.json")
+STATS_FILE = os.path.join(DATA_DIR, "country-stats.json")
+CONFIG_FILE = os.path.join(DATA_DIR, "news-config.json")
+
+MAX_ARTICLES = 500
+REQUEST_TIMEOUT = 30
+
+# Manual aliases for country name matching
+ALIASES = {
+    "US": "USA", "U.S.": "USA", "America": "USA", "United States of America": "USA",
+    "UK": "GBR", "U.K.": "GBR", "Britain": "GBR", "Great Britain": "GBR",
+    "Russia": "RUS", "Russian Federation": "RUS",
+    "China": "CHN", "People's Republic of China": "CHN", "PRC": "CHN",
+    "Iran": "IRN", "Islamic Republic of Iran": "IRN",
+    "Syria": "SYR", "Syrian Arab Republic": "SYR",
+    "North Korea": "PRK", "DPRK": "PRK",
+    "South Korea": "KOR", "Republic of Korea": "KOR",
+    "Taiwan": "TWN",
+    "Venezuela": "VEN", "Bolivarian Republic of Venezuela": "VEN",
+    "Bolivia": "BOL", "Plurinational State of Bolivia": "BOL",
+    "Tanzania": "TZA", "United Republic of Tanzania": "TZA",
+    "Congo": "COD", "DRC": "COD", "DR Congo": "COD",
+    "Ivory Coast": "CIV", "Cote d'Ivoire": "CIV",
+    "Myanmar": "MMR", "Burma": "MMR",
+    "Palestine": "PSE", "Palestinian": "PSE", "Gaza": "PSE", "West Bank": "PSE",
+    "Israel": "ISR", "Israeli": "ISR",
+    "Ukraine": "UKR", "Ukrainian": "UKR",
+    "Yemen": "YEM", "Yemeni": "YEM",
+    "Libya": "LBY", "Libyan": "LBY",
+    "Somalia": "SOM", "Somali": "SOM",
+    "Sudan": "SDN", "Sudanese": "SDN",
+    "South Sudan": "SSD",
+    "Ethiopia": "ETH", "Ethiopian": "ETH",
+    "Afghanistan": "AFG", "Afghan": "AFG",
+    "Iraq": "IRQ", "Iraqi": "IRQ",
+    "Lebanon": "LBN", "Lebanese": "LBN",
+    "Saudi Arabia": "SAU", "Saudi": "SAU",
+    "UAE": "ARE", "Emirati": "ARE",
+    "Turkey": "TUR", "Türkiye": "TUR", "Turkish": "TUR",
+    "Egypt": "EGY", "Egyptian": "EGY",
+    "Morocco": "MAR", "Moroccan": "MAR",
+    "Algeria": "DZA", "Algerian": "DZA",
+    "Tunisia": "TUN", "Tunisian": "TUN",
+    "Pakistan": "PAK", "Pakistani": "PAK",
+    "India": "IND", "Indian": "IND",
+    "Japan": "JPN", "Japanese": "JPN",
+    "Germany": "DEU", "German": "DEU",
+    "France": "FRA", "French": "FRA",
+    "Brazil": "BRA", "Brazilian": "BRA",
+    "Mexico": "MEX", "Mexican": "MEX",
+    "Nigeria": "NGA", "Nigerian": "NGA",
+    "Kenya": "KEN", "Kenyan": "KEN",
+    "South Africa": "ZAF",
+    "Colombia": "COL", "Colombian": "COL",
+    "Mali": "MLI", "Malian": "MLI",
+    "Niger": "NER", "Nigerien": "NER",
+    "Burkina Faso": "BFA",
+    "Cameroon": "CMR", "Cameroonian": "CMR",
+    "Chad": "TCD", "Chadian": "TCD",
+    "Mozambique": "MOZ", "Mozambican": "MOZ",
+    "Haiti": "HTI", "Haitian": "HTI",
+    "Cuba": "CUB", "Cuban": "CUB",
+}
+
+SHORT_NAMES = {"US", "UK", "UAE", "DRC", "PRC", "DPRK", "U.S.", "U.K."}
+
+
+# ---------------------------------------------------------------------------
+# Phase 1 metadata: UN bodies, source tier/type, country flags
+# ---------------------------------------------------------------------------
+
+# Each entry: (regex, body_tag). Patterns must require word boundaries for
+# acronyms so we don't false-match "ICJ" inside a longer word.
+UN_BODY_PATTERNS = [
+    (re.compile(r"\b(Security Council|UNSC)\b", re.IGNORECASE),         "UNSC"),
+    (re.compile(r"\b(General Assembly|UNGA)\b", re.IGNORECASE),         "UNGA"),
+    (re.compile(r"\bHuman Rights Council\b|\bHRC\b"),                    "HRC"),
+    (re.compile(r"\bECOSOC\b|\bEconomic and Social Council\b", re.IGNORECASE), "ECOSOC"),
+    (re.compile(r"\bInternational Court of Justice\b|\bICJ\b"),          "ICJ"),
+    (re.compile(r"\bInternational Criminal Court\b|\bICC\b"),            "ICC"),
+    (re.compile(r"\bSecretary[- ]General\b|\bSecretariat\b|\bGuterres\b", re.IGNORECASE), "SG"),
+    (re.compile(r"\bUNHCR\b|\bUN Refugee Agency\b", re.IGNORECASE),      "UNHCR"),
+    (re.compile(r"\bUNICEF\b", re.IGNORECASE),                           "UNICEF"),
+    (re.compile(r"\bUNRWA\b", re.IGNORECASE),                            "UNRWA"),
+    (re.compile(r"\bOCHA\b|\bHumanitarian Affairs\b", re.IGNORECASE),    "OCHA"),
+    (re.compile(r"\bWHO\b|\bWorld Health Organization\b"),                "WHO"),
+    (re.compile(r"\bWFP\b|\bWorld Food Programme\b", re.IGNORECASE),     "WFP"),
+    (re.compile(r"\bFAO\b|\bFood and Agriculture Organization\b", re.IGNORECASE), "FAO"),
+    (re.compile(r"\bUNDP\b|\bUN Development Programme\b", re.IGNORECASE),"UNDP"),
+    (re.compile(r"\bUNESCO\b", re.IGNORECASE),                           "UNESCO"),
+    (re.compile(r"\bIAEA\b|\bInternational Atomic Energy Agency\b", re.IGNORECASE), "IAEA"),
+    (re.compile(r"\bILO\b|\bInternational Labour Organization\b", re.IGNORECASE), "ILO"),
+    (re.compile(r"\bOHCHR\b|\bHigh Commissioner for Human Rights\b", re.IGNORECASE), "OHCHR"),
+    (re.compile(r"\bIOM\b|\bInternational Organization for Migration\b", re.IGNORECASE), "IOM"),
+    (re.compile(r"\bUNCTAD\b", re.IGNORECASE),                           "UNCTAD"),
+    (re.compile(r"\bDPPA\b|\bPolitical and Peacebuilding Affairs\b", re.IGNORECASE), "DPPA"),
+    (re.compile(r"\bUN Peacekeep|\bpeacekeeping\b|\bMINUSMA\b|\bMONUSCO\b|\bUNIFIL\b|\bUNAMA\b|\bUNAMI\b", re.IGNORECASE), "PEACEKEEPING"),
+    (re.compile(r"\bWTO\b|\bWorld Trade Organization\b", re.IGNORECASE), "WTO"),
+    (re.compile(r"\bIMF\b|\bInternational Monetary Fund\b", re.IGNORECASE), "IMF"),
+    (re.compile(r"\bWorld Bank\b|\bIBRD\b"),                              "WORLD_BANK"),
+    # Reform / governance / budget / development buckets — added per UN-staff request
+    (re.compile(r"\bUN ?80\b|\bPact for the Future\b|\bSummit of the Future\b|\bUN reform\b", re.IGNORECASE), "UN80_REFORM"),
+    (re.compile(r"\bFifth Committee\b|\bACABQ\b|\bregular budget\b|\bscale of assessments\b|\bpeacekeeping budget\b|\bprogramme budget\b", re.IGNORECASE), "FIFTH_COMMITTEE"),
+    (re.compile(r"\b(Sustainable Development Goals?|SDGs?|HLPF|High[- ]Level Political Forum)\b"), "SDGS"),
+    (re.compile(r"\bFinancing for Development\b|\bFfD\b|\bMonterrey Consensus\b|\bAddis Ababa Action Agenda\b"), "FFD"),
+]
+
+
+def extract_un_body_tags(text):
+    if not text:
+        return []
+    tags = []
+    for pat, name in UN_BODY_PATTERNS:
+        if pat.search(text):
+            tags.append(name)
+    return tags
+
+
+# Per-source tier (1=most authoritative) and semantic type.
+# tier:  1 official-UN/IO, 2 government/MFA, 3 specialist analysis, 4 wire, 5 aggregator
+# type:  official | mfa | think-tank | specialist-media | wire | aggregator | regional-news | regional-org
+TIER_TYPE_MAP = {
+    "un-news":             {"tier": 1, "type": "official"},
+    "un-sdg":              {"tier": 1, "type": "official"},
+    "passblue":            {"tier": 3, "type": "specialist-media"},
+    "gdelt":               {"tier": 5, "type": "aggregator"},
+    "uk-fcdo":             {"tier": 2, "type": "mfa"},
+    "al-jazeera":          {"tier": 4, "type": "wire"},
+    "the-diplomat":        {"tier": 3, "type": "specialist-media"},
+    "crisis-group":        {"tier": 3, "type": "think-tank"},
+    "global-voices":       {"tier": 4, "type": "wire"},
+    "africanews":          {"tier": 4, "type": "regional-news"},
+    "islands-business":    {"tier": 4, "type": "regional-news"},
+    "adb-news":            {"tier": 1, "type": "official"},
+    "france24":            {"tier": 4, "type": "wire"},
+    "dw-news":             {"tier": 4, "type": "wire"},
+    "google-news-diplomacy":{"tier": 5, "type": "aggregator"},
+    "us-state-dept":       {"tier": 2, "type": "official"},
+    "tass":                {"tier": 2, "type": "official"},
+    "ecfr":                {"tier": 3, "type": "think-tank"},
+    "atlantic-council":    {"tier": 3, "type": "think-tank"},
+    "foreign-policy":      {"tier": 3, "type": "specialist-media"},
+    "mercopress":          {"tier": 4, "type": "regional-news"},
+    "the-new-humanitarian":{"tier": 3, "type": "specialist-media"},
+    "reuters-un":          {"tier": 4, "type": "wire"},
+    "ap-un":               {"tier": 4, "type": "wire"},
+    "geneva-solutions":    {"tier": 3, "type": "specialist-media"},
+    "un-reform":           {"tier": 5, "type": "aggregator"},
+    "un-budget":           {"tier": 5, "type": "aggregator"},
+    "un-development":      {"tier": 5, "type": "aggregator"},
+    "oas":                 {"tier": 3, "type": "regional-org"},
+    "arab-league":         {"tier": 3, "type": "regional-org"},
+    "osce":                {"tier": 3, "type": "regional-org"},
+    "sco":                 {"tier": 3, "type": "regional-org"},
+    "celac":               {"tier": 3, "type": "regional-org"},
+    "oic":                 {"tier": 3, "type": "regional-org"},
+}
+
+
+def load_country_flags():
+    """Load site/server/data/country-flags.json. Returns a dict mapping
+    iso3 country code -> list of flag names (e.g. 'is_p5', 'is_unsc_current')."""
+    flags_file = os.path.join(DATA_DIR, "country-flags.json")
+    if not os.path.exists(flags_file):
+        return {}
+    try:
+        with open(flags_file, "r") as f:
+            raw = json.load(f)
+    except Exception:
+        return {}
+    out = {}
+    for key, val in raw.items():
+        if key.startswith("_") or not isinstance(val, list):
+            continue
+        for iso3 in val:
+            out.setdefault(iso3, []).append(key)
+    return out
+
+
+def compute_country_flags(country_iso3_list, flags_lookup):
+    if not country_iso3_list or not flags_lookup:
+        return []
+    flags = set()
+    for iso3 in country_iso3_list:
+        for f in flags_lookup.get(iso3, []):
+            flags.add(f)
+    return sorted(flags)
+
+
+def enrich_article(article, *, now_iso, country_flags_lookup, existing=None):
+    """Add Phase 1 metadata fields to an article record (modifies and returns it).
+
+    existing: the previous version of the article from the prior fetch, if any.
+              Used to preserve firstSeenAt across re-fetches.
+    """
+    sid = article.get("source", "")
+    tier_type = TIER_TYPE_MAP.get(sid, {"tier": 5, "type": "wire"})
+
+    article["language"] = article.get("language", "en")
+    article["sourceTier"] = tier_type["tier"]
+    article["sourceType"] = tier_type["type"]
+
+    text = f"{article.get('title','')} {article.get('description','')}"
+    article["unBodyTags"] = extract_un_body_tags(text)
+
+    article["countryFlags"] = compute_country_flags(article.get("countries", []), country_flags_lookup)
+
+    # sourceUpdatedAt mirrors publishedAt for now; Phase 2 will distinguish them.
+    article["sourceUpdatedAt"] = article.get("publishedAt", now_iso)
+
+    # firstSeenAt: preserve existing if we've seen this article before.
+    if existing and existing.get("firstSeenAt"):
+        article["firstSeenAt"] = existing["firstSeenAt"]
+    else:
+        article["firstSeenAt"] = article.get("firstSeenAt") or now_iso
+
+    return article
+
+
+def build_country_map():
+    """Build name->ISO3 lookup from country-stats.json + aliases."""
+    mapping = dict(ALIASES)
+    if os.path.exists(STATS_FILE):
+        try:
+            with open(STATS_FILE, "r") as f:
+                stats = json.load(f)
+            for iso2, info in stats.items():
+                if iso2.startswith("_"):
+                    continue
+                name = info.get("name", "")
+                iso3 = info.get("iso3", "")
+                if name and iso3:
+                    mapping[name] = iso3
+        except Exception as e:
+            print(f"Warning: could not read country-stats.json: {e}", file=sys.stderr)
+    return mapping
+
+
+def compile_country_patterns(mapping):
+    """Build compiled regex patterns for each country name."""
+    patterns = []
+    for name, iso3 in mapping.items():
+        if name in SHORT_NAMES or len(name) <= 3:
+            pat = re.compile(r'\b' + re.escape(name) + r'\b', re.IGNORECASE)
+        else:
+            pat = re.compile(re.escape(name), re.IGNORECASE)
+        patterns.append((pat, iso3))
+    patterns.sort(key=lambda x: -len(x[0].pattern))
+    return patterns
+
+
+def tag_countries(text, patterns):
+    """Return set of ISO3 codes found in text."""
+    if not text:
+        return set()
+    found = set()
+    for pat, iso3 in patterns:
+        if pat.search(text):
+            found.add(iso3)
+    return found
+
+
+def make_id(title, url):
+    """Generate a stable article ID."""
+    key = f"{title}|{url}"
+    return hashlib.md5(key.encode()).hexdigest()[:12]
+
+
+def parse_rss_date(date_str):
+    """Parse an RSS date string to ISO format."""
+    if not date_str:
+        return datetime.now(timezone.utc).isoformat()
+    try:
+        dt = parsedate_to_datetime(date_str)
+        return dt.isoformat()
+    except Exception:
+        # Try ISO format
+        try:
+            dt = datetime.fromisoformat(date_str.replace("Z", "+00:00"))
+            return dt.isoformat()
+        except Exception:
+            return datetime.now(timezone.utc).isoformat()
+
+
+def detect_topics(title, description):
+    """Detect broad topic categories from text."""
+    text = f"{title} {description}".lower()
+    topics = []
+    topic_keywords = {
+        "peace-and-security": ["peace", "security", "conflict", "ceasefire", "war", "military", "weapon", "arms", "terrorism", "peacekeep"],
+        "human-rights": ["human rights", "rights", "discrimination", "refugee", "migrant", "asylum", "torture", "detention", "freedom"],
+        "climate-environment": ["climate", "environment", "carbon", "emission", "biodiversity", "pollution", "sustainable", "green"],
+        "humanitarian": ["humanitarian", "aid", "crisis", "famine", "drought", "flood", "disaster", "relief", "hunger"],
+        "development": ["development", "poverty", "economic", "trade", "sdg", "infrastructure", "education", "health"],
+        "governance": ["governance", "democracy", "election", "corruption", "reform", "rule of law", "institution"],
+        "sanctions": ["sanction", "embargo", "restriction", "ban", "blacklist", "penalty"],
+        "nuclear": ["nuclear", "atomic", "nonproliferation", "iaea", "uranium", "enrichment"],
+        "diplomacy": ["diplomat", "treaty", "agreement", "summit", "negotiation", "bilateral", "multilateral", "ambassador"],
+    }
+    for topic, keywords in topic_keywords.items():
+        if any(kw in text for kw in keywords):
+            topics.append(topic)
+    return topics[:3] if topics else ["general"]
+
+
+BROWSER_UA = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+    "AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
+)
+
+
+def fetch_url(url, accept=None, user_agent="WCG-NewsFetcher/1.0"):
+    """Fetch URL content with timeout and user agent. Handles gzip responses."""
+    headers = {
+        "User-Agent": user_agent,
+        "Accept-Encoding": "gzip, identity",
+    }
+    if accept:
+        headers["Accept"] = accept
+    req = Request(url, headers=headers)
+    try:
+        with urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
+            raw = resp.read()
+            # Decompress gzip if needed
+            encoding = resp.headers.get("Content-Encoding", "")
+            if encoding == "gzip" or raw[:2] == b'\x1f\x8b':
+                try:
+                    raw = gzip.decompress(raw)
+                except Exception:
+                    pass
+            return raw
+    except Exception as e:
+        print(f"Error fetching {url}: {e}", file=sys.stderr)
+        return None
+
+
+def fetch_rss(url, source_id, patterns, user_agent="WCG-NewsFetcher/1.0"):
+    """Fetch and parse an RSS or Atom feed. Works for both formats."""
+    articles = []
+    data = fetch_url(url, user_agent=user_agent)
+    if not data:
+        raise Exception(f"Failed to fetch {url}")
+
+    try:
+        root = ElementTree.fromstring(data)
+    except ElementTree.ParseError as e:
+        raise Exception(f"XML parse error: {e}")
+
+    # Detect namespaces from root tag
+    ns = {}
+    tag = root.tag
+    is_rdf = False
+    if tag.startswith('{'):
+        root_ns = tag.split('}')[0].strip('{')
+        if 'rdf' in root_ns.lower():
+            is_rdf = True
+        elif 'Atom' in root_ns or 'atom' in root_ns:
+            ns['atom'] = root_ns
+
+    # Try RSS 2.0 items first
+    items = list(root.iter("item"))
+
+    # Try RDF/RSS 1.0 namespaced items
+    if not items and is_rdf:
+        rss10_ns = 'http://purl.org/rss/1.0/'
+        items = root.findall(f"{{{rss10_ns}}}item")
+        if items:
+            ns['rss10'] = rss10_ns
+
+    # Try Atom entries
+    is_atom = False
+    if not items:
+        if ns.get('atom'):
+            items = root.findall(f"{{{ns['atom']}}}entry")
+        else:
+            items = list(root.iter("entry"))
+        is_atom = bool(items)
+
+    dc_ns = 'http://purl.org/dc/elements/1.1/'
+
+    for item in items:
+        if is_atom and ns.get('atom'):
+            ans = ns['atom']
+            title = (item.findtext(f"{{{ans}}}title") or "").strip()
+            # Atom links are in <link> elements with href attribute
+            link_el = item.find(f"{{{ans}}}link[@rel='alternate']")
+            if link_el is None:
+                link_el = item.find(f"{{{ans}}}link")
+            link = (link_el.get("href", "") if link_el is not None else "").strip()
+            desc = (item.findtext(f"{{{ans}}}summary") or item.findtext(f"{{{ans}}}content") or "").strip()
+            pub_date = (item.findtext(f"{{{ans}}}updated") or item.findtext(f"{{{ans}}}published") or "").strip()
+        elif is_atom:
+            title = (item.findtext("title") or "").strip()
+            link_el = item.find("link[@rel='alternate']")
+            if link_el is None:
+                link_el = item.find("link")
+            link = (link_el.get("href", "") if link_el is not None else "").strip()
+            desc = (item.findtext("summary") or item.findtext("content") or "").strip()
+            pub_date = (item.findtext("updated") or item.findtext("published") or "").strip()
+        elif ns.get('rss10'):
+            rns = ns['rss10']
+            title = (item.findtext(f"{{{rns}}}title") or "").strip()
+            link = (item.findtext(f"{{{rns}}}link") or "").strip()
+            desc = (item.findtext(f"{{{rns}}}description") or "").strip()
+            pub_date = (item.findtext(f"{{{dc_ns}}}date") or "").strip()
+        else:
+            title = (item.findtext("title") or "").strip()
+            link = (item.findtext("link") or "").strip()
+            desc = (item.findtext("description") or "").strip()
+            pub_date = (item.findtext("pubDate") or "").strip()
+
+        # Strip HTML tags from description
+        desc = re.sub(r"<[^>]+>", "", desc).strip()
+
+        if not title or not link:
+            continue
+
+        text = f"{title} {desc}"
+        countries = tag_countries(text, patterns)
+
+        articles.append({
+            "id": make_id(title, link),
+            "title": title,
+            "description": desc[:300],
+            "url": link,
+            "source": source_id,
+            "publishedAt": parse_rss_date(pub_date),
+            "countries": sorted(countries),
+            "topics": detect_topics(title, desc),
+        })
+
+    return articles
+
+
+def fetch_gdelt(url, source_id, patterns):
+    """Fetch articles from GDELT DOC API."""
+    articles = []
+    data = fetch_url(url, accept="application/json")
+    if not data:
+        raise Exception("Failed to fetch GDELT API")
+
+    try:
+        result = json.loads(data)
+    except json.JSONDecodeError as e:
+        raise Exception(f"JSON parse error: {e}")
+
+    for item in result.get("articles", []):
+        title = (item.get("title") or "").strip()
+        article_url = (item.get("url") or "").strip()
+        seendate = item.get("seendate", "")
+
+        if not title or not article_url:
+            continue
+
+        try:
+            dt = datetime.strptime(seendate, "%Y%m%dT%H%M%SZ").replace(tzinfo=timezone.utc)
+            published = dt.isoformat()
+        except Exception:
+            published = datetime.now(timezone.utc).isoformat()
+
+        domain = item.get("domain", "")
+        text = f"{title} {domain}"
+        countries = tag_countries(text, patterns)
+
+        articles.append({
+            "id": make_id(title, article_url),
+            "title": title,
+            "description": "",
+            "url": article_url,
+            "source": source_id,
+            "publishedAt": published,
+            "countries": sorted(countries),
+            "topics": detect_topics(title, ""),
+        })
+
+    return articles
+
+
+_OG_TITLE_RE = re.compile(
+    r'<meta[^>]+property=["\']og:title["\'][^>]+content=["\']([^"\']+)["\']',
+    re.IGNORECASE,
+)
+_OG_DESC_RE = re.compile(
+    r'<meta[^>]+property=["\']og:description["\'][^>]+content=["\']([^"\']+)["\']',
+    re.IGNORECASE,
+)
+
+
+def _html_unescape(s):
+    return (
+        s.replace("&amp;", "&")
+         .replace("&lt;", "<")
+         .replace("&gt;", ">")
+         .replace("&quot;", '"')
+         .replace("&#039;", "'")
+         .replace("&#8217;", "’")
+         .replace("&hellip;", "…")
+    )
+
+
+def fetch_state_dept(sitemap_index_url, source_id, patterns, limit=20):
+    """Scrape recent state.gov press releases via their WordPress sitemap.
+
+    state.gov has discontinued usable press-release RSS feeds; the press-releases
+    page is JS-rendered. The press_release sitemap is paginated; the highest-
+    numbered sub-sitemap holds the newest URLs. For each recent URL we pull
+    og:title + og:description from the page itself.
+    """
+    articles = []
+    index_xml = fetch_url(sitemap_index_url, user_agent=BROWSER_UA)
+    if not index_xml:
+        raise Exception(f"Failed to fetch sitemap index {sitemap_index_url}")
+
+    # Find all state_press_release sub-sitemaps. WordPress paginates these by age,
+    # but the index's <lastmod> values are often identical, so we can't reliably
+    # pick "the newest one" — instead, read all of them and sort URLs by lastmod.
+    sub_pat = re.compile(
+        r"<loc>(https://www\.state\.gov/state_press_release-sitemap\d*\.xml)</loc>",
+        re.IGNORECASE,
+    )
+    sub_urls = sub_pat.findall(index_xml.decode("utf-8", errors="replace"))
+    if not sub_urls:
+        raise Exception("No state_press_release-sitemap in index")
+
+    url_pat = re.compile(
+        r"<url>\s*<loc>([^<]+)</loc>\s*<lastmod>([^<]+)</lastmod>",
+        re.IGNORECASE,
+    )
+    entries = []
+    for sub_url in sub_urls:
+        sub_xml = fetch_url(sub_url, user_agent=BROWSER_UA)
+        if not sub_xml:
+            continue
+        entries.extend(url_pat.findall(sub_xml.decode("utf-8", errors="replace")))
+    if not entries:
+        raise Exception("No press release URLs found in sub-sitemaps")
+    entries.sort(key=lambda x: x[1], reverse=True)
+    entries = entries[:limit]
+
+    for page_url, lastmod in entries:
+        html = fetch_url(page_url, user_agent=BROWSER_UA)
+        if not html:
+            continue
+        text = html.decode("utf-8", errors="replace")
+        title_m = _OG_TITLE_RE.search(text)
+        desc_m = _OG_DESC_RE.search(text)
+        if not title_m:
+            continue
+        title = _html_unescape(title_m.group(1)).strip()
+        # Strip " - United States Department of State" suffix WordPress adds
+        title = re.sub(r"\s*-\s*United States Department of State\s*$", "", title)
+        desc = _html_unescape(desc_m.group(1)).strip() if desc_m else ""
+
+        try:
+            dt = datetime.fromisoformat(lastmod.replace("Z", "+00:00"))
+            published = dt.isoformat()
+        except Exception:
+            published = datetime.now(timezone.utc).isoformat()
+
+        countries = tag_countries(f"{title} {desc}", patterns)
+        articles.append({
+            "id": make_id(title, page_url),
+            "title": title,
+            "description": desc[:300],
+            "url": page_url,
+            "source": source_id,
+            "publishedAt": published,
+            "countries": sorted(countries),
+            "topics": detect_topics(title, desc),
+        })
+
+    return articles
+
+
+def fetch_news_sitemap(sitemap_index_url, source_id, patterns, limit=30):
+    """Fetch a news source whose sitemap embeds <news:title> / <news:publication_date>.
+
+    The index points to monthly sub-sitemaps like /sitemap/YYYY-MM.xml. We pick
+    the latest (current month, or latest available), parse the inline news
+    metadata directly — no per-article fetch needed because titles live in the
+    sitemap. Works for Geneva Solutions and other Google News Sitemap publishers.
+    """
+    articles = []
+    index_xml = fetch_url(sitemap_index_url, user_agent=BROWSER_UA)
+    if not index_xml:
+        raise Exception(f"Failed to fetch sitemap index {sitemap_index_url}")
+
+    sub_pat = re.compile(r"<loc>(\S+/sitemap/\d{4}-\d{2}\.xml)</loc>", re.IGNORECASE)
+    sub_urls = sub_pat.findall(index_xml.decode("utf-8", errors="replace"))
+    if not sub_urls:
+        raise Exception("No monthly sub-sitemaps found in index")
+    # Latest by name (YYYY-MM sorts correctly as string)
+    sub_urls.sort()
+    newest = sub_urls[-1]
+
+    sub_xml = fetch_url(newest, user_agent=BROWSER_UA)
+    if not sub_xml:
+        raise Exception(f"Failed to fetch {newest}")
+
+    # Each <url> block has <loc>, <news:news> with <news:publication_date> and <news:title>
+    url_pat = re.compile(
+        r"<url>(.*?)</url>",
+        re.IGNORECASE | re.DOTALL,
+    )
+    loc_pat = re.compile(r"<loc>([^<]+)</loc>", re.IGNORECASE)
+    title_pat = re.compile(r"<news:title>\s*([^<]+?)\s*</news:title>", re.IGNORECASE)
+    pubdate_pat = re.compile(r"<news:publication_date>([^<]+)</news:publication_date>", re.IGNORECASE)
+    lastmod_pat = re.compile(r"<lastmod>([^<]+)</lastmod>", re.IGNORECASE)
+    keywords_pat = re.compile(r"<news:keywords>\s*([^<]+?)\s*</news:keywords>", re.IGNORECASE)
+
+    blocks = url_pat.findall(sub_xml.decode("utf-8", errors="replace"))
+    entries = []
+    for b in blocks:
+        loc_m = loc_pat.search(b)
+        if not loc_m:
+            continue
+        title_m = title_pat.search(b)
+        pubdate_m = pubdate_pat.search(b) or lastmod_pat.search(b)
+        keywords_m = keywords_pat.search(b)
+        entries.append({
+            "url": loc_m.group(1),
+            "title": title_m.group(1) if title_m else "",
+            "date": pubdate_m.group(1) if pubdate_m else "",
+            "keywords": keywords_m.group(1) if keywords_m else "",
+        })
+
+    # Newest first
+    entries.sort(key=lambda e: e["date"], reverse=True)
+    entries = entries[:limit]
+
+    for e in entries:
+        try:
+            dt = datetime.fromisoformat(e["date"].replace("Z", "+00:00"))
+            published = dt.isoformat()
+        except Exception:
+            published = datetime.now(timezone.utc).isoformat()
+
+        title = _html_unescape(e["title"]).strip()
+        desc = e["keywords"]
+        # Google News Sitemap spec only includes <news:news> for items <48h old.
+        # For older items, fetch the page to extract og:title / og:description.
+        if not title:
+            html = fetch_url(e["url"], user_agent=BROWSER_UA)
+            if html:
+                text = html.decode("utf-8", errors="replace")
+                tm = _OG_TITLE_RE.search(text)
+                if tm:
+                    title = _html_unescape(tm.group(1)).strip()
+                    title = re.sub(r"\s*[-|]\s*Geneva Solutions\s*$", "", title)
+                dm = _OG_DESC_RE.search(text)
+                if dm and not desc:
+                    desc = _html_unescape(dm.group(1)).strip()
+        if not title:
+            continue
+
+        countries = tag_countries(f"{title} {desc}", patterns)
+        articles.append({
+            "id": make_id(title, e["url"]),
+            "title": title,
+            "description": desc[:300],
+            "url": e["url"],
+            "source": source_id,
+            "publishedAt": published,
+            "countries": sorted(countries),
+            "topics": detect_topics(title, desc),
+        })
+
+    return articles
+
+
+def load_news_config():
+    """Load news source configuration from JSON file."""
+    if os.path.exists(CONFIG_FILE):
+        try:
+            with open(CONFIG_FILE, "r") as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"Warning: could not read news-config.json: {e}", file=sys.stderr)
+    return None
+
+
+def save_news_config(config):
+    """Save news source configuration back to JSON file."""
+    os.makedirs(DATA_DIR, exist_ok=True)
+    with open(CONFIG_FILE, "w") as f:
+        json.dump(config, f, indent=2, ensure_ascii=False)
+
+
+def update_source_status(config, source_id, article_count=0, error=None):
+    """Update lastFetch / lastError / articleCount for a source in the config."""
+    for source in config.get("sources", []):
+        if source["id"] == source_id:
+            source["lastFetch"] = datetime.now(timezone.utc).isoformat()
+            source["lastError"] = error
+            source["articleCount"] = article_count
+            break
+
+
+def main():
+    print(f"Fetching diplomatic news... ({datetime.now(timezone.utc).isoformat()})")
+
+    country_map = build_country_map()
+    patterns = compile_country_patterns(country_map)
+    print(f"  Country patterns: {len(patterns)}")
+
+    # Load config
+    config = load_news_config()
+    if config and config.get("sources"):
+        sources = [s for s in config["sources"] if s.get("enabled", True)]
+        max_articles = config.get("maxArticles", MAX_ARTICLES)
+        print(f"  Config loaded: {len(sources)} enabled sources (of {len(config['sources'])} total)")
+    else:
+        print("  No config found, using defaults")
+        sources = []
+        max_articles = MAX_ARTICLES
+        config = None
+
+    # Fetch from all sources
+    all_articles = []
+
+    if sources:
+        for source in sources:
+            sid = source["id"]
+            stype = source.get("type", "rss")
+            url = source["url"]
+            name = source.get("name", sid)
+
+            ua_pref = source.get("userAgent")
+            ua = BROWSER_UA if ua_pref == "browser" else (ua_pref or "WCG-NewsFetcher/1.0")
+
+            try:
+                if stype == "json-api":
+                    articles = fetch_gdelt(url, sid, patterns)
+                elif stype == "state-sitemap":
+                    articles = fetch_state_dept(url, sid, patterns)
+                elif stype == "news-sitemap":
+                    articles = fetch_news_sitemap(url, sid, patterns)
+                else:
+                    articles = fetch_rss(url, sid, patterns, user_agent=ua)
+
+                all_articles.extend(articles)
+                print(f"  {name}: {len(articles)} articles")
+
+                if config:
+                    update_source_status(config, sid, article_count=len(articles))
+
+            except Exception as e:
+                err_msg = str(e)
+                print(f"  {name}: ERROR - {err_msg}", file=sys.stderr)
+                if config:
+                    update_source_status(config, sid, error=err_msg)
+    else:
+        # Fallback to hardcoded sources if no config
+        from urllib.request import urlopen  # noqa: already imported
+
+        UN_NEWS_RSS = "https://news.un.org/feed/subscribe/en/news/all/rss.xml"
+        PASSBLUE_RSS = "https://www.passblue.com/feed/"
+        GDELT_URL = (
+            "https://api.gdeltproject.org/api/v2/doc/doc"
+            "?query=diplomacy+OR+%22united+nations%22+OR+sanctions+OR+treaty"
+            "&mode=ArtList&maxrecords=50&format=json&timespan=24h"
+        )
+
+        try:
+            all_articles.extend(fetch_rss(UN_NEWS_RSS, "un-news", patterns))
+        except Exception as e:
+            print(f"  UN News: ERROR - {e}", file=sys.stderr)
+        try:
+            all_articles.extend(fetch_rss(PASSBLUE_RSS, "passblue", patterns))
+        except Exception as e:
+            print(f"  PassBlue: ERROR - {e}", file=sys.stderr)
+        try:
+            all_articles.extend(fetch_gdelt(GDELT_URL, "gdelt", patterns))
+        except Exception as e:
+            print(f"  GDELT: ERROR - {e}", file=sys.stderr)
+
+    # Save updated config with lastFetch/lastError/articleCount
+    if config:
+        save_news_config(config)
+
+    # Load existing data for merge
+    existing_by_id = {}
+    if os.path.exists(OUTPUT_FILE):
+        try:
+            with open(OUTPUT_FILE, "r") as f:
+                existing = json.load(f)
+            for a in existing.get("articles", []):
+                existing_by_id[a["id"]] = a
+        except Exception:
+            pass
+
+    # Phase 1 metadata enrichment: load lookups, then enrich each article.
+    country_flags_lookup = load_country_flags()
+    now_iso = datetime.now(timezone.utc).isoformat()
+
+    # Deduplicate: new articles override existing, but preserve firstSeenAt
+    for a in all_articles:
+        existing = existing_by_id.get(a["id"])
+        enrich_article(a, now_iso=now_iso, country_flags_lookup=country_flags_lookup, existing=existing)
+        existing_by_id[a["id"]] = a
+
+    # Backfill metadata on items that weren't re-fetched this run (so we don't have
+    # mixed-schema records in the file).
+    for a in existing_by_id.values():
+        if "sourceTier" not in a:
+            enrich_article(a, now_iso=now_iso, country_flags_lookup=country_flags_lookup, existing=a)
+
+    # Sort by date desc, keep max. Parse to tz-aware datetime so sources in
+    # different timezones compare on real instant, not raw ISO string.
+    _epoch = datetime(1970, 1, 1, tzinfo=timezone.utc)
+
+    def _sort_key(article):
+        s = article.get("publishedAt", "")
+        try:
+            dt = datetime.fromisoformat(s.replace("Z", "+00:00"))
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            return dt
+        except Exception:
+            return _epoch
+
+    merged = sorted(existing_by_id.values(), key=_sort_key, reverse=True)
+    merged = merged[:max_articles]
+
+    # Count unique countries covered
+    all_countries = set()
+    sources_seen = set()
+    for a in merged:
+        all_countries.update(a.get("countries", []))
+        sources_seen.add(a.get("source", ""))
+
+    output = {
+        "_meta": {
+            "last_updated": datetime.now(timezone.utc).isoformat(),
+            "sources": sorted(sources_seen),
+            "article_count": len(merged),
+            "country_coverage": len(all_countries),
+        },
+        "articles": merged,
+    }
+
+    os.makedirs(DATA_DIR, exist_ok=True)
+    with open(OUTPUT_FILE, "w") as f:
+        json.dump(output, f, indent=2, ensure_ascii=False)
+
+    print(f"  Total: {len(merged)} articles, {len(all_countries)} countries covered")
+    print(f"  Written to {OUTPUT_FILE}")
+
+
+if __name__ == "__main__":
+    main()
