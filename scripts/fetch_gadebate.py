@@ -79,6 +79,13 @@ SLUG_ALIASES = {
     "timor-leste": "TLS",
 }
 
+# Observer States / members missing codes in world.json
+EXTRA_COUNTRIES = [
+    {"name": "Holy See", "iso2": "VA", "iso3": "VAT"},
+    {"name": "State of Palestine", "iso2": "PS", "iso3": "PSE"},
+    {"name": "Democratic Republic of the Congo", "iso2": "CD", "iso3": "COD"},
+]
+
 # Pages that are not Member/Observer State statements
 NON_STATE_SLUGS = {
     "secretary-general-united-nations",
@@ -262,7 +269,9 @@ def main():
     args = ap.parse_args()
 
     world = json.load(open(WORLD_JSON))["countries"]
-    by_iso2 = {c["iso2"].lower(): c for c in world if c.get("iso2")}
+    world = [c for c in world if c.get("iso3") and c.get("iso2")]  # skip entries without codes
+    world += [c for c in EXTRA_COUNTRIES if c["iso3"] not in {w["iso3"] for w in world}]
+    by_iso2 = {c["iso2"].lower(): c for c in world}
     by_iso3 = {c["iso3"]: c for c in world}
     by_slug = {slugify(c["name"]): c for c in world}
 
