@@ -434,19 +434,33 @@ export async function refreshUNVotingData(): Promise<{
   const errors: string[] = []
 
   try {
-    const resp = await fetch(UN_CSV_URL)
-    if (!resp.ok || !resp.body) {
-      throw new Error(`Failed to download UN CSV: ${resp.status} ${resp.statusText}`)
+    // The UN Digital Library now puts a human check in front of downloads, so a newer
+    // file downloaded by hand into scripts/data/ (e.g. 2026_09_30_ga_voting.csv) wins.
+    const { readdirSync, createReadStream } = await import('fs')
+    const localDir = join(process.env.HOME || '/home/exedev', 'worldcountrygroups', 'scripts', 'data')
+    const localCsv = existsSync(localDir)
+      ? readdirSync(localDir).filter(f => /ga_voting.*\.csv$/i.test(f)).sort().pop()
+      : undefined
+    let sourceFile = UN_CSV_URL.split('/').pop()!
+    let input: NodeJS.ReadableStream
+    if (localCsv) {
+      sourceFile = localCsv
+      input = createReadStream(join(localDir, localCsv))
+    } else {
+      const resp = await fetch(UN_CSV_URL)
+      if (!resp.ok || !resp.body) {
+        throw new Error(`Failed to download UN CSV: ${resp.status} ${resp.statusText}`)
+      }
+      input = Readable.fromWeb(resp.body as any)
     }
 
-    _unProgress = 'Processing CSV stream...'
+    _unProgress = `Processing ${sourceFile}...`
 
     // Stream-parse the CSV line by line
     const countrySummary: Record<string, { sessions: Record<string, { yes: number; no: number; abstain: number; non_voting: number; total: number }> }> = {}
     const resolutionMap = new Map<string, { id: string; s: number; d: string; t: string; v: Record<string, string> }>()
 
-    const nodeStream = Readable.fromWeb(resp.body as any)
-    const rl = createInterface({ input: nodeStream, crlfDelay: Infinity })
+    const rl = createInterface({ input, crlfDelay: Infinity })
 
     let headers: string[] = []
     let lineCount = 0
@@ -516,7 +530,7 @@ export async function refreshUNVotingData(): Promise<{
     const summaryResult: Record<string, any> = {
       _meta: {
         updated_at: now,
-        source_file: '2026_02_06_ga_voting.csv',
+        source_file: sourceFile,
         total_resolutions: resolutionMap.size,
         sessions: [...sessions].sort((a, b) => a - b),
         country_count: Object.keys(countrySummary).length,

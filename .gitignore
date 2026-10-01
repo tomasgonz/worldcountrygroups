@@ -44,3 +44,6 @@ site/server/data/statements-feed.json
 
 # Downloaded speech PDFs for every session (large, reproducible)
 site/server/data/pdfs-*/
+
+# Derived from the speech index by scripts/build_quotes.py
+site/server/data/quotes-index.json

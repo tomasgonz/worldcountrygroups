@@ -17,7 +17,7 @@ export default defineEventHandler((event) => {
   }
 
   // Public APIs needed by homepage, about, sources
-  const publicPaths = ['/api/groups', '/api/search', '/api/meta', '/api/countries', '/api/news/stats', '/api/news/feed', '/api/statements/feed', '/api/statements/stats']
+  const publicPaths = ['/api/groups', '/api/search', '/api/meta', '/api/countries', '/api/news/stats', '/api/news/feed', '/api/statements/feed', '/api/statements/stats', '/api/speeches/sessions']
   if (publicPaths.some((p) => path === p || path === p + '/')) return
 
   // AI status + pulse + anomalies + UN monitor are public (needed by homepage and /pulse)

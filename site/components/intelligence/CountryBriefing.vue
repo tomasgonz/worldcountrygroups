@@ -566,16 +566,17 @@ const showAllianceGraph = ref(false)
 const cableContent = ref('')
 const cableLoading = ref(false)
 
+const { highlight } = useBriefHighlight()
 const renderedNewsBriefing = computed(() =>
-  newsBriefingContent.value ? marked.parse(newsBriefingContent.value) as string : ''
+  newsBriefingContent.value ? marked.parse(highlight(newsBriefingContent.value)) as string : ''
 )
 
 const renderedSpeechAnalysis = computed(() =>
-  speechAnalysisContent.value ? marked.parse(speechAnalysisContent.value) as string : ''
+  speechAnalysisContent.value ? marked.parse(highlight(speechAnalysisContent.value)) as string : ''
 )
 
 const renderedCable = computed(() =>
-  cableContent.value ? marked.parse(cableContent.value) as string : ''
+  cableContent.value ? marked.parse(highlight(cableContent.value)) as string : ''
 )
 
 async function fetchCable() {

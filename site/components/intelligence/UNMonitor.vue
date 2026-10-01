@@ -530,12 +530,13 @@ function proseToHtml(text: string): string {
     .filter((p: string) => p.trim())
     .map((p: string) => `<p>${p.replace(/\n/g, ' ').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</p>`)
     .join('')
-  return boldCountries(html)
+  return html // countries, UN bodies and key terms are marked by useBriefHighlight
 }
 
-const renderedBriefing = computed(() => proseToHtml(aiBriefing.value?.overview || aiBriefing.value?.content || ''))
-const renderedNewsDigest = computed(() => proseToHtml(aiBriefing.value?.newsDigest || ''))
-const renderedStatementsDigest = computed(() => proseToHtml(aiBriefing.value?.statementsDigest || ''))
+const { highlight } = useBriefHighlight()
+const renderedBriefing = computed(() => proseToHtml(highlight(aiBriefing.value?.overview || aiBriefing.value?.content || '')))
+const renderedNewsDigest = computed(() => proseToHtml(highlight(aiBriefing.value?.newsDigest || '')))
+const renderedStatementsDigest = computed(() => proseToHtml(highlight(aiBriefing.value?.statementsDigest || '')))
 
 async function fetchAIBriefing(force = false) {
   if (aiBriefingLoading.value) return

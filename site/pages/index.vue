@@ -12,25 +12,25 @@
         <div class="max-w-lg mb-12">
           <SearchBar v-model="searchQuery" placeholder="Search countries, groups, or keywords..." />
         </div>
-        <div class="flex items-center gap-10 text-sm">
+        <div class="flex flex-wrap items-center gap-x-6 sm:gap-x-10 gap-y-4 text-sm">
           <div>
             <div class="text-3xl font-serif font-bold text-primary-900">{{ groupCount }}</div>
             <div class="text-primary-400 mt-0.5">Groups</div>
           </div>
-          <div class="w-px h-10 bg-primary-100"></div>
+          <div class="hidden sm:block w-px h-10 bg-primary-100"></div>
           <div>
             <div class="text-3xl font-serif font-bold text-primary-900">{{ countryCount }}</div>
             <div class="text-primary-400 mt-0.5">Countries</div>
           </div>
-          <div class="w-px h-10 bg-primary-100"></div>
+          <div class="hidden sm:block w-px h-10 bg-primary-100"></div>
           <div>
             <div class="text-3xl font-serif font-bold text-primary-900">5,600+</div>
             <div class="text-primary-400 mt-0.5">Resolutions</div>
           </div>
-          <div class="w-px h-10 bg-primary-100"></div>
+          <div class="hidden sm:block w-px h-10 bg-primary-100"></div>
           <div>
-            <div class="text-3xl font-serif font-bold text-primary-900">169</div>
-            <div class="text-primary-400 mt-0.5">Speeches</div>
+            <div class="text-3xl font-serif font-bold text-primary-900">{{ speechTotal ? speechTotal.toLocaleString() : '—' }}</div>
+            <div class="text-primary-400 mt-0.5">Speeches since 1946</div>
           </div>
         </div>
       </div>
@@ -98,6 +98,9 @@
 </template>
 
 <script setup lang="ts">
+const { data: speechSessions } = useFetch<any>('/api/speeches/sessions', { lazy: true, server: false })
+const speechTotal = computed(() => speechSessions.value?.totalSpeeches || 0)
+
 import { marked } from 'marked'
 import { isoToFlag } from '~/composables/useGroups'
 

@@ -299,10 +299,12 @@ export function useCountrySpeeches(iso: string | Ref<string>) {
 
 export function useCountrySpeechText(iso: string | Ref<string>, session: Ref<number | null>) {
   const code = toRef(iso)
-  const { data: speechText, pending, error, refresh } = useFetch(() => {
-    if (session.value == null) return null
-    return `/api/countries/${code.value}/speech/${session.value}`
-  }, { lazy: true, watch: [session] })
+  // Only request a text once a session is selected (a null URL would fetch "/…/null")
+  const { data: speechText, pending, error, refresh } = useAsyncData(
+    () => `speech-text-${code.value}-${session.value}`,
+    () => (session.value == null ? Promise.resolve(null) : $fetch(`/api/countries/${code.value}/speech/${session.value}`)),
+    { lazy: true, watch: [session, code] },
+  )
   return { speechText, pending, error, refresh }
 }
 

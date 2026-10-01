@@ -182,6 +182,7 @@ const navItems: NavItem[] = [
       { to: '/votes', label: 'UN Votes', desc: 'General Assembly records' },
       { to: '/conflicts', label: 'Conflicts', desc: 'Armed conflict dashboard' },
       { to: '/speeches', label: 'Speeches', desc: 'UNGA speech analysis' },
+      { to: '/quotes', label: 'Quotes', desc: 'Search leaders’ words since 1946' },
     ],
   },
   { label: 'Intelligence', to: '/intelligence' },

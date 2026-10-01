@@ -21,6 +21,21 @@
           {{ ins.overview.speeches }} statements<template v-if="ins.overview.dates">, delivered {{ fmtDate(ins.overview.dates.first) }}&ndash;{{ fmtDate(ins.overview.dates.last) }}</template>,
           analysed one by one with AI and compared with session {{ ins.prevSession ?? '—' }}<template v-if="ins.prevSession"> ({{ 1945 + ins.prevSession }})</template>.
         </p>
+        <div class="mt-5 relative max-w-md" @keydown.down.prevent="moveSel(1)" @keydown.up.prevent="moveSel(-1)" @keydown.enter.prevent="goCountry()">
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path stroke-linecap="round" d="M20 20l-3.5-3.5" /></svg>
+          <input v-model="countryQuery" type="search" role="combobox" :aria-expanded="countryMatches.length > 0" aria-label="Find a country's speeches"
+            placeholder="Find a country's speeches…" class="w-full pl-9 pr-3 py-2.5 rounded-xl ring-1 ring-primary-200 focus:ring-2 focus:ring-accent-400 focus:outline-none text-sm"
+            @blur="closeFinder" />
+          <ul v-if="countryMatches.length" class="absolute z-30 mt-1 w-full bg-white rounded-xl ring-1 ring-primary-200 shadow-lg py-1" role="listbox">
+            <li v-for="(c, i) in countryMatches" :key="c.iso3" role="option" :aria-selected="i === countrySel">
+              <NuxtLink :to="`/countries/${c.iso3.toLowerCase()}/speeches`" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-primary-50" :class="i === countrySel ? 'bg-primary-50' : ''">
+                <span>{{ c.iso2 ? isoToFlag(c.iso2) : '' }}</span><span class="text-primary-800">{{ c.name }}</span>
+                <span class="ml-auto text-[11px] text-primary-400">speeches &rarr;</span>
+              </NuxtLink>
+            </li>
+          </ul>
+        </div>
+        <NuxtLink to="/quotes" class="inline-block mt-2 text-xs text-accent-600 hover:text-accent-700">Or search 32,000 quotes from leaders &rarr;</NuxtLink>
         <p v-if="ins && ins.prevSession && !ins.models.comparable" class="mt-2 text-xs text-amber-800 bg-amber-50 ring-1 ring-amber-200 rounded-lg px-3 py-2 max-w-3xl">
           The two sessions were analysed with different AI models ({{ ins.models.current.join(', ') }} vs {{ ins.models.previous.join(', ') }}), so small year-on-year changes may reflect the model rather than the speeches.
         </p>
@@ -57,7 +72,8 @@
         <div class="card lg:col-span-3">
           <h2 class="h2">What the debate was about</h2>
           <p class="sub">Share of speeches where each theme was a high or medium priority</p>
-          <VizDumbbell :rows="themeRows" :max="100" :current-label="`${ins.year}`" :prev-label="`${ins.year - 1}`" />
+          <VizDumbbell :rows="themeRows" :max="100" :current-label="`${ins.year}`" :prev-label="`${ins.year - 1}`" clickable :selected="fTheme" @select="pickTheme" />
+          <p class="text-[11px] text-primary-400 mt-3">Select a theme to list the speeches that prioritised it, and to trace it through history below.</p>
         </div>
         <div class="card lg:col-span-2">
           <h2 class="h2">Rising and falling</h2>
@@ -104,7 +120,10 @@
 
       <!-- ===================== Quotes ===================== -->
       <section>
-        <h2 class="h2 mb-1">In their words</h2>
+        <div class="flex items-baseline justify-between">
+          <h2 class="h2 mb-1">In their words</h2>
+          <NuxtLink :to="`/quotes?from=${ins.year}&to=${ins.year}`" class="text-sm text-accent-600 hover:text-accent-700">All {{ ins.year }} quotes &rarr;</NuxtLink>
+        </div>
         <p class="sub">From the countries other speakers mentioned most</p>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <NuxtLink v-for="q in ins.quotes" :key="q.iso3" :to="`/countries/${q.iso3.toLowerCase()}/speeches`"
@@ -118,8 +137,33 @@
         </div>
       </section>
 
+      <!-- ===================== Theme through history ===================== -->
+      <section class="card">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h2 class="h2">{{ themeLabel(histTheme) }} through history</h2>
+            <p class="sub !mb-0">Share of General Debate speeches giving the theme high or medium priority, 5-year rolling average</p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <select v-model="histTheme" class="text-sm border border-primary-200 rounded-lg px-2 py-1.5" aria-label="Theme">
+              <option v-for="t in histThemes" :key="t" :value="t">{{ themeLabel(t) }}</option>
+            </select>
+            <select v-model="histGroup" class="text-sm border border-primary-200 rounded-lg px-2 py-1.5" aria-label="Compare with">
+              <option value="">All countries only</option>
+              <optgroup label="Groups"><option v-for="g in HIST_GROUPS" :key="g.id" :value="g.id">{{ g.label }}</option></optgroup>
+              <optgroup label="Countries"><option v-for="c in countryList" :key="c.iso3" :value="c.iso3">{{ c.name }}</option></optgroup>
+            </select>
+          </div>
+        </div>
+        <div class="mt-5">
+          <ChartsChartLine v-if="histLine.length" :data="histLine" :series-names="histSeries" :colors="['#2a78d6', '#eb6834']" :legend="histSeries.length > 1"
+            :height="260" :y-min="0" :y-max="100" :y-format="(v: number) => `${Math.round(v)}%`" />
+          <div v-else class="skeleton h-64 rounded-xl" />
+        </div>
+      </section>
+
       <!-- ===================== Explorer (table view) ===================== -->
-      <section class="card !p-0 overflow-hidden">
+      <section id="every-speech" class="card !p-0 overflow-hidden">
         <div class="px-6 pt-6 pb-4 border-b border-primary-100">
           <h2 class="h2">Every speech</h2>
           <p class="sub !mb-3">Filter and sort all {{ ins.speeches.length }} statements; select a row for its summary</p>
@@ -152,7 +196,7 @@
             <tbody>
               <template v-for="s in tableRows" :key="s.iso3">
                 <tr class="border-b border-primary-50 hover:bg-primary-50/60 cursor-pointer" @click="open = open === s.iso3 ? null : s.iso3">
-                  <td class="px-4 py-2.5 whitespace-nowrap"><span class="mr-1.5">{{ s.iso2 ? isoToFlag(s.iso2) : '' }}</span><span class="text-primary-900">{{ s.name }}</span></td>
+                  <td class="px-4 py-2.5 whitespace-nowrap"><span class="mr-1.5">{{ s.iso2 ? isoToFlag(s.iso2) : '' }}</span><NuxtLink :to="`/countries/${s.iso3.toLowerCase()}/speeches`" class="text-primary-900 hover:text-accent-700" @click.stop>{{ s.name }}</NuxtLink></td>
                   <td class="px-4 py-2.5 text-primary-600 hidden md:table-cell">{{ s.speaker }}<div class="text-[11px] text-primary-400">{{ s.title }}</div></td>
                   <td class="px-4 py-2.5">
                     <span class="inline-flex items-center gap-1.5 text-xs text-primary-700"><span class="w-2 h-2 rounded-full" :style="{ background: toneColor(s.tone) }" />{{ s.tone }}</span>
@@ -315,7 +359,7 @@ const moverRows = computed(() => (ins.value?.movers || []).map((t: any) => ({
   detail: [`${Math.round(t.prevShare)}% → ${Math.round(t.share)}% of speeches`],
 })))
 const mentionRows = computed(() => (ins.value?.mentioned || []).slice(0, 14).map((m: any) => ({
-  key: m.iso3, label: m.name, prefix: m.iso2 ? isoToFlag(m.iso2) : '',
+  key: m.iso3, label: m.name, href: `/countries/${m.iso3.toLowerCase()}/speeches`, prefix: m.iso2 ? isoToFlag(m.iso2) : '',
   values: { partner: m.partner, concern: m.concern, criticism: m.criticism, neutral: m.neutral }, valueLabel: String(m.total),
   detail: [`Named in ${m.total} speeches${m.prevTotal ? ` (${m.prevTotal} in ${ins.value.year - 1})` : ''}`],
 })))
@@ -355,6 +399,53 @@ const tableRows = computed(() => {
       const x = a[sortKey.value] ?? '', y = b[sortKey.value] ?? ''
       return (typeof x === 'number' ? x - y : String(x).localeCompare(String(y))) * sortDir.value
     })
+})
+
+// ---------- country finder ----------
+const countryQuery = ref('')
+const countrySel = ref(0)
+const countryList = computed(() => ((allCountries.value as any[]) || []).filter((c: any) => c.iso3).sort((a: any, b: any) => a.name.localeCompare(b.name)))
+const countryMatches = computed(() => {
+  const t = countryQuery.value.trim().toLowerCase()
+  if (!t) return []
+  return countryList.value.filter((c: any) => c.name.toLowerCase().includes(t) || c.iso3.toLowerCase() === t).slice(0, 8)
+})
+watch(countryQuery, () => { countrySel.value = 0 })
+function moveSel(d: number) { const n = countryMatches.value.length; if (n) countrySel.value = (countrySel.value + d + n) % n }
+function closeFinder() { setTimeout(() => { countryQuery.value = '' }, 150) }
+function goCountry() { const c = countryMatches.value[countrySel.value]; if (c) navigateTo(`/countries/${c.iso3.toLowerCase()}/speeches`) }
+
+// ---------- theme selection (cross-filter) ----------
+function pickTheme(t: string) {
+  fTheme.value = fTheme.value === t ? '' : t
+  if (fTheme.value) histTheme.value = t
+  if (fTheme.value && typeof document !== 'undefined') document.getElementById('every-speech')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
+// ---------- theme through history ----------
+const HIST_GROUPS = [
+  { id: 'g77', label: 'G77' }, { id: 'eu', label: 'European Union' }, { id: 'au', label: 'African Union' }, { id: 'asean', label: 'ASEAN' },
+  { id: 'ldcs', label: 'LDCs' }, { id: 'sids', label: 'SIDS' }, { id: 'lldcs', label: 'LLDCs' }, { id: 'brics', label: 'BRICS' },
+  { id: 'nato', label: 'NATO' }, { id: 'oic', label: 'OIC' }, { id: 'grulac', label: 'GRULAC' }, { id: 'unsc-p5', label: 'P5' },
+]
+const histTheme = ref('climate_change')
+const histGroup = ref('g77')
+const histThemes = computed(() => (ins.value?.themes || []).slice(0, 20).map((t: any) => t.theme))
+const { data: histRaw } = useFetch<any>('/api/speeches/theme-history', { query: computed(() => ({ theme: histTheme.value, group: histGroup.value })), lazy: true, server: false })
+function rolling(arr: (number | null | undefined)[], i: number, w = 5) {
+  const vals = arr.slice(Math.max(0, i - w + 1), i + 1).filter((v): v is number => v != null)
+  return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0
+}
+const histSeries = computed(() => (histRaw.value?.groupName ? ['All countries', histRaw.value.groupName] : ['All countries']))
+const histLine = computed(() => {
+  const s = histRaw.value?.series || []
+  const world = s.map((p: any) => p.world)
+  const group = s.map((p: any) => p.group)
+  return s.map((p: any, i: number) => ({
+    x: p.year,
+    values: histRaw.value?.groupName ? [rolling(world, i), rolling(group, i)] : [rolling(world, i)],
+    label: `${p.year}`,
+  }))
 })
 
 // ---------- negotiating groups ----------

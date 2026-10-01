@@ -33,6 +33,8 @@ def main():
         # analyze_speeches exits 1 when a session has no speeches yet; that's fine
         run([os.path.join(HERE, "analyze_speeches.py"), "--session", str(session),
              "--model", os.environ.get("DEBATE_ANALYSIS_MODEL", "gpt-4o"), "--concurrency", "4"])
+    # Rebuild the quote repository from the (possibly new) analyses
+    run([os.path.join(HERE, "build_quotes.py")])
 
 
 if __name__ == "__main__":

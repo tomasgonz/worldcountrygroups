@@ -327,8 +327,9 @@ const props = defineProps<{ data: any; aiConfigured?: boolean }>()
 const cableContent = ref('')
 const cableLoading = ref(false)
 
+const { highlight } = useBriefHighlight()
 const renderedCable = computed(() =>
-  cableContent.value ? marked.parse(cableContent.value) as string : ''
+  cableContent.value ? marked.parse(highlight(cableContent.value)) as string : ''
 )
 
 async function fetchCable() {

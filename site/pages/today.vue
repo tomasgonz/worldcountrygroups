@@ -141,6 +141,7 @@
         </div>
 
         <template v-else-if="data?.briefing">
+          <VizHighlightLegend class="mb-3 px-1" />
           <article class="bg-white rounded-2xl ring-1 ring-primary-200/70 divide-y divide-primary-100">
             <section v-for="sec in briefSections" :key="sec.key" class="px-6 py-6 sm:px-8 sm:py-7">
               <div class="flex items-baseline gap-3 mb-4">
@@ -225,6 +226,8 @@ const isAdmin = computed(() => auth.state.value.role === 'admin')
 const { data, pending, refresh } = useAsyncData('today-brief', () => $fetch<any>('/api/today/briefing').catch(() => null))
 const { data: agenda } = useAsyncData('today-agenda', () => $fetch<any>('/api/today/agenda').catch(() => null))
 const { countries } = useCountries()
+
+const { highlight } = useBriefHighlight()
 
 // ---------- clock (ticks client-side so "Now" and live markers stay right) ----------
 const now = ref(Date.now())
@@ -347,8 +350,8 @@ function promoteLabels(text: string): string {
   return text.replace(/^[-*]\s+\**([^\n]{2,60}?)\**:\s*$/gm, '#### $1')
     .replace(/^ {2,4}([-*] )/gm, '$1')
 }
-const md = (s: string) => (s ? (marked.parse(renderCitations(promoteLabels(s))) as string) : '')
-const inline = (s: string) => (s ? (marked.parseInline(renderCitations(s)) as string) : '')
+const md = (s: string) => (s ? (marked.parse(renderCitations(highlight(promoteLabels(s)))) as string) : '')
+const inline = (s: string) => (s ? (marked.parseInline(renderCitations(highlight(s))) as string) : '')
 
 // ---------- sources ----------
 const sourceTab = ref<'news' | 'statements'>('statements')

@@ -69,9 +69,10 @@ const result = ref<AnalysisResult | null>(null)
 const loading = ref(false)
 const error = ref('')
 
+const { highlight } = useBriefHighlight()
 const renderedContent = computed(() => {
   if (!result.value?.content) return ''
-  return marked.parse(result.value.content) as string
+  return marked.parse(highlight(result.value.content)) as string
 })
 
 const timeAgo = computed(() => {

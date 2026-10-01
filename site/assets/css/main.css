@@ -61,3 +61,26 @@
 .page-leave-to {
   opacity: 0;
 }
+
+/* ---------- AI briefing highlights (see composables/useBriefHighlight.ts) ---------- */
+.hl-country {
+  font-weight: 600;
+  color: #0f172a;
+  text-decoration: none;
+  background: #f1f5f9;
+  border-radius: 0.35rem;
+  padding: 0 0.3em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  white-space: nowrap;
+}
+.hl-country:hover { background: #dbeafe; color: #1d4ed8; }
+.hl-flag { margin-right: 0.25em; font-weight: 400; }
+.hl-un { font-weight: 600; color: #1d4ed8; }
+.hl-term { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.hl-sec { text-decoration-color: #e34948; }
+.hl-hum { text-decoration-color: #eda100; }
+.hl-dev { text-decoration-color: #1baf7a; }
+.hl-rights { text-decoration-color: #4a3aa7; }
+.bg-primary-900 .hl-country { background: rgba(255, 255, 255, 0.12); color: #fff; }
+.bg-primary-900 .hl-un { color: #93c5fd; }

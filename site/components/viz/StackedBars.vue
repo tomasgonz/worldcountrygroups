@@ -8,7 +8,10 @@
     </div>
     <ul class="space-y-1.5">
       <li v-for="r in rows" :key="r.key" class="grid items-center gap-3" :style="{ gridTemplateColumns: `min(${labelWidth}, 38%) 1fr ${valueWidth}` }">
-        <span class="text-[13px] text-primary-700 truncate" :title="r.label">
+        <NuxtLink v-if="r.href" :to="r.href" class="text-[13px] text-primary-700 hover:text-accent-700 truncate" :title="r.label">
+          <span v-if="r.prefix" class="mr-1">{{ r.prefix }}</span>{{ r.label }}
+        </NuxtLink>
+        <span v-else class="text-[13px] text-primary-700 truncate" :title="r.label">
           <span v-if="r.prefix" class="mr-1">{{ r.prefix }}</span>{{ r.label }}
         </span>
         <div class="flex h-4 gap-[2px]" tabindex="0" @mousemove="tip(r, $event)" @mouseleave="hide" @focus="tip(r, $event)" @blur="hide">
@@ -25,7 +28,7 @@
 
 <script setup lang="ts">
 interface Series { key: string; label: string; color: string; ring?: boolean }
-interface Row { key: string; label: string; prefix?: string; values: Record<string, number>; valueLabel?: string; detail?: string[] }
+interface Row { key: string; label: string; href?: string; prefix?: string; values: Record<string, number>; valueLabel?: string; detail?: string[] }
 const props = withDefaults(defineProps<{ rows: Row[]; series: Series[]; normalize?: boolean; labelWidth?: string; valueWidth?: string; unitLabel?: string }>(),
   { normalize: false, labelWidth: '10rem', valueWidth: '3rem', unitLabel: '' })
 const { show, hide } = useVizTip()
