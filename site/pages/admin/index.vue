@@ -60,15 +60,86 @@
 
       <!-- Provider List -->
       <div v-if="aiConfig?.providers?.length" class="space-y-2 mb-4">
-        <div v-for="p in aiConfig.providers" :key="p.id" class="flex items-center justify-between border border-primary-100 rounded-lg p-3">
-          <div>
-            <span class="text-sm font-medium text-primary-800">{{ p.name }}</span>
-            <span class="text-xs text-primary-400 ml-2">{{ p.model }}</span>
-            <span v-if="p.id === aiConfig.activeProvider" class="text-xs text-green-600 ml-2">(active)</span>
+        <div v-for="p in aiConfig.providers" :key="p.id" class="border rounded-xl" :class="p.id === aiConfig.activeProvider ? 'border-green-200 bg-green-50/30' : 'border-primary-100'">
+          <div class="flex flex-wrap items-center justify-between gap-2 p-3">
+            <div class="min-w-0">
+              <span class="text-sm font-medium text-primary-800">{{ p.name }}</span>
+              <code class="text-xs text-primary-500 ml-2 bg-primary-50 px-1.5 py-0.5 rounded">{{ p.model }}</code>
+              <span v-if="p.id === aiConfig.activeProvider" class="text-xs text-green-700 ml-2">active</span>
+              <span v-if="!p.enabled" class="text-xs text-amber-700 ml-2">disabled</span>
+              <div class="text-[11px] text-primary-400 mt-0.5">{{ p.type }} &middot; key {{ p.apiKey }}<span v-if="p.baseUrl"> &middot; {{ p.baseUrl }}</span></div>
+              <div v-if="aiTest[p.id]" class="text-[11px] mt-1" :class="aiTest[p.id].ok ? 'text-green-700' : 'text-red-600'">
+                {{ aiTest[p.id].running ? 'Testing…' : aiTest[p.id].ok ? `Works: replied “${aiTest[p.id].reply}” in ${(aiTest[p.id].ms / 1000).toFixed(1)}s` : `Failed: ${aiTest[p.id].error}` }}
+              </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-1.5">
+              <button class="text-xs px-2.5 py-1 rounded bg-primary-50 text-primary-700 hover:bg-primary-100" @click="testAI(p.id)">Test</button>
+              <button class="text-xs px-2.5 py-1 rounded bg-primary-50 text-primary-700 hover:bg-primary-100" @click="startEditAI(p)">{{ aiEditing === p.id ? 'Close' : 'Edit / change model' }}</button>
+              <button class="text-xs px-2.5 py-1 rounded bg-primary-50 text-primary-700 hover:bg-primary-100" @click="startDupAI(p)">{{ aiDupFor === p.id ? 'Close' : '+ Model with this key' }}</button>
+              <button v-if="p.id !== aiConfig.activeProvider" @click="setActiveAI(p.id)" class="text-xs px-2.5 py-1 rounded bg-blue-50 text-blue-700 hover:bg-blue-100">Set active</button>
+              <button @click="removeAIProvider(p.id)" class="text-xs px-2.5 py-1 rounded bg-red-50 text-red-700 hover:bg-red-100">Remove</button>
+            </div>
           </div>
-          <div class="flex items-center gap-2">
-            <button v-if="p.id !== aiConfig.activeProvider" @click="setActiveAI(p.id)" class="text-xs px-2.5 py-1 rounded bg-blue-50 text-blue-700 hover:bg-blue-100">Set Active</button>
-            <button @click="removeAIProvider(p.id)" class="text-xs px-2.5 py-1 rounded bg-red-50 text-red-700 hover:bg-red-100">Remove</button>
+
+          <!-- Edit -->
+          <div v-if="aiEditing === p.id" class="border-t border-primary-100 p-3 space-y-3">
+            <div class="grid sm:grid-cols-2 gap-3">
+              <label class="block"><span class="block text-xs text-primary-500 mb-1">Display name</span>
+                <input v-model="aiEdit.name" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm"></label>
+              <label class="block"><span class="block text-xs text-primary-500 mb-1">Model</span>
+                <div class="flex gap-1.5">
+                  <input v-model="aiEdit.model" :list="`models-${p.id}`" class="flex-1 min-w-0 border border-primary-200 rounded-lg px-3 py-1.5 text-sm font-mono" placeholder="e.g. gpt-5">
+                  <button class="text-xs px-2 rounded-lg ring-1 ring-primary-200 hover:bg-primary-50 whitespace-nowrap" @click="loadModels(p.id)">{{ aiModels[p.id]?.loading ? '…' : 'List models' }}</button>
+                </div>
+                <datalist :id="`models-${p.id}`"><option v-for="m in aiModels[p.id]?.list || []" :key="m.id" :value="m.id">{{ m.label }}</option></datalist>
+              </label>
+            </div>
+            <div v-if="aiModels[p.id]?.list?.length" class="flex flex-wrap gap-1.5 max-h-28 overflow-y-auto">
+              <button v-for="m in aiModels[p.id].list" :key="m.id" class="text-[11px] px-2 py-0.5 rounded-full ring-1 font-mono"
+                :class="aiEdit.model === m.id ? 'bg-primary-900 text-white ring-primary-900' : 'ring-primary-200 text-primary-600 hover:ring-primary-400'" @click="aiEdit.model = m.id">{{ m.id }}</button>
+            </div>
+            <p v-if="aiModels[p.id]?.error" class="text-[11px] text-red-600">Could not list models: {{ aiModels[p.id].error }}</p>
+            <div class="grid sm:grid-cols-3 gap-3">
+              <label class="block"><span class="block text-xs text-primary-500 mb-1">Temperature (optional)</span>
+                <input v-model="aiEdit.temperature" type="number" step="0.1" min="0" max="2" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="default"></label>
+              <label class="block"><span class="block text-xs text-primary-500 mb-1">Max output tokens (optional)</span>
+                <input v-model="aiEdit.maxTokens" type="number" min="256" step="256" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="default"></label>
+              <label class="block"><span class="block text-xs text-primary-500 mb-1">Replace API key (optional)</span>
+                <input v-model="aiEdit.apiKey" type="password" autocomplete="new-password" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="leave blank to keep"></label>
+            </div>
+            <label v-if="p.type !== 'openai'" class="block"><span class="block text-xs text-primary-500 mb-1">Base URL</span>
+              <input v-model="aiEdit.baseUrl" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="default"></label>
+            <p class="text-[11px] text-primary-400">Reasoning models (gpt-5, o-series) ignore temperature and need a larger token budget.</p>
+            <div class="flex items-center gap-2">
+              <button class="text-sm px-4 py-1.5 rounded-lg bg-primary-900 text-white hover:bg-primary-800" @click="saveEditAI(p.id)">Save</button>
+              <button class="text-sm px-4 py-1.5 rounded-lg ring-1 ring-primary-200 text-primary-700 hover:bg-primary-50" @click="saveEditAI(p.id, true)">Save &amp; test</button>
+              <span v-if="aiMsg" class="text-xs" :class="aiMsg.startsWith('Error') ? 'text-red-600' : 'text-green-700'">{{ aiMsg }}</span>
+            </div>
+          </div>
+
+          <!-- Add another model with the same key -->
+          <div v-if="aiDupFor === p.id" class="border-t border-primary-100 p-3 space-y-3">
+            <p class="text-xs text-primary-500">Creates a second configuration that uses the same {{ p.type }} key, so you can switch between models without re-entering it.</p>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <label class="block"><span class="block text-xs text-primary-500 mb-1">Model</span>
+                <div class="flex gap-1.5">
+                  <input v-model="aiDup.model" :list="`models-${p.id}`" class="flex-1 min-w-0 border border-primary-200 rounded-lg px-3 py-1.5 text-sm font-mono" placeholder="e.g. gpt-4.1">
+                  <button class="text-xs px-2 rounded-lg ring-1 ring-primary-200 hover:bg-primary-50 whitespace-nowrap" @click="loadModels(p.id)">{{ aiModels[p.id]?.loading ? '…' : 'List models' }}</button>
+                </div>
+                <datalist :id="`models-${p.id}`"><option v-for="m in aiModels[p.id]?.list || []" :key="m.id" :value="m.id" /></datalist>
+              </label>
+              <label class="block"><span class="block text-xs text-primary-500 mb-1">Display name (optional)</span>
+                <input v-model="aiDup.name" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" :placeholder="aiDup.model ? `OpenAI ${aiDup.model}` : ''"></label>
+            </div>
+            <div v-if="aiModels[p.id]?.list?.length" class="flex flex-wrap gap-1.5 max-h-28 overflow-y-auto">
+              <button v-for="m in aiModels[p.id].list" :key="m.id" class="text-[11px] px-2 py-0.5 rounded-full ring-1 font-mono"
+                :class="aiDup.model === m.id ? 'bg-primary-900 text-white ring-primary-900' : 'ring-primary-200 text-primary-600 hover:ring-primary-400'" @click="aiDup.model = m.id">{{ m.id }}</button>
+            </div>
+            <label class="flex items-center gap-1.5 text-xs text-primary-600"><input v-model="aiDup.activate" type="checkbox" class="rounded"> Make it the active model</label>
+            <div class="flex items-center gap-2">
+              <button class="text-sm px-4 py-1.5 rounded-lg bg-primary-900 text-white hover:bg-primary-800 disabled:opacity-40" :disabled="!aiDup.model" @click="saveDupAI(p.id)">Add model</button>
+              <span v-if="aiMsg" class="text-xs" :class="aiMsg.startsWith('Error') ? 'text-red-600' : 'text-green-700'">{{ aiMsg }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1229,6 +1300,75 @@ async function addAIProvider() {
     await loadAIConfig()
   } catch (e: any) {
     alert(e?.data?.statusMessage || e?.message || 'Failed to add provider')
+  }
+}
+
+// ---------- AI provider editing ----------
+const aiEditing = ref<string | null>(null)
+const aiEdit = reactive<any>({ name: '', model: '', temperature: '', maxTokens: '', apiKey: '', baseUrl: '' })
+const aiEditOrigModel = ref('')
+const aiDupFor = ref<string | null>(null)
+const aiDup = reactive({ model: '', name: '', activate: true })
+const aiModels = reactive<Record<string, { loading: boolean; list: any[]; error?: string }>>({})
+const aiTest = reactive<Record<string, any>>({})
+const aiMsg = ref('')
+
+function startEditAI(p: any) {
+  aiDupFor.value = null; aiMsg.value = ''
+  if (aiEditing.value === p.id) { aiEditing.value = null; return }
+  aiEditing.value = p.id
+  Object.assign(aiEdit, { name: p.name, model: p.model, temperature: p.temperature ?? '', maxTokens: p.maxTokens ?? '', apiKey: '', baseUrl: p.baseUrl || '' })
+  aiEditOrigModel.value = p.model
+}
+function startDupAI(p: any) {
+  aiEditing.value = null; aiMsg.value = ''
+  aiDupFor.value = aiDupFor.value === p.id ? null : p.id
+  Object.assign(aiDup, { model: '', name: '', activate: true })
+  if (aiDupFor.value && !aiModels[p.id]?.list?.length) loadModels(p.id)
+}
+async function loadModels(id: string) {
+  aiModels[id] = { loading: true, list: aiModels[id]?.list || [] }
+  try {
+    const r = await $fetch<any>('/api/admin/ai-config/models', { query: { id } })
+    aiModels[id] = { loading: false, list: r.models || [], error: r.error }
+  } catch (e: any) {
+    aiModels[id] = { loading: false, list: [], error: e?.data?.message || e?.message || 'failed' }
+  }
+}
+async function saveEditAI(id: string, thenTest = false) {
+  aiMsg.value = ''
+  try {
+    // keep the display name in step with the model ("OpenAI GPT-5" -> "OpenAI GPT-5.5")
+    const orig = aiEditOrigModel.value
+    if (orig && aiEdit.model !== orig) {
+      const re = new RegExp(orig.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i')
+      if (re.test(aiEdit.name)) aiEdit.name = aiEdit.name.replace(re, aiEdit.model.toUpperCase().startsWith('GPT') ? aiEdit.model.replace(/^gpt/i, 'GPT') : aiEdit.model)
+    }
+    await $fetch('/api/admin/ai-config', { method: 'POST', body: { action: 'update', id, updates: { ...aiEdit } } })
+    aiMsg.value = 'Saved'
+    await loadAIConfig()
+    if (thenTest) await testAI(id)
+  } catch (e: any) {
+    aiMsg.value = 'Error: ' + (e?.data?.message || e?.data?.statusMessage || 'could not save')
+  }
+}
+async function saveDupAI(sourceId: string) {
+  aiMsg.value = ''
+  try {
+    const r = await $fetch<any>('/api/admin/ai-config', { method: 'POST', body: { action: 'duplicate', sourceId, model: aiDup.model, name: aiDup.name, activate: aiDup.activate } })
+    aiDupFor.value = null
+    await loadAIConfig()
+    await testAI(r.id)
+  } catch (e: any) {
+    aiMsg.value = 'Error: ' + (e?.data?.message || e?.data?.statusMessage || 'could not add model')
+  }
+}
+async function testAI(id: string) {
+  aiTest[id] = { running: true }
+  try {
+    aiTest[id] = await $fetch<any>('/api/admin/ai-config', { method: 'POST', body: { action: 'test', id } })
+  } catch (e: any) {
+    aiTest[id] = { ok: false, error: e?.data?.message || 'request failed' }
   }
 }
 

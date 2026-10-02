@@ -8,7 +8,7 @@
       "country": "USA",
       "category": "p5-mission",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:01.910992+00:00",
+      "lastFetch": "2026-10-02T12:00:02.048358+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -20,7 +20,7 @@
       "country": "GBR",
       "category": "p5-mission",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:02.225130+00:00",
+      "lastFetch": "2026-10-02T12:00:02.385289+00:00",
       "lastError": null,
       "statementCount": 20
     },
@@ -32,7 +32,7 @@
       "country": "FRA",
       "category": "p5-mission",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:04.026763+00:00",
+      "lastFetch": "2026-10-02T12:00:04.254494+00:00",
       "lastError": "XML parse error: mismatched tag: line 36, column 4",
       "statementCount": 0
     },
@@ -51,7 +51,7 @@
         "dateSelector": ".news-text__item__meta-date",
         "baseUrl": "https://russiaun.ru"
       },
-      "lastFetch": "2026-10-01T20:00:05.089442+00:00",
+      "lastFetch": "2026-10-02T12:00:05.535129+00:00",
       "lastError": null,
       "statementCount": 6
     },
@@ -69,7 +69,7 @@
         "linkSelector": "a",
         "baseUrl": "https://www.fmprc.gov.cn/eng/xw/fyrbt"
       },
-      "lastFetch": "2026-10-01T20:00:06.060021+00:00",
+      "lastFetch": "2026-10-02T12:00:06.366453+00:00",
       "lastError": null,
       "statementCount": 14
     },
@@ -81,7 +81,7 @@
       "country": "DEU",
       "category": "major-mission",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:07.318823+00:00",
+      "lastFetch": "2026-10-02T12:00:07.776323+00:00",
       "lastError": null,
       "statementCount": 20
     },
@@ -93,7 +93,7 @@
       "country": "FRA",
       "category": "major-mission",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:07.807835+00:00",
+      "lastFetch": "2026-10-02T12:00:08.258711+00:00",
       "lastError": "Failed to fetch https://www.diplomatie.gouv.fr/spip.php?page=backend-fd&lang=en",
       "statementCount": 0
     },
@@ -156,7 +156,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:09.018032+00:00",
+      "lastFetch": "2026-10-02T12:00:14.084965+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -168,7 +168,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:10.220834+00:00",
+      "lastFetch": "2026-10-02T12:00:39.513718+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -180,7 +180,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:10.362523+00:00",
+      "lastFetch": "2026-10-02T12:00:39.654095+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -192,7 +192,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:10.545363+00:00",
+      "lastFetch": "2026-10-02T12:00:39.825169+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -204,9 +204,9 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:12.757869+00:00",
+      "lastFetch": "2026-10-02T12:05:20.675685+00:00",
       "lastError": null,
-      "statementCount": 30
+      "statementCount": 5
     },
     {
       "id": "who",
@@ -216,7 +216,7 @@
       "country": "",
       "category": "io-agency",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:13.168355+00:00",
+      "lastFetch": "2026-10-02T12:05:20.895261+00:00",
       "lastError": null,
       "statementCount": 25
     },
@@ -228,7 +228,7 @@
       "country": "",
       "category": "io-agency",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:13.466591+00:00",
+      "lastFetch": "2026-10-02T12:05:21.012515+00:00",
       "lastError": null,
       "statementCount": 150
     },
@@ -240,7 +240,7 @@
       "country": "",
       "category": "io-agency",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:13.699782+00:00",
+      "lastFetch": "2026-10-02T12:05:21.234620+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -252,7 +252,7 @@
       "country": "",
       "category": "regional-org",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:14.086294+00:00",
+      "lastFetch": "2026-10-02T12:05:21.541184+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -264,7 +264,7 @@
       "country": "",
       "category": "regional-org",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:14.424154+00:00",
+      "lastFetch": "2026-10-02T12:05:22.069677+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -283,7 +283,7 @@
         "articleUrlPrefix": "/uzbekistan/news/",
         "baseUrl": "https://www.un.int"
       },
-      "lastFetch": "2026-10-01T20:00:15.637209+00:00",
+      "lastFetch": "2026-10-02T12:05:23.458818+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -302,7 +302,7 @@
         "datePattern": "/official-statements/(\\d{8})",
         "datePatternFormat": "MMDDYYYY"
       },
-      "lastFetch": "2026-10-01T20:00:16.974058+00:00",
+      "lastFetch": "2026-10-02T12:05:26.622659+00:00",
       "lastError": null,
       "statementCount": 6
     },
@@ -314,9 +314,9 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:17.268985+00:00",
+      "lastFetch": "2026-10-02T12:05:27.002072+00:00",
       "lastError": null,
-      "statementCount": 20
+      "statementCount": 9
     },
     {
       "id": "un-pga",
@@ -326,7 +326,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:17.674298+00:00",
+      "lastFetch": "2026-10-02T12:05:27.395153+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -338,7 +338,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:18.162726+00:00",
+      "lastFetch": "2026-10-02T12:05:27.811582+00:00",
       "lastError": null,
       "statementCount": 100
     },
@@ -350,7 +350,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:18.704251+00:00",
+      "lastFetch": "2026-10-02T12:05:28.433099+00:00",
       "lastError": null,
       "statementCount": 100
     },
@@ -362,7 +362,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:19.245220+00:00",
+      "lastFetch": "2026-10-02T12:05:28.925080+00:00",
       "lastError": null,
       "statementCount": 100
     },
@@ -374,9 +374,9 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:19.548272+00:00",
+      "lastFetch": "2026-10-02T12:05:29.208391+00:00",
       "lastError": null,
-      "statementCount": 29
+      "statementCount": 26
     },
     {
       "id": "icc",
@@ -386,7 +386,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:20.382746+00:00",
+      "lastFetch": "2026-10-02T12:05:29.627530+00:00",
       "lastError": null,
       "statementCount": 100
     },
@@ -398,7 +398,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-01T20:00:21.087257+00:00",
+      "lastFetch": "2026-10-02T12:05:30.261758+00:00",
       "lastError": null,
       "statementCount": 100
     }

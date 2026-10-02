@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "last_updated": "2026-10-01",
+    "last_updated": "2026-10-02",
     "days": 120,
     "source": "Dag Hammarskjöld Library, Security Council meetings tables"
   },
@@ -10,7 +10,7 @@
       "date": "2026-09-29",
       "topic": "The situation concerning the Democratic Republic of the Congo",
       "outcome": "",
-      "press_release": "https://www.un.org/press/en/2026/sc16466.doc.htm",
+      "press_release": "https://www.un.org/press/en/2026/sc16467.doc.htm",
       "record": "https://docs.un.org/S/PV.10232"
     },
     {
@@ -18,7 +18,7 @@
       "date": "2026-09-29",
       "topic": "The question concerning Haiti",
       "outcome": "S/RES/2829 (2026) 12-0-3",
-      "press_release": "https://www.un.org/press/en/2026/sc16465.doc.htm",
+      "press_release": "https://www.un.org/press/en/2026/sc16466.doc.htm",
       "record": "https://docs.un.org/S/PV.10231"
     },
     {
@@ -668,14 +668,6 @@
       "outcome": "",
       "press_release": "https://www.un.org/press/en/2026/sc16379.doc.htm",
       "record": "https://docs.un.org/S/PV.10165"
-    },
-    {
-      "meeting": "S/PV.10164",
-      "date": "2026-06-04",
-      "topic": "The situation in the Middle East",
-      "outcome": "",
-      "press_release": "https://www.un.org/press/en/2026/sc16377.doc.htm",
-      "record": "https://docs.un.org/S/PV.10164"
     }
   ],
   "presidential_statements": [

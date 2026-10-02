@@ -42,7 +42,8 @@ export async function callLLMStream(messages: LLMMessage[], options?: LLMOptions
 
 // OpenAI / OpenAI-compatible
 function useNewOpenAIParams(model: string): boolean {
-  return /^(o1|o3|gpt-5|gpt-4\.5)/.test(model || '')
+  // reasoning models: max_completion_tokens and no temperature
+  return /^(o\d|gpt-([5-9]|\d{2})|gpt-4\.5)/.test(model || '')
 }
 
 async function callOpenAI(provider: AIProviderConfig, messages: LLMMessage[], options?: LLMOptions): Promise<string> {
