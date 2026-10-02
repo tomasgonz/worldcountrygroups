@@ -30,7 +30,7 @@ export default defineEventHandler(async (event) => {
   if (!group) throw createError({ statusCode: 404, statusMessage: `Group '${gid}' not found` })
 
   const memberIso3s = new Set(group.countries.map(c => c.iso3))
-  const allCountries = registry.listCountries()
+  const allCountries = registry.getAllCountries()
 
   // Find non-member candidates with basic data
   const candidates = allCountries

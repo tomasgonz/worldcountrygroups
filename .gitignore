@@ -58,3 +58,5 @@ site/server/data/.internal-token
 site/server/data/job-status.json
 site/server/data/data-health.json
 site/server/data/health-alert-state.json
+scripts/data/*.csv
+scripts/data/.upload-*
