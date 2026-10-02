@@ -7,6 +7,9 @@ export default defineEventHandler((event) => {
   // Only protect API routes
   if (!path.startsWith('/api/')) return
 
+  // Internal scheduler endpoints check their own private token
+  if (path.startsWith('/api/internal/')) return
+
   // Auth endpoints always pass through
   if (path.startsWith('/api/auth/')) return
 

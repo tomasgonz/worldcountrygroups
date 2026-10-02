@@ -69,6 +69,26 @@ function groupId(input: string): string | null {
   return s?.gid || null
 }
 
+/** Newer General Assembly resolutions (vote totals only) from the library feed, past the per-country data. */
+function recentGaTotals(query: string, src: SourceCollector) {
+  const latest = latestVoteDate()
+  const q = fold(query || '')
+  const words = q.split(/\s+/).filter(w => w.length > 2)
+  const rows = (readDataFile<any>('ga-resolutions.json')?.resolutions || [])
+    .filter((x: any) => (x.date || '') > latest && words.every(w => fold(x.title || '').includes(w)))
+    .sort((a: any, b: any) => (b.date || '').localeCompare(a.date || '')).slice(0, 12)
+  if (!rows.length) return {}
+  src.used('ga-resolutions.json')
+  return {
+    newer_resolutions_totals_only: rows.map((x: any) => ({
+      symbol: x.id, title: x.title, date: x.date,
+      outcome: x.without_vote ? 'adopted without a vote' : x.tally ? `recorded vote: ${x.tally.yes} yes, ${x.tally.no} no, ${x.tally.abstain} abstentions` : 'no tally',
+      ref: src.add(`${x.id}: ${x.title}`, x.url || `https://docs.un.org/${x.id}`, 'resolution'),
+    })),
+    newer_note: `Adopted after ${latest}; country-by-country votes for these are not yet in the database, only the totals.`,
+  }
+}
+
 /** Date of the most recent recorded General Assembly vote in the data. */
 function latestVoteDate(): string {
   return getRecentResolutions(1).reduce((m, r) => (r.d > m ? r.d : m), '') || 'unknown'
@@ -79,7 +99,7 @@ export const ASK_TOOLS: ToolDef[] = [
   { name: 'country_overview', description: 'Key facts about a country: population, GDP, income group, region, democracy (V-Dem), sanctions, military, Security Council membership, main groups it belongs to, and its current leaders.', parameters: { type: 'object', properties: { country: { type: 'string', description: 'Country name or ISO code' } }, required: ['country'] } },
   { name: 'un_voting_record', description: "A country's UN General Assembly voting record: yes/no/abstain per recent session, voting by subject, and the countries it agrees with most and least.", parameters: { type: 'object', properties: { country: { type: 'string' }, sessions: { type: 'integer', description: 'Recent sessions to analyse (default 10)' } }, required: ['country'] } },
   { name: 'voting_agreement', description: 'How often two countries vote the same way in the General Assembly, overall and by subject.', parameters: { type: 'object', properties: { country_a: { type: 'string' }, country_b: { type: 'string' } }, required: ['country_a', 'country_b'] } },
-  { name: 'search_ga_resolutions', description: 'Search General Assembly resolutions with recorded votes by keyword (title), optionally one session; returns tallies and how the named countries voted.', parameters: { type: 'object', properties: { query: { type: 'string', description: 'Words in the resolution title, e.g. "Myanmar", "nuclear"' }, session: { type: 'integer' }, countries: { type: 'array', items: { type: 'string' }, description: 'Countries whose votes to include' } }, required: ['query'] } },
+  { name: 'search_ga_resolutions', description: 'Search General Assembly resolutions by keyword (title), optionally one session; returns tallies and how the named countries voted, plus newer resolutions known only by their totals.', parameters: { type: 'object', properties: { query: { type: 'string', description: 'Words in the resolution title, e.g. "Myanmar", "nuclear"' }, session: { type: 'integer' }, countries: { type: 'array', items: { type: 'string' }, description: 'Countries whose votes to include' } }, required: ['query'] } },
   { name: 'group_overview', description: 'A country group or organisation (EU, NATO, G77, AU, ASEAN, BRICS, OIC...): members, and how loyally members vote with the group majority on contested UN votes.', parameters: { type: 'object', properties: { group: { type: 'string', description: 'Acronym or name' } }, required: ['group'] } },
   { name: 'voting_blocs', description: 'Voting blocs in the General Assembly detected from contested votes, plus unaligned countries.', parameters: { type: 'object', properties: { sessions: { type: 'integer', description: 'Recent sessions (default 5)' } } } },
   { name: 'security_council', description: 'Security Council: current members and presidency, recent decisions with votes, vetoes and meetings; optionally filtered by topic words.', parameters: { type: 'object', properties: { topic: { type: 'string', description: 'e.g. "Haiti", "Ukraine", "Middle East"' }, since: { type: 'string', description: 'ISO date, default one year ago' } } } },
@@ -160,6 +180,7 @@ export function runTool(name: string, args: any, src: SourceCollector): any {
           ref: src.add(x.title, `https://digitallibrary.un.org/record/${x.id}`, 'resolution'),
         })),
         coverage: `Recorded votes up to ${latestVoteDate()} (session ${r.meta.lastSession})`,
+        ...recentGaTotals(args.query, src),
       }
     }
     case 'group_overview': {

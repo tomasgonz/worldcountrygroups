@@ -66,6 +66,20 @@ const TEMPLATES: Record<AskTemplate, string> = {
   free: `Write a structured briefing with clear "##" sections chosen to fit the request, starting with "## Summary" (3-4 bullets).`,
 }
 
+/** One line per dataset saying how current it is, from the latest health check. */
+function freshnessNote(): string {
+  try {
+    const h = JSON.parse(readFileSync(join(DATA_DIR, 'data-health.json'), 'utf-8'))
+    const day = (t?: string | null) => (t ? t.slice(0, 10) : 'unknown')
+    const keep = ['fetch-news', 'fetch-statements', 'fetch-unsc', 'build-people', 'update-general-debate', 'refresh-country-stats', 'fetch-vdem', 'fetch-sdg', 'fetch-gdelt']
+    const lines = (h.jobs || []).filter((j: any) => keep.includes(j.id)).map((j: any) => `- ${j.label}: last refreshed ${day(j.refreshedAt)}${j.status === 'failing' || j.status === 'stale' ? ' (refresh currently failing; may be out of date)' : ''}`)
+    const g = h.votingGap || {}
+    if (g.latestVote) lines.push(`- Per-country General Assembly votes: up to ${g.latestVote}${g.missingRecordedVotes ? `; ${g.missingRecordedVotes} later recorded votes are known only as totals (search_ga_resolutions)` : ''}`)
+    for (const m of h.manual || []) if (m.file !== 'un-votes-resolutions.json') lines.push(`- ${m.label} (curated by hand): last updated ${day(m.updatedAt)}`)
+    return lines.length ? `\nData currency (from the latest health check):\n${lines.join('\n')}\n` : ''
+  } catch { return '' }
+}
+
 function systemPrompt(mode: AskMode, template: AskTemplate) {
   const today = new Date().toISOString().slice(0, 10)
   return `You are the research desk of World Country Groups, a database on countries, international groups and the United Nations. Today is ${today}.
@@ -75,8 +89,9 @@ Method:
 - State only facts that appear in tool results, and cite each one with the "ref" of the record it came from, like [S3] (several: [S3][S7]). Do not invent figures, dates, votes or quotes.
 - If the tools return nothing relevant, say plainly what the database does not cover. You may add widely known background, but label it "(general knowledge)" and never cite it.
 - Mention how current the data is where it matters (for example, General Assembly voting records may end months before today).
+- When a dataset is old or its refresh is failing (see Data currency below), say so where it affects the answer.
 - Write in clear, neutral English for diplomats and analysts. Prefer short paragraphs and bullets. Quote speakers only from search_quotes or speech results.
-
+${freshnessNote()}
 ${mode === 'briefing' ? TEMPLATES[template] + '\nKeep it to roughly 500-900 words.' : 'Answer concisely (usually under 250 words): lead with the direct answer, then the supporting facts.'}`
 }
 

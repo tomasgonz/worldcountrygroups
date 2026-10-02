@@ -352,6 +352,55 @@
       <div class="h-px flex-1 bg-primary-100"></div>
     </div>
 
+    <!-- Data health -->
+    <div id="data-health" class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-6 scroll-mt-24">
+      <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1">
+        <h2 class="font-serif text-xl font-bold text-primary-900">Data health</h2>
+        <button class="text-xs text-accent-600 hover:underline" @click="loadHealth">Check again</button>
+      </div>
+      <p class="text-xs text-primary-500 mb-4">Every job runs with a time limit, one retry and a check that its files are valid; a broken download never replaces good data. Checked hourly{{ health ? `, last at ${formatTime(health.generatedAt)}` : '' }}.</p>
+      <div v-if="health" class="space-y-4">
+        <div class="flex flex-wrap gap-2 text-xs">
+          <span v-for="k in ['ok','running','stale','failing','disabled']" v-show="health.counts[k]" :key="k" class="px-2.5 py-1 rounded-full font-medium" :class="HEALTH_STYLE[k]">{{ health.counts[k] }} {{ HEALTH_LABEL[k].toLowerCase() }}</span>
+        </div>
+        <div v-if="health.problems.length" class="rounded-xl bg-red-50 ring-1 ring-red-200 px-4 py-3">
+          <div class="text-sm font-medium text-red-800 mb-1">Needs attention</div>
+          <ul class="text-sm text-red-700 list-disc pl-5 space-y-0.5"><li v-for="p in health.problems" :key="p">{{ p }}</li></ul>
+        </div>
+        <div v-else class="rounded-xl bg-green-50 ring-1 ring-green-200 px-4 py-3 text-sm text-green-800">All scheduled data is refreshing on time.</div>
+
+        <div v-if="health.votingGap?.latestVote" class="rounded-xl ring-1 px-4 py-3 text-sm" :class="health.votingGap.missingRecordedVotes ? 'bg-amber-50 ring-amber-200 text-amber-900' : 'bg-primary-50 ring-primary-100 text-primary-700'">
+          <div class="font-medium">Per-country General Assembly votes run to {{ fmtDay(health.votingGap.latestVote) }}</div>
+          <p v-if="health.votingGap.missingRecordedVotes" class="mt-1">
+            {{ health.votingGap.missingRecordedVotes }} recorded votes since then ({{ fmtDay(health.votingGap.firstMissing) }} to {{ fmtDay(health.votingGap.lastMissing) }}) are known only as totals.
+            The UN Digital Library blocks automated downloads, so download the latest "GA voting" CSV from
+            <a href="https://digitallibrary.un.org/record/4060887" target="_blank" rel="noopener" class="underline">the UN Digital Library</a>
+            and upload it under <a href="#upload-votes" class="underline">Upload a newer voting file</a>.
+          </p>
+          <p v-else class="mt-1">No newer recorded votes are known.</p>
+        </div>
+
+        <details class="text-sm">
+          <summary class="cursor-pointer text-primary-600">Datasets updated by hand ({{ health.manual.length }})</summary>
+          <ul class="mt-2 space-y-1">
+            <li v-for="m in health.manual" :key="m.file" class="flex flex-wrap justify-between gap-2 text-xs">
+              <span class="text-primary-800">{{ m.label }} <span class="text-primary-400">· {{ m.how }}</span></span>
+              <span :class="(m.ageDays || 0) > 120 ? 'text-amber-700' : 'text-primary-500'">{{ m.updatedAt ? `${fmtDay(m.updatedAt)} (${m.ageDays} days ago)` : 'missing' }}</span>
+            </li>
+          </ul>
+        </details>
+
+        <div class="flex flex-wrap items-end gap-2 pt-2 border-t border-primary-100">
+          <label class="text-xs text-primary-500 flex-1 min-w-[16rem]">Email alerts to (sent when a problem appears and when it clears)
+            <input v-model="alertEmails" class="mt-1 w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="you@example.org">
+          </label>
+          <button class="text-sm px-4 py-1.5 rounded-lg bg-primary-900 text-white hover:bg-primary-800" @click="saveAlertEmails">Save</button>
+        </div>
+        <p class="text-[11px] text-primary-400 -mt-2">Mail goes through the exe.dev email gateway, which only delivers to the VM owner and other allowed addresses.</p>
+      </div>
+      <div v-else class="text-sm text-primary-400">Checking…</div>
+    </div>
+
     <!-- Scheduled Jobs -->
     <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
       <div class="flex items-center justify-between mb-4">
@@ -409,18 +458,20 @@
             <tr v-for="job in cronJobs" :key="job.id" class="border-b border-primary-50 last:border-0">
               <td class="px-3 py-2.5">
                 <div class="text-primary-800 font-medium">{{ job.label }}</div>
-                <div class="text-xs text-primary-400">{{ job.script }}</div>
+                <div class="text-xs text-primary-400">{{ job.script }} · <button class="text-accent-600 hover:underline" @click="openLog(job.id)">log</button></div>
+                <pre v-if="logFor === job.id" class="mt-2 max-h-72 max-w-[42rem] overflow-auto rounded-lg bg-primary-900 text-primary-50 text-[11px] leading-snug p-3 whitespace-pre-wrap">{{ logText || 'No log yet.' }}</pre>
               </td>
-              <td class="px-3 py-2.5 text-primary-600 font-mono text-xs">{{ job.schedule }}</td>
+              <td class="px-3 py-2.5 text-primary-600 font-mono text-xs whitespace-nowrap">{{ job.schedule }}</td>
               <td class="px-3 py-2.5">
-                <div v-if="job.lastRun" class="text-xs text-primary-500">{{ formatTime(job.lastRun) }}</div>
-                <div v-else class="text-xs text-primary-300">Never</div>
-                <div v-if="job.lastError" class="text-xs text-red-500 truncate max-w-[200px]" :title="job.lastError">{{ job.lastError }}</div>
+                <template v-if="hj(job.id)">
+                  <div class="text-xs text-primary-500">{{ hj(job.id).lastEnd ? formatTime(hj(job.id).lastEnd) : hj(job.id).refreshedAt ? 'Data from ' + formatTime(hj(job.id).refreshedAt) : 'Never' }}<span v-if="hj(job.id).durationSec" class="text-primary-300"> · {{ Math.round(hj(job.id).durationSec) }}s</span></div>
+                  <div v-if="hj(job.id).error" class="text-xs text-red-500 truncate max-w-[240px]" :title="hj(job.id).error">{{ hj(job.id).error }}</div>
+                </template>
+                <div v-else class="text-xs text-primary-300">–</div>
               </td>
               <td class="px-3 py-2.5">
-                <span :class="job.enabled ? 'bg-green-100 text-green-700' : 'bg-primary-100 text-primary-400'" class="text-xs font-medium px-2 py-0.5 rounded-full">
-                  {{ job.enabled ? 'Enabled' : 'Disabled' }}
-                </span>
+                <span class="text-xs font-medium px-2 py-0.5 rounded-full whitespace-nowrap" :class="HEALTH_STYLE[hj(job.id)?.status || (job.enabled ? 'ok' : 'disabled')]">{{ HEALTH_LABEL[hj(job.id)?.status || (job.enabled ? 'ok' : 'disabled')] }}</span>
+                <div v-if="job.maxAgeHours" class="text-[10px] text-primary-400 mt-0.5">expected every {{ job.maxAgeHours >= 48 ? Math.round(job.maxAgeHours / 24) + ' days' : job.maxAgeHours + ' h' }}</div>
               </td>
               <td class="px-3 py-2.5">
                 <div class="flex items-center gap-2">
@@ -436,7 +487,7 @@
                     :disabled="runningCronJob === job.id"
                     class="text-xs px-2.5 py-1 rounded bg-blue-50 text-blue-700 hover:bg-blue-100 disabled:opacity-50 transition-colors"
                   >
-                    {{ runningCronJob === job.id ? 'Running...' : 'Run Now' }}
+                    {{ runningCronJob === job.id || hj(job.id)?.status === 'running' ? 'Running…' : 'Run Now' }}
                   </button>
                   <button
                     @click="editCronJob(job)"
@@ -1573,6 +1624,7 @@ async function loadCronJobs() {
   try {
     const res = await $fetch<any>('/api/admin/cron-jobs')
     cronJobs.value = res.jobs || []
+    alertEmails.value = (res.alertEmails || []).join(', ')
   } catch {}
 }
 
@@ -1590,19 +1642,56 @@ async function toggleCronJob(id: string, enabled: boolean) {
 async function runCronJob(id: string) {
   cronMessage.value = null
   runningCronJob.value = id
+  const started = new Date().toISOString().slice(0, 19)
   try {
-    const res = await $fetch<any>('/api/admin/cron-jobs', { method: 'POST', body: { action: 'run-now', id } })
-    cronJobs.value = res.jobs || []
-    if (res.ok) {
-      cronMessage.value = { ok: true, text: `Job "${id}" completed successfully.${res.output ? ' Output: ' + res.output.slice(0, 200) : ''}` }
-    } else {
-      cronMessage.value = { ok: false, text: `Job "${id}" failed: ${res.error}` }
+    await $fetch<any>('/api/admin/cron-jobs', { method: 'POST', body: { action: 'run-now', id } })
+    cronMessage.value = { ok: true, text: `Job "${id}" started. It runs in the background; this page updates when it finishes.` }
+    for (let i = 0; i < 360; i++) {
+      await new Promise(r => setTimeout(r, 5000))
+      await loadHealth()
+      const j = hj(id)
+      if (j && j.status !== 'running' && (j.lastEnd || '') >= started) {
+        cronMessage.value = j.ok ? { ok: true, text: `Job "${id}" finished in ${Math.round(j.durationSec)}s.` } : { ok: false, text: `Job "${id}" failed: ${j.error}` }
+        if (logFor.value === id) openLog(id, true)
+        break
+      }
     }
   } catch (e: any) {
-    cronMessage.value = { ok: false, text: e?.data?.statusMessage || 'Failed to run job' }
+    cronMessage.value = { ok: false, text: e?.data?.statusMessage || 'Failed to start job' }
   } finally {
     runningCronJob.value = null
   }
+}
+
+// ---------- data health ----------
+const health = ref<any>(null)
+const alertEmails = ref('')
+const HEALTH_LABEL: Record<string, string> = { ok: 'Up to date', running: 'Running', stale: 'Stale', failing: 'Failing', disabled: 'Disabled' }
+const HEALTH_STYLE: Record<string, string> = {
+  ok: 'bg-green-100 text-green-700', running: 'bg-blue-100 text-blue-700', stale: 'bg-amber-100 text-amber-800',
+  failing: 'bg-red-100 text-red-700', disabled: 'bg-primary-100 text-primary-400',
+}
+const hj = (id: string) => (health.value?.jobs || []).find((j: any) => j.id === id)
+const fmtDay = (d: string) => (d ? new Date(d.length === 10 ? d + 'T12:00:00Z' : d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '')
+async function loadHealth() {
+  try { health.value = await $fetch('/api/admin/data-health') } catch {}
+}
+async function saveAlertEmails() {
+  try {
+    const res = await $fetch<any>('/api/admin/cron-jobs', { method: 'POST', body: { action: 'alerts', emails: alertEmails.value } })
+    alertEmails.value = (res.alertEmails || []).join(', ')
+    cronMessage.value = { ok: true, text: res.alertEmails.length ? `Alerts go to ${alertEmails.value}.` : 'Email alerts switched off.' }
+  } catch (e: any) {
+    cronMessage.value = { ok: false, text: e?.data?.statusMessage || 'Could not save' }
+  }
+}
+const logFor = ref<string | null>(null)
+const logText = ref('')
+async function openLog(id: string, keep = false) {
+  if (logFor.value === id && !keep) { logFor.value = null; return }
+  logFor.value = id
+  logText.value = 'Loading…'
+  try { logText.value = ((await $fetch<any>('/api/admin/job-log', { query: { id } })).text || '').split('\n').slice(-200).join('\n') } catch { logText.value = 'Could not load the log.' }
 }
 
 function editCronJob(job: any) {
@@ -1796,6 +1885,7 @@ onMounted(async () => {
     loadAIConfig(),
     loadCacheStats(),
     loadCronJobs(),
+    loadHealth(),
     loadNewsSources(),
     loadNewsFeedStats(),
     loadStmtFeedStats(),

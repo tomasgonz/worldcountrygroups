@@ -1,86 +1,63 @@
-import { execFile } from 'child_process'
-import { join } from 'path'
+import { requireAdmin } from '~/server/utils/auth'
 import {
-  getCronJobs,
-  addCronJob,
-  updateCronJob,
-  removeCronJob,
-  setCronJobEnabled,
-  recordJobRun,
+  getCronJobs, getCronConfig, addCronJob, updateCronJob, removeCronJob, setCronJobEnabled, startJobNow, setAlertEmails,
 } from '~/server/utils/cron-config'
 
-const PROJECT_ROOT = join(process.env.HOME || '/home/exedev', 'worldcountrygroups')
-
 export default defineEventHandler(async (event) => {
+  requireAdmin(event)
   const body = await readBody(event)
-  const { action } = body
+  const { action, id } = body || {}
+  const fail = (e: any) => { throw createError({ statusCode: 400, statusMessage: e?.message || String(e) }) }
 
-  if (action === 'add') {
-    const { job } = body
-    if (!job?.id || !job?.script || !job?.schedule) {
-      throw createError({ statusCode: 400, statusMessage: 'Missing required job fields (id, script, schedule)' })
-    }
-    addCronJob({
-      id: job.id,
-      label: job.label || job.id,
-      script: job.script,
-      schedule: job.schedule,
-      enabled: job.enabled ?? false,
-      lastRun: null,
-      lastError: null,
-      logFile: job.logFile || `/tmp/${job.id}.log`,
-    })
-    return { ok: true, jobs: getCronJobs() }
-  }
-
-  if (action === 'update') {
-    const { id, ...fields } = body
-    if (!id) throw createError({ statusCode: 400, statusMessage: 'Missing job id' })
-    const { action: _a, ...update } = fields
-    updateCronJob(id, update)
-    return { ok: true, jobs: getCronJobs() }
-  }
-
-  if (action === 'toggle') {
-    const { id, enabled } = body
-    if (!id) throw createError({ statusCode: 400, statusMessage: 'Missing job id' })
-    setCronJobEnabled(id, !!enabled)
-    return { ok: true, jobs: getCronJobs() }
-  }
-
-  if (action === 'run-now') {
-    const { id } = body
-    if (!id) throw createError({ statusCode: 400, statusMessage: 'Missing job id' })
-    const jobs = getCronJobs()
-    const job = jobs.find(j => j.id === id)
-    if (!job) throw createError({ statusCode: 404, statusMessage: `Job '${id}' not found` })
-
-    const scriptPath = join(PROJECT_ROOT, job.script)
-
-    return new Promise((resolve) => {
-      execFile('/usr/bin/python3', [scriptPath], {
-        cwd: PROJECT_ROOT,
-        timeout: 300_000,
-        env: { ...process.env, HOME: process.env.HOME || '/home/exedev' },
-      }, (error, stdout, stderr) => {
-        if (error) {
-          const errMsg = stderr?.trim() || error.message
-          recordJobRun(id, errMsg)
-          resolve({ ok: false, error: errMsg, jobs: getCronJobs() })
-        } else {
-          recordJobRun(id)
-          resolve({ ok: true, output: stdout?.trim()?.slice(0, 2000), jobs: getCronJobs() })
-        }
+  try {
+    if (action === 'add') {
+      const { job } = body
+      if (!job?.id || !job?.script || !job?.schedule) throw new Error('Missing required job fields (id, script, schedule)')
+      if (!/^scripts\/[\w.\-/]+\.py(\s+[\w.\-=]+)*$/.test(job.script) || job.script.includes('..')) throw new Error('Script must be a .py file under scripts/')
+      addCronJob({
+        id: job.id, label: job.label || job.id, script: job.script, schedule: job.schedule, enabled: job.enabled ?? false,
+        lastRun: null, lastError: null, logFile: '',
+        maxAgeHours: job.maxAgeHours ? Number(job.maxAgeHours) : null,
+        outputs: Array.isArray(job.outputs) ? job.outputs.filter((o: string) => /^[\w.\-]+\.json$/.test(o)) : [],
       })
-    })
+      return { ok: true, jobs: getCronJobs() }
+    }
+    if (action === 'update') {
+      if (!id) throw new Error('Missing job id')
+      const { label, schedule, maxAgeHours, timeoutMin } = body
+      const patch: any = {}
+      if (label !== undefined) patch.label = String(label)
+      if (schedule !== undefined) {
+        if (!/^[\d*/,\- ]+$/.test(schedule) || schedule.trim().split(/\s+/).length !== 5) throw new Error('Schedule must be a 5-field cron expression')
+        patch.schedule = schedule.trim()
+      }
+      if (maxAgeHours !== undefined) patch.maxAgeHours = maxAgeHours ? Number(maxAgeHours) : null
+      if (timeoutMin !== undefined) patch.timeoutMin = Math.min(240, Math.max(1, Number(timeoutMin) || 30))
+      updateCronJob(id, patch)
+      return { ok: true, jobs: getCronJobs() }
+    }
+    if (action === 'toggle') {
+      if (!id) throw new Error('Missing job id')
+      setCronJobEnabled(id, !!body.enabled)
+      return { ok: true, jobs: getCronJobs() }
+    }
+    if (action === 'run-now') {
+      if (!id) throw new Error('Missing job id')
+      startJobNow(id)
+      return { ok: true, started: true, jobs: getCronJobs() }
+    }
+    if (action === 'remove') {
+      if (!id) throw new Error('Missing job id')
+      removeCronJob(id)
+      return { ok: true, jobs: getCronJobs() }
+    }
+    if (action === 'alerts') {
+      const emails = String(body.emails || '').split(/[,;\s]+/).filter(Boolean)
+      return { ok: true, alertEmails: setAlertEmails(emails) }
+    }
+  } catch (e: any) {
+    if (e?.statusCode) throw e
+    fail(e)
   }
-
-  if (action === 'remove') {
-    const { id } = body
-    if (!id) throw createError({ statusCode: 400, statusMessage: 'Missing job id' })
-    removeCronJob(id)
-    return { ok: true, jobs: getCronJobs() }
-  }
-
   throw createError({ statusCode: 400, statusMessage: `Unknown action: ${action}` })
 })

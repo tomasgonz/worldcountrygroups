@@ -54,3 +54,7 @@ site/server/data/people-wikidata.json
 
 # Research desk question log (user data)
 site/server/data/asks/
+site/server/data/.internal-token
+site/server/data/job-status.json
+site/server/data/data-health.json
+site/server/data/health-alert-state.json
