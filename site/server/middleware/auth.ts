@@ -25,6 +25,7 @@ export default defineEventHandler((event) => {
   if (path === '/api/intelligence/ai/diplomatic-pulse') return
   if (path === '/api/intelligence/ai/anomalies') return
   if (path === '/api/intelligence/un-monitor') return
+  if (path === '/api/un/monitor') return
   if (path === '/api/today/briefing') return
   if (path === '/api/today/agenda') return
 

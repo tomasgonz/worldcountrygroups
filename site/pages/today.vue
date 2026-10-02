@@ -101,24 +101,21 @@
             <p class="px-5 pb-4 text-[11px] text-primary-400">New York time &middot; source: UN Web TV schedule</p>
           </section>
 
-          <!-- Security Council -->
-          <section v-if="agenda?.securityCouncil?.meetings?.length" class="bg-white rounded-2xl ring-1 ring-primary-200/70 p-5">
-            <div class="flex items-baseline justify-between mb-3">
-              <h2 class="font-serif text-2xl text-primary-900">Security Council</h2>
-              <NuxtLink to="/intelligence?tab=un-monitor" class="text-xs text-accent-600 hover:text-accent-700">Monitor &rarr;</NuxtLink>
+          <!-- From the UN Monitor -->
+          <section v-if="agenda?.securityCouncil" class="rounded-2xl ring-1 ring-sky-200 bg-[#f2f8fc] p-5">
+            <div class="flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-[#0077b6] font-semibold">
+              <span class="w-2 h-2 rounded-full bg-[#009edb]" />From the UN Monitor
             </div>
-            <ol class="space-y-3">
-              <li v-for="m in agenda.securityCouncil.meetings.slice(0, 6)" :key="m.meeting" class="grid grid-cols-[3.25rem_1fr] gap-2 text-sm">
-                <span class="text-[11px] text-primary-400 tabular-nums pt-0.5">{{ shortDate(m.date) }}</span>
-                <div class="min-w-0">
-                  <a :href="m.press_release || m.record" target="_blank" rel="noopener" class="text-primary-800 hover:text-accent-700 leading-snug">{{ m.topic }}</a>
-                  <div v-if="m.outcome" class="mt-1">
-                    <span class="inline-block text-[11px] rounded-md px-1.5 py-0.5" :class="outcomeClass(m.outcome)">{{ outcomeLabel(m.outcome) }}</span>
-                  </div>
-                </div>
-              </li>
-            </ol>
-            <p class="mt-4 text-[11px] text-primary-400">Official record, Dag Hammarskjöld Library</p>
+            <div v-if="agenda.securityCouncil.lastDecision" class="mt-3 text-sm">
+              <div class="text-[11px] text-primary-500">Latest Security Council decision · {{ shortDate(agenda.securityCouncil.lastDecision.date) }}</div>
+              <div class="text-primary-900 leading-snug mt-0.5">{{ agenda.securityCouncil.lastDecision.title }}</div>
+              <span class="inline-block mt-1 text-[11px] rounded-md px-1.5 py-0.5" :class="agenda.securityCouncil.lastDecision.adopted ? 'bg-emerald-50 text-emerald-800 ring-1 ring-emerald-200' : 'bg-red-50 text-red-700 ring-1 ring-red-200'">
+                {{ agenda.securityCouncil.lastDecision.adopted ? 'Adopted' : agenda.securityCouncil.lastDecision.vetoed ? 'Vetoed' : 'Not adopted' }}
+                {{ agenda.securityCouncil.lastDecision.tally ? `${agenda.securityCouncil.lastDecision.tally.yes}-${agenda.securityCouncil.lastDecision.tally.no}-${agenda.securityCouncil.lastDecision.tally.abstain}` : '' }}
+              </span>
+            </div>
+            <p class="text-xs text-primary-500 mt-3">Council composition and presidency, every decision and veto, General Assembly votes, and the wider UN system.</p>
+            <NuxtLink to="/un" class="inline-block mt-3 text-sm font-medium text-[#0077b6] hover:underline">Open the UN Monitor &rarr;</NuxtLink>
           </section>
         </div>
       </aside>

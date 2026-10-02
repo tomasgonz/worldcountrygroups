@@ -11,7 +11,8 @@ Writes (schemas kept compatible with the site):
   site/server/data/unsc-votes.json     resolutions + failed drafts, with tallies
   site/server/data/unsc-vetoes.json    every veto since 1946
   site/server/data/unsc-history.json   elected-member terms (current terms corrected)
-  site/server/data/unsc-activity.json  recent meetings + presidential statements
+  site/server/data/unsc-activity.json  recent meetings + presidential statements + presidency rota
+  site/server/data/ga-resolutions.json General Assembly resolutions of the current and previous session
 
 Per-country votes: the meeting tables give tallies only. A resolution's per-member
 votes are filled in only where the record fixes them (unanimous adoption, or the
@@ -31,6 +32,7 @@ from datetime import datetime, timezone
 
 API = "https://ydsftksff8.execute-api.us-east-1.amazonaws.com/dev"
 MEMBERS_URL = "https://www.un.org/securitycouncil/content/current-members"
+PRESIDENCY_URL = "https://www.un.org/securitycouncil/content/presidency"
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 DATA = os.path.join(ROOT, "site", "server", "data")
@@ -120,6 +122,50 @@ def parse_outcome(outcome, names):
     for m in re.finditer(r"S/PRST/(\d{4})/(\d+)", outcome):
         prst.append(f"S/PRST/{m.group(1)}/{m.group(2)}")
     return res, failed, prst
+
+
+
+def fetch_presidency(names):
+    """Monthly Council presidency rota (current, next and previous year) from un.org."""
+    page = get(PRESIDENCY_URL)
+    out = []
+    for cells, _ in rows(page):
+        if len(cells) < 2:
+            continue
+        m = re.match(r"(January|February|March|April|May|June|July|August|September|October|November|December) (\d{4})$", cells[0])
+        if not m:
+            continue
+        month = datetime.strptime(cells[0], "%B %Y").strftime("%Y-%m")
+        term = cells[2] if len(cells) > 2 else ""
+        out.append({"month": month, "country": cells[1], "iso3": names.iso3(cells[1]),
+                    "permanent": "permanent" in term.lower(),
+                    "term_end": None if "permanent" in term.lower() else (re.findall(r"\d{4}", term) or [None])[0]})
+    return sorted({p["month"]: p for p in out}.values(), key=lambda p: p["month"])
+
+
+def fetch_ga_resolutions(session):
+    """General Assembly resolutions of one session, with the vote (or adoption without a vote)."""
+    page = get(f"{API}/render_meeting_ga/garesolutions_{session}/EN")
+    out = []
+    for cells, links in rows(page):
+        if len(cells) < 6 or not cells[0].startswith("A/RES/"):
+            continue
+        res_id, body, agenda, meeting_vote, draft, title = cells[:6]
+        m = re.search(r"(A/\d+/PV\.\d+)\s*-->\s*(\d{1,2} \w+ \d{4})\s*(.*)$", meeting_vote)
+        if not m:
+            continue
+        date = iso_date(m.group(2))
+        vote = m.group(3).strip()
+        # Assembly votes run to three digits ("152-3-4"); the Council pattern only allows two
+        t = re.search(r"(?<!\d)(\d{1,3})-(\d{1,3})-(\d{1,3})(?!\d)", vote)
+        out.append({
+            "id": res_id, "session": session, "date": date, "title": title, "body": body,
+            "agenda_item": agenda, "meeting": m.group(1), "draft": draft,
+            "without_vote": "without" in vote.lower(),
+            "tally": {"yes": int(t.group(1)), "no": int(t.group(2)), "abstain": int(t.group(3))} if t else None,
+            "url": f"https://docs.un.org/{res_id}",
+        })
+    return out
 
 
 def members_in(year, history):
@@ -235,6 +281,22 @@ def main():
     if len(vetoes) < 200:
         sys.exit(f"Veto list looks incomplete ({len(vetoes)} rows); refusing to overwrite")
 
+    # ---- presidency rota and General Assembly resolutions (non-fatal if unavailable) ----
+    try:
+        presidency = fetch_presidency(names)
+    except Exception as e:
+        print(f"  presidency: {e}")
+        presidency = []
+    ga_session = this_year - 1945 - (1 if now.month < 9 else 0)
+    ga = []
+    for sess in (ga_session, ga_session - 1):
+        try:
+            got = fetch_ga_resolutions(sess)
+            print(f"  GA session {sess}: {len(got)} resolutions")
+            ga += got
+        except Exception as e:
+            print(f"  GA session {sess}: {e}")
+
     resolutions.sort(key=lambda r: r["date"], reverse=True)
     stamp = now.strftime("%Y-%m-%d")
     out = {
@@ -257,8 +319,15 @@ def main():
                       "source": "Dag Hammarskjöld Library, Security Council meetings tables"},
             "meetings": sorted(activity, key=lambda m: m["date"], reverse=True),
             "presidential_statements": sorted(prsts, key=lambda p: p["date"], reverse=True)[:100],
+            "presidency": presidency,
         },
     }
+    if ga:
+        out["ga-resolutions.json"] = {
+            "_meta": {"last_updated": stamp, "sessions": sorted({r["session"] for r in ga}),
+                      "source": "Dag Hammarskjöld Library, General Assembly resolutions tables"},
+            "resolutions": sorted(ga, key=lambda r: (r["date"] or "", r["id"]), reverse=True),
+        }
     for name, data in out.items():
         path = os.path.join(DATA, name)
         tmp = path + ".tmp"

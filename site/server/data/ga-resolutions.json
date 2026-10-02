@@ -1,0 +1,4706 @@
+{
+  "_meta": {
+    "last_updated": "2026-10-02",
+    "sessions": [
+      80,
+      81
+    ],
+    "source": "Dag Hammarskjöld Library, General Assembly resolutions tables"
+  },
+  "resolutions": [
+    {
+      "id": "A/RES/81/1",
+      "session": 81,
+      "date": "2026-09-17",
+      "title": "Participation by the State of Palestine during the 81st session",
+      "body": "Plenary",
+      "agenda_item": "7",
+      "meeting": "A/81/PV.4",
+      "draft": "A/81/L.2",
+      "without_vote": false,
+      "tally": {
+        "yes": 152,
+        "no": 3,
+        "abstain": 4
+      },
+      "url": "https://docs.un.org/A/RES/81/1"
+    },
+    {
+      "id": "A/RES/80/311",
+      "session": 80,
+      "date": "2026-09-04",
+      "title": "Commemoration of the 50th anniversary of the Treaty of Amity and Cooperation in Southeast Asia",
+      "body": "Plenary",
+      "agenda_item": "126",
+      "meeting": "A/80/PV.115",
+      "draft": "A/80/L.103",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/311"
+    },
+    {
+      "id": "A/RES/80/310",
+      "session": 80,
+      "date": "2026-09-04",
+      "title": "Multilingualism",
+      "body": "Plenary",
+      "agenda_item": "125",
+      "meeting": "A/80/PV.115",
+      "draft": "A/80/L.114",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/310"
+    },
+    {
+      "id": "A/RES/80/309",
+      "session": 80,
+      "date": "2026-09-04",
+      "title": "International Day for the Elimination of Child, Early and Forced Marriage",
+      "body": "Plenary",
+      "agenda_item": "71",
+      "meeting": "A/80/PV.114",
+      "draft": "A/80/L.99",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/309"
+    },
+    {
+      "id": "A/RES/80/308",
+      "session": 80,
+      "date": "2026-09-04",
+      "title": "International Decade of Culture for Sustainable Development (2027-2036)",
+      "body": "Plenary",
+      "agenda_item": "20b",
+      "meeting": "A/80/PV.114",
+      "draft": "A/80/L.102",
+      "without_vote": false,
+      "tally": {
+        "yes": 174,
+        "no": 1,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/308"
+    },
+    {
+      "id": "A/RES/80/307",
+      "session": 80,
+      "date": "2026-09-04",
+      "title": "\"Correct the map\" : rebalancing global cartographic representation and promoting equitable representation of the world's regions, particularly Africa",
+      "body": "Plenary",
+      "agenda_item": "13",
+      "meeting": "A/80/PV.114",
+      "draft": "A/80/L.104",
+      "without_vote": false,
+      "tally": {
+        "yes": 164,
+        "no": 1,
+        "abstain": 6
+      },
+      "url": "https://docs.un.org/A/RES/80/307"
+    },
+    {
+      "id": "A/RES/80/306",
+      "session": 80,
+      "date": "2026-09-03",
+      "title": "Merger of the United Nations System Staff College into the United Nations Institute for Training and Research",
+      "body": "Plenary",
+      "agenda_item": "123",
+      "meeting": "A/80/PV.113",
+      "draft": "A/80/L.112",
+      "without_vote": false,
+      "tally": {
+        "yes": 132,
+        "no": 4,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/306"
+    },
+    {
+      "id": "A/RES/80/305",
+      "session": 80,
+      "date": "2026-09-02",
+      "title": "Access to assistive technology",
+      "body": "Plenary",
+      "agenda_item": "25",
+      "meeting": "A/80/PV.112",
+      "draft": "A/80/L.110",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/305"
+    },
+    {
+      "id": "A/RES/80/304",
+      "session": 80,
+      "date": "2026-09-02",
+      "title": "Modalities of the 2028 United Nations Conference on the Final Comprehensive Review of the Implementation of the Objectives of the International Decade for Action, \"Water for Sustainable Development\", 2018–2028",
+      "body": "Plenary",
+      "agenda_item": "18",
+      "meeting": "A/80/PV.112",
+      "draft": "A/80/L.113",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/304"
+    },
+    {
+      "id": "A/RES/80/303",
+      "session": 80,
+      "date": "2026-08-31",
+      "title": "Enhancing the participation of Indigenous Peoples' representatives and representative institutions in meetings of relevant United Nations bodies on issues affecting them",
+      "body": "Plenary",
+      "agenda_item": "68a",
+      "meeting": "A/80/PV.109",
+      "draft": "A/80/L.107",
+      "without_vote": false,
+      "tally": {
+        "yes": 139,
+        "no": 3,
+        "abstain": 6
+      },
+      "url": "https://docs.un.org/A/RES/80/303"
+    },
+    {
+      "id": "A/RES/80/302",
+      "session": 80,
+      "date": "2026-08-31",
+      "title": "International Day of Safe, Secure and Trustworthy Artificial Intelligence",
+      "body": "Plenary",
+      "agenda_item": "18",
+      "meeting": "A/80/PV.109",
+      "draft": "A/80/L.106",
+      "without_vote": false,
+      "tally": {
+        "yes": 144,
+        "no": 2,
+        "abstain": 3
+      },
+      "url": "https://docs.un.org/A/RES/80/302"
+    },
+    {
+      "id": "A/RES/80/301",
+      "session": 80,
+      "date": "2026-08-31",
+      "title": "International Day of Recognition for Women Searchers of Missing Persons",
+      "body": "Plenary",
+      "agenda_item": "14",
+      "meeting": "A/80/PV.109",
+      "draft": "A/80/L.108",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/301"
+    },
+    {
+      "id": "A/RES/80/300",
+      "session": 80,
+      "date": "2026-08-31",
+      "title": "International Day of Greening the Planet",
+      "body": "Plenary",
+      "agenda_item": "13",
+      "meeting": "A/80/PV.109",
+      "draft": "A/80/L.105",
+      "without_vote": false,
+      "tally": {
+        "yes": 140,
+        "no": 1,
+        "abstain": 3
+      },
+      "url": "https://docs.un.org/A/RES/80/300"
+    },
+    {
+      "id": "A/RES/80/299",
+      "session": 80,
+      "date": "2026-07-28",
+      "title": "Scope, modalities, format and organization of the High-Level Meeting of the General Assembly to Commemorate the 25th Anniversary of the adoption of the Durban Declaration and Programme of Action",
+      "body": "Plenary",
+      "agenda_item": "69b",
+      "meeting": "A/80/PV.107",
+      "draft": "A/80/L.93",
+      "without_vote": false,
+      "tally": {
+        "yes": 142,
+        "no": 3,
+        "abstain": 13
+      },
+      "url": "https://docs.un.org/A/RES/80/299"
+    },
+    {
+      "id": "A/RES/80/298",
+      "session": 80,
+      "date": "2026-07-28",
+      "title": "Comprehensive review of the whole question of peacekeeping operations in all their aspects",
+      "body": "C.4",
+      "agenda_item": "51",
+      "meeting": "A/80/PV.107",
+      "draft": "A/80/537/Add.1",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/298"
+    },
+    {
+      "id": "A/RES/80/297",
+      "session": 80,
+      "date": "2026-07-28",
+      "title": "Modalities for the intergovernmental review of the implementation of the Buenos Aires outcome document of the 2nd High-level United Nations Conference on South-South Cooperation",
+      "body": "Plenary",
+      "agenda_item": "23b",
+      "meeting": "A/80/PV.107",
+      "draft": "A/80/L.90",
+      "without_vote": false,
+      "tally": {
+        "yes": 158,
+        "no": 1,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/297"
+    },
+    {
+      "id": "A/RES/80/296",
+      "session": 80,
+      "date": "2026-07-24",
+      "title": "Enhancing the role of parliaments in accelerating social development",
+      "body": "Plenary",
+      "agenda_item": "18",
+      "meeting": "A/80/PV.106",
+      "draft": "A/80/L.94",
+      "without_vote": false,
+      "tally": {
+        "yes": 167,
+        "no": 1,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/296"
+    },
+    {
+      "id": "A/RES/80/295",
+      "session": 80,
+      "date": "2026-07-24",
+      "title": "Year of International Law, 2028",
+      "body": "Plenary",
+      "agenda_item": "14",
+      "meeting": "A/80/PV.106",
+      "draft": "A/80/L.88",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/295"
+    },
+    {
+      "id": "A/RES/80/294",
+      "session": 80,
+      "date": "2026-07-24",
+      "title": "Follow-up to the Declaration and Programme of Action on a Culture of Peace",
+      "body": "Plenary",
+      "agenda_item": "14",
+      "meeting": "A/80/PV.106",
+      "draft": "A/80/L.77/Rev.1",
+      "without_vote": false,
+      "tally": {
+        "yes": 169,
+        "no": 2,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/294"
+    },
+    {
+      "id": "A/RES/80/293 B",
+      "session": 80,
+      "date": "2026-07-24",
+      "title": "Review of the implementation of General Assembly resolution 75/290 A on the strengthening of the Economic and Social Council; Review of the implementation of General Assembly resolution 75/290 B on the format and organizational aspects of the high-level political forum on sustainable development and the follow-up and review of the 2030 Agenda for Sustainable Development at the global level",
+      "body": "Plenary",
+      "agenda_item": "13 117",
+      "meeting": "A/80/PV.106",
+      "draft": "A/80/L.98",
+      "without_vote": false,
+      "tally": {
+        "yes": 164,
+        "no": 3,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/293 B"
+    },
+    {
+      "id": "A/RES/80/293 A",
+      "session": 80,
+      "date": "2026-07-24",
+      "title": "Review of the implementation of General Assembly resolution 75/290 A on the strengthening of the Economic and Social Council; Review of the implementation of General Assembly resolution 75/290 B on the format and organizational aspects of the high-level political forum on sustainable development and the follow-up and review of the 2030 Agenda for Sustainable Development at the global level",
+      "body": "Plenary",
+      "agenda_item": "13 117",
+      "meeting": "A/80/PV.106",
+      "draft": "A/80/L.97",
+      "without_vote": false,
+      "tally": {
+        "yes": 165,
+        "no": 2,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/293 A"
+    },
+    {
+      "id": "A/RES/80/292",
+      "session": 80,
+      "date": "2026-07-20",
+      "title": "Progress Declaration of the High-level Meeting on Improving Global Road Safety",
+      "body": "Plenary",
+      "agenda_item": "12",
+      "meeting": "A/80/PV.104",
+      "draft": "A/80/L.95",
+      "without_vote": false,
+      "tally": {
+        "yes": 162,
+        "no": 1,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/292"
+    },
+    {
+      "id": "A/RES/80/291",
+      "session": 80,
+      "date": "2026-07-16",
+      "title": "Political Declaration to Renew Commitment and Accelerate the Implementation of the New Urban Agenda",
+      "body": "Plenary",
+      "agenda_item": "178",
+      "meeting": "A/80/PV.102",
+      "draft": "A/80/L.89",
+      "without_vote": false,
+      "tally": {
+        "yes": 148,
+        "no": 2,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/291"
+    },
+    {
+      "id": "A/RES/80/290",
+      "session": 80,
+      "date": "2026-07-10",
+      "title": "Scope, modalities, format and organization of the High-Level Meeting on Universal Health Coverage",
+      "body": "Plenary",
+      "agenda_item": "127",
+      "meeting": "A/80/PV.101",
+      "draft": "A/80/L.87",
+      "without_vote": false,
+      "tally": {
+        "yes": 141,
+        "no": 3,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/290"
+    },
+    {
+      "id": "A/RES/80/289",
+      "session": 80,
+      "date": "2026-07-06",
+      "title": "Sustainable and safe water, sanitation, hygiene, waste and electricity services in health care facilities",
+      "body": "Plenary",
+      "agenda_item": "127",
+      "meeting": "A/80/PV.98",
+      "draft": "A/80/L.71",
+      "without_vote": false,
+      "tally": {
+        "yes": 151,
+        "no": 2,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/289"
+    },
+    {
+      "id": "A/RES/80/287",
+      "session": 80,
+      "date": "2026-07-06",
+      "title": "Status of the Human Rights Council",
+      "body": "Plenary",
+      "agenda_item": "13 117",
+      "meeting": "A/80/PV.98",
+      "draft": "A/80/L.86",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/287"
+    },
+    {
+      "id": "A/RES/80/286",
+      "session": 80,
+      "date": "2026-07-01",
+      "title": "The United Nations Global Counter-Terrorism Strategy : 9th review",
+      "body": "Plenary",
+      "agenda_item": "118",
+      "meeting": "A/80/PV.95",
+      "draft": "A/80/L.82",
+      "without_vote": false,
+      "tally": {
+        "yes": 140,
+        "no": 3,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/286"
+    },
+    {
+      "id": "A/RES/80/285",
+      "session": 80,
+      "date": "2026-06-30",
+      "title": "Financing of the activities arising from Security Council resolution 1863 (2009)",
+      "body": "C.5",
+      "agenda_item": "159",
+      "meeting": "A/80/PV.94",
+      "draft": "A/80/568/Add.2",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/285"
+    },
+    {
+      "id": "A/RES/80/284",
+      "session": 80,
+      "date": "2026-06-30",
+      "title": "Financing of the United Nations Mission for the Referendum in Western Sahara",
+      "body": "C.5",
+      "agenda_item": "158",
+      "meeting": "A/80/PV.94",
+      "draft": "A/80/568/Add.2",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/284"
+    },
+    {
+      "id": "A/RES/80/283",
+      "session": 80,
+      "date": "2026-06-30",
+      "title": "Financing of the United Nations Mission in South Sudan",
+      "body": "C.5",
+      "agenda_item": "157",
+      "meeting": "A/80/PV.94",
+      "draft": "A/80/568/Add.2",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/283"
+    },
+    {
+      "id": "A/RES/80/282",
+      "session": 80,
+      "date": "2026-06-30",
+      "title": "Financing of the United Nations Interim Force in Lebanon",
+      "body": "C.5",
+      "agenda_item": "156b",
+      "meeting": "A/80/PV.94",
+      "draft": "A/80/568/Add.2",
+      "without_vote": false,
+      "tally": {
+        "yes": 137,
+        "no": 4,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/282"
+    },
+    {
+      "id": "A/RES/80/281",
+      "session": 80,
+      "date": "2026-06-30",
+      "title": "Financing of the United Nations Disengagement Observer Force",
+      "body": "C.5",
+      "agenda_item": "156a",
+      "meeting": "A/80/PV.94",
+      "draft": "A/80/568/Add.2",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/281"
+    },
+    {
+      "id": "A/RES/80/280",
+      "session": 80,
+      "date": "2026-06-30",
+      "title": "Financing of the United Nations Multidimensional Integrated Stabilization Mission in Mali",
+      "body": "C.5",
+      "agenda_item": "155",
+      "meeting": "A/80/PV.94",
+      "draft": "A/80/568/Add.2",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/280"
+    },
+    {
+      "id": "A/RES/80/279",
+      "session": 80,
+      "date": "2026-06-30",
+      "title": "Financing of the United Nations Interim Administration Mission in Kosovo",
+      "body": "C.5",
+      "agenda_item": "154",
+      "meeting": "A/80/PV.94",
+      "draft": "A/80/568/Add.2",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/279"
+    },
+    {
+      "id": "A/RES/80/278",
+      "session": 80,
+      "date": "2026-06-30",
+      "title": "Financing of the United Nations Organization Stabilization Mission in the Democratic Republic of the Congo",
+      "body": "C.5",
+      "agenda_item": "152",
+      "meeting": "A/80/PV.94",
+      "draft": "A/80/568/Add.2",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/278"
+    },
+    {
+      "id": "A/RES/80/277",
+      "session": 80,
+      "date": "2026-06-30",
+      "title": "Financing of the United Nations Peacekeeping Force in Cyprus",
+      "body": "C.5",
+      "agenda_item": "151",
+      "meeting": "A/80/PV.94",
+      "draft": "A/80/568/Add.2",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/277"
+    },
+    {
+      "id": "A/RES/80/276",
+      "session": 80,
+      "date": "2026-06-30",
+      "title": "Financing of the United Nations Multidimensional Integrated Stabilization Mission in the Central African Republic",
+      "body": "C.5",
+      "agenda_item": "150",
+      "meeting": "A/80/PV.94",
+      "draft": "A/80/568/Add.2",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/276"
+    },
+    {
+      "id": "A/RES/80/275",
+      "session": 80,
+      "date": "2026-06-30",
+      "title": "Financing of the United Nations Interim Security Force for Abyei",
+      "body": "C.5",
+      "agenda_item": "149",
+      "meeting": "A/80/PV.94",
+      "draft": "A/80/568/Add.2",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/275"
+    },
+    {
+      "id": "A/RES/80/274",
+      "session": 80,
+      "date": "2026-06-30",
+      "title": "Financing of the United Nations Logistics Base at Brindisi, Italy",
+      "body": "C.5",
+      "agenda_item": "148",
+      "meeting": "A/80/PV.94",
+      "draft": "A/80/568/Add.2",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/274"
+    },
+    {
+      "id": "A/RES/80/273",
+      "session": 80,
+      "date": "2026-06-30",
+      "title": "Financing of the Regional Service Centre in Entebbe, Uganda",
+      "body": "C.5",
+      "agenda_item": "148",
+      "meeting": "A/80/PV.94",
+      "draft": "A/80/568/Add.2",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/273"
+    },
+    {
+      "id": "A/RES/80/272",
+      "session": 80,
+      "date": "2026-06-30",
+      "title": "Rates of reimbursement to troop- and police-contributing countries",
+      "body": "C.5",
+      "agenda_item": "148",
+      "meeting": "A/80/PV.94",
+      "draft": "A/80/568/Add.2",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/272"
+    },
+    {
+      "id": "A/RES/80/271",
+      "session": 80,
+      "date": "2026-06-30",
+      "title": "Triennial review of the rates and standards for reimbursement to Member States for contingent-owned equipment",
+      "body": "C.5",
+      "agenda_item": "148",
+      "meeting": "A/80/PV.94",
+      "draft": "A/80/568/Add.2",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/271"
+    },
+    {
+      "id": "A/RES/80/270",
+      "session": 80,
+      "date": "2026-06-30",
+      "title": "Credit-return methodology",
+      "body": "C.5",
+      "agenda_item": "134",
+      "meeting": "A/80/PV.94",
+      "draft": "A/80/568/Add.2",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/270"
+    },
+    {
+      "id": "A/RES/80/241 B",
+      "session": 80,
+      "date": "2026-06-30",
+      "title": "Financing of the United Nations Support Office in Haiti",
+      "body": "C.5",
+      "agenda_item": "177",
+      "meeting": "A/80/PV.94",
+      "draft": "A/80/568/Add.2",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/241 B"
+    },
+    {
+      "id": "A/RES/80/240 B",
+      "session": 80,
+      "date": "2026-06-30",
+      "title": "Support account for peacekeeping operations",
+      "body": "C.5",
+      "agenda_item": "148",
+      "meeting": "A/80/PV.94",
+      "draft": "A/80/568/Add.2",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/240 B"
+    },
+    {
+      "id": "A/RES/80/231 B",
+      "session": 80,
+      "date": "2026-06-30",
+      "title": "Financial reports and audited financial statements, and reports of the Board of Auditors",
+      "body": "C.5",
+      "agenda_item": "133",
+      "meeting": "A/80/PV.94",
+      "draft": "A/80/568/Add.2",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/231 B"
+    },
+    {
+      "id": "A/RES/80/269",
+      "session": 80,
+      "date": "2026-06-25",
+      "title": "International Decade of Strengthening of Peace for Future Generations",
+      "body": "Plenary",
+      "agenda_item": "14",
+      "meeting": "A/80/PV.93",
+      "draft": "A/80/L.54",
+      "without_vote": false,
+      "tally": {
+        "yes": 153,
+        "no": 1,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/269"
+    },
+    {
+      "id": "A/RES/80/268",
+      "session": 80,
+      "date": "2026-06-23",
+      "title": "Political Declaration on HIV/AIDS : United to End AIDS by 2030",
+      "body": "Plenary",
+      "agenda_item": "10",
+      "meeting": "A/80/PV.92",
+      "draft": "A/80/L.79",
+      "without_vote": false,
+      "tally": {
+        "yes": 149,
+        "no": 8,
+        "abstain": 14
+      },
+      "url": "https://docs.un.org/A/RES/80/268"
+    },
+    {
+      "id": "A/RES/80/267",
+      "session": 80,
+      "date": "2026-06-04",
+      "title": "Promotion of durable peace through sustainable development in Africa",
+      "body": "Plenary",
+      "agenda_item": "65b",
+      "meeting": "A/80/PV.88",
+      "draft": "A/80/L.70",
+      "without_vote": false,
+      "tally": {
+        "yes": 165,
+        "no": 1,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/267"
+    },
+    {
+      "id": "A/RES/80/266",
+      "session": 80,
+      "date": "2026-06-04",
+      "title": "Education for peace",
+      "body": "Plenary",
+      "agenda_item": "13",
+      "meeting": "A/80/PV.88",
+      "draft": "A/80/L.72",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/266"
+    },
+    {
+      "id": "A/RES/80/265",
+      "session": 80,
+      "date": "2026-06-04",
+      "title": "Global health and foreign policy : accelerating the fight against diseases driven by social determinants of health",
+      "body": "Plenary",
+      "agenda_item": "127",
+      "meeting": "A/80/PV.88",
+      "draft": "A/80/L.60",
+      "without_vote": false,
+      "tally": {
+        "yes": 161,
+        "no": 3,
+        "abstain": 4
+      },
+      "url": "https://docs.un.org/A/RES/80/265"
+    },
+    {
+      "id": "A/RES/80/264",
+      "session": 80,
+      "date": "2026-06-04",
+      "title": "Status of internally displaced persons and refugees from Abkhazia, Georgia, and the Tskhinvali region/South Ossetia, Georgia",
+      "body": "Plenary",
+      "agenda_item": "32",
+      "meeting": "A/80/PV.88",
+      "draft": "A/80/L.73",
+      "without_vote": false,
+      "tally": {
+        "yes": 107,
+        "no": 8,
+        "abstain": 55
+      },
+      "url": "https://docs.un.org/A/RES/80/264"
+    },
+    {
+      "id": "A/RES/80/263",
+      "session": 80,
+      "date": "2026-05-20",
+      "title": "Advisory opinion of the International Court of Justice on the obligations of States in respect of climate change",
+      "body": "Plenary",
+      "agenda_item": "73",
+      "meeting": "A/80/PV.83",
+      "draft": "A/80/L.65",
+      "without_vote": false,
+      "tally": {
+        "yes": 141,
+        "no": 8,
+        "abstain": 28
+      },
+      "url": "https://docs.un.org/A/RES/80/263"
+    },
+    {
+      "id": "A/RES/80/262",
+      "session": 80,
+      "date": "2026-05-20",
+      "title": "The role and importance of a policy of neutrality in maintaining and strengthening international peace, security and sustainable development",
+      "body": "Plenary",
+      "agenda_item": "62b",
+      "meeting": "A/80/PV.82",
+      "draft": "A/80/L.55",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/262"
+    },
+    {
+      "id": "A/RES/80/261",
+      "session": 80,
+      "date": "2026-05-20",
+      "title": "Peaceful settlement of border disputes",
+      "body": "Plenary",
+      "agenda_item": "31a",
+      "meeting": "A/80/PV.82",
+      "draft": "A/80/L.63",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/261"
+    },
+    {
+      "id": "A/RES/80/260",
+      "session": 80,
+      "date": "2026-05-20",
+      "title": "Strengthening regional cooperation and economic integration to ensure sustainable development in the Central Asian region",
+      "body": "Plenary",
+      "agenda_item": "18",
+      "meeting": "A/80/PV.82",
+      "draft": "A/80/L.52",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/260"
+    },
+    {
+      "id": "A/RES/80/259",
+      "session": 80,
+      "date": "2026-05-20",
+      "title": "Promotion of interreligious and intercultural dialogue, understanding and cooperation for peace",
+      "body": "Plenary",
+      "agenda_item": "14",
+      "meeting": "A/80/PV.82",
+      "draft": "A/80/L.43",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/259"
+    },
+    {
+      "id": "A/RES/80/258",
+      "session": 80,
+      "date": "2026-05-20",
+      "title": "Progress Declaration of the International Migration Review Forum",
+      "body": "Plenary",
+      "agenda_item": "13 117",
+      "meeting": "A/80/PV.82",
+      "draft": "A/80/L.64",
+      "without_vote": false,
+      "tally": {
+        "yes": 147,
+        "no": 6,
+        "abstain": 23
+      },
+      "url": "https://docs.un.org/A/RES/80/258"
+    },
+    {
+      "id": "A/RES/80/257",
+      "session": 80,
+      "date": "2026-05-20",
+      "title": "Fourth Industrial Development Decade for Africa (2026-2035)",
+      "body": "Plenary",
+      "agenda_item": "13",
+      "meeting": "A/80/PV.82",
+      "draft": "A/80/L.61",
+      "without_vote": false,
+      "tally": {
+        "yes": 176,
+        "no": 2,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/257"
+    },
+    {
+      "id": "A/RES/80/256",
+      "session": 80,
+      "date": "2026-04-24",
+      "title": "Organization of the 2026 High-level Meeting on HIV/AIDS",
+      "body": "Plenary",
+      "agenda_item": "10",
+      "meeting": "A/80/PV.81",
+      "draft": "A/80/L.57",
+      "without_vote": false,
+      "tally": {
+        "yes": 136,
+        "no": 3,
+        "abstain": 11
+      },
+      "url": "https://docs.un.org/A/RES/80/256"
+    },
+    {
+      "id": "A/RES/80/255",
+      "session": 80,
+      "date": "2026-04-15",
+      "title": "Joint Inspection Unit",
+      "body": "C.5",
+      "agenda_item": "143",
+      "meeting": "A/80/PV.78",
+      "draft": "A/80/568/Add.1",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/255"
+    },
+    {
+      "id": "A/RES/80/254",
+      "session": 80,
+      "date": "2026-04-15",
+      "title": "Revised estimates relating to the programme budget for 2026 under section 3, Political affairs, and section 36, Staff assessment",
+      "body": "C.5",
+      "agenda_item": "136",
+      "meeting": "A/80/PV.78",
+      "draft": "A/80/568/Add.1",
+      "without_vote": false,
+      "tally": {
+        "yes": 97,
+        "no": 6,
+        "abstain": 26
+      },
+      "url": "https://docs.un.org/A/RES/80/254"
+    },
+    {
+      "id": "A/RES/80/253",
+      "session": 80,
+      "date": "2026-04-15",
+      "title": "Information and communications technology strategy",
+      "body": "C.5",
+      "agenda_item": "135",
+      "meeting": "A/80/PV.78",
+      "draft": "A/80/568/Add.1",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/253"
+    },
+    {
+      "id": "A/RES/80/252",
+      "session": 80,
+      "date": "2026-04-15",
+      "title": "The role of diamonds in fuelling conflict : breaking the link between the illicit transaction of rough diamonds and armed conflict as a contribution to prevention and settlement of conflicts: draft resolution",
+      "body": "Plenary",
+      "agenda_item": "30",
+      "meeting": "A/80/PV.78",
+      "draft": "A/80/L.53",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/252"
+    },
+    {
+      "id": "A/RES/80/251",
+      "session": 80,
+      "date": "2026-03-31",
+      "title": "Mandate creation, implementation and review for an efficient and effective United Nations",
+      "body": "Plenary",
+      "agenda_item": "123",
+      "meeting": "A/80/PV.76",
+      "draft": "A/80/676",
+      "without_vote": false,
+      "tally": {
+        "yes": 168,
+        "no": 4,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/251"
+    },
+    {
+      "id": "A/RES/80/250",
+      "session": 80,
+      "date": "2026-03-25",
+      "title": "Declaration of the Trafficking of Enslaved Africans and Racialized Chattel Enslavement of Africans as the Gravest Crime against Humanity",
+      "body": "Plenary",
+      "agenda_item": "119",
+      "meeting": "A/80/PV.75",
+      "draft": "A/80/L.48",
+      "without_vote": false,
+      "tally": {
+        "yes": 123,
+        "no": 3,
+        "abstain": 52
+      },
+      "url": "https://docs.un.org/A/RES/80/250"
+    },
+    {
+      "id": "A/RES/80/249",
+      "session": 80,
+      "date": "2026-03-10",
+      "title": "International Wellness Day",
+      "body": "Plenary",
+      "agenda_item": "127",
+      "meeting": "A/80/PV.73",
+      "draft": "A/80/L.45",
+      "without_vote": false,
+      "tally": {
+        "yes": 143,
+        "no": 1,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/249"
+    },
+    {
+      "id": "A/RES/80/248",
+      "session": 80,
+      "date": "2026-03-10",
+      "title": "International Coffee Day",
+      "body": "Plenary",
+      "agenda_item": "13",
+      "meeting": "A/80/PV.73",
+      "draft": "A/80/L.44",
+      "without_vote": false,
+      "tally": {
+        "yes": 150,
+        "no": 1,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/248"
+    },
+    {
+      "id": "A/RES/80/247",
+      "session": 80,
+      "date": "2026-03-10",
+      "title": "Scope, modalities, format and organization of the high-level meeting on improving global road safety",
+      "body": "Plenary",
+      "agenda_item": "12",
+      "meeting": "A/80/PV.73",
+      "draft": "A/80/L.46",
+      "without_vote": false,
+      "tally": {
+        "yes": 149,
+        "no": 1,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/247"
+    },
+    {
+      "id": "A/RES/80/244 A–C",
+      "session": 80,
+      "date": "2025-12-30",
+      "title": "Programme budget for 2026",
+      "body": "C.5",
+      "agenda_item": "136",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/568",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/244 A–C"
+    },
+    {
+      "id": "A/RES/80/236",
+      "session": 80,
+      "date": "2025-12-30",
+      "title": "United Nations common system",
+      "body": "C.5",
+      "agenda_item": "144",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/568",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/236"
+    },
+    {
+      "id": "A/RES/80/230",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Financial arrangements and procedures for the implementation of resolution 2719 (2023)",
+      "body": "C.5",
+      "agenda_item": "148",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/527",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/230"
+    },
+    {
+      "id": "A/RES/80/229",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Strengthening the United Nations Crime Prevention and Criminal Justice Programme, in particular its technical cooperation capacity",
+      "body": "C.3",
+      "agenda_item": "107",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/229"
+    },
+    {
+      "id": "A/RES/80/228",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Improving the coordination of efforts against trafficking in persons",
+      "body": "C.3",
+      "agenda_item": "107",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 139,
+        "no": 3,
+        "abstain": 38
+      },
+      "url": "https://docs.un.org/A/RES/80/228"
+    },
+    {
+      "id": "A/RES/80/227",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Tackling illicit trafficking in wild fauna and flora, including timber and timber products, the illegal mining of and illicit trafficking in minerals and precious metals, illicit trafficking in waste and other crimes that affect the environment",
+      "body": "C.3",
+      "agenda_item": "107",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/227"
+    },
+    {
+      "id": "A/RES/80/226",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "United Nations Model Strategies on Reducing Reoffending (the Kyoto Model Strategies)",
+      "body": "C.3",
+      "agenda_item": "107",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/226"
+    },
+    {
+      "id": "A/RES/80/225",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Follow-up to the 14th United Nations Congress on Crime Prevention and Criminal Justice and preparations for the 15th United Nations Congress on Crime Prevention and Criminal Justice",
+      "body": "C.3",
+      "agenda_item": "107",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/225"
+    },
+    {
+      "id": "A/RES/80/224",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Situation of human rights in the Syrian Arab Republic",
+      "body": "C.3",
+      "agenda_item": "71c",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 114,
+        "no": 2,
+        "abstain": 47
+      },
+      "url": "https://docs.un.org/A/RES/80/224"
+    },
+    {
+      "id": "A/RES/80/223",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Situation of human rights in the temporarily occupied territories of Ukraine, including the Autonomous Republic of Crimea and the city of Sevastopol",
+      "body": "C.3",
+      "agenda_item": "71c",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 79,
+        "no": 16,
+        "abstain": 73
+      },
+      "url": "https://docs.un.org/A/RES/80/223"
+    },
+    {
+      "id": "A/RES/80/222",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Situation of human rights in the Islamic Republic of Iran",
+      "body": "C.3",
+      "agenda_item": "71c",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 78,
+        "no": 27,
+        "abstain": 64
+      },
+      "url": "https://docs.un.org/A/RES/80/222"
+    },
+    {
+      "id": "A/RES/80/221",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Situation of human rights of Rohingya Muslims and other minorities in Myanmar",
+      "body": "C.3",
+      "agenda_item": "71c",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/221"
+    },
+    {
+      "id": "A/RES/80/220",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Situation of human rights in the Democratic People's Republic of Korea",
+      "body": "C.3",
+      "agenda_item": "71c",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/220"
+    },
+    {
+      "id": "A/RES/80/219",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "United Nations Human Rights Training and Documentation Centre for South-West Asia and the Arab Region",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/219"
+    },
+    {
+      "id": "A/RES/80/218",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Protection of migrants",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 147,
+        "no": 4,
+        "abstain": 27
+      },
+      "url": "https://docs.un.org/A/RES/80/218"
+    },
+    {
+      "id": "A/RES/80/217",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "The safety of journalists and the issue of impunity",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/217"
+    },
+    {
+      "id": "A/RES/80/216",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "The human rights to safe drinking water and sanitation",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 176,
+        "no": 2,
+        "abstain": 2
+      },
+      "url": "https://docs.un.org/A/RES/80/216"
+    },
+    {
+      "id": "A/RES/80/215",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Promotion and protection of human rights in the context of digital technologies",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 174,
+        "no": 3,
+        "abstain": 4
+      },
+      "url": "https://docs.un.org/A/RES/80/215"
+    },
+    {
+      "id": "A/RES/80/214",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "National human rights institutions",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 167,
+        "no": 2,
+        "abstain": 11
+      },
+      "url": "https://docs.un.org/A/RES/80/214"
+    },
+    {
+      "id": "A/RES/80/213",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Terrorism and human rights",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 177,
+        "no": 3,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/213"
+    },
+    {
+      "id": "A/RES/80/212",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Subregional Centre for Human Rights and Democracy in Central Africa",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 178,
+        "no": 3,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/212"
+    },
+    {
+      "id": "A/RES/80/211",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Protection of and assistance to internally displaced persons",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 174,
+        "no": 3,
+        "abstain": 3
+      },
+      "url": "https://docs.un.org/A/RES/80/211"
+    },
+    {
+      "id": "A/RES/80/210",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "The right to food",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 176,
+        "no": 3,
+        "abstain": 2
+      },
+      "url": "https://docs.un.org/A/RES/80/210"
+    },
+    {
+      "id": "A/RES/80/209",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Human rights and unilateral coercive measures",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 122,
+        "no": 56,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/209"
+    },
+    {
+      "id": "A/RES/80/208",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Promotion of a democratic and equitable international order",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 119,
+        "no": 55,
+        "abstain": 7
+      },
+      "url": "https://docs.un.org/A/RES/80/208"
+    },
+    {
+      "id": "A/RES/80/207",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "The right to development",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 127,
+        "no": 23,
+        "abstain": 32
+      },
+      "url": "https://docs.un.org/A/RES/80/207"
+    },
+    {
+      "id": "A/RES/80/206",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Promotion of equitable geographical distribution in the membership of the human rights treaty bodies",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 124,
+        "no": 53,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/206"
+    },
+    {
+      "id": "A/RES/80/205",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Human rights and cultural diversity",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 122,
+        "no": 55,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/205"
+    },
+    {
+      "id": "A/RES/80/204",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Enhancement of international cooperation in the field of human rights",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 175,
+        "no": 3,
+        "abstain": 2
+      },
+      "url": "https://docs.un.org/A/RES/80/204"
+    },
+    {
+      "id": "A/RES/80/203",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Strengthening United Nations action in the field of human rights through the promotion of international cooperation and the importance of non-selectivity, impartiality and objectivity",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 169,
+        "no": 3,
+        "abstain": 5
+      },
+      "url": "https://docs.un.org/A/RES/80/203"
+    },
+    {
+      "id": "A/RES/80/202",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Freedom of religion or belief",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/202"
+    },
+    {
+      "id": "A/RES/80/201",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "International Convention for the Protection of All Persons from Enforced Disappearance",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/201"
+    },
+    {
+      "id": "A/RES/80/200",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Combating intolerance, negative stereotyping, stigmatization, discrimination, incitement to violence and violence against persons, based on religion or belief",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/200"
+    },
+    {
+      "id": "A/RES/80/199",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Effective promotion of the Declaration on the Rights of Persons Belonging to National or Ethnic, Religious and Linguistic Minorities",
+      "body": "C.3",
+      "agenda_item": "71b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 173,
+        "no": 1,
+        "abstain": 3
+      },
+      "url": "https://docs.un.org/A/RES/80/199"
+    },
+    {
+      "id": "A/RES/80/196",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Universal realization of the right of peoples to self-determination",
+      "body": "C.3",
+      "agenda_item": "70",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/196"
+    },
+    {
+      "id": "A/RES/80/183",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Follow-up to the 30th anniversary of the International Year of the Family and beyond",
+      "body": "C.3",
+      "agenda_item": "25b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/183"
+    },
+    {
+      "id": "A/RES/80/179",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "Follow-up to the 2nd World Assembly on Ageing",
+      "body": "C.3",
+      "agenda_item": "25b",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/545",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/179"
+    },
+    {
+      "id": "A/RES/80/174",
+      "session": 80,
+      "date": "2025-12-18",
+      "title": "International Day of the Mediterranean Diet",
+      "body": "Plenary",
+      "agenda_item": "13",
+      "meeting": "A/80/PV.69",
+      "draft": "A/80/L.21",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/174"
+    },
+    {
+      "id": "A/RES/80/197",
+      "session": 80,
+      "date": "2025-12-17",
+      "title": "Implementation of the Convention on the Rights of Persons with Disabilities and the Optional Protocol thereto : amplified barriers in diverse contexts",
+      "body": "C.3",
+      "agenda_item": "71a",
+      "meeting": "A/80/PV.67",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 176,
+        "no": 2,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/197"
+    },
+    {
+      "id": "A/RES/80/173",
+      "session": 80,
+      "date": "2025-12-17",
+      "title": "Outcome document of the High-Level Meeting of the General Assembly on the Overall Review of the Implementation of the Outcomes of the World Summit on the Information Society",
+      "body": "Plenary",
+      "agenda_item": "15",
+      "meeting": "A/80/PV.68",
+      "draft": "A/80/L.41",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/173"
+    },
+    {
+      "id": "A/RES/80/198",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Torture and other cruel, inhuman or degrading treatment or punishment",
+      "body": "C.3",
+      "agenda_item": "71a",
+      "meeting": "A/80/PV.63",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 173,
+        "no": 3,
+        "abstain": 2
+      },
+      "url": "https://docs.un.org/A/RES/80/198"
+    },
+    {
+      "id": "A/RES/80/195",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "The right of the Palestinian people to self-determination",
+      "body": "C.3",
+      "agenda_item": "70",
+      "meeting": "A/80/PV.62",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 164,
+        "no": 8,
+        "abstain": 9
+      },
+      "url": "https://docs.un.org/A/RES/80/195"
+    },
+    {
+      "id": "A/RES/80/194",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Use of mercenaries as a means of violating human rights and impeding the exercise of the right of peoples to self-determination",
+      "body": "C.3",
+      "agenda_item": "70",
+      "meeting": "A/80/PV.62",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 121,
+        "no": 53,
+        "abstain": 5
+      },
+      "url": "https://docs.un.org/A/RES/80/194"
+    },
+    {
+      "id": "A/RES/80/193",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "A global call for concrete action for the elimination of racism, racial discrimination, xenophobia and related intolerance and the comprehensive implementation of and follow-up to the Durban Declaration and Programme of Action",
+      "body": "C.3",
+      "agenda_item": "69b",
+      "meeting": "A/80/PV.62",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 127,
+        "no": 16,
+        "abstain": 40
+      },
+      "url": "https://docs.un.org/A/RES/80/193"
+    },
+    {
+      "id": "A/RES/80/192",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Combating glorification of Nazism, neo-Nazism and other practices that contribute to fuelling contemporary forms of racism, racial discrimination, xenophobia and related intolerance",
+      "body": "C.3",
+      "agenda_item": "69a",
+      "meeting": "A/80/PV.62",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 119,
+        "no": 51,
+        "abstain": 10
+      },
+      "url": "https://docs.un.org/A/RES/80/192"
+    },
+    {
+      "id": "A/RES/80/191",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Rights of indigenous peoples",
+      "body": "C.3",
+      "agenda_item": "68a",
+      "meeting": "A/80/PV.62",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 166,
+        "no": 3,
+        "abstain": 8
+      },
+      "url": "https://docs.un.org/A/RES/80/191"
+    },
+    {
+      "id": "A/RES/80/190",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Rights of the child",
+      "body": "C.3",
+      "agenda_item": "67",
+      "meeting": "A/80/PV.62",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 176,
+        "no": 4,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/190"
+    },
+    {
+      "id": "A/RES/80/189",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Report of the Human Rights Council",
+      "body": "C.3",
+      "agenda_item": "66",
+      "meeting": "A/80/PV.62",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 114,
+        "no": 7,
+        "abstain": 59
+      },
+      "url": "https://docs.un.org/A/RES/80/189"
+    },
+    {
+      "id": "A/RES/80/188",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Assistance to refugees, returnees and displaced persons in Africa",
+      "body": "C.3",
+      "agenda_item": "61",
+      "meeting": "A/80/PV.62",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 179,
+        "no": 1,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/188"
+    },
+    {
+      "id": "A/RES/80/187",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Office of the United Nations High Commissioner for Refugees",
+      "body": "C.3",
+      "agenda_item": "61",
+      "meeting": "A/80/PV.62",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 171,
+        "no": 4,
+        "abstain": 5
+      },
+      "url": "https://docs.un.org/A/RES/80/187"
+    },
+    {
+      "id": "A/RES/80/186",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Follow-up to the 4th World Conference on Women and full implementation of the Beijing Declaration and Platform for Action and the outcome of the 23rd special session of the General Assembly",
+      "body": "C.3",
+      "agenda_item": "25b",
+      "meeting": "A/80/PV.62",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 179,
+        "no": 3,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/186"
+    },
+    {
+      "id": "A/RES/80/185",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Violence against women migrant workers",
+      "body": "C.3",
+      "agenda_item": "26a",
+      "meeting": "A/80/PV.62",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 175,
+        "no": 3,
+        "abstain": 3
+      },
+      "url": "https://docs.un.org/A/RES/80/185"
+    },
+    {
+      "id": "A/RES/80/184",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Improvement of the situation of women and girls in rural areas",
+      "body": "C.3",
+      "agenda_item": "26a",
+      "meeting": "A/80/PV.62",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 178,
+        "no": 3,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/184"
+    },
+    {
+      "id": "A/RES/80/182",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Cooperatives in social development",
+      "body": "C.3",
+      "agenda_item": "25b",
+      "meeting": "A/80/PV.62",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 179,
+        "no": 3,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/182"
+    },
+    {
+      "id": "A/RES/80/181",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Promoting social integration through social inclusion",
+      "body": "C.3",
+      "agenda_item": "25b",
+      "meeting": "A/80/PV.62",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 177,
+        "no": 2,
+        "abstain": 2
+      },
+      "url": "https://docs.un.org/A/RES/80/181"
+    },
+    {
+      "id": "A/RES/80/180",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Policies and programmes involving youth",
+      "body": "C.3",
+      "agenda_item": "25b",
+      "meeting": "A/80/PV.62",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 179,
+        "no": 3,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/180"
+    },
+    {
+      "id": "A/RES/80/178",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Implementation of the outcome of the World Summit for Social Development and of the 24th special session of the General Assembly",
+      "body": "C.3",
+      "agenda_item": "25a",
+      "meeting": "A/80/PV.62",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 180,
+        "no": 3,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/178"
+    },
+    {
+      "id": "A/RES/80/177",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Persons with albinism",
+      "body": "C.3",
+      "agenda_item": "25",
+      "meeting": "A/80/PV.62",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 179,
+        "no": 3,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/177"
+    },
+    {
+      "id": "A/RES/80/176",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Addressing the challenges of persons living with a rare disease and their families",
+      "body": "C.3",
+      "agenda_item": "25",
+      "meeting": "A/80/PV.62",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 179,
+        "no": 2,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/176"
+    },
+    {
+      "id": "A/RES/80/175",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Inclusive policies and programmes to address homelessness, including in the aftermath of the coronavirus disease (COVID-19)",
+      "body": "C.3",
+      "agenda_item": "25",
+      "meeting": "A/80/PV.62",
+      "draft": "A/80/545",
+      "without_vote": false,
+      "tally": {
+        "yes": 179,
+        "no": 2,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/175"
+    },
+    {
+      "id": "A/RES/80/172",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Report of the Committee on Relations with the Host Country",
+      "body": "C.6",
+      "agenda_item": "160",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/462",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/172"
+    },
+    {
+      "id": "A/RES/80/171",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Measures to eliminate international terrorism",
+      "body": "C.6",
+      "agenda_item": "109",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/458",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/171"
+    },
+    {
+      "id": "A/RES/80/170",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Strengthening and promoting the international treaty framework",
+      "body": "C.6",
+      "agenda_item": "87",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/457",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/170"
+    },
+    {
+      "id": "A/RES/80/169",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "United Nations Conference of Plenipotentiaries on Protection of Persons in the Event of Disasters",
+      "body": "C.6",
+      "agenda_item": "86",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/456",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/169"
+    },
+    {
+      "id": "A/RES/80/168",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "The scope and application of the principle of universal jurisdiction",
+      "body": "C.6",
+      "agenda_item": "85",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/455",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/168"
+    },
+    {
+      "id": "A/RES/80/167",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "The rule of law at the national and international levels",
+      "body": "C.6",
+      "agenda_item": "84",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/454",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/167"
+    },
+    {
+      "id": "A/RES/80/166",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Report of the Special Committee on the Charter of the United Nations and on the Strengthening of the Role of the Organization",
+      "body": "C.6",
+      "agenda_item": "83",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/453",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/166"
+    },
+    {
+      "id": "A/RES/80/165",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Diplomatic protection",
+      "body": "C.6",
+      "agenda_item": "82",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/452",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/165"
+    },
+    {
+      "id": "A/RES/80/164",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Report of the International Law Commission on the work of its 76th session",
+      "body": "C.6",
+      "agenda_item": "80",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/450",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/164"
+    },
+    {
+      "id": "A/RES/80/163",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "United Nations Programme of Assistance in the Teaching, Study, Dissemination and Wider Appreciation of International Law",
+      "body": "C.6",
+      "agenda_item": "79",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/449",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/163"
+    },
+    {
+      "id": "A/RES/80/162",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "United Nations Convention on Negotiable Cargo Documents",
+      "body": "C.6",
+      "agenda_item": "78",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/448",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/162"
+    },
+    {
+      "id": "A/RES/80/161",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Report of the United Nations Commission on International Trade Law on the work of its 58th session",
+      "body": "C.6",
+      "agenda_item": "78",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/448",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/161"
+    },
+    {
+      "id": "A/RES/80/160",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Criminal accountability of United Nations officials and experts on mission",
+      "body": "C.6",
+      "agenda_item": "77",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/447",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/160"
+    },
+    {
+      "id": "A/RES/80/159",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Responsibility of States for internationally wrongful acts",
+      "body": "C.6",
+      "agenda_item": "76",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/446",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/159"
+    },
+    {
+      "id": "A/RES/80/158",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Permanent sovereignty of the Palestinian people in the Occupied Palestinian Territory, including East Jerusalem, and of the Arab population in the occupied Syrian Golan over their natural resources",
+      "body": "C.2",
+      "agenda_item": "60",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 156,
+        "no": 8,
+        "abstain": 10
+      },
+      "url": "https://docs.un.org/A/RES/80/158"
+    },
+    {
+      "id": "A/RES/80/157",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Agriculture development, food security and nutrition",
+      "body": "C.2",
+      "agenda_item": "24a",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 180,
+        "no": 1,
+        "abstain": 2
+      },
+      "url": "https://docs.un.org/A/RES/80/157"
+    },
+    {
+      "id": "A/RES/80/156",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "South-South cooperation",
+      "body": "C.2",
+      "agenda_item": "23b",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 182,
+        "no": 1,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/156"
+    },
+    {
+      "id": "A/RES/80/155",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Operational activities for development of the United Nations System",
+      "body": "C.2",
+      "agenda_item": "23a",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 180,
+        "no": 1,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/155"
+    },
+    {
+      "id": "A/RES/80/154",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Eradicating rural poverty to implement the 2030 Agenda for Sustainable Development",
+      "body": "C.2",
+      "agenda_item": "22b",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 125,
+        "no": 52,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/154"
+    },
+    {
+      "id": "A/RES/80/153",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Implementation of the 3rd United Nations Decade for the Eradication of Poverty (2018-2027)",
+      "body": "C.2",
+      "agenda_item": "22a",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 181,
+        "no": 2,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/153"
+    },
+    {
+      "id": "A/RES/80/152",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Contribution of the care economy to sustainable development",
+      "body": "C.2",
+      "agenda_item": "22a",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 160,
+        "no": 2,
+        "abstain": 13
+      },
+      "url": "https://docs.un.org/A/RES/80/152"
+    },
+    {
+      "id": "A/RES/80/151",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Follow-up to the 3rd United Nations Conference on Landlocked Developing Countries",
+      "body": "C.2",
+      "agenda_item": "21b",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 181,
+        "no": 1,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/151"
+    },
+    {
+      "id": "A/RES/80/150",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Follow-up to the 5th United Nations Conference on the Least Developed Countries",
+      "body": "C.2",
+      "agenda_item": "21a",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 178,
+        "no": 2,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/150"
+    },
+    {
+      "id": "A/RES/80/149",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Development cooperation with middle-income countries",
+      "body": "C.2",
+      "agenda_item": "20c",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 181,
+        "no": 1,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/149"
+    },
+    {
+      "id": "A/RES/80/148",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Culture and sustainable development",
+      "body": "C.2",
+      "agenda_item": "20b",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 180,
+        "no": 2,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/148"
+    },
+    {
+      "id": "A/RES/80/147",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Science, technology and innovation for sustainable development",
+      "body": "C.2",
+      "agenda_item": "20a",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 180,
+        "no": 2,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/147"
+    },
+    {
+      "id": "A/RES/80/146",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Multidimensional Vulnerability Index",
+      "body": "C.2",
+      "agenda_item": "18l",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 177,
+        "no": 1,
+        "abstain": 2
+      },
+      "url": "https://docs.un.org/A/RES/80/146"
+    },
+    {
+      "id": "A/RES/80/145",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Strengthening cooperation for integrated coastal zone management for achieving sustainable development",
+      "body": "C.2",
+      "agenda_item": "18k",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 174,
+        "no": 1,
+        "abstain": 3
+      },
+      "url": "https://docs.un.org/A/RES/80/145"
+    },
+    {
+      "id": "A/RES/80/144",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Sustainable mountain development",
+      "body": "C.2",
+      "agenda_item": "18j",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 178,
+        "no": 1,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/144"
+    },
+    {
+      "id": "A/RES/80/143",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Combating sand and dust storms",
+      "body": "C.2",
+      "agenda_item": "18i",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 178,
+        "no": 4,
+        "abstain": 2
+      },
+      "url": "https://docs.un.org/A/RES/80/143"
+    },
+    {
+      "id": "A/RES/80/142",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Ensuring access to affordable, reliable, sustainable and modern energy for all",
+      "body": "C.2",
+      "agenda_item": "18h",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 180,
+        "no": 2,
+        "abstain": 2
+      },
+      "url": "https://docs.un.org/A/RES/80/142"
+    },
+    {
+      "id": "A/RES/80/141",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Education for sustainable development in the framework of the 2030 Agenda for Sustainable Development",
+      "body": "C.2",
+      "agenda_item": "18g",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 179,
+        "no": 3,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/141"
+    },
+    {
+      "id": "A/RES/80/140",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Implementation of the Convention on Biological Diversity and its contribution to sustainable development",
+      "body": "C.2",
+      "agenda_item": "18f",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 180,
+        "no": 1,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/140"
+    },
+    {
+      "id": "A/RES/80/139",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Implementation of the United Nations Convention to Combat Desertification in Those Countries Experiencing Serious Drought and/or Desertification, Particularly in Africa",
+      "body": "C.2",
+      "agenda_item": "18e",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 181,
+        "no": 1,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/139"
+    },
+    {
+      "id": "A/RES/80/138",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Protection of global climate for present and future generations of humankind",
+      "body": "C.2",
+      "agenda_item": "18d",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 181,
+        "no": 1,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/138"
+    },
+    {
+      "id": "A/RES/80/137",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Disaster risk reduction",
+      "body": "C.2",
+      "agenda_item": "18c",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 181,
+        "no": 1,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/137"
+    },
+    {
+      "id": "A/RES/80/136",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Follow-up to and implementation of the Antigua and Barbuda Agenda for Small Island Developing States : A Renewed Declaration for Resilient Prosperity",
+      "body": "C.2",
+      "agenda_item": "18b",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 182,
+        "no": 1,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/136"
+    },
+    {
+      "id": "A/RES/80/135",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Promoting sustainable consumption and production patterns for the implementation of the 2030 Agenda for Sustainable Development, building on Agenda 21",
+      "body": "C.2",
+      "agenda_item": "18a",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 180,
+        "no": 3,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/135"
+    },
+    {
+      "id": "A/RES/80/134",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Sustainable and resilient tourism and sustainable development in Central America and the Dominican Republic",
+      "body": "C.2",
+      "agenda_item": "18",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 152,
+        "no": 4,
+        "abstain": 14
+      },
+      "url": "https://docs.un.org/A/RES/80/134"
+    },
+    {
+      "id": "A/RES/80/133",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Agricultural technology for sustainable development",
+      "body": "C.2",
+      "agenda_item": "18",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 138,
+        "no": 27,
+        "abstain": 11
+      },
+      "url": "https://docs.un.org/A/RES/80/133"
+    },
+    {
+      "id": "A/RES/80/132",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "United Nations Decade of Sustainable Transport 2026-2035",
+      "body": "C.2",
+      "agenda_item": "18",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 177,
+        "no": 2,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/132"
+    },
+    {
+      "id": "A/RES/80/131",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "The pivotal role of reliable and stable energy connectivity in driving sustainable development",
+      "body": "C.2",
+      "agenda_item": "18",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 179,
+        "no": 1,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/131"
+    },
+    {
+      "id": "A/RES/80/130",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Oil slick on Lebanese shores",
+      "body": "C.2",
+      "agenda_item": "18",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 163,
+        "no": 9,
+        "abstain": 8
+      },
+      "url": "https://docs.un.org/A/RES/80/130"
+    },
+    {
+      "id": "A/RES/80/129",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Follow-up to and implementation of the outcomes of the International Conferences on Financing for Development",
+      "body": "C.2",
+      "agenda_item": "17",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 180,
+        "no": 1,
+        "abstain": 2
+      },
+      "url": "https://docs.un.org/A/RES/80/129"
+    },
+    {
+      "id": "A/RES/80/128",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Promotion of inclusive and effective international tax cooperation at the United Nations",
+      "body": "C.2",
+      "agenda_item": "16h",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 122,
+        "no": 3,
+        "abstain": 55
+      },
+      "url": "https://docs.un.org/A/RES/80/128"
+    },
+    {
+      "id": "A/RES/80/127",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Promoting investments for sustainable development",
+      "body": "C.2",
+      "agenda_item": "16g",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 181,
+        "no": 2,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/127"
+    },
+    {
+      "id": "A/RES/80/126",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Promotion of international cooperation to combat illicit financial flows and strengthen good practices on assets return to foster sustainable development",
+      "body": "C.2",
+      "agenda_item": "16f",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 176,
+        "no": 1,
+        "abstain": 5
+      },
+      "url": "https://docs.un.org/A/RES/80/126"
+    },
+    {
+      "id": "A/RES/80/125",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Financial inclusion for sustainable development",
+      "body": "C.2",
+      "agenda_item": "16e",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 181,
+        "no": 2,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/125"
+    },
+    {
+      "id": "A/RES/80/124",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Commodities",
+      "body": "C.2",
+      "agenda_item": "16d",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 180,
+        "no": 2,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/124"
+    },
+    {
+      "id": "A/RES/80/123",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "External debt sustainability and development",
+      "body": "C.2",
+      "agenda_item": "16c",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 132,
+        "no": 2,
+        "abstain": 49
+      },
+      "url": "https://docs.un.org/A/RES/80/123"
+    },
+    {
+      "id": "A/RES/80/122",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "International financial system and development",
+      "body": "C.2",
+      "agenda_item": "16b",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 173,
+        "no": 3,
+        "abstain": 8
+      },
+      "url": "https://docs.un.org/A/RES/80/122"
+    },
+    {
+      "id": "A/RES/80/121",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "International trade and development",
+      "body": "C.2",
+      "agenda_item": "16a",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 131,
+        "no": 3,
+        "abstain": 47
+      },
+      "url": "https://docs.un.org/A/RES/80/121"
+    },
+    {
+      "id": "A/RES/80/120",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Unilateral economic measures as a means of political and economic coercion against developing countries",
+      "body": "C.2",
+      "agenda_item": "16a",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 127,
+        "no": 14,
+        "abstain": 38
+      },
+      "url": "https://docs.un.org/A/RES/80/120"
+    },
+    {
+      "id": "A/RES/80/119",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Consumer product safety",
+      "body": "C.2",
+      "agenda_item": "16a",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 179,
+        "no": 3,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/119"
+    },
+    {
+      "id": "A/RES/80/118",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Information and communications technologies for sustainable development",
+      "body": "C.2",
+      "agenda_item": "15",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/555",
+      "without_vote": false,
+      "tally": {
+        "yes": 181,
+        "no": 2,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/118"
+    },
+    {
+      "id": "A/RES/80/117",
+      "session": 80,
+      "date": "2025-12-15",
+      "title": "Political Declaration of the 4th High-Level Meeting of the General Assembly on the Prevention and Control of Noncommunicable Diseases and the Promotion of Mental Health and Well-being",
+      "body": "Plenary",
+      "agenda_item": "127",
+      "meeting": "A/80/PV.64",
+      "draft": "A/80/L.34",
+      "without_vote": false,
+      "tally": {
+        "yes": 175,
+        "no": 2,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/117"
+    },
+    {
+      "id": "A/RES/80/116",
+      "session": 80,
+      "date": "2025-12-12",
+      "title": "Advisory opinion of the International Court of Justice on the Obligations of Israel in relation to the presence and activities of the United Nations, other international organizations and third States in and in relation to the Occupied Palestinian Territory",
+      "body": "Plenary",
+      "agenda_item": "123",
+      "meeting": "A/80/PV.61",
+      "draft": "A/80/L.26",
+      "without_vote": false,
+      "tally": {
+        "yes": 139,
+        "no": 12,
+        "abstain": 19
+      },
+      "url": "https://docs.un.org/A/RES/80/116"
+    },
+    {
+      "id": "A/RES/80/115",
+      "session": 80,
+      "date": "2025-12-12",
+      "title": "International Year of Legal Literacy, 2027",
+      "body": "Plenary",
+      "agenda_item": "13",
+      "meeting": "A/80/PV.61",
+      "draft": "A/80/L.24",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/115"
+    },
+    {
+      "id": "A/RES/80/114",
+      "session": 80,
+      "date": "2025-12-12",
+      "title": "Credentials of representatives to the 80th session of the General Assembly",
+      "body": "Plenary",
+      "agenda_item": "3b",
+      "meeting": "A/80/PV.61",
+      "draft": "A/80/547",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/114"
+    },
+    {
+      "id": "A/RES/80/113",
+      "session": 80,
+      "date": "2025-12-10",
+      "title": "International cooperation on humanitarian assistance in the field of natural disasters, from relief to development",
+      "body": "Plenary",
+      "agenda_item": "72a",
+      "meeting": "A/80/PV.60",
+      "draft": "A/80/L.23",
+      "without_vote": false,
+      "tally": {
+        "yes": 162,
+        "no": 1,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/113"
+    },
+    {
+      "id": "A/RES/80/112",
+      "session": 80,
+      "date": "2025-12-10",
+      "title": "Safety and security of humanitarian personnel and protection of United Nations personnel",
+      "body": "Plenary",
+      "agenda_item": "72a",
+      "meeting": "A/80/PV.60",
+      "draft": "A/80/L.18",
+      "without_vote": false,
+      "tally": {
+        "yes": 153,
+        "no": 1,
+        "abstain": 6
+      },
+      "url": "https://docs.un.org/A/RES/80/112"
+    },
+    {
+      "id": "A/RES/80/111",
+      "session": 80,
+      "date": "2025-12-10",
+      "title": "Strengthening of international cooperation and coordination of efforts to study, mitigate and minimize the consequences of the Chornobyl disaster",
+      "body": "Plenary",
+      "agenda_item": "72d",
+      "meeting": "A/80/PV.60",
+      "draft": "A/80/L.27",
+      "without_vote": false,
+      "tally": {
+        "yes": 97,
+        "no": 8,
+        "abstain": 39
+      },
+      "url": "https://docs.un.org/A/RES/80/111"
+    },
+    {
+      "id": "A/RES/80/110",
+      "session": 80,
+      "date": "2025-12-09",
+      "title": "Oceans and the law of the sea",
+      "body": "Plenary",
+      "agenda_item": "75",
+      "meeting": "A/80/PV.58",
+      "draft": "A/80/L.22",
+      "without_vote": false,
+      "tally": {
+        "yes": 166,
+        "no": 1,
+        "abstain": 4
+      },
+      "url": "https://docs.un.org/A/RES/80/110"
+    },
+    {
+      "id": "A/RES/80/109",
+      "session": 80,
+      "date": "2025-12-09",
+      "title": "Sustainable fisheries, including through the 1995 Agreement for the Implementation of the Provisions of the United Nations Convention on the Law of the Sea of 10 December 1982 relating to the Conservation and Management of Straddling Fish Stocks and Highly Migratory Fish Stocks, and related instruments",
+      "body": "Plenary",
+      "agenda_item": "75a",
+      "meeting": "A/80/PV.58",
+      "draft": "A/80/L.17",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/109"
+    },
+    {
+      "id": "A/RES/80/108",
+      "session": 80,
+      "date": "2025-12-09",
+      "title": "2028 United Nations Conference to Support the Implementation of Sustainable Development Goal 14 : Conserve and sustainably use the oceans, seas and marine resources for sustainable development",
+      "body": "Plenary",
+      "agenda_item": "13 75",
+      "meeting": "A/80/PV.58",
+      "draft": "A/80/L.14",
+      "without_vote": false,
+      "tally": {
+        "yes": 169,
+        "no": 2,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/108"
+    },
+    {
+      "id": "A/RES/80/107",
+      "session": 80,
+      "date": "2025-12-09",
+      "title": "Agreement under the United Nations Convention on the Law of the Sea on the Conservation and Sustainable Use of Marine Biological Diversity of Areas beyond National Jurisdiction",
+      "body": "Plenary",
+      "agenda_item": "75b",
+      "meeting": "A/80/PV.58",
+      "draft": "A/80/L.13",
+      "without_vote": false,
+      "tally": {
+        "yes": 168,
+        "no": 1,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/107"
+    },
+    {
+      "id": "A/RES/80/99",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Question of Pitcairn",
+      "body": "Plenary",
+      "agenda_item": "58",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/99"
+    },
+    {
+      "id": "A/RES/80/98",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Question of New Caledonia",
+      "body": "C.4",
+      "agenda_item": "58",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/98"
+    },
+    {
+      "id": "A/RES/80/97",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Question of Montserrat",
+      "body": "C.4",
+      "agenda_item": "58",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/97"
+    },
+    {
+      "id": "A/RES/80/96",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Question of Guam",
+      "body": "C.4",
+      "agenda_item": "58",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": false,
+      "tally": {
+        "yes": 153,
+        "no": 2,
+        "abstain": 9
+      },
+      "url": "https://docs.un.org/A/RES/80/96"
+    },
+    {
+      "id": "A/RES/80/95",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Question of French Polynesia",
+      "body": "C.4",
+      "agenda_item": "58",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/95"
+    },
+    {
+      "id": "A/RES/80/94",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Question of the Cayman Islands",
+      "body": "C.4",
+      "agenda_item": "58",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/94"
+    },
+    {
+      "id": "A/RES/80/93",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Question of the British Virgin Islands",
+      "body": "C.4",
+      "agenda_item": "58",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/93"
+    },
+    {
+      "id": "A/RES/80/92",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Question of Bermuda",
+      "body": "C.4",
+      "agenda_item": "58",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/92"
+    },
+    {
+      "id": "A/RES/80/91",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Question of Anguilla",
+      "body": "Plenary",
+      "agenda_item": "58",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/91"
+    },
+    {
+      "id": "A/RES/80/90",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Question of American Samoa",
+      "body": "C.4",
+      "agenda_item": "58",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": false,
+      "tally": {
+        "yes": 156,
+        "no": 2,
+        "abstain": 7
+      },
+      "url": "https://docs.un.org/A/RES/80/90"
+    },
+    {
+      "id": "A/RES/80/89",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Question of Western Sahara",
+      "body": "C.4",
+      "agenda_item": "58",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/89"
+    },
+    {
+      "id": "A/RES/80/88",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Offers by Member States of study and training facilities for inhabitants of Non-Self-Governing Territories",
+      "body": "C.4",
+      "agenda_item": "57",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/88"
+    },
+    {
+      "id": "A/RES/80/87",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Implementation of the Declaration on the Granting of Independence to Colonial Countries and Peoples by the specialized agencies and the international institutions associated with the United Nations",
+      "body": "C.4",
+      "agenda_item": "56",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": false,
+      "tally": {
+        "yes": 124,
+        "no": 2,
+        "abstain": 51
+      },
+      "url": "https://docs.un.org/A/RES/80/87"
+    },
+    {
+      "id": "A/RES/80/86",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Economic and other activities which affect the interests of the peoples of the Non-Self-Governing Territories",
+      "body": "C.4",
+      "agenda_item": "55",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": false,
+      "tally": {
+        "yes": 174,
+        "no": 2,
+        "abstain": 3
+      },
+      "url": "https://docs.un.org/A/RES/80/86"
+    },
+    {
+      "id": "A/RES/80/85",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Information from Non-Self-Governing Territories transmitted under Article 73 e of the Charter of the United Nations",
+      "body": "C.4",
+      "agenda_item": "54",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": false,
+      "tally": {
+        "yes": 174,
+        "no": 2,
+        "abstain": 3
+      },
+      "url": "https://docs.un.org/A/RES/80/85"
+    },
+    {
+      "id": "A/RES/80/84 B",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "United Nations global communications policies and activities",
+      "body": "C.4",
+      "agenda_item": "53",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": false,
+      "tally": {
+        "yes": 174,
+        "no": 3,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/84 B"
+    },
+    {
+      "id": "A/RES/80/84 A",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Information in the service of humanity",
+      "body": "C.4",
+      "agenda_item": "53",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": false,
+      "tally": {
+        "yes": 173,
+        "no": 3,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/84 A"
+    },
+    {
+      "id": "A/RES/80/83",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Comprehensive review of special political missions",
+      "body": "C.4",
+      "agenda_item": "52",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": false,
+      "tally": {
+        "yes": 169,
+        "no": 2,
+        "abstain": 2
+      },
+      "url": "https://docs.un.org/A/RES/80/83"
+    },
+    {
+      "id": "A/RES/80/82",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "The occupied Syrian Golan",
+      "body": "C.4",
+      "agenda_item": "50",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": false,
+      "tally": {
+        "yes": 146,
+        "no": 6,
+        "abstain": 23
+      },
+      "url": "https://docs.un.org/A/RES/80/82"
+    },
+    {
+      "id": "A/RES/80/81",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Israeli settlements in the Occupied Palestinian Territory, including East Jerusalem, and the occupied Syrian Golan",
+      "body": "C.4",
+      "agenda_item": "50",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": false,
+      "tally": {
+        "yes": 146,
+        "no": 13,
+        "abstain": 17
+      },
+      "url": "https://docs.un.org/A/RES/80/81"
+    },
+    {
+      "id": "A/RES/80/80",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Work of the Special Committee to Investigate Israeli Practices Affecting the Human Rights of the Palestinian People and Other Arabs of the Occupied Territories",
+      "body": "C.4",
+      "agenda_item": "50",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": false,
+      "tally": {
+        "yes": 88,
+        "no": 19,
+        "abstain": 64
+      },
+      "url": "https://docs.un.org/A/RES/80/80"
+    },
+    {
+      "id": "A/RES/80/79",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Palestine refugees' properties and their revenues",
+      "body": "C.4",
+      "agenda_item": "49",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": false,
+      "tally": {
+        "yes": 157,
+        "no": 10,
+        "abstain": 9
+      },
+      "url": "https://docs.un.org/A/RES/80/79"
+    },
+    {
+      "id": "A/RES/80/78",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Assistance to Palestine refugees",
+      "body": "C.4",
+      "agenda_item": "49",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": false,
+      "tally": {
+        "yes": 151,
+        "no": 10,
+        "abstain": 14
+      },
+      "url": "https://docs.un.org/A/RES/80/78"
+    },
+    {
+      "id": "A/RES/80/77",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Operations of the United Nations Relief and Works Agency for Palestine Refugees in the Near East",
+      "body": "C.4",
+      "agenda_item": "49",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": false,
+      "tally": {
+        "yes": 145,
+        "no": 10,
+        "abstain": 18
+      },
+      "url": "https://docs.un.org/A/RES/80/77"
+    },
+    {
+      "id": "A/RES/80/76",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "International cooperation in the peaceful uses of outer space",
+      "body": "C.4",
+      "agenda_item": "48",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": false,
+      "tally": {
+        "yes": 171,
+        "no": 1,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/76"
+    },
+    {
+      "id": "A/RES/80/75",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Effects of atomic radiation",
+      "body": "C.4",
+      "agenda_item": "47",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/75"
+    },
+    {
+      "id": "A/RES/80/74",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Assistance in mine action",
+      "body": "C.4",
+      "agenda_item": "46",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": false,
+      "tally": {
+        "yes": 166,
+        "no": 1,
+        "abstain": 2
+      },
+      "url": "https://docs.un.org/A/RES/80/74"
+    },
+    {
+      "id": "A/RES/80/106",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "International Day against Colonialism in All Its Forms and Manifestations",
+      "body": "C.4",
+      "agenda_item": "59",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": false,
+      "tally": {
+        "yes": 116,
+        "no": 2,
+        "abstain": 54
+      },
+      "url": "https://docs.un.org/A/RES/80/106"
+    },
+    {
+      "id": "A/RES/80/105",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Implementation of the Declaration on the Granting of Independence to Colonial Countries and Peoples",
+      "body": "C.4",
+      "agenda_item": "58",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": false,
+      "tally": {
+        "yes": 132,
+        "no": 3,
+        "abstain": 40
+      },
+      "url": "https://docs.un.org/A/RES/80/105"
+    },
+    {
+      "id": "A/RES/80/104",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Dissemination of information on decolonization",
+      "body": "C.4",
+      "agenda_item": "58",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": false,
+      "tally": {
+        "yes": 172,
+        "no": 3,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/104"
+    },
+    {
+      "id": "A/RES/80/103",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Question of the United States Virgin Islands",
+      "body": "C.4",
+      "agenda_item": "58",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": false,
+      "tally": {
+        "yes": 155,
+        "no": 2,
+        "abstain": 7
+      },
+      "url": "https://docs.un.org/A/RES/80/103"
+    },
+    {
+      "id": "A/RES/80/102",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Question of the Turks and Caicos Islands",
+      "body": "Plenary",
+      "agenda_item": "58",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/102"
+    },
+    {
+      "id": "A/RES/80/101",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Question of the Tokelau",
+      "body": "C.4",
+      "agenda_item": "58",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/101"
+    },
+    {
+      "id": "A/RES/80/100",
+      "session": 80,
+      "date": "2025-12-05",
+      "title": "Question of Saint Helena",
+      "body": "C.4",
+      "agenda_item": "58",
+      "meeting": "A/80/PV.55",
+      "draft": "A/80/537",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/100"
+    },
+    {
+      "id": "A/RES/80/73",
+      "session": 80,
+      "date": "2025-12-02",
+      "title": "The Syrian Golan",
+      "body": "Plenary",
+      "agenda_item": "34",
+      "meeting": "A/80/PV.54",
+      "draft": "A/80/L.12",
+      "without_vote": false,
+      "tally": {
+        "yes": 123,
+        "no": 7,
+        "abstain": 41
+      },
+      "url": "https://docs.un.org/A/RES/80/73"
+    },
+    {
+      "id": "A/RES/80/72",
+      "session": 80,
+      "date": "2025-12-02",
+      "title": "Peaceful settlement of the question of Palestine",
+      "body": "Plenary",
+      "agenda_item": "35",
+      "meeting": "A/80/PV.54",
+      "draft": "A/80/L.16",
+      "without_vote": false,
+      "tally": {
+        "yes": 151,
+        "no": 11,
+        "abstain": 11
+      },
+      "url": "https://docs.un.org/A/RES/80/72"
+    },
+    {
+      "id": "A/RES/80/71",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Convention on the Prohibition of the Development, Production and Stockpiling of Bacteriological (Biological) and Toxin Weapons and on Their Destruction",
+      "body": "C.1",
+      "agenda_item": "106",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/71"
+    },
+    {
+      "id": "A/RES/80/70",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Comprehensive Nuclear-Test-Ban Treaty",
+      "body": "C.1",
+      "agenda_item": "105",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 176,
+        "no": 1,
+        "abstain": 3
+      },
+      "url": "https://docs.un.org/A/RES/80/70"
+    },
+    {
+      "id": "A/RES/80/69",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Strengthening of security and cooperation in the Mediterranean region",
+      "body": "C.1",
+      "agenda_item": "104",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 168,
+        "no": 4,
+        "abstain": 4
+      },
+      "url": "https://docs.un.org/A/RES/80/69"
+    },
+    {
+      "id": "A/RES/80/68",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Convention on Prohibitions or Restrictions on the Use of Certain Conventional Weapons Which May Be Deemed to Be Excessively Injurious or to Have Indiscriminate Effects",
+      "body": "C.1",
+      "agenda_item": "103",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/68"
+    },
+    {
+      "id": "A/RES/80/67",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "The risk of nuclear proliferation in the Middle East",
+      "body": "C.1",
+      "agenda_item": "102",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 145,
+        "no": 6,
+        "abstain": 30
+      },
+      "url": "https://docs.un.org/A/RES/80/67"
+    },
+    {
+      "id": "A/RES/80/66",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Report of the Disarmament Commission",
+      "body": "C.1",
+      "agenda_item": "101b",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 172,
+        "no": 1,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/66"
+    },
+    {
+      "id": "A/RES/80/65",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Report of the Conference on Disarmament",
+      "body": "C.1",
+      "agenda_item": "101a",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 146,
+        "no": 1,
+        "abstain": 21
+      },
+      "url": "https://docs.un.org/A/RES/80/65"
+    },
+    {
+      "id": "A/RES/80/64",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "United Nations regional centres for peace and disarmament",
+      "body": "C.1",
+      "agenda_item": "100f",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/64"
+    },
+    {
+      "id": "A/RES/80/63",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Regional confidence-building measures : activities of the United Nations Standing Advisory Committee on Security Questions in Central Africa",
+      "body": "C.1",
+      "agenda_item": "100e",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 171,
+        "no": 1,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/63"
+    },
+    {
+      "id": "A/RES/80/62",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "United Nations Regional Centre for Peace and Disarmament in Asia and the Pacific",
+      "body": "C.1",
+      "agenda_item": "100d",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/62"
+    },
+    {
+      "id": "A/RES/80/61",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "United Nations Regional Centre for Peace, Disarmament and Development in Latin America and the Caribbean",
+      "body": "C.1",
+      "agenda_item": "100c",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/61"
+    },
+    {
+      "id": "A/RES/80/60",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "United Nations Regional Centre for Peace and Disarmament in Africa",
+      "body": "C.1",
+      "agenda_item": "100b",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/60"
+    },
+    {
+      "id": "A/RES/80/59",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Convention on the Prohibition of the Use of Nuclear Weapons",
+      "body": "C.1",
+      "agenda_item": "100a",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 116,
+        "no": 50,
+        "abstain": 11
+      },
+      "url": "https://docs.un.org/A/RES/80/59"
+    },
+    {
+      "id": "A/RES/80/58",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Artificial intelligence in the military domain and its implications for international peace and security",
+      "body": "C.1",
+      "agenda_item": "99mm",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 167,
+        "no": 5,
+        "abstain": 5
+      },
+      "url": "https://docs.un.org/A/RES/80/58"
+    },
+    {
+      "id": "A/RES/80/57",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Lethal autonomous weapons systems",
+      "body": "C.1",
+      "agenda_item": "99kk",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 164,
+        "no": 6,
+        "abstain": 7
+      },
+      "url": "https://docs.un.org/A/RES/80/57"
+    },
+    {
+      "id": "A/RES/80/56",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Modalities of the 2026 meeting on victim assistance and environmental remediation",
+      "body": "C.1",
+      "agenda_item": "99jj",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 170,
+        "no": 4,
+        "abstain": 5
+      },
+      "url": "https://docs.un.org/A/RES/80/56"
+    },
+    {
+      "id": "A/RES/80/55",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Youth, disarmament and non-proliferation",
+      "body": "C.1",
+      "agenda_item": "99ii",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 174,
+        "no": 2,
+        "abstain": 0
+      },
+      "url": "https://docs.un.org/A/RES/80/55"
+    },
+    {
+      "id": "A/RES/80/54",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Treaty on the Prohibition of Nuclear Weapons",
+      "body": "C.1",
+      "agenda_item": "99hh",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 119,
+        "no": 45,
+        "abstain": 12
+      },
+      "url": "https://docs.un.org/A/RES/80/54"
+    },
+    {
+      "id": "A/RES/80/53",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Establishment of the Group of Scientific and Technical Experts on Nuclear Disarmament Verification",
+      "body": "C.1",
+      "agenda_item": "99gg",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 170,
+        "no": 2,
+        "abstain": 2
+      },
+      "url": "https://docs.un.org/A/RES/80/53"
+    },
+    {
+      "id": "A/RES/80/52",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Implementation of the Convention on Cluster Munitions",
+      "body": "C.1",
+      "agenda_item": "99ff",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 138,
+        "no": 2,
+        "abstain": 35
+      },
+      "url": "https://docs.un.org/A/RES/80/52"
+    },
+    {
+      "id": "A/RES/80/51",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Ethical imperatives for a nuclear-weapon-free world",
+      "body": "C.1",
+      "agenda_item": "99ee",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 129,
+        "no": 41,
+        "abstain": 9
+      },
+      "url": "https://docs.un.org/A/RES/80/51"
+    },
+    {
+      "id": "A/RES/80/50",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Humanitarian consequences of nuclear weapons",
+      "body": "C.1",
+      "agenda_item": "99dd",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 135,
+        "no": 11,
+        "abstain": 33
+      },
+      "url": "https://docs.un.org/A/RES/80/50"
+    },
+    {
+      "id": "A/RES/80/49",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Follow-up to the 2013 High-Level Meeting of the General Assembly on Nuclear Disarmament",
+      "body": "C.1",
+      "agenda_item": "99cc",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 135,
+        "no": 36,
+        "abstain": 9
+      },
+      "url": "https://docs.un.org/A/RES/80/49"
+    },
+    {
+      "id": "A/RES/80/48",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Steps to building a common roadmap towards a world without nuclear weapons",
+      "body": "C.1",
+      "agenda_item": "99bb",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 147,
+        "no": 5,
+        "abstain": 26
+      },
+      "url": "https://docs.un.org/A/RES/80/48"
+    },
+    {
+      "id": "A/RES/80/47",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Treaty on the South-East Asia Nuclear-Weapon-Free Zone (Bangkok Treaty)",
+      "body": "C.1",
+      "agenda_item": "99z",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/47"
+    },
+    {
+      "id": "A/RES/80/46",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "The Arms Trade Treaty",
+      "body": "C.1",
+      "agenda_item": "99y",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 153,
+        "no": 1,
+        "abstain": 22
+      },
+      "url": "https://docs.un.org/A/RES/80/46"
+    },
+    {
+      "id": "A/RES/80/45",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Follow-up to nuclear disarmament obligations agreed to at the 1995, 2000 and 2010 Review Conferences of the Parties to the Treaty on the Non-Proliferation of Nuclear Weapons",
+      "body": "C.1",
+      "agenda_item": "99x",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 112,
+        "no": 45,
+        "abstain": 18
+      },
+      "url": "https://docs.un.org/A/RES/80/45"
+    },
+    {
+      "id": "A/RES/80/44",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Transparency and confidence-building measures in outer space activities",
+      "body": "C.1",
+      "agenda_item": "99w",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 173,
+        "no": 3,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/44"
+    },
+    {
+      "id": "A/RES/80/43",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Through-life conventional ammunition management",
+      "body": "C.1",
+      "agenda_item": "99v",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 171,
+        "no": 0,
+        "abstain": 5
+      },
+      "url": "https://docs.un.org/A/RES/80/43"
+    },
+    {
+      "id": "A/RES/80/42",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Confidence-building measures in the regional and subregional context",
+      "body": "C.1",
+      "agenda_item": "99u",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/42"
+    },
+    {
+      "id": "A/RES/80/41",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Measures to prevent terrorists from acquiring weapons of mass destruction",
+      "body": "C.1",
+      "agenda_item": "99t",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/41"
+    },
+    {
+      "id": "A/RES/80/40",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Promotion of multilateralism in the area of disarmament and non-proliferation",
+      "body": "C.1",
+      "agenda_item": "99s",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 125,
+        "no": 6,
+        "abstain": 48
+      },
+      "url": "https://docs.un.org/A/RES/80/40"
+    },
+    {
+      "id": "A/RES/80/39",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Towards a nuclear-weapon-free world : accelerating the implementation of nuclear disarmament commitments",
+      "body": "C.1",
+      "agenda_item": "99r",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 130,
+        "no": 39,
+        "abstain": 12
+      },
+      "url": "https://docs.un.org/A/RES/80/39"
+    },
+    {
+      "id": "A/RES/80/38",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "The illicit trade in small arms and light weapons in all its aspects",
+      "body": "C.1",
+      "agenda_item": "99q",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/38"
+    },
+    {
+      "id": "A/RES/80/37",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Reducing nuclear danger",
+      "body": "C.1",
+      "agenda_item": "99p",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 117,
+        "no": 50,
+        "abstain": 11
+      },
+      "url": "https://docs.un.org/A/RES/80/37"
+    },
+    {
+      "id": "A/RES/80/36",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Assistance to States for curbing the illicit traffic in small arms and light weapons and collecting them",
+      "body": "C.1",
+      "agenda_item": "99o",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/36"
+    },
+    {
+      "id": "A/RES/80/35",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Implementation of the Convention on the Prohibition of the Use, Stockpiling, Production and Transfer of Anti-Personnel Mines and on Their Destruction",
+      "body": "C.1",
+      "agenda_item": "99n",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 159,
+        "no": 1,
+        "abstain": 19
+      },
+      "url": "https://docs.un.org/A/RES/80/35"
+    },
+    {
+      "id": "A/RES/80/34",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Implementation of the Convention on the Prohibition of the Development, Production, Stockpiling and Use of Chemical Weapons and on Their Destruction",
+      "body": "C.1",
+      "agenda_item": "99m",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 155,
+        "no": 9,
+        "abstain": 11
+      },
+      "url": "https://docs.un.org/A/RES/80/34"
+    },
+    {
+      "id": "A/RES/80/33",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Follow-up to the advisory opinion of the International Court of Justice on the legality of the threat or use of nuclear weapons",
+      "body": "C.1",
+      "agenda_item": "99l",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 127,
+        "no": 35,
+        "abstain": 16
+      },
+      "url": "https://docs.un.org/A/RES/80/33"
+    },
+    {
+      "id": "A/RES/80/32",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Observance of environmental norms in the drafting and implementation of agreements on disarmament and arms control",
+      "body": "C.1",
+      "agenda_item": "99k",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 178,
+        "no": 1,
+        "abstain": 2
+      },
+      "url": "https://docs.un.org/A/RES/80/32"
+    },
+    {
+      "id": "A/RES/80/31",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Nuclear-weapon-free southern hemisphere and adjacent areas",
+      "body": "C.1",
+      "agenda_item": "99j",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 145,
+        "no": 5,
+        "abstain": 28
+      },
+      "url": "https://docs.un.org/A/RES/80/31"
+    },
+    {
+      "id": "A/RES/80/30",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Convening of the 4th special session of the General Assembly devoted to disarmament",
+      "body": "C.1",
+      "agenda_item": "99i",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/30"
+    },
+    {
+      "id": "A/RES/80/29",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Conventional arms control at the regional and subregional levels",
+      "body": "C.1",
+      "agenda_item": "99h",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 179,
+        "no": 1,
+        "abstain": 2
+      },
+      "url": "https://docs.un.org/A/RES/80/29"
+    },
+    {
+      "id": "A/RES/80/28",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Transparency in armaments",
+      "body": "C.1",
+      "agenda_item": "99g",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 150,
+        "no": 0,
+        "abstain": 25
+      },
+      "url": "https://docs.un.org/A/RES/80/28"
+    },
+    {
+      "id": "A/RES/80/27",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Regional disarmament",
+      "body": "C.1",
+      "agenda_item": "99f",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/27"
+    },
+    {
+      "id": "A/RES/80/26",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Prohibition of the dumping of radioactive wastes",
+      "body": "C.1",
+      "agenda_item": "99e",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/26"
+    },
+    {
+      "id": "A/RES/80/25",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Relationship between disarmament and development",
+      "body": "C.1",
+      "agenda_item": "99d",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 178,
+        "no": 1,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/25"
+    },
+    {
+      "id": "A/RES/80/24",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Nuclear disarmament",
+      "body": "C.1",
+      "agenda_item": "99b",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 114,
+        "no": 44,
+        "abstain": 19
+      },
+      "url": "https://docs.un.org/A/RES/80/24"
+    },
+    {
+      "id": "A/RES/80/23",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Possible risks of the integration of artificial intelligence into command, control and communications systems of nuclear weapons",
+      "body": "C.1",
+      "agenda_item": "99",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 118,
+        "no": 9,
+        "abstain": 44
+      },
+      "url": "https://docs.un.org/A/RES/80/23"
+    },
+    {
+      "id": "A/RES/80/22",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Role of science and technology in the context of international security and disarmament",
+      "body": "C.1",
+      "agenda_item": "98",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/22"
+    },
+    {
+      "id": "A/RES/80/21",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Further practical measures for the prevention of an arms race in outer space",
+      "body": "C.1",
+      "agenda_item": "97c",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 121,
+        "no": 50,
+        "abstain": 7
+      },
+      "url": "https://docs.un.org/A/RES/80/21"
+    },
+    {
+      "id": "A/RES/80/20",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "No first placement of weapons in outer space",
+      "body": "C.1",
+      "agenda_item": "97b",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 123,
+        "no": 52,
+        "abstain": 5
+      },
+      "url": "https://docs.un.org/A/RES/80/20"
+    },
+    {
+      "id": "A/RES/80/19",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Prevention of an arms race in outer space",
+      "body": "C.1",
+      "agenda_item": "97a",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 177,
+        "no": 2,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/19"
+    },
+    {
+      "id": "A/RES/80/18",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Conclusion of effective international arrangements to assure non-nuclear-weapon States against the use or threat of use of nuclear weapons",
+      "body": "C.1",
+      "agenda_item": "96",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 120,
+        "no": 0,
+        "abstain": 60
+      },
+      "url": "https://docs.un.org/A/RES/80/18"
+    },
+    {
+      "id": "A/RES/80/17",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Establishment of a nuclear-weapon-free zone in the region of the Middle East",
+      "body": "C.1",
+      "agenda_item": "95",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 173,
+        "no": 3,
+        "abstain": 3
+      },
+      "url": "https://docs.un.org/A/RES/80/17"
+    },
+    {
+      "id": "A/RES/80/16",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Open-ended Working Group on Security of and in the Use of Information and Communications Technologies 2021-2025 established pursuant to General Assembly resolution 75/240",
+      "body": "C.1",
+      "agenda_item": "94",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/16"
+    },
+    {
+      "id": "A/RES/80/15",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean (Treaty of Tlatelolco)",
+      "body": "C.1",
+      "agenda_item": "93",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/15"
+    },
+    {
+      "id": "A/RES/80/14",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "African Nuclear-Weapon-Free Zone Treaty",
+      "body": "C.1",
+      "agenda_item": "92",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/14"
+    },
+    {
+      "id": "A/RES/80/13",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Implementation of the Declaration of the Indian Ocean as a Zone of Peace",
+      "body": "C.1",
+      "agenda_item": "91",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": false,
+      "tally": {
+        "yes": 129,
+        "no": 5,
+        "abstain": 42
+      },
+      "url": "https://docs.un.org/A/RES/80/13"
+    },
+    {
+      "id": "A/RES/80/12",
+      "session": 80,
+      "date": "2025-12-01",
+      "title": "Objective information on military matters, including transparency of military expenditures",
+      "body": "C.1",
+      "agenda_item": "90b",
+      "meeting": "A/80/PV.52",
+      "draft": "A/80/534",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/12"
+    },
+    {
+      "id": "A/RES/80/11",
+      "session": 80,
+      "date": "2025-11-26",
+      "title": "2025 review of the United Nations peacebuilding architecture",
+      "body": "Plenary",
+      "agenda_item": "62",
+      "meeting": "A/80/PV.51",
+      "draft": "A/80/L.15",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/11"
+    },
+    {
+      "id": "A/RES/80/10",
+      "session": 80,
+      "date": "2025-11-26",
+      "title": "International Day of the World's Indigenous Women and Girls",
+      "body": "Plenary",
+      "agenda_item": "13",
+      "meeting": "A/80/PV.51",
+      "draft": "A/80/L.11",
+      "without_vote": false,
+      "tally": {
+        "yes": 123,
+        "no": 3,
+        "abstain": 2
+      },
+      "url": "https://docs.un.org/A/RES/80/10"
+    },
+    {
+      "id": "A/RES/80/9",
+      "session": 80,
+      "date": "2025-11-24",
+      "title": "2025 Political Declaration on the Implementation of the United Nations Global Plan of Action to Combat Trafficking in Persons",
+      "body": "Plenary",
+      "agenda_item": "107",
+      "meeting": "A/80/PV.48",
+      "draft": "A/80/L.8",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/9"
+    },
+    {
+      "id": "A/RES/80/8",
+      "session": 80,
+      "date": "2025-11-19",
+      "title": "Building a peaceful and better world through sport and the Olympic ideal",
+      "body": "Plenary",
+      "agenda_item": "11",
+      "meeting": "A/80/PV.46",
+      "draft": "A/80/L.10",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/8"
+    },
+    {
+      "id": "A/RES/80/7",
+      "session": 80,
+      "date": "2025-11-14",
+      "title": "Report of the International Atomic Energy Agency",
+      "body": "Plenary",
+      "agenda_item": "89",
+      "meeting": "A/80/PV.40",
+      "draft": "A/80/L.7",
+      "without_vote": false,
+      "tally": {
+        "yes": 146,
+        "no": 2,
+        "abstain": 1
+      },
+      "url": "https://docs.un.org/A/RES/80/7"
+    },
+    {
+      "id": "A/RES/80/6",
+      "session": 80,
+      "date": "2025-11-11",
+      "title": "Report of the International Criminal Court",
+      "body": "Plenary",
+      "agenda_item": "74",
+      "meeting": "A/80/PV.35",
+      "draft": "A/80/L.9",
+      "without_vote": false,
+      "tally": {
+        "yes": 94,
+        "no": 10,
+        "abstain": 34
+      },
+      "url": "https://docs.un.org/A/RES/80/6"
+    },
+    {
+      "id": "A/RES/80/5",
+      "session": 80,
+      "date": "2025-11-04",
+      "title": "Doha Political Declaration of the \"World Social Summit\" under the title \"the Second World Summit for Social Development\"",
+      "body": "Plenary",
+      "agenda_item": "25b",
+      "meeting": "A/80/PV.28",
+      "draft": "A/80/L.5",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/5"
+    },
+    {
+      "id": "A/RES/80/4",
+      "session": 80,
+      "date": "2025-10-29",
+      "title": "Necessity of ending the economic, commercial and financial embargo imposed by the United States of America against Cuba",
+      "body": "Plenary",
+      "agenda_item": "38",
+      "meeting": "A/80/PV.22",
+      "draft": "A/80/L.6",
+      "without_vote": false,
+      "tally": {
+        "yes": 165,
+        "no": 7,
+        "abstain": 12
+      },
+      "url": "https://docs.un.org/A/RES/80/4"
+    },
+    {
+      "id": "A/RES/80/3",
+      "session": 80,
+      "date": "2025-10-14",
+      "title": "Awaza Political Declaration",
+      "body": "Plenary",
+      "agenda_item": "13",
+      "meeting": "A/80/PV.18",
+      "draft": "A/80/L.4",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/3"
+    },
+    {
+      "id": "A/RES/80/2",
+      "session": 80,
+      "date": "2025-10-14",
+      "title": "Scale of assessments for the apportionment of the expenses of the United Nations : requests under Article 19 of the Charter",
+      "body": "C.5",
+      "agenda_item": "140",
+      "meeting": "A/80/PV.18",
+      "draft": "A/80/401",
+      "without_vote": true,
+      "tally": null,
+      "url": "https://docs.un.org/A/RES/80/2"
+    },
+    {
+      "id": "A/RES/80/1",
+      "session": 80,
+      "date": "2025-09-19",
+      "title": "Participation by the State of Palestine during the 80th session",
+      "body": "Plenary",
+      "agenda_item": "7",
+      "meeting": "A/80/PV.3",
+      "draft": "A/80/L.2/Rev.1",
+      "without_vote": false,
+      "tally": {
+        "yes": 145,
+        "no": 5,
+        "abstain": 6
+      },
+      "url": "https://docs.un.org/A/RES/80/1"
+    }
+  ]
+}

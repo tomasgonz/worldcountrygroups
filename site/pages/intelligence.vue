@@ -171,7 +171,7 @@ const aiStatus = ref<{ configured: boolean; provider: string | null } | null>(nu
 
 const tabs = [
   { id: 'watchlist', label: 'Watchlist', desc: 'Your bookmarked countries' },
-  { id: 'un-monitor', label: 'UN Monitor', desc: 'Live UN activity dashboard' },
+  { id: 'un-monitor', label: 'UN Monitor ↗', desc: 'Now a page of its own' },
   { id: 'briefing', label: 'Country Briefing', desc: 'Single-country analysis' },
   { id: 'bilateral', label: 'Country Comparator', desc: 'Compare two countries' },
   { id: 'trends', label: 'Group Trends', desc: 'Group-level patterns' },
@@ -179,6 +179,7 @@ const tabs = [
 ]
 
 const activeTab = ref((route.query.tab as string) || 'briefing')
+if (activeTab.value === 'un-monitor') navigateTo('/un', { replace: true })
 const initialIso = route.query.iso as string || ''
 const initialA = route.query.a as string || ''
 const initialB = route.query.b as string || ''
@@ -195,6 +196,8 @@ useHead({
 })
 
 function setActiveTab(tabId: string) {
+  // The UN Monitor is now its own page in the main menu
+  if (tabId === 'un-monitor') { navigateTo('/un'); return }
   activeTab.value = tabId
   router.replace({ query: { tab: tabId === 'briefing' ? undefined : tabId } })
   if (tabId === 'un-monitor' && !unMonitor.data && !unMonitor.pending) {

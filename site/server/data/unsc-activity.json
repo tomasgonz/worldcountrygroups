@@ -1371,5 +1371,259 @@
       "meeting": "S/PV.8029",
       "press_release": null
     }
+  ],
+  "presidency": [
+    {
+      "month": "2025-01",
+      "country": "Algeria",
+      "iso3": "DZA",
+      "permanent": false,
+      "term_end": "2025"
+    },
+    {
+      "month": "2025-02",
+      "country": "China",
+      "iso3": "CHN",
+      "permanent": true,
+      "term_end": null
+    },
+    {
+      "month": "2025-03",
+      "country": "Denmark",
+      "iso3": "DNK",
+      "permanent": false,
+      "term_end": "2026"
+    },
+    {
+      "month": "2025-04",
+      "country": "France",
+      "iso3": "FRA",
+      "permanent": true,
+      "term_end": null
+    },
+    {
+      "month": "2025-05",
+      "country": "Greece",
+      "iso3": "GRC",
+      "permanent": false,
+      "term_end": "2026"
+    },
+    {
+      "month": "2025-06",
+      "country": "Guyana",
+      "iso3": "GUY",
+      "permanent": false,
+      "term_end": "2025"
+    },
+    {
+      "month": "2025-07",
+      "country": "Pakistan",
+      "iso3": "PAK",
+      "permanent": false,
+      "term_end": "2026"
+    },
+    {
+      "month": "2025-08",
+      "country": "Panama",
+      "iso3": "PAN",
+      "permanent": false,
+      "term_end": "2026"
+    },
+    {
+      "month": "2025-09",
+      "country": "Republic of Korea",
+      "iso3": "KOR",
+      "permanent": false,
+      "term_end": "2025"
+    },
+    {
+      "month": "2025-10",
+      "country": "Russian Federation",
+      "iso3": "RUS",
+      "permanent": true,
+      "term_end": null
+    },
+    {
+      "month": "2025-11",
+      "country": "Sierra Leone",
+      "iso3": "SLE",
+      "permanent": false,
+      "term_end": "2025"
+    },
+    {
+      "month": "2025-12",
+      "country": "Slovenia",
+      "iso3": "SVN",
+      "permanent": false,
+      "term_end": "2025"
+    },
+    {
+      "month": "2026-01",
+      "country": "Somalia",
+      "iso3": "SOM",
+      "permanent": false,
+      "term_end": "2026"
+    },
+    {
+      "month": "2026-02",
+      "country": "United Kingdom",
+      "iso3": "GBR",
+      "permanent": true,
+      "term_end": null
+    },
+    {
+      "month": "2026-03",
+      "country": "United States",
+      "iso3": "USA",
+      "permanent": true,
+      "term_end": null
+    },
+    {
+      "month": "2026-04",
+      "country": "Bahrain",
+      "iso3": "BHR",
+      "permanent": false,
+      "term_end": "2027"
+    },
+    {
+      "month": "2026-05",
+      "country": "China",
+      "iso3": "CHN",
+      "permanent": true,
+      "term_end": null
+    },
+    {
+      "month": "2026-06",
+      "country": "Colombia",
+      "iso3": "COL",
+      "permanent": false,
+      "term_end": "2027"
+    },
+    {
+      "month": "2026-07",
+      "country": "Democratic Republic of the Congo",
+      "iso3": "COD",
+      "permanent": false,
+      "term_end": "2027"
+    },
+    {
+      "month": "2026-08",
+      "country": "Denmark",
+      "iso3": "DNK",
+      "permanent": false,
+      "term_end": "2026"
+    },
+    {
+      "month": "2026-09",
+      "country": "France",
+      "iso3": "FRA",
+      "permanent": true,
+      "term_end": null
+    },
+    {
+      "month": "2026-10",
+      "country": "Greece",
+      "iso3": "GRC",
+      "permanent": false,
+      "term_end": "2026"
+    },
+    {
+      "month": "2026-11",
+      "country": "Latvia",
+      "iso3": "LVA",
+      "permanent": false,
+      "term_end": "2027"
+    },
+    {
+      "month": "2026-12",
+      "country": "Liberia",
+      "iso3": "LBR",
+      "permanent": false,
+      "term_end": "2027"
+    },
+    {
+      "month": "2027-01",
+      "country": "Portugal",
+      "iso3": "PRT",
+      "permanent": false,
+      "term_end": "2028"
+    },
+    {
+      "month": "2027-02",
+      "country": "Russian Federation",
+      "iso3": "RUS",
+      "permanent": true,
+      "term_end": null
+    },
+    {
+      "month": "2027-03",
+      "country": "Trinidad and Tobago",
+      "iso3": "TTO",
+      "permanent": false,
+      "term_end": "2028"
+    },
+    {
+      "month": "2027-04",
+      "country": "United Kingdom",
+      "iso3": "GBR",
+      "permanent": true,
+      "term_end": null
+    },
+    {
+      "month": "2027-05",
+      "country": "United States",
+      "iso3": "USA",
+      "permanent": true,
+      "term_end": null
+    },
+    {
+      "month": "2027-06",
+      "country": "Zimbabwe",
+      "iso3": "ZWE",
+      "permanent": false,
+      "term_end": "2028"
+    },
+    {
+      "month": "2027-07",
+      "country": "Austria",
+      "iso3": "AUT",
+      "permanent": false,
+      "term_end": "2028"
+    },
+    {
+      "month": "2027-08",
+      "country": "Bahrain",
+      "iso3": "BHR",
+      "permanent": false,
+      "term_end": "2027"
+    },
+    {
+      "month": "2027-09",
+      "country": "China",
+      "iso3": "CHN",
+      "permanent": true,
+      "term_end": null
+    },
+    {
+      "month": "2027-10",
+      "country": "Colombia",
+      "iso3": "COL",
+      "permanent": false,
+      "term_end": "2027"
+    },
+    {
+      "month": "2027-11",
+      "country": "Democratic Republic of the Congo",
+      "iso3": "COD",
+      "permanent": false,
+      "term_end": "2027"
+    },
+    {
+      "month": "2027-12",
+      "country": "France",
+      "iso3": "FRA",
+      "permanent": true,
+      "term_end": null
+    }
   ]
 }
