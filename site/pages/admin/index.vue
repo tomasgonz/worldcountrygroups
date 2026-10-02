@@ -146,6 +146,11 @@
 
       <!-- Add Provider Form -->
       <div v-if="showAIForm" class="border border-primary-200 rounded-xl p-4 mb-4 space-y-3">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-xs text-primary-500">Quick setup:</span>
+          <button v-for="ps in AI_PRESETS" :key="ps.id" type="button" class="text-xs px-2.5 py-1 rounded-full ring-1 ring-primary-200 hover:ring-primary-400" @click="applyPreset(ps)">{{ ps.name }}</button>
+          <span class="text-[11px] text-primary-400">Fills in the details; paste your API key, add, then use “Edit / change model” → “List models”.</span>
+        </div>
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block text-xs text-primary-500 mb-1">Provider ID</label>
@@ -1318,6 +1323,19 @@ async function loadAIConfig() {
   try {
     promptDefaults.value = await $fetch<Record<string, string>>('/api/admin/ai-config/prompt-defaults')
   } catch {}
+}
+
+const AI_PRESETS = [
+  { id: 'openai', name: 'OpenAI', type: 'openai', baseUrl: '', model: 'gpt-6.1-sol' },
+  { id: 'anthropic', name: 'Anthropic', type: 'anthropic', baseUrl: '', model: 'claude-sonnet-5-5' },
+  // Groq serves open models very fast and cheaply through an OpenAI-compatible API
+  { id: 'groq', name: 'Groq', type: 'openai-compatible', baseUrl: 'https://api.groq.com/openai/v1', model: 'openai/gpt-oss-120b' },
+]
+function applyPreset(ps: any) {
+  const taken = new Set((aiConfig.value?.providers || []).map((p: any) => p.id))
+  let id = ps.id
+  for (let i = 2; taken.has(id); i++) id = `${ps.id}-${i}`
+  Object.assign(aiForm, { id, name: `${ps.name} ${ps.model.split('/').pop()}`, type: ps.type, baseUrl: ps.baseUrl, model: ps.model })
 }
 
 async function addAIProvider() {
