@@ -90,7 +90,11 @@ export default defineEventHandler(() => {
     .map(r => ({ ...r, yesShare: r.tally.yes / Math.max(1, r.tally.yes + r.tally.no + r.tally.abstain) }))
     .sort((a, b) => a.yesShare - b.yesShare)
     .slice(0, 8)
+  // current President of the General Assembly, from the people directory (official UN site)
+  const peopleFile = readDataFile<any>('people-index.json')
+  const pgaPerson = (peopleFile?.people || []).find((p: any) => p.roles.some((r: any) => /^President of the United Nations General Assembly \(\d+\w+ session\)$/.test(r.role) && !r.past && r.source === 'un.org/pga'))
   const generalAssembly = {
+    president: pgaPerson ? { name: pgaPerson.name, slug: pgaPerson.slug, home: pgaPerson.homeIso3 ? country(pgaPerson.homeIso3) : null, description: pgaPerson.description } : null,
     currentSession: sessions[0] ?? null,
     statsSession: focusSession ?? null,
     stats: {

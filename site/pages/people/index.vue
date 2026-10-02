@@ -32,7 +32,7 @@
       <div v-else class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <NuxtLink v-for="p in data?.people || []" :key="p.slug" :to="`/people/${p.slug}`"
           class="group flex gap-4 bg-white rounded-2xl ring-1 ring-primary-200/70 p-4 hover:ring-accent-300 transition">
-          <PersonPhoto :image="p.image" :image-path="p.imagePath" :name="p.name" size="h-16 w-16" />
+          <PersonPhoto :image="p.image" :image-path="p.imagePath" :image-url="p.imageUrl" :name="p.name" size="h-16 w-16" />
           <div class="min-w-0">
             <div class="font-medium text-primary-900 group-hover:text-accent-700 truncate">{{ p.name }}</div>
             <div v-for="r in p.roles.slice(0, 2)" :key="r.role + r.iso3" class="text-xs text-primary-500 truncate">{{ r.iso2 ? flag(r.iso2) + ' ' : '' }}{{ r.role }}<span v-if="r.country">, {{ r.country }}</span></div>

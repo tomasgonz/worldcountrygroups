@@ -226,6 +226,7 @@ TIER_TYPE_MAP.update({
     "gnews-pacific-forum":    {"tier": 5, "type": "aggregator"},
     "gnews-sids":             {"tier": 5, "type": "aggregator"},
     "gnews-un-sg":            {"tier": 5, "type": "aggregator"},
+    "gnews-un-pga":           {"tier": 5, "type": "aggregator"},
     "reliefweb":              {"tier": 1, "type": "official"},
 })
 

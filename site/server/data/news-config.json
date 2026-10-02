@@ -7,7 +7,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:56:18.126703+00:00",
+      "lastFetch": "2026-10-02T17:39:35.183809+00:00",
       "lastError": null,
       "articleCount": 30
     },
@@ -18,7 +18,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T16:56:19.020549+00:00",
+      "lastFetch": "2026-10-02T17:39:37.233299+00:00",
       "lastError": null,
       "articleCount": 1
     },
@@ -40,7 +40,7 @@
       "type": "atom",
       "enabled": true,
       "category": "government",
-      "lastFetch": "2026-10-02T16:56:19.309218+00:00",
+      "lastFetch": "2026-10-02T17:39:37.285343+00:00",
       "lastError": null,
       "articleCount": 20
     },
@@ -51,7 +51,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T16:56:19.441512+00:00",
+      "lastFetch": "2026-10-02T17:39:37.363304+00:00",
       "lastError": null,
       "articleCount": 25
     },
@@ -62,7 +62,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T16:56:19.555017+00:00",
+      "lastFetch": "2026-10-02T17:39:37.475763+00:00",
       "lastError": null,
       "articleCount": 96
     },
@@ -73,7 +73,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:56:19.752434+00:00",
+      "lastFetch": "2026-10-02T17:39:37.701730+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -84,7 +84,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:56:20.534500+00:00",
+      "lastFetch": "2026-10-02T17:39:38.520314+00:00",
       "lastError": null,
       "articleCount": 20
     },
@@ -95,7 +95,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T16:56:21.914168+00:00",
+      "lastFetch": "2026-10-02T17:39:39.667621+00:00",
       "lastError": null,
       "articleCount": 15
     },
@@ -106,7 +106,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T16:56:21.995420+00:00",
+      "lastFetch": "2026-10-02T17:39:39.786679+00:00",
       "lastError": null,
       "articleCount": 50
     },
@@ -117,7 +117,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T16:56:23.357226+00:00",
+      "lastFetch": "2026-10-02T17:39:41.336610+00:00",
       "lastError": null,
       "articleCount": 12
     },
@@ -128,7 +128,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T16:56:23.511395+00:00",
+      "lastFetch": "2026-10-02T17:39:41.762529+00:00",
       "lastError": null,
       "articleCount": 20
     },
@@ -139,7 +139,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T16:56:23.611792+00:00",
+      "lastFetch": "2026-10-02T17:39:41.858353+00:00",
       "lastError": null,
       "articleCount": 24
     },
@@ -150,7 +150,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T16:56:23.845915+00:00",
+      "lastFetch": "2026-10-02T17:39:42.050228+00:00",
       "lastError": null,
       "articleCount": 135
     },
@@ -161,7 +161,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T16:56:24.451929+00:00",
+      "lastFetch": "2026-10-02T17:39:42.694063+00:00",
       "lastError": null,
       "articleCount": 89
     },
@@ -172,9 +172,9 @@
       "type": "state-sitemap",
       "enabled": true,
       "category": "government",
-      "lastFetch": "2026-10-02T16:56:31.086807+00:00",
+      "lastFetch": "2026-10-02T17:44:03.368304+00:00",
       "lastError": null,
-      "articleCount": 20
+      "articleCount": 12
     },
     {
       "id": "tass",
@@ -184,7 +184,7 @@
       "userAgent": "browser",
       "enabled": true,
       "category": "government",
-      "lastFetch": "2026-10-02T16:56:32.947606+00:00",
+      "lastFetch": "2026-10-02T17:44:04.379622+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -206,7 +206,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:56:33.249591+00:00",
+      "lastFetch": "2026-10-02T17:44:04.802240+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -217,7 +217,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T16:56:33.337960+00:00",
+      "lastFetch": "2026-10-02T17:44:04.853295+00:00",
       "lastError": null,
       "articleCount": 25
     },
@@ -228,7 +228,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T16:56:39.358853+00:00",
+      "lastFetch": "2026-10-02T17:44:10.601804+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -251,7 +251,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:56:39.457829+00:00",
+      "lastFetch": "2026-10-02T17:44:10.700967+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -262,7 +262,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T16:56:40.170068+00:00",
+      "lastFetch": "2026-10-02T17:44:11.261205+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -273,7 +273,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T16:56:41.077626+00:00",
+      "lastFetch": "2026-10-02T17:44:11.982915+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -284,7 +284,7 @@
       "type": "news-sitemap",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:56:43.047452+00:00",
+      "lastFetch": "2026-10-02T17:44:13.791491+00:00",
       "lastError": null,
       "articleCount": 1
     },
@@ -295,7 +295,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:56:43.677882+00:00",
+      "lastFetch": "2026-10-02T17:44:14.266112+00:00",
       "lastError": null,
       "articleCount": 78
     },
@@ -306,7 +306,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:56:44.406929+00:00",
+      "lastFetch": "2026-10-02T17:44:14.726780+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -317,7 +317,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:56:45.103337+00:00",
+      "lastFetch": "2026-10-02T17:44:15.214456+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -328,7 +328,7 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-02T16:56:45.875277+00:00",
+      "lastFetch": "2026-10-02T17:44:15.719253+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -339,7 +339,7 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-02T16:56:46.505344+00:00",
+      "lastFetch": "2026-10-02T17:44:16.270161+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -350,7 +350,7 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-02T16:56:47.311373+00:00",
+      "lastFetch": "2026-10-02T17:44:16.783475+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -361,7 +361,7 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-02T16:56:47.984034+00:00",
+      "lastFetch": "2026-10-02T17:44:17.329148+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -372,7 +372,7 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-02T16:56:48.661061+00:00",
+      "lastFetch": "2026-10-02T17:44:17.920478+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -383,7 +383,7 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-02T16:56:49.428147+00:00",
+      "lastFetch": "2026-10-02T17:44:21.147153+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -394,7 +394,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:56:50.291719+00:00",
+      "lastFetch": "2026-10-02T17:44:22.139626+00:00",
       "lastError": null,
       "articleCount": 2
     },
@@ -405,7 +405,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:56:50.909702+00:00",
+      "lastFetch": "2026-10-02T17:44:22.604616+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -416,7 +416,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:56:51.239346+00:00",
+      "lastFetch": "2026-10-02T17:44:22.922993+00:00",
       "lastError": null,
       "articleCount": 36
     },
@@ -427,7 +427,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:56:54.229591+00:00",
+      "lastFetch": "2026-10-02T17:44:23.819700+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -438,7 +438,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:56:54.772270+00:00",
+      "lastFetch": "2026-10-02T17:44:24.412100+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -449,7 +449,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:56:56.441819+00:00",
+      "lastFetch": "2026-10-02T17:44:26.256301+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -460,7 +460,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:56:58.202575+00:00",
+      "lastFetch": "2026-10-02T17:44:27.744553+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -471,7 +471,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:56:59.399502+00:00",
+      "lastFetch": "2026-10-02T17:44:28.413772+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -482,7 +482,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:56:59.570202+00:00",
+      "lastFetch": "2026-10-02T17:44:28.580929+00:00",
       "lastError": null,
       "articleCount": 50
     },
@@ -493,7 +493,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:57:01.735035+00:00",
+      "lastFetch": "2026-10-02T17:44:30.166082+00:00",
       "lastError": null,
       "articleCount": 12
     },
@@ -504,7 +504,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:57:01.854422+00:00",
+      "lastFetch": "2026-10-02T17:44:30.240248+00:00",
       "lastError": null,
       "articleCount": 30
     },
@@ -515,7 +515,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:57:02.123863+00:00",
+      "lastFetch": "2026-10-02T17:44:30.311508+00:00",
       "lastError": null,
       "articleCount": 30
     },
@@ -526,7 +526,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:57:02.301738+00:00",
+      "lastFetch": "2026-10-02T17:44:30.480028+00:00",
       "lastError": null,
       "articleCount": 30
     },
@@ -537,7 +537,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:57:02.403309+00:00",
+      "lastFetch": "2026-10-02T17:44:30.555973+00:00",
       "lastError": null,
       "articleCount": 30
     },
@@ -548,7 +548,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:57:02.495740+00:00",
+      "lastFetch": "2026-10-02T17:44:30.624555+00:00",
       "lastError": null,
       "articleCount": 30
     },
@@ -559,7 +559,7 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-02T16:57:03.582273+00:00",
+      "lastFetch": "2026-10-02T17:44:31.927704+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -570,7 +570,7 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-02T16:57:03.822313+00:00",
+      "lastFetch": "2026-10-02T17:44:32.145834+00:00",
       "lastError": null,
       "articleCount": 20
     },
@@ -581,7 +581,7 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-02T16:57:09.282400+00:00",
+      "lastFetch": "2026-10-02T17:44:37.447166+00:00",
       "lastError": null,
       "articleCount": 20
     },
@@ -592,7 +592,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T16:57:09.493777+00:00",
+      "lastFetch": "2026-10-02T17:44:37.659679+00:00",
       "lastError": null,
       "articleCount": 31
     },
@@ -603,7 +603,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T16:57:09.594854+00:00",
+      "lastFetch": "2026-10-02T17:44:38.072455+00:00",
       "lastError": null,
       "articleCount": 53
     },
@@ -614,7 +614,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T16:57:10.154429+00:00",
+      "lastFetch": "2026-10-02T17:44:39.013828+00:00",
       "lastError": null,
       "articleCount": 15
     },
@@ -625,7 +625,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T16:57:10.349227+00:00",
+      "lastFetch": "2026-10-02T17:44:39.423147+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -636,7 +636,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T16:57:10.436811+00:00",
+      "lastFetch": "2026-10-02T17:44:39.497523+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -647,7 +647,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T16:57:40.501622+00:00",
+      "lastFetch": "2026-10-02T17:45:09.550258+00:00",
       "lastError": "Failed to fetch https://caribbeannewsglobal.com/feed/",
       "articleCount": 0
     },
@@ -658,7 +658,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T16:57:40.579718+00:00",
+      "lastFetch": "2026-10-02T17:45:09.624455+00:00",
       "lastError": null,
       "articleCount": 17
     },
@@ -669,7 +669,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T16:57:41.088647+00:00",
+      "lastFetch": "2026-10-02T17:45:10.142455+00:00",
       "lastError": null,
       "articleCount": 50
     },
@@ -680,7 +680,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T16:57:41.481331+00:00",
+      "lastFetch": "2026-10-02T17:45:10.535533+00:00",
       "lastError": null,
       "articleCount": 26
     },
@@ -691,7 +691,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T16:57:41.731130+00:00",
+      "lastFetch": "2026-10-02T17:45:10.743925+00:00",
       "lastError": null,
       "articleCount": 50
     },
@@ -702,7 +702,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T16:57:41.836048+00:00",
+      "lastFetch": "2026-10-02T17:45:10.850939+00:00",
       "lastError": null,
       "articleCount": 60
     },
@@ -724,7 +724,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T16:57:41.905979+00:00",
+      "lastFetch": "2026-10-02T17:45:10.921385+00:00",
       "lastError": null,
       "articleCount": 20
     },
@@ -735,7 +735,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T16:57:41.954066+00:00",
+      "lastFetch": "2026-10-02T17:45:10.990161+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -746,7 +746,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T16:57:42.033245+00:00",
+      "lastFetch": "2026-10-02T17:45:11.191584+00:00",
       "lastError": null,
       "articleCount": 33
     },
@@ -757,7 +757,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T16:57:42.221965+00:00",
+      "lastFetch": "2026-10-02T17:45:11.354718+00:00",
       "lastError": null,
       "articleCount": 45
     },
@@ -768,7 +768,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:57:42.711644+00:00",
+      "lastFetch": "2026-10-02T17:45:11.837875+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -779,9 +779,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:57:43.077465+00:00",
+      "lastFetch": "2026-10-02T17:45:12.154620+00:00",
       "lastError": null,
-      "articleCount": 42
+      "articleCount": 39
     },
     {
       "id": "gnews-unicef",
@@ -790,7 +790,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:57:43.682422+00:00",
+      "lastFetch": "2026-10-02T17:45:12.832693+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -801,9 +801,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:57:44.115063+00:00",
+      "lastFetch": "2026-10-02T17:45:13.339657+00:00",
       "lastError": null,
-      "articleCount": 70
+      "articleCount": 71
     },
     {
       "id": "gnews-african-union",
@@ -812,7 +812,7 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-02T16:57:44.629361+00:00",
+      "lastFetch": "2026-10-02T17:45:13.846244+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -823,9 +823,9 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T16:57:45.022621+00:00",
+      "lastFetch": "2026-10-02T17:45:14.251326+00:00",
       "lastError": null,
-      "articleCount": 66
+      "articleCount": 67
     },
     {
       "id": "gnews-pacific-forum",
@@ -834,7 +834,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T16:57:45.480461+00:00",
+      "lastFetch": "2026-10-02T17:45:14.633304+00:00",
       "lastError": null,
       "articleCount": 61
     },
@@ -845,7 +845,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T16:57:45.975465+00:00",
+      "lastFetch": "2026-10-02T17:45:15.014651+00:00",
       "lastError": null,
       "articleCount": 38
     },
@@ -856,9 +856,20 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T16:57:46.351890+00:00",
+      "lastFetch": "2026-10-02T17:45:15.402485+00:00",
       "lastError": null,
       "articleCount": 40
+    },
+    {
+      "id": "gnews-un-pga",
+      "name": "President of the UN General Assembly (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22President+of+the+General+Assembly%22+OR+%22General+Assembly+President%22+when:14d&hl=en-US&gl=US&ceid=US:en",
+      "type": "rss",
+      "enabled": true,
+      "category": "institutional",
+      "lastFetch": "2026-10-02T17:45:15.797843+00:00",
+      "lastError": null,
+      "articleCount": 47
     }
   ],
   "maxArticles": 1600,

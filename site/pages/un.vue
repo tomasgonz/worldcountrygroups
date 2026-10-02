@@ -144,6 +144,11 @@
         <SectionHead :title="`General Assembly · ${ordinal(d.generalAssembly.currentSession)} session`" :updated="d.freshness.generalAssembly" note="Resolutions and votes, Dag Hammarskjöld Library" />
         <div class="grid lg:grid-cols-3 gap-6">
           <div class="card">
+            <NuxtLink v-if="d.generalAssembly.president" :to="`/people/${d.generalAssembly.president.slug}`" class="block rounded-xl bg-[#e8f4fb] p-4 mb-5 hover:bg-[#dcefFa]">
+              <div class="text-[11px] uppercase tracking-wider text-[#0077b6] font-semibold">President of the {{ ordinal(d.generalAssembly.currentSession) }} session</div>
+              <div class="mt-1 text-xl font-serif text-primary-900">{{ d.generalAssembly.president.name }}</div>
+              <div v-if="d.generalAssembly.president.home" class="text-xs text-primary-500 mt-0.5">{{ flag(d.generalAssembly.president.home.iso2) }} {{ d.generalAssembly.president.home.name }}</div>
+            </NuxtLink>
             <h3 class="h3">Session {{ d.generalAssembly.statsSession }} in numbers</h3>
             <p v-if="d.generalAssembly.statsSession !== d.generalAssembly.currentSession" class="sub">The {{ ordinal(d.generalAssembly.currentSession) }} session has just opened, so figures are for the previous session</p>
             <p v-else class="sub">Resolutions adopted so far</p>

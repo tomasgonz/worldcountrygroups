@@ -20,7 +20,7 @@ export default defineEventHandler((event) => {
     total: list.length,
     generated: file?._meta?.generated || null,
     people: list.slice(0, limit).map(p => ({
-      slug: p.slug, name: p.name, image: p.image, imagePath: p.imagePath, description: p.description,
+      slug: p.slug, name: p.name, image: p.image, imagePath: p.imagePath, imageUrl: p.imageUrl, description: p.description,
       roles: p.roles, speeches: p.speeches.length, quoteCount: p.quoteCount,
       mentions30d: p.mentions30d, mentionCount: p.mentionCount, delivered: p.delivered.length, lastSeen: p.lastSeen,
     })),

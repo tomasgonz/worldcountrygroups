@@ -12,7 +12,7 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-8">
           <NuxtLink to="/people" class="text-sm text-primary-400 hover:text-primary-700">&larr; People</NuxtLink>
           <div class="mt-4 flex flex-col sm:flex-row gap-6">
-            <PersonPhoto :image="p.image" :image-path="p.imagePath" :name="p.name" size="h-36 w-28 sm:h-44 sm:w-36" :width="500" />
+            <PersonPhoto :image="p.image" :image-path="p.imagePath" :image-url="p.imageUrl" :name="p.name" size="h-36 w-28 sm:h-44 sm:w-36" :width="500" />
             <div class="min-w-0">
               <h1 class="font-serif text-4xl sm:text-5xl text-primary-900 leading-tight">{{ p.name }}</h1>
               <p v-if="p.description" class="text-primary-500 mt-1">{{ capitalize(p.description) }}</p>
@@ -30,6 +30,7 @@
               <div class="flex flex-wrap gap-3 mt-4 text-xs">
                 <a v-if="p.wikipedia" :href="`https://en.wikipedia.org/wiki/${encodeURIComponent(p.wikipedia)}`" target="_blank" rel="noopener" class="text-accent-600 hover:underline">Wikipedia</a>
                 <a v-if="p.qid" :href="`https://www.wikidata.org/wiki/${p.qid}`" target="_blank" rel="noopener" class="text-accent-600 hover:underline">Wikidata</a>
+                <a v-if="p.officialUrl" :href="p.officialUrl" target="_blank" rel="noopener" class="text-accent-600 hover:underline">Official page</a>
                 <NuxtLink v-if="p.quoteCount" :to="`/quotes?speaker=${encodeURIComponent(p.name)}`" class="text-accent-600 hover:underline">All quotes</NuxtLink>
               </div>
             </div>

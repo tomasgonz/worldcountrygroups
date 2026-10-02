@@ -150,6 +150,35 @@ def load_wikidata():
     return cached
 
 
+def ga_session_now():
+    now = datetime.now(timezone.utc)
+    return now.year - 1945 - (1 if (now.month, now.day) < (9, 9) else 0)
+
+
+def ordinal(n):
+    return f"{n}{'th' if 11 <= n % 100 <= 13 else {1: 'st', 2: 'nd', 3: 'rd'}.get(n % 10, 'th')}"
+
+
+def fetch_current_pga(session):
+    """The President of the General Assembly from the official site (Wikidata lags behind)."""
+    url = f"https://www.un.org/pga/{session}/"
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"})
+    with urllib.request.urlopen(req, timeout=60) as r:
+        page = r.read().decode("utf-8", "replace")
+    m = re.search(r"<title>[^|<]*\|\s*([^<]+)</title>", page)
+    if not m:
+        return None
+    name = re.sub(r"^(H\.?\s?E\.?\s+)?((Mr|Ms|Mrs|Dr|Prof|Ambassador)\.?\s+)*", "", m.group(1).strip()).strip()
+    text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", page))
+    home = re.search(re.escape(name) + r",\s*([^,]{3,60}?) of ([A-Z][A-Za-z ]{2,40}?),?\s+was elected", text)
+    elected = re.search(r"was elected President of the [\w-]+ session on (\d{1,2} \w+ \d{4})", text)
+    img = re.search(r'<img[^>]+src="([^"]+)"[^>]*alt="[^"]*' + re.escape(name), page)
+    return {"name": name, "url": url,
+            "previous_role": home.group(1).strip() if home else None, "home": home.group(2).strip() if home else None,
+            "elected": datetime.strptime(elected.group(1), "%d %B %Y").strftime("%Y-%m-%d") if elected else None,
+            "image_url": img.group(1) if img else None}
+
+
 ROLE_WORDS = r"(Deputy|Permanent|Representative|Ambassador|Minister|Secretary|President|Spokesperson|Chargé|Charge)"
 VERBS = {"appoints", "strongly", "condemns", "welcomes", "calls", "urges", "says", "notes", "statement", "remarks"}
 
@@ -203,6 +232,40 @@ def main():
             add_name(q, a)
         if not any(r["role"] == role and r.get("iso3") == iso3 for r in p["roles"]):
             p["roles"].append({"role": role, "iso3": iso3, "country": cname.get(iso3) if iso3 else "United Nations", "since": start, "source": "Wikidata"})
+
+    # ---- President of the General Assembly: official site overrides Wikidata ----
+    session = ga_session_now()
+    pga_id, prev_pga_id = None, None
+    try:
+        pga = fetch_current_pga(session)
+    except Exception as e:
+        print("PGA page unavailable:", e)
+        pga = None
+    if pga and pga["name"]:
+        PGA_ROLE = "President of the United Nations General Assembly"
+        for pid, p in people.items():
+            for r in p["roles"]:
+                if r["role"] == PGA_ROLE and fold(p["name"]) != fold(pga["name"]):
+                    r["role"] = f"{PGA_ROLE} ({ordinal(session - 1)} session)"
+                    r["past"] = True
+                    prev_pga_id = pid
+        pga_id = by_name.get(fold(pga["name"])) or slugify(pga["name"])
+        p = person(pga_id, pga["name"])
+        p["roles"] = [r for r in p["roles"] if r["role"] != PGA_ROLE]
+        p["roles"].insert(0, {"role": f"{PGA_ROLE} ({ordinal(session)} session)", "iso3": None, "country": "United Nations",
+                              "since": f"{1945 + session}-09-09", "source": "un.org/pga"})
+        home_iso3 = next((k for k, v in cname.items() if pga.get("home") and fold(v) == fold(pga["home"])), None)
+        if not p.get("description"):
+            bits = [f"President of the {ordinal(session)} session of the UN General Assembly"]
+            if pga.get("previous_role") and pga.get("home"):
+                bits.append(f"elected on {datetime.strptime(pga['elected'], '%Y-%m-%d').strftime('%-d %B %Y') if pga.get('elected') else ''} while {pga['previous_role']} of {pga['home']}".replace("on  while", "while"))
+            p["description"] = "; ".join(bits)
+        if home_iso3:
+            p["homeIso3"] = home_iso3
+        if not p.get("image") and pga.get("image_url"):
+            p["imageUrl"] = pga["image_url"]
+        p["officialUrl"] = pga["url"]
+        print(f"PGA {ordinal(session)} session: {pga['name']} ({pga.get('home')})")
 
     # ---- General Debate speakers ----
     speeches = json.load(open(os.path.join(DATA, "un-speeches-index.json")))["speeches"]
@@ -258,6 +321,10 @@ def main():
     # Office titles that refer to the current holder (UN sources rarely repeat the name)
     OFFICE_ALIASES = {"United Nations Secretary-General": ["UN chief", "U.N. chief", "UN Secretary-General", "U.N. Secretary-General",
                                                            "United Nations Secretary-General", "UN Secretary General"]}
+    # the PGA office title is credited by date (current holder from the session start, predecessor before)
+    PGA_OFFICE = re.compile(r"\b(President of the (UN |U\.N\. |United Nations )?General Assembly|(UN |U\.N\. )?General Assembly President|UNGA President)\b")
+    session_start = f"{1945 + session}-09-09"
+    PGA_TITLE = re.compile(r"^(Letter from the President of the General Assembly|PGA\b|President of the General Assembly|Statement by the President of the General Assembly|Remarks by the President of the General Assembly)")
     sg_id = next((pid for pid, p in people.items() if any(r["role"] == "United Nations Secretary-General" for r in p["roles"])), None)
 
     def all_variants(pid, p):
@@ -289,6 +356,17 @@ def main():
             title = it.get("title", "")
             text = title + " " + (it.get("description") or it.get("excerpt") or "")
             spk = clean_speaker(it.get("speaker"))
+            # the PGA's own letters and remarks: credit whoever held the office on that date
+            # everything from the PGA's own office feed, plus PGA-titled UN items
+            if it.get("source") == "un-pga" or (it.get("source") in UN_OFFICIAL and PGA_TITLE.search(title)):
+                holder = pga_id if (it.get("publishedAt") or "") >= session_start else prev_pga_id
+                if holder:
+                    delivered[holder].append({"title": title, "url": it.get("url"), "source": it.get("source"), "publishedAt": it.get("publishedAt"), "kind": kind})
+                    continue
+            if PGA_OFFICE.search(text):
+                holder = pga_id if (it.get("publishedAt") or "") >= session_start else prev_pga_id
+                if holder and not compiled[holder].search(text):
+                    mentions[holder].append({"title": title, "url": it.get("url"), "source": it.get("source"), "publishedAt": it.get("publishedAt"), "kind": kind})
             # "Secretary-General Appoints ...", "Secretary-General's remarks to ..." from UN sources are the SG's own
             if sg_id and it.get("source") in UN_OFFICIAL and SG_TITLE.search(title) and not re.search(r"\bDeputy Secretary-General", title):
                 delivered[sg_id].append({"title": title, "url": it.get("url"), "source": it.get("source"), "publishedAt": it.get("publishedAt"), "kind": kind})
