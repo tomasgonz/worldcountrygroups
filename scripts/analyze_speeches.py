@@ -13,6 +13,9 @@ from datetime import date
 from dotenv import load_dotenv
 from openai import OpenAI, RateLimitError
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import ai_usage  # noqa: E402
+
 load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "site", "server", "data")
@@ -77,6 +80,11 @@ def analyze_speech(client, text, model="gpt-4o"):
         temperature=0.3,
         max_tokens=2000,
     )
+    u = getattr(response, "usage", None)
+    if u:
+        details = getattr(u, "prompt_tokens_details", None)
+        ai_usage.record("speech-analysis", "OpenAI", model, u.prompt_tokens, u.completion_tokens,
+                        getattr(details, "cached_tokens", 0) if details else 0)
     return json.loads(response.choices[0].message.content)
 
 

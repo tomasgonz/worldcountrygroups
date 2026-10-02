@@ -29,6 +29,7 @@
           </span>
         </div>
         <p class="text-primary-400 leading-relaxed max-w-3xl">{{ (group as any).description }}</p>
+        <AskButtons kind="group" :name="(group as any).name" class="mt-5" />
 
         <!-- UNSC Historical Non-Permanent Members -->
         <div v-if="gid === 'unsc' && unscHistory && !unscHistoryPending" class="mt-8">

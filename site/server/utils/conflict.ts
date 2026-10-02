@@ -1,39 +1,101 @@
-import { readFileSync, existsSync } from 'fs'
+import { readFileSync, existsSync, statSync } from 'fs'
 import { join } from 'path'
 
 const DATA_FILE = join(process.cwd(), 'server', 'data', 'conflict-events.json')
 const ALT_DIR = join(process.env.HOME || '/home', 'worldcountrygroups', 'site', 'server', 'data')
 const DATA_FILE_ALT = join(ALT_DIR, 'conflict-events.json')
 
-interface ConflictByType {
+export interface ConflictByType {
   events: number
   fatalities: number
 }
 
-interface ConflictTrend {
+export interface ConflictTrend {
   year: number
   events: number
   fatalities: number
+  /** Year not yet complete in the data (through = last event date) */
+  partial?: boolean
+  through?: string
+  /** Year covered only by UCDP candidate (provisional) events */
+  provisional?: boolean
 }
 
-interface CountryConflict {
+export interface ConflictMonth {
+  month: string // YYYY-MM
+  events: number
+  fatalities: number
+}
+
+export interface ConflictActor {
+  id: string
+  name: string
+  type: ConflictViolenceType | string
+  events: number
+  fatalities: number
+  latest_event: string
+}
+
+/** UCDP type_of_violence: 1 state-based, 2 non-state, 3 one-sided */
+export type ConflictViolenceType = 'state_based' | 'non_state' | 'one_sided'
+
+export interface CountryConflict {
   total_events: number
   total_fatalities: number
-  by_type: {
-    battles: ConflictByType
-    explosions_remote_violence: ConflictByType
-    violence_against_civilians: ConflictByType
-    protests: ConflictByType
-    riots: ConflictByType
-    strategic_developments: ConflictByType
-  }
+  /** UCDP types (state_based / non_state / one_sided); older files used ACLED categories */
+  by_type: Partial<Record<ConflictViolenceType, ConflictByType>> & Record<string, ConflictByType>
   trend: ConflictTrend[]
   conflict_intensity: 'high' | 'medium' | 'low' | 'none'
+  // Added with the UCDP-based data (optional so older files still type-check)
+  fatalities_low?: number
+  fatalities_high?: number
+  civilian_deaths?: number
+  monthly?: ConflictMonth[]
+  last_12_months?: { events: number; fatalities: number }
+  top_conflicts?: ConflictActor[]
+  top_dyads?: ConflictActor[]
+  latest_event_date?: string
+  provisional_events?: number
 }
 
-interface ConflictData {
-  _meta: { last_updated: string; source: string; period: string }
+export interface ConflictMeta {
+  last_updated: string
+  source: string
+  period: string
+  source_url?: string
+  period_start?: string
+  period_end?: string
+  ged_version?: string
+  ged_through?: string
+  candidate_files?: string[]
+  candidate_from?: string | null
+  types?: Record<string, string>
+  intensity_rule?: string
+  notes?: string
+  citation?: string
+}
+
+export interface ConflictGlobal {
+  total_events: number
+  total_fatalities: number
+  civilian_deaths?: number
+  by_type: Record<string, ConflictByType>
+  trend: ConflictTrend[]
+  monthly: ConflictMonth[]
+  last_12_months?: { events: number; fatalities: number }
+  latest_event_date?: string
+}
+
+export interface ConflictData {
+  _meta: ConflictMeta
+  global?: ConflictGlobal
   countries: Record<string, CountryConflict>
+}
+
+export const CONFLICT_TYPE_LABELS: Record<string, string> = {
+  state_based: 'State-based conflict',
+  non_state: 'Non-state conflict',
+  one_sided: 'One-sided violence',
 }
 
 let _data: ConflictData | null = null
@@ -44,17 +106,29 @@ function resolve(primary: string, alt: string): string | null {
   return null
 }
 
+let _loadedPath: string | null = null
+let _loadedMtime = 0
+let _checkedAt = 0
+
+// Reloads when the data file changes (the refresh job rewrites it), checked at most every 60 s
 function ensureLoaded(): void {
-  if (_data !== null) return
+  const now = Date.now()
+  if (_data !== null && now - _checkedAt < 60_000) return
+  _checkedAt = now
   const filePath = resolve(DATA_FILE, DATA_FILE_ALT)
   if (!filePath) {
-    _data = { _meta: { last_updated: '', source: '', period: '' }, countries: {} }
+    if (_data === null) _data = { _meta: { last_updated: '', source: '', period: '' }, countries: {} }
     return
   }
+  let mtime = 0
+  try { mtime = statSync(filePath).mtimeMs } catch {}
+  if (_data !== null && filePath === _loadedPath && mtime === _loadedMtime) return
   try {
     _data = JSON.parse(readFileSync(filePath, 'utf-8'))
+    _loadedPath = filePath
+    _loadedMtime = mtime
   } catch {
-    _data = { _meta: { last_updated: '', source: '', period: '' }, countries: {} }
+    if (_data === null) _data = { _meta: { last_updated: '', source: '', period: '' }, countries: {} }
   }
 }
 
@@ -118,4 +192,16 @@ export function getConflictHotspots(): Array<{ iso3: string } & CountryConflict>
 export function getConflictMeta() {
   ensureLoaded()
   return _data!._meta
+}
+
+/** Worldwide totals, yearly trend and monthly series (null for older data files). */
+export function getConflictGlobal(): ConflictGlobal | null {
+  ensureLoaded()
+  return _data!.global ?? null
+}
+
+/** Full dataset (meta, global, countries) for the conflicts API. */
+export function getAllConflicts(): ConflictData {
+  ensureLoaded()
+  return _data!
 }

@@ -8,6 +8,7 @@ import { getRecentNews } from '~/server/utils/news-feed'
 import { getRecentStatements, getTopicDistribution, getP5Activity } from '~/server/utils/statements-feed'
 import { getRegistry } from '~/server/utils/wcg'
 import { readDataFile } from '~/server/utils/data-file'
+import { getJournalDays, getElections } from '~/server/utils/upcoming'
 import { getNYTodayKey, getNYWeekRange, isInNYToday, isInNYWindow, formatNYDateLong } from '~/server/utils/un-day'
 
 const DATA_DIR = join(process.cwd(), 'server', 'data')
@@ -192,6 +193,12 @@ async function generate(now: Date, todayKey: string, cacheKey: string): Promise<
     activeTopics,
     topCountriesToday: evidence.topCountriesToday,
     topCountriesWeek: evidence.topCountriesWeek,
+    weekAheadMeetings: getJournalDays({ location: 'New York', days: 7, includeClosed: false })
+      .flatMap(d => d.meetings)
+      .filter(m => !m.cancelled)
+      .map(m => ({ date: m.date, time: m.time, organ: m.organ, title: m.title, agenda: m.agenda || [] })),
+    upcomingElections: getElections({ status: 'upcoming', withinDays: 30, includeIndirect: false })
+      .map(e => ({ date: e.date, precision: e.precision, country: e.country, description: e.description })),
   })
 
   // gpt-5 spends substantial budget on reasoning tokens before output; give it room

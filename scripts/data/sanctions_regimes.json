@@ -1,0 +1,231 @@
+{
+  "_comment": "Curated base for scripts/fetch_sanctions.py: one entry per UN Security Council sanctions regime. list_type is the UN_LIST_TYPE value used in the consolidated list XML. Edit here, not in site/server/data/sanctions.json (which is regenerated).",
+  "regimes": [
+    {
+      "id": "dprk",
+      "name": "Democratic People's Republic of Korea",
+      "resolution": "S/RES/1718",
+      "established": "2006-10-14",
+      "measures": [
+        "arms_embargo",
+        "travel_ban",
+        "asset_freeze",
+        "financial_sanctions",
+        "luxury_goods_ban",
+        "sectoral_sanctions"
+      ],
+      "target_countries": [
+        "PRK"
+      ],
+      "list_type": "DPRK"
+    },
+    {
+      "id": "iran",
+      "name": "Iran (Non-proliferation)",
+      "resolution": "S/RES/1737",
+      "established": "2006-12-23",
+      "measures": [
+        "arms_embargo",
+        "travel_ban",
+        "asset_freeze",
+        "nuclear_restrictions"
+      ],
+      "target_countries": [
+        "IRN"
+      ],
+      "list_type": "Iran",
+      "note": "Measures under S/RES/1737 and successor resolutions were re-applied on 2025-09-28 through the snapback mechanism of S/RES/2231 (2015)."
+    },
+    {
+      "id": "somalia",
+      "name": "Somalia",
+      "resolution": "S/RES/751",
+      "established": "1992-04-24",
+      "measures": [
+        "arms_embargo",
+        "travel_ban",
+        "asset_freeze",
+        "charcoal_ban"
+      ],
+      "target_countries": [
+        "SOM"
+      ],
+      "list_type": "Somalia"
+    },
+    {
+      "id": "isil-alqaida",
+      "name": "ISIL (Da'esh) and Al-Qaida",
+      "resolution": "S/RES/1267",
+      "established": "1999-10-15",
+      "measures": [
+        "travel_ban",
+        "asset_freeze",
+        "arms_embargo"
+      ],
+      "target_countries": [],
+      "list_type": "Al-Qaida"
+    },
+    {
+      "id": "iraq",
+      "name": "Iraq (residual)",
+      "resolution": "S/RES/1518",
+      "established": "2003-12-24",
+      "measures": [
+        "asset_freeze"
+      ],
+      "target_countries": [
+        "IRQ"
+      ],
+      "list_type": "Iraq"
+    },
+    {
+      "id": "libya",
+      "name": "Libya",
+      "resolution": "S/RES/1970",
+      "established": "2011-02-26",
+      "measures": [
+        "arms_embargo",
+        "travel_ban",
+        "asset_freeze"
+      ],
+      "target_countries": [
+        "LBY"
+      ],
+      "list_type": "Libya"
+    },
+    {
+      "id": "car",
+      "name": "Central African Republic",
+      "resolution": "S/RES/2127",
+      "established": "2013-12-05",
+      "measures": [
+        "arms_embargo",
+        "travel_ban",
+        "asset_freeze"
+      ],
+      "target_countries": [
+        "CAF"
+      ],
+      "list_type": "CAR"
+    },
+    {
+      "id": "yemen",
+      "name": "Yemen",
+      "resolution": "S/RES/2140",
+      "established": "2014-02-26",
+      "measures": [
+        "travel_ban",
+        "asset_freeze",
+        "arms_embargo"
+      ],
+      "target_countries": [
+        "YEM"
+      ],
+      "list_type": "Yemen"
+    },
+    {
+      "id": "south-sudan",
+      "name": "South Sudan",
+      "resolution": "S/RES/2206",
+      "established": "2015-03-03",
+      "measures": [
+        "travel_ban",
+        "asset_freeze",
+        "arms_embargo"
+      ],
+      "target_countries": [
+        "SSD"
+      ],
+      "list_type": "SouthSudan"
+    },
+    {
+      "id": "mali",
+      "name": "Mali",
+      "resolution": "S/RES/2374",
+      "established": "2017-09-05",
+      "measures": [
+        "travel_ban",
+        "asset_freeze"
+      ],
+      "target_countries": [
+        "MLI"
+      ],
+      "status": "terminated",
+      "terminated": "2023-08-31",
+      "note": "Regime lapsed on 2023-08-31 after its renewal was vetoed in the Security Council; no individuals remain listed."
+    },
+    {
+      "id": "drc",
+      "name": "Democratic Republic of the Congo",
+      "resolution": "S/RES/1533",
+      "established": "2004-03-12",
+      "measures": [
+        "arms_embargo",
+        "travel_ban",
+        "asset_freeze"
+      ],
+      "target_countries": [
+        "COD"
+      ],
+      "list_type": "DRC"
+    },
+    {
+      "id": "sudan",
+      "name": "Sudan (Darfur)",
+      "resolution": "S/RES/1556",
+      "established": "2004-07-30",
+      "measures": [
+        "arms_embargo",
+        "travel_ban",
+        "asset_freeze"
+      ],
+      "target_countries": [
+        "SDN"
+      ],
+      "list_type": "Sudan"
+    },
+    {
+      "id": "guinea-bissau",
+      "name": "Guinea-Bissau",
+      "resolution": "S/RES/2048",
+      "established": "2012-05-18",
+      "measures": [
+        "travel_ban"
+      ],
+      "target_countries": [
+        "GNB"
+      ],
+      "list_type": "GB"
+    },
+    {
+      "id": "haiti",
+      "name": "Haiti",
+      "resolution": "S/RES/2653",
+      "established": "2022-10-21",
+      "measures": [
+        "travel_ban",
+        "asset_freeze",
+        "arms_embargo"
+      ],
+      "target_countries": [
+        "HTI"
+      ],
+      "list_type": "Haiti"
+    },
+    {
+      "id": "taliban",
+      "name": "Taliban (1988 regime)",
+      "resolution": "S/RES/1988",
+      "established": "2011-06-17",
+      "measures": [
+        "travel_ban",
+        "asset_freeze",
+        "arms_embargo"
+      ],
+      "target_countries": [
+        "AFG"
+      ],
+      "list_type": "Taliban"
+    }
+  ]
+}

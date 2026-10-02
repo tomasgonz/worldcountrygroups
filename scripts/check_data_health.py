@@ -35,8 +35,6 @@ GATEWAY = "http://169.254.169.254/gateway/email/send"
 # Datasets with no automatic source: shown with their age, never alerted on
 MANUAL = [
     ("un-votes-resolutions.json", "UN General Assembly votes by country", "Upload the UN Digital Library voting CSV in Admin"),
-    ("sanctions.json", "Sanctions regimes", "Curated by hand"),
-    ("conflict-events.json", "Conflict events", "Curated by hand"),
     ("military-capabilities.json", "Military capabilities", "Curated by hand"),
     ("treaties.json", "Treaties", "Curated by hand"),
     ("recognition.json", "Recognition disputes", "Curated by hand"),
@@ -94,6 +92,32 @@ def voting_gap():
     }
 
 
+def backup_status():
+    """Nightly Wasabi backup: configured? when did the last one finish?"""
+    env = os.path.join(os.path.expanduser("~exedev"), ".config", "wcg-backup", "env")
+    log = os.path.join(os.path.expanduser("~exedev"), ".cache", "wcg-backup", "backup.log")
+    try:
+        with open(env) as f:
+            text = f.read()
+        configured = "YOUR-BUCKET" not in text and "YOUR_WASABI" not in text
+    except OSError:
+        configured = False
+    last = None
+    try:
+        with open(log, errors="replace") as f:
+            for line in f:
+                if line.startswith("Backup finished "):
+                    last = line.split("Backup finished ", 1)[1].strip()
+    except OSError:
+        pass
+    age_h = None
+    if last:
+        t = parse(last)
+        if t:
+            age_h = (datetime.now(timezone.utc) - t).total_seconds() / 3600
+    return {"configured": configured, "lastSuccess": last, "ageHours": round(age_h, 1) if age_h is not None else None}
+
+
 def compute():
     cfg = load("cron-config.json", {}) or {}
     status = load("job-status.json", {}) or {}
@@ -142,11 +166,14 @@ def compute():
     if gap["missingRecordedVotes"] >= 10:
         problems.append(f"UN voting data: {gap['missingRecordedVotes']} recorded General Assembly votes since "
                         f"{gap['latestVote']} are not in the per-country data")
+    backup = backup_status()
+    if backup["configured"] and (backup["ageHours"] is None or backup["ageHours"] > 36):
+        problems.append(f"Backup: no successful backup in the last 36 hours (last {backup['lastSuccess'] or 'never'})")
     counts = {}
     for j in jobs:
         counts[j["status"]] = counts.get(j["status"], 0) + 1
     return {"generatedAt": iso(now), "counts": counts, "problems": problems, "jobs": jobs,
-            "manual": manual, "votingGap": gap}
+            "manual": manual, "votingGap": gap, "backup": backup}
 
 
 def send_email(to, subject, body):

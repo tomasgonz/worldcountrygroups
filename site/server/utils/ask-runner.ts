@@ -31,6 +31,9 @@ export interface AskRecord {
   shared: boolean
   review?: { status: 'verified' | 'incorrect' | null; note?: string; by?: string; at?: string }
   rerunOf?: string
+  parentId?: string   // the answer this follows up on
+  threadId?: string   // first question of the conversation
+  usage?: { input: number; output: number; cached: number; calls: number }
 }
 
 const TEMPLATES: Record<AskTemplate, string> = {
@@ -80,7 +83,7 @@ function freshnessNote(): string {
   } catch { return '' }
 }
 
-function systemPrompt(mode: AskMode, template: AskTemplate) {
+function systemPrompt(mode: AskMode, template: AskTemplate, followUp = false) {
   const today = new Date().toISOString().slice(0, 10)
   return `You are the research desk of World Country Groups, a database on countries, international groups and the United Nations. Today is ${today}.
 
@@ -90,12 +93,16 @@ Method:
 - If the tools return nothing relevant, say plainly what the database does not cover. You may add widely known background, but label it "(general knowledge)" and never cite it.
 - Mention how current the data is where it matters (for example, General Assembly voting records may end months before today).
 - When a dataset is old or its refresh is failing (see Data currency below), say so where it affects the answer.
+- To find what was said about a topic, use search_texts (full speeches since 1946, statements, news); quote passages verbatim and cite them.
 - Write in clear, neutral English for diplomats and analysts. Prefer short paragraphs and bullets. Quote speakers only from search_quotes or speech results.
-${freshnessNote()}
+${freshnessNote()}${followUp ? '\nThis is a follow-up in a conversation. The earlier questions and answers are included for context, with their citations removed: look facts up again with the tools before citing them, and do not repeat earlier material unless asked.\n' : ''}
 ${mode === 'briefing' ? TEMPLATES[template] + '\nKeep it to roughly 500-900 words.' : 'Answer concisely (usually under 250 words): lead with the direct answer, then the supporting facts.'}`
 }
 
 const LABELS: Record<string, (a: any) => string> = {
+  upcoming_events: a => `Upcoming ${a.what === 'elections' ? 'elections' : a.what === 'meetings' ? 'UN meetings' : 'UN meetings and elections'}${a.country ? `: ${a.country}` : ''}`,
+  sanctions_and_conflict: a => (a.country ? `Sanctions and conflict: ${a.country}` : 'Conflict hotspots'),
+  search_texts: a => `Full-text search: “${a.query}”${a.country ? ` (${a.country})` : ''}${({ speech: ', speeches', statement: ', statements', news: ', news' } as any)[a.kind] || ''}${a.from_year || a.to_year ? `, ${a.from_year || '…'}–${a.to_year || 'now'}` : ''}`,
   country_overview: a => `Country profile: ${a.country}`,
   un_voting_record: a => `UN voting record: ${a.country}`,
   voting_agreement: a => `Voting agreement: ${a.country_a} and ${a.country_b}`,
@@ -145,13 +152,38 @@ export function staleDatasets(rec: AskRecord): string[] {
   }).map(([f]) => f)
 }
 
+/** All turns of a conversation, oldest first. */
+export function getThread(threadId: string): AskRecord[] {
+  return listAsks().filter(a => a.id === threadId || a.threadId === threadId).sort((a, b) => a.createdAt.localeCompare(b.createdAt))
+}
+
+/** Whether a user may read a record: theirs, shared (or in a shared conversation), or admin. */
+export function canView(a: AskRecord, user: { id: string; role?: string }): boolean {
+  if (a.userId === user.id || a.shared || user.role === 'admin') return true
+  const root = a.threadId && a.threadId !== a.id ? getAsk(a.threadId) : null
+  return !!root?.shared
+}
+
+/** Earlier turns leading to `parentId`, oldest first (citations removed), at most `max`. */
+function historyFor(parentId: string, max = 6): { question: string; answer: string }[] {
+  const out: { question: string; answer: string }[] = []
+  let cur = getAsk(parentId)
+  while (cur && out.length < max) {
+    if (cur.status === 'done' && cur.answer) {
+      out.unshift({ question: cur.question, answer: cur.answer.replace(/\[S\d+\]/g, '').slice(0, 12000) })
+    }
+    cur = cur.parentId ? getAsk(cur.parentId) : null
+  }
+  return out
+}
+
 export function asksToday(userId: string): number {
   const day = new Date().toISOString().slice(0, 10)
   return listAsks().filter(a => a.userId === userId && a.createdAt.startsWith(day)).length
 }
 
 export async function runAsk(opts: {
-  question: string; mode: AskMode; template: AskTemplate; userId: string; userName: string; rerunOf?: string
+  question: string; mode: AskMode; template: AskTemplate; userId: string; userName: string; rerunOf?: string; parentId?: string
   onEvent: (ev: any) => void
 }): Promise<AskRecord> {
   const rec: AskRecord = {
@@ -159,13 +191,21 @@ export async function runAsk(opts: {
     userId: opts.userId, userName: opts.userName, question: opts.question.trim(), mode: opts.mode, template: opts.template,
     createdAt: new Date().toISOString(), status: 'running', shared: false, steps: [], rerunOf: opts.rerunOf,
   }
+  const parent = opts.parentId ? getAsk(opts.parentId) : null
+  if (parent) {
+    rec.parentId = parent.id
+    rec.threadId = parent.threadId || parent.id
+  }
   save(rec)
   opts.onEvent({ type: 'start', id: rec.id })
 
   const src = new SourceCollector()
+  let sessionRef: ToolSession | null = null
   try {
-    const session = new ToolSession(systemPrompt(opts.mode, opts.template), rec.question, ASK_TOOLS,
-      { task: 'ask', maxTokens: opts.mode === 'briefing' ? 16000 : 8000 })
+    const history = parent ? historyFor(parent.id) : []
+    const session = new ToolSession(systemPrompt(opts.mode, opts.template, history.length > 0), rec.question, ASK_TOOLS,
+      { task: 'ask', maxTokens: opts.mode === 'briefing' ? 16000 : 8000 }, history)
+    sessionRef = session
     const provider: any = session.provider
     let final = ''
     for (let round = 0; round < 8; round++) {
@@ -176,7 +216,7 @@ export async function runAsk(opts: {
         rec.steps!.push({ tool: call.name, args: call.arguments, label })
         opts.onEvent({ type: 'step', label })
         let result: any
-        try { result = runTool(call.name, call.arguments || {}, src) } catch (e: any) { result = { error: String(e?.message || e) } }
+        try { result = await runTool(call.name, call.arguments || {}, src) } catch (e: any) { result = { error: String(e?.message || e) } }
         let text = JSON.stringify(result)
         if (text.length > 9000) text = text.slice(0, 9000) + '…(truncated)'
         session.addToolResult(call.id, text)
@@ -198,10 +238,12 @@ export async function runAsk(opts: {
     rec.provider = provider?.name
     rec.datasets = Object.fromEntries([...src.datasets].map(f => [f, dataFileMtime(f)]))
     rec.finishedAt = new Date().toISOString()
+    rec.usage = sessionRef?.usage
     save(rec)
     opts.onEvent({ type: 'done', record: rec })
   } catch (e: any) {
     rec.status = 'error'
+    rec.usage = sessionRef?.usage
     rec.error = String(e?.message || e).slice(0, 500)
     rec.finishedAt = new Date().toISOString()
     save(rec)

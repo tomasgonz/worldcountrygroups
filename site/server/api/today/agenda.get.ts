@@ -2,6 +2,7 @@ import { getRecentStatements, getStatementsFeedMeta } from '~/server/utils/state
 import { readDataFile, dataFileMtime } from '~/server/utils/data-file'
 import { getNYTodayKey, isInNYToday } from '~/server/utils/un-day'
 import { getRecentNews } from '~/server/utils/news-feed'
+import { getJournalDays, getJournalMeta, getElections, getElectionsMeta } from '~/server/utils/upcoming'
 
 /**
  * Factual "what is happening at the UN" data for the Today page. No AI involved,
@@ -61,6 +62,29 @@ export default defineEventHandler(() => {
   const votes = readDataFile<any>('unsc-votes.json')
   const lastDecision = (votes?.resolutions || [])[0] || null
 
+  // --- the week ahead: UN Journal programme (New York and Geneva) ---
+  const trimMeeting = (m: any) => ({ ...m, agenda: (m.agenda || []).slice(0, 8), documents: (m.documents || []).slice(0, 8) })
+  const journalMeta = getJournalMeta()
+  const journalDays = getJournalDays({ location: 'all', days: 8 })
+    .map(d => ({ ...d, meetings: d.meetings.map(trimMeeting) }))
+  const journal = {
+    updated: journalMeta.updated,
+    sourceUrl: journalMeta.sourceUrl,
+    newYork: journalDays.filter(d => d.location === 'New York'),
+    geneva: journalDays.filter(d => d.location === 'Geneva'),
+  }
+
+  // --- elections in the next 60 days (Wikipedia, CC BY-SA) ---
+  const electionsMeta = getElectionsMeta()
+  const elections = {
+    attribution: electionsMeta.attribution,
+    licenseUrl: electionsMeta.licenseUrl,
+    pages: electionsMeta.pages,
+    updated: electionsMeta.updated,
+    upcoming: getElections({ status: 'upcoming', withinDays: 60, limit: 40 }),
+    recent: getElections({ status: 'past', limit: 6 }),
+  }
+
   // --- freshness of every feed this page relies on ---
   const statementsMeta = getStatementsFeedMeta() as any
   const newsMeta = readDataFile<any>('news-feed.json')?._meta
@@ -69,6 +93,7 @@ export default defineEventHandler(() => {
     { label: 'UN schedule & statements', updated: statementsMeta?.last_updated || null },
     { label: 'News', updated: newsLatest },
     { label: 'Security Council record', updated: dataFileMtime('unsc-activity.json') },
+    { label: 'UN Journal', updated: journalMeta.updated },
   ]
 
   // --- headline numbers for the summary strip ---
@@ -92,6 +117,8 @@ export default defineEventHandler(() => {
     tomorrowKey,
     schedule: { today: byBody(today), tomorrow: byBody(tomorrow), todayCount: today.length, tomorrowCount: tomorrow.length },
     securityCouncil: { meetings: scMeetings, lastDecision },
+    journal,
+    elections,
     freshness,
   }
 })

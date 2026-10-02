@@ -60,3 +60,8 @@ site/server/data/data-health.json
 site/server/data/health-alert-state.json
 scripts/data/*.csv
 scripts/data/.upload-*
+site/server/data/search.db*
+site/server/data/ai-usage.json
+site/server/data/ai-usage-batch.json
+site/server/data/un-journal.json
+site/server/data/elections.json

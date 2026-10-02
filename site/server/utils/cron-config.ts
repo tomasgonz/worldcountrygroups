@@ -16,6 +16,7 @@ export interface CronJob {
   maxAgeHours?: number | null // how old the data may get before it counts as stale
   timeoutMin?: number
   retries?: number
+  allowShrink?: boolean     // output may legitimately get much smaller (e.g. UN recess)
 }
 
 export interface CronConfig {
@@ -53,6 +54,11 @@ const DEFAULT_JOBS: Def[] = [
   d('fetch-vdem', 'Democracy (V-Dem)', 'scripts/fetch_vdem.py', '0 5 1 * *', true, ['vdem-data.json'], 24 * 33),
   d('fetch-sipri', 'Arms Trade (SIPRI)', 'scripts/fetch_sipri.py', '0 3 2 * *', true, ['sipri-arms.json'], 24 * 33, 60),
   d('fetch-cables', 'Submarine Cables', 'scripts/fetch_submarine_cables.py', '0 7 3 * *', true, ['submarine-cables.json'], 24 * 33),
+  d('fetch-sanctions', 'UN Sanctions (Consolidated List)', 'scripts/fetch_sanctions.py', '30 5 * * *', true, ['sanctions.json'], 36, 10),
+  d('fetch-conflicts', 'Conflict Events (UCDP)', 'scripts/fetch_conflicts.py', '15 4 * * 1', true, ['conflict-events.json'], 24 * 8, 30),
+  d('build-search-index', 'Full-text search index (speeches, statements, news)', 'scripts/build_search_index.py --embed', '50 */4 * * *', true, ['search.db'], 9, 60),
+  d('fetch-elections', 'Elections calendar (Wikipedia)', 'scripts/fetch_elections.py', '10 4 * * *', true, ['elections.json'], 30, 5),
+  { ...d('fetch-un-journal', 'UN Journal (meetings programme)', 'scripts/fetch_un_journal.py', '25 */3 * * *', true, ['un-journal.json'], 7, 10), allowShrink: true },
   d('fetch-alliances', 'Alliances (CoW)', 'scripts/fetch_cow_alliances.py', '0 6 * * 0', false, ['cow-alliances.json'], null),
   d('health-check', 'Data health check and alerts', 'scripts/check_data_health.py --email', '50 * * * *', true, [], null, 5),
 ]
@@ -74,7 +80,7 @@ function migrate(cfg: CronConfig): boolean {
       changed = true
       continue
     }
-    for (const k of ['outputs', 'maxAgeHours', 'timeoutMin', 'retries'] as const) {
+    for (const k of ['outputs', 'maxAgeHours', 'timeoutMin', 'retries', 'allowShrink'] as const) {
       if (job[k] === undefined) { (job as any)[k] = def[k]; changed = true }
     }
     // jobs that used to be off with no schedule worth keeping: adopt the new defaults once

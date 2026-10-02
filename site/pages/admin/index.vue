@@ -308,6 +308,88 @@
       </div>
     </div>
 
+    <!-- AI usage and cost -->
+    <div id="ai-usage" class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8 scroll-mt-24">
+      <VizTip />
+      <div class="flex flex-wrap items-baseline justify-between gap-3 mb-1">
+        <h2 class="font-serif text-xl font-bold text-primary-900">AI usage and cost</h2>
+        <div class="flex rounded-full bg-primary-100 p-0.5 text-xs" role="tablist" aria-label="Period">
+          <button v-for="d in [7, 30, 90]" :key="d" role="tab" :aria-selected="usageDays === d" class="px-3 py-1 rounded-full"
+            :class="usageDays === d ? 'bg-white shadow-sm text-primary-900' : 'text-primary-500'" @click="usageDays = d; loadUsage()">{{ d }} days</button>
+        </div>
+      </div>
+      <p class="text-xs text-primary-500 mb-4">Tokens are counted from every AI call the site and its data scripts make. Costs are estimates from the prices you enter below (USD per million tokens); check your provider's price page.</p>
+      <template v-if="usage">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-px bg-primary-100 rounded-xl overflow-hidden ring-1 ring-primary-100 mb-5">
+          <div v-for="t in usageTiles" :key="t.label" class="bg-white px-4 py-3">
+            <div class="font-serif text-2xl text-primary-900 tabular-nums">{{ t.value }}</div>
+            <div class="text-[11px] text-primary-500 mt-0.5">{{ t.label }}</div>
+          </div>
+        </div>
+
+        <div class="text-sm font-medium text-primary-900">{{ usageHasCost ? 'Estimated cost per day' : 'Tokens per day' }}</div>
+        <div class="flex items-end gap-[2px] h-28 mt-2 mb-1 border-b border-primary-100">
+          <div v-for="d in usage.series" :key="d.day" class="flex-1 h-full flex flex-col justify-end" tabindex="0"
+            @mousemove="showTip($event, fmtDay(d.day), usageTipLines(d))" @focus="showTip($event, fmtDay(d.day), usageTipLines(d))" @mouseleave="hideTip" @blur="hideTip">
+            <div class="w-full rounded-t-[3px]" :class="usageVal(d) ? 'bg-[#2a78d6]' : 'bg-primary-100'" :style="{ height: usageVal(d) ? Math.max(4, usageVal(d) / usageMax * 100) + '%' : '2px' }" />
+          </div>
+        </div>
+        <div class="flex justify-between text-[10px] text-primary-400 mb-6"><span>{{ fmtDay(usage.series[0]?.day) }}</span><span>{{ fmtDay(usage.series[usage.series.length - 1]?.day) }}</span></div>
+
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div>
+            <h3 class="text-sm font-semibold text-primary-800 mb-2">By task</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-xs">
+                <thead><tr class="text-left text-primary-400 border-b border-primary-100"><th class="py-1.5 font-medium">Task</th><th class="py-1.5 font-medium text-right">Calls</th><th class="py-1.5 font-medium text-right">Tokens in / out</th><th class="py-1.5 font-medium text-right">Cost</th></tr></thead>
+                <tbody>
+                  <tr v-for="t in usage.byTask" :key="t.id" class="border-b border-primary-50">
+                    <td class="py-1.5 text-primary-800">{{ t.label }}<span v-if="t.errors" class="text-red-500"> · {{ t.errors }} failed</span></td>
+                    <td class="py-1.5 text-right tabular-nums">{{ t.calls.toLocaleString() }}</td>
+                    <td class="py-1.5 text-right tabular-nums text-primary-500">{{ fmtTok(t.input) }} / {{ fmtTok(t.output) }}</td>
+                    <td class="py-1.5 text-right tabular-nums">{{ fmtCost(t.cost, t.unpriced) }}</td>
+                  </tr>
+                  <tr v-if="!usage.byTask.length"><td colspan="4" class="py-3 text-primary-400">No AI calls recorded in this period yet.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold text-primary-800 mb-2">By model, with prices (USD per 1M tokens)</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-xs">
+                <thead><tr class="text-left text-primary-400 border-b border-primary-100"><th class="py-1.5 font-medium">Model</th><th class="py-1.5 font-medium text-right">Tokens</th><th class="py-1.5 font-medium">Input</th><th class="py-1.5 font-medium">Cached</th><th class="py-1.5 font-medium">Output</th></tr></thead>
+                <tbody>
+                  <tr v-for="m in usageModels" :key="m.model" class="border-b border-primary-50">
+                    <td class="py-1.5 text-primary-800 font-mono text-[11px] pr-2">{{ m.model }}</td>
+                    <td class="py-1.5 text-right tabular-nums text-primary-500 pr-2">{{ fmtTok(m.input + m.output) }}</td>
+                    <td class="py-1"><input v-model="priceForm[m.model].input" inputmode="decimal" class="w-16 border border-primary-200 rounded px-1.5 py-0.5" :aria-label="`${m.model} input price`" placeholder="–"></td>
+                    <td class="py-1"><input v-model="priceForm[m.model].cached" inputmode="decimal" class="w-16 border border-primary-200 rounded px-1.5 py-0.5" :aria-label="`${m.model} cached input price`" placeholder="–"></td>
+                    <td class="py-1"><input v-model="priceForm[m.model].output" inputmode="decimal" class="w-16 border border-primary-200 rounded px-1.5 py-0.5" :aria-label="`${m.model} output price`" placeholder="–"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="flex items-center gap-3 mt-2">
+              <button class="text-xs px-3 py-1.5 rounded-lg bg-primary-900 text-white hover:bg-primary-800" @click="savePrices">Save prices</button>
+              <span v-if="priceMsg" class="text-xs text-primary-500">{{ priceMsg }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="usage.asks.priciest.length" class="mt-6">
+          <h3 class="text-sm font-semibold text-primary-800 mb-2">Most expensive Ask questions</h3>
+          <ul class="text-xs divide-y divide-primary-50">
+            <li v-for="a in usage.asks.priciest" :key="a.id" class="py-1.5 flex justify-between gap-3">
+              <NuxtLink :to="`/ask?id=${a.id}`" class="text-primary-800 hover:text-accent-700 truncate">{{ a.question }}</NuxtLink>
+              <span class="shrink-0 tabular-nums text-primary-500">{{ fmtTok(a.input + a.output) }} tokens · {{ a.cost === null ? 'no price' : '$' + a.cost.toFixed(3) }}</span>
+            </li>
+          </ul>
+        </div>
+      </template>
+      <div v-else class="text-sm text-primary-400">Loading…</div>
+    </div>
+
     <!-- AI Analysis Cache -->
     <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
       <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">AI Analysis Cache</h2>
@@ -400,6 +482,9 @@
       </div>
       <div v-else class="text-sm text-primary-400">Checking…</div>
     </div>
+
+    <!-- Backup -->
+    <AdminBackupPanel class="mb-6" />
 
     <!-- Scheduled Jobs -->
     <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
@@ -1663,6 +1748,59 @@ async function runCronJob(id: string) {
   }
 }
 
+// ---------- AI usage and cost ----------
+const usage = ref<any>(null)
+const usageDays = ref(30)
+const priceForm = reactive<Record<string, { input: string; cached: string; output: string }>>({})
+const priceMsg = ref('')
+const { show: showTip, hide: hideTip } = useVizTip()
+async function loadUsage() {
+  try {
+    usage.value = await $fetch('/api/admin/ai-usage', { query: { days: usageDays.value } })
+    for (const m of usage.value.models as string[]) {
+      if (!priceForm[m]) {
+        const p = usage.value.prices[m]
+        priceForm[m] = { input: p ? String(p.input) : '', cached: p?.cached !== undefined ? String(p.cached) : '', output: p ? String(p.output) : '' }
+      }
+    }
+  } catch {}
+}
+const usageModels = computed(() => {
+  const seen = new Map((usage.value?.byModel || []).map((m: any) => [m.model, m]))
+  return (usage.value?.models || []).map((m: string) => seen.get(m) || { model: m, input: 0, output: 0 })
+})
+async function savePrices() {
+  const prices: Record<string, any> = {}
+  for (const [m, p] of Object.entries(priceForm)) {
+    if (p.input === '' && p.output === '') continue
+    prices[m] = { input: Number(p.input || 0), output: Number(p.output || 0), ...(p.cached !== '' ? { cached: Number(p.cached) } : {}) }
+  }
+  try {
+    await $fetch('/api/admin/ai-usage', { method: 'POST', body: { prices } })
+    priceMsg.value = 'Saved.'
+    await loadUsage()
+  } catch { priceMsg.value = 'Could not save.' }
+}
+const usageHasCost = computed(() => (usage.value?.total?.cost || 0) > 0)
+const usageVal = (d: any) => (usageHasCost.value ? d.cost : d.input + d.output)
+const usageMax = computed(() => Math.max(1e-9, ...(usage.value?.series || []).map(usageVal)))
+const fmtTok = (n: number) => (n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >= 1e3 ? Math.round(n / 1e3) + 'k' : String(n || 0))
+const fmtCost = (c: number, unpriced = 0) => (c > 0 ? '$' + (c < 1 ? c.toFixed(3) : c.toFixed(2)) : '') + (unpriced ? (c > 0 ? ' + ' : '') + 'no price' : c > 0 ? '' : '$0')
+const usageTipLines = (d: any) => [
+  { text: `${fmtTok(d.input)} in, ${fmtTok(d.output)} out`, color: '#2a78d6' },
+  { text: `${d.calls} calls${d.cost ? ` · $${d.cost.toFixed(3)}` : ''}` },
+]
+const usageTiles = computed(() => {
+  const u = usage.value
+  if (!u) return []
+  return [
+    { label: `AI calls, last ${u.days} days`, value: u.total.calls.toLocaleString() },
+    { label: 'tokens in / out', value: `${fmtTok(u.total.input)} / ${fmtTok(u.total.output)}` },
+    { label: u.total.unpriced ? 'estimated cost (some models unpriced)' : 'estimated cost', value: u.total.cost ? '$' + u.total.cost.toFixed(2) : '–' },
+    { label: `per Ask question (${u.asks.count} asked)`, value: u.asks.avgCost !== null ? '$' + u.asks.avgCost.toFixed(3) : fmtTok(u.asks.avgTokens) + ' tok' },
+  ]
+})
+
 // ---------- data health ----------
 const health = ref<any>(null)
 const alertEmails = ref('')
@@ -1886,6 +2024,7 @@ onMounted(async () => {
     loadCacheStats(),
     loadCronJobs(),
     loadHealth(),
+    loadUsage(),
     loadNewsSources(),
     loadNewsFeedStats(),
     loadStmtFeedStats(),

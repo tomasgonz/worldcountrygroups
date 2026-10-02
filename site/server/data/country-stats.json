@@ -1,10 +1,10 @@
 {
   "_meta": {
-    "updated_at": "2026-07-14T18:35:20.307Z",
+    "updated_at": "2026-10-02T19:25:10.956Z",
     "sources": {
-      "worldbank": "2026-07-14T18:35:20.307Z",
+      "worldbank": "2026-10-02T19:25:10.956Z",
       "restcountries": null,
-      "undp": "2026-07-14T18:35:20.307Z"
+      "undp": "2026-10-02T19:25:10.956Z"
     },
     "country_count": 220
   },
@@ -1316,7 +1316,7 @@
     "gdp": 347082562221.377,
     "gdp_per_capita": 31827.7552539413,
     "population": 10905028,
-    "co2": null,
+    "co2": 77.7492,
     "life_expectancy": 79.9780487804878,
     "hdi": 0.905,
     "military_expenditure": 6524946704.27873,
@@ -1325,7 +1325,7 @@
     "data_year": {
       "gdp": 2024,
       "population": 2024,
-      "co2": null,
+      "co2": 2024,
       "life_expectancy": 2024,
       "hdi": 2022,
       "military_expenditure": 2024
@@ -1451,7 +1451,7 @@
     "gdp": 124282245638.568,
     "gdp_per_capita": 10875.6618443092,
     "population": 11427557,
-    "co2": null,
+    "co2": 34.2225,
     "life_expectancy": 73.868,
     "hdi": 0.766,
     "military_expenditure": 980991970.499619,
@@ -1460,7 +1460,7 @@
     "data_year": {
       "gdp": 2024,
       "population": 2024,
-      "co2": null,
+      "co2": 2024,
       "life_expectancy": 2024,
       "hdi": 2022,
       "military_expenditure": 2024
@@ -1560,7 +1560,7 @@
     "gdp_per_capita": 3338.47371043679,
     "population": 116538258,
     "co2": 291.6386,
-    "life_expectancy": null,
+    "life_expectancy": 71.806,
     "hdi": 0.728,
     "military_expenditure": 2396211163.82267,
     "military_pct_gdp": 0.665263620234986,
@@ -1569,7 +1569,7 @@
       "gdp": 2024,
       "population": 2024,
       "co2": 2024,
-      "life_expectancy": null,
+      "life_expectancy": 2024,
       "hdi": 2022,
       "military_expenditure": 2024
     }
@@ -2665,7 +2665,7 @@
     "income_group": null,
     "gdp": 4190008188358.57,
     "gdp_per_capita": 33797.1014287876,
-    "population": null,
+    "population": 123975371,
     "co2": 972.267,
     "life_expectancy": 84.0363414634146,
     "hdi": 0.92,
@@ -2674,7 +2674,7 @@
     "armed_forces_pct": 3.25056353280673,
     "data_year": {
       "gdp": 2024,
-      "population": null,
+      "population": 2024,
       "co2": 2024,
       "life_expectancy": 2024,
       "hdi": 2022,
@@ -2801,7 +2801,7 @@
     "gdp": 1610082688.26617,
     "gdp_per_capita": 1857.87060684189,
     "population": 866628,
-    "co2": null,
+    "co2": 0.4463,
     "life_expectancy": 67.023,
     "hdi": 0.596,
     "military_expenditure": null,
@@ -2810,7 +2810,7 @@
     "data_year": {
       "gdp": 2024,
       "population": 2024,
-      "co2": null,
+      "co2": 2024,
       "life_expectancy": 2024,
       "hdi": 2022,
       "military_expenditure": null
@@ -2937,7 +2937,7 @@
     "gdp_per_capita": 104292.900672109,
     "population": 74457,
     "co2": 0.372,
-    "life_expectancy": null,
+    "life_expectancy": 80.54,
     "hdi": null,
     "military_expenditure": null,
     "military_pct_gdp": null,
@@ -2946,7 +2946,7 @@
       "gdp": 2024,
       "population": 2024,
       "co2": 2024,
-      "life_expectancy": null,
+      "life_expectancy": 2024,
       "hdi": null,
       "military_expenditure": null
     }
@@ -3204,7 +3204,7 @@
     "area_km2": null,
     "income_group": null,
     "gdp": 93279851863.4062,
-    "gdp_per_capita": null,
+    "gdp_per_capita": 137781.681659123,
     "population": 677012,
     "co2": 7.1474,
     "life_expectancy": 83.1951219512195,
@@ -3230,7 +3230,7 @@
     "subregion": null,
     "area_km2": null,
     "income_group": null,
-    "gdp": null,
+    "gdp": 44001275012.6141,
     "gdp_per_capita": 23578.9663562625,
     "population": 1866124,
     "co2": 6.8072,
@@ -3240,7 +3240,7 @@
     "military_pct_gdp": 3.25799154535171,
     "armed_forces_pct": 7.49161598362985,
     "data_year": {
-      "gdp": null,
+      "gdp": 2024,
       "population": 2024,
       "co2": 2024,
       "life_expectancy": 2024,
@@ -3373,7 +3373,7 @@
     "hdi": 0.844,
     "military_expenditure": 150033208.503973,
     "military_pct_gdp": 1.83253539270475,
-    "armed_forces_pct": null,
+    "armed_forces_pct": 4.18653788107455,
     "data_year": {
       "gdp": 2024,
       "population": 2024,
@@ -3504,7 +3504,7 @@
     "gdp_per_capita": 1093.2523323649,
     "population": 24478595,
     "co2": 7.4121,
-    "life_expectancy": null,
+    "life_expectancy": 60.675,
     "hdi": 0.41,
     "military_expenditure": 929278520.861402,
     "military_pct_gdp": 4.1981465701254,
@@ -3513,7 +3513,7 @@
       "gdp": 2024,
       "population": 2024,
       "co2": 2024,
-      "life_expectancy": null,
+      "life_expectancy": 2024,
       "hdi": 2022,
       "military_expenditure": 2024
     }
@@ -3665,7 +3665,7 @@
     "gdp": 25042712191.3281,
     "gdp_per_capita": 44023.6341078148,
     "population": 568847,
-    "co2": null,
+    "co2": 1.8083,
     "life_expectancy": 82.9560975609756,
     "hdi": 0.918,
     "military_expenditure": 109254896.361343,
@@ -3674,7 +3674,7 @@
     "data_year": {
       "gdp": 2024,
       "population": 2024,
-      "co2": null,
+      "co2": 2024,
       "life_expectancy": 2024,
       "hdi": 2022,
       "military_expenditure": 2024
@@ -3692,7 +3692,7 @@
     "gdp": 14938055690.3609,
     "gdp_per_capita": 11990.9355434317,
     "population": 1245779,
-    "co2": null,
+    "co2": 4.4055,
     "life_expectancy": 73.7890243902439,
     "hdi": 0.796,
     "military_expenditure": 23009853.3257139,
@@ -3701,7 +3701,7 @@
     "data_year": {
       "gdp": 2024,
       "population": 2024,
-      "co2": null,
+      "co2": 2024,
       "life_expectancy": 2024,
       "hdi": 2022,
       "military_expenditure": 2024
@@ -3749,7 +3749,7 @@
     "co2": 4.7949,
     "life_expectancy": 67.561,
     "hdi": 0.508,
-    "military_expenditure": null,
+    "military_expenditure": 117589994.544906,
     "military_pct_gdp": 1.02496048269861,
     "armed_forces_pct": 3.49715845398772,
     "data_year": {
@@ -3758,7 +3758,7 @@
       "co2": 2024,
       "life_expectancy": 2024,
       "hdi": 2022,
-      "military_expenditure": null
+      "military_expenditure": 2024
     }
   },
   "MX": {
@@ -4016,7 +4016,7 @@
     "gdp": 500886328034.123,
     "gdp_per_capita": 89888.9535204758,
     "population": 5572279,
-    "co2": null,
+    "co2": 39.9995,
     "life_expectancy": 83.1609756097561,
     "hdi": 0.966,
     "military_expenditure": 10435320375.7091,
@@ -4025,7 +4025,7 @@
     "data_year": {
       "gdp": 2024,
       "population": 2024,
-      "co2": null,
+      "co2": 2024,
       "life_expectancy": 2024,
       "hdi": 2022,
       "military_expenditure": 2024
@@ -4367,7 +4367,7 @@
     "gdp": 126029527033.705,
     "gdp_per_capita": 39353.2242360643,
     "population": 3202521,
-    "co2": null,
+    "co2": 15.4301,
     "life_expectancy": 81.902,
     "hdi": null,
     "military_expenditure": null,
@@ -4376,7 +4376,7 @@
     "data_year": {
       "gdp": 2024,
       "population": 2024,
-      "co2": null,
+      "co2": 2024,
       "life_expectancy": 2024,
       "hdi": null,
       "military_expenditure": null
@@ -4395,7 +4395,7 @@
     "gdp_per_capita": 3028.25481286981,
     "population": 5289152,
     "co2": null,
-    "life_expectancy": null,
+    "life_expectancy": 69.213,
     "hdi": 0.716,
     "military_expenditure": null,
     "military_pct_gdp": null,
@@ -4404,7 +4404,7 @@
       "gdp": 2024,
       "population": 2024,
       "co2": null,
-      "life_expectancy": null,
+      "life_expectancy": 2024,
       "hdi": 2022,
       "military_expenditure": null
     }
@@ -4479,7 +4479,7 @@
     "life_expectancy": 73.982,
     "hdi": 0.717,
     "military_expenditure": 413971348.08491,
-    "military_pct_gdp": null,
+    "military_pct_gdp": 0.933106143624753,
     "armed_forces_pct": 4.46785614082274,
     "data_year": {
       "gdp": 2024,
@@ -4532,7 +4532,7 @@
     "co2": 70.8832,
     "life_expectancy": 76.4585365853659,
     "hdi": 0.827,
-    "military_expenditure": null,
+    "military_expenditure": 8715729594.3219,
     "military_pct_gdp": 2.29815245791591,
     "armed_forces_pct": 5.85153488698029,
     "data_year": {
@@ -4541,7 +4541,7 @@
       "co2": 2024,
       "life_expectancy": 2024,
       "hdi": 2022,
-      "military_expenditure": null
+      "military_expenditure": 2024
     }
   },
   "RS": {
@@ -4611,7 +4611,7 @@
     "gdp_per_capita": 1059.93709298801,
     "population": 14256567,
     "co2": 2.3114,
-    "life_expectancy": null,
+    "life_expectancy": 68.017,
     "hdi": 0.548,
     "military_expenditure": 175924380.585353,
     "military_pct_gdp": 1.24772078121775,
@@ -4620,7 +4620,7 @@
       "gdp": 2024,
       "population": 2024,
       "co2": 2024,
-      "life_expectancy": null,
+      "life_expectancy": 2024,
       "hdi": 2022,
       "military_expenditure": 2024
     }
@@ -4690,7 +4690,7 @@
     "income_group": null,
     "gdp": 2228608684.29911,
     "gdp_per_capita": 18364.5259678223,
-    "population": null,
+    "population": 121354,
     "co2": 0.8782,
     "life_expectancy": 76.2951219512195,
     "hdi": 0.785,
@@ -4699,7 +4699,7 @@
     "armed_forces_pct": 3.36022582407576,
     "data_year": {
       "gdp": 2024,
-      "population": null,
+      "population": 2024,
       "co2": 2024,
       "life_expectancy": 2024,
       "hdi": 2022,
@@ -4803,7 +4803,7 @@
     "life_expectancy": 82.2853658536585,
     "hdi": 0.926,
     "military_expenditure": 951904999.881012,
-    "military_pct_gdp": null,
+    "military_pct_gdp": 1.31001116486788,
     "armed_forces_pct": 2.74331317413804,
     "data_year": {
       "gdp": 2024,
@@ -4824,9 +4824,9 @@
     "area_km2": null,
     "income_group": null,
     "gdp": 140934076532.375,
-    "gdp_per_capita": null,
+    "gdp_per_capita": 25992.6748502048,
     "population": 5422069,
-    "co2": null,
+    "co2": 29.8925,
     "life_expectancy": 78.3707317073171,
     "hdi": 0.855,
     "military_expenditure": 2849224738.28021,
@@ -4835,7 +4835,7 @@
     "data_year": {
       "gdp": 2024,
       "population": 2024,
-      "co2": null,
+      "co2": 2024,
       "life_expectancy": 2024,
       "hdi": 2022,
       "military_expenditure": 2024

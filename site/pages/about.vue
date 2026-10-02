@@ -38,7 +38,7 @@
         <h2 class="font-serif text-xl font-bold text-primary-900 mb-3">Data Sources</h2>
         <p class="text-primary-600 leading-relaxed mb-4">
           All data is drawn from public, authoritative sources including the World Bank, United Nations Digital Library,
-          SIPRI, Global Firepower, ACLED, and more.
+          SIPRI, Global Firepower, the Uppsala Conflict Data Program (UCDP), and more.
         </p>
         <NuxtLink
           to="/sources"

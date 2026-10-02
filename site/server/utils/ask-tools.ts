@@ -2,7 +2,9 @@ import type { ToolDef } from './llm-client'
 import { getRegistry } from './wcg'
 import { getCountryData } from './countrydata'
 import { getCountryVDem, classifyRegimeLabel } from './vdem'
-import { getCountrySanctions } from './sanctions'
+import { getCountrySanctions, getCountrySanctionsListings, getSanctionsMeta } from './sanctions'
+import { getCountryConflict, getConflictMeta, getAllConflicts } from './conflict'
+import { getElections, getJournalDays } from './upcoming'
 import { getMilitaryCapabilities } from './military'
 import { getCountryVoteSummary, getCountryThemeStats, getCountryAlignmentScores, getBilateralVotingAlignment, searchResolutions, getRecentResolutions } from './unvotes'
 import { detectVotingBlocs } from './voting-blocs'
@@ -11,6 +13,7 @@ import { getCountrySpeeches, getAllSpeeches } from './speeches'
 import { getRecentStatements } from './statements-feed'
 import { getRecentNews } from './news-feed'
 import { readDataFile } from './data-file'
+import { searchTexts, type PassageKind } from './text-search'
 import { getSessionInsights } from './speech-insights'
 
 /**
@@ -96,6 +99,9 @@ function latestVoteDate(): string {
 
 // ---------------------------------------------------------------------------
 export const ASK_TOOLS: ToolDef[] = [
+  { name: 'upcoming_events', description: 'What is coming up: the official UN meetings programme for the next days from the Journal of the United Nations (New York and Geneva: General Assembly, Security Council, ECOSOC, Human Rights Council...), and national elections (upcoming and recently held, worldwide or for one country).', parameters: { type: 'object', properties: { what: { type: 'string', enum: ['meetings', 'elections', 'both'] }, country: { type: 'string', description: 'For elections: only this country' }, location: { type: 'string', enum: ['New York', 'Geneva', 'all'] }, days: { type: 'integer', description: 'Look-ahead in days (meetings up to 8, elections up to 365; default 8 / 120)' }, include_past_elections: { type: 'boolean' } } } },
+  { name: 'sanctions_and_conflict', description: 'UN Security Council sanctions (live Consolidated List: regimes targeting the country, listings of its nationals and entities, recent listings) and armed conflict data (UCDP: events, deaths, violence types, trend, last 12 months, main conflicts). Without a country: worldwide conflict hotspots ranked by deaths in the last 12 months.', parameters: { type: 'object', properties: { country: { type: 'string' } } } },
+  { name: 'search_texts', description: 'Search the full text of every General Debate speech since 1946 (paragraph by paragraph), plus official statements and news summaries, by meaning and keywords. Use it to find what was actually said about a topic, by whom and when, and to quote exact passages. Describe the topic in plain words (e.g. "debt relief for poor countries", "reform of the Security Council veto"); call it again with different wording or filters for better coverage.', parameters: { type: 'object', properties: { query: { type: 'string', description: 'The topic or idea to find, in plain words' }, country: { type: 'string', description: 'Only passages from or about this country' }, kind: { type: 'string', enum: ['speech', 'statement', 'news', 'any'], description: 'speech = General Debate speeches (default any)' }, from_year: { type: 'integer' }, to_year: { type: 'integer' }, limit: { type: 'integer', description: 'Passages to return, up to 15 (default 8)' } }, required: ['query'] } },
   { name: 'country_overview', description: 'Key facts about a country: population, GDP, income group, region, democracy (V-Dem), sanctions, military, Security Council membership, main groups it belongs to, and its current leaders.', parameters: { type: 'object', properties: { country: { type: 'string', description: 'Country name or ISO code' } }, required: ['country'] } },
   { name: 'un_voting_record', description: "A country's UN General Assembly voting record: yes/no/abstain per recent session, voting by subject, and the countries it agrees with most and least.", parameters: { type: 'object', properties: { country: { type: 'string' }, sessions: { type: 'integer', description: 'Recent sessions to analyse (default 10)' } }, required: ['country'] } },
   { name: 'voting_agreement', description: 'How often two countries vote the same way in the General Assembly, overall and by subject.', parameters: { type: 'object', properties: { country_a: { type: 'string' }, country_b: { type: 'string' } }, required: ['country_a', 'country_b'] } },
@@ -111,7 +117,7 @@ export const ASK_TOOLS: ToolDef[] = [
 ]
 
 // ---------------------------------------------------------------------------
-export function runTool(name: string, args: any, src: SourceCollector): any {
+export async function runTool(name: string, args: any, src: SourceCollector): Promise<any> {
   switch (name) {
     case 'country_overview': {
       const iso3 = resolveIso3(args.country)
@@ -252,6 +258,89 @@ export function runTool(name: string, args: any, src: SourceCollector): any {
         most_mentioned_countries: ins.mentioned.slice(0, 10).map((m: any) => ({ country: m.name, speeches: m.total, criticism: m.criticism, concern: m.concern, partner: m.partner })),
         crises: ins.conflicts.slice(0, 8).map((c: any) => ({ crisis: c.name, share_pct: round(c.share, 0), previous_pct: c.prevShare })),
         ref: src.add(`General Debate ${ins.year} analysis`, `${SITE}/speeches`, 'page'),
+      }
+    }
+    case 'sanctions_and_conflict': {
+      src.used('sanctions.json', 'conflict-events.json')
+      const cm: any = getConflictMeta()
+      const conflictRef = src.add(`UCDP conflict data (${cm?.period || 'recent years'})`, `${SITE}/conflicts`, 'dataset')
+      if (!args.country) {
+        const all: any = getAllConflicts()
+        const rows = Object.entries(all.countries || {}).map(([iso, c]: [string, any]) => ({ iso, c }))
+          .sort((a, b) => (b.c.last_12_months?.fatalities ?? b.c.total_fatalities) - (a.c.last_12_months?.fatalities ?? a.c.total_fatalities)).slice(0, 15)
+        return {
+          hotspots: rows.map(({ iso, c }) => ({ country: countryName(iso), deaths_last_12_months: c.last_12_months?.fatalities ?? null, events_last_12_months: c.last_12_months?.events ?? null, intensity: c.conflict_intensity, main_conflict: c.top_conflicts?.[0]?.name || null })),
+          period: cm?.period, note: 'UCDP GED and monthly candidate events (recent months provisional); UCDP does not record protests or riots.', ref: conflictRef,
+        }
+      }
+      const iso3 = resolveIso3(args.country)
+      if (!iso3) return { error: `Unknown country "${args.country}"` }
+      const sm: any = getSanctionsMeta()
+      const sanctionsRef = src.add(`UN Security Council Consolidated List (generated ${String(sm?.list_generated || sm?.generated || '').slice(0, 10) || 'recently'})`, 'https://main.un.org/securitycouncil/en/content/un-sc-consolidated-list', 'dataset')
+      const regimes = getCountrySanctions(iso3).map((r: any) => ({
+        regime: r.name, resolution: r.resolution, since: r.established, measures: r.measures,
+        listed_individuals: r.listed_individuals ?? null, listed_entities: r.listed_entities ?? null, latest_listing: r.latest_listing ?? null,
+        recent_listings: (r.recent_listings || []).slice(0, 4).map((l: any) => `${l.name} (${l.reference}, listed ${l.listed_on})`),
+      }))
+      const listings = getCountrySanctionsListings(iso3)
+      const c: any = getCountryConflict(iso3)
+      return {
+        country: countryName(iso3),
+        sanctions: { regimes_targeting_country: regimes, nationals_and_entities_on_list: { individuals: listings.individuals, entities: listings.entities, by_regime: listings.by_regime }, ref: sanctionsRef },
+        conflict: c ? {
+          period: cm?.period, intensity: c.conflict_intensity, events: c.total_events, deaths_best: c.total_fatalities,
+          deaths_range: c.fatalities_low != null ? `${c.fatalities_low}–${c.fatalities_high}` : null, civilian_deaths: c.civilian_deaths ?? null,
+          by_type: c.by_type, trend: c.trend, last_12_months: c.last_12_months ?? null, latest_event: c.latest_event_date ?? null,
+          main_conflicts: (c.top_conflicts || []).slice(0, 3).map((x: any) => ({ name: x.name, deaths: x.fatalities, latest: x.latest_event })),
+          ref: conflictRef,
+        } : { note: 'No organised violence recorded by UCDP in the period', ref: conflictRef },
+      }
+    }
+    case 'upcoming_events': {
+      const what = args.what || 'both'
+      const out: any = {}
+      if (what !== 'elections') {
+        src.used('un-journal.json')
+        const days = getJournalDays({ location: args.location || 'New York', days: Math.min(8, args.days || 8) })
+        out.un_meetings = days.map(d => ({
+          date: d.date, location: d.location,
+          ref: src.add(`Journal of the United Nations, ${d.location}, ${d.date}`, d.journalUrl || 'https://journal.un.org', 'schedule'),
+          meetings: d.meetings.filter(m => !m.cancelled).slice(0, 25).map(m => ({
+            time: m.time, body: m.organ, group: m.group, title: m.title, room: m.room, closed: m.closed,
+            agenda: (m.agenda || []).slice(0, 4),
+          })),
+        }))
+        out.meetings_note = 'Security Council meetings usually appear in the Journal only a day ahead.'
+      }
+      if (what !== 'meetings') {
+        src.used('elections.json')
+        const iso3 = args.country ? resolveIso3(args.country) : undefined
+        if (args.country && !iso3) return { error: `Unknown country "${args.country}"` }
+        const list = getElections({ iso3: iso3 || undefined, status: args.include_past_elections ? 'all' : 'upcoming', withinDays: iso3 ? undefined : Math.min(365, args.days || 120), limit: 40 })
+        out.elections = list.map(e => ({
+          date: e.date, precision: e.precision, country: e.country, type: e.type, description: e.description, status: e.status,
+          ref: src.add(`Elections: ${e.country} ${e.date} (Wikipedia national electoral calendar)`, e.source_url, 'calendar'),
+        }))
+        out.elections_note = 'From Wikipedia national electoral calendars (CC BY-SA); dates can change.'
+      }
+      return out
+    }
+    case 'search_texts': {
+      const iso3 = args.country ? resolveIso3(args.country) : null
+      if (args.country && !iso3) return { error: `Unknown country "${args.country}"` }
+      const kind = ['speech', 'statement', 'news'].includes(args.kind) ? [args.kind as PassageKind] : undefined
+      const r = await searchTexts({ query: String(args.query || ''), kinds: kind, iso3, fromYear: args.from_year, toYear: args.to_year, limit: args.limit })
+      if (!r) return { error: 'The full-text index has not been built yet' }
+      const files: Record<string, string> = { speech: 'un-speeches-index.json', statement: 'statements-feed.json', news: 'news-feed.json' }
+      for (const k of new Set(r.passages.map(p => p.kind))) src.used(files[k])
+      return {
+        method: r.method,
+        passages: r.passages.map(p => ({
+          kind: p.kind, country: p.iso3 ? countryName(p.iso3) : null, year: p.year, date: p.date || null, speaker: p.speaker || null,
+          source: p.title, text: p.text.length > 1100 ? p.text.slice(0, 1100) + '…' : p.text,
+          ref: src.add(p.title, p.url.startsWith('/') ? `${SITE}${p.url}` : p.url, p.kind),
+        })),
+        note: 'Speech passages are verbatim from the official record (older speeches are UN translations); statements and news are headline and summary only.',
       }
     }
     case 'search_quotes': {

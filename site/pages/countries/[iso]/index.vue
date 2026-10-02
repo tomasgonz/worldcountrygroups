@@ -32,6 +32,8 @@
             </p>
           </div>
         </div>
+        <CountryNextElection v-if="(country as any).iso3" :iso3="(country as any).iso3" />
+        <AskButtons v-if="(country as any).iso3" kind="country" :name="(country as any).name" :iso3="(country as any).iso3" class="mt-4" />
       </div>
 
       <!-- Country Info Card -->
@@ -614,9 +616,11 @@
             </div>
           </div>
 
-          <!-- Conflict Events (ACLED) -->
+          <!-- Conflict Events (UCDP) -->
           <div>
-            <h3 class="font-serif text-lg font-bold text-primary-900 mb-3">Conflict Events (2023&ndash;2025)</h3>
+            <h3 class="font-serif text-lg font-bold text-primary-900 mb-3">
+              Conflict Events<template v-if="conflictData?.meta?.period_start && conflictData?.meta?.period_end"> ({{ conflictData.meta.period_start.slice(0, 4) }} to {{ conflictData.meta.period_end }})</template>
+            </h3>
             <template v-if="conflictPending">
               <div class="skeleton h-32 rounded-xl" />
             </template>
@@ -636,7 +640,7 @@
                 <!-- By type breakdown -->
                 <div class="space-y-2 mb-5">
                   <div v-for="(typeData, typeKey) in conflictData.by_type" :key="typeKey" class="flex items-center gap-3">
-                    <span class="text-xs text-primary-500 w-40 truncate capitalize">{{ formatConflictType(typeKey) }}</span>
+                    <span class="text-xs text-primary-500 w-40 truncate">{{ formatConflictType(typeKey) }}</span>
                     <div class="flex-1 h-4 bg-primary-50 rounded-full overflow-hidden">
                       <div
                         class="h-full rounded-full"
@@ -658,14 +662,31 @@
                         :style="{ height: Math.max((t.fatalities / maxTrendFatalities) * 48, 4) + 'px' }"
                         :title="`${t.fatalities.toLocaleString()} fatalities`"
                       />
-                      <span class="text-[10px] text-primary-400">{{ t.year }}</span>
+                      <span class="text-[10px] text-primary-400">{{ t.year }}<template v-if="t.partial">*</template></span>
                     </div>
                   </div>
                 </div>
+
+                <!-- Last 12 months + deadliest conflicts -->
+                <div v-if="conflictData.last_12_months || conflictData.top_conflicts?.length" class="border-t border-primary-100 pt-4 mt-4">
+                  <div v-if="conflictData.last_12_months" class="text-xs text-primary-500 mb-2">
+                    Last 12 months: {{ conflictData.last_12_months.events.toLocaleString() }} events,
+                    {{ conflictData.last_12_months.fatalities.toLocaleString() }} fatalities<template v-if="conflictData.latest_event_date">; latest event {{ conflictData.latest_event_date }}</template>
+                  </div>
+                  <div v-for="tc in (conflictData.top_conflicts || []).slice(0, 3)" :key="tc.id" class="flex items-baseline gap-2 text-xs py-0.5">
+                    <span class="w-2 h-2 rounded-sm shrink-0" :class="conflictBarClass(tc.type)"></span>
+                    <span class="text-primary-700 flex-1 min-w-0 truncate" :title="tc.name">{{ tc.name }}</span>
+                    <span class="text-red-500 tabular-nums shrink-0">{{ tc.fatalities.toLocaleString() }} killed</span>
+                  </div>
+                </div>
+                <p class="text-[11px] text-primary-400 mt-3">
+                  Source: {{ conflictData.meta?.source || 'UCDP' }}. Best-estimate fatalities<template v-if="conflictData.meta?.candidate_from">; data from {{ conflictData.meta.candidate_from.slice(0, 7) }} is provisional</template>.
+                  <NuxtLink to="/conflicts" class="underline hover:text-primary-600">All countries</NuxtLink>
+                </p>
               </div>
             </template>
             <div v-else class="bg-primary-50 rounded-2xl border border-primary-100 p-6 text-center">
-              <p class="text-primary-400 text-sm">No significant armed conflict events recorded (2023&ndash;2025).</p>
+              <p class="text-primary-400 text-sm">No organised violence recorded by UCDP<template v-if="conflictData?.meta?.period"> ({{ conflictData.meta.period }})</template>.</p>
             </div>
           </div>
         </div>
@@ -801,7 +822,13 @@
                 <span class="text-sm font-medium text-primary-800">{{ r.name }}</span>
                 <span class="text-xs text-primary-400">{{ r.resolution }}</span>
               </div>
-              <div class="text-xs text-primary-400 mb-2">Established {{ r.established }}</div>
+              <div class="text-xs text-primary-400 mb-2">
+                Established {{ r.established }}
+                <template v-if="r.listed_individuals != null">
+                  &middot; {{ r.listed_individuals }} individuals and {{ r.listed_entities }} entities listed
+                </template>
+                <template v-if="r.latest_listing">&middot; latest listing {{ r.latest_listing }}</template>
+              </div>
               <div class="flex flex-wrap gap-1.5">
                 <span
                   v-for="m in r.measures"
@@ -809,11 +836,49 @@
                   class="text-xs px-2 py-0.5 rounded-full bg-red-50 text-red-600"
                 >{{ m.replace(/_/g, ' ') }}</span>
               </div>
+              <p v-if="r.note" class="text-xs text-primary-400 mt-2">{{ r.note }}</p>
+              <div v-if="r.recent_listings?.length" class="mt-3 border-t border-red-100 pt-2">
+                <div class="text-[10px] text-primary-400 font-medium uppercase tracking-wider mb-1">Most recent listings</div>
+                <div v-for="l in r.recent_listings" :key="l.reference" class="flex items-baseline gap-2 text-xs py-0.5">
+                  <span class="text-primary-400 tabular-nums w-20 shrink-0">{{ l.listed_on }}</span>
+                  <span class="text-primary-700 flex-1 min-w-0 truncate">{{ l.name }}</span>
+                  <span class="text-primary-400 shrink-0">{{ l.reference }}</span>
+                </div>
+              </div>
             </div>
           </div>
           <div v-else class="bg-primary-50 rounded-2xl border border-primary-100 p-6 text-center">
             <p class="text-primary-400 text-sm">No active UN sanctions against this country.</p>
           </div>
+          <div
+            v-if="sanctionsData.listings && (sanctionsData.listings.individuals || sanctionsData.listings.entities)"
+            class="mt-3 bg-white rounded-2xl border border-primary-100 p-5"
+          >
+            <div class="text-sm text-primary-700">
+              On the UN Security Council Consolidated List:
+              <strong>{{ sanctionsData.listings.individuals }}</strong> individuals with this nationality
+              and <strong>{{ sanctionsData.listings.entities }}</strong> entities located here.
+            </div>
+            <div class="flex flex-wrap gap-1.5 mt-2">
+              <span
+                v-for="b in sanctionsData.listings.by_regime"
+                :key="b.id"
+                class="text-xs px-2 py-0.5 rounded-full bg-primary-50 text-primary-600"
+              >{{ b.name }}: {{ b.count }}</span>
+            </div>
+            <div v-if="sanctionsData.listings.recent?.length" class="mt-3 border-t border-primary-100 pt-2">
+              <div class="text-[10px] text-primary-400 font-medium uppercase tracking-wider mb-1">Recently listed</div>
+              <div v-for="l in sanctionsData.listings.recent.slice(0, 5)" :key="l.reference" class="flex items-baseline gap-2 text-xs py-0.5">
+                <span class="text-primary-400 tabular-nums w-20 shrink-0">{{ l.listed_on }}</span>
+                <span class="text-primary-700 flex-1 min-w-0 truncate">{{ l.name }}</span>
+                <span class="text-primary-400 shrink-0">{{ l.reference }}</span>
+              </div>
+            </div>
+          </div>
+          <p v-if="sanctionsData.source?.list_generated" class="text-[11px] text-primary-400 mt-2">
+            Source: <a :href="sanctionsData.source.url || 'https://main.un.org/securitycouncil/en/content/un-sc-consolidated-list'" target="_blank" rel="noopener" class="underline hover:text-primary-600">UN Security Council Consolidated List</a>,
+            generated {{ sanctionsData.source.list_generated.slice(0, 10) }}.
+          </p>
         </div>
 
         <!-- Visa / Passport - MOVED here from after Alliances -->
@@ -1495,17 +1560,21 @@ function intensityBadgeClass(intensity: string): string {
   }
 }
 
+const CONFLICT_TYPE_LABELS: Record<string, string> = {
+  state_based: 'State-based conflict',
+  non_state: 'Non-state conflict',
+  one_sided: 'One-sided violence',
+}
+
 function formatConflictType(key: string): string {
-  return key.replace(/_/g, ' ')
+  return CONFLICT_TYPE_LABELS[key] || key.replace(/_/g, ' ')
 }
 
 function conflictBarClass(typeKey: string): string {
   switch (typeKey) {
-    case 'battles': return 'bg-red-400'
-    case 'explosions_remote_violence': return 'bg-orange-400'
-    case 'violence_against_civilians': return 'bg-rose-400'
-    case 'protests': return 'bg-blue-400'
-    case 'riots': return 'bg-amber-400'
+    case 'state_based': return 'bg-red-400'
+    case 'non_state': return 'bg-orange-400'
+    case 'one_sided': return 'bg-rose-400'
     default: return 'bg-gray-400'
   }
 }

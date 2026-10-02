@@ -1,4 +1,5 @@
 import { getActiveProvider, getProviderForTask, type AIProviderConfig } from './ai-config'
+import { recordUsage, usageFrom, type Usage } from './ai-usage'
 
 export interface LLMMessage {
   role: 'system' | 'user' | 'assistant'
@@ -26,20 +27,29 @@ export async function callLLM(messages: LLMMessage[], options?: LLMOptions): Pro
   const provider = options?.provider || getProviderForTask(options?.task)
   if (!provider) throw new Error('No AI provider configured')
 
-  if (provider.type === 'anthropic') {
-    return callAnthropic(provider, messages, options)
+  try {
+    return provider.type === 'anthropic' ? await callAnthropic(provider, messages, options) : await callOpenAI(provider, messages, options)
+  } catch (e) {
+    recordUsage(options?.task, provider, null, true)
+    throw e
   }
-  return callOpenAI(provider, messages, options)
 }
 
 export async function callLLMStream(messages: LLMMessage[], options?: LLMOptions): Promise<ReadableStream<string>> {
   const provider = options?.provider || getProviderForTask(options?.task)
   if (!provider) throw new Error('No AI provider configured')
 
-  if (provider.type === 'anthropic') {
-    return streamAnthropic(provider, messages, options)
+  try {
+    return provider.type === 'anthropic' ? await streamAnthropic(provider, messages, options) : await streamOpenAI(provider, messages, options)
+  } catch (e) {
+    recordUsage(options?.task, provider, null, true)
+    throw e
   }
-  return streamOpenAI(provider, messages, options)
+}
+
+/** Providers known to accept stream_options.include_usage (others may reject unknown fields). */
+function streamsUsage(baseUrl: string) {
+  return /api\.openai\.com|api\.groq\.com/.test(baseUrl)
 }
 
 // OpenAI / OpenAI-compatible
@@ -71,6 +81,7 @@ async function callOpenAI(provider: AIProviderConfig, messages: LLMMessage[], op
     throw new Error(`OpenAI API error ${res.status}: ${err}`)
   }
   const data = await res.json()
+  recordUsage(options?.task, provider, usageFrom(data))
   return data.choices?.[0]?.message?.content || ''
 }
 
@@ -84,6 +95,7 @@ async function streamOpenAI(provider: AIProviderConfig, messages: LLMMessage[], 
     [newParams ? 'max_completion_tokens' : 'max_tokens']: maxTok,
     stream: true,
   }
+  if (streamsUsage(baseUrl)) body.stream_options = { include_usage: true }
   if (!newParams) body.temperature = options?.temperature ?? provider.temperature ?? 0.7
   const res = await fetch(`${baseUrl}/chat/completions`, {
     method: 'POST',
@@ -100,13 +112,16 @@ async function streamOpenAI(provider: AIProviderConfig, messages: LLMMessage[], 
 
   const reader = res.body!.getReader()
   const decoder = new TextDecoder()
+  let usage: Usage | null = null
+  let recorded = false
+  const done = () => { if (!recorded) { recorded = true; recordUsage(options?.task, provider, usage) } }
 
   return new ReadableStream<string>({
     async pull(controller) {
       let buffer = ''
       while (true) {
-        const { done, value } = await reader.read()
-        if (done) { controller.close(); return }
+        const { done: end, value } = await reader.read()
+        if (end) { done(); controller.close(); return }
         buffer += decoder.decode(value, { stream: true })
         const lines = buffer.split('\n')
         buffer = lines.pop() || ''
@@ -114,9 +129,10 @@ async function streamOpenAI(provider: AIProviderConfig, messages: LLMMessage[], 
           const trimmed = line.trim()
           if (!trimmed || !trimmed.startsWith('data: ')) continue
           const payload = trimmed.slice(6)
-          if (payload === '[DONE]') { controller.close(); return }
+          if (payload === '[DONE]') { done(); controller.close(); return }
           try {
             const json = JSON.parse(payload)
+            usage = usageFrom(json) || usage
             const content = json.choices?.[0]?.delta?.content
             if (content) controller.enqueue(content)
           } catch {}
@@ -154,6 +170,7 @@ async function callAnthropic(provider: AIProviderConfig, messages: LLMMessage[],
     throw new Error(`Anthropic API error ${res.status}: ${err}`)
   }
   const data = await res.json()
+  recordUsage(options?.task, provider, usageFrom(data))
   return data.content?.[0]?.text || ''
 }
 
@@ -187,6 +204,8 @@ async function streamAnthropic(provider: AIProviderConfig, messages: LLMMessage[
 
   const reader = res.body!.getReader()
   const decoder = new TextDecoder()
+  let aIn = 0
+  let aOut = 0
 
   return new ReadableStream<string>({
     async pull(controller) {
@@ -203,10 +222,13 @@ async function streamAnthropic(provider: AIProviderConfig, messages: LLMMessage[
           const payload = trimmed.slice(6)
           try {
             const json = JSON.parse(payload)
+            if (json.type === 'message_start') aIn = json.message?.usage?.input_tokens || 0
+            if (json.type === 'message_delta') aOut = json.usage?.output_tokens || aOut
             if (json.type === 'content_block_delta' && json.delta?.text) {
               controller.enqueue(json.delta.text)
             }
             if (json.type === 'message_stop') {
+              recordUsage(options?.task, provider, { input: aIn, output: aOut })
               controller.close()
               return
             }
@@ -237,7 +259,7 @@ export async function callLLMWithTools(
   messages: any[],
   tools: ToolDef[],
   options?: LLMOptions,
-): Promise<{ content: string; toolCalls: ToolCall[]; assistantMessage: any; provider: AIProviderConfig }> {
+): Promise<{ content: string; toolCalls: ToolCall[]; assistantMessage: any; provider: AIProviderConfig; usage: Usage | null }> {
   const provider = options?.provider || getProviderForTask(options?.task)
   if (!provider) throw new Error('No AI provider configured')
   if (provider.type === 'anthropic') {
@@ -261,15 +283,20 @@ export async function callLLMWithTools(
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${provider.apiKey}` },
     body: JSON.stringify(body),
   })
-  if (!res.ok) throw new Error(`AI provider error ${res.status}: ${(await res.text()).slice(0, 300)}`)
+  if (!res.ok) {
+    recordUsage(options?.task, provider, null, true)
+    throw new Error(`AI provider error ${res.status}: ${(await res.text()).slice(0, 300)}`)
+  }
   const data: any = await res.json()
+  const usage = usageFrom(data)
+  recordUsage(options?.task, provider, usage)
   const msg = data.choices?.[0]?.message || {}
   const toolCalls: ToolCall[] = (msg.tool_calls || []).map((c: any) => {
     let args: any = {}
     try { args = JSON.parse(c.function?.arguments || '{}') } catch {}
     return { id: c.id, name: c.function?.name, arguments: args }
   })
-  return { content: msg.content || '', toolCalls, assistantMessage: msg, provider }
+  return { content: msg.content || '', toolCalls, assistantMessage: msg, provider, usage }
 }
 
 /**
@@ -283,16 +310,35 @@ export class ToolSession {
   private pending: any[] = []
   provider: AIProviderConfig
 
-  constructor(private system: string, question: string, private tools: ToolDef[], options?: LLMOptions) {
+  /** Tokens used by this session so far. */
+  usage = { input: 0, output: 0, cached: 0, calls: 0 }
+  private task?: string
+
+  /**
+   * history: earlier turns of the same thread (question + the answer given), oldest
+   * first, so a follow-up question is understood in context.
+   */
+  constructor(private system: string, question: string, private tools: ToolDef[], options?: LLMOptions,
+    history: { question: string; answer: string }[] = []) {
     const p = options?.provider || getProviderForTask(options?.task)
     if (!p) throw new Error('No AI provider configured')
     if (p.type === 'anthropic') {
       throw new Error('The research desk needs an OpenAI or OpenAI-compatible model. Assign one to “Ask the database” in Admin › Model per task.')
     }
     this.provider = p
+    this.task = options?.task
     this.maxTokens = options?.maxTokens || p.maxTokens || 8000
-    if (p.type === 'openai') this.pending = [{ role: 'user', content: question }]
-    else this.messages = [{ role: 'system', content: system }, { role: 'user', content: question }]
+    const turns = history.flatMap(h => [{ role: 'user', content: h.question }, { role: 'assistant', content: h.answer }])
+    if (p.type === 'openai') this.pending = [...turns, { role: 'user', content: question }]
+    else this.messages = [{ role: 'system', content: system }, ...turns, { role: 'user', content: question }]
+  }
+
+  private add(u: Usage | null) {
+    this.usage.calls++
+    if (!u) return
+    this.usage.input += u.input || 0
+    this.usage.output += u.output || 0
+    this.usage.cached += u.cached || 0
   }
 
   private maxTokens: number
@@ -324,8 +370,14 @@ export class ToolSession {
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${p.apiKey}` },
       body: JSON.stringify(body),
     })
-    if (!res.ok) throw new Error(`AI provider error ${res.status}: ${(await res.text()).slice(0, 300)}`)
+    if (!res.ok) {
+      recordUsage(this.task, p, null, true)
+      throw new Error(`AI provider error ${res.status}: ${(await res.text()).slice(0, 300)}`)
+    }
     const data: any = await res.json()
+    const usage = usageFrom(data)
+    recordUsage(this.task, p, usage)
+    this.add(usage)
     this.previousId = data.id
     this.pending = []
     const out: any[] = data.output || []
@@ -340,7 +392,8 @@ export class ToolSession {
   }
 
   private async nextChat(allowTools: boolean) {
-    const r = await callLLMWithTools(this.messages, allowTools ? this.tools : [], { provider: this.provider, maxTokens: this.maxTokens })
+    const r = await callLLMWithTools(this.messages, allowTools ? this.tools : [], { provider: this.provider, maxTokens: this.maxTokens, task: this.task })
+    this.add(r.usage)
     if (r.toolCalls.length) this.messages.push({ role: 'assistant', content: r.content || null, tool_calls: r.assistantMessage.tool_calls })
     return { content: r.content, toolCalls: r.toolCalls }
   }

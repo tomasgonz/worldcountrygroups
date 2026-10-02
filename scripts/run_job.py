@@ -88,13 +88,13 @@ def snapshot(outputs):
     sizes = {}
     for name in outputs:
         src = os.path.join(DATA, name)
-        if os.path.exists(src):
+        if os.path.exists(src) and name.endswith(".json"):
             shutil.copy2(src, os.path.join(PREV, name))
             sizes[name] = os.path.getsize(src)
     return sizes
 
 
-def check_outputs(outputs, before):
+def check_outputs(outputs, before, allow_shrink=False):
     """Return a list of problems; restore the previous copy of any broken file."""
     problems = []
     for name in outputs:
@@ -107,12 +107,14 @@ def check_outputs(outputs, before):
             continue
         size = os.path.getsize(path)
         bad = None
+        if not name.endswith(".json"):
+            continue
         try:
             with open(path) as f:
                 json.load(f)
         except Exception as e:
             bad = f"is not valid JSON ({str(e)[:80]})"
-        if not bad and name in before and before[name] > 20_000 and size < before[name] * 0.3:
+        if not bad and not allow_shrink and name in before and before[name] > 20_000 and size < before[name] * 0.3:
             bad = f"shrank from {before[name]:,} to {size:,} bytes"
         if bad:
             if name in before:
@@ -190,7 +192,7 @@ def main():
             log.flush()
             before = snapshot(outputs)
             rc, err, tail, dur = run_once(job, log, timeout_s)
-            problems = check_outputs(outputs, before)
+            problems = check_outputs(outputs, before, bool(job.get("allowShrink")))
             if rc == 0 and not problems:
                 break
             if problems:

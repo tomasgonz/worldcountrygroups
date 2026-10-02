@@ -147,7 +147,7 @@
         </div>
 
         <div class="text-sm text-primary-600">
-          <p>14 active UN sanctions regimes with measures (arms embargo, travel ban, asset freeze) and target countries, from the <a href="https://www.un.org/securitycouncil/sanctions/information" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">UN Security Council Sanctions Committees</a>.</p>
+          <p>UN Security Council sanctions regimes with measures (arms embargo, travel ban, asset freeze) and target countries, from the <a href="https://www.un.org/securitycouncil/sanctions/information" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">UN Security Council Sanctions Committees</a>, enriched daily with listed individuals and entities from the <a href="https://main.un.org/securitycouncil/en/content/un-sc-consolidated-list" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">UN Security Council Consolidated List</a>.</p>
         </div>
       </section>
 
@@ -191,7 +191,7 @@
           </div>
           <div>
             <h3 class="font-semibold text-primary-800 mb-1">Conflict Events</h3>
-            <p><a href="https://acleddata.com/" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">ACLED (Armed Conflict Location &amp; Event Data)</a> &mdash; aggregated conflict event counts and fatalities by type (battles, explosions, violence against civilians, protests, riots) for 2023&ndash;2025.</p>
+            <p><a href="https://ucdp.uu.se/downloads/" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">UCDP (Uppsala Conflict Data Program)</a> &mdash; Georeferenced Event Dataset (GED 26.1, through 2025) and the monthly candidate events releases for the current year, aggregated by country: events and best-estimate fatalities by type of violence, yearly and monthly series, and deadliest conflicts. Refreshed automatically from the public downloads.</p>
           </div>
         </div>
       </section>
@@ -387,16 +387,14 @@
           <div>
             <h3 class="font-semibold text-primary-900 mb-2">Conflict Events &amp; Intensity</h3>
             <div class="text-sm text-primary-600 space-y-2">
-              <p>Conflict data from <strong>ACLED</strong> covers the period <strong>2023&ndash;2025</strong>. Events are pre-aggregated by country and broken down by type:</p>
-              <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-0.5 text-xs text-primary-500 ml-2 my-2">
-                <span>Battles</span>
-                <span>Explosions &amp; Remote Violence</span>
-                <span>Violence Against Civilians</span>
-                <span>Protests</span>
-                <span>Riots</span>
-                <span>Strategic Developments</span>
+              <p>Conflict data comes from the <strong>Uppsala Conflict Data Program (UCDP)</strong>: the yearly Georeferenced Event Dataset for the last three full years and the monthly candidate events releases for the current year to date. Candidate events are provisional and are revised in the next yearly release. Events are aggregated by country and broken down by UCDP&rsquo;s type of violence:</p>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-0.5 text-xs text-primary-500 ml-2 my-2">
+                <span>State-based conflict</span>
+                <span>Non-state conflict</span>
+                <span>One-sided violence (against civilians)</span>
               </div>
-              <p>Each country is assigned a <strong>conflict intensity</strong> level (high, medium, low, or none) based on total event counts and fatality figures. This classification is pre-computed in the source data rather than calculated dynamically.</p>
+              <p>Fatalities are UCDP&rsquo;s best estimates (low and high estimates are also kept). UCDP records only organised violence with at least one death; it does not cover protests or riots. UCDP codes events in Gaza and the West Bank under Israel; here they are attributed to Palestine.</p>
+              <p>Each country is assigned a <strong>conflict intensity</strong> level from best-estimate fatalities in the last 12 months of data: high (1,000 or more, UCDP&rsquo;s threshold for war), medium (25 or more, its threshold for armed conflict), low (fewer than 25), or none (no events in the last 12 months).</p>
               <p>At the group level, events and fatalities are summed, and the &ldquo;Members with Active Conflict&rdquo; list ranks affected members by total fatalities (descending).</p>
               <p>Year-over-year trend charts on country pages show the fatality trajectory across the covered period, with bar heights proportional to the year with the highest fatality count.</p>
             </div>
@@ -452,7 +450,8 @@
           <div>
             <h3 class="font-semibold text-primary-900 mb-2">Sanctions Regimes</h3>
             <div class="text-sm text-primary-600 space-y-2">
-              <p>Sanctions data covers <strong>14 active UN Security Council sanctions regimes</strong>. Each regime record includes the establishing UNSC resolution, the date it was established, the types of measures imposed (arms embargo, travel ban, asset freeze, etc.), and the targeted countries.</p>
+              <p>Sanctions data covers the <strong>active UN Security Council sanctions regimes</strong>. Each regime record includes the establishing UNSC resolution, the date it was established, the types of measures imposed (arms embargo, travel ban, asset freeze, etc.), and the targeted countries. These are curated; the number of listed individuals and entities, the most recent listings and listings by nationality are taken from the UN Security Council Consolidated List each day.</p>
+              <p>Listings by nationality count listed individuals holding a country&rsquo;s nationality and listed entities with an address there. That is not the same as the country being a target of sanctions.</p>
               <p>A country is shown as &ldquo;under sanctions&rdquo; if it appears in the target list of one or more regimes. The measures displayed are specific to that regime, not aggregated across regimes.</p>
             </div>
           </div>
@@ -480,7 +479,7 @@
                 <li><strong>Coverage gaps:</strong> Not all countries report all indicators. Small states, territories, and countries in conflict often have incomplete data. Coverage percentages are shown where applicable.</li>
                 <li><strong>Theme classification:</strong> Resolution themes are assigned by keyword matching, not by expert review. Some resolutions may be misclassified or assigned to overly broad categories.</li>
                 <li><strong>Alignment scores:</strong> Voting alignment measures co-voting behaviour, not diplomatic alignment. Two countries may vote similarly for different reasons, or diverge on votes while being close allies.</li>
-                <li><strong>Conflict intensity:</strong> ACLED intensity levels are pre-computed aggregates. They do not capture the full context of each conflict (duration, scale of displacement, strategic significance).</li>
+                <li><strong>Conflict intensity:</strong> intensity levels are derived from UCDP fatality counts alone. They do not capture the full context of each conflict (duration, scale of displacement, strategic significance), and recent months rely on provisional candidate events.</li>
                 <li><strong>Military data discrepancies:</strong> SIPRI and Global Firepower use different methodologies. Defense budgets may differ between sources for the same country and year.</li>
                 <li><strong>Recognition data:</strong> Diplomatic recognition is fluid. States may have ambiguous or evolving positions that are not fully captured by a binary recognizes/does-not-recognize classification.</li>
                 <li><strong>GDELT data:</strong> GDELT captures media-reported events, not all real-world events. Countries with more English-language media coverage are overrepresented. Tone scores reflect media framing, not objective reality. The cooperation ratio is a rough proxy and should not be interpreted as a measure of actual diplomatic relationships.</li>

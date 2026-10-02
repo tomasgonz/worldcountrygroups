@@ -1,117 +1,2377 @@
 {
-  "_meta": { "last_updated": "2026-03-03", "regime_count": 14 },
-  "regimes": [
+ "_meta": {
+  "last_updated": "2026-10-02",
+  "regime_count": 15,
+  "active_regime_count": 14,
+  "source": "UN Security Council Consolidated List",
+  "source_url": "https://main.un.org/securitycouncil/en/content/un-sc-consolidated-list",
+  "list_generated": "2026-10-01T23:00:06.597Z",
+  "list_etag": "\"0x8DF201003369D4E\"",
+  "listed_individuals": 736,
+  "listed_entities": 275,
+  "latest_listing": "2026-07-22",
+  "notes": "Regime metadata (measures, resolutions, target countries) is curated in scripts/data/sanctions_regimes.json; listing counts and recent listings come from the live list. by_country counts listed individuals by nationality and listed entities by address country; these are not the same as the country being a sanctions target.",
+  "unmapped_countries": {}
+ },
+ "regimes": [
+  {
+   "id": "dprk",
+   "name": "Democratic People's Republic of Korea",
+   "resolution": "S/RES/1718",
+   "established": "2006-10-14",
+   "measures": [
+    "arms_embargo",
+    "travel_ban",
+    "asset_freeze",
+    "financial_sanctions",
+    "luxury_goods_ban",
+    "sectoral_sanctions"
+   ],
+   "target_countries": [
+    "PRK"
+   ],
+   "list_type": "DPRK",
+   "status": "active",
+   "curated": true,
+   "listed_individuals": 80,
+   "listed_entities": 75,
+   "listed_total": 155,
+   "latest_listing": "2018-03-30",
+   "listed_last_12_months": 0,
+   "recent_listings": [
     {
-      "id": "dprk",
-      "name": "Democratic People's Republic of Korea",
-      "resolution": "S/RES/1718",
-      "established": "2006-10-14",
-      "measures": ["arms_embargo", "travel_ban", "asset_freeze", "financial_sanctions", "luxury_goods_ban", "sectoral_sanctions"],
-      "target_countries": ["PRK"]
+     "name": "TSANG YUNG YUAN",
+     "reference": "KPi.080",
+     "type": "individual",
+     "listed_on": "2018-03-30",
+     "nationality": null,
+     "iso3": null
     },
     {
-      "id": "iran",
-      "name": "Iran (Non-proliferation)",
-      "resolution": "S/RES/2231",
-      "established": "2015-07-20",
-      "measures": ["arms_embargo", "travel_ban", "asset_freeze", "nuclear_restrictions"],
-      "target_countries": ["IRN"]
+     "name": "YUK TUNG ENERGY PTE LTD",
+     "reference": "KPe.075",
+     "type": "entity",
+     "listed_on": "2018-03-30",
+     "nationality": "Singapore",
+     "iso3": "SGP"
     },
     {
-      "id": "somalia",
-      "name": "Somalia",
-      "resolution": "S/RES/751",
-      "established": "1992-04-24",
-      "measures": ["arms_embargo", "travel_ban", "asset_freeze", "charcoal_ban"],
-      "target_countries": ["SOM"]
+     "name": "WEIHAI WORLD-SHIPPING FREIGHT",
+     "reference": "KPe.074",
+     "type": "entity",
+     "listed_on": "2018-03-30",
+     "nationality": "China",
+     "iso3": "CHN"
     },
     {
-      "id": "isil-alqaida",
-      "name": "ISIL (Da'esh) and Al-Qaida",
-      "resolution": "S/RES/1267",
-      "established": "1999-10-15",
-      "measures": ["travel_ban", "asset_freeze", "arms_embargo"],
-      "target_countries": []
+     "name": "SHEN ZHONG INTERNATIONAL SHIPPING",
+     "reference": "KPe.073",
+     "type": "entity",
+     "listed_on": "2018-03-30",
+     "nationality": "China",
+     "iso3": "CHN"
     },
     {
-      "id": "iraq",
-      "name": "Iraq (residual)",
-      "resolution": "S/RES/1518",
-      "established": "2003-12-24",
-      "measures": ["asset_freeze"],
-      "target_countries": ["IRQ"]
+     "name": "SHANGHAI DONGFENG SHIPPING CO LTD",
+     "reference": "KPe.072",
+     "type": "entity",
+     "listed_on": "2018-03-30",
+     "nationality": "China",
+     "iso3": "CHN"
     },
     {
-      "id": "libya",
-      "name": "Libya",
-      "resolution": "S/RES/1970",
-      "established": "2011-02-26",
-      "measures": ["arms_embargo", "travel_ban", "asset_freeze"],
-      "target_countries": ["LBY"]
+     "name": "PRO-GAIN GROUP CORPORATION",
+     "reference": "KPe.071",
+     "type": "entity",
+     "listed_on": "2018-03-30",
+     "nationality": null,
+     "iso3": null
     },
     {
-      "id": "car",
-      "name": "Central African Republic",
-      "resolution": "S/RES/2127",
-      "established": "2013-12-05",
-      "measures": ["arms_embargo", "travel_ban", "asset_freeze"],
-      "target_countries": ["CAF"]
+     "name": "PHYONGCHON SHIPPING & MARINE",
+     "reference": "KPe.070",
+     "type": "entity",
+     "listed_on": "2018-03-30",
+     "nationality": "Democratic People's Republic of Korea",
+     "iso3": "PRK"
     },
     {
-      "id": "yemen",
-      "name": "Yemen",
-      "resolution": "S/RES/2140",
-      "established": "2014-02-26",
-      "measures": ["travel_ban", "asset_freeze", "arms_embargo"],
-      "target_countries": ["YEM"]
+     "name": "PAEKMA SHIPPING CO",
+     "reference": "KPe.069",
+     "type": "entity",
+     "listed_on": "2018-03-30",
+     "nationality": "Democratic People's Republic of Korea",
+     "iso3": "PRK"
     },
     {
-      "id": "south-sudan",
-      "name": "South Sudan",
-      "resolution": "S/RES/2206",
-      "established": "2015-03-03",
-      "measures": ["travel_ban", "asset_freeze", "arms_embargo"],
-      "target_countries": ["SSD"]
+     "name": "MYOHYANG SHIPPING CO",
+     "reference": "KPe.068",
+     "type": "entity",
+     "listed_on": "2018-03-30",
+     "nationality": "Democratic People's Republic of Korea",
+     "iso3": "PRK"
     },
     {
-      "id": "mali",
-      "name": "Mali",
-      "resolution": "S/RES/2374",
-      "established": "2017-09-05",
-      "measures": ["travel_ban", "asset_freeze"],
-      "target_countries": ["MLI"]
-    },
-    {
-      "id": "drc",
-      "name": "Democratic Republic of the Congo",
-      "resolution": "S/RES/1533",
-      "established": "2004-03-12",
-      "measures": ["arms_embargo", "travel_ban", "asset_freeze"],
-      "target_countries": ["COD"]
-    },
-    {
-      "id": "sudan",
-      "name": "Sudan (Darfur)",
-      "resolution": "S/RES/1556",
-      "established": "2004-07-30",
-      "measures": ["arms_embargo", "travel_ban", "asset_freeze"],
-      "target_countries": ["SDN"]
-    },
-    {
-      "id": "guinea-bissau",
-      "name": "Guinea-Bissau",
-      "resolution": "S/RES/2048",
-      "established": "2012-05-18",
-      "measures": ["travel_ban"],
-      "target_countries": ["GNB"]
-    },
-    {
-      "id": "haiti",
-      "name": "Haiti",
-      "resolution": "S/RES/2653",
-      "established": "2022-10-21",
-      "measures": ["travel_ban", "asset_freeze", "arms_embargo"],
-      "target_countries": ["HTI"]
+     "name": "KOTI CORP",
+     "reference": "KPe.067",
+     "type": "entity",
+     "listed_on": "2018-03-30",
+     "nationality": "Panama",
+     "iso3": "PAN"
     }
-  ]
+   ],
+   "individuals_by_nationality": {
+    "PRK": 79
+   },
+   "entities_by_country": {
+    "PRK": 62,
+    "CHN": 6,
+    "IRN": 1,
+    "HKG": 1,
+    "VGB": 1,
+    "MHL": 1,
+    "PAN": 1,
+    "SGP": 1
+   }
+  },
+  {
+   "id": "iran",
+   "name": "Iran (Non-proliferation)",
+   "resolution": "S/RES/1737",
+   "established": "2006-12-23",
+   "measures": [
+    "arms_embargo",
+    "travel_ban",
+    "asset_freeze",
+    "nuclear_restrictions"
+   ],
+   "target_countries": [
+    "IRN"
+   ],
+   "list_type": "Iran",
+   "note": "Measures under S/RES/1737 and successor resolutions were re-applied on 2025-09-28 through the snapback mechanism of S/RES/2231 (2015).",
+   "status": "active",
+   "curated": true,
+   "listed_individuals": 43,
+   "listed_entities": 78,
+   "listed_total": 121,
+   "latest_listing": "2012-12-20",
+   "listed_last_12_months": 0,
+   "recent_listings": [
+    {
+     "name": "YAS AIR",
+     "reference": "IRe.077",
+     "type": "entity",
+     "listed_on": "2012-12-20",
+     "nationality": "Iran (Islamic Republic of)",
+     "iso3": "IRN"
+    },
+    {
+     "name": "SAD IMPORT EXPORT COMPANY",
+     "reference": "IRe.059",
+     "type": "entity",
+     "listed_on": "2012-12-20",
+     "nationality": "Iran (Islamic Republic of)",
+     "iso3": "IRN"
+    },
+    {
+     "name": "ALI AKBAR TABATABAEI",
+     "reference": "IRi.041",
+     "type": "individual",
+     "listed_on": "2012-04-18",
+     "nationality": "Iran (Islamic Republic of)",
+     "iso3": "IRN"
+    },
+    {
+     "name": "AZIM AGHAJANI",
+     "reference": "IRi.003",
+     "type": "individual",
+     "listed_on": "2012-04-18",
+     "nationality": "Iran (Islamic Republic of)",
+     "iso3": "IRN"
+    },
+    {
+     "name": "BEHINEH TRADING CO.",
+     "reference": "IRe.009",
+     "type": "entity",
+     "listed_on": "2012-04-18",
+     "nationality": "Iran (Islamic Republic of)",
+     "iso3": "IRN"
+    },
+    {
+     "name": "JAVAD RAHIQI",
+     "reference": "IRi.031",
+     "type": "individual",
+     "listed_on": "2010-06-09",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "YAZD METALLURGY INDUSTRIES (YMI)",
+     "reference": "IRe.078",
+     "type": "entity",
+     "listed_on": "2010-06-09",
+     "nationality": "Iran (Islamic Republic of)",
+     "iso3": "IRN"
+    },
+    {
+     "name": "TIZ PARS",
+     "reference": "IRe.075",
+     "type": "entity",
+     "listed_on": "2010-06-09",
+     "nationality": "Iran (Islamic Republic of)",
+     "iso3": "IRN"
+    },
+    {
+     "name": "SPECIAL INDUSTRIES GROUP (SIG)",
+     "reference": "IRe.073",
+     "type": "entity",
+     "listed_on": "2010-06-09",
+     "nationality": "Iran (Islamic Republic of)",
+     "iso3": "IRN"
+    },
+    {
+     "name": "SOUTH SHIPPING LINE IRAN (SSL)",
+     "reference": "IRe.072",
+     "type": "entity",
+     "listed_on": "2010-06-09",
+     "nationality": "Iran (Islamic Republic of)",
+     "iso3": "IRN"
+    }
+   ],
+   "individuals_by_nationality": {
+    "IRN": 5
+   },
+   "entities_by_country": {
+    "IRN": 25,
+    "MYS": 1,
+    "BEL": 1
+   }
+  },
+  {
+   "id": "somalia",
+   "name": "Somalia",
+   "resolution": "S/RES/751",
+   "established": "1992-04-24",
+   "measures": [
+    "arms_embargo",
+    "travel_ban",
+    "asset_freeze",
+    "charcoal_ban"
+   ],
+   "target_countries": [
+    "SOM"
+   ],
+   "list_type": "Somalia",
+   "status": "active",
+   "curated": true,
+   "listed_individuals": 23,
+   "listed_entities": 1,
+   "listed_total": 24,
+   "latest_listing": "2024-05-21",
+   "listed_last_12_months": 0,
+   "recent_listings": [
+    {
+     "name": "MOHAMED OMAR MOHAMED",
+     "reference": "SOi.025",
+     "type": "individual",
+     "listed_on": "2024-05-21",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "MOHAMED MOHAMUD MIRE",
+     "reference": "SOi.024",
+     "type": "individual",
+     "listed_on": "2024-05-21",
+     "nationality": "Somalia",
+     "iso3": "SOM"
+    },
+    {
+     "name": "ABDIKADIR MOHAMED ABDIKADIR",
+     "reference": "SOi.023",
+     "type": "individual",
+     "listed_on": "2024-05-21",
+     "nationality": "Somalia",
+     "iso3": "SOM"
+    },
+    {
+     "name": "ABDULLAHI OSMAN MOHAMED CADDOW",
+     "reference": "SOi.022",
+     "type": "individual",
+     "listed_on": "2023-05-26",
+     "nationality": "Somalia",
+     "iso3": "SOM"
+    },
+    {
+     "name": "ALI MOHAMED RAGE",
+     "reference": "SOi.021",
+     "type": "individual",
+     "listed_on": "2022-02-18",
+     "nationality": "Somalia",
+     "iso3": "SOM"
+    },
+    {
+     "name": "MAHAD KARATE",
+     "reference": "SOi.020",
+     "type": "individual",
+     "listed_on": "2021-02-26",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "MAALIM AYMAN",
+     "reference": "SOi.019",
+     "type": "individual",
+     "listed_on": "2021-02-26",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "ABUKAR ALI ADAN",
+     "reference": "SOi.018",
+     "type": "individual",
+     "listed_on": "2021-02-26",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "Abdifatah Abubakar Abdi",
+     "reference": "SOi.017",
+     "type": "individual",
+     "listed_on": "2018-03-08",
+     "nationality": "Somalia",
+     "iso3": "SOM"
+    },
+    {
+     "name": "Ahmad Iman Ali",
+     "reference": "SOi.016",
+     "type": "individual",
+     "listed_on": "2018-03-08",
+     "nationality": "Kenya",
+     "iso3": "KEN"
+    }
+   ],
+   "individuals_by_nationality": {
+    "SOM": 11,
+    "KEN": 2,
+    "SWE": 1,
+    "ETH": 1,
+    "USA": 1
+   },
+   "entities_by_country": {}
+  },
+  {
+   "id": "isil-alqaida",
+   "name": "ISIL (Da'esh) and Al-Qaida",
+   "resolution": "S/RES/1267",
+   "established": "1999-10-15",
+   "measures": [
+    "travel_ban",
+    "asset_freeze",
+    "arms_embargo"
+   ],
+   "target_countries": [],
+   "list_type": "Al-Qaida",
+   "status": "active",
+   "curated": true,
+   "listed_individuals": 248,
+   "listed_entities": 88,
+   "listed_total": 336,
+   "latest_listing": "2026-03-30",
+   "listed_last_12_months": 3,
+   "recent_listings": [
+    {
+     "name": "HAMIDA NABAGGALA",
+     "reference": "QDi.439",
+     "type": "individual",
+     "listed_on": "2026-03-30",
+     "nationality": "Uganda",
+     "iso3": "UGA"
+    },
+    {
+     "name": "ABD EL HAMID SALIM IBRAHIM BRUKAN AL-KHATOUNI",
+     "reference": "QDi.438",
+     "type": "individual",
+     "listed_on": "2026-03-26",
+     "nationality": "Iraq",
+     "iso3": "IRQ"
+    },
+    {
+     "name": "SAMI JASIM MUHAMMAD JAATA AL-JABURI",
+     "reference": "QDi.437",
+     "type": "individual",
+     "listed_on": "2026-03-26",
+     "nationality": "Iraq",
+     "iso3": "IRQ"
+    },
+    {
+     "name": "ABUBAKAR SWALLEH",
+     "reference": "QDi.436",
+     "type": "individual",
+     "listed_on": "2025-06-16",
+     "nationality": "Uganda",
+     "iso3": "UGA"
+    },
+    {
+     "name": "SULTAN AZIZ AZAM",
+     "reference": "QDi.435",
+     "type": "individual",
+     "listed_on": "2023-04-26",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "MAULAWI RAJAB",
+     "reference": "QDi.434",
+     "type": "individual",
+     "listed_on": "2023-04-26",
+     "nationality": "Afghanistan",
+     "iso3": "AFG"
+    },
+    {
+     "name": "Islamic State In Iraq And the Levant In South-East Asia (ISIL-SEA, ISIL-South East Asia)",
+     "reference": "QDe.169",
+     "type": "entity",
+     "listed_on": "2023-01-27",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "KHATIBA JAMA`AT AL-TAWHID WAL-JIHAD (KTJ)",
+     "reference": "QDe.168",
+     "type": "entity",
+     "listed_on": "2022-03-07",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "ASHRAF AL-QIZANI",
+     "reference": "QDi.432",
+     "type": "individual",
+     "listed_on": "2021-12-29",
+     "nationality": "Tunisia",
+     "iso3": "TUN"
+    },
+    {
+     "name": "JUND AL-KHILAFAH IN TUNISIA (JAK-T)",
+     "reference": "QDe.167",
+     "type": "entity",
+     "listed_on": "2021-12-29",
+     "nationality": null,
+     "iso3": null
+    }
+   ],
+   "individuals_by_nationality": {
+    "IDN": 24,
+    "TUN": 22,
+    "DZA": 18,
+    "IRQ": 16,
+    "PHL": 15,
+    "EGY": 13,
+    "PAK": 12,
+    "SAU": 12,
+    "RUS": 12,
+    "GBR": 10,
+    "MAR": 9,
+    "YEM": 8,
+    "LBY": 8,
+    "KWT": 8,
+    "AFG": 7,
+    "FRA": 6,
+    "JOR": 5,
+    "DEU": 5,
+    "MLI": 5,
+    "USA": 4,
+    "QAT": 4,
+    "SYR": 4,
+    "MRT": 3,
+    "PSE": 3,
+    "MYS": 3,
+    "SOM": 2,
+    "GEO": 2,
+    "TTO": 2,
+    "UGA": 2,
+    "TZA": 1,
+    "IND": 1,
+    "TUR": 1,
+    "CHN": 1,
+    "UZB": 1,
+    "NGA": 1,
+    "NOR": 1,
+    "SEN": 1,
+    "TJK": 1,
+    "BIH": 1
+   },
+   "entities_by_country": {
+    "PAK": 8,
+    "AFG": 7,
+    "MLI": 6,
+    "DZA": 5,
+    "SYR": 5,
+    "TUN": 3,
+    "BIH": 3,
+    "PHL": 2,
+    "MAR": 2,
+    "NER": 2,
+    "USA": 2,
+    "BGD": 2,
+    "IDN": 2,
+    "NGA": 2,
+    "IRQ": 2,
+    "LBN": 1,
+    "LBY": 1,
+    "MRT": 1,
+    "KWT": 1,
+    "ARE": 1,
+    "SDN": 1,
+    "YEM": 1,
+    "KEN": 1,
+    "TZA": 1,
+    "ALB": 1,
+    "ETH": 1,
+    "NLD": 1,
+    "COM": 1
+   }
+  },
+  {
+   "id": "iraq",
+   "name": "Iraq (residual)",
+   "resolution": "S/RES/1518",
+   "established": "2003-12-24",
+   "measures": [
+    "asset_freeze"
+   ],
+   "target_countries": [
+    "IRQ"
+   ],
+   "list_type": "Iraq",
+   "status": "active",
+   "curated": true,
+   "listed_individuals": 65,
+   "listed_entities": 10,
+   "listed_total": 75,
+   "latest_listing": "2006-05-12",
+   "listed_last_12_months": 0,
+   "recent_listings": [
+    {
+     "name": "T.M.G. ENGINEERING LIMITED",
+     "reference": "IQe.208",
+     "type": "entity",
+     "listed_on": "2006-05-12",
+     "nationality": "United Kingdom of Great Britain and Northern Ireland",
+     "iso3": "GBR"
+    },
+    {
+     "name": "TECHNOLOGY AND DEVELOPMENT GROUP LIMITED",
+     "reference": "IQe.207",
+     "type": "entity",
+     "listed_on": "2006-05-12",
+     "nationality": "United Kingdom of Great Britain and Northern Ireland",
+     "iso3": "GBR"
+    },
+    {
+     "name": "SA’D SABAWI IBRAHIM HASAN AL-TIKRITI",
+     "reference": "IQi.086",
+     "type": "individual",
+     "listed_on": "2005-07-27",
+     "nationality": "Iraq",
+     "iso3": "IRQ"
+    },
+    {
+     "name": "BASHAR SABAWI IBRAHIM HASAN AL-TIKRITI",
+     "reference": "IQi.085",
+     "type": "individual",
+     "listed_on": "2005-07-27",
+     "nationality": "Iraq",
+     "iso3": "IRQ"
+    },
+    {
+     "name": "IBRAHIM SABAWI IBRAHIM HASAN AL-TIKRITI",
+     "reference": "IQi.084",
+     "type": "individual",
+     "listed_on": "2005-07-27",
+     "nationality": "Iraq",
+     "iso3": "IRQ"
+    },
+    {
+     "name": "AYMAN SABAWI IBRAHIM HASAN AL-TIKRITI",
+     "reference": "IQi.083",
+     "type": "individual",
+     "listed_on": "2005-07-27",
+     "nationality": "Iraq",
+     "iso3": "IRQ"
+    },
+    {
+     "name": "OMAR SABAWI IBRAHIM HASAN AL-TIKRITI",
+     "reference": "IQi.082",
+     "type": "individual",
+     "listed_on": "2005-07-27",
+     "nationality": "Iraq",
+     "iso3": "IRQ"
+    },
+    {
+     "name": "YASIR SABAWI IBRAHIM HASAN AL-TIKRITI",
+     "reference": "IQi.081",
+     "type": "individual",
+     "listed_on": "2005-07-27",
+     "nationality": "Iraq",
+     "iso3": "IRQ"
+    },
+    {
+     "name": "MUHAMMAD YUNIS AHMAD",
+     "reference": "IQi.080",
+     "type": "individual",
+     "listed_on": "2004-06-22",
+     "nationality": "Iraq",
+     "iso3": "IRQ"
+    },
+    {
+     "name": "ROODI SLEWA",
+     "reference": "IQi.079",
+     "type": "individual",
+     "listed_on": "2004-06-02",
+     "nationality": "Iraq",
+     "iso3": "IRQ"
+    }
+   ],
+   "individuals_by_nationality": {
+    "IRQ": 65
+   },
+   "entities_by_country": {
+    "IRQ": 4,
+    "JOR": 2,
+    "GBR": 2,
+    "ARE": 1,
+    "LIE": 1,
+    "CHE": 1
+   }
+  },
+  {
+   "id": "libya",
+   "name": "Libya",
+   "resolution": "S/RES/1970",
+   "established": "2011-02-26",
+   "measures": [
+    "arms_embargo",
+    "travel_ban",
+    "asset_freeze"
+   ],
+   "target_countries": [
+    "LBY"
+   ],
+   "list_type": "Libya",
+   "status": "active",
+   "curated": true,
+   "listed_individuals": 28,
+   "listed_entities": 3,
+   "listed_total": 31,
+   "latest_listing": "2026-07-22",
+   "listed_last_12_months": 1,
+   "recent_listings": [
+    {
+     "name": "AVAX",
+     "reference": "LYe.006",
+     "type": "entity",
+     "listed_on": "2026-07-22",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "Osama Al Kuni Ibrahim",
+     "reference": "LYi.029",
+     "type": "individual",
+     "listed_on": "2021-10-25",
+     "nationality": "Libya",
+     "iso3": "LBY"
+    },
+    {
+     "name": "Salah Badi",
+     "reference": "LYi.028",
+     "type": "individual",
+     "listed_on": "2018-11-16",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "Ibrahim Saeed Salim Jadhran",
+     "reference": "LYi.027",
+     "type": "individual",
+     "listed_on": "2018-09-11",
+     "nationality": "Libya",
+     "iso3": "LBY"
+    },
+    {
+     "name": "Abd Al-Rahman SALIM IBRAHIM AL-MILAD",
+     "reference": "LYi.026",
+     "type": "individual",
+     "listed_on": "2018-06-07",
+     "nationality": "Libya",
+     "iso3": "LBY"
+    },
+    {
+     "name": "Mohammed Al Amin Al-Arabi Kashlaf",
+     "reference": "LYi.025",
+     "type": "individual",
+     "listed_on": "2018-06-07",
+     "nationality": "Libya",
+     "iso3": "LBY"
+    },
+    {
+     "name": "Mus’ab Mustafa Abu al Qassim Omar",
+     "reference": "LYi.024",
+     "type": "individual",
+     "listed_on": "2018-06-07",
+     "nationality": "Libya",
+     "iso3": "LBY"
+    },
+    {
+     "name": "Ahmad Oumar Imhamad al-Fitouri",
+     "reference": "LYi.023",
+     "type": "individual",
+     "listed_on": "2018-06-07",
+     "nationality": "Libya",
+     "iso3": "LBY"
+    },
+    {
+     "name": "Fitiwi Abdelrazak",
+     "reference": "LYi.022",
+     "type": "individual",
+     "listed_on": "2018-06-07",
+     "nationality": "Eritrea",
+     "iso3": "ERI"
+    },
+    {
+     "name": "Ermias Alem",
+     "reference": "LYi.021",
+     "type": "individual",
+     "listed_on": "2018-06-07",
+     "nationality": "Eritrea",
+     "iso3": "ERI"
+    }
+   ],
+   "individuals_by_nationality": {
+    "LBY": 6,
+    "ERI": 2
+   },
+   "entities_by_country": {
+    "LBY": 2
+   }
+  },
+  {
+   "id": "car",
+   "name": "Central African Republic",
+   "resolution": "S/RES/2127",
+   "established": "2013-12-05",
+   "measures": [
+    "arms_embargo",
+    "travel_ban",
+    "asset_freeze"
+   ],
+   "target_countries": [
+    "CAF"
+   ],
+   "list_type": "CAR",
+   "status": "active",
+   "curated": true,
+   "listed_individuals": 14,
+   "listed_entities": 1,
+   "listed_total": 15,
+   "latest_listing": "2021-12-21",
+   "listed_last_12_months": 0,
+   "recent_listings": [
+    {
+     "name": "ALI DARASSA",
+     "reference": "CFi.015",
+     "type": "individual",
+     "listed_on": "2021-12-21",
+     "nationality": "Central African Republic",
+     "iso3": "CAF"
+    },
+    {
+     "name": "BI SIDI SOULEMAN",
+     "reference": "CFi.014",
+     "type": "individual",
+     "listed_on": "2020-08-05",
+     "nationality": "Central African Republic",
+     "iso3": "CAF"
+    },
+    {
+     "name": "MARTIN KOUMTAMADJI",
+     "reference": "CFi.013",
+     "type": "individual",
+     "listed_on": "2020-04-20",
+     "nationality": "Chad",
+     "iso3": "TCD"
+    },
+    {
+     "name": "ABDOULAYE HISSENE",
+     "reference": "CFi.012",
+     "type": "individual",
+     "listed_on": "2017-05-17",
+     "nationality": "Central African Republic",
+     "iso3": "CAF"
+    },
+    {
+     "name": "SALIM KONY",
+     "reference": "CFi.011",
+     "type": "individual",
+     "listed_on": "2016-08-23",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "ALI KONY",
+     "reference": "CFi.010",
+     "type": "individual",
+     "listed_on": "2016-08-23",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "JOSEPH KONY",
+     "reference": "CFi.009",
+     "type": "individual",
+     "listed_on": "2016-03-07",
+     "nationality": "Uganda",
+     "iso3": "UGA"
+    },
+    {
+     "name": "LORD’S RESISTANCE ARMY",
+     "reference": "CFe.002",
+     "type": "entity",
+     "listed_on": "2016-03-07",
+     "nationality": "Central African Republic",
+     "iso3": "CAF"
+    },
+    {
+     "name": "EUGÈNE BARRET NGAÏKOSSET",
+     "reference": "CFi.008",
+     "type": "individual",
+     "listed_on": "2015-12-17",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "HAROUN GAYE",
+     "reference": "CFi.007",
+     "type": "individual",
+     "listed_on": "2015-12-17",
+     "nationality": null,
+     "iso3": null
+    }
+   ],
+   "individuals_by_nationality": {
+    "CAF": 8,
+    "SDN": 2,
+    "TCD": 2,
+    "SSD": 1,
+    "UGA": 1,
+    "COG": 1
+   },
+   "entities_by_country": {
+    "CAF": 1,
+    "COD": 1
+   }
+  },
+  {
+   "id": "yemen",
+   "name": "Yemen",
+   "resolution": "S/RES/2140",
+   "established": "2014-02-26",
+   "measures": [
+    "travel_ban",
+    "asset_freeze",
+    "arms_embargo"
+   ],
+   "target_countries": [
+    "YEM"
+   ],
+   "list_type": "Yemen",
+   "status": "active",
+   "curated": true,
+   "listed_individuals": 10,
+   "listed_entities": 1,
+   "listed_total": 11,
+   "latest_listing": "2022-10-04",
+   "listed_last_12_months": 0,
+   "recent_listings": [
+    {
+     "name": "AHMAD AL-HAMZI",
+     "reference": "YEi.012",
+     "type": "individual",
+     "listed_on": "2022-10-04",
+     "nationality": "Yemen",
+     "iso3": "YEM"
+    },
+    {
+     "name": "MOTLAQ AMER AL-MARRANI",
+     "reference": "YEi.011",
+     "type": "individual",
+     "listed_on": "2022-09-26",
+     "nationality": "Yemen",
+     "iso3": "YEM"
+    },
+    {
+     "name": "MANSUR AL-SA’ADI",
+     "reference": "YEi.010",
+     "type": "individual",
+     "listed_on": "2022-09-26",
+     "nationality": "Yemen",
+     "iso3": "YEM"
+    },
+    {
+     "name": "THE HOUTHIS",
+     "reference": "YEe.001",
+     "type": "entity",
+     "listed_on": "2022-02-28",
+     "nationality": "Yemen",
+     "iso3": "YEM"
+    },
+    {
+     "name": "YUSUF AL-MADANI",
+     "reference": "YEi.009",
+     "type": "individual",
+     "listed_on": "2021-11-09",
+     "nationality": "Yemen",
+     "iso3": "YEM"
+    },
+    {
+     "name": "MUHAMMAD ABD AL-KARIM AL-GHAMARI",
+     "reference": "YEi.008",
+     "type": "individual",
+     "listed_on": "2021-11-09",
+     "nationality": "Yemen",
+     "iso3": "YEM"
+    },
+    {
+     "name": "SALEH MESFER SALEH AL SHAER",
+     "reference": "YEi.007",
+     "type": "individual",
+     "listed_on": "2021-11-09",
+     "nationality": "Yemen",
+     "iso3": "YEM"
+    },
+    {
+     "name": "SULTAN SALEH AIDA AIDA ZABIN",
+     "reference": "YEi.006",
+     "type": "individual",
+     "listed_on": "2021-02-25",
+     "nationality": "Yemen",
+     "iso3": "YEM"
+    },
+    {
+     "name": "ABDULMALIK AL-HOUTHI",
+     "reference": "YEi.004",
+     "type": "individual",
+     "listed_on": "2015-04-14",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "ABDULLAH YAHYA AL HAKIM",
+     "reference": "YEi.002",
+     "type": "individual",
+     "listed_on": "2014-11-07",
+     "nationality": "Yemen",
+     "iso3": "YEM"
+    }
+   ],
+   "individuals_by_nationality": {
+    "YEM": 9
+   },
+   "entities_by_country": {
+    "YEM": 1
+   }
+  },
+  {
+   "id": "south-sudan",
+   "name": "South Sudan",
+   "resolution": "S/RES/2206",
+   "established": "2015-03-03",
+   "measures": [
+    "travel_ban",
+    "asset_freeze",
+    "arms_embargo"
+   ],
+   "target_countries": [
+    "SSD"
+   ],
+   "list_type": "SouthSudan",
+   "status": "active",
+   "curated": true,
+   "listed_individuals": 8,
+   "listed_entities": 0,
+   "listed_total": 8,
+   "latest_listing": "2018-07-13",
+   "listed_last_12_months": 0,
+   "recent_listings": [
+    {
+     "name": "PAUL MALONG AWAN ANEI",
+     "reference": "SSi.008",
+     "type": "individual",
+     "listed_on": "2018-07-13",
+     "nationality": "South Sudan",
+     "iso3": "SSD"
+    },
+    {
+     "name": "MALEK REUBEN RIAK RENGU",
+     "reference": "SSi.007",
+     "type": "individual",
+     "listed_on": "2018-07-13",
+     "nationality": "South Sudan",
+     "iso3": "SSD"
+    },
+    {
+     "name": "PETER GADET",
+     "reference": "SSi.006",
+     "type": "individual",
+     "listed_on": "2015-07-01",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "MARIAL CHANUONG YOL MANGOK",
+     "reference": "SSi.005",
+     "type": "individual",
+     "listed_on": "2015-07-01",
+     "nationality": "South Sudan",
+     "iso3": "SSD"
+    },
+    {
+     "name": "SANTINO DENG WOL",
+     "reference": "SSi.004",
+     "type": "individual",
+     "listed_on": "2015-07-01",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "JAMES KOANG CHUOL",
+     "reference": "SSi.003",
+     "type": "individual",
+     "listed_on": "2015-07-01",
+     "nationality": "South Sudan",
+     "iso3": "SSD"
+    },
+    {
+     "name": "SIMON GATWECH DUAL",
+     "reference": "SSi.002",
+     "type": "individual",
+     "listed_on": "2015-07-01",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "GABRIEL JOK RIAK MAKOL",
+     "reference": "SSi.001",
+     "type": "individual",
+     "listed_on": "2015-07-01",
+     "nationality": "South Sudan",
+     "iso3": "SSD"
+    }
+   ],
+   "individuals_by_nationality": {
+    "SSD": 5,
+    "UGA": 1
+   },
+   "entities_by_country": {}
+  },
+  {
+   "id": "mali",
+   "name": "Mali",
+   "resolution": "S/RES/2374",
+   "established": "2017-09-05",
+   "measures": [
+    "travel_ban",
+    "asset_freeze"
+   ],
+   "target_countries": [
+    "MLI"
+   ],
+   "status": "terminated",
+   "terminated": "2023-08-31",
+   "note": "Regime lapsed on 2023-08-31 after its renewal was vetoed in the Security Council; no individuals remain listed.",
+   "curated": true,
+   "listed_individuals": 0,
+   "listed_entities": 0,
+   "listed_total": 0,
+   "latest_listing": null,
+   "listed_last_12_months": 0,
+   "recent_listings": [],
+   "individuals_by_nationality": {},
+   "entities_by_country": {}
+  },
+  {
+   "id": "drc",
+   "name": "Democratic Republic of the Congo",
+   "resolution": "S/RES/1533",
+   "established": "2004-03-12",
+   "measures": [
+    "arms_embargo",
+    "travel_ban",
+    "asset_freeze"
+   ],
+   "target_countries": [
+    "COD"
+   ],
+   "list_type": "DRC",
+   "status": "active",
+   "curated": true,
+   "listed_individuals": 50,
+   "listed_entities": 11,
+   "listed_total": 61,
+   "latest_listing": "2026-07-14",
+   "listed_last_12_months": 8,
+   "recent_listings": [
+    {
+     "name": "GUSTAVE KUBWAYO",
+     "reference": "CDi.050",
+     "type": "individual",
+     "listed_on": "2026-07-14",
+     "nationality": "Rwanda",
+     "iso3": "RWA"
+    },
+    {
+     "name": "JOHN IMANI NZENZE",
+     "reference": "CDi.049",
+     "type": "individual",
+     "listed_on": "2026-07-14",
+     "nationality": "Democratic Republic of the Congo",
+     "iso3": "COD"
+    },
+    {
+     "name": "CHARLES SEMATAMA",
+     "reference": "CDi.048",
+     "type": "individual",
+     "listed_on": "2026-07-14",
+     "nationality": "Democratic Republic of the Congo",
+     "iso3": "COD"
+    },
+    {
+     "name": "MUHAMMED LUMISA",
+     "reference": "CDi.047",
+     "type": "individual",
+     "listed_on": "2026-07-14",
+     "nationality": "Uganda",
+     "iso3": "UGA"
+    },
+    {
+     "name": "SEBASTIEN UWIMBABAZI",
+     "reference": "CDi.046",
+     "type": "individual",
+     "listed_on": "2026-07-14",
+     "nationality": "Rwanda",
+     "iso3": "RWA"
+    },
+    {
+     "name": "CORNEILLE NANGAA YOBELUO",
+     "reference": "CDi.045",
+     "type": "individual",
+     "listed_on": "2026-07-14",
+     "nationality": "Democratic Republic of the Congo",
+     "iso3": "COD"
+    },
+    {
+     "name": "TWIRWANEHO",
+     "reference": "CDe.011",
+     "type": "entity",
+     "listed_on": "2026-07-14",
+     "nationality": "Democratic Republic of the Congo",
+     "iso3": "COD"
+    },
+    {
+     "name": "ALLIANCE FLEUVE CONGO (AFC)",
+     "reference": "CDe.010",
+     "type": "entity",
+     "listed_on": "2026-07-14",
+     "nationality": "Democratic Republic of the Congo",
+     "iso3": "COD"
+    },
+    {
+     "name": "WILLY NGOMA",
+     "reference": "CDi.044",
+     "type": "individual",
+     "listed_on": "2024-02-20",
+     "nationality": "Democratic Republic of the Congo",
+     "iso3": "COD"
+    },
+    {
+     "name": "WILLIAM AMURI YAKUTUMBA",
+     "reference": "CDi.043",
+     "type": "individual",
+     "listed_on": "2024-02-20",
+     "nationality": "Democratic Republic of the Congo",
+     "iso3": "COD"
+    }
+   ],
+   "individuals_by_nationality": {
+    "COD": 25,
+    "RWA": 15,
+    "UGA": 5,
+    "TZA": 1
+   },
+   "entities_by_country": {
+    "COD": 7,
+    "UGA": 2,
+    "RWA": 1
+   }
+  },
+  {
+   "id": "sudan",
+   "name": "Sudan (Darfur)",
+   "resolution": "S/RES/1556",
+   "established": "2004-07-30",
+   "measures": [
+    "arms_embargo",
+    "travel_ban",
+    "asset_freeze"
+   ],
+   "target_countries": [
+    "SDN"
+   ],
+   "list_type": "Sudan",
+   "status": "active",
+   "curated": true,
+   "listed_individuals": 13,
+   "listed_entities": 0,
+   "listed_total": 13,
+   "latest_listing": "2026-04-28",
+   "listed_last_12_months": 8,
+   "recent_listings": [
+    {
+     "name": "MATEO ANDRES DUQUE BOTERO",
+     "reference": "SDi.014",
+     "type": "individual",
+     "listed_on": "2026-04-28",
+     "nationality": "Colombia",
+     "iso3": "COL"
+    },
+    {
+     "name": "CLAUDIA VIVIANA OLIVEROS FORERO",
+     "reference": "SDi.013",
+     "type": "individual",
+     "listed_on": "2026-04-28",
+     "nationality": "Colombia",
+     "iso3": "COL"
+    },
+    {
+     "name": "ALVARO ANDRES QUIJANO BECERRA",
+     "reference": "SDi.012",
+     "type": "individual",
+     "listed_on": "2026-04-28",
+     "nationality": "Colombia",
+     "iso3": "COL"
+    },
+    {
+     "name": "AL-GONEY HAMDAN DAGALO",
+     "reference": "SDi.011",
+     "type": "individual",
+     "listed_on": "2026-04-28",
+     "nationality": "Sudan",
+     "iso3": "SDN"
+    },
+    {
+     "name": "TIJANI IBRAHIM MOUSSA MOHAMED",
+     "reference": "SDi.010",
+     "type": "individual",
+     "listed_on": "2026-02-24",
+     "nationality": "Sudan",
+     "iso3": "SDN"
+    },
+    {
+     "name": "AL-FATEH ABDULLAH IDRIS",
+     "reference": "SDi.009",
+     "type": "individual",
+     "listed_on": "2026-02-24",
+     "nationality": "Sudan",
+     "iso3": "SDN"
+    },
+    {
+     "name": "ABDUL RAHIM HAMDAN DAGALO",
+     "reference": "SDi.008",
+     "type": "individual",
+     "listed_on": "2026-02-24",
+     "nationality": "Sudan",
+     "iso3": "SDN"
+    },
+    {
+     "name": "GEDO HAMDAN AHMED",
+     "reference": "SDi.007",
+     "type": "individual",
+     "listed_on": "2026-02-24",
+     "nationality": "Sudan",
+     "iso3": "SDN"
+    },
+    {
+     "name": "OSMAN MOHAMED HAMID MOHAMED",
+     "reference": "SDi.006",
+     "type": "individual",
+     "listed_on": "2024-11-08",
+     "nationality": "Sudan",
+     "iso3": "SDN"
+    },
+    {
+     "name": "ABDEL RAHMAN JUMA BARKALLA",
+     "reference": "SDi.005",
+     "type": "individual",
+     "listed_on": "2024-11-08",
+     "nationality": "Sudan",
+     "iso3": "SDN"
+    }
+   ],
+   "individuals_by_nationality": {
+    "SDN": 9,
+    "COL": 3,
+    "SSD": 1,
+    "ITA": 1,
+    "ESP": 1
+   },
+   "entities_by_country": {}
+  },
+  {
+   "id": "guinea-bissau",
+   "name": "Guinea-Bissau",
+   "resolution": "S/RES/2048",
+   "established": "2012-05-18",
+   "measures": [
+    "travel_ban"
+   ],
+   "target_countries": [
+    "GNB"
+   ],
+   "list_type": "GB",
+   "status": "active",
+   "curated": true,
+   "listed_individuals": 10,
+   "listed_entities": 0,
+   "listed_total": 10,
+   "latest_listing": "2012-07-18",
+   "listed_last_12_months": 0,
+   "recent_listings": [
+    {
+     "name": "JÚLIO NHATE",
+     "reference": "GBi.010",
+     "type": "individual",
+     "listed_on": "2012-07-18",
+     "nationality": "Guinea-Bissau",
+     "iso3": "GNB"
+    },
+    {
+     "name": "TCHAM NA MAN",
+     "reference": "GBi.007",
+     "type": "individual",
+     "listed_on": "2012-07-18",
+     "nationality": "Guinea-Bissau",
+     "iso3": "GNB"
+    },
+    {
+     "name": "TCHIPA NA BIDON",
+     "reference": "GBi.006",
+     "type": "individual",
+     "listed_on": "2012-07-18",
+     "nationality": "Guinea-Bissau",
+     "iso3": "GNB"
+    },
+    {
+     "name": "IDRISSA DJALÓ",
+     "reference": "GBi.004",
+     "type": "individual",
+     "listed_on": "2012-07-18",
+     "nationality": "Guinea-Bissau",
+     "iso3": "GNB"
+    },
+    {
+     "name": "CRANHA DANFA",
+     "reference": "GBi.003",
+     "type": "individual",
+     "listed_on": "2012-07-18",
+     "nationality": "Guinea-Bissau",
+     "iso3": "GNB"
+    },
+    {
+     "name": "MAMADU TURE",
+     "reference": "GBi.011",
+     "type": "individual",
+     "listed_on": "2012-05-18",
+     "nationality": "Guinea-Bissau",
+     "iso3": "GNB"
+    },
+    {
+     "name": "DABA NAUALNA",
+     "reference": "GBi.009",
+     "type": "individual",
+     "listed_on": "2012-05-18",
+     "nationality": "Guinea-Bissau",
+     "iso3": "GNB"
+    },
+    {
+     "name": "ESTÊVÃO NA MENA",
+     "reference": "GBi.008",
+     "type": "individual",
+     "listed_on": "2012-05-18",
+     "nationality": "Guinea-Bissau",
+     "iso3": "GNB"
+    },
+    {
+     "name": "ANTÓNIO INJAI",
+     "reference": "GBi.005",
+     "type": "individual",
+     "listed_on": "2012-05-18",
+     "nationality": "Guinea-Bissau",
+     "iso3": "GNB"
+    },
+    {
+     "name": "IBRAIMA CAMARÁ",
+     "reference": "GBi.001",
+     "type": "individual",
+     "listed_on": "2012-05-18",
+     "nationality": "Guinea-Bissau",
+     "iso3": "GNB"
+    }
+   ],
+   "individuals_by_nationality": {
+    "GNB": 10
+   },
+   "entities_by_country": {}
+  },
+  {
+   "id": "haiti",
+   "name": "Haiti",
+   "resolution": "S/RES/2653",
+   "established": "2022-10-21",
+   "measures": [
+    "travel_ban",
+    "asset_freeze",
+    "arms_embargo"
+   ],
+   "target_countries": [
+    "HTI"
+   ],
+   "list_type": "Haiti",
+   "status": "active",
+   "curated": true,
+   "listed_individuals": 9,
+   "listed_entities": 2,
+   "listed_total": 11,
+   "latest_listing": "2025-10-17",
+   "listed_last_12_months": 2,
+   "recent_listings": [
+    {
+     "name": "KEMPES SANON",
+     "reference": "HTi.009",
+     "type": "individual",
+     "listed_on": "2025-10-17",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "DIMITRI HERARD",
+     "reference": "HTi.008",
+     "type": "individual",
+     "listed_on": "2025-10-17",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "VIV ANSANM",
+     "reference": "HTe.002",
+     "type": "entity",
+     "listed_on": "2025-07-08",
+     "nationality": "Haiti",
+     "iso3": "HTI"
+    },
+    {
+     "name": "GRAN GRIF",
+     "reference": "HTe.001",
+     "type": "entity",
+     "listed_on": "2025-07-08",
+     "nationality": "Haiti",
+     "iso3": "HTI"
+    },
+    {
+     "name": "LUCKSON ELAN",
+     "reference": "HTi.007",
+     "type": "individual",
+     "listed_on": "2024-09-27",
+     "nationality": "Haiti",
+     "iso3": "HTI"
+    },
+    {
+     "name": "PROPHANE VICTOR",
+     "reference": "HTi.006",
+     "type": "individual",
+     "listed_on": "2024-09-27",
+     "nationality": "Haiti",
+     "iso3": "HTI"
+    },
+    {
+     "name": "VITELHOMME INNOCENT",
+     "reference": "HTi.005",
+     "type": "individual",
+     "listed_on": "2023-12-08",
+     "nationality": "Haiti",
+     "iso3": "HTI"
+    },
+    {
+     "name": "WILSON JOSEPH",
+     "reference": "HTi.004",
+     "type": "individual",
+     "listed_on": "2023-12-08",
+     "nationality": "Haiti",
+     "iso3": "HTI"
+    },
+    {
+     "name": "RENEL DESTINA",
+     "reference": "HTi.003",
+     "type": "individual",
+     "listed_on": "2023-12-08",
+     "nationality": "Haiti",
+     "iso3": "HTI"
+    },
+    {
+     "name": "JOHNSON ANDRE",
+     "reference": "HTi.002",
+     "type": "individual",
+     "listed_on": "2023-12-08",
+     "nationality": "Haiti",
+     "iso3": "HTI"
+    }
+   ],
+   "individuals_by_nationality": {
+    "HTI": 7
+   },
+   "entities_by_country": {
+    "HTI": 2
+   }
+  },
+  {
+   "id": "taliban",
+   "name": "Taliban (1988 regime)",
+   "resolution": "S/RES/1988",
+   "established": "2011-06-17",
+   "measures": [
+    "travel_ban",
+    "asset_freeze",
+    "arms_embargo"
+   ],
+   "target_countries": [
+    "AFG"
+   ],
+   "list_type": "Taliban",
+   "status": "active",
+   "curated": true,
+   "listed_individuals": 135,
+   "listed_entities": 5,
+   "listed_total": 140,
+   "latest_listing": "2015-11-02",
+   "listed_last_12_months": 0,
+   "recent_listings": [
+    {
+     "name": "TOREK AGHA",
+     "reference": "TAi.174",
+     "type": "individual",
+     "listed_on": "2015-11-02",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "ABDUL BASIR NOORZAI",
+     "reference": "TAi.173",
+     "type": "individual",
+     "listed_on": "2015-03-27",
+     "nationality": "Afghanistan",
+     "iso3": "AFG"
+    },
+    {
+     "name": "HAJI BASIR AND ZARJMIL COMPANY HAWALA",
+     "reference": "TAe.014",
+     "type": "entity",
+     "listed_on": "2015-03-27",
+     "nationality": "Pakistan",
+     "iso3": "PAK"
+    },
+    {
+     "name": "RAHMATULLAH SHAH NAWAZ",
+     "reference": "TAi.172",
+     "type": "individual",
+     "listed_on": "2014-08-21",
+     "nationality": "Afghanistan",
+     "iso3": "AFG"
+    },
+    {
+     "name": "MUHAMMAD OMAR ZADRAN",
+     "reference": "TAi.171",
+     "type": "individual",
+     "listed_on": "2014-07-31",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "SAIDULLAH JAN",
+     "reference": "TAi.170",
+     "type": "individual",
+     "listed_on": "2014-07-31",
+     "nationality": null,
+     "iso3": null
+    },
+    {
+     "name": "YAHYA HAQQANI",
+     "reference": "TAi.169",
+     "type": "individual",
+     "listed_on": "2014-07-31",
+     "nationality": "Afghanistan",
+     "iso3": "AFG"
+    },
+    {
+     "name": "QARI SAIFULLAH TOKHI",
+     "reference": "TAi.168",
+     "type": "individual",
+     "listed_on": "2014-03-19",
+     "nationality": "Afghanistan",
+     "iso3": "AFG"
+    },
+    {
+     "name": "ADAM KHAN ACHEKZAI",
+     "reference": "TAi.167",
+     "type": "individual",
+     "listed_on": "2013-04-16",
+     "nationality": "Pakistan",
+     "iso3": "PAK"
+    },
+    {
+     "name": "AHMED SHAH NOORZAI OBAIDULLAH",
+     "reference": "TAi.166",
+     "type": "individual",
+     "listed_on": "2013-02-26",
+     "nationality": null,
+     "iso3": null
+    }
+   ],
+   "individuals_by_nationality": {
+    "AFG": 125,
+    "PAK": 2
+   },
+   "entities_by_country": {
+    "PAK": 1,
+    "AFG": 1,
+    "ARE": 1,
+    "IRN": 1
+   }
+  }
+ ],
+ "recent_listings": [
+  {
+   "regime": "libya",
+   "name": "AVAX",
+   "reference": "LYe.006",
+   "type": "entity",
+   "listed_on": "2026-07-22",
+   "nationality": null,
+   "iso3": null
+  },
+  {
+   "regime": "drc",
+   "name": "GUSTAVE KUBWAYO",
+   "reference": "CDi.050",
+   "type": "individual",
+   "listed_on": "2026-07-14",
+   "nationality": "Rwanda",
+   "iso3": "RWA"
+  },
+  {
+   "regime": "drc",
+   "name": "JOHN IMANI NZENZE",
+   "reference": "CDi.049",
+   "type": "individual",
+   "listed_on": "2026-07-14",
+   "nationality": "Democratic Republic of the Congo",
+   "iso3": "COD"
+  },
+  {
+   "regime": "drc",
+   "name": "CHARLES SEMATAMA",
+   "reference": "CDi.048",
+   "type": "individual",
+   "listed_on": "2026-07-14",
+   "nationality": "Democratic Republic of the Congo",
+   "iso3": "COD"
+  },
+  {
+   "regime": "drc",
+   "name": "MUHAMMED LUMISA",
+   "reference": "CDi.047",
+   "type": "individual",
+   "listed_on": "2026-07-14",
+   "nationality": "Uganda",
+   "iso3": "UGA"
+  },
+  {
+   "regime": "drc",
+   "name": "SEBASTIEN UWIMBABAZI",
+   "reference": "CDi.046",
+   "type": "individual",
+   "listed_on": "2026-07-14",
+   "nationality": "Rwanda",
+   "iso3": "RWA"
+  },
+  {
+   "regime": "drc",
+   "name": "CORNEILLE NANGAA YOBELUO",
+   "reference": "CDi.045",
+   "type": "individual",
+   "listed_on": "2026-07-14",
+   "nationality": "Democratic Republic of the Congo",
+   "iso3": "COD"
+  },
+  {
+   "regime": "drc",
+   "name": "TWIRWANEHO",
+   "reference": "CDe.011",
+   "type": "entity",
+   "listed_on": "2026-07-14",
+   "nationality": "Democratic Republic of the Congo",
+   "iso3": "COD"
+  },
+  {
+   "regime": "drc",
+   "name": "ALLIANCE FLEUVE CONGO (AFC)",
+   "reference": "CDe.010",
+   "type": "entity",
+   "listed_on": "2026-07-14",
+   "nationality": "Democratic Republic of the Congo",
+   "iso3": "COD"
+  },
+  {
+   "regime": "sudan",
+   "name": "MATEO ANDRES DUQUE BOTERO",
+   "reference": "SDi.014",
+   "type": "individual",
+   "listed_on": "2026-04-28",
+   "nationality": "Colombia",
+   "iso3": "COL"
+  },
+  {
+   "regime": "sudan",
+   "name": "CLAUDIA VIVIANA OLIVEROS FORERO",
+   "reference": "SDi.013",
+   "type": "individual",
+   "listed_on": "2026-04-28",
+   "nationality": "Colombia",
+   "iso3": "COL"
+  },
+  {
+   "regime": "sudan",
+   "name": "ALVARO ANDRES QUIJANO BECERRA",
+   "reference": "SDi.012",
+   "type": "individual",
+   "listed_on": "2026-04-28",
+   "nationality": "Colombia",
+   "iso3": "COL"
+  },
+  {
+   "regime": "sudan",
+   "name": "AL-GONEY HAMDAN DAGALO",
+   "reference": "SDi.011",
+   "type": "individual",
+   "listed_on": "2026-04-28",
+   "nationality": "Sudan",
+   "iso3": "SDN"
+  },
+  {
+   "regime": "isil-alqaida",
+   "name": "HAMIDA NABAGGALA",
+   "reference": "QDi.439",
+   "type": "individual",
+   "listed_on": "2026-03-30",
+   "nationality": "Uganda",
+   "iso3": "UGA"
+  },
+  {
+   "regime": "isil-alqaida",
+   "name": "ABD EL HAMID SALIM IBRAHIM BRUKAN AL-KHATOUNI",
+   "reference": "QDi.438",
+   "type": "individual",
+   "listed_on": "2026-03-26",
+   "nationality": "Iraq",
+   "iso3": "IRQ"
+  },
+  {
+   "regime": "isil-alqaida",
+   "name": "SAMI JASIM MUHAMMAD JAATA AL-JABURI",
+   "reference": "QDi.437",
+   "type": "individual",
+   "listed_on": "2026-03-26",
+   "nationality": "Iraq",
+   "iso3": "IRQ"
+  },
+  {
+   "regime": "sudan",
+   "name": "TIJANI IBRAHIM MOUSSA MOHAMED",
+   "reference": "SDi.010",
+   "type": "individual",
+   "listed_on": "2026-02-24",
+   "nationality": "Sudan",
+   "iso3": "SDN"
+  },
+  {
+   "regime": "sudan",
+   "name": "AL-FATEH ABDULLAH IDRIS",
+   "reference": "SDi.009",
+   "type": "individual",
+   "listed_on": "2026-02-24",
+   "nationality": "Sudan",
+   "iso3": "SDN"
+  },
+  {
+   "regime": "sudan",
+   "name": "ABDUL RAHIM HAMDAN DAGALO",
+   "reference": "SDi.008",
+   "type": "individual",
+   "listed_on": "2026-02-24",
+   "nationality": "Sudan",
+   "iso3": "SDN"
+  },
+  {
+   "regime": "sudan",
+   "name": "GEDO HAMDAN AHMED",
+   "reference": "SDi.007",
+   "type": "individual",
+   "listed_on": "2026-02-24",
+   "nationality": "Sudan",
+   "iso3": "SDN"
+  }
+ ],
+ "by_country": {
+  "PRK": {
+   "individuals": 79,
+   "entities": 62,
+   "by_regime": {
+    "dprk": 141
+   }
+  },
+  "AFG": {
+   "individuals": 132,
+   "entities": 8,
+   "by_regime": {
+    "taliban": 126,
+    "isil-alqaida": 14
+   }
+  },
+  "IRQ": {
+   "individuals": 81,
+   "entities": 6,
+   "by_regime": {
+    "iraq": 69,
+    "isil-alqaida": 18
+   }
+  },
+  "COD": {
+   "individuals": 25,
+   "entities": 8,
+   "by_regime": {
+    "drc": 32,
+    "car": 1
+   }
+  },
+  "IRN": {
+   "individuals": 5,
+   "entities": 27,
+   "by_regime": {
+    "iran": 30,
+    "dprk": 1,
+    "taliban": 1
+   }
+  },
+  "IDN": {
+   "individuals": 24,
+   "entities": 2,
+   "by_regime": {
+    "isil-alqaida": 26
+   }
+  },
+  "TUN": {
+   "individuals": 22,
+   "entities": 3,
+   "by_regime": {
+    "isil-alqaida": 25
+   }
+  },
+  "PAK": {
+   "individuals": 14,
+   "entities": 9,
+   "by_regime": {
+    "isil-alqaida": 20,
+    "taliban": 3
+   }
+  },
+  "DZA": {
+   "individuals": 18,
+   "entities": 5,
+   "by_regime": {
+    "isil-alqaida": 23
+   }
+  },
+  "YEM": {
+   "individuals": 17,
+   "entities": 2,
+   "by_regime": {
+    "yemen": 10,
+    "isil-alqaida": 9
+   }
+  },
+  "LBY": {
+   "individuals": 14,
+   "entities": 3,
+   "by_regime": {
+    "isil-alqaida": 9,
+    "libya": 8
+   }
+  },
+  "PHL": {
+   "individuals": 15,
+   "entities": 2,
+   "by_regime": {
+    "isil-alqaida": 17
+   }
+  },
+  "RWA": {
+   "individuals": 15,
+   "entities": 1,
+   "by_regime": {
+    "drc": 16
+   }
+  },
+  "SOM": {
+   "individuals": 13,
+   "entities": 0,
+   "by_regime": {
+    "somalia": 11,
+    "isil-alqaida": 2
+   }
+  },
+  "EGY": {
+   "individuals": 13,
+   "entities": 0,
+   "by_regime": {
+    "isil-alqaida": 13
+   }
+  },
+  "SAU": {
+   "individuals": 12,
+   "entities": 0,
+   "by_regime": {
+    "isil-alqaida": 12
+   }
+  },
+  "GBR": {
+   "individuals": 10,
+   "entities": 2,
+   "by_regime": {
+    "isil-alqaida": 10,
+    "iraq": 2
+   }
+  },
+  "RUS": {
+   "individuals": 12,
+   "entities": 0,
+   "by_regime": {
+    "isil-alqaida": 12
+   }
+  },
+  "SDN": {
+   "individuals": 11,
+   "entities": 1,
+   "by_regime": {
+    "sudan": 9,
+    "car": 2,
+    "isil-alqaida": 1
+   }
+  },
+  "MAR": {
+   "individuals": 9,
+   "entities": 2,
+   "by_regime": {
+    "isil-alqaida": 11
+   }
+  },
+  "MLI": {
+   "individuals": 5,
+   "entities": 6,
+   "by_regime": {
+    "isil-alqaida": 11
+   }
+  },
+  "UGA": {
+   "individuals": 9,
+   "entities": 2,
+   "by_regime": {
+    "drc": 7,
+    "isil-alqaida": 2,
+    "car": 1,
+    "south-sudan": 1
+   }
+  },
+  "GNB": {
+   "individuals": 10,
+   "entities": 0,
+   "by_regime": {
+    "guinea-bissau": 10
+   }
+  },
+  "KWT": {
+   "individuals": 8,
+   "entities": 1,
+   "by_regime": {
+    "isil-alqaida": 9
+   }
+  },
+  "SYR": {
+   "individuals": 4,
+   "entities": 5,
+   "by_regime": {
+    "isil-alqaida": 9
+   }
+  },
+  "CAF": {
+   "individuals": 8,
+   "entities": 1,
+   "by_regime": {
+    "car": 9
+   }
+  },
+  "HTI": {
+   "individuals": 7,
+   "entities": 2,
+   "by_regime": {
+    "haiti": 9
+   }
+  },
+  "CHN": {
+   "individuals": 1,
+   "entities": 6,
+   "by_regime": {
+    "dprk": 6,
+    "isil-alqaida": 1
+   }
+  },
+  "USA": {
+   "individuals": 5,
+   "entities": 2,
+   "by_regime": {
+    "isil-alqaida": 6,
+    "somalia": 1
+   }
+  },
+  "JOR": {
+   "individuals": 5,
+   "entities": 2,
+   "by_regime": {
+    "isil-alqaida": 5,
+    "iraq": 2
+   }
+  },
+  "SSD": {
+   "individuals": 7,
+   "entities": 0,
+   "by_regime": {
+    "south-sudan": 5,
+    "car": 1,
+    "sudan": 1
+   }
+  },
+  "FRA": {
+   "individuals": 6,
+   "entities": 0,
+   "by_regime": {
+    "isil-alqaida": 6
+   }
+  },
+  "DEU": {
+   "individuals": 5,
+   "entities": 0,
+   "by_regime": {
+    "isil-alqaida": 5
+   }
+  },
+  "MYS": {
+   "individuals": 3,
+   "entities": 1,
+   "by_regime": {
+    "isil-alqaida": 3,
+    "iran": 1
+   }
+  },
+  "MRT": {
+   "individuals": 3,
+   "entities": 1,
+   "by_regime": {
+    "isil-alqaida": 4
+   }
+  },
+  "QAT": {
+   "individuals": 4,
+   "entities": 0,
+   "by_regime": {
+    "isil-alqaida": 4
+   }
+  },
+  "BIH": {
+   "individuals": 1,
+   "entities": 3,
+   "by_regime": {
+    "isil-alqaida": 4
+   }
+  },
+  "KEN": {
+   "individuals": 2,
+   "entities": 1,
+   "by_regime": {
+    "somalia": 2,
+    "isil-alqaida": 1
+   }
+  },
+  "TZA": {
+   "individuals": 2,
+   "entities": 1,
+   "by_regime": {
+    "isil-alqaida": 2,
+    "drc": 1
+   }
+  },
+  "PSE": {
+   "individuals": 3,
+   "entities": 0,
+   "by_regime": {
+    "isil-alqaida": 3
+   }
+  },
+  "NGA": {
+   "individuals": 1,
+   "entities": 2,
+   "by_regime": {
+    "isil-alqaida": 3
+   }
+  },
+  "ARE": {
+   "individuals": 0,
+   "entities": 3,
+   "by_regime": {
+    "isil-alqaida": 1,
+    "iraq": 1,
+    "taliban": 1
+   }
+  },
+  "COL": {
+   "individuals": 3,
+   "entities": 0,
+   "by_regime": {
+    "sudan": 3
+   }
+  },
+  "ETH": {
+   "individuals": 1,
+   "entities": 1,
+   "by_regime": {
+    "somalia": 1,
+    "isil-alqaida": 1
+   }
+  },
+  "GEO": {
+   "individuals": 2,
+   "entities": 0,
+   "by_regime": {
+    "isil-alqaida": 2
+   }
+  },
+  "TTO": {
+   "individuals": 2,
+   "entities": 0,
+   "by_regime": {
+    "isil-alqaida": 2
+   }
+  },
+  "NER": {
+   "individuals": 0,
+   "entities": 2,
+   "by_regime": {
+    "isil-alqaida": 2
+   }
+  },
+  "BGD": {
+   "individuals": 0,
+   "entities": 2,
+   "by_regime": {
+    "isil-alqaida": 2
+   }
+  },
+  "ERI": {
+   "individuals": 2,
+   "entities": 0,
+   "by_regime": {
+    "libya": 2
+   }
+  },
+  "TCD": {
+   "individuals": 2,
+   "entities": 0,
+   "by_regime": {
+    "car": 2
+   }
+  },
+  "HKG": {
+   "individuals": 0,
+   "entities": 1,
+   "by_regime": {
+    "dprk": 1
+   }
+  },
+  "VGB": {
+   "individuals": 0,
+   "entities": 1,
+   "by_regime": {
+    "dprk": 1
+   }
+  },
+  "MHL": {
+   "individuals": 0,
+   "entities": 1,
+   "by_regime": {
+    "dprk": 1
+   }
+  },
+  "PAN": {
+   "individuals": 0,
+   "entities": 1,
+   "by_regime": {
+    "dprk": 1
+   }
+  },
+  "SGP": {
+   "individuals": 0,
+   "entities": 1,
+   "by_regime": {
+    "dprk": 1
+   }
+  },
+  "BEL": {
+   "individuals": 0,
+   "entities": 1,
+   "by_regime": {
+    "iran": 1
+   }
+  },
+  "SWE": {
+   "individuals": 1,
+   "entities": 0,
+   "by_regime": {
+    "somalia": 1
+   }
+  },
+  "IND": {
+   "individuals": 1,
+   "entities": 0,
+   "by_regime": {
+    "isil-alqaida": 1
+   }
+  },
+  "TUR": {
+   "individuals": 1,
+   "entities": 0,
+   "by_regime": {
+    "isil-alqaida": 1
+   }
+  },
+  "UZB": {
+   "individuals": 1,
+   "entities": 0,
+   "by_regime": {
+    "isil-alqaida": 1
+   }
+  },
+  "NOR": {
+   "individuals": 1,
+   "entities": 0,
+   "by_regime": {
+    "isil-alqaida": 1
+   }
+  },
+  "SEN": {
+   "individuals": 1,
+   "entities": 0,
+   "by_regime": {
+    "isil-alqaida": 1
+   }
+  },
+  "TJK": {
+   "individuals": 1,
+   "entities": 0,
+   "by_regime": {
+    "isil-alqaida": 1
+   }
+  },
+  "LBN": {
+   "individuals": 0,
+   "entities": 1,
+   "by_regime": {
+    "isil-alqaida": 1
+   }
+  },
+  "ALB": {
+   "individuals": 0,
+   "entities": 1,
+   "by_regime": {
+    "isil-alqaida": 1
+   }
+  },
+  "NLD": {
+   "individuals": 0,
+   "entities": 1,
+   "by_regime": {
+    "isil-alqaida": 1
+   }
+  },
+  "COM": {
+   "individuals": 0,
+   "entities": 1,
+   "by_regime": {
+    "isil-alqaida": 1
+   }
+  },
+  "LIE": {
+   "individuals": 0,
+   "entities": 1,
+   "by_regime": {
+    "iraq": 1
+   }
+  },
+  "CHE": {
+   "individuals": 0,
+   "entities": 1,
+   "by_regime": {
+    "iraq": 1
+   }
+  },
+  "COG": {
+   "individuals": 1,
+   "entities": 0,
+   "by_regime": {
+    "car": 1
+   }
+  },
+  "ITA": {
+   "individuals": 1,
+   "entities": 0,
+   "by_regime": {
+    "sudan": 1
+   }
+  },
+  "ESP": {
+   "individuals": 1,
+   "entities": 0,
+   "by_regime": {
+    "sudan": 1
+   }
+  }
+ }
 }

@@ -191,6 +191,129 @@
         </div>
       </main>
     </div>
+
+    <!-- ======================= The week ahead ======================= -->
+    <div v-if="agenda?.journal || agenda?.elections" class="grid lg:grid-cols-12 gap-8 mt-10">
+      <!-- ---------- This week at the UN (Journal of the United Nations) ---------- -->
+      <section v-if="agenda?.journal" class="lg:col-span-8 min-w-0 bg-white rounded-2xl ring-1 ring-primary-200/70 overflow-hidden" aria-labelledby="week-at-un">
+        <div class="px-5 sm:px-6 pt-5 pb-3 border-b border-primary-100">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <div class="text-[11px] font-semibold uppercase tracking-[0.14em] text-accent-700">Upcoming</div>
+              <h2 id="week-at-un" class="font-serif text-2xl sm:text-3xl text-primary-900">This week at the UN</h2>
+            </div>
+            <div class="flex rounded-full bg-primary-100 p-0.5 text-xs" role="tablist" aria-label="Duty station">
+              <button v-for="l in journalLocations" :key="l.key" role="tab" :aria-selected="journalLoc === l.key"
+                class="px-3 py-1 rounded-full transition-colors"
+                :class="journalLoc === l.key ? 'bg-white text-primary-900 shadow-sm' : 'text-primary-500 hover:text-primary-800'"
+                @click="journalLoc = l.key">{{ l.label }} <span class="tabular-nums text-primary-400">{{ l.count }}</span></button>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center gap-1.5 mt-3">
+            <button class="chip" :class="!journalGroup ? 'chip-on' : ''" @click="journalGroup = null">All bodies</button>
+            <button v-for="g in journalGroups" :key="g" class="chip" :class="journalGroup === g ? 'chip-on' : ''" @click="journalGroup = journalGroup === g ? null : g">
+              <span class="w-1.5 h-1.5 rounded-full" :class="bodyStyle(g).dot" />{{ shortBody(g) }}
+            </button>
+            <label class="ml-auto inline-flex items-center gap-1.5 text-[11px] text-primary-500 cursor-pointer select-none">
+              <input v-model="journalPublicOnly" type="checkbox" class="rounded border-primary-300 text-accent-600 focus:ring-accent-500 h-3.5 w-3.5">
+              Public meetings only
+            </label>
+          </div>
+        </div>
+
+        <div v-if="journalDaysShown.length" class="divide-y divide-primary-100">
+          <div v-for="day in journalDaysShown" :key="day.location + day.date" class="px-5 sm:px-6 py-4">
+            <div class="flex items-baseline gap-3 mb-2">
+              <h3 class="font-serif text-lg text-primary-900">{{ journalDayLabel(day.date) }}</h3>
+              <span class="text-[11px] text-primary-400 tabular-nums">{{ day.meetings.length }} {{ day.meetings.length === 1 ? 'meeting' : 'meetings' }}</span>
+              <a v-if="day.journalUrl" :href="day.journalUrl" target="_blank" rel="noopener" class="ml-auto text-[11px] text-accent-600 hover:text-accent-700">Journal &#8599;</a>
+            </div>
+            <ol class="space-y-1">
+              <li v-for="m in day.meetings" :key="m.id" class="flex gap-3 py-1.5" :class="m.cancelled || isMeetingOver(m) ? 'opacity-55' : ''">
+                <span class="w-14 shrink-0 text-xs tabular-nums text-primary-500 pt-0.5">{{ m.followed_by ? 'then' : (m.time || '—') }}</span>
+                <span class="mt-1.5 w-2 h-2 rounded-full shrink-0" :class="bodyStyle(m.group || '').dot" />
+                <div class="min-w-0 flex-1">
+                  <div class="text-sm leading-snug">
+                    <span class="font-medium text-primary-900">{{ m.organ }}</span>
+                    <span v-if="m.title" class="text-primary-600"> &middot; {{ m.title }}</span>
+                  </div>
+                  <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-primary-400 mt-0.5">
+                    <span v-if="m.room">{{ m.room }}</span>
+                    <span v-if="m.cancelled" class="rounded px-1.5 bg-red-50 text-red-700 ring-1 ring-red-200">Cancelled</span>
+                    <span v-else-if="m.closed" class="rounded px-1.5 bg-primary-50 text-primary-500 ring-1 ring-primary-200">Closed</span>
+                    <span v-else class="rounded px-1.5 bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200">Public</span>
+                    <a v-if="m.webcast_url" :href="m.webcast_url" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700">Webcast &#8599;</a>
+                    <a v-if="m.journal_url" :href="m.journal_url" target="_blank" rel="noopener" class="hover:text-accent-700">Details &#8599;</a>
+                    <button v-if="m.agenda?.length" class="text-primary-500 hover:text-primary-800" :aria-expanded="!!openAgenda[m.id]" @click="openAgenda[m.id] = !openAgenda[m.id]">
+                      {{ openAgenda[m.id] ? 'Hide agenda' : `Agenda (${m.agenda.length})` }}
+                    </button>
+                  </div>
+                  <ul v-if="openAgenda[m.id] && m.agenda?.length" class="mt-1.5 pl-3 border-l-2 border-primary-100 space-y-0.5">
+                    <li v-for="(a, i) in m.agenda" :key="i" class="text-xs text-primary-600 leading-snug">{{ a }}</li>
+                  </ul>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+        <p v-else class="px-6 py-6 text-sm text-primary-400">No official meetings published in the Journal for the coming days{{ journalGroup ? ` for ${journalGroup}` : '' }}.</p>
+        <button v-if="journalDaysAll.length > journalDayLimit" class="w-full py-3 text-xs text-accent-600 hover:text-accent-700 border-t border-primary-100" @click="journalDayLimit += 3">
+          Show more days ({{ journalDaysAll.length - journalDayLimit }} left)
+        </button>
+        <p class="px-5 sm:px-6 py-3 text-[11px] text-primary-400 border-t border-primary-100">
+          {{ journalLoc === 'geneva' ? 'Geneva' : 'New York' }} local time &middot; source:
+          <a :href="agenda.journal.sourceUrl" target="_blank" rel="noopener" class="hover:text-accent-700">Journal of the United Nations</a>,
+          official meetings<span v-if="agenda.journal.updated"> &middot; updated {{ timeAgo(agenda.journal.updated) }}</span>.
+          Later days are provisional; Security Council meetings are usually announced a day ahead.
+        </p>
+      </section>
+
+      <!-- ---------- Upcoming elections ---------- -->
+      <section v-if="agenda?.elections" class="lg:col-span-4 min-w-0 bg-white rounded-2xl ring-1 ring-primary-200/70 overflow-hidden" aria-labelledby="upcoming-elections">
+        <div class="px-5 pt-5 pb-3 border-b border-primary-100">
+          <div class="text-[11px] font-semibold uppercase tracking-[0.14em] text-emerald-700">Next 60 days</div>
+          <h2 id="upcoming-elections" class="font-serif text-2xl text-primary-900">Upcoming elections</h2>
+        </div>
+        <ul v-if="agenda.elections.upcoming?.length" class="divide-y divide-primary-50">
+          <li v-for="e in agenda.elections.upcoming" :key="e.id" class="px-5 py-3 flex gap-3">
+            <div class="w-12 shrink-0 text-center">
+              <div class="text-[10px] uppercase tracking-wider text-primary-400">{{ electionMonth(e) }}</div>
+              <div class="font-serif text-xl leading-none text-primary-900 tabular-nums">{{ e.precision === 'day' ? Number(e.date.slice(8, 10)) : '—' }}</div>
+            </div>
+            <div class="min-w-0 flex-1">
+              <div class="text-sm text-primary-900 leading-snug">
+                <span v-if="e.iso3" class="mr-1">{{ flagFor(e.iso3) }}</span>
+                <NuxtLink v-if="e.iso3" :to="`/countries/${e.iso3}`" class="font-medium hover:text-accent-700">{{ e.country }}</NuxtLink>
+                <span v-else class="font-medium">{{ e.country }}</span>
+              </div>
+              <div class="text-xs text-primary-600 leading-snug mt-0.5">
+                <a v-if="e.article_url" :href="e.article_url" target="_blank" rel="noopener" class="hover:text-accent-700">{{ e.description || 'Election' }}</a>
+                <span v-else>{{ e.description || 'Election' }}</span>
+              </div>
+              <div class="flex flex-wrap items-center gap-1.5 mt-1 text-[10px]">
+                <span class="rounded px-1.5 py-px ring-1" :class="electionTypeClass(e.type)">{{ electionTypeLabel(e.type) }}</span>
+                <span v-if="e.indirect" class="rounded px-1.5 py-px ring-1 ring-primary-200 text-primary-500">indirect</span>
+                <span class="text-primary-400">{{ electionWhen(e) }}</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <p v-else class="px-5 py-6 text-sm text-primary-400">No national elections scheduled in the next 60 days.</p>
+        <div v-if="agenda.elections.recent?.length" class="px-5 py-3 border-t border-primary-100">
+          <div class="text-[11px] uppercase tracking-[0.14em] text-primary-400 mb-1.5">Recently held</div>
+          <div class="flex flex-wrap gap-x-3 gap-y-1 text-xs text-primary-600">
+            <span v-for="e in agenda.elections.recent" :key="e.id">
+              {{ e.iso3 ? flagFor(e.iso3) : '' }} {{ e.country }} <span class="text-primary-400">{{ electionShortDate(e) }}</span>
+            </span>
+          </div>
+        </div>
+        <p class="px-5 py-3 text-[11px] text-primary-400 border-t border-primary-100">
+          National elections and referendums.
+          <template v-for="(p, i) in agenda.elections.pages" :key="p.url">{{ i ? ', ' : 'From ' }}<a :href="p.url" target="_blank" rel="noopener" class="hover:text-accent-700">{{ p.title }}</a></template>.
+          Source: Wikipedia, <a :href="agenda.elections.licenseUrl" target="_blank" rel="noopener" class="hover:text-accent-700">CC BY-SA</a>.
+        </p>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -274,6 +397,8 @@ const BODY_STYLES: Record<string, { dot: string; short: string }> = {
   'Conferences': { dot: 'bg-violet-500', short: 'Conferences' },
   'Press Conferences': { dot: 'bg-primary-400', short: 'Press' },
   'Media Stakeouts': { dot: 'bg-primary-400', short: 'Stakeouts' },
+  'Human Rights Treaty Bodies': { dot: 'bg-amber-300', short: 'Treaty bodies' },
+  'Other bodies': { dot: 'bg-primary-300', short: 'Other bodies' },
 }
 const bodyStyle = (b: string) => BODY_STYLES[b] || { dot: 'bg-primary-300', short: b }
 const shortBody = (b: string) => bodyStyle(b).short
@@ -282,6 +407,84 @@ const shortBody = (b: string) => bodyStyle(b).short
 function cleanTitle(t: string): string {
   return (t || '').replace(/\s*-\s*(General Assembly|Security Council),\s*\d+(st|nd|rd|th) (session|meeting)\s*$/i, '').trim()
 }
+
+// ---------- the week ahead: UN Journal ----------
+type JournalLoc = 'newYork' | 'geneva'
+const JOURNAL_TZ: Record<JournalLoc, string> = { newYork: 'America/New_York', geneva: 'Europe/Zurich' }
+const JOURNAL_GROUP_ORDER = ['General Assembly', 'Security Council', 'Economic and Social Council', 'Human Rights Council', 'Human Rights Treaty Bodies', 'Other bodies']
+const journalLoc = ref<JournalLoc>('newYork')
+const journalGroup = ref<string | null>(null)
+const journalPublicOnly = ref(false)
+const journalDayLimit = ref(3)
+const openAgenda = reactive<Record<string, boolean>>({})
+watch(journalLoc, () => { journalGroup.value = null; journalDayLimit.value = 3 })
+
+const countMeetings = (days: any[] | undefined): number => (days || []).reduce((n: number, d: any) => n + (d.meetings?.length || 0), 0)
+const journalLocations = computed(() => [
+  { key: 'newYork' as const, label: 'New York', count: countMeetings(agenda.value?.journal?.newYork) },
+  { key: 'geneva' as const, label: 'Geneva', count: countMeetings(agenda.value?.journal?.geneva) },
+])
+const journalRaw = computed<any[]>(() => agenda.value?.journal?.[journalLoc.value] || [])
+const groupOf = (m: any): string => m.group || 'Other bodies'
+const journalGroups = computed(() => {
+  const set = new Set<string>(journalRaw.value.flatMap((d: any) => (d.meetings || []).map(groupOf)))
+  const rank = (g: string) => { const i = JOURNAL_GROUP_ORDER.indexOf(g); return i === -1 ? 99 : i }
+  return [...set].sort((a, b) => rank(a) - rank(b) || a.localeCompare(b))
+})
+const journalDaysAll = computed<any[]>(() => journalRaw.value
+  .map((d: any) => ({
+    ...d,
+    meetings: (d.meetings || []).filter((m: any) =>
+      (!journalGroup.value || groupOf(m) === journalGroup.value) && (!journalPublicOnly.value || !m.closed)),
+  }))
+  .filter((d: any) => d.meetings.length))
+const journalDaysShown = computed(() => journalDaysAll.value.slice(0, journalDayLimit.value))
+
+function localDayKey(tz: string, offsetDays = 0): string {
+  return new Date(now.value + offsetDays * 24 * 3600 * 1000).toLocaleDateString('en-CA', { timeZone: tz })
+}
+function journalDayLabel(date: string): string {
+  const tz = JOURNAL_TZ[journalLoc.value]
+  const label = new Date(`${date}T12:00:00Z`).toLocaleDateString('en-US', { timeZone: 'UTC', weekday: 'long', month: 'long', day: 'numeric' })
+  if (date === localDayKey(tz)) return `Today, ${label}`
+  if (date === localDayKey(tz, 1)) return `Tomorrow, ${label}`
+  return label
+}
+function isMeetingOver(m: any): boolean {
+  if (m.end) return new Date(m.end).getTime() < now.value
+  if (m.start) return new Date(m.start).getTime() + 3 * 3600 * 1000 < now.value
+  return false
+}
+
+// ---------- upcoming elections ----------
+const nyTodayKey = computed(() => localDayKey('America/New_York'))
+function electionMonth(e: any): string {
+  const [y, m] = String(e.date || '').split('-').map(Number)
+  if (!y || !m) return String(e.date || '')
+  return new Date(Date.UTC(y, m - 1, 1)).toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' })
+}
+function electionWhen(e: any): string {
+  if (e.precision !== 'day') return 'date to be confirmed'
+  const days = Math.round((new Date(`${e.date}T12:00:00Z`).getTime() - new Date(`${nyTodayKey.value}T12:00:00Z`).getTime()) / 86400000)
+  if (days < 0 && e.date_end && e.date_end >= nyTodayKey.value) return 'under way'
+  const span = e.date_end ? `, until ${shortDate(e.date_end)}` : ''
+  if (days === 0) return `today${span}`
+  if (days === 1) return `tomorrow${span}`
+  return `in ${days} days${span}`
+}
+function electionShortDate(e: any): string {
+  return e.precision === 'day' ? shortDate(e.date) : electionMonth(e)
+}
+const ELECTION_TYPES: Record<string, { label: string; cls: string }> = {
+  general: { label: 'General', cls: 'ring-violet-200 text-violet-700 bg-violet-50' },
+  presidential: { label: 'Presidential', cls: 'ring-accent-200 text-accent-700 bg-accent-50' },
+  parliamentary: { label: 'Parliamentary', cls: 'ring-sky-200 text-sky-700 bg-sky-50' },
+  referendum: { label: 'Referendum', cls: 'ring-amber-200 text-amber-800 bg-amber-50' },
+  local: { label: 'Local', cls: 'ring-primary-200 text-primary-600 bg-primary-50' },
+  executive: { label: 'Executive', cls: 'ring-primary-200 text-primary-600 bg-primary-50' },
+}
+const electionTypeLabel = (t: string) => ELECTION_TYPES[t]?.label || 'Election'
+const electionTypeClass = (t: string) => ELECTION_TYPES[t]?.cls || 'ring-primary-200 text-primary-600 bg-primary-50'
 
 // ---------- Security Council ----------
 function shortDate(d: string) {

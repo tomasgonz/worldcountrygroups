@@ -885,6 +885,10 @@ export function buildTodayBriefingPrompt(data: {
   activeTopics: any[]
   topCountriesToday: { iso3: string; count: number }[]
   topCountriesWeek: { iso3: string; count: number }[]
+  /** scheduled UN meetings (Journal of the United Nations) for the coming days */
+  weekAheadMeetings?: { date: string; time: string | null; organ: string; title: string | null; agenda: string[] }[]
+  /** national elections in the coming weeks (Wikipedia electoral calendar) */
+  upcomingElections?: { date: string; precision: string; country: string; description: string }[]
 }): LLMMessage[] {
   const prompts = getPromptConfig()
   const systemBase = prompts.systemBase || DEFAULT_SYSTEM_BASE
@@ -989,6 +993,24 @@ export function buildTodayBriefingPrompt(data: {
 
   if (data.activeTopics?.length) {
     ctx += `## ACTIVE TOPICS (statements): ${data.activeTopics.map((t: any) => `${t.topic}(${t.count})`).join(', ')}\n\n`
+  }
+
+  if (data.weekAheadMeetings?.length) {
+    ctx += `## SCHEDULED UN MEETINGS — next days (Journal of the United Nations, New York; public meetings; use for the watch list, no citation IDs)\n`
+    for (const m of data.weekAheadMeetings.slice(0, 40)) {
+      ctx += `- ${m.date} ${m.time || ''} | ${m.organ}${m.title ? ` — ${m.title}` : ''}`
+      if (m.agenda?.length) ctx += ` | agenda: ${m.agenda.slice(0, 3).join('; ').slice(0, 260)}`
+      ctx += '\n'
+    }
+    ctx += '\n'
+  }
+
+  if (data.upcomingElections?.length) {
+    ctx += `## UPCOMING NATIONAL ELECTIONS (next 30 days; Wikipedia electoral calendar; use for the watch list, no citation IDs)\n`
+    for (const e of data.upcomingElections.slice(0, 20)) {
+      ctx += `- ${e.date}${e.precision !== 'day' ? ' (date approximate)' : ''} | ${e.country} | ${e.description}\n`
+    }
+    ctx += '\n'
   }
 
   return [
