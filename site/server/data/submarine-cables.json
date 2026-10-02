@@ -1,9 +1,9 @@
 {
   "_meta": {
-    "updated_at": "2026-03-06T02:02:22Z",
+    "updated_at": "2026-10-02T16:57:05Z",
     "source": "TeleGeography Submarine Cable Map API",
-    "total_cables": 689,
-    "total_countries": 175
+    "total_cables": 712,
+    "total_countries": 184
   },
   "cables": [
     {
@@ -111,6 +111,21 @@
       ]
     },
     {
+      "id": "andromeda",
+      "name": "ANDROMEDA",
+      "owners": [
+        "Etisalat Group",
+        "Exelera",
+        "Grid Telecom"
+      ],
+      "landing_countries": [
+        "GR",
+        "IL",
+        "IT",
+        "JO"
+      ]
+    },
+    {
       "id": "apcn-2",
       "name": "APCN-2",
       "rfs_year": 2001,
@@ -181,8 +196,50 @@
       ],
       "landing_countries": [
         "AU",
+        "CL",
         "FJ",
         "US"
+      ]
+    },
+    {
+      "id": "apx-east-2",
+      "name": "APX East-2",
+      "rfs_year": 2029,
+      "length_km": 10000,
+      "owners": [
+        "SUBCO"
+      ],
+      "landing_countries": [
+        "GU",
+        "US"
+      ]
+    },
+    {
+      "id": "apx-north",
+      "name": "APX North",
+      "rfs_year": 2029,
+      "length_km": 9500,
+      "owners": [
+        "SUBCO"
+      ],
+      "landing_countries": [
+        "AU",
+        "GU",
+        "JP"
+      ]
+    },
+    {
+      "id": "apx-west",
+      "name": "APX West",
+      "rfs_year": 2029,
+      "length_km": 4600,
+      "owners": [
+        "SUBCO"
+      ],
+      "landing_countries": [
+        "AU",
+        "ID",
+        "SG"
       ]
     },
     {
@@ -200,7 +257,7 @@
         "Enitel",
         "Hondutel",
         "ICE (Kolbi)",
-        "Internexa",
+        "InterNexa",
         "Liberty Networks",
         "Orbinet Overseas",
         "RACSA",
@@ -361,7 +418,7 @@
     {
       "id": "africa-1",
       "name": "Africa-1",
-      "rfs_year": 2026,
+      "rfs_year": 2027,
       "length_km": 10000,
       "owners": [
         "G42",
@@ -462,6 +519,18 @@
       ]
     },
     {
+      "id": "alisios",
+      "name": "Alisios",
+      "owners": [
+        "Google"
+      ],
+      "landing_countries": [
+        "CL",
+        "DO",
+        "PA"
+      ]
+    },
+    {
       "id": "almera-melilla-alme",
       "name": "Almer\u00eda-Melilla (ALME)",
       "rfs_year": 1990,
@@ -479,28 +548,12 @@
       "rfs_year": 1999,
       "length_km": 122,
       "owners": [
-        "Setar",
+        "SETAR",
         "United Telecommunication Services (UTS)"
       ],
       "landing_countries": [
         "AW",
         "CW"
-      ]
-    },
-    {
-      "id": "alpal-2",
-      "name": "Alpal-2",
-      "rfs_year": 2002,
-      "length_km": 312,
-      "owners": [
-        "Algerie Telecom",
-        "Orange",
-        "Sparkle",
-        "Telxius"
-      ],
-      "landing_countries": [
-        "DZ",
-        "ES"
       ]
     },
     {
@@ -553,8 +606,11 @@
       "id": "americas-ii-west",
       "name": "Americas-II West",
       "rfs_year": 2000,
+      "length_km": 217,
       "owners": [
-        "AT&T"
+        "AT&T",
+        "Liberty Networks",
+        "Sparkle"
       ],
       "landing_countries": [
         "US"
@@ -608,7 +664,7 @@
       "id": "antigua-st-kitts",
       "name": "Antigua-St.Kitts",
       "rfs_year": 1995,
-      "length_km": 14,
+      "length_km": 141,
       "owners": [
         "Liberty Networks"
       ],
@@ -627,7 +683,7 @@
         "Antelecom",
         "Claro Dominicana (Codetel)",
         "Liberty Networks",
-        "Setar"
+        "SETAR"
       ],
       "landing_countries": [
         "DO",
@@ -754,7 +810,6 @@
     {
       "id": "asia-connect-cable-1-acc-1",
       "name": "Asia Connect Cable-1 (ACC-1)",
-      "rfs_year": 2028,
       "length_km": 19000,
       "owners": [
         "Inligo Networks"
@@ -806,7 +861,6 @@
         "Globe Telecom",
         "Matrix NAP Info",
         "Singtel",
-        "TIME dotCom",
         "Telekom Malaysia",
         "Unified National Networks (UNN)",
         "VNPT",
@@ -979,15 +1033,14 @@
     {
       "id": "aurora",
       "name": "Aurora",
-      "rfs_year": 2024,
-      "length_km": 500,
+      "rfs_year": 2028,
+      "length_km": 7268,
       "owners": [
-        "GlobalConnect"
+        "Meta"
       ],
       "landing_countries": [
-        "DE",
         "DK",
-        "SE"
+        "US"
       ]
     },
     {
@@ -1174,7 +1227,8 @@
         "Manx Telecom"
       ],
       "landing_countries": [
-        "GB"
+        "GB",
+        "IM"
       ]
     },
     {
@@ -1276,7 +1330,7 @@
     {
       "id": "bangladesh-private-cable-system-bpcs",
       "name": "Bangladesh Private Cable System (BPCS)",
-      "rfs_year": 2026,
+      "rfs_year": 2027,
       "length_km": 1300,
       "owners": [
         "CdNet Communications",
@@ -1449,6 +1503,19 @@
       "landing_countries": [
         "GB",
         "IE"
+      ]
+    },
+    {
+      "id": "bernacchi-1",
+      "name": "Bernacchi-1",
+      "rfs_year": 2027,
+      "length_km": 200,
+      "owners": [
+        "Firmus",
+        "SUBCO"
+      ],
+      "landing_countries": [
+        "AU"
       ]
     },
     {
@@ -1722,12 +1789,13 @@
       "owners": [
         "APUA",
         "Orange",
-        "Setar",
+        "SETAR",
         "Telxius"
       ],
       "landing_countries": [
         "AG",
         "AW",
+        "BL",
         "BQ",
         "CW",
         "MQ",
@@ -1823,7 +1891,7 @@
       "rfs_year": 2011,
       "length_km": 1835,
       "owners": [
-        "IT3"
+        "Canalink"
       ],
       "landing_countries": [
         "ES",
@@ -1836,6 +1904,7 @@
       "rfs_year": 2028,
       "length_km": 8000,
       "owners": [
+        "Globe Telecom",
         "IPS",
         "Inc.",
         "Meta",
@@ -1850,6 +1919,17 @@
         "PH",
         "SG",
         "TW"
+      ]
+    },
+    {
+      "id": "canoa",
+      "name": "Canoa",
+      "owners": [
+        "Google"
+      ],
+      "landing_countries": [
+        "BM",
+        "DO"
       ]
     },
     {
@@ -1875,7 +1955,8 @@
         "Orange"
       ],
       "landing_countries": [
-        "BM"
+        "BM",
+        "VG"
       ]
     },
     {
@@ -1978,7 +2059,8 @@
         "JTGlobal"
       ],
       "landing_countries": [
-        "GB"
+        "GB",
+        "GG"
       ]
     },
     {
@@ -2063,7 +2145,7 @@
       "length_km": 2068,
       "owners": [
         "AT&T",
-        "Setar"
+        "SETAR"
       ],
       "landing_countries": [
         "US"
@@ -2102,18 +2184,6 @@
       "landing_countries": [
         "GB",
         "NL"
-      ]
-    },
-    {
-      "id": "confluence-1",
-      "name": "Confluence-1",
-      "rfs_year": 2028,
-      "length_km": 2571,
-      "owners": [
-        "Confluence Networks"
-      ],
-      "landing_countries": [
-        "US"
       ]
     },
     {
@@ -2398,8 +2468,7 @@
       "rfs_year": 2026,
       "length_km": 4108,
       "owners": [
-        "Meta",
-        "Safaricom"
+        "Meta"
       ],
       "landing_countries": [
         "KE",
@@ -2606,7 +2675,8 @@
         "Manx Electricity Authority"
       ],
       "landing_countries": [
-        "GB"
+        "GB",
+        "IM"
       ]
     },
     {
@@ -2647,7 +2717,7 @@
     {
       "id": "eagle",
       "name": "EAGLE",
-      "rfs_year": 2028,
+      "rfs_year": 2029,
       "length_km": 1900,
       "owners": [
         "4iG Group",
@@ -2766,6 +2836,19 @@
       ]
     },
     {
+      "id": "exa-meridian",
+      "name": "EXA Meridian",
+      "rfs_year": 2029,
+      "length_km": 6552,
+      "owners": [
+        "EXA Infrastructure"
+      ],
+      "landing_countries": [
+        "GB",
+        "US"
+      ]
+    },
+    {
       "id": "exa-north-and-south",
       "name": "EXA North and South",
       "rfs_year": 2001,
@@ -2806,7 +2889,8 @@
       ],
       "landing_countries": [
         "DO",
-        "JM"
+        "JM",
+        "VG"
       ]
     },
     {
@@ -2885,7 +2969,8 @@
         "MQ",
         "SX",
         "TT",
-        "VC"
+        "VC",
+        "VG"
       ]
     },
     {
@@ -2910,6 +2995,21 @@
       "landing_countries": [
         "FI",
         "SE"
+      ]
+    },
+    {
+      "id": "ebla",
+      "name": "Ebla",
+      "rfs_year": 2028,
+      "length_km": 240,
+      "owners": [
+        "Cyta",
+        "Syrian Telecommunications Establishment",
+        "UNIFI Communications"
+      ],
+      "landing_countries": [
+        "CY",
+        "SY"
       ]
     },
     {
@@ -2953,10 +3053,12 @@
       "landing_countries": [
         "BR",
         "CV",
+        "ES",
         "GF",
         "MA",
         "MR",
-        "PT"
+        "PT",
+        "SR"
       ]
     },
     {
@@ -3084,6 +3186,7 @@
         "GI",
         "IN",
         "LY",
+        "MC",
         "OM",
         "PT",
         "SA"
@@ -3486,6 +3589,7 @@
       "landing_countries": [
         "AR",
         "BR",
+        "DO",
         "US",
         "UY"
       ]
@@ -3503,15 +3607,17 @@
       ]
     },
     {
-      "id": "gc-lnz-fu-ring",
-      "name": "GC-LNZ-FU Ring",
-      "rfs_year": 2028,
-      "length_km": 553,
+      "id": "fnix",
+      "name": "F\u00e9nix",
+      "rfs_year": 2026,
+      "length_km": 378,
       "owners": [
-        "Canalink"
+        "CANTV",
+        "Liberty Networks"
       ],
       "landing_countries": [
-        "ES"
+        "CW",
+        "VE"
       ]
     },
     {
@@ -3630,7 +3736,9 @@
         "Loret Group"
       ],
       "landing_countries": [
+        "BL",
         "GP",
+        "MF",
         "US"
       ]
     },
@@ -3668,6 +3776,20 @@
       ],
       "landing_countries": [
         "DK"
+      ]
+    },
+    {
+      "id": "globalconnect-aurora",
+      "name": "GlobalConnect Aurora",
+      "rfs_year": 2024,
+      "length_km": 500,
+      "owners": [
+        "GlobalConnect"
+      ],
+      "landing_countries": [
+        "DE",
+        "DK",
+        "SE"
       ]
     },
     {
@@ -3839,6 +3961,19 @@
       ]
     },
     {
+      "id": "guernsey-jersey-4",
+      "name": "Guernsey-Jersey-4",
+      "rfs_year": 1994,
+      "length_km": 36,
+      "owners": [
+        "Sure"
+      ],
+      "landing_countries": [
+        "GG",
+        "JE"
+      ]
+    },
+    {
       "id": "gulf-bridge-international-cable-systemmiddle-east-north-africa-cable-system-gbicsmena",
       "name": "Gulf Bridge International Cable System/Middle East North Africa Cable System (GBICS/MENA)",
       "rfs_year": 2012,
@@ -4006,7 +4141,8 @@
       ],
       "landing_countries": [
         "GB",
-        "IE"
+        "IE",
+        "IM"
       ]
     },
     {
@@ -4065,11 +4201,10 @@
     {
       "id": "hawaiian-islands-fiber-link-hifl",
       "name": "Hawaiian Islands Fiber Link (HIFL)",
-      "rfs_year": 2026,
+      "rfs_year": 2027,
       "length_km": 740,
       "owners": [
-        "Ocean Networks",
-        "University of Hawai\u2019i"
+        "Ocean Networks"
       ],
       "landing_countries": [
         "US"
@@ -4094,7 +4229,7 @@
     {
       "id": "hawaiki-nui-1",
       "name": "Hawaiki Nui 1",
-      "rfs_year": 2027,
+      "rfs_year": 2029,
       "length_km": 10000,
       "owners": [
         "BW Digital"
@@ -4133,7 +4268,8 @@
       ],
       "landing_countries": [
         "FR",
-        "GB"
+        "GB",
+        "GG"
       ]
     },
     {
@@ -4215,6 +4351,23 @@
       ],
       "landing_countries": [
         "DK"
+      ]
+    },
+    {
+      "id": "i-2sea",
+      "name": "I-2SEA",
+      "rfs_year": 2029,
+      "length_km": 3600,
+      "owners": [
+        "Lightstorm",
+        "Microsoft",
+        "Singtel",
+        "Tata Communications"
+      ],
+      "landing_countries": [
+        "IN",
+        "MY",
+        "SG"
       ]
     },
     {
@@ -4304,13 +4457,15 @@
         "CIEG"
       ],
       "landing_countries": [
-        "FR"
+        "FR",
+        "GG",
+        "JE"
       ]
     },
     {
       "id": "insica",
       "name": "INSICA",
-      "rfs_year": 2026,
+      "rfs_year": 2027,
       "length_km": 100,
       "owners": [
         "Singtel",
@@ -4335,6 +4490,29 @@
         "GB",
         "NL",
         "NO"
+      ]
+    },
+    {
+      "id": "iokwe",
+      "name": "IOKWE",
+      "rfs_year": 2029,
+      "owners": [
+        "Marshall Islands Telecommunications Authority"
+      ],
+      "landing_countries": [
+        "MH"
+      ]
+    },
+    {
+      "id": "ion-cable-system-1-ics1",
+      "name": "ION Cable System-1 (ICS1)",
+      "rfs_year": 2027,
+      "length_km": 1041,
+      "owners": [
+        "ION Network"
+      ],
+      "landing_countries": [
+        "ID"
       ]
     },
     {
@@ -4567,7 +4745,8 @@
         "Sparkle"
       ],
       "landing_countries": [
-        "IT"
+        "IT",
+        "MC"
       ]
     },
     {
@@ -4642,18 +4821,6 @@
       ],
       "landing_countries": [
         "ID"
-      ]
-    },
-    {
-      "id": "jscfs",
-      "name": "JSCFS",
-      "rfs_year": 1997,
-      "length_km": 342,
-      "owners": [
-        "CW Jamaica"
-      ],
-      "landing_countries": [
-        "JM"
       ]
     },
     {
@@ -4762,6 +4929,18 @@
       ]
     },
     {
+      "id": "jamaica-submarine-cable-festoon-system-jscfs",
+      "name": "Jamaica Submarine Cable Festoon System (JSCFS)",
+      "rfs_year": 1997,
+      "length_km": 342,
+      "owners": [
+        "CW Jamaica"
+      ],
+      "landing_countries": [
+        "JM"
+      ]
+    },
+    {
       "id": "jambi-batam-cable-system-jiba",
       "name": "Jambi-Batam Cable System (JIBA)",
       "rfs_year": 2014,
@@ -4808,7 +4987,7 @@
       "rfs_year": 2020,
       "length_km": 2600,
       "owners": [
-        "Lightstorm Telecom"
+        "Lightstorm"
       ],
       "landing_countries": [
         "GU",
@@ -4823,7 +5002,7 @@
       "owners": [
         "Australia\u2019s Academic and Research Network (AARNET)",
         "Google",
-        "Lightstorm Telecom"
+        "Lightstorm"
       ],
       "landing_countries": [
         "AU",
@@ -5133,8 +5312,18 @@
         "PNG DataCo Limited"
       ],
       "landing_countries": [
-        "ID",
         "PG"
+      ]
+    },
+    {
+      "id": "kunoa-north",
+      "name": "Kunoa North",
+      "rfs_year": 2028,
+      "owners": [
+        "Hawaiian Telcom"
+      ],
+      "landing_countries": [
+        "US"
       ]
     },
     {
@@ -5179,6 +5368,7 @@
     {
       "id": "la-gomera-el-hierro",
       "name": "La Gomera-El Hierro",
+      "rfs_year": 2007,
       "owners": [
         "Telefonica"
       ],
@@ -5270,7 +5460,8 @@
         "Vodafone"
       ],
       "landing_countries": [
-        "GB"
+        "GB",
+        "IM"
       ]
     },
     {
@@ -5282,7 +5473,8 @@
         "Vodafone"
       ],
       "landing_countries": [
-        "GB"
+        "GB",
+        "IM"
       ]
     },
     {
@@ -5326,7 +5518,7 @@
     {
       "id": "le-vasa",
       "name": "Le Vasa",
-      "rfs_year": 2026,
+      "rfs_year": 2027,
       "owners": [
         "ASTCA"
       ],
@@ -5584,6 +5776,21 @@
       ]
     },
     {
+      "id": "mvista",
+      "name": "MViSTA",
+      "rfs_year": 2028,
+      "length_km": 2400,
+      "owners": [
+        "AsiaHub1"
+      ],
+      "landing_countries": [
+        "MY",
+        "SG",
+        "TH",
+        "VN"
+      ]
+    },
+    {
       "id": "mainone",
       "name": "MainOne",
       "rfs_year": 2010,
@@ -5696,7 +5903,8 @@
         "BT"
       ],
       "landing_countries": [
-        "GB"
+        "GB",
+        "IM"
       ]
     },
     {
@@ -5746,7 +5954,8 @@
       "rfs_year": 2008,
       "length_km": 1055,
       "owners": [
-        "Matrix NAP Info"
+        "Matrix NAP Info",
+        "Matrix Networks"
       ],
       "landing_countries": [
         "ID",
@@ -5768,7 +5977,7 @@
     {
       "id": "maya-1-2",
       "name": "Maya-1.2",
-      "rfs_year": 2000,
+      "rfs_year": 2026,
       "length_km": 2386,
       "owners": [
         "Hondutel",
@@ -5830,7 +6039,7 @@
       "rfs_year": 2026,
       "length_km": 8760,
       "owners": [
-        "AFRIX Telecom"
+        "AFR-IX Telecom"
       ],
       "landing_countries": [
         "CY",
@@ -5867,7 +6076,7 @@
       "rfs_year": 2021,
       "length_km": 3200,
       "owners": [
-        "*Canal+ Telecom",
+        "***Canal+ Telecom***",
         "CEB Fibernet",
         "Emtel",
         "SFR",
@@ -6211,6 +6420,7 @@
       "length_km": 50,
       "owners": [
         "BW Digital",
+        "Hawaiki Submarine Cable LP",
         "Telin"
       ],
       "landing_countries": [
@@ -6448,6 +6658,18 @@
       ]
     },
     {
+      "id": "oceanic-tatitlek-telecommunications-enhancement-route-otter",
+      "name": "Oceanic Tatitlek Telecommunications Enhancement Route (OTTER)",
+      "rfs_year": 2027,
+      "length_km": 50,
+      "owners": [
+        "Copper Valley Telecom"
+      ],
+      "landing_countries": [
+        "US"
+      ]
+    },
+    {
       "id": "ogasawara-cable-network",
       "name": "Ogasawara Cable Network",
       "rfs_year": 2011,
@@ -6463,7 +6685,7 @@
       "id": "okinawa-cellular-cable",
       "name": "Okinawa Cellular Cable",
       "rfs_year": 2020,
-      "length_km": 760,
+      "length_km": 780,
       "owners": [
         "Okinawa Cellular Telephone Company"
       ],
@@ -6496,9 +6718,20 @@
       ]
     },
     {
+      "id": "olaluz",
+      "name": "OlaLuz",
+      "owners": [
+        "Google"
+      ],
+      "landing_countries": [
+        "DO",
+        "US"
+      ]
+    },
+    {
       "id": "olisipo",
       "name": "Olisipo",
-      "rfs_year": 2026,
+      "rfs_year": 2029,
       "length_km": 110,
       "owners": [
         "EllaLink"
@@ -6517,6 +6750,7 @@
       ],
       "landing_countries": [
         "AU",
+        "CC",
         "IN",
         "OM"
       ]
@@ -6532,6 +6766,19 @@
       "landing_countries": [
         "DZ",
         "ES"
+      ]
+    },
+    {
+      "id": "orient-island-ring",
+      "name": "Orient Island Ring",
+      "rfs_year": 2028,
+      "length_km": 553,
+      "owners": [
+        "Canalink"
+      ],
+      "landing_countries": [
+        "ES",
+        "MA"
       ]
     },
     {
@@ -6665,7 +6912,7 @@
       "length_km": 6163,
       "owners": [
         "Liberty Networks",
-        "Setar",
+        "SETAR",
         "Telconet",
         "Telxius",
         "United Telecommunication Services (UTS)"
@@ -6676,7 +6923,8 @@
         "CW",
         "EC",
         "PA",
-        "US"
+        "US",
+        "VG"
       ]
     },
     {
@@ -6723,7 +6971,6 @@
       "id": "palapa-ring-east",
       "name": "Palapa Ring East",
       "rfs_year": 2019,
-      "length_km": 6300,
       "owners": [
         "Indonesian Government",
         "Moratelindo",
@@ -6909,6 +7156,19 @@
       ]
     },
     {
+      "id": "petal",
+      "name": "Petal",
+      "rfs_year": 2029,
+      "length_km": 7000,
+      "owners": [
+        "Meta"
+      ],
+      "landing_countries": [
+        "FR",
+        "US"
+      ]
+    },
+    {
       "id": "petropavlovsk-kamchatsky---anadyr",
       "name": "Petropavlovsk-Kamchatsky - Anadyr",
       "rfs_year": 2022,
@@ -7083,6 +7343,18 @@
       ]
     },
     {
+      "id": "pukpuk-1-cable-system",
+      "name": "Pukpuk-1 Cable System",
+      "rfs_year": 2026,
+      "length_km": 134,
+      "owners": [
+        "PNG DataCo Limited"
+      ],
+      "landing_countries": [
+        "ID"
+      ]
+    },
+    {
       "id": "qe-north",
       "name": "Q&E North",
       "rfs_year": 2025,
@@ -7174,7 +7446,7 @@
     {
       "id": "raman",
       "name": "Raman",
-      "rfs_year": 2026,
+      "rfs_year": 2027,
       "length_km": 7376,
       "owners": [
         "Google",
@@ -7211,6 +7483,21 @@
       ],
       "landing_countries": [
         "EG"
+      ]
+    },
+    {
+      "id": "reunion",
+      "name": "ReuNION",
+      "rfs_year": 2028,
+      "owners": [
+        "Free Reunion (Telco OI)",
+        "La R\u00e9union Connect\u00e9e",
+        "Orange",
+        "Zeop (incl. Reunicable)"
+      ],
+      "landing_countries": [
+        "RE",
+        "ZA"
       ]
     },
     {
@@ -7425,7 +7712,7 @@
       "id": "sea-h2x",
       "name": "SEA-H2X",
       "rfs_year": 2026,
-      "length_km": 6000,
+      "length_km": 5746,
       "owners": [
         "China Mobile",
         "China Unicom",
@@ -7433,7 +7720,6 @@
       ],
       "landing_countries": [
         "CN",
-        "MY",
         "PH",
         "SG",
         "TH"
@@ -7448,7 +7734,7 @@
         "GTA TeleGuam",
         "Globe Telecom",
         "Hawaiian Telcom",
-        "Lightstorm Telecom",
+        "Lightstorm",
         "Telin"
       ],
       "landing_countries": [
@@ -7602,6 +7888,7 @@
         "Government of the Netherlands"
       ],
       "landing_countries": [
+        "BL",
         "BQ",
         "KN",
         "SX"
@@ -7951,6 +8238,18 @@
       ]
     },
     {
+      "id": "sharm-el-sheikhtaba",
+      "name": "Sharm El Sheikh\u2013Taba",
+      "rfs_year": 2027,
+      "length_km": 200,
+      "owners": [
+        "Telecom Egypt"
+      ],
+      "landing_countries": [
+        "EG"
+      ]
+    },
+    {
       "id": "sihanoukville-hong-kong-shv-hk",
       "name": "Sihanoukville-Hong Kong (SHV-HK)",
       "rfs_year": 2026,
@@ -7986,6 +8285,7 @@
         "TelEm Group"
       ],
       "landing_countries": [
+        "MF",
         "SX",
         "US"
       ]
@@ -8046,7 +8346,7 @@
       "rfs_year": 2020,
       "length_km": 170,
       "owners": [
-        "Altibox"
+        "Midgard Infra"
       ],
       "landing_countries": [
         "DK",
@@ -8253,11 +8553,13 @@
       "landing_countries": [
         "AG",
         "BB",
+        "BL",
         "DM",
         "GD",
         "GP",
         "KN",
         "LC",
+        "MF",
         "MQ",
         "MS",
         "TT",
@@ -8330,7 +8632,8 @@
         "French Authority of St. Pierre and Miquelon"
       ],
       "landing_countries": [
-        "CA"
+        "CA",
+        "PM"
       ]
     },
     {
@@ -8343,6 +8646,18 @@
         "Inc."
       ],
       "landing_countries": [
+        "US"
+      ]
+    },
+    {
+      "id": "staonuk",
+      "name": "Sta\u2019O\u2019Nuk",
+      "rfs_year": 2029,
+      "owners": [
+        "Amazon Web Services"
+      ],
+      "landing_countries": [
+        "JP",
         "US"
       ]
     },
@@ -8434,7 +8749,7 @@
       "id": "sunoque-iii",
       "name": "Sunoque III",
       "rfs_year": 2027,
-      "length_km": 130,
+      "length_km": 125,
       "owners": [
         "Hydro-Qu\u00e9bec",
         "Telus"
@@ -8733,7 +9048,7 @@
         "Embratel",
         "Liberty Networks",
         "Orange",
-        "Setar"
+        "SETAR"
       ],
       "landing_countries": [
         "US"
@@ -8836,7 +9151,7 @@
       "id": "tamtam",
       "name": "Tamtam",
       "rfs_year": 2027,
-      "length_km": 411,
+      "length_km": 1000,
       "owners": [
         "Prima"
       ],
@@ -8913,10 +9228,10 @@
       ]
     },
     {
-      "id": "tasman-ring-network",
-      "name": "Tasman Ring Network",
-      "rfs_year": 2027,
-      "length_km": 6000,
+      "id": "tasman-ring-network-phase-1",
+      "name": "Tasman Ring Network-Phase 1",
+      "rfs_year": 2029,
+      "length_km": 2300,
       "owners": [
         "Datagrid New Zealand"
       ],
@@ -9022,6 +9337,18 @@
       ]
     },
     {
+      "id": "teide",
+      "name": "Teide",
+      "rfs_year": 2027,
+      "length_km": 225,
+      "owners": [
+        "Canalink"
+      ],
+      "landing_countries": [
+        "ES"
+      ]
+    },
+    {
       "id": "telstra-endeavour",
       "name": "Telstra Endeavour",
       "rfs_year": 2008,
@@ -9049,6 +9376,7 @@
     {
       "id": "tenerife-la-palma",
       "name": "Tenerife-La Palma",
+      "rfs_year": 2011,
       "owners": [
         "Telefonica"
       ],
@@ -9125,7 +9453,7 @@
     {
       "id": "timor-leste-south-submarine-cable-tlssc",
       "name": "Timor-Leste South Submarine Cable (TLSSC)",
-      "rfs_year": 2025,
+      "rfs_year": 2026,
       "length_km": 607,
       "owners": [
         "Government of Timor-Leste"
@@ -9215,7 +9543,7 @@
     {
       "id": "trans-global-cable-system-tgcs",
       "name": "Trans Global Cable System (TGCS)",
-      "rfs_year": 2026,
+      "rfs_year": 2027,
       "length_km": 1200,
       "owners": [
         "Trans Indonesia Supercorridor"
@@ -9374,7 +9702,8 @@
         "Sure"
       ],
       "landing_countries": [
-        "GB"
+        "GB",
+        "GG"
       ]
     },
     {
@@ -9386,7 +9715,8 @@
         "BT"
       ],
       "landing_countries": [
-        "GB"
+        "GB",
+        "JE"
       ]
     },
     {
@@ -9431,6 +9761,7 @@
       "id": "ulysses-2",
       "name": "Ulysses 2",
       "rfs_year": 1997,
+      "length_km": 199,
       "owners": [
         "Verizon"
       ],
@@ -9491,8 +9822,8 @@
       ]
     },
     {
-      "id": "unityeac-pacific",
-      "name": "Unity/EAC-Pacific",
+      "id": "unity",
+      "name": "Unity",
       "rfs_year": 2010,
       "length_km": 9620,
       "owners": [
@@ -9550,7 +9881,7 @@
       "rfs_year": 2028,
       "length_km": 630,
       "owners": [
-        "Altibox"
+        "Midgard Infra"
       ],
       "landing_countries": [
         "DK",
@@ -9560,8 +9891,9 @@
     {
       "id": "vietnam-singapore-cable-system-vts",
       "name": "Vietnam-Singapore Cable System (VTS)",
-      "rfs_year": 2027,
+      "rfs_year": 2030,
       "owners": [
+        "Gulf Development",
         "Singtel",
         "Viettel Corporation"
       ],
@@ -9831,6 +10163,7 @@
         "LB",
         "LK",
         "LY",
+        "MC",
         "MG",
         "MM",
         "MT",
@@ -9856,7 +10189,7 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 19
+      "connectivity_rank": 21
     },
     "AG": {
       "cable_count": 4,
@@ -9865,6 +10198,7 @@
         "AI",
         "AW",
         "BB",
+        "BL",
         "BQ",
         "CW",
         "DM",
@@ -9872,14 +10206,16 @@
         "GP",
         "KN",
         "LC",
+        "MF",
         "MQ",
         "MS",
         "SX",
         "TT",
         "US",
-        "VC"
+        "VC",
+        "VG"
       ],
-      "connectivity_rank": 99
+      "connectivity_rank": 101
     },
     "AI": {
       "cable_count": 1,
@@ -9895,9 +10231,10 @@
         "MQ",
         "SX",
         "TT",
-        "VC"
+        "VC",
+        "VG"
       ],
-      "connectivity_rank": 164
+      "connectivity_rank": 172
     },
     "AL": {
       "cable_count": 4,
@@ -9908,7 +10245,7 @@
         "HR",
         "IT"
       ],
-      "connectivity_rank": 92
+      "connectivity_rank": 96
     },
     "AO": {
       "cable_count": 5,
@@ -9954,7 +10291,7 @@
         "TZ",
         "ZA"
       ],
-      "connectivity_rank": 78
+      "connectivity_rank": 80
     },
     "AR": {
       "cable_count": 8,
@@ -9972,7 +10309,7 @@
         "UY",
         "VE"
       ],
-      "connectivity_rank": 49
+      "connectivity_rank": 53
     },
     "AS": {
       "cable_count": 3,
@@ -9984,14 +10321,16 @@
         "US",
         "WS"
       ],
-      "connectivity_rank": 133
+      "connectivity_rank": 141
     },
     "AU": {
-      "cable_count": 33,
-      "landing_points": 54,
+      "cable_count": 36,
+      "landing_points": 56,
       "connected_countries": [
         "AS",
         "BR",
+        "CC",
+        "CL",
         "CX",
         "FJ",
         "GU",
@@ -10015,22 +10354,24 @@
         "US",
         "ZA"
       ],
-      "connectivity_rank": 9
+      "connectivity_rank": 8
     },
     "AW": {
       "cable_count": 3,
       "landing_points": 3,
       "connected_countries": [
         "AG",
+        "BL",
         "BQ",
         "CO",
         "CW",
         "EC",
         "MQ",
         "PA",
-        "US"
+        "US",
+        "VG"
       ],
-      "connectivity_rank": 114
+      "connectivity_rank": 119
     },
     "AZ": {
       "cable_count": 1,
@@ -10038,7 +10379,7 @@
       "connected_countries": [
         "KZ"
       ],
-      "connectivity_rank": 172
+      "connectivity_rank": 181
     },
     "BB": {
       "cable_count": 3,
@@ -10046,20 +10387,23 @@
       "connected_countries": [
         "AG",
         "AI",
+        "BL",
         "DM",
         "GD",
         "GP",
         "GY",
         "KN",
         "LC",
+        "MF",
         "MQ",
         "MS",
         "SX",
         "TT",
         "US",
-        "VC"
+        "VC",
+        "VG"
       ],
-      "connectivity_rank": 129
+      "connectivity_rank": 135
     },
     "BD": {
       "cable_count": 4,
@@ -10088,7 +10432,7 @@
         "TR",
         "YE"
       ],
-      "connectivity_rank": 102
+      "connectivity_rank": 104
     },
     "BE": {
       "cable_count": 4,
@@ -10096,7 +10440,7 @@
       "connected_countries": [
         "GB"
       ],
-      "connectivity_rank": 110
+      "connectivity_rank": 115
     },
     "BG": {
       "cable_count": 3,
@@ -10107,7 +10451,7 @@
         "TR",
         "UA"
       ],
-      "connectivity_rank": 125
+      "connectivity_rank": 129
     },
     "BH": {
       "cable_count": 7,
@@ -10154,7 +10498,7 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 55
+      "connectivity_rank": 57
     },
     "BJ": {
       "cable_count": 3,
@@ -10182,20 +10526,46 @@
         "TG",
         "ZA"
       ],
-      "connectivity_rank": 112
+      "connectivity_rank": 116
+    },
+    "BL": {
+      "cable_count": 4,
+      "landing_points": 4,
+      "connected_countries": [
+        "AG",
+        "AW",
+        "BB",
+        "BQ",
+        "CW",
+        "DM",
+        "GD",
+        "GP",
+        "KN",
+        "LC",
+        "MF",
+        "MQ",
+        "MS",
+        "SX",
+        "TT",
+        "US",
+        "VC"
+      ],
+      "connectivity_rank": 108
     },
     "BM": {
-      "cable_count": 6,
-      "landing_points": 6,
+      "cable_count": 7,
+      "landing_points": 7,
       "connected_countries": [
         "BR",
         "CO",
+        "DO",
         "ES",
         "PT",
         "US",
-        "VE"
+        "VE",
+        "VG"
       ],
-      "connectivity_rank": 68
+      "connectivity_rank": 59
     },
     "BN": {
       "cable_count": 5,
@@ -10214,7 +10584,7 @@
         "US",
         "VN"
       ],
-      "connectivity_rank": 85
+      "connectivity_rank": 88
     },
     "BQ": {
       "cable_count": 3,
@@ -10222,17 +10592,18 @@
       "connected_countries": [
         "AG",
         "AW",
+        "BL",
         "CW",
         "KN",
         "MQ",
         "SX",
         "US"
       ],
-      "connectivity_rank": 126
+      "connectivity_rank": 131
     },
     "BR": {
       "cable_count": 26,
-      "landing_points": 107,
+      "landing_points": 109,
       "connected_countries": [
         "AO",
         "AR",
@@ -10245,6 +10616,7 @@
         "CV",
         "DO",
         "EC",
+        "ES",
         "GF",
         "GT",
         "IN",
@@ -10255,6 +10627,7 @@
         "PA",
         "PE",
         "PT",
+        "SR",
         "US",
         "UY",
         "VE",
@@ -10281,7 +10654,7 @@
         "US",
         "VE"
       ],
-      "connectivity_rank": 84
+      "connectivity_rank": 86
     },
     "BZ": {
       "cable_count": 2,
@@ -10301,7 +10674,7 @@
         "US",
         "VE"
       ],
-      "connectivity_rank": 141
+      "connectivity_rank": 148
     },
     "CA": {
       "cable_count": 21,
@@ -10312,10 +10685,21 @@
         "IE",
         "IS",
         "JP",
+        "PM",
         "TW",
         "US"
       ],
-      "connectivity_rank": 21
+      "connectivity_rank": 22
+    },
+    "CC": {
+      "cable_count": 1,
+      "landing_points": 1,
+      "connected_countries": [
+        "AU",
+        "IN",
+        "OM"
+      ],
+      "connectivity_rank": 178
     },
     "CD": {
       "cable_count": 5,
@@ -10360,7 +10744,7 @@
         "UG",
         "ZA"
       ],
-      "connectivity_rank": 77
+      "connectivity_rank": 79
     },
     "CG": {
       "cable_count": 2,
@@ -10404,7 +10788,7 @@
         "TZ",
         "ZA"
       ],
-      "connectivity_rank": 138
+      "connectivity_rank": 147
     },
     "CI": {
       "cable_count": 6,
@@ -10458,7 +10842,7 @@
         "TZ",
         "ZA"
       ],
-      "connectivity_rank": 59
+      "connectivity_rank": 60
     },
     "CK": {
       "cable_count": 1,
@@ -10468,17 +10852,19 @@
         "PF",
         "WS"
       ],
-      "connectivity_rank": 169
+      "connectivity_rank": 177
     },
     "CL": {
-      "cable_count": 9,
-      "landing_points": 27,
+      "cable_count": 11,
+      "landing_points": 29,
       "connected_countries": [
         "AR",
+        "AU",
         "BR",
         "CO",
         "DO",
         "EC",
+        "FJ",
         "GT",
         "GU",
         "MP",
@@ -10488,7 +10874,7 @@
         "US",
         "VE"
       ],
-      "connectivity_rank": 47
+      "connectivity_rank": 37
     },
     "CM": {
       "cable_count": 5,
@@ -10512,7 +10898,7 @@
         "TG",
         "ZA"
       ],
-      "connectivity_rank": 88
+      "connectivity_rank": 90
     },
     "CN": {
       "cable_count": 23,
@@ -10570,9 +10956,10 @@
         "PE",
         "TC",
         "US",
-        "VE"
+        "VE",
+        "VG"
       ],
-      "connectivity_rank": 36
+      "connectivity_rank": 35
     },
     "CR": {
       "cable_count": 4,
@@ -10593,7 +10980,7 @@
         "US",
         "VE"
       ],
-      "connectivity_rank": 96
+      "connectivity_rank": 100
     },
     "CU": {
       "cable_count": 4,
@@ -10604,7 +10991,7 @@
         "US",
         "VE"
       ],
-      "connectivity_rank": 98
+      "connectivity_rank": 99
     },
     "CV": {
       "cable_count": 6,
@@ -10625,17 +11012,19 @@
         "NG",
         "PT",
         "SN",
+        "SR",
         "TG",
         "ZA"
       ],
-      "connectivity_rank": 67
+      "connectivity_rank": 71
     },
     "CW": {
-      "cable_count": 7,
-      "landing_points": 7,
+      "cable_count": 8,
+      "landing_points": 8,
       "connected_countries": [
         "AG",
         "AW",
+        "BL",
         "BQ",
         "BS",
         "BZ",
@@ -10653,9 +11042,10 @@
         "TC",
         "TT",
         "US",
-        "VE"
+        "VE",
+        "VG"
       ],
-      "connectivity_rank": 56
+      "connectivity_rank": 51
     },
     "CX": {
       "cable_count": 4,
@@ -10668,11 +11058,11 @@
         "SG",
         "TH"
       ],
-      "connectivity_rank": 101
+      "connectivity_rank": 103
     },
     "CY": {
-      "cable_count": 13,
-      "landing_points": 14,
+      "cable_count": 14,
+      "landing_points": 15,
       "connected_countries": [
         "AE",
         "DZ",
@@ -10699,7 +11089,7 @@
         "TN",
         "TR"
       ],
-      "connectivity_rank": 33
+      "connectivity_rank": 32
     },
     "DE": {
       "cable_count": 10,
@@ -10713,7 +11103,7 @@
         "SE",
         "US"
       ],
-      "connectivity_rank": 40
+      "connectivity_rank": 43
     },
     "DJ": {
       "cable_count": 12,
@@ -10747,6 +11137,7 @@
         "KW",
         "LK",
         "LY",
+        "MC",
         "MG",
         "MM",
         "MV",
@@ -10773,8 +11164,8 @@
       "connectivity_rank": 34
     },
     "DK": {
-      "cable_count": 31,
-      "landing_points": 46,
+      "cable_count": 32,
+      "landing_points": 47,
       "connected_countries": [
         "DE",
         "GB",
@@ -10795,24 +11186,28 @@
         "AG",
         "AI",
         "BB",
+        "BL",
         "GD",
         "GP",
         "KN",
         "LC",
+        "MF",
         "MQ",
         "MS",
         "SX",
         "TT",
         "US",
-        "VC"
+        "VC",
+        "VG"
       ],
-      "connectivity_rank": 146
+      "connectivity_rank": 153
     },
     "DO": {
-      "cable_count": 6,
-      "landing_points": 9,
+      "cable_count": 10,
+      "landing_points": 13,
       "connected_countries": [
         "AR",
+        "BM",
         "BR",
         "BS",
         "BZ",
@@ -10831,13 +11226,15 @@
         "PE",
         "TC",
         "US",
-        "VE"
+        "UY",
+        "VE",
+        "VG"
       ],
-      "connectivity_rank": 62
+      "connectivity_rank": 41
     },
     "DZ": {
-      "cable_count": 7,
-      "landing_points": 11,
+      "cable_count": 6,
+      "landing_points": 10,
       "connected_countries": [
         "AE",
         "BD",
@@ -10865,7 +11262,7 @@
         "TN",
         "YE"
       ],
-      "connectivity_rank": 54
+      "connectivity_rank": 64
     },
     "EC": {
       "cable_count": 5,
@@ -10882,9 +11279,10 @@
         "MX",
         "PA",
         "PE",
-        "US"
+        "US",
+        "VG"
       ],
-      "connectivity_rank": 87
+      "connectivity_rank": 89
     },
     "EE": {
       "cable_count": 8,
@@ -10893,11 +11291,11 @@
         "FI",
         "SE"
       ],
-      "connectivity_rank": 51
+      "connectivity_rank": 54
     },
     "EG": {
-      "cable_count": 23,
-      "landing_points": 39,
+      "cable_count": 24,
+      "landing_points": 41,
       "connected_countries": [
         "AE",
         "AL",
@@ -10932,6 +11330,7 @@
         "LK",
         "LY",
         "MA",
+        "MC",
         "MG",
         "MM",
         "MT",
@@ -10958,17 +11357,18 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 16
+      "connectivity_rank": 15
     },
     "ES": {
-      "cable_count": 35,
-      "landing_points": 74,
+      "cable_count": 36,
+      "landing_points": 77,
       "connected_countries": [
         "AE",
         "AO",
         "BH",
         "BJ",
         "BM",
+        "BR",
         "CD",
         "CG",
         "CI",
@@ -10981,6 +11381,7 @@
         "FR",
         "GA",
         "GB",
+        "GF",
         "GH",
         "GM",
         "GN",
@@ -11012,6 +11413,7 @@
         "SL",
         "SN",
         "SO",
+        "SR",
         "ST",
         "SY",
         "TG",
@@ -11038,6 +11440,7 @@
       "landing_points": 13,
       "connected_countries": [
         "AU",
+        "CL",
         "GU",
         "KI",
         "MP",
@@ -11051,7 +11454,7 @@
         "WF",
         "WS"
       ],
-      "connectivity_rank": 44
+      "connectivity_rank": 47
     },
     "FM": {
       "cable_count": 4,
@@ -11066,7 +11469,7 @@
         "PW",
         "US"
       ],
-      "connectivity_rank": 105
+      "connectivity_rank": 109
     },
     "FO": {
       "cable_count": 2,
@@ -11075,11 +11478,11 @@
         "GB",
         "IS"
       ],
-      "connectivity_rank": 150
+      "connectivity_rank": 157
     },
     "FR": {
-      "cable_count": 34,
-      "landing_points": 45,
+      "cable_count": 35,
+      "landing_points": 46,
       "connected_countries": [
         "AE",
         "AO",
@@ -11097,6 +11500,7 @@
         "ES",
         "GA",
         "GB",
+        "GG",
         "GH",
         "GM",
         "GN",
@@ -11108,6 +11512,7 @@
         "IN",
         "IQ",
         "IT",
+        "JE",
         "JO",
         "KE",
         "KH",
@@ -11148,7 +11553,7 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 8
+      "connectivity_rank": 9
     },
     "GA": {
       "cable_count": 5,
@@ -11200,11 +11605,11 @@
         "TZ",
         "ZA"
       ],
-      "connectivity_rank": 80
+      "connectivity_rank": 77
     },
     "GB": {
-      "cable_count": 65,
-      "landing_points": 151,
+      "cable_count": 66,
+      "landing_points": 152,
       "connected_countries": [
         "AE",
         "AO",
@@ -11222,18 +11627,22 @@
         "FO",
         "FR",
         "GA",
+        "GG",
         "GH",
         "GI",
         "GR",
         "IE",
+        "IM",
         "IN",
         "IQ",
         "IS",
         "IT",
+        "JE",
         "KE",
         "KM",
         "KW",
         "LY",
+        "MC",
         "MG",
         "MZ",
         "NG",
@@ -11261,18 +11670,21 @@
         "AG",
         "AI",
         "BB",
+        "BL",
         "DM",
         "GP",
         "KN",
         "LC",
+        "MF",
         "MQ",
         "MS",
         "SX",
         "TT",
         "US",
-        "VC"
+        "VC",
+        "VG"
       ],
-      "connectivity_rank": 122
+      "connectivity_rank": 128
     },
     "GE": {
       "cable_count": 3,
@@ -11283,7 +11695,7 @@
         "TR",
         "UA"
       ],
-      "connectivity_rank": 124
+      "connectivity_rank": 130
     },
     "GF": {
       "cable_count": 3,
@@ -11291,6 +11703,7 @@
       "connected_countries": [
         "BR",
         "CV",
+        "ES",
         "GY",
         "MA",
         "MQ",
@@ -11299,7 +11712,17 @@
         "SR",
         "TT"
       ],
-      "connectivity_rank": 128
+      "connectivity_rank": 132
+    },
+    "GG": {
+      "cable_count": 5,
+      "landing_points": 6,
+      "connected_countries": [
+        "FR",
+        "GB",
+        "JE"
+      ],
+      "connectivity_rank": 91
     },
     "GH": {
       "cable_count": 6,
@@ -11352,7 +11775,7 @@
         "TZ",
         "ZA"
       ],
-      "connectivity_rank": 60
+      "connectivity_rank": 61
     },
     "GI": {
       "cable_count": 1,
@@ -11364,11 +11787,12 @@
         "GB",
         "IN",
         "LY",
+        "MC",
         "OM",
         "PT",
         "SA"
       ],
-      "connectivity_rank": 166
+      "connectivity_rank": 174
     },
     "GL": {
       "cable_count": 2,
@@ -11377,7 +11801,7 @@
         "CA",
         "IS"
       ],
-      "connectivity_rank": 151
+      "connectivity_rank": 158
     },
     "GM": {
       "cable_count": 1,
@@ -11401,7 +11825,7 @@
         "ST",
         "ZA"
       ],
-      "connectivity_rank": 158
+      "connectivity_rank": 167
     },
     "GN": {
       "cable_count": 1,
@@ -11425,7 +11849,7 @@
         "ST",
         "ZA"
       ],
-      "connectivity_rank": 155
+      "connectivity_rank": 164
     },
     "GP": {
       "cable_count": 4,
@@ -11434,18 +11858,21 @@
         "AG",
         "AI",
         "BB",
+        "BL",
         "DM",
         "GD",
         "KN",
         "LC",
+        "MF",
         "MQ",
         "MS",
         "SX",
         "TT",
         "US",
-        "VC"
+        "VC",
+        "VG"
       ],
-      "connectivity_rank": 107
+      "connectivity_rank": 111
     },
     "GQ": {
       "cable_count": 4,
@@ -11473,8 +11900,8 @@
       "connectivity_rank": 95
     },
     "GR": {
-      "cable_count": 20,
-      "landing_points": 51,
+      "cable_count": 21,
+      "landing_points": 53,
       "connected_countries": [
         "AE",
         "AL",
@@ -11529,7 +11956,7 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 23
+      "connectivity_rank": 20
     },
     "GT": {
       "cable_count": 6,
@@ -11554,11 +11981,11 @@
         "US",
         "VE"
       ],
-      "connectivity_rank": 63
+      "connectivity_rank": 67
     },
     "GU": {
-      "cable_count": 19,
-      "landing_points": 21,
+      "cable_count": 21,
+      "landing_points": 23,
       "connected_countries": [
         "AU",
         "BN",
@@ -11583,7 +12010,7 @@
         "US",
         "VN"
       ],
-      "connectivity_rank": 25
+      "connectivity_rank": 24
     },
     "GW": {
       "cable_count": 1,
@@ -11607,7 +12034,7 @@
         "ST",
         "ZA"
       ],
-      "connectivity_rank": 159
+      "connectivity_rank": 166
     },
     "GY": {
       "cable_count": 3,
@@ -11618,7 +12045,7 @@
         "SR",
         "TT"
       ],
-      "connectivity_rank": 127
+      "connectivity_rank": 134
     },
     "HN": {
       "cable_count": 3,
@@ -11639,7 +12066,7 @@
         "US",
         "VE"
       ],
-      "connectivity_rank": 115
+      "connectivity_rank": 120
     },
     "HR": {
       "cable_count": 2,
@@ -11649,7 +12076,7 @@
         "GR",
         "IT"
       ],
-      "connectivity_rank": 137
+      "connectivity_rank": 146
     },
     "HT": {
       "cable_count": 2,
@@ -11659,11 +12086,11 @@
         "DO",
         "JM"
       ],
-      "connectivity_rank": 142
+      "connectivity_rank": 149
     },
     "ID": {
-      "cable_count": 72,
-      "landing_points": 264,
+      "cable_count": 74,
+      "landing_points": 275,
       "connected_countries": [
         "AE",
         "AU",
@@ -11706,15 +12133,16 @@
         "CA",
         "DK",
         "GB",
+        "IM",
         "IS",
         "NO",
         "US"
       ],
-      "connectivity_rank": 27
+      "connectivity_rank": 28
     },
     "IL": {
-      "cable_count": 7,
-      "landing_points": 14,
+      "cable_count": 8,
+      "landing_points": 15,
       "connected_countries": [
         "CY",
         "FR",
@@ -11724,11 +12152,20 @@
         "SA",
         "TR"
       ],
-      "connectivity_rank": 57
+      "connectivity_rank": 52
+    },
+    "IM": {
+      "cable_count": 6,
+      "landing_points": 7,
+      "connected_countries": [
+        "GB",
+        "IE"
+      ],
+      "connectivity_rank": 70
     },
     "IN": {
-      "cable_count": 23,
-      "landing_points": 51,
+      "cable_count": 24,
+      "landing_points": 53,
       "connected_countries": [
         "AE",
         "AO",
@@ -11736,6 +12173,7 @@
         "BD",
         "BH",
         "BR",
+        "CC",
         "CD",
         "CG",
         "CI",
@@ -11761,6 +12199,7 @@
         "LB",
         "LK",
         "LY",
+        "MC",
         "MG",
         "MM",
         "MU",
@@ -11787,7 +12226,7 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 17
+      "connectivity_rank": 16
     },
     "IQ": {
       "cable_count": 4,
@@ -11831,7 +12270,7 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 93
+      "connectivity_rank": 97
     },
     "IR": {
       "cable_count": 6,
@@ -11851,7 +12290,7 @@
         "SD",
         "YE"
       ],
-      "connectivity_rank": 71
+      "connectivity_rank": 74
     },
     "IS": {
       "cable_count": 4,
@@ -11864,11 +12303,11 @@
         "GL",
         "IE"
       ],
-      "connectivity_rank": 106
+      "connectivity_rank": 110
     },
     "IT": {
-      "cable_count": 36,
-      "landing_points": 80,
+      "cable_count": 37,
+      "landing_points": 81,
       "connected_countries": [
         "AE",
         "AL",
@@ -11903,6 +12342,7 @@
         "LK",
         "LY",
         "MA",
+        "MC",
         "MG",
         "MM",
         "MT",
@@ -11930,6 +12370,16 @@
       ],
       "connectivity_rank": 6
     },
+    "JE": {
+      "cable_count": 3,
+      "landing_points": 4,
+      "connected_countries": [
+        "FR",
+        "GB",
+        "GG"
+      ],
+      "connectivity_rank": 140
+    },
     "JM": {
       "cable_count": 6,
       "landing_points": 15,
@@ -11940,13 +12390,14 @@
         "HT",
         "KY",
         "US",
-        "VE"
+        "VE",
+        "VG"
       ],
-      "connectivity_rank": 64
+      "connectivity_rank": 65
     },
     "JO": {
-      "cable_count": 5,
-      "landing_points": 5,
+      "cable_count": 6,
+      "landing_points": 6,
       "connected_countries": [
         "AE",
         "CY",
@@ -11962,11 +12413,11 @@
         "SA",
         "TH"
       ],
-      "connectivity_rank": 86
+      "connectivity_rank": 68
     },
     "JP": {
-      "cable_count": 50,
-      "landing_points": 118,
+      "cable_count": 52,
+      "landing_points": 120,
       "connected_countries": [
         "AU",
         "BN",
@@ -12033,7 +12484,7 @@
         "YT",
         "ZA"
       ],
-      "connectivity_rank": 41
+      "connectivity_rank": 45
     },
     "KH": {
       "cable_count": 3,
@@ -12057,7 +12508,7 @@
         "VN",
         "YE"
       ],
-      "connectivity_rank": 118
+      "connectivity_rank": 122
     },
     "KI": {
       "cable_count": 2,
@@ -12071,7 +12522,7 @@
         "TK",
         "US"
       ],
-      "connectivity_rank": 145
+      "connectivity_rank": 151
     },
     "KM": {
       "cable_count": 5,
@@ -12112,7 +12563,7 @@
         "YT",
         "ZA"
       ],
-      "connectivity_rank": 79
+      "connectivity_rank": 81
     },
     "KN": {
       "cable_count": 4,
@@ -12121,19 +12572,22 @@
         "AG",
         "AI",
         "BB",
+        "BL",
         "BQ",
         "DM",
         "GD",
         "GP",
         "LC",
+        "MF",
         "MQ",
         "MS",
         "SX",
         "TT",
         "US",
-        "VC"
+        "VC",
+        "VG"
       ],
-      "connectivity_rank": 100
+      "connectivity_rank": 102
     },
     "KR": {
       "cable_count": 16,
@@ -12151,7 +12605,7 @@
         "US",
         "VN"
       ],
-      "connectivity_rank": 28
+      "connectivity_rank": 29
     },
     "KW": {
       "cable_count": 6,
@@ -12195,7 +12649,7 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 61
+      "connectivity_rank": 62
     },
     "KY": {
       "cable_count": 2,
@@ -12205,7 +12659,7 @@
         "JM",
         "US"
       ],
-      "connectivity_rank": 143
+      "connectivity_rank": 150
     },
     "KZ": {
       "cable_count": 1,
@@ -12213,7 +12667,7 @@
       "connected_countries": [
         "AZ"
       ],
-      "connectivity_rank": 173
+      "connectivity_rank": 182
     },
     "LB": {
       "cable_count": 4,
@@ -12229,7 +12683,7 @@
         "SA",
         "SY"
       ],
-      "connectivity_rank": 103
+      "connectivity_rank": 105
     },
     "LC": {
       "cable_count": 2,
@@ -12238,18 +12692,21 @@
         "AG",
         "AI",
         "BB",
+        "BL",
         "DM",
         "GD",
         "GP",
         "KN",
+        "MF",
         "MQ",
         "MS",
         "SX",
         "TT",
         "US",
-        "VC"
+        "VC",
+        "VG"
       ],
-      "connectivity_rank": 147
+      "connectivity_rank": 152
     },
     "LK": {
       "cable_count": 9,
@@ -12282,7 +12739,7 @@
         "TR",
         "YE"
       ],
-      "connectivity_rank": 46
+      "connectivity_rank": 49
     },
     "LR": {
       "cable_count": 1,
@@ -12306,7 +12763,7 @@
         "ST",
         "ZA"
       ],
-      "connectivity_rank": 157
+      "connectivity_rank": 165
     },
     "LT": {
       "cable_count": 3,
@@ -12315,7 +12772,7 @@
         "LV",
         "SE"
       ],
-      "connectivity_rank": 120
+      "connectivity_rank": 125
     },
     "LV": {
       "cable_count": 3,
@@ -12324,7 +12781,7 @@
         "LT",
         "SE"
       ],
-      "connectivity_rank": 121
+      "connectivity_rank": 126
     },
     "LY": {
       "cable_count": 6,
@@ -12343,6 +12800,7 @@
         "IN",
         "IT",
         "MA",
+        "MC",
         "MT",
         "OM",
         "PT",
@@ -12350,11 +12808,11 @@
         "SY",
         "TN"
       ],
-      "connectivity_rank": 70
+      "connectivity_rank": 73
     },
     "MA": {
-      "cable_count": 6,
-      "landing_points": 8,
+      "cable_count": 7,
+      "landing_points": 9,
       "connected_countries": [
         "BJ",
         "BR",
@@ -12373,11 +12831,51 @@
         "MR",
         "MT",
         "PT",
+        "SR",
         "SY",
         "TG",
         "TN"
       ],
-      "connectivity_rank": 66
+      "connectivity_rank": 58
+    },
+    "MC": {
+      "cable_count": 2,
+      "landing_points": 2,
+      "connected_countries": [
+        "AE",
+        "DJ",
+        "EG",
+        "GB",
+        "GI",
+        "IN",
+        "IT",
+        "LY",
+        "OM",
+        "PT",
+        "SA"
+      ],
+      "connectivity_rank": 156
+    },
+    "MF": {
+      "cable_count": 3,
+      "landing_points": 3,
+      "connected_countries": [
+        "AG",
+        "BB",
+        "BL",
+        "DM",
+        "GD",
+        "GP",
+        "KN",
+        "LC",
+        "MQ",
+        "MS",
+        "SX",
+        "TT",
+        "US",
+        "VC"
+      ],
+      "connectivity_rank": 139
     },
     "MG": {
       "cable_count": 5,
@@ -12419,16 +12917,16 @@
         "TZ",
         "ZA"
       ],
-      "connectivity_rank": 76
+      "connectivity_rank": 84
     },
     "MH": {
-      "cable_count": 1,
-      "landing_points": 2,
+      "cable_count": 2,
+      "landing_points": 3,
       "connected_countries": [
         "FM",
         "GU"
       ],
-      "connectivity_rank": 167
+      "connectivity_rank": 159
     },
     "MM": {
       "cable_count": 3,
@@ -12457,7 +12955,7 @@
         "VN",
         "YE"
       ],
-      "connectivity_rank": 117
+      "connectivity_rank": 121
     },
     "MP": {
       "cable_count": 6,
@@ -12472,7 +12970,7 @@
         "TW",
         "US"
       ],
-      "connectivity_rank": 65
+      "connectivity_rank": 69
     },
     "MQ": {
       "cable_count": 5,
@@ -12482,6 +12980,7 @@
         "AI",
         "AW",
         "BB",
+        "BL",
         "BQ",
         "CU",
         "CW",
@@ -12491,13 +12990,15 @@
         "GP",
         "KN",
         "LC",
+        "MF",
         "MS",
         "SX",
         "TT",
         "US",
-        "VC"
+        "VC",
+        "VG"
       ],
-      "connectivity_rank": 83
+      "connectivity_rank": 87
     },
     "MR": {
       "cable_count": 2,
@@ -12522,10 +13023,11 @@
         "PT",
         "SL",
         "SN",
+        "SR",
         "ST",
         "ZA"
       ],
-      "connectivity_rank": 139
+      "connectivity_rank": 144
     },
     "MS": {
       "cable_count": 1,
@@ -12533,17 +13035,19 @@
       "connected_countries": [
         "AG",
         "BB",
+        "BL",
         "DM",
         "GD",
         "GP",
         "KN",
         "LC",
+        "MF",
         "MQ",
         "TT",
         "US",
         "VC"
       ],
-      "connectivity_rank": 171
+      "connectivity_rank": 179
     },
     "MT": {
       "cable_count": 8,
@@ -12570,7 +13074,7 @@
         "SY",
         "TN"
       ],
-      "connectivity_rank": 53
+      "connectivity_rank": 56
     },
     "MU": {
       "cable_count": 5,
@@ -12582,7 +13086,7 @@
         "RE",
         "ZA"
       ],
-      "connectivity_rank": 91
+      "connectivity_rank": 94
     },
     "MV": {
       "cable_count": 11,
@@ -12616,7 +13120,7 @@
         "TN",
         "YE"
       ],
-      "connectivity_rank": 38
+      "connectivity_rank": 39
     },
     "MX": {
       "cable_count": 12,
@@ -12642,11 +13146,11 @@
         "US",
         "VE"
       ],
-      "connectivity_rank": 35
+      "connectivity_rank": 36
     },
     "MY": {
-      "cable_count": 32,
-      "landing_points": 42,
+      "cable_count": 33,
+      "landing_points": 43,
       "connected_countries": [
         "AE",
         "AU",
@@ -12728,7 +13232,7 @@
         "TZ",
         "ZA"
       ],
-      "connectivity_rank": 94
+      "connectivity_rank": 98
     },
     "NA": {
       "cable_count": 2,
@@ -12748,7 +13252,7 @@
         "TG",
         "ZA"
       ],
-      "connectivity_rank": 149
+      "connectivity_rank": 155
     },
     "NC": {
       "cable_count": 4,
@@ -12758,7 +13262,7 @@
         "FJ",
         "VU"
       ],
-      "connectivity_rank": 109
+      "connectivity_rank": 113
     },
     "NG": {
       "cable_count": 8,
@@ -12812,7 +13316,7 @@
         "TZ",
         "ZA"
       ],
-      "connectivity_rank": 48
+      "connectivity_rank": 50
     },
     "NI": {
       "cable_count": 1,
@@ -12832,7 +13336,7 @@
         "US",
         "VE"
       ],
-      "connectivity_rank": 160
+      "connectivity_rank": 169
     },
     "NL": {
       "cable_count": 11,
@@ -12845,7 +13349,7 @@
         "NO",
         "US"
       ],
-      "connectivity_rank": 37
+      "connectivity_rank": 38
     },
     "NO": {
       "cable_count": 17,
@@ -12868,7 +13372,7 @@
         "FM",
         "KI"
       ],
-      "connectivity_rank": 163
+      "connectivity_rank": 171
     },
     "NU": {
       "cable_count": 1,
@@ -12878,11 +13382,11 @@
         "PF",
         "WS"
       ],
-      "connectivity_rank": 170
+      "connectivity_rank": 176
     },
     "NZ": {
       "cable_count": 10,
-      "landing_points": 26,
+      "landing_points": 23,
       "connected_countries": [
         "AS",
         "AU",
@@ -12893,7 +13397,7 @@
         "TO",
         "US"
       ],
-      "connectivity_rank": 39
+      "connectivity_rank": 42
     },
     "OM": {
       "cable_count": 20,
@@ -12904,6 +13408,7 @@
         "AU",
         "BD",
         "BH",
+        "CC",
         "CD",
         "CG",
         "CI",
@@ -12930,6 +13435,7 @@
         "KW",
         "LK",
         "LY",
+        "MC",
         "MG",
         "MM",
         "MV",
@@ -12952,11 +13458,11 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 24
+      "connectivity_rank": 25
     },
     "PA": {
-      "cable_count": 9,
-      "landing_points": 13,
+      "cable_count": 10,
+      "landing_points": 15,
       "connected_countries": [
         "AR",
         "AW",
@@ -12976,9 +13482,10 @@
         "PE",
         "TC",
         "US",
-        "VE"
+        "VE",
+        "VG"
       ],
-      "connectivity_rank": 45
+      "connectivity_rank": 40
     },
     "PE": {
       "cable_count": 4,
@@ -12995,11 +13502,11 @@
         "US",
         "VE"
       ],
-      "connectivity_rank": 108
+      "connectivity_rank": 112
     },
     "PF": {
       "cable_count": 8,
-      "landing_points": 29,
+      "landing_points": 30,
       "connected_countries": [
         "AU",
         "CK",
@@ -13012,7 +13519,7 @@
         "US",
         "WS"
       ],
-      "connectivity_rank": 52
+      "connectivity_rank": 55
     },
     "PG": {
       "cable_count": 5,
@@ -13025,7 +13532,7 @@
         "SG",
         "TL"
       ],
-      "connectivity_rank": 89
+      "connectivity_rank": 92
     },
     "PH": {
       "cable_count": 26,
@@ -13108,7 +13615,7 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 42
+      "connectivity_rank": 46
     },
     "PL": {
       "cable_count": 1,
@@ -13117,7 +13624,15 @@
         "DK",
         "SE"
       ],
-      "connectivity_rank": 162
+      "connectivity_rank": 170
+    },
+    "PM": {
+      "cable_count": 1,
+      "landing_points": 2,
+      "connected_countries": [
+        "CA"
+      ],
+      "connectivity_rank": 180
     },
     "PT": {
       "cable_count": 21,
@@ -13159,6 +13674,7 @@
         "LR",
         "LY",
         "MA",
+        "MC",
         "MG",
         "MR",
         "MT",
@@ -13175,6 +13691,7 @@
         "SL",
         "SN",
         "SO",
+        "SR",
         "ST",
         "SY",
         "TG",
@@ -13183,7 +13700,7 @@
         "US",
         "ZA"
       ],
-      "connectivity_rank": 20
+      "connectivity_rank": 19
     },
     "PW": {
       "cable_count": 2,
@@ -13196,7 +13713,7 @@
         "SG",
         "US"
       ],
-      "connectivity_rank": 148
+      "connectivity_rank": 154
     },
     "QA": {
       "cable_count": 9,
@@ -13248,11 +13765,11 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 43
+      "connectivity_rank": 44
     },
     "RE": {
-      "cable_count": 3,
-      "landing_points": 3,
+      "cable_count": 4,
+      "landing_points": 4,
       "connected_countries": [
         "IN",
         "MG",
@@ -13260,7 +13777,7 @@
         "MY",
         "ZA"
       ],
-      "connectivity_rank": 135
+      "connectivity_rank": 114
     },
     "RO": {
       "cable_count": 1,
@@ -13269,7 +13786,7 @@
         "BG",
         "TR"
       ],
-      "connectivity_rank": 168
+      "connectivity_rank": 175
     },
     "RU": {
       "cable_count": 13,
@@ -13280,7 +13797,7 @@
         "JP",
         "UA"
       ],
-      "connectivity_rank": 32
+      "connectivity_rank": 33
     },
     "SA": {
       "cable_count": 24,
@@ -13319,6 +13836,7 @@
         "LB",
         "LK",
         "LY",
+        "MC",
         "MG",
         "MM",
         "MT",
@@ -13343,7 +13861,7 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 15
+      "connectivity_rank": 17
     },
     "SB": {
       "cable_count": 3,
@@ -13355,7 +13873,7 @@
         "SG",
         "TL"
       ],
-      "connectivity_rank": 113
+      "connectivity_rank": 117
     },
     "SC": {
       "cable_count": 3,
@@ -13400,7 +13918,7 @@
         "TZ",
         "ZA"
       ],
-      "connectivity_rank": 111
+      "connectivity_rank": 118
     },
     "SD": {
       "cable_count": 5,
@@ -13444,7 +13962,7 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 75
+      "connectivity_rank": 83
     },
     "SE": {
       "cable_count": 28,
@@ -13462,8 +13980,8 @@
       "connectivity_rank": 12
     },
     "SG": {
-      "cable_count": 44,
-      "landing_points": 45,
+      "cable_count": 47,
+      "landing_points": 48,
       "connected_countries": [
         "AE",
         "AU",
@@ -13521,7 +14039,7 @@
         "TG",
         "ZA"
       ],
-      "connectivity_rank": 165
+      "connectivity_rank": 173
     },
     "SL": {
       "cable_count": 1,
@@ -13545,7 +14063,7 @@
         "ST",
         "ZA"
       ],
-      "connectivity_rank": 156
+      "connectivity_rank": 163
     },
     "SN": {
       "cable_count": 5,
@@ -13596,7 +14114,7 @@
         "TZ",
         "ZA"
       ],
-      "connectivity_rank": 81
+      "connectivity_rank": 78
     },
     "SO": {
       "cable_count": 6,
@@ -13643,17 +14161,23 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 58
+      "connectivity_rank": 63
     },
     "SR": {
-      "cable_count": 2,
-      "landing_points": 2,
+      "cable_count": 3,
+      "landing_points": 3,
       "connected_countries": [
+        "BR",
+        "CV",
+        "ES",
         "GF",
         "GY",
+        "MA",
+        "MR",
+        "PT",
         "TT"
       ],
-      "connectivity_rank": 144
+      "connectivity_rank": 133
     },
     "ST": {
       "cable_count": 2,
@@ -13677,7 +14201,7 @@
         "SN",
         "ZA"
       ],
-      "connectivity_rank": 140
+      "connectivity_rank": 145
     },
     "SX": {
       "cable_count": 3,
@@ -13686,22 +14210,25 @@
         "AG",
         "AI",
         "BB",
+        "BL",
         "BQ",
         "DM",
         "GD",
         "GP",
         "KN",
         "LC",
+        "MF",
         "MQ",
         "TT",
         "US",
-        "VC"
+        "VC",
+        "VG"
       ],
-      "connectivity_rank": 130
+      "connectivity_rank": 136
     },
     "SY": {
-      "cable_count": 4,
-      "landing_points": 4,
+      "cable_count": 5,
+      "landing_points": 5,
       "connected_countries": [
         "CY",
         "DZ",
@@ -13717,7 +14244,7 @@
         "PT",
         "TN"
       ],
-      "connectivity_rank": 97
+      "connectivity_rank": 85
     },
     "TC": {
       "cable_count": 1,
@@ -13737,7 +14264,7 @@
         "US",
         "VE"
       ],
-      "connectivity_rank": 161
+      "connectivity_rank": 168
     },
     "TG": {
       "cable_count": 3,
@@ -13760,11 +14287,11 @@
         "SH",
         "ZA"
       ],
-      "connectivity_rank": 132
+      "connectivity_rank": 138
     },
     "TH": {
-      "cable_count": 16,
-      "landing_points": 23,
+      "cable_count": 17,
+      "landing_points": 25,
       "connected_countries": [
         "AE",
         "AU",
@@ -13801,7 +14328,7 @@
         "VN",
         "YE"
       ],
-      "connectivity_rank": 29
+      "connectivity_rank": 27
     },
     "TK": {
       "cable_count": 2,
@@ -13813,7 +14340,7 @@
         "NZ",
         "US"
       ],
-      "connectivity_rank": 154
+      "connectivity_rank": 162
     },
     "TL": {
       "cable_count": 3,
@@ -13828,7 +14355,7 @@
         "SG",
         "US"
       ],
-      "connectivity_rank": 116
+      "connectivity_rank": 123
     },
     "TN": {
       "cable_count": 5,
@@ -13860,7 +14387,7 @@
         "SY",
         "TH"
       ],
-      "connectivity_rank": 90
+      "connectivity_rank": 93
     },
     "TO": {
       "cable_count": 3,
@@ -13872,7 +14399,7 @@
         "NZ",
         "US"
       ],
-      "connectivity_rank": 134
+      "connectivity_rank": 142
     },
     "TR": {
       "cable_count": 6,
@@ -13901,7 +14428,7 @@
         "UA",
         "YE"
       ],
-      "connectivity_rank": 72
+      "connectivity_rank": 75
     },
     "TT": {
       "cable_count": 6,
@@ -13910,6 +14437,7 @@
         "AG",
         "AI",
         "BB",
+        "BL",
         "CW",
         "DM",
         "GD",
@@ -13918,20 +14446,22 @@
         "GY",
         "KN",
         "LC",
+        "MF",
         "MQ",
         "MS",
         "SR",
         "SX",
         "US",
-        "VC"
+        "VC",
+        "VG"
       ],
-      "connectivity_rank": 69
+      "connectivity_rank": 72
     },
     "TV": {
       "cable_count": 1,
       "landing_points": 1,
       "connected_countries": [],
-      "connectivity_rank": 175
+      "connectivity_rank": 184
     },
     "TW": {
       "cable_count": 21,
@@ -13952,7 +14482,7 @@
         "US",
         "VN"
       ],
-      "connectivity_rank": 22
+      "connectivity_rank": 23
     },
     "TZ": {
       "cable_count": 5,
@@ -13992,7 +14522,7 @@
         "SO",
         "ZA"
       ],
-      "connectivity_rank": 74
+      "connectivity_rank": 82
     },
     "UA": {
       "cable_count": 3,
@@ -14003,7 +14533,7 @@
         "RU",
         "TR"
       ],
-      "connectivity_rank": 131
+      "connectivity_rank": 137
     },
     "UG": {
       "cable_count": 2,
@@ -14011,11 +14541,11 @@
       "connected_countries": [
         "CD"
       ],
-      "connectivity_rank": 153
+      "connectivity_rank": 161
     },
     "US": {
-      "cable_count": 117,
-      "landing_points": 281,
+      "cable_count": 124,
+      "landing_points": 289,
       "connected_countries": [
         "AG",
         "AR",
@@ -14023,6 +14553,7 @@
         "AU",
         "AW",
         "BB",
+        "BL",
         "BM",
         "BN",
         "BQ",
@@ -14061,6 +14592,7 @@
         "KR",
         "KY",
         "LC",
+        "MF",
         "MP",
         "MQ",
         "MS",
@@ -14088,6 +14620,7 @@
         "UY",
         "VC",
         "VE",
+        "VG",
         "VN",
         "ZA"
       ],
@@ -14099,9 +14632,10 @@
       "connected_countries": [
         "AR",
         "BR",
+        "DO",
         "US"
       ],
-      "connectivity_rank": 104
+      "connectivity_rank": 106
     },
     "VC": {
       "cable_count": 3,
@@ -14110,22 +14644,25 @@
         "AG",
         "AI",
         "BB",
+        "BL",
         "DM",
         "GD",
         "GP",
         "KN",
         "LC",
+        "MF",
         "MQ",
         "MS",
         "SX",
         "TT",
-        "US"
+        "US",
+        "VG"
       ],
-      "connectivity_rank": 123
+      "connectivity_rank": 127
     },
     "VE": {
-      "cable_count": 5,
-      "landing_points": 16,
+      "cable_count": 6,
+      "landing_points": 17,
       "connected_countries": [
         "AR",
         "BM",
@@ -14148,11 +14685,39 @@
         "TC",
         "US"
       ],
-      "connectivity_rank": 82
+      "connectivity_rank": 66
+    },
+    "VG": {
+      "cable_count": 4,
+      "landing_points": 4,
+      "connected_countries": [
+        "AG",
+        "AI",
+        "AW",
+        "BB",
+        "BM",
+        "CO",
+        "CW",
+        "DM",
+        "DO",
+        "EC",
+        "GD",
+        "GP",
+        "JM",
+        "KN",
+        "LC",
+        "MQ",
+        "PA",
+        "SX",
+        "TT",
+        "US",
+        "VC"
+      ],
+      "connectivity_rank": 107
     },
     "VN": {
-      "cable_count": 8,
-      "landing_points": 8,
+      "cable_count": 9,
+      "landing_points": 9,
       "connected_countries": [
         "AE",
         "BN",
@@ -14180,7 +14745,7 @@
         "US",
         "YE"
       ],
-      "connectivity_rank": 50
+      "connectivity_rank": 48
     },
     "VU": {
       "cable_count": 2,
@@ -14189,7 +14754,7 @@
         "FJ",
         "NC"
       ],
-      "connectivity_rank": 152
+      "connectivity_rank": 160
     },
     "WF": {
       "cable_count": 1,
@@ -14198,7 +14763,7 @@
         "FJ",
         "WS"
       ],
-      "connectivity_rank": 174
+      "connectivity_rank": 183
     },
     "WS": {
       "cable_count": 3,
@@ -14211,7 +14776,7 @@
         "PF",
         "WF"
       ],
-      "connectivity_rank": 136
+      "connectivity_rank": 143
     },
     "YE": {
       "cable_count": 5,
@@ -14249,7 +14814,7 @@
         "TR",
         "VN"
       ],
-      "connectivity_rank": 73
+      "connectivity_rank": 76
     },
     "YT": {
       "cable_count": 3,
@@ -14258,11 +14823,11 @@
         "KE",
         "KM"
       ],
-      "connectivity_rank": 119
+      "connectivity_rank": 124
     },
     "ZA": {
-      "cable_count": 13,
-      "landing_points": 18,
+      "cable_count": 14,
+      "landing_points": 19,
       "connected_countries": [
         "AE",
         "AO",

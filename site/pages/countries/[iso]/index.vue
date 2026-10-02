@@ -37,6 +37,9 @@
       <!-- Country Info Card -->
       <CountryInfoCard v-if="countryInfo" :info="countryInfo" />
 
+      <!-- Leaders and officials (people profiles) -->
+      <CountryLeaders v-if="(country as any).iso3" :iso3="(country as any).iso3" />
+
       <!-- ==================== Category 1: Overview ==================== -->
       <div id="cat-overview" class="mb-16 scroll-mt-24">
         <div class="flex items-center gap-4 mb-8">

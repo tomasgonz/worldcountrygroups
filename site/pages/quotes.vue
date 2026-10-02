@@ -141,7 +141,7 @@
             <blockquote class="font-serif text-xl sm:text-[1.35rem] leading-snug text-primary-900" v-html="'&ldquo;' + highlight(x.q) + '&rdquo;'" />
             <div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
               <span class="text-lg leading-none">{{ flag(x.iso2) }}</span>
-              <span v-if="x.speaker" class="font-medium text-primary-800">{{ x.speaker }}</span>
+              <NuxtLink v-if="x.speaker" :to="`/people?q=${encodeURIComponent(x.speaker)}`" class="font-medium text-primary-800 hover:text-accent-700">{{ x.speaker }}</NuxtLink>
               <span v-if="x.title" class="text-primary-500">{{ x.title }},</span>
               <button class="text-primary-700 hover:text-accent-700" @click="f.country = x.iso3; apply()">{{ x.country }}</button>
               <span class="text-primary-300">&middot;</span>

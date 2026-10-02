@@ -197,7 +197,7 @@
               <template v-for="s in tableRows" :key="s.iso3">
                 <tr class="border-b border-primary-50 hover:bg-primary-50/60 cursor-pointer" @click="open = open === s.iso3 ? null : s.iso3">
                   <td class="px-4 py-2.5 whitespace-nowrap"><span class="mr-1.5">{{ s.iso2 ? isoToFlag(s.iso2) : '' }}</span><NuxtLink :to="`/countries/${s.iso3.toLowerCase()}/speeches`" class="text-primary-900 hover:text-accent-700" @click.stop>{{ s.name }}</NuxtLink></td>
-                  <td class="px-4 py-2.5 text-primary-600 hidden md:table-cell">{{ s.speaker }}<div class="text-[11px] text-primary-400">{{ s.title }}</div></td>
+                  <td class="px-4 py-2.5 text-primary-600 hidden md:table-cell"><NuxtLink v-if="s.speaker" :to="`/people?q=${encodeURIComponent(s.speaker)}`" class="hover:text-accent-700" @click.stop>{{ s.speaker }}</NuxtLink><div class="text-[11px] text-primary-400">{{ s.title }}</div></td>
                   <td class="px-4 py-2.5">
                     <span class="inline-flex items-center gap-1.5 text-xs text-primary-700"><span class="w-2 h-2 rounded-full" :style="{ background: toneColor(s.tone) }" />{{ s.tone }}</span>
                   </td>

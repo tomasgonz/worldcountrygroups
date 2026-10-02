@@ -47,3 +47,7 @@ site/server/data/pdfs-*/
 
 # Derived from the speech index by scripts/build_quotes.py
 site/server/data/quotes-index.json
+
+# Derived people directory (scripts/build_people.py)
+site/server/data/people-index.json
+site/server/data/people-wikidata.json

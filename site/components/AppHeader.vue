@@ -174,6 +174,7 @@ const navItems: NavItem[] = [
     children: [
       { to: '/groups', label: 'Groups', desc: 'International organizations' },
       { to: '/countries', label: 'Countries', desc: 'Country profiles & data' },
+      { to: '/people', label: 'People', desc: 'Leaders, ministers and UN officials' },
       { to: '/compare', label: 'Compare', desc: 'Side-by-side analysis' },
     ],
   },

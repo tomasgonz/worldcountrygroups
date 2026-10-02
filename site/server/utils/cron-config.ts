@@ -32,6 +32,7 @@ const DEFAULT_JOBS: CronJob[] = [
   { id: 'send-digests', label: 'Watchlist Email Digests', script: 'scripts/send_digests.py', schedule: '0 7 * * *', enabled: true, lastRun: null, lastError: null, logFile: '/tmp/send-digests.log' },
   { id: 'fetch-gdelt', label: 'Media Coverage (GDELT)', script: 'scripts/fetch_gdelt.py', schedule: '30 2 * * *', enabled: true, lastRun: null, lastError: null, logFile: '/tmp/fetch-gdelt.log' },
   { id: 'fetch-unsc', label: 'Security Council Record', script: 'scripts/fetch_unsc.py', schedule: '15 */6 * * *', enabled: true, lastRun: null, lastError: null, logFile: '/tmp/fetch-unsc.log' },
+  { id: 'build-people', label: 'People directory', script: 'scripts/build_people.py', schedule: '40 */6 * * *', enabled: true, lastRun: null, lastError: null, logFile: '/tmp/build-people.log' },
   { id: 'fetch-alliances', label: 'Alliances (CoW)', script: 'scripts/fetch_cow_alliances.py', schedule: '0 6 * * 0', enabled: false, lastRun: null, lastError: null, logFile: '/tmp/fetch-alliances.log' },
   { id: 'fetch-cables', label: 'Submarine Cables', script: 'scripts/fetch_submarine_cables.py', schedule: '0 7 * * 0', enabled: false, lastRun: null, lastError: null, logFile: '/tmp/fetch-cables.log' },
   { id: 'fetch-visa', label: 'Visa Restrictions', script: 'scripts/fetch_visa_data.py', schedule: '0 8 * * 0', enabled: false, lastRun: null, lastError: null, logFile: '/tmp/fetch-visa.log' },
