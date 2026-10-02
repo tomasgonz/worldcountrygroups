@@ -50,27 +50,6 @@
       />
     </template>
 
-    <!-- UN Monitor -->
-    <template v-if="activeTab === 'un-monitor'">
-      <div v-if="unMonitor.error" class="bg-white rounded-2xl border border-red-100 p-6 text-center mb-6">
-        <p class="text-red-600 text-sm">{{ unMonitor.error }}</p>
-      </div>
-      <div v-if="unMonitor.pending" class="space-y-6">
-        <div v-for="i in 3" :key="i" class="bg-white rounded-2xl border border-primary-100 p-6">
-          <div class="h-5 bg-primary-100 rounded w-48 mb-4 animate-pulse"></div>
-          <div class="grid grid-cols-4 gap-4">
-            <div v-for="j in 4" :key="j" class="h-16 bg-primary-50 rounded-xl animate-pulse"></div>
-          </div>
-        </div>
-      </div>
-      <IntelligenceUNMonitor
-        v-if="unMonitor.data"
-        :data="unMonitor.data"
-        :ai-status="aiStatus"
-        @view-country="viewCountryFromWatchlist"
-      />
-    </template>
-
     <!-- Country Briefing -->
     <template v-if="activeTab === 'briefing'">
       <IntelligenceCountrySelector
@@ -164,14 +143,12 @@ const briefing = reactive(useCountryBriefing())
 const bilateral = reactive(useBilateralPrep())
 const trends = reactive(useGroupTrends())
 const chat = reactive(useIntelligenceChat())
-const unMonitor = reactive(useUNMonitor())
 const { state: bookmarkState, fetchBookmarks } = useBookmarks()
 
 const aiStatus = ref<{ configured: boolean; provider: string | null } | null>(null)
 
 const tabs = [
   { id: 'watchlist', label: 'Watchlist', desc: 'Your bookmarked countries' },
-  { id: 'un-monitor', label: 'UN Monitor ↗', desc: 'Now a page of its own' },
   { id: 'briefing', label: 'Country Briefing', desc: 'Single-country analysis' },
   { id: 'bilateral', label: 'Country Comparator', desc: 'Compare two countries' },
   { id: 'trends', label: 'Group Trends', desc: 'Group-level patterns' },
@@ -179,6 +156,7 @@ const tabs = [
 ]
 
 const activeTab = ref((route.query.tab as string) || 'briefing')
+// old links to the former UN Monitor tab
 if (activeTab.value === 'un-monitor') navigateTo('/un', { replace: true })
 const initialIso = route.query.iso as string || ''
 const initialA = route.query.a as string || ''
@@ -196,13 +174,8 @@ useHead({
 })
 
 function setActiveTab(tabId: string) {
-  // The UN Monitor is now its own page in the main menu
-  if (tabId === 'un-monitor') { navigateTo('/un'); return }
   activeTab.value = tabId
   router.replace({ query: { tab: tabId === 'briefing' ? undefined : tabId } })
-  if (tabId === 'un-monitor' && !unMonitor.data && !unMonitor.pending) {
-    unMonitor.fetch()
-  }
   updateChatContext()
 }
 
@@ -255,9 +228,7 @@ onMounted(async () => {
   // Fetch bookmarks for watchlist
   fetchBookmarks()
 
-  if (activeTab.value === 'un-monitor') {
-    unMonitor.fetch()
-  } else if (activeTab.value === 'briefing' && initialIso) {
+  if (activeTab.value === 'briefing' && initialIso) {
     const waitForCountries = () => new Promise<void>((resolve) => {
       if (allCountries.value) return resolve()
       const stop = watch(allCountries, (val) => { if (val) { stop(); resolve() } })
