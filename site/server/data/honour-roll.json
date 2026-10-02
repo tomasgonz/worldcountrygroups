@@ -1,11 +1,11 @@
 {
  "_meta": {
-  "generated": "2026-09-28T07:00:01.613242+00:00",
+  "generated": "2026-10-02T14:12:53.843492+00:00",
   "source": "https://www.un.org/en/ga/contributions/honourroll.shtml",
-  "asOfDate": "2026-09-21",
+  "asOfDate": "2026-10-01",
   "budgetYear": 2026,
-  "totalPaidReported": 141,
-  "totalPaidMatched": 141,
+  "totalPaidReported": 143,
+  "totalPaidMatched": 143,
   "unmatchedNames": []
  },
  "paid": {
@@ -995,6 +995,20 @@
    "section": "later-in-full",
    "amountUsd": 190738,
    "datePaid": "2026-09-21"
+  },
+  "SAU": {
+   "name": "Saudi Arabia",
+   "officialName": "Saudi Arabia",
+   "section": "later-in-full",
+   "amountUsd": 38939004,
+   "datePaid": "2026-10-01"
+  },
+  "UGA": {
+   "name": "Uganda",
+   "officialName": "Uganda",
+   "section": "later-in-full",
+   "amountUsd": 317897,
+   "datePaid": "2026-10-01"
   }
  },
  "unpaidIso3": [
@@ -1033,7 +1047,6 @@
   "OMN",
   "PLW",
   "PNG",
-  "SAU",
   "SDN",
   "SLB",
   "SLV",
@@ -1044,7 +1057,6 @@
   "SYR",
   "TON",
   "TTO",
-  "UGA",
   "USA",
   "VCT",
   "VEN",
@@ -1060,7 +1072,8 @@
    "May": 111,
    "June": 119,
    "July": 123,
-   "August": 132
+   "August": 132,
+   "September": 141
   },
   "2025": {
    "January": 35,

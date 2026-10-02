@@ -172,6 +172,7 @@
                   <a :href="item.url" target="_blank" rel="noopener" class="text-sm text-primary-800 hover:text-accent-700 leading-snug">{{ cleanTitle(item.title) }}</a>
                   <div class="text-[11px] text-primary-400 mt-0.5 flex flex-wrap gap-x-2">
                     <span>{{ sourceName(item.source) }}</span>
+                    <span v-if="item.sourceOwnership" class="text-amber-700">{{ item.sourceOwnership }}</span>
                     <span v-if="item.countries?.length">{{ item.countries.slice(0, 4).map(flagFor).join(' ') }}</span>
                   </div>
                 </div>

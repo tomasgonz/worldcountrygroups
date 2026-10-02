@@ -24,7 +24,7 @@ OUTPUT_FILE = os.path.join(DATA_DIR, "news-feed.json")
 STATS_FILE = os.path.join(DATA_DIR, "country-stats.json")
 CONFIG_FILE = os.path.join(DATA_DIR, "news-config.json")
 
-MAX_ARTICLES = 500
+MAX_ARTICLES = 1600
 REQUEST_TIMEOUT = 30
 
 # Manual aliases for country name matching
@@ -179,6 +179,56 @@ TIER_TYPE_MAP = {
 }
 
 
+# Who runs the outlet, shown next to the source so readers can weigh it.
+# Only set where ownership is a material fact (state-run or state-funded media).
+SOURCE_OWNERSHIP = {
+    "tass": "state-run (Russia)",
+    "al-jazeera": "state-funded (Qatar)",
+}
+
+TIER_TYPE_MAP.update({
+    "whats-in-blue":          {"tier": 3, "type": "specialist-media"},
+    "ipi-global-observatory": {"tier": 3, "type": "think-tank"},
+    "just-security":          {"tier": 3, "type": "specialist-media"},
+    "war-on-the-rocks":       {"tier": 3, "type": "specialist-media"},
+    "lowy-interpreter":       {"tier": 3, "type": "think-tank"},
+    "south-centre":           {"tier": 3, "type": "think-tank"},
+    "un-news-peace":          {"tier": 1, "type": "official"},
+    "un-news-humanitarian":   {"tier": 1, "type": "official"},
+    "un-news-migrants":       {"tier": 1, "type": "official"},
+    "un-news-middle-east":    {"tier": 1, "type": "official"},
+    "un-news-asia-pacific":   {"tier": 1, "type": "official"},
+    "eu-commission":          {"tier": 2, "type": "official"},
+    "consilium":              {"tier": 2, "type": "official"},
+    "ecowas":                 {"tier": 3, "type": "regional-org"},
+    "allafrica":              {"tier": 4, "type": "regional-news"},
+    "daily-maverick":         {"tier": 4, "type": "regional-news"},
+    "premium-times":          {"tier": 4, "type": "regional-news"},
+    "buenos-aires-times":     {"tier": 4, "type": "regional-news"},
+    "mexico-news-daily":      {"tier": 4, "type": "regional-news"},
+    "caribbean-news-global":  {"tier": 4, "type": "regional-news"},
+    "rnz-pacific":            {"tier": 4, "type": "regional-news"},
+    "scmp-world":             {"tier": 4, "type": "regional-news"},
+    "dawn":                   {"tier": 4, "type": "regional-news"},
+    "straits-times-world":    {"tier": 4, "type": "regional-news"},
+    "the-hindu-intl":         {"tier": 4, "type": "regional-news"},
+    "nikkei-asia":            {"tier": 4, "type": "regional-news"},
+    "al-monitor":             {"tier": 3, "type": "specialist-media"},
+    "politico-eu":            {"tier": 4, "type": "regional-news"},
+    "bbc-world":              {"tier": 4, "type": "wire"},
+    "guardian-world":         {"tier": 4, "type": "wire"},
+    "gnews-unhcr":            {"tier": 5, "type": "aggregator"},
+    "gnews-wfp":              {"tier": 5, "type": "aggregator"},
+    "gnews-unicef":           {"tier": 5, "type": "aggregator"},
+    "gnews-who":              {"tier": 5, "type": "aggregator"},
+    "gnews-african-union":    {"tier": 5, "type": "aggregator"},
+    "gnews-caricom":          {"tier": 5, "type": "aggregator"},
+    "gnews-pacific-forum":    {"tier": 5, "type": "aggregator"},
+    "gnews-sids":             {"tier": 5, "type": "aggregator"},
+    "gnews-un-sg":            {"tier": 5, "type": "aggregator"},
+})
+
+
 def load_country_flags():
     """Load site/server/data/country-flags.json. Returns a dict mapping
     iso3 country code -> list of flag names (e.g. 'is_p5', 'is_unsc_current')."""
@@ -221,6 +271,10 @@ def enrich_article(article, *, now_iso, country_flags_lookup, existing=None):
     article["language"] = article.get("language", "en")
     article["sourceTier"] = tier_type["tier"]
     article["sourceType"] = tier_type["type"]
+    if sid in SOURCE_OWNERSHIP:
+        article["sourceOwnership"] = SOURCE_OWNERSHIP[sid]
+    else:
+        article.pop("sourceOwnership", None)
 
     text = f"{article.get('title','')} {article.get('description','')}"
     article["unBodyTags"] = extract_un_body_tags(text)
@@ -289,19 +343,31 @@ def make_id(title, url):
 
 
 def parse_rss_date(date_str):
-    """Parse an RSS date string to ISO format."""
+    """Parse an RSS/Atom date string to ISO format; "" when it can't be read
+    (the caller then treats the item as undated instead of stamping it "now")."""
     if not date_str:
-        return datetime.now(timezone.utc).isoformat()
+        return ""
     try:
-        dt = parsedate_to_datetime(date_str)
-        return dt.isoformat()
+        return parsedate_to_datetime(date_str).isoformat()
     except Exception:
-        # Try ISO format
+        pass
+    try:
+        return datetime.fromisoformat(date_str.replace("Z", "+00:00")).isoformat()
+    except Exception:
+        pass
+    # e.g. Crisis Group: "Friday, September 25, 2026 - 15:56" (assumed UTC), also in French
+    fr = {"lundi": "Monday", "mardi": "Tuesday", "mercredi": "Wednesday", "jeudi": "Thursday", "vendredi": "Friday",
+          "samedi": "Saturday", "dimanche": "Sunday", "janvier": "January", "février": "February", "fevrier": "February",
+          "mars": "March", "avril": "April", "mai": "May", "juin": "June", "juillet": "July", "août": "August",
+          "aout": "August", "septembre": "September", "octobre": "October", "novembre": "November", "décembre": "December",
+          "decembre": "December"}
+    date_str = re.sub(r"[A-Za-zÀ-ÿ]+", lambda m: fr.get(m.group(0).lower(), m.group(0)), date_str)
+    for fmt in ("%A, %B %d, %Y - %H:%M", "%B %d, %Y - %H:%M", "%d %B %Y", "%B %d, %Y"):
         try:
-            dt = datetime.fromisoformat(date_str.replace("Z", "+00:00"))
-            return dt.isoformat()
+            return datetime.strptime(date_str.strip(), fmt).replace(tzinfo=timezone.utc).isoformat()
         except Exception:
-            return datetime.now(timezone.utc).isoformat()
+            continue
+    return ""
 
 
 def detect_topics(title, description):
@@ -430,6 +496,11 @@ def fetch_rss(url, source_id, patterns, user_agent="WCG-NewsFetcher/1.0"):
             link = (item.findtext("link") or "").strip()
             desc = (item.findtext("description") or "").strip()
             pub_date = (item.findtext("pubDate") or "").strip()
+            if not pub_date:
+                # some RSS feeds (e.g. Council of the EU) date items with an Atom element
+                pub_date = (item.findtext("{http://www.w3.org/2005/Atom}updated")
+                            or item.findtext("{http://www.w3.org/2005/Atom}published")
+                            or item.findtext("{http://purl.org/dc/elements/1.1/}date") or "").strip()
 
         # Strip HTML tags from description
         desc = re.sub(r"<[^>]+>", "", desc).strip()
@@ -447,6 +518,7 @@ def fetch_rss(url, source_id, patterns, user_agent="WCG-NewsFetcher/1.0"):
             "url": link,
             "source": source_id,
             "publishedAt": parse_rss_date(pub_date),
+            "_noDate": not parse_rss_date(pub_date),
             "countries": sorted(countries),
             "topics": detect_topics(title, desc),
         })
@@ -718,6 +790,37 @@ def update_source_status(config, source_id, article_count=0, error=None):
             break
 
 
+
+def to_utc_iso(value, fallback):
+    """Normalise any ISO timestamp to UTC so string comparisons sort correctly."""
+    try:
+        dt = datetime.fromisoformat((value or "").replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(timezone.utc).isoformat()
+    except Exception:
+        return fallback
+
+
+def cap_per_source(items, max_total, share=0.08, overrides=None, floor=15):
+    """Keep newest-first items, but no source may exceed `share` of the feed
+    (at least `floor` items); `overrides` sets explicit per-source limits.
+    Stops one high-volume outlet from crowding out everyone else."""
+    overrides = overrides or {}
+    default_cap = max(floor, int(max_total * share))
+    counts, out = {}, []
+    for it in items:
+        src = it.get("source", "")
+        cap = overrides.get(src, default_cap)
+        if counts.get(src, 0) >= cap:
+            continue
+        counts[src] = counts.get(src, 0) + 1
+        out.append(it)
+        if len(out) >= max_total:
+            break
+    return out
+
+
 def main():
     print(f"Fetching diplomatic news... ({datetime.now(timezone.utc).isoformat()})")
 
@@ -816,8 +919,23 @@ def main():
     now_iso = datetime.now(timezone.utc).isoformat()
 
     # Deduplicate: new articles override existing, but preserve firstSeenAt
+    now_dt = datetime.now(timezone.utc)
     for a in all_articles:
         existing = existing_by_id.get(a["id"])
+        # Undated items (e.g. Nikkei Asia) would be re-stamped "now" on every run and
+        # sit on top forever: keep the time we first saw them instead.
+        if a.pop("_noDate", False):
+            a["publishedAt"] = (existing or {}).get("publishedAt") or now_iso
+            a["dateEstimated"] = True
+        # Feeds that mislabel local time as UTC (e.g. Daily Maverick) can be hours ahead
+        try:
+            pdt = datetime.fromisoformat(a.get("publishedAt", "").replace("Z", "+00:00"))
+            if pdt.tzinfo is None:
+                pdt = pdt.replace(tzinfo=timezone.utc)
+            if (pdt - now_dt).total_seconds() > 300:
+                a["publishedAt"] = now_iso
+        except Exception:
+            pass
         enrich_article(a, now_iso=now_iso, country_flags_lookup=country_flags_lookup, existing=existing)
         existing_by_id[a["id"]] = a
 
@@ -842,7 +960,17 @@ def main():
             return _epoch
 
     merged = sorted(existing_by_id.values(), key=_sort_key, reverse=True)
-    merged = merged[:max_articles]
+    share = (config or {}).get("maxSourceShare", 0.08)
+    overrides = {src["id"]: src["maxItems"] for src in (config or {}).get("sources", []) if src.get("maxItems")}
+    merged = cap_per_source(merged, max_articles, share=share, overrides=overrides)
+    for item in merged:
+        item["publishedAt"] = to_utc_iso(item.get("publishedAt"), item.get("publishedAt"))
+    # ownership labels apply to every kept item, including ones fetched in earlier runs
+    for a in merged:
+        if a.get("source") in SOURCE_OWNERSHIP:
+            a["sourceOwnership"] = SOURCE_OWNERSHIP[a["source"]]
+        else:
+            a.pop("sourceOwnership", None)
 
     # Count unique countries covered
     all_countries = set()

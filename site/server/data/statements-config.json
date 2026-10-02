@@ -8,7 +8,7 @@
       "country": "USA",
       "category": "p5-mission",
       "enabled": true,
-      "lastFetch": "2026-10-02T12:00:02.048358+00:00",
+      "lastFetch": "2026-10-02T14:26:36.312894+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -20,7 +20,7 @@
       "country": "GBR",
       "category": "p5-mission",
       "enabled": true,
-      "lastFetch": "2026-10-02T12:00:02.385289+00:00",
+      "lastFetch": "2026-10-02T14:26:36.670231+00:00",
       "lastError": null,
       "statementCount": 20
     },
@@ -31,9 +31,9 @@
       "type": "rss",
       "country": "FRA",
       "category": "p5-mission",
-      "enabled": true,
+      "enabled": false,
       "lastFetch": "2026-10-02T12:00:04.254494+00:00",
-      "lastError": "XML parse error: mismatched tag: line 36, column 4",
+      "lastError": "Retired: onu.delegfrance.org no longer serves a valid feed (returns an HTML page)",
       "statementCount": 0
     },
     {
@@ -51,7 +51,7 @@
         "dateSelector": ".news-text__item__meta-date",
         "baseUrl": "https://russiaun.ru"
       },
-      "lastFetch": "2026-10-02T12:00:05.535129+00:00",
+      "lastFetch": "2026-10-02T14:26:37.526287+00:00",
       "lastError": null,
       "statementCount": 6
     },
@@ -69,7 +69,7 @@
         "linkSelector": "a",
         "baseUrl": "https://www.fmprc.gov.cn/eng/xw/fyrbt"
       },
-      "lastFetch": "2026-10-02T12:00:06.366453+00:00",
+      "lastFetch": "2026-10-02T14:26:38.390394+00:00",
       "lastError": null,
       "statementCount": 14
     },
@@ -81,7 +81,7 @@
       "country": "DEU",
       "category": "major-mission",
       "enabled": true,
-      "lastFetch": "2026-10-02T12:00:07.776323+00:00",
+      "lastFetch": "2026-10-02T14:26:39.678388+00:00",
       "lastError": null,
       "statementCount": 20
     },
@@ -92,9 +92,9 @@
       "type": "rss",
       "country": "FRA",
       "category": "major-mission",
-      "enabled": true,
+      "enabled": false,
       "lastFetch": "2026-10-02T12:00:08.258711+00:00",
-      "lastError": "Failed to fetch https://www.diplomatie.gouv.fr/spip.php?page=backend-fd&lang=en",
+      "lastError": "Retired: diplomatie.gouv.fr blocks automated feed requests (HTTP 403)",
       "statementCount": 0
     },
     {
@@ -156,7 +156,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-02T12:00:14.084965+00:00",
+      "lastFetch": "2026-10-02T14:26:40.533085+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -168,7 +168,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-02T12:00:39.513718+00:00",
+      "lastFetch": "2026-10-02T14:26:41.890360+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -180,7 +180,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-02T12:00:39.654095+00:00",
+      "lastFetch": "2026-10-02T14:26:42.037362+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -191,9 +191,9 @@
       "type": "rss",
       "country": "",
       "category": "un-official",
-      "enabled": true,
+      "enabled": false,
       "lastFetch": "2026-10-02T12:00:39.825169+00:00",
-      "lastError": null,
+      "lastError": "Retired: un.org/sg feed stopped updating; replaced by news source gnews-un-sg and un-spokesperson",
       "statementCount": 10
     },
     {
@@ -204,9 +204,9 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-02T12:05:20.675685+00:00",
+      "lastFetch": "2026-10-02T14:29:26.086894+00:00",
       "lastError": null,
-      "statementCount": 5
+      "statementCount": 16
     },
     {
       "id": "who",
@@ -215,9 +215,9 @@
       "type": "rss",
       "country": "",
       "category": "io-agency",
-      "enabled": true,
+      "enabled": false,
       "lastFetch": "2026-10-02T12:05:20.895261+00:00",
-      "lastError": null,
+      "lastError": "Retired: WHO feed stopped updating; replaced by news source gnews-who",
       "statementCount": 25
     },
     {
@@ -228,7 +228,7 @@
       "country": "",
       "category": "io-agency",
       "enabled": true,
-      "lastFetch": "2026-10-02T12:05:21.012515+00:00",
+      "lastFetch": "2026-10-02T14:29:26.201612+00:00",
       "lastError": null,
       "statementCount": 150
     },
@@ -240,7 +240,7 @@
       "country": "",
       "category": "io-agency",
       "enabled": true,
-      "lastFetch": "2026-10-02T12:05:21.234620+00:00",
+      "lastFetch": "2026-10-02T14:29:26.432100+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -251,9 +251,9 @@
       "type": "rss",
       "country": "",
       "category": "regional-org",
-      "enabled": true,
+      "enabled": false,
       "lastFetch": "2026-10-02T12:05:21.541184+00:00",
-      "lastError": null,
+      "lastError": "Retired: au.int feed stopped updating; replaced by news source gnews-african-union",
       "statementCount": 10
     },
     {
@@ -264,7 +264,7 @@
       "country": "",
       "category": "regional-org",
       "enabled": true,
-      "lastFetch": "2026-10-02T12:05:22.069677+00:00",
+      "lastFetch": "2026-10-02T14:29:26.770303+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -283,7 +283,7 @@
         "articleUrlPrefix": "/uzbekistan/news/",
         "baseUrl": "https://www.un.int"
       },
-      "lastFetch": "2026-10-02T12:05:23.458818+00:00",
+      "lastFetch": "2026-10-02T14:29:28.520917+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -302,7 +302,7 @@
         "datePattern": "/official-statements/(\\d{8})",
         "datePatternFormat": "MMDDYYYY"
       },
-      "lastFetch": "2026-10-02T12:05:26.622659+00:00",
+      "lastFetch": "2026-10-02T14:29:29.859537+00:00",
       "lastError": null,
       "statementCount": 6
     },
@@ -314,21 +314,21 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-02T12:05:27.002072+00:00",
+      "lastFetch": "2026-10-02T14:29:30.035213+00:00",
       "lastError": null,
       "statementCount": 9
     },
     {
       "id": "un-pga",
       "name": "President of the General Assembly",
-      "url": "https://www.un.org/pga/80/feed/",
+      "url": "https://www.un.org/pga/81/feed/",
       "type": "rss",
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-02T12:05:27.395153+00:00",
+      "lastFetch": "2026-10-02T14:29:30.107089+00:00",
       "lastError": null,
-      "statementCount": 10
+      "statementCount": 5
     },
     {
       "id": "ohchr",
@@ -338,7 +338,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-02T12:05:27.811582+00:00",
+      "lastFetch": "2026-10-02T14:29:30.513522+00:00",
       "lastError": null,
       "statementCount": 100
     },
@@ -350,7 +350,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-02T12:05:28.433099+00:00",
+      "lastFetch": "2026-10-02T14:29:30.953454+00:00",
       "lastError": null,
       "statementCount": 100
     },
@@ -362,7 +362,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-02T12:05:28.925080+00:00",
+      "lastFetch": "2026-10-02T14:29:31.479608+00:00",
       "lastError": null,
       "statementCount": 100
     },
@@ -374,7 +374,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-02T12:05:29.208391+00:00",
+      "lastFetch": "2026-10-02T14:29:31.704310+00:00",
       "lastError": null,
       "statementCount": 26
     },
@@ -386,7 +386,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-02T12:05:29.627530+00:00",
+      "lastFetch": "2026-10-02T14:29:32.133784+00:00",
       "lastError": null,
       "statementCount": 100
     },
@@ -398,10 +398,11 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-02T12:05:30.261758+00:00",
+      "lastFetch": "2026-10-02T14:29:32.592493+00:00",
       "lastError": null,
       "statementCount": 100
     }
   ],
-  "maxStatements": 1000
+  "maxStatements": 1500,
+  "maxSourceShare": 0.1
 }

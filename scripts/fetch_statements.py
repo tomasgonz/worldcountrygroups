@@ -25,7 +25,7 @@ OUTPUT_FILE = os.path.join(DATA_DIR, "statements-feed.json")
 STATS_FILE = os.path.join(DATA_DIR, "country-stats.json")
 CONFIG_FILE = os.path.join(DATA_DIR, "statements-config.json")
 
-MAX_STATEMENTS = 1000
+MAX_STATEMENTS = 1500
 REQUEST_TIMEOUT = 30
 
 # ---------------------------------------------------------------------------
@@ -1193,6 +1193,43 @@ def update_source_status(config, source_id, statement_count=0, error=None):
 # Main
 # ---------------------------------------------------------------------------
 
+
+def to_utc_iso(value, fallback):
+    """Normalise any ISO timestamp to UTC so string comparisons sort correctly."""
+    try:
+        dt = datetime.fromisoformat((value or "").replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(timezone.utc).isoformat()
+    except Exception:
+        return fallback
+
+
+def cap_per_source(items, max_total, share=0.08, overrides=None, floor=15):
+    """Keep newest-first items, but no source may exceed `share` of the feed
+    (at least `floor` items); `overrides` sets explicit per-source limits.
+    Stops one high-volume outlet from crowding out everyone else."""
+    overrides = overrides or {}
+    default_cap = max(floor, int(max_total * share))
+    counts, out = {}, []
+    for it in items:
+        src = it.get("source", "")
+        cap = overrides.get(src, default_cap)
+        if counts.get(src, 0) >= cap:
+            continue
+        counts[src] = counts.get(src, 0) + 1
+        out.append(it)
+        if len(out) >= max_total:
+            break
+    return out
+
+
+def current_ga_session():
+    """General Assembly session number (a new session opens each September)."""
+    now = datetime.now(timezone.utc)
+    return now.year - 1945 - (1 if now.month < 9 else 0)
+
+
 def main():
     print(f"Fetching diplomatic statements... ({datetime.now(timezone.utc).isoformat()})")
 
@@ -1213,6 +1250,9 @@ def main():
 
     for source in sources:
         sid = source["id"]
+        if "/pga/" in source.get("url", ""):
+            # the PGA site moves to /pga/<session>/ every September
+            source["url"] = re.sub(r"/pga/\d+/", f"/pga/{current_ga_session()}/", source["url"])
         stype = source.get("type", "rss")
         url = source["url"]
         name = source.get("name", sid)
@@ -1287,7 +1327,11 @@ def main():
             return _epoch
 
     merged = sorted(existing_by_id.values(), key=_sort_key, reverse=True)
-    merged = merged[:max_statements]
+    share = config.get("maxSourceShare", 0.10)
+    overrides = {src["id"]: src["maxItems"] for src in config.get("sources", []) if src.get("maxItems")}
+    merged = cap_per_source(merged, max_statements, share=share, overrides=overrides)
+    for item in merged:
+        item["publishedAt"] = to_utc_iso(item.get("publishedAt"), item.get("publishedAt"))
 
     all_countries = set()
     sources_seen = set()

@@ -29,6 +29,7 @@
       >
         <div class="flex items-center gap-3 mb-2">
           <span class="text-xs font-medium text-primary-700 bg-primary-50 px-2 py-0.5 rounded-full">{{ formatSource(article.source) }}</span>
+          <span v-if="article.sourceOwnership" class="text-[10px] px-1.5 py-0.5 rounded-full ring-1 ring-amber-200 bg-amber-50 text-amber-800" :title="`Outlet is ${article.sourceOwnership}`">{{ article.sourceOwnership }}</span>
           <span class="text-xs text-primary-300">{{ timeAgoStr(article.publishedAt) }}</span>
         </div>
         <h2 class="text-base font-semibold text-primary-900 mb-1 leading-snug">{{ article.title }}</h2>
