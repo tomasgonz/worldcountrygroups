@@ -1,6 +1,6 @@
 import { readDataFile } from '~/server/utils/data-file'
 import { isAIConfigured, callLLM } from '~/server/utils/llm-client'
-import { getActiveProvider } from '~/server/utils/ai-config'
+import { getProviderForTask } from '~/server/utils/ai-config'
 import { buildUNBriefingPrompt } from '~/server/utils/ai-prompts'
 import { getCachedAnalysis, setCachedAnalysis } from '~/server/utils/ai-cache'
 import {
@@ -166,8 +166,8 @@ export default defineEventHandler(async (event) => {
   })
 
   // Reasoning models spend much of the budget before writing; give them room
-  const content = await callLLM(messages, { temperature: 0.6, maxTokens: 16000 })
-  const provider = getActiveProvider()!
+  const content = await callLLM(messages, { task: 'un-monitor', temperature: 0.6, maxTokens: 16000 })
+  const provider = getProviderForTask('un-monitor')!
   if (!content?.trim()) {
     throw createError({ statusCode: 502, statusMessage: 'The AI provider returned an empty briefing; try again' })
   }

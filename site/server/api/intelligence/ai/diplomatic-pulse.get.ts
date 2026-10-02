@@ -1,5 +1,5 @@
 import { isAIConfigured, callLLM } from '~/server/utils/llm-client'
-import { getActiveProvider, getPulseStyleConfig, type PulseStyleConfig, type PulseTone } from '~/server/utils/ai-config'
+import { getProviderForTask, getPulseStyleConfig, type PulseStyleConfig, type PulseTone } from '~/server/utils/ai-config'
 import { buildDiplomaticPulsePrompt } from '~/server/utils/ai-prompts'
 import { getCachedAnalysis, setCachedAnalysis } from '~/server/utils/ai-cache'
 import { getConflictHotspots } from '~/server/utils/conflict'
@@ -88,9 +88,9 @@ export default defineEventHandler(async (event) => {
   }
 
   const messages = buildDiplomaticPulsePrompt(data, styleParams)
-  const content = await callLLM(messages, { temperature: styleParams.temperature })
+  const content = await callLLM(messages, { task: 'pulse', temperature: styleParams.temperature })
 
-  const provider = getActiveProvider()!
+  const provider = getProviderForTask('pulse')!
   setCachedAnalysis(cacheKey, content, provider.name, provider.model)
 
   const { headlines, analysis } = splitPulseContent(content)

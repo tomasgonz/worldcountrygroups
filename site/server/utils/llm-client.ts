@@ -1,4 +1,4 @@
-import { getActiveProvider, type AIProviderConfig } from './ai-config'
+import { getActiveProvider, getProviderForTask, type AIProviderConfig } from './ai-config'
 
 export interface LLMMessage {
   role: 'system' | 'user' | 'assistant'
@@ -9,6 +9,8 @@ export interface LLMOptions {
   maxTokens?: number
   temperature?: number
   provider?: AIProviderConfig
+  /** which kind of work this is; picks the model assigned to it in the admin page */
+  task?: string
 }
 
 export function isAIConfigured(): boolean {
@@ -21,7 +23,7 @@ export function getAIStatus(): { configured: boolean; provider: string | null } 
 }
 
 export async function callLLM(messages: LLMMessage[], options?: LLMOptions): Promise<string> {
-  const provider = options?.provider || getActiveProvider()
+  const provider = options?.provider || getProviderForTask(options?.task)
   if (!provider) throw new Error('No AI provider configured')
 
   if (provider.type === 'anthropic') {
@@ -31,7 +33,7 @@ export async function callLLM(messages: LLMMessage[], options?: LLMOptions): Pro
 }
 
 export async function callLLMStream(messages: LLMMessage[], options?: LLMOptions): Promise<ReadableStream<string>> {
-  const provider = options?.provider || getActiveProvider()
+  const provider = options?.provider || getProviderForTask(options?.task)
   if (!provider) throw new Error('No AI provider configured')
 
   if (provider.type === 'anthropic') {

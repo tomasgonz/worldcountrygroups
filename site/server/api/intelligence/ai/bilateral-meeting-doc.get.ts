@@ -1,5 +1,5 @@
 import { isAIConfigured, callLLM } from '~/server/utils/llm-client'
-import { getActiveProvider } from '~/server/utils/ai-config'
+import { getProviderForTask } from '~/server/utils/ai-config'
 import { buildBilateralMeetingDocPrompt } from '~/server/utils/ai-prompts'
 import { getCachedAnalysis, setCachedAnalysis } from '~/server/utils/ai-cache'
 import { createBriefingDoc, generateDocxBuffer, type BriefingSection } from '~/server/utils/docx-builder'
@@ -46,8 +46,8 @@ export default defineEventHandler(async (event) => {
       briefingB,
       existingAnalysis: existingBilateral?.content || '',
     })
-    meetingContent = await callLLM(messages, { maxTokens: 4096 })
-    const provider = getActiveProvider()!
+    meetingContent = await callLLM(messages, { task: 'meeting-doc', maxTokens: 4096 })
+    const provider = getProviderForTask('meeting-doc')!
     setCachedAnalysis(cacheKey, meetingContent, provider.name, provider.model)
   }
 

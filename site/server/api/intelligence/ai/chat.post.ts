@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
     'Connection': 'keep-alive',
   })
 
-  const stream = await callLLMStream(messages)
+  const stream = await callLLMStream(messages, { task: 'chat', task: 'chat' })
   const reader = stream.getReader()
 
   const encoder = new TextEncoder()

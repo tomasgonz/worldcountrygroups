@@ -1,5 +1,5 @@
 import { isAIConfigured, callLLM, getAIStatus } from '~/server/utils/llm-client'
-import { getActiveProvider } from '~/server/utils/ai-config'
+import { getProviderForTask } from '~/server/utils/ai-config'
 import { buildCountryBriefingPrompt } from '~/server/utils/ai-prompts'
 import { getCachedAnalysis, setCachedAnalysis } from '~/server/utils/ai-cache'
 
@@ -25,9 +25,9 @@ export default defineEventHandler(async (event) => {
   const cookie = getRequestHeader(event, 'cookie') || ''
   const briefingData = await $fetch('/api/intelligence/country-briefing', { query: { iso }, headers: { cookie } })
   const messages = buildCountryBriefingPrompt(briefingData)
-  const content = await callLLM(messages)
+  const content = await callLLM(messages, { task: 'country-analysis', task: 'country-analysis' })
 
-  const provider = getActiveProvider()!
+  const provider = getProviderForTask('country-analysis')!
   setCachedAnalysis(cacheKey, content, provider.name, provider.model)
 
   return { cached: false, content, generatedAt: new Date().toISOString(), provider: provider.name, model: provider.model }

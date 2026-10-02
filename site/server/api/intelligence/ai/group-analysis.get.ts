@@ -1,5 +1,5 @@
 import { isAIConfigured, callLLM } from '~/server/utils/llm-client'
-import { getActiveProvider } from '~/server/utils/ai-config'
+import { getProviderForTask } from '~/server/utils/ai-config'
 import { buildGroupTrendsPrompt } from '~/server/utils/ai-prompts'
 import { getCachedAnalysis, setCachedAnalysis } from '~/server/utils/ai-cache'
 
@@ -25,9 +25,9 @@ export default defineEventHandler(async (event) => {
   const cookie = getRequestHeader(event, 'cookie') || ''
   const groupData = await $fetch('/api/intelligence/group-trends', { query: { gid }, headers: { cookie } })
   const messages = buildGroupTrendsPrompt(groupData)
-  const content = await callLLM(messages)
+  const content = await callLLM(messages, { task: 'group-analysis', task: 'group-analysis' })
 
-  const provider = getActiveProvider()!
+  const provider = getProviderForTask('group-analysis')!
   setCachedAnalysis(cacheKey, content, provider.name, provider.model)
 
   return { cached: false, content, generatedAt: new Date().toISOString(), provider: provider.name, model: provider.model }

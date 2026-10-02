@@ -1,5 +1,5 @@
 import { isAIConfigured, callLLM } from '~/server/utils/llm-client'
-import { getActiveProvider } from '~/server/utils/ai-config'
+import { getProviderForTask } from '~/server/utils/ai-config'
 import { buildNewsBriefingPrompt } from '~/server/utils/ai-prompts'
 import { getCachedAnalysis, setCachedAnalysis } from '~/server/utils/ai-cache'
 import { getCountryNews } from '~/server/utils/news-feed'
@@ -37,9 +37,9 @@ export default defineEventHandler(async (event) => {
     country: { name: countryName, iso3: iso, region: undefined },
     articles,
   })
-  const content = await callLLM(messages)
+  const content = await callLLM(messages, { task: 'news-briefing', task: 'news-briefing' })
 
-  const provider = getActiveProvider()!
+  const provider = getProviderForTask('news-briefing')!
   setCachedAnalysis(cacheKey, content, provider.name, provider.model)
 
   return { cached: false, content, generatedAt: new Date().toISOString(), provider: provider.name, model: provider.model }

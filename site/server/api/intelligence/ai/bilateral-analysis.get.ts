@@ -1,5 +1,5 @@
 import { isAIConfigured, callLLM } from '~/server/utils/llm-client'
-import { getActiveProvider } from '~/server/utils/ai-config'
+import { getProviderForTask } from '~/server/utils/ai-config'
 import { buildBilateralPrepPrompt } from '~/server/utils/ai-prompts'
 import { getCachedAnalysis, setCachedAnalysis } from '~/server/utils/ai-cache'
 
@@ -27,9 +27,9 @@ export default defineEventHandler(async (event) => {
   const cookie = getRequestHeader(event, 'cookie') || ''
   const bilateralData = await $fetch('/api/intelligence/bilateral-prep', { query: { a, b }, headers: { cookie } })
   const messages = buildBilateralPrepPrompt(bilateralData)
-  const content = await callLLM(messages)
+  const content = await callLLM(messages, { task: 'bilateral-analysis', task: 'bilateral-analysis' })
 
-  const provider = getActiveProvider()!
+  const provider = getProviderForTask('bilateral-analysis')!
   setCachedAnalysis(cacheKey, content, provider.name, provider.model)
 
   return { cached: false, content, generatedAt: new Date().toISOString(), provider: provider.name, model: provider.model }

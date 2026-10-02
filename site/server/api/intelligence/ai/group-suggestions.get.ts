@@ -1,5 +1,5 @@
 import { isAIConfigured, callLLM } from '~/server/utils/llm-client'
-import { getActiveProvider } from '~/server/utils/ai-config'
+import { getProviderForTask } from '~/server/utils/ai-config'
 import { buildGroupSuggestionsPrompt } from '~/server/utils/ai-prompts'
 import { getCachedAnalysis, setCachedAnalysis } from '~/server/utils/ai-cache'
 import { getRegistry } from '~/server/utils/wcg'
@@ -65,9 +65,9 @@ export default defineEventHandler(async (event) => {
     members,
     candidates,
   })
-  const content = await callLLM(messages)
+  const content = await callLLM(messages, { task: 'group-suggestions', task: 'group-suggestions' })
 
-  const provider = getActiveProvider()!
+  const provider = getProviderForTask('group-suggestions')!
   setCachedAnalysis(cacheKey, content, provider.name, provider.model)
 
   return { cached: false, content, generatedAt: new Date().toISOString(), provider: provider.name, model: provider.model }

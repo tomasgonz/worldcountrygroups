@@ -1,7 +1,7 @@
 import { readFileSync, existsSync } from 'fs'
 import { join } from 'path'
 import { isAIConfigured, callLLM } from '~/server/utils/llm-client'
-import { getActiveProvider } from '~/server/utils/ai-config'
+import { getProviderForTask } from '~/server/utils/ai-config'
 import { buildTodayBriefingPrompt } from '~/server/utils/ai-prompts'
 import { getCachedAnalysis, setCachedAnalysis } from '~/server/utils/ai-cache'
 import { getRecentNews } from '~/server/utils/news-feed'
@@ -195,8 +195,8 @@ async function generate(now: Date, todayKey: string, cacheKey: string): Promise<
   })
 
   // gpt-5 spends substantial budget on reasoning tokens before output; give it room
-  const content = await callLLM(messages, { temperature: 0.5, maxTokens: 24000 })
-  const provider = getActiveProvider()!
+  const content = await callLLM(messages, { task: 'today-brief', temperature: 0.5, maxTokens: 24000 })
+  const provider = getProviderForTask('today-brief')!
   setCachedAnalysis(cacheKey, content, provider.name, provider.model)
 }
 

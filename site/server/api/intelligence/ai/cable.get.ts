@@ -43,7 +43,7 @@ export default defineEventHandler(async (event) => {
 
   // Build prompt and call LLM
   const messages = buildDiplomaticCablePrompt({ type: type as 'country' | 'bilateral', briefingData })
-  const content = await callLLM(messages, { maxTokens: 4000 })
+  const content = await callLLM(messages, { task: 'cable', maxTokens: 4000 })
 
   const status = getAIStatus()
   setCachedAnalysis(cacheKey, content, status.provider || 'unknown', 'default')

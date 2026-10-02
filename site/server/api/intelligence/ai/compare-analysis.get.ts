@@ -1,5 +1,5 @@
 import { isAIConfigured, callLLM } from '~/server/utils/llm-client'
-import { getActiveProvider } from '~/server/utils/ai-config'
+import { getProviderForTask } from '~/server/utils/ai-config'
 import { buildCompareAnalysisPrompt } from '~/server/utils/ai-prompts'
 import { getCachedAnalysis, setCachedAnalysis } from '~/server/utils/ai-cache'
 
@@ -38,9 +38,9 @@ export default defineEventHandler(async (event) => {
   }
 
   const messages = buildCompareAnalysisPrompt({ mode, entities, comparison })
-  const content = await callLLM(messages)
+  const content = await callLLM(messages, { task: 'compare-analysis', task: 'compare-analysis' })
 
-  const provider = getActiveProvider()!
+  const provider = getProviderForTask('compare-analysis')!
   setCachedAnalysis(cacheKey, content, provider.name, provider.model)
 
   return { cached: false, content, generatedAt: new Date().toISOString(), provider: provider.name, model: provider.model }

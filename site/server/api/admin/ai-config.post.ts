@@ -1,5 +1,5 @@
 import { requireAdmin } from '~/server/utils/auth'
-import { addProvider, updateProvider, setActiveProvider, setPromptConfig, setPulseStyleConfig, getAIConfig } from '~/server/utils/ai-config'
+import { addProvider, updateProvider, setActiveProvider, setPromptConfig, setPulseStyleConfig, getAIConfig, setTaskModels } from '~/server/utils/ai-config'
 import { callLLM } from '~/server/utils/llm-client'
 
 export default defineEventHandler(async (event) => {
@@ -68,6 +68,11 @@ export default defineEventHandler(async (event) => {
 
   if (body.action === 'set-active') {
     setActiveProvider(body.id ?? null)
+    return { ok: true }
+  }
+
+  if (body.action === 'save-task-models') {
+    setTaskModels(body.taskModels || {})
     return { ok: true }
   }
 

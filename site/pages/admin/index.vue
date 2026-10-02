@@ -188,6 +188,37 @@
         + Add Provider
       </button>
 
+      <!-- Model per task -->
+      <div v-if="aiConfig?.tasks?.length && aiConfig?.providers?.length" class="border-t border-primary-100 mt-6 pt-6">
+        <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1">
+          <h3 class="text-sm font-semibold text-primary-800">Model per task</h3>
+          <span class="text-[11px] text-primary-400">Tasks left on “Default” use the active model{{ activeProviderName ? ` (${activeProviderName})` : '' }}.</span>
+        </div>
+        <p class="text-xs text-primary-400 mb-4">Use a stronger model where quality matters most and a faster, cheaper one for short or interactive tasks. Add models with “+ Model with this key” above.</p>
+        <div class="grid md:grid-cols-2 gap-x-8 gap-y-5">
+          <div v-for="g in taskGroups" :key="g.name">
+            <div class="text-[11px] font-semibold uppercase tracking-wider text-primary-500 mb-2">{{ g.name }}</div>
+            <div class="space-y-2">
+              <div v-for="t in g.tasks" :key="t.id" class="grid grid-cols-[1fr_12rem] items-center gap-3">
+                <div class="min-w-0">
+                  <div class="text-sm text-primary-800">{{ t.label }}</div>
+                  <div class="text-[11px] text-primary-400 truncate" :title="t.hint">{{ t.hint }}</div>
+                </div>
+                <select v-model="taskForm[t.id]" class="w-full border border-primary-200 rounded-lg px-2 py-1.5 text-xs bg-white">
+                  <option value="">Default</option>
+                  <option v-for="p in aiConfig.providers.filter((x: any) => x.enabled)" :key="p.id" :value="p.id">{{ p.name }} ({{ p.model }})</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 mt-5">
+          <button class="text-sm px-4 py-2 rounded-lg bg-primary-900 text-white hover:bg-primary-800" @click="saveTaskModels">Save task models</button>
+          <button class="text-sm px-4 py-2 rounded-lg bg-primary-100 text-primary-600" @click="resetTaskModels">All on default</button>
+          <span v-if="taskMsg" class="text-xs" :class="taskMsg.startsWith('Error') ? 'text-red-600' : 'text-green-700'">{{ taskMsg }}</span>
+        </div>
+      </div>
+
       <!-- Prompt Configuration -->
       <div class="border-t border-primary-100 mt-6 pt-6">
         <div class="flex items-center justify-between mb-4">
@@ -1335,14 +1366,23 @@ async function loadModels(id: string) {
     aiModels[id] = { loading: false, list: [], error: e?.data?.message || e?.message || 'failed' }
   }
 }
+// "gpt-6-luna" -> "GPT-6 Luna", "gpt-5.4-mini" -> "GPT-5.4 Mini"
+function prettyModel(m: string) {
+  const parts = m.split('-')
+  const cap = (w: string) => w.charAt(0).toUpperCase() + w.slice(1)
+  if (/^gpt$/i.test(parts[0]) && parts[1]) return [`GPT-${parts[1]}`, ...parts.slice(2).map(cap)].join(' ')
+  return parts.map((w, i) => (i === 0 ? cap(w) : cap(w))).join(' ')
+}
+
 async function saveEditAI(id: string, thenTest = false) {
   aiMsg.value = ''
   try {
-    // keep the display name in step with the model ("OpenAI GPT-5" -> "OpenAI GPT-5.5")
+    // keep the display name in step with the model ("OpenAI GPT-6.1 Sol" -> "OpenAI GPT-6 Luna")
     const orig = aiEditOrigModel.value
-    if (orig && aiEdit.model !== orig) {
-      const re = new RegExp(orig.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i')
-      if (re.test(aiEdit.name)) aiEdit.name = aiEdit.name.replace(re, aiEdit.model.toUpperCase().startsWith('GPT') ? aiEdit.model.replace(/^gpt/i, 'GPT') : aiEdit.model)
+    const squash = (x: string) => x.toLowerCase().replace(/[^a-z0-9]/g, '')
+    if (orig && aiEdit.model !== orig && squash(aiEdit.name).includes(squash(orig))) {
+      const vendor = aiEdit.name.trim().split(/\s+/)[0]
+      aiEdit.name = `${vendor} ${prettyModel(aiEdit.model)}`
     }
     await $fetch('/api/admin/ai-config', { method: 'POST', body: { action: 'update', id, updates: { ...aiEdit } } })
     aiMsg.value = 'Saved'
@@ -1371,6 +1411,35 @@ async function testAI(id: string) {
     aiTest[id] = { ok: false, error: e?.data?.message || 'request failed' }
   }
 }
+
+// ---------- model per task ----------
+const taskForm = reactive<Record<string, string>>({})
+const taskMsg = ref('')
+const activeProviderName = computed(() => aiConfig.value?.providers?.find((p: any) => p.id === aiConfig.value?.activeProvider)?.name || '')
+const taskGroups = computed(() => {
+  const groups: { name: string; tasks: any[] }[] = []
+  for (const t of aiConfig.value?.tasks || []) {
+    let g = groups.find(x => x.name === t.group)
+    if (!g) groups.push(g = { name: t.group, tasks: [] })
+    g.tasks.push(t)
+  }
+  return groups
+})
+watch(() => aiConfig.value?.taskModels, (m) => {
+  for (const t of aiConfig.value?.tasks || []) taskForm[t.id] = m?.[t.id] || ''
+}, { immediate: true })
+async function saveTaskModels() {
+  taskMsg.value = ''
+  try {
+    const map = Object.fromEntries(Object.entries(taskForm).filter(([, v]) => v))
+    await $fetch('/api/admin/ai-config', { method: 'POST', body: { action: 'save-task-models', taskModels: map } })
+    taskMsg.value = Object.keys(map).length ? `Saved: ${Object.keys(map).length} task(s) on a specific model` : 'Saved: all tasks use the default'
+    await loadAIConfig()
+  } catch (e: any) {
+    taskMsg.value = 'Error: ' + (e?.data?.message || 'could not save')
+  }
+}
+function resetTaskModels() { for (const k of Object.keys(taskForm)) taskForm[k] = ''; saveTaskModels() }
 
 async function setActiveAI(id: string) {
   try {

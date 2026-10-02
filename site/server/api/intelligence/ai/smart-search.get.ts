@@ -1,5 +1,5 @@
 import { isAIConfigured, callLLM } from '~/server/utils/llm-client'
-import { getActiveProvider } from '~/server/utils/ai-config'
+import { getProviderForTask } from '~/server/utils/ai-config'
 import { buildSmartSearchPrompt } from '~/server/utils/ai-prompts'
 import { getRegistry } from '~/server/utils/wcg'
 import { getCountryData } from '~/server/utils/countrydata'
@@ -14,8 +14,8 @@ export default defineEventHandler(async (event) => {
   if (!q) throw createError({ statusCode: 400, statusMessage: 'Missing q parameter' })
 
   const registry = getRegistry()
-  const allGroups = registry.listGroups()
-  const allCountries = registry.listCountries()
+  const allGroups = registry.listSummaries()
+  const allCountries = registry.getAllCountries().filter((c: any) => c.iso3 && c.iso2)
 
   // Find relevant countries and groups by searching query terms
   const terms = q.toLowerCase().split(/\s+/)
@@ -56,8 +56,8 @@ export default defineEventHandler(async (event) => {
   }
 
   const messages = buildSmartSearchPrompt(q, context)
-  const content = await callLLM(messages)
+  const content = await callLLM(messages, { task: 'smart-search', task: 'smart-search' })
 
-  const provider = getActiveProvider()!
+  const provider = getProviderForTask('smart-search')!
   return { content, generatedAt: new Date().toISOString(), provider: provider.name }
 })

@@ -1,5 +1,5 @@
 import { isAIConfigured, callLLM } from '~/server/utils/llm-client'
-import { getActiveProvider } from '~/server/utils/ai-config'
+import { getProviderForTask } from '~/server/utils/ai-config'
 import { buildAnomalyDetectionPrompt } from '~/server/utils/ai-prompts'
 import { getCachedAnalysis, setCachedAnalysis } from '~/server/utils/ai-cache'
 import { getConflictHotspots } from '~/server/utils/conflict'
@@ -27,9 +27,9 @@ export default defineEventHandler(async (event) => {
   }
 
   const messages = buildAnomalyDetectionPrompt(data)
-  const content = await callLLM(messages)
+  const content = await callLLM(messages, { task: 'anomalies', task: 'anomalies' })
 
-  const provider = getActiveProvider()!
+  const provider = getProviderForTask('anomalies')!
   setCachedAnalysis(cacheKey, content, provider.name, provider.model)
 
   return { cached: false, content, generatedAt: new Date().toISOString(), provider: provider.name, model: provider.model }

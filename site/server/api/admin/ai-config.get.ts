@@ -1,5 +1,5 @@
 import { requireAdmin } from '~/server/utils/auth'
-import { getAIConfig, getPromptConfig, getPulseStyleConfig } from '~/server/utils/ai-config'
+import { getAIConfig, getPromptConfig, getPulseStyleConfig, getTaskModels, AI_TASKS } from '~/server/utils/ai-config'
 
 export default defineEventHandler(async (event) => {
   await requireAdmin(event)
@@ -12,5 +12,7 @@ export default defineEventHandler(async (event) => {
     })),
     prompts: getPromptConfig(),
     pulseStyle: getPulseStyleConfig(),
+    taskModels: getTaskModels(),
+    tasks: AI_TASKS,
   }
 })

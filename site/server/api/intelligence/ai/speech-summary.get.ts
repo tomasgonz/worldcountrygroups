@@ -1,5 +1,5 @@
 import { isAIConfigured, callLLM } from '~/server/utils/llm-client'
-import { getActiveProvider } from '~/server/utils/ai-config'
+import { getProviderForTask } from '~/server/utils/ai-config'
 import { buildSpeechSummaryPrompt } from '~/server/utils/ai-prompts'
 import { getCachedAnalysis, setCachedAnalysis } from '~/server/utils/ai-cache'
 import { getCountrySpeeches, getSpeechText } from '~/server/utils/speeches'
@@ -36,9 +36,9 @@ export default defineEventHandler(async (event) => {
     meta,
     analysis: (meta as any).analysis || null,
   })
-  const content = await callLLM(messages, { maxTokens: 4096 })
+  const content = await callLLM(messages, { task: 'speech-summary', maxTokens: 4096 })
 
-  const provider = getActiveProvider()!
+  const provider = getProviderForTask('speech-summary')!
   setCachedAnalysis(cacheKey, content, provider.name, provider.model)
 
   return { cached: false, content, generatedAt: new Date().toISOString(), provider: provider.name, model: provider.model }
