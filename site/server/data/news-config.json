@@ -234,14 +234,15 @@
     },
     {
       "id": "reliefweb",
-      "name": "ReliefWeb",
-      "url": "https://api.reliefweb.int/v2/reports?appname=REGISTER_APPNAME_HERE&limit=20&sort[]=date:desc",
-      "type": "rss",
+      "name": "ReliefWeb (OCHA)",
+      "url": "https://api.reliefweb.int/v2/reports",
+      "type": "reliefweb-api",
       "enabled": false,
       "category": "institutional",
       "lastFetch": null,
-      "lastError": "Disabled: register appname at apidoc.reliefweb.int and replace REGISTER_APPNAME_HERE in url; also note this endpoint returns JSON, not RSS, so it needs a dedicated fetcher.",
-      "articleCount": 0
+      "lastError": "Waiting for a ReliefWeb-approved appname (request at apidoc.reliefweb.int)",
+      "articleCount": 0,
+      "appname": ""
     },
     {
       "id": "the-new-humanitarian",

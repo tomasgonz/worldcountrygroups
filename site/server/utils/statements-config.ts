@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs'
+import { readFileSync, writeFileSync, existsSync, mkdirSync , statSync} from 'fs'
 import { join } from 'path'
 
 export interface ScrapeConfig {
@@ -56,12 +56,15 @@ const DEFAULT_SOURCES: StatementSource[] = [
 ]
 
 let cache: StatementsConfig | null = null
+let cacheMtime = 0 // the fetch scripts also write this file; reload when it changes
 
 function loadData(): StatementsConfig {
-  if (cache) return cache
   try {
     if (existsSync(DATA_PATH)) {
+      const mtime = statSync(DATA_PATH).mtimeMs
+      if (cache && mtime === cacheMtime) return cache
       cache = JSON.parse(readFileSync(DATA_PATH, 'utf-8'))
+      cacheMtime = mtime
       return cache!
     }
   } catch {}
@@ -74,6 +77,7 @@ function saveData(data: StatementsConfig) {
   if (!existsSync(DATA_DIR)) mkdirSync(DATA_DIR, { recursive: true })
   writeFileSync(DATA_PATH, JSON.stringify(data, null, 2))
   cache = data
+  try { cacheMtime = statSync(DATA_PATH).mtimeMs } catch {}
 }
 
 export function getStatementsConfig(): StatementsConfig {

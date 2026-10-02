@@ -226,6 +226,7 @@ TIER_TYPE_MAP.update({
     "gnews-pacific-forum":    {"tier": 5, "type": "aggregator"},
     "gnews-sids":             {"tier": 5, "type": "aggregator"},
     "gnews-un-sg":            {"tier": 5, "type": "aggregator"},
+    "reliefweb":              {"tier": 1, "type": "official"},
 })
 
 
@@ -524,6 +525,50 @@ def fetch_rss(url, source_id, patterns, user_agent="WCG-NewsFetcher/1.0"):
         })
 
     return articles
+
+
+
+def fetch_reliefweb(source, patterns, limit=40):
+    """Latest ReliefWeb reports through the v2 API. Needs an appname that ReliefWeb
+    has pre-approved (required since November 2025); set it in Admin -> News Sources."""
+    appname = (source.get("appname") or "").strip()
+    if not appname:
+        raise Exception("No approved ReliefWeb appname set (Admin > News Sources > ReliefWeb)")
+    params = [("appname", appname), ("limit", str(limit)), ("sort[]", "date.created:desc"),
+              ("profile", "list")]
+    for f in ("title", "url_alias", "date.created", "country.iso3", "primary_country.iso3",
+              "source.shortname", "format.name", "theme.name"):
+        params.append(("fields[include][]", f))
+    url = source.get("url") or "https://api.reliefweb.int/v2/reports"
+    from urllib.parse import urlencode
+    data = fetch_url(f"{url}?{urlencode(params)}", accept="application/json")
+    if not data:
+        raise Exception("ReliefWeb API returned nothing")
+    payload = json.loads(data)
+    if payload.get("error"):
+        raise Exception(payload["error"].get("message", "ReliefWeb API error"))
+    out = []
+    for row in payload.get("data", []):
+        f = row.get("fields", {})
+        title = (f.get("title") or "").strip()
+        link = f.get("url_alias") or f.get("url") or f"https://reliefweb.int/node/{row.get('id')}"
+        if not title:
+            continue
+        countries = {c.get("iso3", "").upper() for c in f.get("country", []) if c.get("iso3")}
+        countries |= tag_countries(title, patterns)
+        srcs = ", ".join(x.get("shortname", "") for x in f.get("source", [])[:2] if x.get("shortname"))
+        fmt = ", ".join(x.get("name", "") for x in f.get("format", [])[:1])
+        out.append({
+            "id": make_id(title, link),
+            "title": title,
+            "description": " · ".join(x for x in (fmt, srcs) if x),
+            "url": link,
+            "source": source["id"],
+            "publishedAt": parse_rss_date((f.get("date") or {}).get("created", "")) or datetime.now(timezone.utc).isoformat(),
+            "countries": sorted(c for c in countries if c),
+            "topics": detect_topics(title, " ".join(t.get("name", "") for t in f.get("theme", []))),
+        })
+    return out
 
 
 def fetch_gdelt(url, source_id, patterns):
@@ -860,6 +905,8 @@ def main():
                     articles = fetch_state_dept(url, sid, patterns)
                 elif stype == "news-sitemap":
                     articles = fetch_news_sitemap(url, sid, patterns)
+                elif stype == "reliefweb-api":
+                    articles = fetch_reliefweb(source, patterns)
                 else:
                     articles = fetch_rss(url, sid, patterns, user_agent=ua)
 

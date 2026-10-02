@@ -51,6 +51,20 @@ export default defineEventHandler(async (event) => {
     return { ok: true, sources: getNewsSources() }
   }
 
+  if (action === 'test-reliefweb') {
+    // Check an appname against the live ReliefWeb API (approval is required since Nov 2025)
+    const appname = String(body.appname || '').trim()
+    if (!appname) throw createError({ statusCode: 400, statusMessage: 'Enter the appname ReliefWeb approved' })
+    try {
+      const r = await fetch(`https://api.reliefweb.int/v2/reports?appname=${encodeURIComponent(appname)}&limit=3&sort[]=date.created:desc&fields[include][]=title`)
+      const j: any = await r.json().catch(() => ({}))
+      if (!r.ok || j.error) return { ok: false, message: j?.error?.message || `HTTP ${r.status}` }
+      return { ok: true, message: `Approved: ${j.totalCount?.toLocaleString?.() ?? ''} reports available`, sample: (j.data || []).map((d: any) => d.fields?.title).filter(Boolean) }
+    } catch (e: any) {
+      return { ok: false, message: String(e?.message || e) }
+    }
+  }
+
   if (action === 'test') {
     const { url } = body
     if (!url) throw createError({ statusCode: 400, statusMessage: 'Missing URL to test' })

@@ -508,6 +508,23 @@
         </button>
       </div>
 
+      <!-- ReliefWeb needs a pre-approved appname -->
+      <div class="my-4 rounded-xl ring-1 ring-sky-200 bg-sky-50/50 p-4">
+        <div class="text-sm font-semibold text-primary-800">ReliefWeb (OCHA humanitarian reports)</div>
+        <p class="text-xs text-primary-500 mt-1 mb-3 leading-relaxed">
+          ReliefWeb only answers apps it has approved. Request an appname at
+          <a href="https://apidoc.reliefweb.int/parameters#appname" target="_blank" rel="noopener" class="underline">apidoc.reliefweb.int</a>
+          (suggested: <code>worldcountrygroups.exe.xyz</code>), then paste the approved name here.
+        </p>
+        <div class="flex flex-wrap items-center gap-2">
+          <input v-model="rwAppname" class="border border-primary-200 rounded-lg px-3 py-1.5 text-sm w-72 bg-white" placeholder="approved appname">
+          <button class="text-sm px-3 py-1.5 rounded-lg ring-1 ring-primary-200 bg-white hover:bg-primary-50" :disabled="!rwAppname" @click="testReliefweb">Test</button>
+          <button class="text-sm px-3 py-1.5 rounded-lg bg-primary-900 text-white hover:bg-primary-800 disabled:opacity-40" :disabled="!rwOk" @click="saveReliefweb">Save &amp; enable</button>
+          <span v-if="rwMsg" class="text-xs" :class="rwOk ? 'text-green-700' : 'text-red-600'">{{ rwMsg }}</span>
+        </div>
+        <ul v-if="rwSample.length" class="mt-2 text-[11px] text-primary-500 list-disc pl-4"><li v-for="t in rwSample" :key="t">{{ t }}</li></ul>
+      </div>
+
       <!-- Add Source Form -->
       <div v-if="showNewsForm" class="border border-primary-200 rounded-xl p-4 mb-4 space-y-3">
         <div class="grid grid-cols-2 gap-3">
@@ -1458,6 +1475,25 @@ async function saveTaskModels() {
   }
 }
 function resetTaskModels() { for (const k of Object.keys(taskForm)) taskForm[k] = ''; saveTaskModels() }
+
+// ---------- ReliefWeb appname ----------
+const rwAppname = ref('')
+const rwOk = ref(false)
+const rwMsg = ref('')
+const rwSample = ref<string[]>([])
+async function testReliefweb() {
+  rwMsg.value = 'Testing…'; rwOk.value = false; rwSample.value = []
+  try {
+    const r = await $fetch<any>('/api/admin/news-sources', { method: 'POST', body: { action: 'test-reliefweb', appname: rwAppname.value } })
+    rwOk.value = r.ok; rwMsg.value = r.message; rwSample.value = r.sample || []
+  } catch (e: any) { rwMsg.value = e?.data?.statusMessage || 'Test failed' }
+}
+async function saveReliefweb() {
+  try {
+    await $fetch('/api/admin/news-sources', { method: 'POST', body: { action: 'update', id: 'reliefweb', appname: rwAppname.value.trim(), enabled: true, lastError: null } })
+    rwMsg.value = 'Saved and enabled. Reports arrive with the next news run (every 6 hours).'
+  } catch (e: any) { rwOk.value = false; rwMsg.value = e?.data?.statusMessage || 'Could not save' }
+}
 
 async function setActiveAI(id: string) {
   try {
