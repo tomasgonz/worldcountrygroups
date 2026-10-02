@@ -93,6 +93,8 @@
       </div>
 
       <p class="text-[10px] text-primary-400 mt-4">Computed {{ new Date(res.computedAt).toLocaleString() }} from recorded General Assembly votes.</p>
+
+      <IntelligenceVotingDynamics :sessions="res.sessions" :threshold="res.threshold" />
     </template>
 
     <div v-else-if="hasRun" class="bg-white rounded-xl border border-primary-100 p-8 text-center text-primary-500">
