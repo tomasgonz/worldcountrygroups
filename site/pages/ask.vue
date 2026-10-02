@@ -144,7 +144,8 @@ const EXAMPLES = [
   { label: 'Debt relief in speeches since 2000', q: 'Which countries have argued for debt relief or debt restructuring in their General Debate speeches since 2000, and how has the argument changed?', mode: 'answer' },
   { label: 'G77 cohesion', q: 'How cohesive is the G77 in General Assembly votes, and which members break ranks most often?', mode: 'briefing', template: 'group' },
 ]
-const SCOPES = [{ v: 'mine', label: 'Mine' }, { v: 'shared', label: 'Shared' }]
+const { state: authState } = useAuth()
+const SCOPES = computed(() => [{ v: 'mine', label: 'Mine' }, { v: 'shared', label: 'Shared' }, ...(authState.value?.role === 'admin' ? [{ v: 'all', label: 'Everyone' }] : [])])
 
 const question = ref(String(route.query.q || ''))
 const mode = ref<'answer' | 'briefing'>(route.query.mode === 'briefing' ? 'briefing' : 'answer')
@@ -159,7 +160,7 @@ const followUp = ref('')
 const followMode = ref<'answer' | 'briefing'>('answer')
 
 // ---------- history ----------
-const scope = ref('mine')
+const scope = ref(['mine', 'shared', 'all'].includes(String(route.query.scope)) ? String(route.query.scope) : 'mine')
 const historyQuery = ref('')
 const { data: history, refresh: refreshHistory } = useFetch<any[]>('/api/ask', { query: computed(() => ({ scope: scope.value, q: historyQuery.value })), server: false })
 

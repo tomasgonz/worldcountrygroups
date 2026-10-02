@@ -1,4 +1,4 @@
-import { clearAnalysisCache, setAnalysisCacheMaxAge } from '~/server/utils/ai-cache'
+import { clearAnalysisCache, clearExpiredAnalysisCache, setAnalysisCacheMaxAge } from '~/server/utils/ai-cache'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
@@ -11,6 +11,8 @@ export default defineEventHandler(async (event) => {
       setAnalysisCacheMaxAge(hours)
       return { ok: true }
     }
+    case 'clear-expired':
+      return { ok: true, removed: clearExpiredAnalysisCache() }
     case 'clear-all':
       clearAnalysisCache()
       return { ok: true }

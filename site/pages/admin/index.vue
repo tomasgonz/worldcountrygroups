@@ -1,7 +1,7 @@
 <template>
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="flex items-center justify-between mb-8">
-      <h1 class="font-serif text-3xl font-bold text-primary-900">Admin Dashboard</h1>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="font-serif text-3xl font-bold text-primary-900">Admin</h1>
       <button
         @click="handleLogout"
         class="text-sm text-primary-400 hover:text-primary-900 transition-colors"
@@ -10,13 +10,47 @@
       </button>
     </div>
 
-    <!-- ═══ CONTENT MANAGEMENT ═══ -->
-    <div class="flex items-center gap-3 mb-4">
-      <div class="h-px flex-1 bg-primary-100"></div>
-      <span class="text-xs font-medium text-primary-400 uppercase tracking-widest">Content</span>
-      <div class="h-px flex-1 bg-primary-100"></div>
-    </div>
+    <!-- Tabs -->
+    <nav class="admin-tabs sticky top-[72px] z-20 -mx-4 sm:mx-0 px-4 sm:px-0 mb-8 bg-primary-50/90 backdrop-blur border-b border-primary-100" aria-label="Admin sections">
+      <div class="flex gap-1 overflow-x-auto" role="tablist">
+        <button v-for="t in ADMIN_TABS" :key="t.id" role="tab" :aria-selected="tab === t.id" class="relative shrink-0 px-3.5 py-2.5 text-sm border-b-2 -mb-px transition-colors"
+          :class="tab === t.id ? 'border-primary-900 text-primary-900 font-medium' : 'border-transparent text-primary-500 hover:text-primary-800'" @click="setTab(t.id)">
+          {{ t.label }}
+          <span v-if="tabAlerts[t.id]" class="ml-1 inline-flex items-center justify-center min-w-[1.1rem] h-[1.1rem] px-1 rounded-full text-[10px] font-semibold bg-red-100 text-red-700">{{ tabAlerts[t.id] }}</span>
+        </button>
+      </div>
+    </nav>
 
+    <!-- ═══ OVERVIEW ═══ -->
+    <div v-show="tab === 'overview'">
+      <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-6">
+        <div class="flex flex-wrap items-baseline justify-between gap-2 mb-4">
+          <h2 class="font-serif text-xl font-bold text-primary-900">Needs attention</h2>
+          <button class="text-xs text-accent-600 hover:underline" @click="refreshOverview">Check again</button>
+        </div>
+        <ul v-if="attention.length" class="divide-y divide-primary-100">
+          <li v-for="a in attention" :key="a.key" class="py-3 flex flex-wrap items-start gap-3">
+            <span class="mt-0.5 shrink-0 inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-full" :class="a.level === 'problem' ? 'bg-red-100 text-red-700' : a.level === 'setup' ? 'bg-amber-100 text-amber-800' : 'bg-sky-100 text-sky-800'">
+              <span aria-hidden="true">{{ a.level === 'problem' ? '!' : a.level === 'setup' ? '◔' : 'i' }}</span>{{ a.level === 'problem' ? 'Problem' : a.level === 'setup' ? 'Set up' : 'Note' }}
+            </span>
+            <div class="flex-1 min-w-[14rem]">
+              <div class="text-sm text-primary-900">{{ a.title }}</div>
+              <div v-if="a.detail" class="text-xs text-primary-500 mt-0.5">{{ a.detail }}</div>
+            </div>
+            <button class="shrink-0 text-xs px-3 py-1.5 rounded-lg ring-1 ring-primary-200 text-primary-700 hover:bg-primary-50" @click="goTo(a.tab, a.anchor)">{{ a.action }}</button>
+          </li>
+        </ul>
+        <p v-else class="text-sm text-emerald-700">Everything looks fine.</p>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-primary-100 rounded-2xl overflow-hidden ring-1 ring-primary-100 mb-6">
+        <button v-for="t in overviewTiles" :key="t.label" class="bg-white px-5 py-4 text-left hover:bg-primary-50/50" @click="goTo(t.tab)">
+          <div class="font-serif text-2xl text-primary-900 tabular-nums">{{ t.value }}</div>
+          <div class="text-xs text-primary-500 mt-0.5">{{ t.label }}</div>
+        </button>
+      </div>
+
+      <h2 class="text-xs font-medium text-primary-400 uppercase tracking-widest mb-3">Content</h2>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
       <!-- Group Management -->
       <NuxtLink to="/admin/groups" class="block bg-white rounded-2xl border border-primary-100 p-5 hover:border-primary-300 transition-colors group">
@@ -37,13 +71,16 @@
       </NuxtLink>
     </div>
 
-    <!-- ═══ AI & INTELLIGENCE ═══ -->
-    <div class="flex items-center gap-3 mb-4">
-      <div class="h-px flex-1 bg-primary-100"></div>
-      <span class="text-xs font-medium text-primary-400 uppercase tracking-widest">AI & Intelligence</span>
-      <div class="h-px flex-1 bg-primary-100"></div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <NuxtLink to="/ask?scope=all" class="block bg-white rounded-2xl border border-primary-100 p-5 hover:border-primary-300 transition-colors">
+          <h2 class="font-serif text-lg font-bold text-primary-900">Ask questions</h2>
+          <p class="text-sm text-primary-500 mt-1">Everyone's questions and briefings</p>
+        </NuxtLink>
+      </div>
     </div>
 
+    <!-- ═══ AI ═══ -->
+    <div v-show="tab === 'ai'">
     <!-- AI Configuration -->
     <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
       <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">AI Configuration</h2>
@@ -408,32 +445,33 @@
         <span class="text-xs text-primary-400">{{ cacheStats?.totalEntries || 0 }} cached entries</span>
       </div>
 
-      <div v-if="cacheStats?.entries?.length" class="space-y-2 mb-4">
-        <div v-for="entry in cacheStats.entries" :key="entry.key" class="flex items-center justify-between border border-primary-100 rounded-lg p-3">
-          <div>
+      <div class="grid grid-cols-3 gap-px bg-primary-100 rounded-xl overflow-hidden ring-1 ring-primary-100 mb-4 text-center">
+        <div class="bg-white py-3"><div class="font-serif text-2xl text-primary-900">{{ cacheStats?.totalEntries || 0 }}</div><div class="text-[11px] text-primary-500">saved analyses</div></div>
+        <div class="bg-white py-3"><div class="font-serif text-2xl text-emerald-700">{{ cacheFresh }}</div><div class="text-[11px] text-primary-500">still fresh</div></div>
+        <div class="bg-white py-3"><div class="font-serif text-2xl text-primary-400">{{ (cacheStats?.totalEntries || 0) - cacheFresh }}</div><div class="text-[11px] text-primary-500">expired</div></div>
+      </div>
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <input v-model="cacheQuery" type="search" placeholder="Find an analysis (e.g. country:FRA)" aria-label="Find a saved analysis" class="flex-1 min-w-[12rem] border border-primary-200 rounded-lg px-3 py-1.5 text-sm">
+        <button @click="clearExpiredCache" class="text-xs px-3 py-1.5 rounded-lg ring-1 ring-primary-200 text-primary-700 hover:bg-primary-50">Clear expired</button>
+        <button @click="clearAllCache" class="text-xs px-3 py-1.5 rounded-lg border border-red-200 text-red-600 hover:bg-red-50">{{ confirmClearAll ? 'Click again to clear all' : 'Clear all' }}</button>
+      </div>
+      <div v-if="cacheQuery" class="space-y-1.5">
+        <div v-for="entry in cacheMatches" :key="entry.key" class="flex items-center justify-between gap-2 border border-primary-100 rounded-lg px-3 py-2">
+          <div class="min-w-0 text-xs">
             <span class="text-sm font-medium text-primary-800">{{ entry.key }}</span>
-            <span class="text-xs text-primary-400 ml-2">{{ entry.provider }} / {{ entry.model }}</span>
-            <span class="text-xs ml-2" :class="entry.expired ? 'text-red-500' : 'text-green-600'">
-              {{ entry.expired ? 'expired' : formatTime(entry.generatedAt) }}
-            </span>
+            <span class="text-primary-400 ml-2">{{ entry.model }}</span>
+            <span class="ml-2" :class="entry.expired ? 'text-primary-400' : 'text-emerald-700'">{{ entry.expired ? 'expired' : formatTime(entry.generatedAt) }}</span>
           </div>
           <button @click="clearCacheEntry(entry.key)" class="text-xs px-2.5 py-1 rounded bg-red-50 text-red-700 hover:bg-red-100">Clear</button>
         </div>
-      </div>
-      <div v-else class="text-sm text-primary-400 mb-4">No cached analyses.</div>
-
-      <div class="flex gap-2">
-        <button @click="clearAllCache" class="text-xs px-3 py-1.5 rounded-lg border border-red-200 text-red-600 hover:bg-red-50">Clear All</button>
+        <p v-if="!cacheMatches.length" class="text-xs text-primary-400">No saved analysis matches.</p>
       </div>
     </div>
 
-    <!-- ═══ SCHEDULING ═══ -->
-    <div class="flex items-center gap-3 mb-4">
-      <div class="h-px flex-1 bg-primary-100"></div>
-      <span class="text-xs font-medium text-primary-400 uppercase tracking-widest">Scheduling</span>
-      <div class="h-px flex-1 bg-primary-100"></div>
-    </div>
+        </div>
 
+    <!-- ═══ DATA ═══ -->
+    <div v-show="tab === 'data'">
     <!-- Data health -->
     <div id="data-health" class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-6 scroll-mt-24">
       <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1">
@@ -482,9 +520,6 @@
       </div>
       <div v-else class="text-sm text-primary-400">Checking…</div>
     </div>
-
-    <!-- Backup -->
-    <AdminBackupPanel class="mb-6" />
 
     <!-- Scheduled Jobs -->
     <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
@@ -546,7 +581,7 @@
                 <div class="text-xs text-primary-400">{{ job.script }} · <button class="text-accent-600 hover:underline" @click="openLog(job.id)">log</button></div>
                 <pre v-if="logFor === job.id" class="mt-2 max-h-72 max-w-[42rem] overflow-auto rounded-lg bg-primary-900 text-primary-50 text-[11px] leading-snug p-3 whitespace-pre-wrap">{{ logText || 'No log yet.' }}</pre>
               </td>
-              <td class="px-3 py-2.5 text-primary-600 font-mono text-xs whitespace-nowrap">{{ job.schedule }}</td>
+              <td class="px-3 py-2.5 text-xs text-primary-700"><div>{{ describeCron(job.schedule) }}</div><div class="font-mono text-[10px] text-primary-400">{{ job.schedule }}</div></td>
               <td class="px-3 py-2.5">
                 <template v-if="hj(job.id)">
                   <div class="text-xs text-primary-500">{{ hj(job.id).lastEnd ? formatTime(hj(job.id).lastEnd) : hj(job.id).refreshedAt ? 'Data from ' + formatTime(hj(job.id).refreshedAt) : 'Never' }}<span v-if="hj(job.id).durationSec" class="text-primary-300"> · {{ Math.round(hj(job.id).durationSec) }}s</span></div>
@@ -559,33 +594,21 @@
                 <div v-if="job.maxAgeHours" class="text-[10px] text-primary-400 mt-0.5">expected every {{ job.maxAgeHours >= 48 ? Math.round(job.maxAgeHours / 24) + ' days' : job.maxAgeHours + ' h' }}</div>
               </td>
               <td class="px-3 py-2.5">
-                <div class="flex items-center gap-2">
-                  <button
-                    @click="toggleCronJob(job.id, !job.enabled)"
-                    class="text-xs px-2.5 py-1 rounded transition-colors"
-                    :class="job.enabled ? 'bg-amber-50 text-amber-700 hover:bg-amber-100' : 'bg-green-50 text-green-700 hover:bg-green-100'"
-                  >
-                    {{ job.enabled ? 'Disable' : 'Enable' }}
-                  </button>
+                <div class="flex items-center gap-1.5">
                   <button
                     @click="runCronJob(job.id)"
-                    :disabled="runningCronJob === job.id"
-                    class="text-xs px-2.5 py-1 rounded bg-blue-50 text-blue-700 hover:bg-blue-100 disabled:opacity-50 transition-colors"
-                  >
-                    {{ runningCronJob === job.id || hj(job.id)?.status === 'running' ? 'Running…' : 'Run Now' }}
-                  </button>
-                  <button
-                    @click="editCronJob(job)"
-                    class="text-xs px-2.5 py-1 rounded bg-primary-50 text-primary-600 hover:bg-primary-100 transition-colors"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    @click="deleteCronJob(job.id)"
-                    class="text-xs px-2.5 py-1 rounded bg-red-50 text-red-700 hover:bg-red-100 transition-colors"
-                  >
-                    Remove
-                  </button>
+                    :disabled="runningCronJob === job.id || hj(job.id)?.status === 'running'"
+                    class="text-xs px-2.5 py-1 rounded bg-blue-50 text-blue-700 hover:bg-blue-100 disabled:opacity-50 whitespace-nowrap"
+                  >{{ runningCronJob === job.id || hj(job.id)?.status === 'running' ? 'Running…' : 'Run now' }}</button>
+                  <details class="relative job-menu">
+                    <summary class="list-none cursor-pointer text-xs px-2 py-1 rounded bg-primary-50 text-primary-600 hover:bg-primary-100" aria-label="More actions">•••</summary>
+                    <div class="absolute right-0 z-10 mt-1 w-36 rounded-lg bg-white shadow-lg ring-1 ring-primary-200 py-1 text-xs">
+                      <button class="block w-full text-left px-3 py-1.5 hover:bg-primary-50" @click="closeMenu($event); toggleCronJob(job.id, !job.enabled)">{{ job.enabled ? 'Disable' : 'Enable' }}</button>
+                      <button class="block w-full text-left px-3 py-1.5 hover:bg-primary-50" @click="closeMenu($event); editCronJob(job)">Edit schedule</button>
+                      <button class="block w-full text-left px-3 py-1.5 hover:bg-primary-50" @click="closeMenu($event); openLog(job.id)">Show log</button>
+                      <button class="block w-full text-left px-3 py-1.5 text-red-600 hover:bg-red-50" @click="closeMenu($event); deleteCronJob(job.id)">Remove</button>
+                    </div>
+                  </details>
                 </div>
               </td>
             </tr>
@@ -600,333 +623,10 @@
       </div>
     </div>
 
-    <!-- ═══ NEWS & FEEDS ═══ -->
-    <div class="flex items-center gap-3 mb-4">
-      <div class="h-px flex-1 bg-primary-100"></div>
-      <span class="text-xs font-medium text-primary-400 uppercase tracking-widest">News & Feeds</span>
-      <div class="h-px flex-1 bg-primary-100"></div>
-    </div>
-
-    <!-- News Feed Status -->
-    <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
-      <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">News Feed Status</h2>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div class="border border-primary-100 rounded-xl p-4 text-center">
-          <div class="text-2xl font-serif font-bold text-primary-900">{{ newsFeedStats.articles }}</div>
-          <div class="text-xs text-primary-400 mt-1">Articles</div>
-        </div>
-        <div class="border border-primary-100 rounded-xl p-4 text-center">
-          <div class="text-2xl font-serif font-bold text-primary-900">{{ newsFeedStats.sources }}</div>
-          <div class="text-xs text-primary-400 mt-1">Active Sources</div>
-        </div>
-        <div class="border border-primary-100 rounded-xl p-4 text-center">
-          <div class="text-2xl font-serif font-bold text-primary-900">{{ newsFeedStats.countries }}</div>
-          <div class="text-xs text-primary-400 mt-1">Countries Covered</div>
-        </div>
-        <div class="border border-primary-100 rounded-xl p-4 text-center">
-          <div class="text-2xl font-serif font-bold text-primary-900">{{ newsFeedStats.sizeKB }} KB</div>
-          <div class="text-xs text-primary-400 mt-1">Feed Size</div>
-        </div>
-      </div>
-      <div class="flex items-center justify-between mt-4 text-xs text-primary-400">
-        <span v-if="newsFeedStats.lastUpdated">Last updated: {{ formatTime(newsFeedStats.lastUpdated) }}</span>
-        <span v-else>No data yet</span>
-        <span>{{ newsFeedStats.enabledSources }} of {{ newsFeedStats.totalSources }} sources enabled</span>
-      </div>
-    </div>
-
-    <!-- News Sources -->
-    <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
-      <div class="flex items-center justify-between mb-4">
-        <h2 class="font-serif text-xl font-bold text-primary-900">News Sources</h2>
-        <button @click="showNewsForm = true; Object.assign(newsForm, { id: '', name: '', url: '', type: 'rss', category: 'wire' })" v-if="!showNewsForm" class="text-sm px-4 py-2 rounded-lg border border-primary-200 text-primary-600 hover:bg-primary-50">
-          + Add Source
-        </button>
-      </div>
-
-      <!-- ReliefWeb needs a pre-approved appname -->
-      <div class="my-4 rounded-xl ring-1 ring-sky-200 bg-sky-50/50 p-4">
-        <div class="text-sm font-semibold text-primary-800">ReliefWeb (OCHA humanitarian reports)</div>
-        <p class="text-xs text-primary-500 mt-1 mb-3 leading-relaxed">
-          ReliefWeb only answers apps it has approved. Request an appname at
-          <a href="https://apidoc.reliefweb.int/parameters#appname" target="_blank" rel="noopener" class="underline">apidoc.reliefweb.int</a>
-          (suggested: <code>worldcountrygroups.exe.xyz</code>), then paste the approved name here.
-        </p>
-        <div class="flex flex-wrap items-center gap-2">
-          <input v-model="rwAppname" class="border border-primary-200 rounded-lg px-3 py-1.5 text-sm w-72 bg-white" placeholder="approved appname">
-          <button class="text-sm px-3 py-1.5 rounded-lg ring-1 ring-primary-200 bg-white hover:bg-primary-50" :disabled="!rwAppname" @click="testReliefweb">Test</button>
-          <button class="text-sm px-3 py-1.5 rounded-lg bg-primary-900 text-white hover:bg-primary-800 disabled:opacity-40" :disabled="!rwOk" @click="saveReliefweb">Save &amp; enable</button>
-          <span v-if="rwMsg" class="text-xs" :class="rwOk ? 'text-green-700' : 'text-red-600'">{{ rwMsg }}</span>
-        </div>
-        <ul v-if="rwSample.length" class="mt-2 text-[11px] text-primary-500 list-disc pl-4"><li v-for="t in rwSample" :key="t">{{ t }}</li></ul>
-      </div>
-
-      <!-- Add Source Form -->
-      <div v-if="showNewsForm" class="border border-primary-200 rounded-xl p-4 mb-4 space-y-3">
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs text-primary-500 mb-1">Source ID</label>
-            <input v-model="newsForm.id" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="my-source">
-          </div>
-          <div>
-            <label class="block text-xs text-primary-500 mb-1">Name</label>
-            <input v-model="newsForm.name" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="My News Source">
-          </div>
-        </div>
-        <div>
-          <label class="block text-xs text-primary-500 mb-1">URL</label>
-          <input v-model="newsForm.url" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="https://example.com/feed/">
-        </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs text-primary-500 mb-1">Type</label>
-            <select v-model="newsForm.type" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm">
-              <option value="rss">RSS</option>
-              <option value="atom">Atom</option>
-              <option value="json-api">JSON API</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs text-primary-500 mb-1">Category</label>
-            <select v-model="newsForm.category" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm">
-              <option value="government">Government</option>
-              <option value="wire">Wire / Diplomatic</option>
-              <option value="institutional">Institutional</option>
-              <option value="regional">Regional</option>
-              <option value="lldc-sids">LLDC / SIDS</option>
-            </select>
-          </div>
-        </div>
-        <div class="flex gap-2">
-          <button @click="addNewSource" class="text-sm px-4 py-2 rounded-lg bg-primary-900 text-white hover:bg-primary-800">Add Source</button>
-          <button @click="testNewsUrl" :disabled="testingNewsUrl" class="text-sm px-4 py-2 rounded-lg border border-primary-200 text-primary-600 hover:bg-primary-50 disabled:opacity-50">
-            {{ testingNewsUrl ? 'Testing...' : 'Test URL' }}
-          </button>
-          <button @click="showNewsForm = false" class="text-sm px-4 py-2 rounded-lg bg-primary-100 text-primary-600">Cancel</button>
-        </div>
-        <div v-if="newsTestResult" class="text-xs rounded-lg px-3 py-2" :class="newsTestResult.ok ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'">
-          {{ newsTestResult.ok ? `OK — ${newsTestResult.format} format, ${newsTestResult.size} bytes` : `Error: ${newsTestResult.error}` }}
-        </div>
-      </div>
-
-      <!-- Sources Table -->
-      <div v-if="newsSources.length" class="overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead>
-            <tr class="border-b border-primary-100 text-left">
-              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Source</th>
-              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Category</th>
-              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Articles</th>
-              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Last Fetch</th>
-              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Status</th>
-              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="src in newsSources" :key="src.id" class="border-b border-primary-50 last:border-0">
-              <td class="px-3 py-2.5">
-                <div class="text-primary-800 font-medium">{{ src.name }}</div>
-                <div class="text-xs text-primary-400 truncate max-w-[250px]" :title="src.url">{{ src.url }}</div>
-              </td>
-              <td class="px-3 py-2.5">
-                <span class="text-xs px-2 py-0.5 rounded-full" :class="newsCategoryClass(src.category)">{{ src.category }}</span>
-              </td>
-              <td class="px-3 py-2.5 text-primary-600 tabular-nums text-xs">{{ src.articleCount || 0 }}</td>
-              <td class="px-3 py-2.5">
-                <div v-if="src.lastFetch" class="text-xs text-primary-500">{{ formatTime(src.lastFetch) }}</div>
-                <div v-else class="text-xs text-primary-300">Never</div>
-                <div v-if="src.lastError" class="text-xs text-red-500 truncate max-w-[200px]" :title="src.lastError">{{ src.lastError }}</div>
-              </td>
-              <td class="px-3 py-2.5">
-                <span :class="src.enabled ? 'bg-green-100 text-green-700' : 'bg-primary-100 text-primary-400'" class="text-xs font-medium px-2 py-0.5 rounded-full">
-                  {{ src.enabled ? 'Enabled' : 'Disabled' }}
-                </span>
-              </td>
-              <td class="px-3 py-2.5">
-                <div class="flex items-center gap-2">
-                  <button
-                    @click="toggleNewsSource(src.id, !src.enabled)"
-                    class="text-xs px-2.5 py-1 rounded transition-colors"
-                    :class="src.enabled ? 'bg-amber-50 text-amber-700 hover:bg-amber-100' : 'bg-green-50 text-green-700 hover:bg-green-100'"
-                  >
-                    {{ src.enabled ? 'Disable' : 'Enable' }}
-                  </button>
-                  <button
-                    @click="deleteNewsSource(src.id)"
-                    class="text-xs px-2.5 py-1 rounded bg-red-50 text-red-700 hover:bg-red-100 transition-colors"
-                  >
-                    Remove
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div v-else class="text-sm text-primary-400">No news sources configured.</div>
-
-      <div v-if="newsMessage" class="mt-4 rounded-lg px-4 py-3 text-sm" :class="newsMessage.ok ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'">
-        {{ newsMessage.text }}
-      </div>
-    </div>
-
-    <!-- ═══ SITE SETTINGS ═══ -->
-    <div class="flex items-center gap-3 mb-4">
-      <div class="h-px flex-1 bg-primary-100"></div>
-      <span class="text-xs font-medium text-primary-400 uppercase tracking-widest">Site Settings</span>
-      <div class="h-px flex-1 bg-primary-100"></div>
-    </div>
-
-    <!-- Site Mode -->
-    <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
-      <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">Site Access Mode</h2>
-      <p class="text-sm text-primary-500 mb-4">
-        <strong>Public:</strong> All pages accessible without login.
-        <strong>Restricted:</strong> Only homepage, about, and sources are public; everything else requires login.
-      </p>
-      <div class="flex items-center gap-3">
-        <button
-          @click="toggleSiteMode('public')"
-          :class="siteMode === 'public' ? 'bg-green-600 text-white' : 'bg-primary-100 text-primary-600'"
-          class="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-        >
-          Public
-        </button>
-        <button
-          @click="toggleSiteMode('restricted')"
-          :class="siteMode === 'restricted' ? 'bg-amber-600 text-white' : 'bg-primary-100 text-primary-600'"
-          class="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-        >
-          Restricted
-        </button>
-      </div>
-    </div>
-
-    <!-- Navigation Links -->
-    <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
-      <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">Navigation Links</h2>
-      <p class="text-sm text-primary-500 mb-4">
-        Disable pages to hide them from the navigation bar for non-admin users.
-      </p>
-      <div class="flex flex-wrap gap-2">
-        <button
-          v-for="page in toggleablePages"
-          :key="page.path"
-          @click="togglePage(page.path)"
-          class="text-sm px-4 py-2 rounded-lg font-medium transition-colors border"
-          :class="disabledPages.includes(page.path)
-            ? 'bg-red-50 text-red-600 border-red-200'
-            : 'bg-green-50 text-green-700 border-green-200'"
-        >
-          {{ page.label }}
-          <span class="text-xs ml-1 opacity-60">{{ disabledPages.includes(page.path) ? 'OFF' : 'ON' }}</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- ═══ USERS ═══ -->
-    <div class="flex items-center gap-3 mb-4">
-      <div class="h-px flex-1 bg-primary-100"></div>
-      <span class="text-xs font-medium text-primary-400 uppercase tracking-widest">Users</span>
-      <div class="h-px flex-1 bg-primary-100"></div>
-    </div>
-
-    <!-- User Management -->
-    <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
-      <div class="flex items-center gap-3 mb-6">
-        <h2 class="font-serif text-xl font-bold text-primary-900">User Management</h2>
-        <span v-if="pendingCount > 0" class="bg-amber-100 text-amber-700 text-xs font-medium px-2.5 py-0.5 rounded-full">
-          {{ pendingCount }} pending
-        </span>
-      </div>
-
-      <div v-if="!users.length" class="text-sm text-primary-400">No users found.</div>
-
-      <div v-else class="overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead>
-            <tr class="border-b border-primary-100 text-left">
-              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Username</th>
-              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Display Name</th>
-              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Email</th>
-              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Role</th>
-              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Status</th>
-              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Created</th>
-              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="user in users" :key="user.id" class="border-b border-primary-50 last:border-0">
-              <td class="px-3 py-2.5 text-primary-700 font-medium">{{ user.username }}</td>
-              <td class="px-3 py-2.5 text-primary-600">{{ user.displayName }}</td>
-              <td class="px-3 py-2.5 text-primary-600">{{ user.email || '—' }}</td>
-              <td class="px-3 py-2.5">
-                <span :class="user.role === 'admin' ? 'bg-purple-100 text-purple-700' : 'bg-primary-100 text-primary-600'" class="text-xs font-medium px-2 py-0.5 rounded-full">
-                  {{ user.role }}
-                </span>
-              </td>
-              <td class="px-3 py-2.5">
-                <span :class="statusClass(user.status)" class="text-xs font-medium px-2 py-0.5 rounded-full">
-                  {{ user.status }}
-                </span>
-              </td>
-              <td class="px-3 py-2.5 text-primary-500 text-xs">{{ formatTime(user.createdAt) }}</td>
-              <td class="px-3 py-2.5">
-                <div class="flex items-center gap-2">
-                  <button
-                    v-if="user.status === 'pending'"
-                    @click="approveUser(user.id)"
-                    class="text-xs px-2.5 py-1 rounded bg-green-50 text-green-700 hover:bg-green-100 transition-colors"
-                  >
-                    Approve
-                  </button>
-                  <button
-                    v-if="user.status === 'pending'"
-                    @click="rejectUser(user.id)"
-                    class="text-xs px-2.5 py-1 rounded bg-red-50 text-red-700 hover:bg-red-100 transition-colors"
-                  >
-                    Reject
-                  </button>
-                  <button
-                    v-if="user.status === 'approved' && user.role !== 'admin'"
-                    @click="suspendUser(user.id)"
-                    class="text-xs px-2.5 py-1 rounded bg-amber-50 text-amber-700 hover:bg-amber-100 transition-colors"
-                  >
-                    Suspend
-                  </button>
-                  <button
-                    v-if="user.status === 'suspended'"
-                    @click="suspendUser(user.id)"
-                    class="text-xs px-2.5 py-1 rounded bg-green-50 text-green-700 hover:bg-green-100 transition-colors"
-                  >
-                    Unsuspend
-                  </button>
-                  <button
-                    v-if="user.role !== 'admin'"
-                    @click="removeUser(user.id)"
-                    class="text-xs px-2.5 py-1 rounded bg-primary-50 text-primary-500 hover:bg-primary-100 transition-colors"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- ═══ DATA ═══ -->
-    <div class="flex items-center gap-3 mb-4">
-      <div class="h-px flex-1 bg-primary-100"></div>
-      <span class="text-xs font-medium text-primary-400 uppercase tracking-widest">Data</span>
-      <div class="h-px flex-1 bg-primary-100"></div>
-    </div>
-
-    <!-- Data Refresh -->
+        <!-- Data Refresh -->
     <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
       <div class="flex items-center justify-between mb-6">
-        <h2 class="font-serif text-xl font-bold text-primary-900">Data Refresh</h2>
+        <div><h2 class="font-serif text-xl font-bold text-primary-900">Refresh by hand</h2><p class="text-xs text-primary-500 mt-1">Most data refreshes on its own schedule above; use these for an immediate update or to upload the UN voting file.</p></div>
         <button
           @click="handleRefreshAll"
           :disabled="anyRefreshing"
@@ -941,7 +641,7 @@
         <!-- Country Statistics -->
         <div class="border border-primary-100 rounded-xl p-4">
           <div class="text-sm font-semibold text-primary-800 mb-1">Country Statistics</div>
-          <div class="text-xs text-primary-400 mb-3">World Bank + REST Countries + UNDP</div>
+          <div class="text-xs text-primary-400 mb-3">World Bank (statistics, capitals, regions, income) + UNDP</div>
           <div v-if="refreshStatus?.country?.refreshing" class="text-xs text-blue-600 mb-2">
             {{ refreshStatus.country.progress || 'Refreshing...' }}
           </div>
@@ -1082,20 +782,9 @@
       </div>
     </div>
 
-    <!-- Data Source Timestamps -->
-    <div v-if="sourceMeta" class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
-      <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">Data Sources</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div v-for="(ts, source) in sourceMeta" :key="source" class="border border-primary-100 rounded-lg p-4">
-          <div class="text-xs text-primary-400 uppercase tracking-wider mb-1">{{ source }}</div>
-          <div class="text-sm text-primary-700">{{ ts ? formatTime(ts) : 'Not fetched' }}</div>
-        </div>
-      </div>
-    </div>
-
     <!-- Data Coverage -->
-    <div v-if="coverage" class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8">
-      <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">Data Coverage</h2>
+    <details v-if="coverage" class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
+      <summary class="cursor-pointer font-serif text-xl font-bold text-primary-900">Country statistics coverage</summary>
       <p class="text-sm text-primary-500 mb-4">{{ coverage.total }} countries loaded</p>
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
@@ -1122,6 +811,336 @@
           </tbody>
         </table>
       </div>
+    </details>
+    </div>
+
+    <!-- ═══ SOURCES ═══ -->
+    <div v-show="tab === 'sources'">
+    <!-- News Feed Status -->
+    <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
+      <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">News Feed Status</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="border border-primary-100 rounded-xl p-4 text-center">
+          <div class="text-2xl font-serif font-bold text-primary-900">{{ newsFeedStats.articles }}</div>
+          <div class="text-xs text-primary-400 mt-1">Articles</div>
+        </div>
+        <div class="border border-primary-100 rounded-xl p-4 text-center">
+          <div class="text-2xl font-serif font-bold text-primary-900">{{ newsFeedStats.sources }}</div>
+          <div class="text-xs text-primary-400 mt-1">Active Sources</div>
+        </div>
+        <div class="border border-primary-100 rounded-xl p-4 text-center">
+          <div class="text-2xl font-serif font-bold text-primary-900">{{ newsFeedStats.countries }}</div>
+          <div class="text-xs text-primary-400 mt-1">Countries Covered</div>
+        </div>
+        <div class="border border-primary-100 rounded-xl p-4 text-center">
+          <div class="text-2xl font-serif font-bold text-primary-900">{{ newsFeedStats.sizeKB }} KB</div>
+          <div class="text-xs text-primary-400 mt-1">Feed Size</div>
+        </div>
+      </div>
+      <div class="flex items-center justify-between mt-4 text-xs text-primary-400">
+        <span v-if="newsFeedStats.lastUpdated">Last updated: {{ formatTime(newsFeedStats.lastUpdated) }}</span>
+        <span v-else>No data yet</span>
+        <span>{{ newsFeedStats.enabledSources }} of {{ newsFeedStats.totalSources }} sources enabled</span>
+      </div>
+    </div>
+
+    <!-- News Sources -->
+    <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-serif text-xl font-bold text-primary-900">News Sources</h2>
+        <button @click="showNewsForm = true; Object.assign(newsForm, { id: '', name: '', url: '', type: 'rss', category: 'wire' })" v-if="!showNewsForm" class="text-sm px-4 py-2 rounded-lg border border-primary-200 text-primary-600 hover:bg-primary-50">
+          + Add Source
+        </button>
+      </div>
+
+      <!-- ReliefWeb needs a pre-approved appname -->
+      <div class="my-4 rounded-xl ring-1 ring-sky-200 bg-sky-50/50 p-4">
+        <div class="text-sm font-semibold text-primary-800">ReliefWeb (OCHA humanitarian reports)</div>
+        <p class="text-xs text-primary-500 mt-1 mb-3 leading-relaxed">
+          ReliefWeb only answers apps it has approved. Request an appname at
+          <a href="https://apidoc.reliefweb.int/parameters#appname" target="_blank" rel="noopener" class="underline">apidoc.reliefweb.int</a>
+          (suggested: <code>worldcountrygroups.exe.xyz</code>), then paste the approved name here.
+        </p>
+        <div class="flex flex-wrap items-center gap-2">
+          <input v-model="rwAppname" class="border border-primary-200 rounded-lg px-3 py-1.5 text-sm w-72 bg-white" placeholder="approved appname">
+          <button class="text-sm px-3 py-1.5 rounded-lg ring-1 ring-primary-200 bg-white hover:bg-primary-50" :disabled="!rwAppname" @click="testReliefweb">Test</button>
+          <button class="text-sm px-3 py-1.5 rounded-lg bg-primary-900 text-white hover:bg-primary-800 disabled:opacity-40" :disabled="!rwOk" @click="saveReliefweb">Save &amp; enable</button>
+          <span v-if="rwMsg" class="text-xs" :class="rwOk ? 'text-green-700' : 'text-red-600'">{{ rwMsg }}</span>
+        </div>
+        <ul v-if="rwSample.length" class="mt-2 text-[11px] text-primary-500 list-disc pl-4"><li v-for="t in rwSample" :key="t">{{ t }}</li></ul>
+      </div>
+
+      <!-- Add Source Form -->
+      <div v-if="showNewsForm" class="border border-primary-200 rounded-xl p-4 mb-4 space-y-3">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-primary-500 mb-1">Source ID</label>
+            <input v-model="newsForm.id" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="my-source">
+          </div>
+          <div>
+            <label class="block text-xs text-primary-500 mb-1">Name</label>
+            <input v-model="newsForm.name" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="My News Source">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-primary-500 mb-1">URL</label>
+          <input v-model="newsForm.url" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="https://example.com/feed/">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-primary-500 mb-1">Type</label>
+            <select v-model="newsForm.type" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm">
+              <option value="rss">RSS</option>
+              <option value="atom">Atom</option>
+              <option value="json-api">JSON API</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs text-primary-500 mb-1">Category</label>
+            <select v-model="newsForm.category" class="w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm">
+              <option value="government">Government</option>
+              <option value="wire">Wire / Diplomatic</option>
+              <option value="institutional">Institutional</option>
+              <option value="regional">Regional</option>
+              <option value="lldc-sids">LLDC / SIDS</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <button @click="addNewSource" class="text-sm px-4 py-2 rounded-lg bg-primary-900 text-white hover:bg-primary-800">Add Source</button>
+          <button @click="testNewsUrl" :disabled="testingNewsUrl" class="text-sm px-4 py-2 rounded-lg border border-primary-200 text-primary-600 hover:bg-primary-50 disabled:opacity-50">
+            {{ testingNewsUrl ? 'Testing...' : 'Test URL' }}
+          </button>
+          <button @click="showNewsForm = false" class="text-sm px-4 py-2 rounded-lg bg-primary-100 text-primary-600">Cancel</button>
+        </div>
+        <div v-if="newsTestResult" class="text-xs rounded-lg px-3 py-2" :class="newsTestResult.ok ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'">
+          {{ newsTestResult.ok ? `OK — ${newsTestResult.format} format, ${newsTestResult.size} bytes` : `Error: ${newsTestResult.error}` }}
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <input v-model="srcQuery" type="search" placeholder="Search sources" aria-label="Search sources" class="flex-1 min-w-[12rem] border border-primary-200 rounded-lg px-3 py-1.5 text-sm">
+        <div class="flex rounded-full bg-primary-100 p-0.5 text-xs" role="tablist" aria-label="Show">
+          <button v-for="f in SRC_FILTERS" :key="f.v" role="tab" :aria-selected="srcFilter === f.v" class="px-2.5 py-1 rounded-full whitespace-nowrap"
+            :class="srcFilter === f.v ? 'bg-white shadow-sm text-primary-900' : 'text-primary-500'" @click="srcFilter = f.v">{{ f.label }} {{ srcCounts[f.v] }}</button>
+        </div>
+        <select v-model="srcCategory" class="text-xs border border-primary-200 rounded-lg px-2 py-1.5 bg-white" aria-label="Category">
+          <option value="">All categories</option>
+          <option v-for="c in srcCategories" :key="c" :value="c">{{ c }}</option>
+        </select>
+      </div>
+
+      <!-- Sources Table -->
+      <div v-if="newsSources.length" class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-primary-100 text-left">
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Source</th>
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Category</th>
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Articles</th>
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Last Fetch</th>
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Status</th>
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="src in filteredSources" :key="src.id" class="border-b border-primary-50 last:border-0">
+              <td class="px-3 py-2.5">
+                <div class="text-primary-800 font-medium">{{ src.name }}</div>
+                <div class="text-xs text-primary-400 truncate max-w-[250px]" :title="src.url">{{ src.url }}</div>
+              </td>
+              <td class="px-3 py-2.5">
+                <span class="text-xs px-2 py-0.5 rounded-full" :class="newsCategoryClass(src.category)">{{ src.category }}</span>
+              </td>
+              <td class="px-3 py-2.5 text-primary-600 tabular-nums text-xs">{{ src.articleCount || 0 }}</td>
+              <td class="px-3 py-2.5">
+                <div v-if="src.lastFetch" class="text-xs text-primary-500">{{ formatTime(src.lastFetch) }}</div>
+                <div v-else class="text-xs text-primary-300">Never</div>
+                <div v-if="src.lastError" class="text-xs text-red-500 truncate max-w-[200px]" :title="src.lastError">{{ src.lastError }}</div>
+              </td>
+              <td class="px-3 py-2.5">
+                <span :class="src.enabled ? 'bg-green-100 text-green-700' : 'bg-primary-100 text-primary-400'" class="text-xs font-medium px-2 py-0.5 rounded-full">
+                  {{ src.enabled ? 'Enabled' : 'Disabled' }}
+                </span>
+              </td>
+              <td class="px-3 py-2.5">
+                <div class="flex items-center gap-2">
+                  <button
+                    @click="toggleNewsSource(src.id, !src.enabled)"
+                    class="text-xs px-2.5 py-1 rounded transition-colors"
+                    :class="src.enabled ? 'bg-amber-50 text-amber-700 hover:bg-amber-100' : 'bg-green-50 text-green-700 hover:bg-green-100'"
+                  >
+                    {{ src.enabled ? 'Disable' : 'Enable' }}
+                  </button>
+                  <button
+                    @click="deleteNewsSource(src.id)"
+                    class="text-xs px-2.5 py-1 rounded bg-red-50 text-red-700 hover:bg-red-100 transition-colors"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p v-if="newsSources.length && !filteredSources.length" class="text-sm text-primary-400 py-3">No source matches.</p>
+      <div v-if="!newsSources.length" class="text-sm text-primary-400">No news sources configured.</div>
+
+      <div v-if="newsMessage" class="mt-4 rounded-lg px-4 py-3 text-sm" :class="newsMessage.ok ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'">
+        {{ newsMessage.text }}
+      </div>
+    </div>
+
+        </div>
+
+    <!-- ═══ USERS & ACCESS ═══ -->
+    <div v-show="tab === 'users'">
+    <!-- User Management -->
+    <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
+      <div class="flex items-center gap-3 mb-6">
+        <h2 class="font-serif text-xl font-bold text-primary-900">User Management</h2>
+        <span v-if="pendingCount > 0" class="bg-amber-100 text-amber-700 text-xs font-medium px-2.5 py-0.5 rounded-full">
+          {{ pendingCount }} pending
+        </span>
+      </div>
+
+      <div v-if="!users.length" class="text-sm text-primary-400">No users found.</div>
+
+      <div v-else class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-primary-100 text-left">
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Username</th>
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Display Name</th>
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Email</th>
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Role</th>
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Status</th>
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Created</th>
+              <th class="px-3 py-2.5 font-medium text-primary-400 text-xs uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="user in users" :key="user.id" class="border-b border-primary-50 last:border-0">
+              <td class="px-3 py-2.5 text-primary-700 font-medium">{{ user.username }}</td>
+              <td class="px-3 py-2.5 text-primary-600">{{ user.displayName }}</td>
+              <td class="px-3 py-2.5 text-primary-600">
+                <form v-if="editingEmail === user.id" class="flex items-center gap-1" @submit.prevent="saveEmail(user)">
+                  <input v-model="emailDraft" type="email" class="border border-primary-200 rounded px-2 py-1 text-xs w-48" placeholder="name@example.org" aria-label="Email address">
+                  <button class="text-xs px-2 py-1 rounded bg-primary-900 text-white">Save</button>
+                  <button type="button" class="text-xs px-1.5 text-primary-500" @click="editingEmail = null">Cancel</button>
+                </form>
+                <button v-else class="text-left hover:text-accent-700" :title="'Edit email'" @click="editingEmail = user.id; emailDraft = user.email || ''">{{ user.email || 'Add email' }} <span class="text-primary-300 text-[10px]">✎</span></button>
+              </td>
+              <td class="px-3 py-2.5">
+                <span :class="user.role === 'admin' ? 'bg-purple-100 text-purple-700' : 'bg-primary-100 text-primary-600'" class="text-xs font-medium px-2 py-0.5 rounded-full">
+                  {{ user.role }}
+                </span>
+              </td>
+              <td class="px-3 py-2.5">
+                <span :class="statusClass(user.status)" class="text-xs font-medium px-2 py-0.5 rounded-full">
+                  {{ user.status }}
+                </span>
+              </td>
+              <td class="px-3 py-2.5 text-primary-500 text-xs">{{ formatTime(user.createdAt) }}</td>
+              <td class="px-3 py-2.5">
+                <div class="flex items-center gap-2">
+                  <button
+                    v-if="user.status === 'pending'"
+                    @click="approveUser(user.id)"
+                    class="text-xs px-2.5 py-1 rounded bg-green-50 text-green-700 hover:bg-green-100 transition-colors"
+                  >
+                    Approve
+                  </button>
+                  <button
+                    v-if="user.status === 'pending'"
+                    @click="rejectUser(user.id)"
+                    class="text-xs px-2.5 py-1 rounded bg-red-50 text-red-700 hover:bg-red-100 transition-colors"
+                  >
+                    Reject
+                  </button>
+                  <button
+                    v-if="user.status === 'approved' && user.role !== 'admin'"
+                    @click="suspendUser(user.id)"
+                    class="text-xs px-2.5 py-1 rounded bg-amber-50 text-amber-700 hover:bg-amber-100 transition-colors"
+                  >
+                    Suspend
+                  </button>
+                  <button
+                    v-if="user.status === 'suspended'"
+                    @click="suspendUser(user.id)"
+                    class="text-xs px-2.5 py-1 rounded bg-green-50 text-green-700 hover:bg-green-100 transition-colors"
+                  >
+                    Unsuspend
+                  </button>
+                  <button
+                    v-if="user.role !== 'admin'"
+                    @click="removeUser(user.id)"
+                    class="text-xs px-2.5 py-1 rounded bg-primary-50 text-primary-500 hover:bg-primary-100 transition-colors"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+        <!-- Site Mode -->
+    <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
+      <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">Site Access Mode</h2>
+      <p class="text-sm text-primary-500 mb-4">
+        <strong>Public:</strong> All pages accessible without login.
+        <strong>Restricted:</strong> Only homepage, about, and sources are public; everything else requires login.
+      </p>
+      <div class="flex items-center gap-3">
+        <button
+          @click="toggleSiteMode('public')"
+          :class="siteMode === 'public' ? 'bg-green-600 text-white' : 'bg-primary-100 text-primary-600'"
+          class="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+        >
+          Public
+        </button>
+        <button
+          @click="toggleSiteMode('restricted')"
+          :class="siteMode === 'restricted' ? 'bg-amber-600 text-white' : 'bg-primary-100 text-primary-600'"
+          class="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+        >
+          Restricted
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
+      <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">Navigation Links</h2>
+      <p class="text-sm text-primary-500 mb-4">
+        Disable pages to hide them from the navigation bar for non-admin users.
+      </p>
+      <div class="flex flex-wrap gap-2">
+        <button
+          v-for="page in toggleablePages"
+          :key="page.path"
+          @click="togglePage(page.path)"
+          class="text-sm px-4 py-2 rounded-lg font-medium transition-colors border"
+          :class="disabledPages.includes(page.path)
+            ? 'bg-red-50 text-red-600 border-red-200'
+            : 'bg-green-50 text-green-700 border-green-200'"
+        >
+          {{ page.label }}
+          <span class="text-xs ml-1 opacity-60">{{ disabledPages.includes(page.path) ? 'OFF' : 'ON' }}</span>
+        </button>
+      </div>
+    </div>
+
+        </div>
+
+    <!-- ═══ BACKUP ═══ -->
+    <div v-show="tab === 'backup'">
+      <AdminBackupPanel class="mb-6" />
     </div>
   </div>
 </template>
@@ -1695,15 +1714,27 @@ async function clearCacheEntry(key: string) {
   }
 }
 
+const confirmClearAll = ref(false)
 async function clearAllCache() {
-  if (!confirm('Clear all cached analyses?')) return
+  if (!confirmClearAll.value) { confirmClearAll.value = true; setTimeout(() => { confirmClearAll.value = false }, 3000); return }
+  confirmClearAll.value = false
   try {
     await $fetch('/api/admin/ai-cache', { method: 'POST', body: { action: 'clear-all' } })
     await loadCacheStats()
-  } catch (e: any) {
-    alert(e?.data?.statusMessage || 'Failed to clear cache')
-  }
+  } catch {}
 }
+async function clearExpiredCache() {
+  try {
+    await $fetch('/api/admin/ai-cache', { method: 'POST', body: { action: 'clear-expired' } })
+    await loadCacheStats()
+  } catch {}
+}
+const cacheQuery = ref('')
+const cacheFresh = computed(() => (cacheStats.value?.entries || []).filter((e: any) => !e.expired).length)
+const cacheMatches = computed(() => {
+  const q = cacheQuery.value.trim().toLowerCase()
+  return (cacheStats.value?.entries || []).filter((e: any) => e.key.toLowerCase().includes(q)).slice(0, 60)
+})
 
 async function loadCronJobs() {
   try {
@@ -1745,6 +1776,131 @@ async function runCronJob(id: string) {
     cronMessage.value = { ok: false, text: e?.data?.statusMessage || 'Failed to start job' }
   } finally {
     runningCronJob.value = null
+  }
+}
+
+// ---------- tabs and overview ----------
+const route = useRoute()
+const router = useRouter()
+const ADMIN_TABS = [
+  { id: 'overview', label: 'Overview' }, { id: 'ai', label: 'AI' }, { id: 'data', label: 'Data' },
+  { id: 'sources', label: 'Sources' }, { id: 'users', label: 'Users and access' }, { id: 'backup', label: 'Backup' },
+] as const
+type TabId = typeof ADMIN_TABS[number]['id']
+const tab = ref<TabId>((ADMIN_TABS.some(t => t.id === route.query.tab) ? route.query.tab : 'overview') as TabId)
+function setTab(id: TabId) {
+  tab.value = id
+  router.replace({ query: { ...route.query, tab: id === 'overview' ? undefined : id } })
+}
+function goTo(id: TabId, anchor?: string) {
+  setTab(id)
+  if (anchor === 'src-failing') { srcFilter.value = 'failing'; anchor = undefined }
+  if (anchor) nextTick(() => document.getElementById(anchor)?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
+  else window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+function closeMenu(e: Event) { (e.target as HTMLElement).closest('details')?.removeAttribute('open') }
+
+const backupStatus = ref<any>(null)
+async function loadBackupStatus() {
+  try { backupStatus.value = await $fetch('/api/admin/backup/status') } catch {}
+}
+async function refreshOverview() {
+  await Promise.all([loadHealth(), loadUsage(), loadBackupStatus(), loadUsers(), loadNewsSources(), loadCronJobs()])
+}
+
+interface Attention { key: string; level: 'problem' | 'setup' | 'note'; title: string; detail?: string; tab: TabId; anchor?: string; action: string }
+const attention = computed<Attention[]>(() => {
+  const out: Attention[] = []
+  const h = health.value
+  for (const p of h?.problems || []) {
+    if (p.startsWith('UN voting data')) {
+      out.push({ key: 'votes', level: 'problem', title: p, detail: 'The UN Digital Library blocks automated downloads; download the newest voting CSV in your browser and upload it.', tab: 'data', anchor: 'upload-votes', action: 'Upload voting file' })
+    } else if (p.startsWith('Backup')) {
+      out.push({ key: 'backup-stale', level: 'problem', title: p, tab: 'backup', action: 'Open backup' })
+    } else {
+      out.push({ key: p, level: 'problem', title: p, tab: 'data', anchor: 'data-health', action: 'See data health' })
+    }
+  }
+  const b = backupStatus.value
+  if (b && !b.configured) out.push({ key: 'backup', level: 'setup', title: 'Backups are not set up', detail: 'Enter your Wasabi bucket and access keys to start nightly encrypted backups.', tab: 'backup', action: 'Set up backup' })
+  else if (b?.configured && b.lastResult?.lastRunFailed && !out.some(a => a.key === 'backup-stale')) out.push({ key: 'backup-failed', level: 'problem', title: 'The last backup failed', detail: (b.lastResult.errorLines || [])[0], tab: 'backup', action: 'Open backup' })
+  const admins = users.value.filter((u: any) => u.role === 'admin')
+  if (!alertEmails.value.trim() && !admins.some((u: any) => u.email)) {
+    out.push({ key: 'alerts', level: 'setup', title: 'No email address for data alerts', detail: 'Add your email to your user, or an alert address under Data health, to hear when a refresh breaks.', tab: 'users', action: 'Add email' })
+  }
+  const pending = users.value.filter((u: any) => u.status === 'pending').length
+  if (pending) out.push({ key: 'pending', level: 'problem', title: `${pending} ${pending === 1 ? 'person is' : 'people are'} waiting for approval`, tab: 'users', action: 'Review' })
+  const unpriced = (usage.value?.byModel || []).filter((m: any) => m.input + m.output > 0 && !m.price)
+  if (unpriced.length) out.push({ key: 'prices', level: 'setup', title: `No price set for ${unpriced.map((m: any) => m.model).join(', ')}`, detail: 'Enter USD per million tokens so AI costs show in dollars.', tab: 'ai', anchor: 'ai-usage', action: 'Enter prices' })
+  const failing = newsSources.value.filter((x: any) => x.enabled && x.lastError)
+  if (failing.length) out.push({ key: 'sources', level: 'problem', title: `${failing.length} news ${failing.length === 1 ? 'source' : 'sources'} failed on the last fetch`, detail: failing.slice(0, 4).map((x: any) => x.name).join(', ') + (failing.length > 4 ? '…' : ''), tab: 'sources', anchor: 'src-failing', action: 'Show failing' })
+  const rw = newsSources.value.find((x: any) => /reliefweb/i.test(x.id) && !x.enabled)
+  if (rw) out.push({ key: 'reliefweb', level: 'note', title: 'ReliefWeb is waiting for an approved app name', tab: 'sources', action: 'Open sources' })
+  return out
+})
+const tabAlerts = computed(() => {
+  const c: Record<string, number> = {}
+  for (const a of attention.value) if (a.level !== 'note') c[a.tab] = (c[a.tab] || 0) + 1
+  c.overview = attention.value.filter(a => a.level !== 'note').length
+  return c
+})
+const overviewTiles = computed(() => {
+  const h = health.value
+  const enabled = (h?.jobs || []).filter((j: any) => j.enabled).length
+  const u = usage.value
+  const b = backupStatus.value
+  return [
+    { label: 'scheduled datasets up to date', value: h ? `${(h.counts.ok || 0) + (h.counts.running || 0)} / ${enabled}` : '…', tab: 'data' as TabId },
+    { label: u?.total?.cost ? 'AI cost, last 30 days' : 'AI tokens, last 30 days', value: u ? (u.total.cost ? '$' + u.total.cost.toFixed(2) : fmtTok(u.total.input + u.total.output)) : '…', tab: 'ai' as TabId },
+    { label: 'questions asked, last 30 days', value: u ? String(u.asks.count) : '…', tab: 'ai' as TabId },
+    { label: 'last backup', value: !b ? '…' : !b.configured ? 'Not set up' : b.lastResult?.lastFinishedAt ? formatTime(b.lastResult.lastFinishedAt).split(',')[0] : 'Never', tab: 'backup' as TabId },
+  ]
+})
+
+/** Plain-English reading of the cron expressions the scheduler uses (server time is UTC). */
+const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+const MONTHS = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+function describeCron(expr: string): string {
+  const f = (expr || '').trim().split(/\s+/)
+  if (f.length !== 5) return expr
+  const [mi, hr, dom, mon, dow] = f
+  const num = (x: string) => /^\d+$/.test(x)
+  const at = num(mi) && num(hr) ? `${hr.padStart(2, '0')}:${mi.padStart(2, '0')} UTC` : ''
+  const months = mon === '*' ? '' : ` in ${mon.split(',').map(m => MONTHS[Number(m)] || m).join(' and ')}`
+  if (num(mi) && hr === '*' && dom === '*' && mon === '*' && dow === '*') return `Every hour at :${mi.padStart(2, '0')}`
+  const every = hr.match(/^\*\/(\d+)$/)
+  if (num(mi) && every && dom === '*' && dow === '*') return `Every ${every[1]} hours at :${mi.padStart(2, '0')}${months}`
+  if (at && dom === '*' && dow === '*') return `Daily at ${at}${months}`
+  if (at && dom === '*' && num(dow)) return `${DAYS[Number(dow) % 7]}s at ${at}${months}`
+  if (at && num(dom) && dow === '*') return `Monthly on the ${dom}${['th', 'st', 'nd', 'rd'][(Number(dom) % 10 > 3 || [11, 12, 13].includes(Number(dom))) ? 0 : Number(dom) % 10]} at ${at}${months}`
+  return expr
+}
+
+// ---------- news source filters ----------
+const SRC_FILTERS = [{ v: 'all', label: 'All' }, { v: 'failing', label: 'Failing' }, { v: 'enabled', label: 'On' }, { v: 'disabled', label: 'Off' }]
+const srcFilter = ref('all')
+const srcQuery = ref('')
+const srcCategory = ref('')
+const srcCategories = computed(() => [...new Set(newsSources.value.map((x: any) => x.category).filter(Boolean))].sort())
+const srcMatch = (x: any, f: string) => f === 'all' || (f === 'failing' && x.enabled && !!x.lastError) || (f === 'enabled' && x.enabled) || (f === 'disabled' && !x.enabled)
+const srcCounts = computed(() => Object.fromEntries(SRC_FILTERS.map(f => [f.v, newsSources.value.filter((x: any) => srcMatch(x, f.v)).length])))
+const filteredSources = computed(() => {
+  const q = srcQuery.value.trim().toLowerCase()
+  return newsSources.value
+    .filter((x: any) => srcMatch(x, srcFilter.value) && (!srcCategory.value || x.category === srcCategory.value) && (!q || `${x.name} ${x.url} ${x.id}`.toLowerCase().includes(q)))
+    .sort((a: any, b: any) => Number(!!(b.enabled && b.lastError)) - Number(!!(a.enabled && a.lastError)))
+})
+
+// ---------- user email ----------
+const editingEmail = ref<string | null>(null)
+const emailDraft = ref('')
+async function saveEmail(user: any) {
+  try {
+    const r = await $fetch<any>(`/api/admin/users/${user.id}/email`, { method: 'POST', body: { email: emailDraft.value } })
+    user.email = r.email
+    editingEmail.value = null
+  } catch (e: any) {
+    alert(e?.data?.statusMessage || 'Could not save the email address')
   }
 }
 
@@ -2006,11 +2162,9 @@ async function handleLogout() {
 
 function formatTime(iso: string): string {
   if (!iso) return 'N/A'
-  try {
-    return new Date(iso).toLocaleString()
-  } catch {
-    return iso
-  }
+  const d = new Date(iso)
+  if (isNaN(d.getTime())) return iso
+  return d.toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
 }
 
 onMounted(async () => {
@@ -2025,6 +2179,7 @@ onMounted(async () => {
     loadCronJobs(),
     loadHealth(),
     loadUsage(),
+    loadBackupStatus(),
     loadNewsSources(),
     loadNewsFeedStats(),
     loadStmtFeedStats(),

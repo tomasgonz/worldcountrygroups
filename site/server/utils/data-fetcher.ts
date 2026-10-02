@@ -44,6 +44,7 @@ const WB_INDICATORS: Record<string, string> = {
   military_expenditure: 'MS.MIL.XPND.CD',
   military_pct_gdp: 'MS.MIL.XPND.GD.ZS',
   armed_forces_pct: 'MS.MIL.XPND.ZS',
+  surface_area: 'AG.SRF.TOTL.K2',
 }
 
 async function fetchWBBatch(
@@ -54,7 +55,7 @@ async function fetchWBBatch(
   const joined = codes.join(';')
   const url = `https://api.worldbank.org/v2/country/${joined}/indicator/${indicator}?format=json&per_page=5000&date=2018:2024`
   try {
-    const resp = await fetch(url)
+    const resp = await fetch(url, { signal: AbortSignal.timeout(45_000) })
     if (!resp.ok) return false
     const data = await resp.json()
     if (!Array.isArray(data) || data.length < 2 || !data[1]) return false
@@ -114,14 +115,16 @@ async function fetchWorldBankIncomeGroups(
     const url = `https://api.worldbank.org/v2/country/${joined}?format=json&per_page=100`
 
     try {
-      const resp = await fetch(url)
+      const resp = await fetch(url, { signal: AbortSignal.timeout(45_000) })
       if (!resp.ok) continue
       const data = await resp.json()
       if (!Array.isArray(data) || data.length < 2 || !data[1]) continue
 
       for (const entry of data[1]) {
-        if (entry.id && entry.incomeLevel?.value) {
-          results.set(entry.id, entry.incomeLevel.value)
+        // entry.id is the three-letter code; the rest of the refresh is keyed by two-letter codes
+        const code = (entry.iso2Code || '').toUpperCase()
+        if (code && entry.incomeLevel?.value && entry.incomeLevel.value !== 'Not classified') {
+          results.set(code, entry.incomeLevel.value)
         }
       }
     } catch {
@@ -133,6 +136,7 @@ async function fetchWorldBankIncomeGroups(
 }
 
 interface RestCountryInfo {
+  income?: string | null
   capital: string | null
   region: string | null
   subregion: string | null
@@ -141,30 +145,33 @@ interface RestCountryInfo {
   iso3: string
 }
 
+/**
+ * Capital and region for every country from the World Bank country API (no key needed).
+ * REST Countries v1–v4 were retired in 2026 and v5 needs an account, so it is no longer used.
+ */
 async function fetchRestCountries(): Promise<Map<string, RestCountryInfo>> {
   const results = new Map<string, RestCountryInfo>()
-
   try {
-    const resp = await fetch('https://restcountries.com/v3.1/all?fields=cca2,cca3,name,capital,region,subregion,area')
+    const resp = await fetch('https://api.worldbank.org/v2/country?format=json&per_page=400', { signal: AbortSignal.timeout(45_000) })
     if (!resp.ok) return results
     const data = await resp.json()
-
-    for (const entry of data) {
-      const iso2 = entry.cca2
-      if (!iso2) continue
-      results.set(iso2.toUpperCase(), {
-        capital: Array.isArray(entry.capital) && entry.capital.length > 0 ? entry.capital[0] : null,
-        region: entry.region || null,
-        subregion: entry.subregion || null,
-        area: entry.area || null,
-        name: entry.name?.common || entry.name?.official || '',
-        iso3: entry.cca3 || '',
+    if (!Array.isArray(data) || !Array.isArray(data[1])) return results
+    for (const entry of data[1]) {
+      const iso2 = (entry.iso2Code || '').toUpperCase()
+      if (!iso2 || entry.region?.value === 'Aggregates') continue
+      results.set(iso2, {
+        capital: entry.capitalCity || null,
+        income: entry.incomeLevel?.value && entry.incomeLevel.value !== 'Not classified' ? entry.incomeLevel.value : null,
+        region: (entry.region?.value || '').trim() || null,
+        subregion: null,
+        area: null,
+        name: entry.name || '',
+        iso3: entry.id || '',
       })
     }
   } catch {
-    // REST Countries failed
+    // World Bank country list failed; capitals and regions stay empty this run
   }
-
   return results
 }
 
@@ -242,7 +249,7 @@ export async function refreshAllData(): Promise<{
 
     // Fetch from all sources in parallel
     _progress = 'Fetching from World Bank API...'
-    const [gdpData, gdpPcData, popData, co2Data, leData, milExpData, milPctData, armedPctData, incomeData, restData] = await Promise.all([
+    const [gdpData, gdpPcData, popData, co2Data, leData, milExpData, milPctData, armedPctData, incomeData, restData, areaData] = await Promise.all([
       fetchWorldBankIndicator(allIso2, WB_INDICATORS.gdp).catch(e => { errors.push(`GDP: ${e}`); return new Map() }),
       fetchWorldBankIndicator(allIso2, WB_INDICATORS.gdp_per_capita).catch(e => { errors.push(`GDP/cap: ${e}`); return new Map() }),
       fetchWorldBankIndicator(allIso2, WB_INDICATORS.population).catch(e => { errors.push(`Pop: ${e}`); return new Map() }),
@@ -252,7 +259,8 @@ export async function refreshAllData(): Promise<{
       fetchWorldBankIndicator(allIso2, WB_INDICATORS.military_pct_gdp).catch(e => { errors.push(`MilPct: ${e}`); return new Map() }),
       fetchWorldBankIndicator(allIso2, WB_INDICATORS.armed_forces_pct).catch(e => { errors.push(`Armed: ${e}`); return new Map() }),
       fetchWorldBankIncomeGroups(allIso2).catch(e => { errors.push(`Income: ${e}`); return new Map() }),
-      fetchRestCountries().catch(e => { errors.push(`RestCountries: ${e}`); return new Map() }),
+      fetchRestCountries().catch(e => { errors.push(`Country metadata: ${e}`); return new Map() }),
+      fetchWorldBankIndicator(allIso2, WB_INDICATORS.surface_area).catch(e => { errors.push(`Area: ${e}`); return new Map() }),
     ]) as [
       Map<string, { value: number; year: number }>,
       Map<string, { value: number; year: number }>,
@@ -264,6 +272,7 @@ export async function refreshAllData(): Promise<{
       Map<string, { value: number; year: number }>,
       Map<string, string>,
       Map<string, RestCountryInfo>,
+      Map<string, { value: number; year: number }>,
     ]
 
     _progress = 'Merging data...'
@@ -274,7 +283,7 @@ export async function refreshAllData(): Promise<{
         updated_at: now,
         sources: {
           worldbank: now,
-          restcountries: restData.size > 0 ? now : null,
+          restcountries: restData.size > 0 ? now : null, // capitals and regions, now from the World Bank country API
           undp: now, // bundled HDI values
         },
         country_count: 0,
@@ -304,8 +313,8 @@ export async function refreshAllData(): Promise<{
         capital: rest?.capital ?? null,
         region: rest?.region ?? null,
         subregion: rest?.subregion ?? null,
-        area_km2: rest?.area ?? null,
-        income_group: incomeData.get(iso2) ?? null,
+        area_km2: areaData.get(iso2)?.value ?? rest?.area ?? null,
+        income_group: rest?.income ?? incomeData.get(iso2) ?? null,
         gdp: gdp?.value ?? null,
         gdp_per_capita: gdpPc?.value ?? null,
         population: pop?.value ?? null,
@@ -447,7 +456,7 @@ export async function refreshUNVotingData(): Promise<{
       sourceFile = localCsv
       input = createReadStream(join(localDir, localCsv))
     } else {
-      const resp = await fetch(UN_CSV_URL)
+      const resp = await fetch(UN_CSV_URL, { signal: AbortSignal.timeout(20 * 60_000) })
       if (!resp.ok || !resp.body) {
         throw new Error(`Failed to download UN CSV: ${resp.status} ${resp.statusText}`)
       }
@@ -788,7 +797,7 @@ async function fetchGDELTDailyCSV(dateStr: string): Promise<{
 } | null> {
   const url = `https://data.gdeltproject.org/events/${dateStr}.export.CSV.zip`
   try {
-    const resp = await fetch(url)
+    const resp = await fetch(url, { signal: AbortSignal.timeout(45_000) })
     if (!resp.ok) return null
     const csv = unzipSingleEntry(Buffer.from(await resp.arrayBuffer()))
     if (!csv) return null
@@ -873,7 +882,7 @@ async function fetchGDELTDocSeries(countryName: string, mode: 'timelinetone' | '
   const url = `https://api.gdeltproject.org/api/v2/doc/doc?query=${encodedName}&mode=${mode}&timespan=12m&format=json`
   for (let attempt = 0; attempt < 4; attempt++) {
     try {
-      const resp = await fetch(url)
+      const resp = await fetch(url, { signal: AbortSignal.timeout(45_000) })
       const body = resp.ok ? await resp.text() : ''
       // Rate-limited requests get HTTP 429 or a plain-text notice instead of JSON
       if (body.trimStart().startsWith('{')) {

@@ -72,6 +72,17 @@ export function clearAnalysisCache(key?: string) {
   saveCache(data)
 }
 
+/** Remove entries older than the maximum age; returns how many were removed. */
+export function clearExpiredAnalysisCache(): number {
+  const data = loadCache()
+  let n = 0
+  for (const [k, e] of Object.entries(data.entries)) {
+    if (isExpired(e, data.maxAgeHours)) { delete data.entries[k]; n++ }
+  }
+  if (n) saveCache(data)
+  return n
+}
+
 export function getAnalysisCacheStats() {
   const data = loadCache()
   const entries = Object.entries(data.entries).map(([key, entry]) => ({
