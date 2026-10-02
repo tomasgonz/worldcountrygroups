@@ -65,7 +65,7 @@ export default defineEventHandler(async (event) => {
     members,
     candidates,
   })
-  const content = await callLLM(messages, { task: 'group-suggestions', task: 'group-suggestions' })
+  const content = await callLLM(messages, { task: 'group-suggestions' })
 
   const provider = getProviderForTask('group-suggestions')!
   setCachedAnalysis(cacheKey, content, provider.name, provider.model)

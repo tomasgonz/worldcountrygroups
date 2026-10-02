@@ -37,7 +37,7 @@ export default defineEventHandler(async (event) => {
     country: { name: countryName, iso3: iso, region: undefined },
     articles,
   })
-  const content = await callLLM(messages, { task: 'news-briefing', task: 'news-briefing' })
+  const content = await callLLM(messages, { task: 'news-briefing' })
 
   const provider = getProviderForTask('news-briefing')!
   setCachedAnalysis(cacheKey, content, provider.name, provider.model)

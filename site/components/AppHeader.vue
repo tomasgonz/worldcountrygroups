@@ -167,6 +167,7 @@ interface NavItem { label: string; to?: string; children?: NavChild[] }
 const navItems: NavItem[] = [
   { label: 'Today', to: '/today' },
   { label: 'UN Monitor', to: '/un' },
+  { label: 'Ask', to: '/ask' },
   { label: 'News', to: '/news' },
   { label: 'Statements', to: '/statements' },
   {

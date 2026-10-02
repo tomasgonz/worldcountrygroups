@@ -38,7 +38,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const messages = buildCompareAnalysisPrompt({ mode, entities, comparison })
-  const content = await callLLM(messages, { task: 'compare-analysis', task: 'compare-analysis' })
+  const content = await callLLM(messages, { task: 'compare-analysis' })
 
   const provider = getProviderForTask('compare-analysis')!
   setCachedAnalysis(cacheKey, content, provider.name, provider.model)

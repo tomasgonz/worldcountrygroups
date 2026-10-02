@@ -63,6 +63,7 @@ export const AI_TASKS = [
   { id: 'group-suggestions', label: 'Group suggestions', group: 'Quick tasks', hint: 'Short structured output' },
   { id: 'smart-search', label: 'Smart search', group: 'Quick tasks', hint: 'Interprets search queries; speed matters' },
   { id: 'chat', label: 'Intelligence chat', group: 'Chat', hint: 'Interactive answers; speed matters' },
+  { id: 'ask', label: 'Ask the database', group: 'Chat', hint: 'Research desk: looks up the data, then answers or writes a briefing (needs tool support)' },
 ] as const
 export type AITaskId = typeof AI_TASKS[number]['id']
 

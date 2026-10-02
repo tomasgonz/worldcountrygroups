@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
   const cookie = getRequestHeader(event, 'cookie') || ''
   const briefingData = await $fetch('/api/intelligence/country-briefing', { query: { iso }, headers: { cookie } })
   const messages = buildCountryBriefingPrompt(briefingData)
-  const content = await callLLM(messages, { task: 'country-analysis', task: 'country-analysis' })
+  const content = await callLLM(messages, { task: 'country-analysis' })
 
   const provider = getProviderForTask('country-analysis')!
   setCachedAnalysis(cacheKey, content, provider.name, provider.model)

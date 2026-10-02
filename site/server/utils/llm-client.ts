@@ -216,3 +216,132 @@ async function streamAnthropic(provider: AIProviderConfig, messages: LLMMessage[
     },
   })
 }
+
+// ---------------------------------------------------------------------------
+// Tool calling (OpenAI-compatible APIs: OpenAI, Groq, most others)
+// ---------------------------------------------------------------------------
+
+export interface ToolDef {
+  name: string
+  description: string
+  parameters: Record<string, any> // JSON schema
+}
+
+export interface ToolCall { id: string; name: string; arguments: any }
+
+/**
+ * One round of a tool-using conversation. `messages` may include assistant messages
+ * with tool_calls and { role: 'tool', tool_call_id, content } results.
+ */
+export async function callLLMWithTools(
+  messages: any[],
+  tools: ToolDef[],
+  options?: LLMOptions,
+): Promise<{ content: string; toolCalls: ToolCall[]; assistantMessage: any; provider: AIProviderConfig }> {
+  const provider = options?.provider || getProviderForTask(options?.task)
+  if (!provider) throw new Error('No AI provider configured')
+  if (provider.type === 'anthropic') {
+    throw new Error('The research desk needs an OpenAI-compatible model (OpenAI, Groq…). Assign one to “Ask the database” in Admin › Model per task.')
+  }
+  const baseUrl = provider.baseUrl || 'https://api.openai.com/v1'
+  const newParams = useNewOpenAIParams(provider.model)
+  const maxTok = options?.maxTokens || provider.maxTokens || 4096
+  const body: any = {
+    model: provider.model,
+    messages,
+    [newParams ? 'max_completion_tokens' : 'max_tokens']: maxTok,
+  }
+  if (tools.length) { // an empty tool list is rejected; omit it to force a written answer
+    body.tools = tools.map(t => ({ type: 'function', function: t }))
+    body.tool_choice = 'auto'
+  }
+  if (!newParams) body.temperature = options?.temperature ?? provider.temperature ?? 0.3
+  const res = await fetch(`${baseUrl}/chat/completions`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${provider.apiKey}` },
+    body: JSON.stringify(body),
+  })
+  if (!res.ok) throw new Error(`AI provider error ${res.status}: ${(await res.text()).slice(0, 300)}`)
+  const data: any = await res.json()
+  const msg = data.choices?.[0]?.message || {}
+  const toolCalls: ToolCall[] = (msg.tool_calls || []).map((c: any) => {
+    let args: any = {}
+    try { args = JSON.parse(c.function?.arguments || '{}') } catch {}
+    return { id: c.id, name: c.function?.name, arguments: args }
+  })
+  return { content: msg.content || '', toolCalls, assistantMessage: msg, provider }
+}
+
+/**
+ * A multi-round tool-using session. OpenAI providers use the Responses API (required
+ * for tools with reasoning models such as GPT-5.x/6.x); OpenAI-compatible providers
+ * (Groq, etc.) use chat completions with tool calls.
+ */
+export class ToolSession {
+  private messages: any[] = []
+  private previousId: string | null = null
+  private pending: any[] = []
+  provider: AIProviderConfig
+
+  constructor(private system: string, question: string, private tools: ToolDef[], options?: LLMOptions) {
+    const p = options?.provider || getProviderForTask(options?.task)
+    if (!p) throw new Error('No AI provider configured')
+    if (p.type === 'anthropic') {
+      throw new Error('The research desk needs an OpenAI or OpenAI-compatible model. Assign one to “Ask the database” in Admin › Model per task.')
+    }
+    this.provider = p
+    this.maxTokens = options?.maxTokens || p.maxTokens || 8000
+    if (p.type === 'openai') this.pending = [{ role: 'user', content: question }]
+    else this.messages = [{ role: 'system', content: system }, { role: 'user', content: question }]
+  }
+
+  private maxTokens: number
+
+  /** Add the results of the previous round's tool calls. */
+  addToolResult(callId: string, output: string) {
+    if (this.provider.type === 'openai') this.pending.push({ type: 'function_call_output', call_id: callId, output })
+    else this.messages.push({ role: 'tool', tool_call_id: callId, content: output })
+  }
+
+  /** Run one round. With allowTools=false the model must write its answer. */
+  async next(allowTools = true): Promise<{ content: string; toolCalls: ToolCall[] }> {
+    return this.provider.type === 'openai' ? this.nextResponses(allowTools) : this.nextChat(allowTools)
+  }
+
+  private async nextResponses(allowTools: boolean) {
+    const p = this.provider
+    const body: any = {
+      model: p.model,
+      instructions: this.system,
+      input: this.pending,
+      max_output_tokens: this.maxTokens,
+    }
+    if (this.previousId) body.previous_response_id = this.previousId
+    if (allowTools) body.tools = this.tools.map(t => ({ type: 'function', name: t.name, description: t.description, parameters: t.parameters }))
+    if (!useNewOpenAIParams(p.model)) body.temperature = p.temperature ?? 0.3
+    const res = await fetch(`${p.baseUrl || 'https://api.openai.com/v1'}/responses`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${p.apiKey}` },
+      body: JSON.stringify(body),
+    })
+    if (!res.ok) throw new Error(`AI provider error ${res.status}: ${(await res.text()).slice(0, 300)}`)
+    const data: any = await res.json()
+    this.previousId = data.id
+    this.pending = []
+    const out: any[] = data.output || []
+    const toolCalls: ToolCall[] = out.filter(o => o.type === 'function_call').map((o) => {
+      let args: any = {}
+      try { args = JSON.parse(o.arguments || '{}') } catch {}
+      return { id: o.call_id, name: o.name, arguments: args }
+    })
+    const content = out.filter(o => o.type === 'message')
+      .flatMap(o => (o.content || []).filter((c: any) => c.type === 'output_text').map((c: any) => c.text)).join('\n')
+    return { content, toolCalls }
+  }
+
+  private async nextChat(allowTools: boolean) {
+    const r = await callLLMWithTools(this.messages, allowTools ? this.tools : [], { provider: this.provider, maxTokens: this.maxTokens })
+    if (r.toolCalls.length) this.messages.push({ role: 'assistant', content: r.content || null, tool_calls: r.assistantMessage.tool_calls })
+    return { content: r.content, toolCalls: r.toolCalls }
+  }
+}

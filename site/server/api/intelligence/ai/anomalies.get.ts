@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const messages = buildAnomalyDetectionPrompt(data)
-  const content = await callLLM(messages, { task: 'anomalies', task: 'anomalies' })
+  const content = await callLLM(messages, { task: 'anomalies' })
 
   const provider = getProviderForTask('anomalies')!
   setCachedAnalysis(cacheKey, content, provider.name, provider.model)

@@ -1,0 +1,196 @@
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync, statSync } from 'fs'
+import { join } from 'path'
+import { randomBytes } from 'crypto'
+import { ToolSession } from './llm-client'
+import { ASK_TOOLS, runTool, SourceCollector } from './ask-tools'
+import { dataFileMtime } from './data-file'
+
+const DATA_DIR = process.env.WCG_SITE_DATA || join(process.env.HOME || '/home/exedev', 'worldcountrygroups/site/server/data')
+const ASK_DIR = join(DATA_DIR, 'asks')
+
+export type AskMode = 'answer' | 'briefing'
+export type AskTemplate = 'country' | 'bilateral' | 'issue' | 'group' | 'free'
+
+export interface AskRecord {
+  id: string
+  userId: string
+  userName: string
+  question: string
+  mode: AskMode
+  template: AskTemplate
+  createdAt: string
+  finishedAt?: string
+  status: 'running' | 'done' | 'error'
+  error?: string
+  answer?: string
+  sources?: { ref: string; title: string; url: string; kind: string }[]
+  steps?: { tool: string; args: any; label: string }[]
+  datasets?: Record<string, string | null>
+  model?: string
+  provider?: string
+  shared: boolean
+  review?: { status: 'verified' | 'incorrect' | null; note?: string; by?: string; at?: string }
+  rerunOf?: string
+}
+
+const TEMPLATES: Record<AskTemplate, string> = {
+  country: `Write a country briefing with these sections (markdown "##" headings):
+## Summary (3-4 bullets)
+## Political and economic snapshot
+## At the United Nations (voting record, alignments, blocs, General Debate positions)
+## Security Council relevance
+## Recent developments (last two weeks)
+## Leaders
+## Talking points and what to watch`,
+  bilateral: `Write a bilateral meeting briefing for the two countries with these sections:
+## Summary (3-4 bullets)
+## The relationship at the UN (overall and subject-by-subject voting agreement)
+## Positions compared (from General Debate speeches)
+## Recent developments on each side
+## Where they converge and diverge
+## Suggested talking points`,
+  issue: `Write an issue briefing with these sections:
+## Summary (3-4 bullets)
+## Where the UN stands (resolutions and votes)
+## Who said what (speeches and quotes)
+## Security Council
+## Recent developments
+## Outlook`,
+  group: `Write a briefing on the group with these sections:
+## Summary (3-4 bullets)
+## Membership and cohesion
+## Voting behaviour at the UN
+## Positions and priorities
+## Recent developments
+## What to watch`,
+  free: `Write a structured briefing with clear "##" sections chosen to fit the request, starting with "## Summary" (3-4 bullets).`,
+}
+
+function systemPrompt(mode: AskMode, template: AskTemplate) {
+  const today = new Date().toISOString().slice(0, 10)
+  return `You are the research desk of World Country Groups, a database on countries, international groups and the United Nations. Today is ${today}.
+
+Method:
+- Before answering, use the tools to look up the facts. Call several tools when the question has several parts; look up each country, group or person involved.
+- State only facts that appear in tool results, and cite each one with the "ref" of the record it came from, like [S3] (several: [S3][S7]). Do not invent figures, dates, votes or quotes.
+- If the tools return nothing relevant, say plainly what the database does not cover. You may add widely known background, but label it "(general knowledge)" and never cite it.
+- Mention how current the data is where it matters (for example, General Assembly voting records may end months before today).
+- Write in clear, neutral English for diplomats and analysts. Prefer short paragraphs and bullets. Quote speakers only from search_quotes or speech results.
+
+${mode === 'briefing' ? TEMPLATES[template] + '\nKeep it to roughly 500-900 words.' : 'Answer concisely (usually under 250 words): lead with the direct answer, then the supporting facts.'}`
+}
+
+const LABELS: Record<string, (a: any) => string> = {
+  country_overview: a => `Country profile: ${a.country}`,
+  un_voting_record: a => `UN voting record: ${a.country}`,
+  voting_agreement: a => `Voting agreement: ${a.country_a} and ${a.country_b}`,
+  search_ga_resolutions: a => `General Assembly resolutions: “${a.query}”${a.session ? ` (session ${a.session})` : ''}`,
+  group_overview: a => `Group: ${a.group}`,
+  voting_blocs: () => 'Voting blocs',
+  security_council: a => `Security Council${a.topic ? `: ${a.topic}` : ''}`,
+  general_debate_speeches: a => `General Debate speeches${a.country ? `: ${a.country}` : ''}${a.topic ? ` on “${a.topic}”` : ''}`,
+  general_debate_overview: a => `General Debate overview${a.session ? ` (session ${a.session})` : ''}`,
+  search_quotes: a => `Quotes${a.query ? `: “${a.query}”` : ''}${a.speaker ? ` by ${a.speaker}` : ''}${a.country ? ` (${a.country})` : ''}`,
+  person_profile: a => `Person: ${a.name}`,
+  recent_news_and_statements: a => `Recent news and statements${a.country ? `: ${a.country}` : ''}${a.query ? ` on “${a.query}”` : ''}`,
+}
+
+function save(rec: AskRecord) {
+  if (!existsSync(ASK_DIR)) mkdirSync(ASK_DIR, { recursive: true })
+  writeFileSync(join(ASK_DIR, `${rec.id}.json`), JSON.stringify(rec, null, 2))
+}
+
+export function getAsk(id: string): AskRecord | null {
+  if (!/^[a-z0-9]+$/.test(id)) return null
+  const p = join(ASK_DIR, `${id}.json`)
+  return existsSync(p) ? JSON.parse(readFileSync(p, 'utf-8')) : null
+}
+
+export function listAsks(): AskRecord[] {
+  if (!existsSync(ASK_DIR)) return []
+  return readdirSync(ASK_DIR).filter(f => f.endsWith('.json'))
+    .map(f => { try { return JSON.parse(readFileSync(join(ASK_DIR, f), 'utf-8')) } catch { return null } })
+    .filter(Boolean)
+    .sort((a: any, b: any) => b.createdAt.localeCompare(a.createdAt))
+}
+
+export function updateAsk(id: string, patch: Partial<AskRecord>) {
+  const rec = getAsk(id)
+  if (!rec) return null
+  Object.assign(rec, patch)
+  save(rec)
+  return rec
+}
+
+/** Which datasets an answer used have been refreshed since it was written. */
+export function staleDatasets(rec: AskRecord): string[] {
+  return Object.entries(rec.datasets || {}).filter(([f, t]) => {
+    const now = dataFileMtime(f)
+    return now && t && now > t
+  }).map(([f]) => f)
+}
+
+export function asksToday(userId: string): number {
+  const day = new Date().toISOString().slice(0, 10)
+  return listAsks().filter(a => a.userId === userId && a.createdAt.startsWith(day)).length
+}
+
+export async function runAsk(opts: {
+  question: string; mode: AskMode; template: AskTemplate; userId: string; userName: string; rerunOf?: string
+  onEvent: (ev: any) => void
+}): Promise<AskRecord> {
+  const rec: AskRecord = {
+    id: Date.now().toString(36) + randomBytes(3).toString('hex'),
+    userId: opts.userId, userName: opts.userName, question: opts.question.trim(), mode: opts.mode, template: opts.template,
+    createdAt: new Date().toISOString(), status: 'running', shared: false, steps: [], rerunOf: opts.rerunOf,
+  }
+  save(rec)
+  opts.onEvent({ type: 'start', id: rec.id })
+
+  const src = new SourceCollector()
+  try {
+    const session = new ToolSession(systemPrompt(opts.mode, opts.template), rec.question, ASK_TOOLS,
+      { task: 'ask', maxTokens: opts.mode === 'briefing' ? 16000 : 8000 })
+    const provider: any = session.provider
+    let final = ''
+    for (let round = 0; round < 8; round++) {
+      const r = await session.next(round < 7)
+      if (!r.toolCalls.length) { final = r.content; break }
+      for (const call of r.toolCalls.slice(0, 10)) {
+        const label = (LABELS[call.name] || (() => call.name))(call.arguments || {})
+        rec.steps!.push({ tool: call.name, args: call.arguments, label })
+        opts.onEvent({ type: 'step', label })
+        let result: any
+        try { result = runTool(call.name, call.arguments || {}, src) } catch (e: any) { result = { error: String(e?.message || e) } }
+        let text = JSON.stringify(result)
+        if (text.length > 9000) text = text.slice(0, 9000) + '…(truncated)'
+        session.addToolResult(call.id, text)
+      }
+      opts.onEvent({ type: 'thinking' })
+    }
+    if (!final.trim()) throw new Error('The model did not produce an answer')
+    // keep only the sources the answer actually cites, in citation order
+    // the question is already shown as the title, so drop a leading "# heading" the model adds
+    final = final.replace(/^\s*#\s[^\n]*\n+/, '')
+    // keep only cited sources that exist, renumbered S1, S2… in order of first citation
+    const cited = [...new Set([...final.matchAll(/\[(S\d+)\]/g)].map(m => m[1]))].filter(ref => src.sources.some(s => s.ref === ref))
+    const renum = new Map(cited.map((ref, i) => [ref, `S${i + 1}`]))
+    final = final.replace(/\[(S\d+)\]/g, (m, ref) => (renum.has(ref) ? `[${renum.get(ref)}]` : ''))
+    rec.sources = cited.map(ref => ({ ...src.sources.find(s => s.ref === ref)!, ref: renum.get(ref)! })) as any
+    rec.answer = final
+    rec.status = 'done'
+    rec.model = provider?.model
+    rec.provider = provider?.name
+    rec.datasets = Object.fromEntries([...src.datasets].map(f => [f, dataFileMtime(f)]))
+    rec.finishedAt = new Date().toISOString()
+    save(rec)
+    opts.onEvent({ type: 'done', record: rec })
+  } catch (e: any) {
+    rec.status = 'error'
+    rec.error = String(e?.message || e).slice(0, 500)
+    rec.finishedAt = new Date().toISOString()
+    save(rec)
+    opts.onEvent({ type: 'error', message: rec.error, id: rec.id })
+  }
+  return rec
+}

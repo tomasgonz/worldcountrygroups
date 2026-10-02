@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
   const cookie = getRequestHeader(event, 'cookie') || ''
   const groupData = await $fetch('/api/intelligence/group-trends', { query: { gid }, headers: { cookie } })
   const messages = buildGroupTrendsPrompt(groupData)
-  const content = await callLLM(messages, { task: 'group-analysis', task: 'group-analysis' })
+  const content = await callLLM(messages, { task: 'group-analysis' })
 
   const provider = getProviderForTask('group-analysis')!
   setCachedAnalysis(cacheKey, content, provider.name, provider.model)

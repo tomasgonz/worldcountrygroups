@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
   const briefingData = await $fetch<any>('/api/intelligence/country-briefing', { query: { iso }, headers: { cookie } })
 
   const messages = buildRiskScorePrompt(briefingData)
-  const content = await callLLM(messages, { task: 'risk-score', task: 'risk-score' })
+  const content = await callLLM(messages, { task: 'risk-score' })
 
   const provider = getProviderForTask('risk-score')!
   setCachedAnalysis(cacheKey, content, provider.name, provider.model)

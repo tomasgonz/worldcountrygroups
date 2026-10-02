@@ -51,3 +51,6 @@ site/server/data/quotes-index.json
 # Derived people directory (scripts/build_people.py)
 site/server/data/people-index.json
 site/server/data/people-wikidata.json
+
+# Research desk question log (user data)
+site/server/data/asks/

@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
   const cookie = getRequestHeader(event, 'cookie') || ''
   const bilateralData = await $fetch('/api/intelligence/bilateral-prep', { query: { a, b }, headers: { cookie } })
   const messages = buildBilateralPrepPrompt(bilateralData)
-  const content = await callLLM(messages, { task: 'bilateral-analysis', task: 'bilateral-analysis' })
+  const content = await callLLM(messages, { task: 'bilateral-analysis' })
 
   const provider = getProviderForTask('bilateral-analysis')!
   setCachedAnalysis(cacheKey, content, provider.name, provider.model)

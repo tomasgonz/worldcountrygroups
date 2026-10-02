@@ -56,7 +56,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const messages = buildSmartSearchPrompt(q, context)
-  const content = await callLLM(messages, { task: 'smart-search', task: 'smart-search' })
+  const content = await callLLM(messages, { task: 'smart-search' })
 
   const provider = getProviderForTask('smart-search')!
   return { content, generatedAt: new Date().toISOString(), provider: provider.name }
