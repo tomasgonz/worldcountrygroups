@@ -13,6 +13,7 @@ export default defineEventHandler((event) => {
   if (path === '/api/share-beacon') return
   if (path === '/api/share-optout') return
   if (path === '/api/privacy-request') return // public data-protection request form
+  if (path === '/api/privacy-policy') return
 
   // Internal scheduler endpoints check their own private token
   if (path.startsWith('/api/internal/')) return

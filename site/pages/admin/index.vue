@@ -1290,6 +1290,51 @@
       </div>
     </div>
 
+    <!-- ═══ PRIVACY POLICY ═══ -->
+    <div v-show="tab === 'privacy'">
+      <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-6">
+        <div class="flex flex-wrap items-baseline justify-between gap-2">
+          <h2 class="font-serif text-xl font-bold text-primary-900">Privacy policy</h2>
+          <NuxtLink to="/privacy" target="_blank" class="text-xs text-accent-600 hover:underline">Open the public page &rarr;</NuxtLink>
+        </div>
+        <p class="text-xs text-primary-500 mt-1 mb-4">
+          Edit the text shown at <code>/privacy</code>. Formatting: <code>## Heading</code>, <code>**bold**</code>, <code>- list item</code>, <code>[link](https://…)</code>, and tables with <code>| … |</code>. The request form is added below the text automatically; link to it with <code>[form](#contact)</code>. Saving updates the “Last updated” date and keeps the previous version.
+        </p>
+        <div v-if="policyAdmin" class="grid lg:grid-cols-2 gap-4">
+          <div>
+            <div class="flex items-center justify-between text-xs text-primary-500 mb-1">
+              <span>Text</span><span v-if="policyDirty" class="text-amber-700">Unsaved changes</span>
+            </div>
+            <textarea v-model="policyDraft" rows="28" spellcheck="true" aria-label="Privacy policy text" class="w-full border border-primary-200 rounded-lg px-3 py-2 font-mono text-xs leading-relaxed focus:outline-none focus:ring-2 focus:ring-accent-300" />
+          </div>
+          <div>
+            <div class="text-xs text-primary-500 mb-1">Preview</div>
+            <div class="policy-preview h-[38rem] overflow-y-auto border border-primary-100 rounded-lg px-4 py-3" v-html="policyPreview" />
+          </div>
+        </div>
+        <div v-else class="text-sm text-primary-400">Loading…</div>
+        <div v-if="policyAdmin" class="mt-4 flex flex-wrap items-center gap-2">
+          <input v-model="policyNote" class="flex-1 min-w-[14rem] border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="What changed (optional, kept with the version)">
+          <button class="text-sm px-4 py-2 rounded-lg bg-primary-900 text-white hover:bg-primary-800 disabled:opacity-40" :disabled="!policyDirty || policySaving" @click="savePolicyText">{{ policySaving ? 'Saving…' : 'Save and publish' }}</button>
+          <button class="text-sm px-4 py-2 rounded-lg bg-primary-100 text-primary-600 disabled:opacity-40" :disabled="!policyDirty" @click="policyDraft = policyAdmin.current.markdown">Discard changes</button>
+          <span v-if="policyMsg" class="text-xs" :class="policyMsg.ok ? 'text-emerald-700' : 'text-red-600'">{{ policyMsg.text }}</span>
+        </div>
+        <p v-if="policyAdmin" class="text-[11px] text-primary-400 mt-2">Current version: {{ policyAdmin.current.updatedBy === 'default' ? 'built-in default' : `saved ${formatTime(policyAdmin.current.updatedAt)} by ${policyAdmin.current.updatedBy}` }}.</p>
+      </div>
+
+      <div v-if="policyAdmin?.history?.length" class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
+        <h3 class="font-serif text-lg font-bold text-primary-900 mb-2">Earlier versions</h3>
+        <ul class="divide-y divide-primary-100">
+          <li v-for="(v, i) in policyAdmin.history" :key="i" class="py-2 flex flex-wrap items-center gap-3 text-sm">
+            <span class="text-primary-700">{{ v.updatedBy === 'default' ? 'Built-in default' : `${formatTime(v.updatedAt)} · ${v.updatedBy}` }}</span>
+            <span v-if="v.note" class="text-xs text-primary-500">{{ v.note }}</span>
+            <span class="flex-1" />
+            <button class="text-xs px-2.5 py-1 rounded bg-primary-50 text-primary-700 hover:bg-primary-100" @click="policyDraft = v.markdown; policyNote = `Restored version of ${v.updatedAt.slice(0, 10)}`; policyMsg = { ok: true, text: 'Loaded into the editor; save to publish it.' }">Load into editor</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
     <!-- ═══ BACKUP ═══ -->
     <div v-show="tab === 'backup'">
       <AdminBackupPanel class="mb-6" />
@@ -1298,6 +1343,7 @@
 </template>
 
 <script setup lang="ts">
+import { marked } from 'marked'
 useHead({ title: 'Admin — World Country Groups' })
 
 const { state: authState, logout } = useAuth()
@@ -1936,7 +1982,7 @@ const route = useRoute()
 const router = useRouter()
 const ADMIN_TABS = [
   { id: 'overview', label: 'Overview' }, { id: 'ai', label: 'AI' }, { id: 'data', label: 'Data' },
-  { id: 'sources', label: 'Sources' }, { id: 'users', label: 'Users and access' }, { id: 'sharing', label: 'Sharing' }, { id: 'backup', label: 'Backup' },
+  { id: 'sources', label: 'Sources' }, { id: 'users', label: 'Users and access' }, { id: 'sharing', label: 'Sharing' }, { id: 'privacy', label: 'Privacy policy' }, { id: 'backup', label: 'Backup' },
 ] as const
 type TabId = typeof ADMIN_TABS[number]['id']
 const tab = ref<TabId>((ADMIN_TABS.some(t => t.id === route.query.tab) ? route.query.tab : 'overview') as TabId)
@@ -2110,6 +2156,28 @@ const usageTiles = computed(() => {
     { label: `per Ask question (${u.asks.count} asked)`, value: u.asks.avgCost !== null ? '$' + u.asks.avgCost.toFixed(3) : fmtTok(u.asks.avgTokens) + ' tok' },
   ]
 })
+
+// ---------- privacy policy editor ----------
+const policyAdmin = ref<any>(null)
+const policyDraft = ref('')
+const policyNote = ref('')
+const policySaving = ref(false)
+const policyMsg = ref<{ ok: boolean; text: string } | null>(null)
+const policyDirty = computed(() => !!policyAdmin.value && policyDraft.value.trim() !== (policyAdmin.value.current.markdown || '').trim())
+const policyPreview = computed(() => (policyDraft.value ? marked.parse(policyDraft.value) as string : ''))
+async function loadPolicy() {
+  try { policyAdmin.value = await $fetch('/api/admin/privacy-policy'); policyDraft.value = policyAdmin.value.current.markdown } catch {}
+}
+async function savePolicyText() {
+  policySaving.value = true; policyMsg.value = null
+  try {
+    await $fetch('/api/admin/privacy-policy', { method: 'POST', body: { markdown: policyDraft.value, note: policyNote.value } })
+    await loadPolicy(); policyNote.value = ''
+    policyMsg.value = { ok: true, text: 'Saved and published.' }
+  } catch (e: any) {
+    policyMsg.value = { ok: false, text: e?.data?.statusMessage || 'Could not save' }
+  } finally { policySaving.value = false }
+}
 
 // ---------- privacy requests ----------
 const privacyRequests = ref<any[]>([])
@@ -2422,6 +2490,7 @@ onMounted(async () => {
     loadBackupStatus(),
     loadShares(),
     loadPrivacy(),
+    loadPolicy(),
     loadNewsSources(),
     loadNewsFeedStats(),
     loadStmtFeedStats(),
@@ -2433,3 +2502,13 @@ onUnmounted(() => {
   stopPolling()
 })
 </script>
+
+<style scoped>
+.policy-preview :deep(h2) { font-family: Georgia, serif; font-size: 1.15rem; color: #0f172a; margin: 1.25rem 0 0.4rem; }
+.policy-preview :deep(p), .policy-preview :deep(li) { font-size: 0.85rem; line-height: 1.6; color: #334155; margin-top: 0.4rem; }
+.policy-preview :deep(ul) { list-style: disc; padding-left: 1.2rem; }
+.policy-preview :deep(table) { width: 100%; font-size: 0.75rem; margin-top: 0.5rem; border-collapse: collapse; }
+.policy-preview :deep(th), .policy-preview :deep(td) { border-bottom: 1px solid #e2e8f0; padding: 0.3rem 0.4rem; text-align: left; vertical-align: top; }
+.policy-preview :deep(code) { font-size: 0.75rem; background: #f1f5f9; padding: 0 0.2rem; border-radius: 3px; }
+.policy-preview :deep(a) { color: #2563eb; text-decoration: underline; }
+</style>
