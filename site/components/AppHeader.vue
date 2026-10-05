@@ -15,8 +15,8 @@
         <div class="flex items-center gap-5">
           <div v-if="isGuest" class="flex items-center gap-2 text-xs text-primary-500 min-w-0">
             <span class="px-2 py-0.5 rounded-full bg-sky-50 text-sky-800 ring-1 ring-sky-200 whitespace-nowrap">Shared view</span>
-            <span class="hidden md:inline truncate max-w-[22rem]">{{ auth.state.value.share!.label }} · shared by {{ auth.state.value.share!.sharedBy }}</span>
-            <button class="underline hover:text-primary-800 whitespace-nowrap" @click="showShareNotice">Privacy</button>
+            <span class="hidden md:inline truncate max-w-[22rem]">{{ auth.state.value.share!.label }}</span>
+            <NuxtLink to="/privacy" class="hidden sm:inline underline hover:text-primary-800 whitespace-nowrap">Privacy</NuxtLink>
           </div>
           <div v-if="!isGuest" class="hidden xl:flex items-center gap-5 text-sm whitespace-nowrap">
             <template v-for="item in navItems" :key="item.label">

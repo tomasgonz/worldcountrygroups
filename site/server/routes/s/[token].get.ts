@@ -1,5 +1,5 @@
 import { findByToken, linkStatus, recordView, SHARE_COOKIE } from '~/server/utils/share-links'
-import { logAccess, describeAgent, visitorId } from '~/server/utils/share-access'
+import { logAccess, describeAgent } from '~/server/utils/share-access'
 
 /** Opening a share link: log it, remember it in a cookie and go to the shared page. */
 export default defineEventHandler((event) => {
@@ -19,12 +19,11 @@ export default defineEventHandler((event) => {
   }
 
   if (!link || status !== 'active') {
-    logAccess(event, { event: 'refused', linkId: link?.id || null, label: link?.label, reason: link ? status : `unknown link (${token.slice(0, 4)}…)`, visitor: visitorId(event, false) })
+    logAccess(event, { event: 'refused', linkId: link?.id || null, label: link?.label, reason: link ? status : 'unknown link' })
     return sendRedirect(event, `/shared?reason=${encodeURIComponent(status)}`, 302)
   }
-  const visitor = visitorId(event, true)
   recordView(link.id)
-  logAccess(event, { event: 'open', linkId: link.id, label: link.label, path: link.path, visitor })
+  logAccess(event, { event: 'open', linkId: link.id, label: link.label, path: link.path })
   const maxAge = link.expiresAt ? Math.max(60, Math.floor((new Date(link.expiresAt).getTime() - Date.now()) / 1000)) : 60 * 60 * 24 * 90
   setCookie(event, SHARE_COOKIE, token, { httpOnly: true, sameSite: 'lax', secure: true, path: '/', maxAge })
   setHeader(event, 'cache-control', 'no-store')

@@ -9,7 +9,7 @@ interface AuthState {
   disabledPages: string[]
   loaded: boolean
   /** set when a visitor without an account opened a share link */
-  share?: { path: string; label: string; sharedBy: string; expiresAt: string | null } | null
+  share?: { path: string; label: string; expiresAt: string | null } | null
 }
 
 export function useAuth() {

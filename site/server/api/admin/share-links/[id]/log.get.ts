@@ -7,7 +7,7 @@ export default defineEventHandler((event) => {
   const id = String(getRouterParam(event, 'id'))
   const entries = id === 'refused' ? readAccess().filter(e => e.event === 'refused' && !e.linkId) : readAccess(id)
   if (getQuery(event).format === 'csv') {
-    const cols = ['t', 'event', 'reason', 'path', 'visitor', 'ip', 'forwardedFor', 'device', 'lang', 'referer', 'ua'] as const
+    const cols = ['t', 'event', 'reason', 'path', 'visitor', 'network', 'device', 'lang', 'referer'] as const
     const q = (v: any) => `"${String(v ?? '').replace(/"/g, '""')}"`
     setHeader(event, 'content-type', 'text/csv; charset=utf-8')
     setHeader(event, 'content-disposition', `attachment; filename="share-link-${id}-access.csv"`)

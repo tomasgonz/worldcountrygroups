@@ -14,6 +14,7 @@
             <li><NuxtLink to="/groups" class="text-primary-400 hover:text-primary-900 transition-colors">Browse Groups</NuxtLink></li>
             <li><NuxtLink to="/compare" class="text-primary-400 hover:text-primary-900 transition-colors">Compare Groups</NuxtLink></li>
             <li><NuxtLink to="/about" class="text-primary-400 hover:text-primary-900 transition-colors">About</NuxtLink></li>
+            <li><NuxtLink to="/privacy" class="text-primary-400 hover:text-primary-900 transition-colors">Privacy policy</NuxtLink></li>
           </ul>
         </div>
         <div>
@@ -25,13 +26,15 @@
         </div>
       </div>
       <div class="border-t border-primary-100 mt-10 pt-8 text-center text-primary-300 text-xs">
-        Developed by Tomas Gonzalez &middot; <a href="mailto:me@tomasgonzalez.net" class="hover:text-primary-500 transition-colors">me@tomasgonzalez.net</a> &middot; &copy; {{ new Date().getFullYear() }}
+        <template v-if="!isGuest">Developed by Tomas Gonzalez &middot; <a href="mailto:me@tomasgonzalez.net" class="hover:text-primary-500 transition-colors">me@tomasgonzalez.net</a> &middot; </template><NuxtLink to="/privacy" class="hover:text-primary-500 transition-colors">Privacy</NuxtLink> &middot; &copy; {{ new Date().getFullYear() }}
       </div>
     </div>
   </footer>
 </template>
 
 <script setup lang="ts">
+const { state: authState } = useAuth()
+const isGuest = computed(() => !authState.value.authenticated && !!authState.value.share)
 const { data } = await useFetch('/api/groups')
 const groupCount = computed(() => data.value?.length ?? 47)
 </script>

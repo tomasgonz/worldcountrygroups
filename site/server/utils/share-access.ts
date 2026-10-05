@@ -1,17 +1,18 @@
 import { appendFileSync, existsSync, readFileSync, writeFileSync, renameSync, statSync } from 'fs'
 import { join } from 'path'
-import { randomBytes } from 'crypto'
+import { randomBytes, createHash } from 'crypto'
 import type { H3Event } from 'h3'
 
 /**
- * Access log for share links: every open (or refused attempt), link previews made by
- * messaging apps, and the pages a visitor then views. One JSON object per line in
- * share-access.jsonl; entries older than a year are dropped.
+ * Minimal visit statistics for share links: opens (or refused attempts), link previews
+ * made by messaging apps, and pages viewed. Deliberately limited: no full IP address
+ * (shortened to the network), no browser fingerprint, no tracking cookie; visitors are
+ * counted per day with a code that changes daily and cannot be linked across days.
+ * One JSON object per line in share-access.jsonl; entries older than 90 days are dropped.
  */
 const DATA_DIR = process.env.WCG_SITE_DATA || join(process.env.HOME || '/home/exedev', 'worldcountrygroups/site/server/data')
 const FILE = join(DATA_DIR, 'share-access.jsonl')
-const KEEP_DAYS = 365
-export const VISITOR_COOKIE = 'wcg_sv'
+const KEEP_DAYS = 90
 
 export interface AccessEntry {
   t: string
@@ -20,16 +21,37 @@ export interface AccessEntry {
   label?: string
   reason?: string          // for refused: missing, expired, revoked, used up
   path?: string
-  visitor: string | null   // random id kept in a cookie on the visitor's browser
-  ip: string | null
-  forwardedFor: string | null
-  ua: string
-  device: string
-  lang: string | null
-  referer: string | null
+  visitor: string | null   // daily code: same browser and network on the same day; changes every day
+  network: string | null   // IP address shortened to its network (last part removed)
+  device: string           // browser family and device type only
+  lang: string | null      // main language code only
+  referer: string | null   // referring site name only
 }
 
 /** Client IP: exe.dev appends the address it sees, then nginx appends the proxy's; take the one exe.dev added. */
+/** Remove the host part: 203.0.113.57 -> 203.0.113.0, 2001:db8:1:2:… -> 2001:db8:1::. */
+export function shortenIp(ip: string | null): string | null {
+  if (!ip) return null
+  const v4 = ip.replace(/^::ffff:/, '')
+  if (/^\d+\.\d+\.\d+\.\d+$/.test(v4)) return v4.split('.').slice(0, 3).join('.') + '.0'
+  if (ip.includes(':')) return ip.split(':').slice(0, 3).join(':') + '::'
+  return null
+}
+
+let salt = { day: '', value: '' }
+function dailySalt() {
+  const day = new Date().toISOString().slice(0, 10)
+  if (salt.day !== day) salt = { day, value: randomBytes(16).toString('hex') } // kept only in memory, never written
+  return salt.value
+}
+
+/** A code for "this browser on this network today": not stored on the visitor's device, unlinkable across days. */
+export function dailyVisitor(event: H3Event): string {
+  const { ip } = clientIp(event)
+  const ua = String(getHeader(event, 'user-agent') || '')
+  return createHash('sha256').update(`${dailySalt()}|${ip}|${ua}`).digest('base64url').slice(0, 10)
+}
+
 export function clientIp(event: H3Event): { ip: string | null; xff: string | null } {
   const xff = getHeader(event, 'x-forwarded-for') || null
   const parts = (xff || '').split(',').map(s => s.trim()).filter(Boolean)
@@ -47,30 +69,24 @@ const BOTS: [RegExp, string][] = [
 
 export function describeAgent(ua: string): { bot: string | null; device: string } {
   for (const [re, name] of BOTS) if (re.test(ua)) return { bot: name, device: name }
-  const os = /iPhone|iPad/.test(ua) ? (/iPad/.test(ua) ? 'iPad' : 'iPhone') : /Android/.test(ua) ? 'Android' : /Mac OS X/.test(ua) ? 'Mac' : /Windows/.test(ua) ? 'Windows' : /Linux/.test(ua) ? 'Linux' : 'unknown device'
+  const os = /iPad|Tablet/.test(ua) ? 'tablet' : /iPhone|Android.*Mobile|Mobile/.test(ua) ? 'phone' : 'computer'
   const br = /Edg\//.test(ua) ? 'Edge' : /OPR\//.test(ua) ? 'Opera' : /Firefox\//.test(ua) ? 'Firefox' : /Chrome\//.test(ua) ? 'Chrome' : /Safari\//.test(ua) ? 'Safari' : 'browser'
-  return { bot: null, device: `${br} on ${os}` }
-}
-
-export function visitorId(event: H3Event, create: boolean): string | null {
-  let v = getCookie(event, VISITOR_COOKIE) || null
-  if (!v && create) {
-    v = randomBytes(9).toString('base64url')
-    setCookie(event, VISITOR_COOKIE, v, { httpOnly: true, sameSite: 'lax', secure: true, path: '/', maxAge: 60 * 60 * 24 * 365 })
-  }
-  return v
+  return { bot: null, device: `${br}, ${os}` }
 }
 
 let writes = 0
-export function logAccess(event: H3Event, e: Omit<AccessEntry, 't' | 'ip' | 'forwardedFor' | 'ua' | 'device' | 'lang' | 'referer'> & { device?: string }) {
+export function logAccess(event: H3Event, e: Omit<AccessEntry, 't' | 'network' | 'device' | 'lang' | 'referer' | 'visitor'> & { device?: string; visitor?: string | null }) {
   try {
-    const ua = String(getHeader(event, 'user-agent') || '').slice(0, 300)
-    const { ip, xff } = clientIp(event)
+    const ua = String(getHeader(event, 'user-agent') || '')
+    const ref = getHeader(event, 'referer') || ''
+    let refHost: string | null = null
+    try { refHost = ref ? new URL(ref).hostname : null } catch {}
     const entry: AccessEntry = {
       t: new Date().toISOString(), ...e,
-      ip, forwardedFor: xff, ua, device: e.device || describeAgent(ua).device,
-      lang: (getHeader(event, 'accept-language') || '').split(',')[0] || null,
-      referer: getHeader(event, 'referer') || null,
+      visitor: e.visitor === undefined ? dailyVisitor(event) : e.visitor,
+      network: shortenIp(clientIp(event).ip), device: e.device || describeAgent(ua).device,
+      lang: ((getHeader(event, 'accept-language') || '').split(',')[0] || '').split('-')[0].toLowerCase() || null,
+      referer: refHost,
     }
     appendFileSync(FILE, JSON.stringify(entry) + '\n')
     if (++writes % 200 === 0) prune()
@@ -107,7 +123,7 @@ export function accessSummary(): Record<string, { opens: number; previews: numbe
       r.opens++
       if (!r.lastOpen || e.t > r.lastOpen) r.lastOpen = e.t
       if (e.visitor) (vis[e.linkId] ||= new Set()).add(e.visitor)
-      if (e.ip) (ips[e.linkId] ||= new Set()).add(e.ip)
+      if (e.network) (ips[e.linkId] ||= new Set()).add(e.network)
     } else if (e.event === 'preview') r.previews++
     else if (e.event === 'refused') r.refused++
     else if (e.event === 'view') r.views++

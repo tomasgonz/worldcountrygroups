@@ -1231,8 +1231,7 @@
               <NuxtLink :to="l.path" class="text-xs text-accent-700 hover:underline break-all">{{ l.path }}</NuxtLink>
               <div class="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-primary-700">
                 <span><strong class="tabular-nums">{{ l.access.opens }}</strong> {{ l.access.opens === 1 ? 'click' : 'clicks' }}<span v-if="l.maxViews" class="text-primary-400"> (limit {{ l.maxViews }})</span></span>
-                <span><strong class="tabular-nums">{{ l.access.visitors }}</strong> {{ l.access.visitors === 1 ? 'device' : 'devices' }}</span>
-                <span><strong class="tabular-nums">{{ l.access.ips }}</strong> IP {{ l.access.ips === 1 ? 'address' : 'addresses' }}</span>
+                <span><strong class="tabular-nums">{{ l.access.ips }}</strong> {{ l.access.ips === 1 ? 'network' : 'networks' }}</span>
                 <span><strong class="tabular-nums">{{ l.access.views }}</strong> pages viewed</span>
                 <span v-if="l.access.previews" class="text-primary-500">{{ l.access.previews }} link {{ l.access.previews === 1 ? 'preview' : 'previews' }} (not counted)</span>
                 <span v-if="l.access.refused" class="text-amber-700">{{ l.access.refused }} refused</span>
@@ -1260,7 +1259,7 @@
           <button class="text-accent-700 hover:underline" @click="toggleLog('refused')">{{ logOpen === 'refused' ? 'Hide' : 'Show' }} {{ refusedUnknown }} {{ refusedUnknown === 1 ? 'attempt' : 'attempts' }} with unknown links</button>
           <AccessLog v-if="logOpen === 'refused'" id="refused" />
         </div>
-        <p class="text-[11px] text-primary-400 mt-4">Every click is logged with time, IP address, browser and device, language and the referring page, plus the pages the visitor then views. A random id kept on the visitor's browser separates people from repeat visits. Previews made by WhatsApp, Slack, email scanners and similar are logged separately and don't count as clicks. Logs are kept for a year.</p>
+        <p class="text-[11px] text-primary-400 mt-4">Kept deliberately minimal (see the <NuxtLink to="/privacy" class="underline">privacy policy</NuxtLink>): time, the network part of the IP address (e.g. 203.0.113.0), browser family and device type, main language, the referring site's name and the pages viewed. No tracking cookie; “Visitor today” is a code that groups a visitor's clicks on one day and changes every day. Link previews (WhatsApp, Teams, Slack, email scanners) are listed separately and not counted as clicks. Kept for 90 days.</p>
         <p class="text-[11px] text-primary-400 mt-1">Revoking stops a link at once, including for people who already opened it; deleting also removes it from this list. Visitors can't make AI requests or see anything outside the shared page.</p>
       </div>
     </div>
@@ -2111,12 +2110,12 @@ const AccessLog = defineComponent({
           h('a', { href: `/api/admin/share-links/${props.id}/log?format=csv`, class: 'text-accent-700 hover:underline' }, 'Download CSV'),
         ]),
         list.length ? h('table', { class: 'w-full text-xs' }, [
-          h('thead', h('tr', { class: 'text-left text-primary-400 border-b border-primary-100' }, ['Time', 'Event', 'IP address', 'Device', 'Language', 'Page / from', 'Visitor'].map(c => h('th', { class: 'px-3 py-1.5 font-medium whitespace-nowrap' }, c)))),
+          h('thead', h('tr', { class: 'text-left text-primary-400 border-b border-primary-100' }, ['Time', 'Event', 'Network', 'Browser', 'Language', 'Page / from', 'Visitor today'].map(c => h('th', { class: 'px-3 py-1.5 font-medium whitespace-nowrap' }, c)))),
           h('tbody', list.map((e: any) => h('tr', { class: 'border-b border-primary-50 align-top' }, [
             h('td', { class: 'px-3 py-1.5 whitespace-nowrap tabular-nums' }, formatTime(e.t)),
             h('td', { class: 'px-3 py-1.5' }, h('span', { class: `px-1.5 py-0.5 rounded-full ${EV[e.event]?.[1] || ''}` }, (EV[e.event]?.[0] || e.event) + (e.reason ? `: ${e.reason}` : ''))),
-            h('td', { class: 'px-3 py-1.5 font-mono whitespace-nowrap', title: e.forwardedFor ? `Forwarded for: ${e.forwardedFor}` : '' }, e.ip || '—'),
-            h('td', { class: 'px-3 py-1.5 whitespace-nowrap', title: e.ua }, e.device),
+            h('td', { class: 'px-3 py-1.5 font-mono whitespace-nowrap' }, e.network || '—'),
+            h('td', { class: 'px-3 py-1.5 whitespace-nowrap' }, e.device),
             h('td', { class: 'px-3 py-1.5' }, e.lang || '—'),
             h('td', { class: 'px-3 py-1.5 max-w-[16rem] truncate', title: e.event === 'view' ? e.path : (e.referer || '') }, e.event === 'view' ? e.path : (e.referer ? `from ${e.referer}` : '—')),
             h('td', { class: 'px-3 py-1.5 font-mono text-primary-400' }, e.visitor ? e.visitor.slice(0, 6) : '—'),

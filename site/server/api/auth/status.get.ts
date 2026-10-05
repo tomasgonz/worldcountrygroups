@@ -13,7 +13,7 @@ export default defineEventHandler((event) => {
       authenticated: false,
       siteMode,
       disabledPages,
-      share: share ? { path: share.path, label: share.label, sharedBy: share.createdBy, expiresAt: share.expiresAt } : null,
+      share: share ? { path: share.path, label: share.label, expiresAt: share.expiresAt } : null,
     }
   }
 
