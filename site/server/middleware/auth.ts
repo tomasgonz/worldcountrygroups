@@ -11,6 +11,8 @@ export default defineEventHandler((event) => {
 
   // Page-view reports from share-link visitors (the handler checks the link)
   if (path === '/api/share-beacon') return
+  if (path === '/api/share-optout') return
+  if (path === '/api/privacy-request') return // public data-protection request form
 
   // Internal scheduler endpoints check their own private token
   if (path.startsWith('/api/internal/')) return
@@ -36,6 +38,7 @@ export default defineEventHandler((event) => {
   if (path === '/api/un/monitor') return
   if (path === '/api/today/briefing') return
   if (path === '/api/today/agenda') return
+  if (path === '/api/img') return // image relay (allow-listed hosts only)
 
   // If site is in public mode, allow everything
   if (getSiteMode() === 'public') return

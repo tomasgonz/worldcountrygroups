@@ -1180,6 +1180,32 @@
 
         </div>
 
+    <!-- Privacy requests (shown in the Users and access tab) -->
+    <div v-show="tab === 'users'" id="privacy-requests" class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8 scroll-mt-24">
+      <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1">
+        <h2 class="font-serif text-xl font-bold text-primary-900">Privacy requests</h2>
+        <span class="text-xs text-primary-400">from the form on the <NuxtLink to="/privacy" class="underline">privacy page</NuxtLink></span>
+      </div>
+      <p class="text-xs text-primary-500 mb-4">Answer within one month. For a copy of someone's data or to delete an account, use the user list above (deleting a user removes their questions and digest records too); the person can also do it themselves from their account page.</p>
+      <p v-if="!privacyRequests.length" class="text-sm text-primary-400">No requests.</p>
+      <ul class="divide-y divide-primary-100">
+        <li v-for="r in privacyRequests" :key="r.id" class="py-3">
+          <div class="flex flex-wrap items-center gap-2 text-xs">
+            <span class="px-2 py-0.5 rounded-full" :class="r.status === 'open' ? 'bg-amber-100 text-amber-800' : 'bg-green-100 text-green-700'">{{ r.status === 'open' ? 'Open' : 'Done' }}</span>
+            <span class="font-medium text-primary-800">{{ cap(r.type) }}</span>
+            <span class="text-primary-500">{{ r.name || 'No name' }} · <a :href="`mailto:${r.email}`" class="underline">{{ r.email }}</a> · {{ formatTime(r.createdAt) }}</span>
+            <span v-if="r.status === 'open'" class="text-primary-400">· reply by {{ formatTime(new Date(new Date(r.createdAt).getTime() + 30 * 86400000).toISOString()).split(',')[0] }}</span>
+          </div>
+          <p class="text-sm text-primary-700 mt-1 whitespace-pre-line">{{ r.message }}</p>
+          <div class="mt-2 flex gap-2">
+            <button v-if="r.status === 'open'" class="text-xs px-2.5 py-1 rounded bg-green-50 text-green-700 hover:bg-green-100" @click="privacyAction(r, 'done')">Mark done</button>
+            <button v-else class="text-xs px-2.5 py-1 rounded bg-primary-50 text-primary-700 hover:bg-primary-100" @click="privacyAction(r, 'reopen')">Reopen</button>
+            <button class="text-xs px-2.5 py-1 rounded bg-red-50 text-red-700 hover:bg-red-100" @click="privacyAction(r, 'delete')">Delete</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+
     <!-- ═══ SHARING ═══ -->
     <div v-show="tab === 'sharing'">
       <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-6">
@@ -1954,6 +1980,8 @@ const attention = computed<Attention[]>(() => {
   if (!alertEmails.value.trim() && !admins.some((u: any) => u.email)) {
     out.push({ key: 'alerts', level: 'setup', title: 'No email address for data alerts', detail: 'Add your email to your user, or an alert address under Data health, to hear when a refresh breaks.', tab: 'users', action: 'Add email' })
   }
+  const openPrivacy = privacyRequests.value.filter((r: any) => r.status === 'open')
+  if (openPrivacy.length) out.push({ key: 'privacy', level: 'problem', title: `${openPrivacy.length} privacy ${openPrivacy.length === 1 ? 'request' : 'requests'} to answer`, detail: 'Data-protection requests must be answered within one month.', tab: 'users', anchor: 'privacy-requests', action: 'Open requests' })
   const pending = users.value.filter((u: any) => u.status === 'pending').length
   if (pending) out.push({ key: 'pending', level: 'problem', title: `${pending} ${pending === 1 ? 'person is' : 'people are'} waiting for approval`, tab: 'users', action: 'Review' })
   const unpriced = (usage.value?.byModel || []).filter((m: any) => m.input + m.output > 0 && !m.price)
@@ -2082,6 +2110,15 @@ const usageTiles = computed(() => {
     { label: `per Ask question (${u.asks.count} asked)`, value: u.asks.avgCost !== null ? '$' + u.asks.avgCost.toFixed(3) : fmtTok(u.asks.avgTokens) + ' tok' },
   ]
 })
+
+// ---------- privacy requests ----------
+const privacyRequests = ref<any[]>([])
+async function loadPrivacy() { try { privacyRequests.value = (await $fetch<any>('/api/admin/privacy-requests')).requests || [] } catch {} }
+async function privacyAction(r: any, action: string) {
+  await $fetch('/api/admin/privacy-requests', { method: 'POST', body: { id: r.id, action } })
+  await loadPrivacy()
+}
+const cap = (x: string) => (x ? x.charAt(0).toUpperCase() + x.slice(1) : x)
 
 // ---------- share links ----------
 const SHARE_SUGGESTIONS = [
@@ -2384,6 +2421,7 @@ onMounted(async () => {
     loadUsage(),
     loadBackupStatus(),
     loadShares(),
+    loadPrivacy(),
     loadNewsSources(),
     loadNewsFeedStats(),
     loadStmtFeedStats(),

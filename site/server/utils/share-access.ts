@@ -13,6 +13,8 @@ import type { H3Event } from 'h3'
 const DATA_DIR = process.env.WCG_SITE_DATA || join(process.env.HOME || '/home/exedev', 'worldcountrygroups/site/server/data')
 const FILE = join(DATA_DIR, 'share-access.jsonl')
 const KEEP_DAYS = 90
+/** Set when a visitor objects to statistics; their visits are then not recorded. */
+export const NOSTATS_COOKIE = 'wcg_nostats'
 
 export interface AccessEntry {
   t: string
@@ -76,6 +78,7 @@ export function describeAgent(ua: string): { bot: string | null; device: string 
 
 let writes = 0
 export function logAccess(event: H3Event, e: Omit<AccessEntry, 't' | 'network' | 'device' | 'lang' | 'referer' | 'visitor'> & { device?: string; visitor?: string | null }) {
+  if (getCookie(event, NOSTATS_COOKIE) === '1') return // the visitor objected
   try {
     const ua = String(getHeader(event, 'user-agent') || '')
     const ref = getHeader(event, 'referer') || ''

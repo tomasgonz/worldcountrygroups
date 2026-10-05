@@ -81,6 +81,7 @@
           >
             {{ loading ? 'Registering...' : 'Register' }}
           </button>
+                  <p class="text-xs text-primary-500 leading-relaxed">We store your username, display name, email address (optional) and your password in hashed form, to run your account. See the <NuxtLink to="/privacy" class="underline">privacy policy</NuxtLink> for details and your rights.</p>
         </form>
 
         <p v-if="!success" class="mt-6 text-center text-sm text-primary-400">

@@ -137,6 +137,27 @@
         </div>
       </div>
     </div>
+
+    <!-- Your data -->
+    <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mt-8">
+      <h2 class="font-serif text-xl font-bold text-primary-900 mb-2">Your data and privacy</h2>
+      <p class="text-sm text-primary-500 mb-4">Download a copy of everything we hold about your account, or delete your account. See the <NuxtLink to="/privacy" class="underline">privacy policy</NuxtLink>.</p>
+      <div class="flex flex-wrap gap-3">
+        <a href="/api/account/export" class="text-sm px-4 py-2 rounded-lg border border-primary-200 text-primary-700 hover:bg-primary-50">Download my data</a>
+        <button v-if="!deleting" class="text-sm px-4 py-2 rounded-lg border border-red-200 text-red-600 hover:bg-red-50" @click="deleting = true">Delete my account…</button>
+      </div>
+      <form v-if="deleting" class="mt-4 rounded-xl ring-1 ring-red-200 bg-red-50/50 p-4 space-y-3" @submit.prevent="deleteAccount">
+        <p class="text-sm text-red-800">This permanently deletes your account, your saved questions and your digest settings. It can't be undone; copies in our encrypted backups expire within twelve months.</p>
+        <label class="block text-xs text-primary-600">Enter your password to confirm
+          <input v-model="delPw" type="password" autocomplete="current-password" class="mt-1 w-full max-w-xs border border-primary-200 rounded-lg px-3 py-1.5 text-sm" required>
+        </label>
+        <div class="flex gap-2">
+          <button class="text-sm px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 disabled:opacity-50" :disabled="!delPw">Delete my account permanently</button>
+          <button type="button" class="text-sm px-4 py-2 rounded-lg bg-primary-100 text-primary-600" @click="deleting = false; delPw = ''">Cancel</button>
+        </div>
+        <p v-if="delMsg" class="text-sm text-red-700">{{ delMsg }}</p>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -155,6 +176,20 @@ const pw = reactive({ current: '', newPw: '', confirm: '' })
 const changingPw = ref(false)
 const pwMsg = ref('')
 const pwOk = ref(false)
+
+const deleting = ref(false)
+const delPw = ref('')
+const delMsg = ref('')
+async function deleteAccount() {
+  delMsg.value = ''
+  try {
+    await $fetch('/api/account/delete', { method: 'POST', body: { password: delPw.value } })
+    auth.state.value = { ...auth.state.value, authenticated: false, userId: null, username: null, displayName: null, role: null, status: null }
+    await navigateTo('/')
+  } catch (e: any) {
+    delMsg.value = e?.data?.statusMessage || 'Could not delete the account'
+  }
+}
 
 const digest = ref<any>(null)
 const testing = ref(false)

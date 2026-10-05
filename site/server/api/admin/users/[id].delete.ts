@@ -1,5 +1,6 @@
 import { getSession } from '~/server/utils/auth'
-import { getUserById, deleteUser } from '~/server/utils/users'
+import { getUserById } from '~/server/utils/users'
+import { eraseUser } from '~/server/utils/user-data'
 
 export default defineEventHandler((event) => {
   const session = getSession(event)
@@ -14,7 +15,7 @@ export default defineEventHandler((event) => {
   const user = getUserById(id)
   if (!user) throw createError({ statusCode: 404, statusMessage: 'User not found' })
 
-  deleteUser(id)
+  const r = eraseUser(id) // also removes their questions and digest records
 
-  return { ok: true }
+  return { ok: true, ...r }
 })

@@ -548,7 +548,7 @@ const CandHead = defineComponent({
       const sameAsNat = (c.nominated_by || []).length === 1 && c.nominated_by[0] === c.nationality
       return h('div', { class: 'flex gap-3 items-start' }, [
         src
-          ? h('img', { src, alt: c.name, loading: 'lazy', referrerpolicy: 'no-referrer', class: `${size} rounded-full object-cover object-top bg-primary-100 shrink-0 ring-1 ring-primary-200`, onError: () => { failed.value = true } })
+          ? h('img', { src: relayImage(src), alt: c.name, loading: 'lazy', referrerpolicy: 'no-referrer', class: `${size} rounded-full object-cover object-top bg-primary-100 shrink-0 ring-1 ring-primary-200`, onError: () => { failed.value = true } })
           : h('div', { class: `${size} rounded-full bg-primary-100 shrink-0 flex items-center justify-center font-serif text-primary-500` }, c.name.split(' ').map(x => x[0]).slice(0, 2).join('')),
         h('div', { class: 'min-w-0' }, [
           h('div', { class: `font-serif font-bold text-primary-900 leading-tight ${p.small ? 'text-base' : 'text-lg'}` }, [

@@ -9,13 +9,13 @@ const props = withDefaults(defineProps<{ image?: string | null; imagePath?: stri
 const failed = ref(false)
 // Direct thumbnail URL; Wikimedia serves standard widths (250, 500) from cache
 const src = computed(() => {
-  if (!props.image && props.imageUrl) return props.imageUrl // official (non-Commons) photo
+  if (!props.image && props.imageUrl) return relayImage(props.imageUrl) // official (non-Commons) photo
   if (props.imagePath) {
     const file = props.imagePath.split('/').pop() || ''
     const ext = /\.(svg|tif|tiff)$/i.test(file) ? '.png' : ''
-    return `https://upload.wikimedia.org/wikipedia/commons/thumb/${props.imagePath}/${props.width}px-${file}${ext}`
+    return relayImage(`https://upload.wikimedia.org/wikipedia/commons/thumb/${props.imagePath}/${props.width}px-${file}${ext}`)
   }
-  return `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(props.image || '')}?width=${props.width}`
+  return relayImage(`https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(props.image || '')}?width=${props.width}`)
 })
 const initials = computed(() => props.name.split(/\s+/).filter(Boolean).map(w => w[0]).slice(0, 2).join('').toUpperCase())
 </script>
