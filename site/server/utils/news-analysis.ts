@@ -177,8 +177,11 @@ export function archiveStats(): { items: number; news: number; statements: numbe
   const db = archiveDb()
   if (!db) return null
   const r = db.prepare("SELECT COUNT(*) AS items, SUM(kind = 'news') AS news FROM items").get() as any
-  const d = db.prepare("SELECT COUNT(*) AS n, MIN(day) AS first FROM (SELECT day FROM items WHERE kind = 'news' GROUP BY day HAVING COUNT(*) >= 20)").get() as any
-  return { items: r.items, news: r.news || 0, statements: r.items - (r.news || 0), firstDay: d.first, daysWithNews: d.n }
+  // Some searches return items weeks old, so history counts from when collecting began
+  const c = db.prepare("SELECT MIN(substr(archived_at, 1, 10)) AS first FROM items").get() as any
+  const first = c.first || new Date().toISOString().slice(0, 10)
+  const days = Math.max(0, Math.round((Date.now() - new Date(first + 'T00:00:00Z').getTime()) / 86400_000))
+  return { items: r.items, news: r.news || 0, statements: r.items - (r.news || 0), firstDay: first, daysWithNews: days }
 }
 
 // ---------- story clustering ----------
@@ -303,9 +306,9 @@ function dailySeries(items: NewsItem[], days: number, keyOf: (i: NewsItem) => st
 }
 
 /** Recent (last 2 days) vs baseline (the days before), as a smoothed ratio. */
-function momentum(s: number[]) {
+function momentum(s: number[], from = 0) {
   const recent = s.slice(-2).reduce((a, b) => a + b, 0) / 2
-  const base = s.slice(0, -2)
+  const base = s.slice(Math.max(0, from), -2)
   const baseline = base.length ? base.reduce((a, b) => a + b, 0) / base.length : 0
   return { recent, baseline, ratio: (recent + 1) / (baseline + 1), total: s.reduce((a, b) => a + b, 0) }
 }
@@ -332,7 +335,9 @@ export function newsAnalysis(f: AnalysisFilters) {
   const arch = archiveStats()
   const historyDays = arch?.daysWithNews || 0
   const { dayKeys, series: cSeries } = unfiltered ? fromHistory('countries') : dailySeries(news, days, i => i.countries)
-  const countries = [...cSeries.entries()].map(([c, s]) => ({ iso3: c, iso2: iso2(c), name: name(c), series: s, ...momentum(s) }))
+  // days before collection began are incomplete: leave them out of baselines
+  const startIdx = Math.max(0, dayKeys.findIndex(d => d >= (arch?.firstDay || dayKeys[0])))
+  const countries = [...cSeries.entries()].map(([c, s]) => ({ iso3: c, iso2: iso2(c), name: name(c), series: s, ...momentum(s, startIdx) }))
   // a trend needs a baseline: at least a week of days with real volume
   const trendsReady = historyDays >= 8
   const rising = trendsReady ? countries.filter(c => c.recent >= 3 && c.baseline > 0 && c.iso3 !== f.country).sort((a, b) => b.ratio - a.ratio).slice(0, 10) : []
@@ -342,7 +347,7 @@ export function newsAnalysis(f: AnalysisFilters) {
   // topics
   const { series: tSeries } = unfiltered ? fromHistory('topics') : dailySeries(news, days, i => (i.topics.length ? i.topics : ['other']))
   const topics = [...tSeries.entries()].filter(([t]) => t !== 'other')
-    .map(([t, s]) => ({ id: t, label: topicLabel(t), series: s, ...momentum(s) }))
+    .map(([t, s]) => ({ id: t, label: topicLabel(t), series: s, ...momentum(s, startIdx) }))
     .sort((a, b) => b.total - a.total)
 
   // regions (last 7 days vs the 7 before)
