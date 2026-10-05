@@ -1229,23 +1229,39 @@
                 <span class="text-[11px] px-2 py-0.5 rounded-full" :class="SHARE_STYLE[l.status]">{{ l.status }}</span>
               </div>
               <NuxtLink :to="l.path" class="text-xs text-accent-700 hover:underline break-all">{{ l.path }}</NuxtLink>
+              <div class="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-primary-700">
+                <span><strong class="tabular-nums">{{ l.access.opens }}</strong> {{ l.access.opens === 1 ? 'click' : 'clicks' }}<span v-if="l.maxViews" class="text-primary-400"> (limit {{ l.maxViews }})</span></span>
+                <span><strong class="tabular-nums">{{ l.access.visitors }}</strong> {{ l.access.visitors === 1 ? 'device' : 'devices' }}</span>
+                <span><strong class="tabular-nums">{{ l.access.ips }}</strong> IP {{ l.access.ips === 1 ? 'address' : 'addresses' }}</span>
+                <span><strong class="tabular-nums">{{ l.access.views }}</strong> pages viewed</span>
+                <span v-if="l.access.previews" class="text-primary-500">{{ l.access.previews }} link {{ l.access.previews === 1 ? 'preview' : 'previews' }} (not counted)</span>
+                <span v-if="l.access.refused" class="text-amber-700">{{ l.access.refused }} refused</span>
+              </div>
               <div class="text-[11px] text-primary-400 mt-0.5">
-                {{ l.views }} {{ l.views === 1 ? 'open' : 'opens' }}<span v-if="l.maxViews"> of {{ l.maxViews }}</span>
-                · last opened {{ l.lastViewedAt ? formatTime(l.lastViewedAt) : 'never' }}
+                last click {{ l.access.lastOpen ? formatTime(l.access.lastOpen) : 'never' }}
                 · created {{ formatTime(l.createdAt) }} by {{ l.createdBy }}
                 · {{ l.expiresAt ? (l.status === 'expired' ? 'expired ' : 'expires ') + formatTime(l.expiresAt) : 'no expiry' }}
               </div>
             </div>
             <div class="flex flex-wrap items-center gap-1.5">
               <button class="text-xs px-2.5 py-1 rounded bg-primary-50 text-primary-700 hover:bg-primary-100" @click="copyShare(l)">{{ copiedShare === l.id ? 'Copied' : 'Copy link' }}</button>
+              <button class="text-xs px-2.5 py-1 rounded bg-primary-50 text-primary-700 hover:bg-primary-100" :aria-expanded="logOpen === l.id" @click="toggleLog(l.id)">{{ logOpen === l.id ? 'Hide log' : 'Access log' }}</button>
               <button v-if="l.status !== 'revoked'" class="text-xs px-2.5 py-1 rounded bg-primary-50 text-primary-700 hover:bg-primary-100" @click="shareAction(l, 'extend', 30)">+30 days</button>
               <button v-if="l.status !== 'revoked'" class="text-xs px-2.5 py-1 rounded bg-amber-50 text-amber-700 hover:bg-amber-100" @click="shareAction(l, 'revoke')">Revoke</button>
               <button v-else class="text-xs px-2.5 py-1 rounded bg-green-50 text-green-700 hover:bg-green-100" @click="shareAction(l, 'restore')">Restore</button>
               <button class="text-xs px-2.5 py-1 rounded bg-red-50 text-red-700 hover:bg-red-100" @click="deleteShare(l)">{{ confirmDeleteShare === l.id ? 'Click again' : 'Delete' }}</button>
             </div>
+            <div v-if="logOpen === l.id" class="w-full">
+              <AccessLog :id="l.id" />
+            </div>
           </li>
         </ul>
-        <p class="text-[11px] text-primary-400 mt-4">Revoking stops a link at once, including for people who already opened it; deleting also removes it from this list. Visitors can't make AI requests or see anything outside the shared page.</p>
+        <div v-if="refusedUnknown" class="mt-4 text-xs text-primary-600">
+          <button class="text-accent-700 hover:underline" @click="toggleLog('refused')">{{ logOpen === 'refused' ? 'Hide' : 'Show' }} {{ refusedUnknown }} {{ refusedUnknown === 1 ? 'attempt' : 'attempts' }} with unknown links</button>
+          <AccessLog v-if="logOpen === 'refused'" id="refused" />
+        </div>
+        <p class="text-[11px] text-primary-400 mt-4">Every click is logged with time, IP address, browser and device, language and the referring page, plus the pages the visitor then views. A random id kept on the visitor's browser separates people from repeat visits. Previews made by WhatsApp, Slack, email scanners and similar are logged separately and don't count as clicks. Logs are kept for a year.</p>
+        <p class="text-[11px] text-primary-400 mt-1">Revoking stops a link at once, including for people who already opened it; deleting also removes it from this list. Visitors can't make AI requests or see anything outside the shared page.</p>
       </div>
     </div>
 
@@ -2076,6 +2092,40 @@ const SHARE_SUGGESTIONS = [
 ]
 const SHARE_STYLE: Record<string, string> = { active: 'bg-green-100 text-green-700', expired: 'bg-primary-100 text-primary-500', revoked: 'bg-amber-100 text-amber-800', 'used up': 'bg-primary-100 text-primary-500' }
 const shareLinks = ref<any[]>([])
+const refusedUnknown = ref(0)
+const logOpen = ref('')
+function toggleLog(id: string) { logOpen.value = logOpen.value === id ? '' : id }
+const AccessLog = defineComponent({
+  props: { id: { type: String, required: true } },
+  setup(props) {
+    const entries = ref<any[] | null>(null)
+    const load = async () => { try { entries.value = (await $fetch<any>(`/api/admin/share-links/${props.id}/log`)).entries } catch { entries.value = [] } }
+    onMounted(load)
+    const EV: Record<string, [string, string]> = { open: ['click', 'bg-green-100 text-green-700'], view: ['page view', 'bg-primary-100 text-primary-600'], preview: ['preview', 'bg-sky-50 text-sky-700'], refused: ['refused', 'bg-amber-100 text-amber-800'] }
+    return () => {
+      const list = entries.value
+      if (list === null) return h('p', { class: 'text-xs text-primary-400 mt-2' }, 'Loading…')
+      return h('div', { class: 'mt-2 rounded-xl ring-1 ring-primary-100 overflow-x-auto' }, [
+        h('div', { class: 'flex items-center justify-between px-3 py-2 bg-primary-50/60 text-xs' }, [
+          h('span', { class: 'text-primary-600' }, `${list.length} ${list.length === 1 ? 'entry' : 'entries'}, newest first`),
+          h('a', { href: `/api/admin/share-links/${props.id}/log?format=csv`, class: 'text-accent-700 hover:underline' }, 'Download CSV'),
+        ]),
+        list.length ? h('table', { class: 'w-full text-xs' }, [
+          h('thead', h('tr', { class: 'text-left text-primary-400 border-b border-primary-100' }, ['Time', 'Event', 'IP address', 'Device', 'Language', 'Page / from', 'Visitor'].map(c => h('th', { class: 'px-3 py-1.5 font-medium whitespace-nowrap' }, c)))),
+          h('tbody', list.map((e: any) => h('tr', { class: 'border-b border-primary-50 align-top' }, [
+            h('td', { class: 'px-3 py-1.5 whitespace-nowrap tabular-nums' }, formatTime(e.t)),
+            h('td', { class: 'px-3 py-1.5' }, h('span', { class: `px-1.5 py-0.5 rounded-full ${EV[e.event]?.[1] || ''}` }, (EV[e.event]?.[0] || e.event) + (e.reason ? `: ${e.reason}` : ''))),
+            h('td', { class: 'px-3 py-1.5 font-mono whitespace-nowrap', title: e.forwardedFor ? `Forwarded for: ${e.forwardedFor}` : '' }, e.ip || '—'),
+            h('td', { class: 'px-3 py-1.5 whitespace-nowrap', title: e.ua }, e.device),
+            h('td', { class: 'px-3 py-1.5' }, e.lang || '—'),
+            h('td', { class: 'px-3 py-1.5 max-w-[16rem] truncate', title: e.event === 'view' ? e.path : (e.referer || '') }, e.event === 'view' ? e.path : (e.referer ? `from ${e.referer}` : '—')),
+            h('td', { class: 'px-3 py-1.5 font-mono text-primary-400' }, e.visitor ? e.visitor.slice(0, 6) : '—'),
+          ]))),
+        ]) : h('p', { class: 'px-3 py-3 text-xs text-primary-400' }, 'No activity yet.'),
+      ])
+    }
+  },
+})
 const shareFilter = ref('active')
 const shownLinks = computed(() => shareLinks.value.filter((l: any) => shareFilter.value === 'all' || l.status === 'active'))
 const shareForm = reactive({ path: '', label: '', expiresDays: 30, maxViews: null as number | null })
@@ -2084,7 +2134,7 @@ const copiedShare = ref('')
 const confirmDeleteShare = ref('')
 const shareUrlOf = (l: any) => `${location.origin}/s/${l.token}`
 async function loadShares() {
-  try { shareLinks.value = (await $fetch<any>('/api/admin/share-links')).links || [] } catch {}
+  try { const r = await $fetch<any>('/api/admin/share-links'); shareLinks.value = r.links || []; refusedUnknown.value = r.refusedUnknown || 0 } catch {}
 }
 async function createShare() {
   shareMsg.value = null

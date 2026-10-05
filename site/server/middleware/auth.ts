@@ -9,6 +9,9 @@ export default defineEventHandler((event) => {
   // Only protect API routes
   if (!path.startsWith('/api/')) return
 
+  // Page-view reports from share-link visitors (the handler checks the link)
+  if (path === '/api/share-beacon') return
+
   // Internal scheduler endpoints check their own private token
   if (path.startsWith('/api/internal/')) return
 
