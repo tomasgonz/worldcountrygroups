@@ -8,6 +8,8 @@ import { getElections, getJournalDays } from './upcoming'
 import { archiveSearch, archiveStats } from './news-analysis'
 import { TRADE_TOOLS, runTradeTool } from './ask-tools-trade'
 import { DONOR_TOOLS, runDonorTool } from './ask-tools-donors'
+import { UNELECTION_TOOLS, runUnElectionTool } from './ask-tools-unelections'
+import { SG_TOOLS, runSgTool } from './ask-tools-sg'
 import { getMilitaryCapabilities } from './military'
 import { getCountryVoteSummary, getCountryThemeStats, getCountryAlignmentScores, getBilateralVotingAlignment, searchResolutions, getRecentResolutions } from './unvotes'
 import { detectVotingBlocs } from './voting-blocs'
@@ -119,6 +121,8 @@ export const ASK_TOOLS: ToolDef[] = [
   { name: 'recent_news_and_statements', description: 'News and official statements, optionally about a country and/or containing words. Covers the last weeks by default; give from/to dates (YYYY-MM-DD) to search the full archive of everything collected since October 2026.', parameters: { type: 'object', properties: { query: { type: 'string' }, country: { type: 'string' }, days: { type: 'integer', description: 'Default 14' }, from: { type: 'string', description: 'Start date YYYY-MM-DD (searches the archive)' }, to: { type: 'string', description: 'End date YYYY-MM-DD' }, kind: { type: 'string', enum: ['news', 'statement', 'any'] }, limit: { type: 'integer', description: 'Default 12' } } } },
   ...TRADE_TOOLS,
   ...DONOR_TOOLS,
+  ...UNELECTION_TOOLS,
+  ...SG_TOOLS,
 ]
 
 // ---------------------------------------------------------------------------
@@ -401,7 +405,7 @@ export async function runTool(name: string, args: any, src: SourceCollector): Pr
       return { items: items.map((x: any) => ({ title: x.title, summary: (x.description || x.excerpt || '').slice(0, 240), source: x.source, kind: x.kind, date: (x.publishedAt || '').slice(0, 10), ref: src.add(x.title, x.url, x.kind) })) }
     }
   }
-  const extra = (await runTradeTool(name, args, src)) ?? (await runDonorTool(name, args, src))
+  const extra = (await runTradeTool(name, args, src)) ?? (await runDonorTool(name, args, src)) ?? (await runUnElectionTool(name, args, src)) ?? (await runSgTool(name, args, src))
   if (extra !== undefined) return extra
   return { error: `Unknown tool ${name}` }
 }

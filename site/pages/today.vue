@@ -272,7 +272,10 @@
       <section v-if="agenda?.elections" class="lg:col-span-4 min-w-0 bg-white rounded-2xl ring-1 ring-primary-200/70 overflow-hidden" aria-labelledby="upcoming-elections">
         <div class="px-5 pt-5 pb-3 border-b border-primary-100">
           <div class="text-[11px] font-semibold uppercase tracking-[0.14em] text-emerald-700">Next 60 days</div>
-          <h2 id="upcoming-elections" class="font-serif text-2xl text-primary-900">Upcoming elections</h2>
+          <div class="flex items-baseline justify-between gap-2">
+            <h2 id="upcoming-elections" class="font-serif text-2xl text-primary-900">Upcoming elections</h2>
+            <NuxtLink to="/elections" class="text-xs text-accent-600 hover:underline whitespace-nowrap">All elections &rarr;</NuxtLink>
+          </div>
         </div>
         <ul v-if="agenda.elections.upcoming?.length" class="divide-y divide-primary-50">
           <li v-for="e in agenda.elections.upcoming" :key="e.id" class="px-5 py-3 flex gap-3">

@@ -94,6 +94,7 @@ Method:
 - Mention how current the data is where it matters (for example, General Assembly voting records may end months before today).
 - When a dataset is old or its refresh is failing (see Data currency below), say so where it affects the answer.
 - To find what was said about a topic, use search_texts (full speeches since 1946, statements, news); quote passages verbatim and cite them.
+- For the Secretary-General race use sg_selection; for Security Council and PGA elections use un_elections.
 - For trade with emerging economies use trade_partners; for aid budgets, cuts and donor news use donor_tracker.
 - Write in clear, neutral English for diplomats and analysts. Prefer short paragraphs and bullets. Quote speakers only from search_quotes or speech results.
 ${freshnessNote()}${followUp ? '\nThis is a follow-up in a conversation. The earlier questions and answers are included for context, with their citations removed: look facts up again with the tools before citing them, and do not repeat earlier material unless asked.\n' : ''}
@@ -101,6 +102,8 @@ ${mode === 'briefing' ? TEMPLATES[template] + '\nKeep it to roughly 500-900 word
 }
 
 const LABELS: Record<string, (a: any) => string> = {
+  sg_selection: a => `Secretary-General selection${a.candidate ? `: ${a.candidate}` : ''}`,
+  un_elections: a => `UN elections: ${a.body === 'pga' ? 'President of the General Assembly' : 'Security Council'}${a.country ? ` (${a.country})` : ''}`,
   trade_partners: a => `Trade partners${a.country ? `: ${a.country}` : ''}${a.partner ? ` with ${a.partner}` : ''}`,
   donor_tracker: a => `Aid donors${a.donor ? `: ${a.donor}` : ''}${a.recipient ? ` → ${a.recipient}` : ''}`,
   upcoming_events: a => `Upcoming ${a.what === 'elections' ? 'elections' : a.what === 'meetings' ? 'UN meetings' : 'UN meetings and elections'}${a.country ? `: ${a.country}` : ''}`,

@@ -63,6 +63,8 @@ const DEFAULT_JOBS: Def[] = [
   d('fetch-donor-tracker', 'Aid donors (OECD DAC tracker)', 'scripts/fetch_donor_tracker.py', '30 4 * * 0', true, ['donor-tracker.json'], 24 * 8, 20),
   d('fetch-donor-news', 'Donor news', 'scripts/fetch_donor_news.py', '20 */6 * * *', true, ['donor-news.json'], 13, 10),
   d('archive-feeds', 'News and statements archive', 'scripts/archive_feeds.py', '10 * * * *', true, ['archive.db'], 3, 10),
+  d('fetch-un-elections', 'UN elections (Security Council, PGA)', 'scripts/fetch_un_elections.py', '40 5 * * *', true, ['un-elections.json'], 72, 10),
+  d('fetch-sg-selection', 'UN Secretary-General selection', 'scripts/fetch_sg_selection.py', '40 */3 * * *', true, ['sg-selection.json'], 8, 10),
   d('fetch-alliances', 'Alliances (CoW)', 'scripts/fetch_cow_alliances.py', '0 6 * * 0', false, ['cow-alliances.json'], null),
   d('health-check', 'Data health check and alerts', 'scripts/check_data_health.py --email', '50 * * * *', true, [], null, 5),
 ]

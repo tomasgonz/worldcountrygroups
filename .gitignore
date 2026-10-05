@@ -73,3 +73,5 @@ site/server/data/*.lock
 site/server/data/news-history.json
 scripts/data/*.csv.gz
 site/server/data/archive.db*
+site/server/data/un-elections.json
+site/server/data/sg-selection.json

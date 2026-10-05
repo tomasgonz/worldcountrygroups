@@ -1,6 +1,6 @@
 <template>
   <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-primary-100">
-    <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-[72px]">
         <NuxtLink to="/" class="flex items-center gap-3 group">
           <div class="w-9 h-9 rounded-xl bg-primary-900 flex items-center justify-center group-hover:bg-primary-800 transition-colors">
@@ -12,8 +12,8 @@
           </div>
           <span class="font-serif font-bold text-lg text-primary-900 whitespace-nowrap">World Country Groups</span>
         </NuxtLink>
-        <div class="flex items-center gap-8">
-          <div class="hidden lg:flex items-center gap-6 text-sm">
+        <div class="flex items-center gap-5">
+          <div class="hidden xl:flex items-center gap-5 text-sm whitespace-nowrap">
             <template v-for="item in navItems" :key="item.label">
               <!-- Direct link -->
               <NuxtLink
@@ -100,7 +100,7 @@
           </div>
           <!-- Phone / tablet menu button -->
           <button
-            class="lg:hidden -mr-2 p-2 rounded-lg text-primary-700 hover:bg-primary-100"
+            class="xl:hidden -mr-2 p-2 rounded-lg text-primary-700 hover:bg-primary-100"
             :aria-expanded="mobileOpen" aria-controls="mobile-menu" aria-label="Menu"
             @click.stop="mobileOpen = !mobileOpen"
           >
@@ -112,7 +112,7 @@
     </nav>
 
     <!-- Phone / tablet menu -->
-    <div v-if="mobileOpen" id="mobile-menu" class="lg:hidden border-t border-primary-100 bg-white max-h-[calc(100vh-72px)] overflow-y-auto">
+    <div v-if="mobileOpen" id="mobile-menu" class="xl:hidden border-t border-primary-100 bg-white max-h-[calc(100vh-72px)] overflow-y-auto">
       <div class="px-4 py-3 space-y-1">
         <template v-for="item in navItems" :key="item.label">
           <NuxtLink v-if="item.to && !isDisabled(item.to)" :to="item.to" class="block px-3 py-2.5 rounded-lg text-primary-800 hover:bg-primary-50" active-class="bg-primary-50 font-medium">{{ item.label }}</NuxtLink>
@@ -167,6 +167,7 @@ interface NavItem { label: string; to?: string; children?: NavChild[] }
 const navItems: NavItem[] = [
   { label: 'Today', to: '/today' },
   { label: 'UN Monitor', to: '/un' },
+  { label: 'Elections', to: '/elections' },
   { label: 'Ask', to: '/ask' },
   { label: 'News', to: '/news' },
   { label: 'Statements', to: '/statements' },
