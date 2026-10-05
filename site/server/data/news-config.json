@@ -7,7 +7,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:02.017638+00:00",
+      "lastFetch": "2026-10-05T16:26:59.435063+00:00",
       "lastError": null,
       "articleCount": 30
     },
@@ -18,7 +18,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T18:00:03.586385+00:00",
+      "lastFetch": "2026-10-05T16:27:02.639204+00:00",
       "lastError": null,
       "articleCount": 1
     },
@@ -40,7 +40,7 @@
       "type": "atom",
       "enabled": true,
       "category": "government",
-      "lastFetch": "2026-10-02T18:00:03.645764+00:00",
+      "lastFetch": "2026-10-05T16:27:02.701378+00:00",
       "lastError": null,
       "articleCount": 20
     },
@@ -51,7 +51,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T18:00:03.725258+00:00",
+      "lastFetch": "2026-10-05T16:27:02.772587+00:00",
       "lastError": null,
       "articleCount": 25
     },
@@ -62,7 +62,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T18:00:03.874115+00:00",
+      "lastFetch": "2026-10-05T16:27:02.891774+00:00",
       "lastError": null,
       "articleCount": 96
     },
@@ -73,7 +73,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:04.095933+00:00",
+      "lastFetch": "2026-10-05T16:27:03.407061+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -84,7 +84,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:04.165556+00:00",
+      "lastFetch": "2026-10-05T16:27:03.576681+00:00",
       "lastError": null,
       "articleCount": 20
     },
@@ -95,7 +95,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T18:00:05.295573+00:00",
+      "lastFetch": "2026-10-05T16:27:04.732909+00:00",
       "lastError": null,
       "articleCount": 15
     },
@@ -106,7 +106,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T18:00:05.504134+00:00",
+      "lastFetch": "2026-10-05T16:27:04.826582+00:00",
       "lastError": null,
       "articleCount": 50
     },
@@ -117,7 +117,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T18:00:07.630354+00:00",
+      "lastFetch": "2026-10-05T16:27:06.447520+00:00",
       "lastError": null,
       "articleCount": 12
     },
@@ -128,7 +128,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T18:00:07.976836+00:00",
+      "lastFetch": "2026-10-05T16:27:06.620685+00:00",
       "lastError": null,
       "articleCount": 20
     },
@@ -139,7 +139,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T18:00:08.077731+00:00",
+      "lastFetch": "2026-10-05T16:27:06.718628+00:00",
       "lastError": null,
       "articleCount": 24
     },
@@ -150,9 +150,9 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T18:00:08.257476+00:00",
+      "lastFetch": "2026-10-05T16:27:06.993597+00:00",
       "lastError": null,
-      "articleCount": 135
+      "articleCount": 131
     },
     {
       "id": "google-news-diplomacy",
@@ -161,9 +161,9 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T18:00:08.743778+00:00",
+      "lastFetch": "2026-10-05T16:27:08.427787+00:00",
       "lastError": null,
-      "articleCount": 89
+      "articleCount": 84
     },
     {
       "id": "us-state-dept",
@@ -172,7 +172,7 @@
       "type": "state-sitemap",
       "enabled": true,
       "category": "government",
-      "lastFetch": "2026-10-02T18:00:24.378079+00:00",
+      "lastFetch": "2026-10-05T16:27:11.204669+00:00",
       "lastError": null,
       "articleCount": 20
     },
@@ -184,7 +184,7 @@
       "userAgent": "browser",
       "enabled": true,
       "category": "government",
-      "lastFetch": "2026-10-02T18:00:26.133113+00:00",
+      "lastFetch": "2026-10-05T16:27:12.825209+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -206,7 +206,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:26.574075+00:00",
+      "lastFetch": "2026-10-05T16:27:13.039377+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -217,7 +217,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T18:00:26.628528+00:00",
+      "lastFetch": "2026-10-05T16:27:13.091829+00:00",
       "lastError": null,
       "articleCount": 25
     },
@@ -228,7 +228,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T18:00:27.120738+00:00",
+      "lastFetch": "2026-10-05T16:27:13.336953+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -251,7 +251,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:27.418931+00:00",
+      "lastFetch": "2026-10-05T16:27:13.436724+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -262,7 +262,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T18:00:27.995938+00:00",
+      "lastFetch": "2026-10-05T16:27:15.095690+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -273,7 +273,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T18:00:28.650022+00:00",
+      "lastFetch": "2026-10-05T16:27:16.751815+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -284,9 +284,9 @@
       "type": "news-sitemap",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:30.661403+00:00",
+      "lastFetch": "2026-10-05T16:27:19.365117+00:00",
       "lastError": null,
-      "articleCount": 1
+      "articleCount": 4
     },
     {
       "id": "un-reform",
@@ -295,9 +295,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:31.111110+00:00",
+      "lastFetch": "2026-10-05T16:27:20.763491+00:00",
       "lastError": null,
-      "articleCount": 78
+      "articleCount": 68
     },
     {
       "id": "un-budget",
@@ -306,9 +306,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:31.683955+00:00",
+      "lastFetch": "2026-10-05T16:27:22.225451+00:00",
       "lastError": null,
-      "articleCount": 100
+      "articleCount": 99
     },
     {
       "id": "un-development",
@@ -317,9 +317,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:32.313352+00:00",
+      "lastFetch": "2026-10-05T16:27:23.766769+00:00",
       "lastError": null,
-      "articleCount": 100
+      "articleCount": 99
     },
     {
       "id": "oas",
@@ -328,9 +328,9 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-02T18:00:32.894032+00:00",
+      "lastFetch": "2026-10-05T16:27:25.332312+00:00",
       "lastError": null,
-      "articleCount": 100
+      "articleCount": 99
     },
     {
       "id": "arab-league",
@@ -339,9 +339,9 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-02T18:00:33.387922+00:00",
+      "lastFetch": "2026-10-05T16:27:26.819059+00:00",
       "lastError": null,
-      "articleCount": 100
+      "articleCount": 99
     },
     {
       "id": "osce",
@@ -350,9 +350,9 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-02T18:00:33.884639+00:00",
+      "lastFetch": "2026-10-05T16:27:28.338400+00:00",
       "lastError": null,
-      "articleCount": 100
+      "articleCount": 99
     },
     {
       "id": "sco",
@@ -361,9 +361,9 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-02T18:00:34.351452+00:00",
+      "lastFetch": "2026-10-05T16:27:29.819764+00:00",
       "lastError": null,
-      "articleCount": 100
+      "articleCount": 99
     },
     {
       "id": "celac",
@@ -372,9 +372,9 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-02T18:00:34.847861+00:00",
+      "lastFetch": "2026-10-05T16:27:31.316215+00:00",
       "lastError": null,
-      "articleCount": 100
+      "articleCount": 99
     },
     {
       "id": "oic",
@@ -383,7 +383,7 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-02T18:00:35.376734+00:00",
+      "lastFetch": "2026-10-05T16:27:32.839801+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -394,7 +394,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:36.385831+00:00",
+      "lastFetch": "2026-10-05T16:27:33.860945+00:00",
       "lastError": null,
       "articleCount": 2
     },
@@ -405,9 +405,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:36.896818+00:00",
+      "lastFetch": "2026-10-05T16:27:35.329125+00:00",
       "lastError": null,
-      "articleCount": 100
+      "articleCount": 95
     },
     {
       "id": "un-desa-publications",
@@ -416,9 +416,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:37.175468+00:00",
+      "lastFetch": "2026-10-05T16:27:36.571974+00:00",
       "lastError": null,
-      "articleCount": 36
+      "articleCount": 25
     },
     {
       "id": "un-desa-sdgs",
@@ -427,9 +427,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:38.147980+00:00",
+      "lastFetch": "2026-10-05T16:27:37.527278+00:00",
       "lastError": null,
-      "articleCount": 10
+      "articleCount": 9
     },
     {
       "id": "whats-in-blue",
@@ -438,7 +438,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:38.586137+00:00",
+      "lastFetch": "2026-10-05T16:27:38.027817+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -449,7 +449,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:40.287363+00:00",
+      "lastFetch": "2026-10-05T16:27:39.613718+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -460,7 +460,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:41.880480+00:00",
+      "lastFetch": "2026-10-05T16:27:41.344285+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -471,7 +471,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:42.449224+00:00",
+      "lastFetch": "2026-10-05T16:27:41.949514+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -482,7 +482,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:42.620795+00:00",
+      "lastFetch": "2026-10-05T16:27:42.127798+00:00",
       "lastError": null,
       "articleCount": 50
     },
@@ -493,7 +493,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:44.090000+00:00",
+      "lastFetch": "2026-10-05T16:27:43.563739+00:00",
       "lastError": null,
       "articleCount": 12
     },
@@ -504,7 +504,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:44.161767+00:00",
+      "lastFetch": "2026-10-05T16:27:43.639736+00:00",
       "lastError": null,
       "articleCount": 30
     },
@@ -515,7 +515,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:44.228849+00:00",
+      "lastFetch": "2026-10-05T16:27:43.715778+00:00",
       "lastError": null,
       "articleCount": 30
     },
@@ -526,7 +526,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:44.293588+00:00",
+      "lastFetch": "2026-10-05T16:27:43.782737+00:00",
       "lastError": null,
       "articleCount": 30
     },
@@ -537,7 +537,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:44.370695+00:00",
+      "lastFetch": "2026-10-05T16:27:43.855577+00:00",
       "lastError": null,
       "articleCount": 30
     },
@@ -548,7 +548,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:00:44.459388+00:00",
+      "lastFetch": "2026-10-05T16:27:43.930198+00:00",
       "lastError": null,
       "articleCount": 30
     },
@@ -559,7 +559,7 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-02T18:00:45.531207+00:00",
+      "lastFetch": "2026-10-05T16:27:45.120446+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -570,7 +570,7 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-02T18:00:45.761143+00:00",
+      "lastFetch": "2026-10-05T16:27:45.184827+00:00",
       "lastError": null,
       "articleCount": 20
     },
@@ -581,7 +581,7 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-02T18:00:49.966957+00:00",
+      "lastFetch": "2026-10-05T16:27:49.469065+00:00",
       "lastError": null,
       "articleCount": 20
     },
@@ -592,9 +592,9 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T18:00:50.320047+00:00",
+      "lastFetch": "2026-10-05T16:27:49.748036+00:00",
       "lastError": null,
-      "articleCount": 31
+      "articleCount": 32
     },
     {
       "id": "daily-maverick",
@@ -603,9 +603,9 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T18:00:50.753335+00:00",
+      "lastFetch": "2026-10-05T16:27:50.152062+00:00",
       "lastError": null,
-      "articleCount": 53
+      "articleCount": 51
     },
     {
       "id": "premium-times",
@@ -614,7 +614,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T18:00:51.380572+00:00",
+      "lastFetch": "2026-10-05T16:27:51.085902+00:00",
       "lastError": null,
       "articleCount": 15
     },
@@ -625,7 +625,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T18:00:51.578230+00:00",
+      "lastFetch": "2026-10-05T16:27:51.282522+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -636,7 +636,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T18:00:51.652788+00:00",
+      "lastFetch": "2026-10-05T16:27:51.367011+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -647,7 +647,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T18:01:21.718624+00:00",
+      "lastFetch": "2026-10-05T16:28:21.443850+00:00",
       "lastError": "Failed to fetch https://caribbeannewsglobal.com/feed/",
       "articleCount": 0
     },
@@ -658,9 +658,9 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T18:01:21.793749+00:00",
+      "lastFetch": "2026-10-05T16:28:21.510396+00:00",
       "lastError": null,
-      "articleCount": 17
+      "articleCount": 15
     },
     {
       "id": "scmp-world",
@@ -669,7 +669,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T18:01:22.317816+00:00",
+      "lastFetch": "2026-10-05T16:28:22.006118+00:00",
       "lastError": null,
       "articleCount": 50
     },
@@ -680,7 +680,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T18:01:22.706436+00:00",
+      "lastFetch": "2026-10-05T16:28:22.453624+00:00",
       "lastError": null,
       "articleCount": 26
     },
@@ -691,7 +691,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T18:01:22.953356+00:00",
+      "lastFetch": "2026-10-05T16:28:22.774532+00:00",
       "lastError": null,
       "articleCount": 50
     },
@@ -702,7 +702,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T18:01:23.062455+00:00",
+      "lastFetch": "2026-10-05T16:28:23.160853+00:00",
       "lastError": null,
       "articleCount": 60
     },
@@ -724,7 +724,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T18:01:23.130902+00:00",
+      "lastFetch": "2026-10-05T16:28:23.236016+00:00",
       "lastError": null,
       "articleCount": 20
     },
@@ -735,7 +735,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T18:01:23.399137+00:00",
+      "lastFetch": "2026-10-05T16:28:23.304048+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -746,9 +746,9 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T18:01:23.546944+00:00",
+      "lastFetch": "2026-10-05T16:28:23.545437+00:00",
       "lastError": null,
-      "articleCount": 33
+      "articleCount": 23
     },
     {
       "id": "guardian-world",
@@ -757,7 +757,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-02T18:01:23.714445+00:00",
+      "lastFetch": "2026-10-05T16:28:23.694632+00:00",
       "lastError": null,
       "articleCount": 45
     },
@@ -768,9 +768,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:01:24.336874+00:00",
+      "lastFetch": "2026-10-05T16:28:25.199379+00:00",
       "lastError": null,
-      "articleCount": 100
+      "articleCount": 97
     },
     {
       "id": "gnews-wfp",
@@ -779,9 +779,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:01:24.695810+00:00",
+      "lastFetch": "2026-10-05T16:28:26.608079+00:00",
       "lastError": null,
-      "articleCount": 39
+      "articleCount": 52
     },
     {
       "id": "gnews-unicef",
@@ -790,9 +790,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:01:25.216925+00:00",
+      "lastFetch": "2026-10-05T16:28:28.125240+00:00",
       "lastError": null,
-      "articleCount": 100
+      "articleCount": 95
     },
     {
       "id": "gnews-who",
@@ -801,9 +801,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:01:25.699525+00:00",
+      "lastFetch": "2026-10-05T16:28:29.564150+00:00",
       "lastError": null,
-      "articleCount": 71
+      "articleCount": 64
     },
     {
       "id": "gnews-african-union",
@@ -812,7 +812,7 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-02T18:01:26.403358+00:00",
+      "lastFetch": "2026-10-05T16:28:31.054511+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -823,9 +823,9 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T18:01:26.786953+00:00",
+      "lastFetch": "2026-10-05T16:28:32.435352+00:00",
       "lastError": null,
-      "articleCount": 67
+      "articleCount": 65
     },
     {
       "id": "gnews-pacific-forum",
@@ -834,9 +834,9 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T18:01:27.181215+00:00",
+      "lastFetch": "2026-10-05T16:28:33.822263+00:00",
       "lastError": null,
-      "articleCount": 61
+      "articleCount": 50
     },
     {
       "id": "gnews-sids",
@@ -845,9 +845,9 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-02T18:01:27.565310+00:00",
+      "lastFetch": "2026-10-05T16:28:35.174439+00:00",
       "lastError": null,
-      "articleCount": 38
+      "articleCount": 42
     },
     {
       "id": "gnews-un-sg",
@@ -856,9 +856,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:01:27.938909+00:00",
+      "lastFetch": "2026-10-05T16:28:36.597272+00:00",
       "lastError": null,
-      "articleCount": 40
+      "articleCount": 42
     },
     {
       "id": "gnews-un-pga",
@@ -867,11 +867,875 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-02T18:01:28.442142+00:00",
+      "lastFetch": "2026-10-05T16:28:37.960873+00:00",
       "lastError": null,
-      "articleCount": 47
+      "articleCount": 43
+    },
+    {
+      "id": "country-bgd",
+      "name": "Bangladesh news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Bangladesh%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:28:39.571974+00:00",
+      "lastError": null,
+      "articleCount": 100
+    },
+    {
+      "id": "country-phl",
+      "name": "Philippines news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Philippines%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:28:41.219089+00:00",
+      "lastError": null,
+      "articleCount": 98
+    },
+    {
+      "id": "country-cod",
+      "name": "Congo, Dem. Rep. news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%28%22DR+Congo%22+OR+%22Democratic+Republic+of+Congo%22%29+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:28:42.624478+00:00",
+      "lastError": null,
+      "articleCount": 36
+    },
+    {
+      "id": "country-vnm",
+      "name": "Viet Nam news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Vietnam%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:28:44.114447+00:00",
+      "lastError": null,
+      "articleCount": 68
+    },
+    {
+      "id": "country-tza",
+      "name": "Tanzania news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Tanzania%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:28:45.575101+00:00",
+      "lastError": null,
+      "articleCount": 55
+    },
+    {
+      "id": "country-ita",
+      "name": "Italy news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Italy%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:28:47.231747+00:00",
+      "lastError": null,
+      "articleCount": 100
+    },
+    {
+      "id": "country-ken",
+      "name": "Kenya news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Kenya%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:28:49.122377+00:00",
+      "lastError": null,
+      "articleCount": 99
+    },
+    {
+      "id": "country-mmr",
+      "name": "Myanmar news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Myanmar%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:28:50.736467+00:00",
+      "lastError": null,
+      "articleCount": 98
+    },
+    {
+      "id": "country-col",
+      "name": "Colombia news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Colombia%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:28:52.380231+00:00",
+      "lastError": null,
+      "articleCount": 100
+    },
+    {
+      "id": "country-dza",
+      "name": "Algeria news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Algeria%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:28:53.934949+00:00",
+      "lastError": null,
+      "articleCount": 100
+    },
+    {
+      "id": "country-irq",
+      "name": "Iraq news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Iraq%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:28:55.635699+00:00",
+      "lastError": null,
+      "articleCount": 100
+    },
+    {
+      "id": "country-arg",
+      "name": "Argentina news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Argentina%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:28:57.293880+00:00",
+      "lastError": null,
+      "articleCount": 98
+    },
+    {
+      "id": "country-mar",
+      "name": "Morocco news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Morocco%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:28:58.919534+00:00",
+      "lastError": null,
+      "articleCount": 99
+    },
+    {
+      "id": "country-ago",
+      "name": "Angola news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Angola%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:00.295656+00:00",
+      "lastError": null,
+      "articleCount": 37
+    },
+    {
+      "id": "country-pol",
+      "name": "Poland news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Poland%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:01.756145+00:00",
+      "lastError": null,
+      "articleCount": 51
+    },
+    {
+      "id": "country-uzb",
+      "name": "Uzbekistan news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Uzbekistan%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:03.331653+00:00",
+      "lastError": null,
+      "articleCount": 99
+    },
+    {
+      "id": "country-moz",
+      "name": "Mozambique news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Mozambique%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:04.807761+00:00",
+      "lastError": null,
+      "articleCount": 46
+    },
+    {
+      "id": "country-gha",
+      "name": "Ghana news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Ghana%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:06.387738+00:00",
+      "lastError": null,
+      "articleCount": 100
+    },
+    {
+      "id": "country-per",
+      "name": "Peru news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Peru%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:07.825190+00:00",
+      "lastError": null,
+      "articleCount": 43
+    },
+    {
+      "id": "country-mdg",
+      "name": "Madagascar news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Madagascar%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:09.237351+00:00",
+      "lastError": null,
+      "articleCount": 26
+    },
+    {
+      "id": "country-civ",
+      "name": "Cote d'Ivoire news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%28%22Ivory+Coast%22+OR+%22C%C3%B4te+d%27Ivoire%22%29+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:10.767041+00:00",
+      "lastError": null,
+      "articleCount": 49
+    },
+    {
+      "id": "country-npl",
+      "name": "Nepal news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Nepal%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:12.314223+00:00",
+      "lastError": null,
+      "articleCount": 99
+    },
+    {
+      "id": "country-cmr",
+      "name": "Cameroon news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Cameroon%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:13.766536+00:00",
+      "lastError": null,
+      "articleCount": 43
+    },
+    {
+      "id": "country-ven",
+      "name": "Venezuela, RB news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Venezuela%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:15.329852+00:00",
+      "lastError": null,
+      "articleCount": 91
+    },
+    {
+      "id": "country-syr",
+      "name": "Syrian Arab Republic news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Syria%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:16.884516+00:00",
+      "lastError": null,
+      "articleCount": 99
+    },
+    {
+      "id": "country-bfa",
+      "name": "Burkina Faso news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Burkina+Faso%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:18.405145+00:00",
+      "lastError": null,
+      "articleCount": 49
+    },
+    {
+      "id": "country-lka",
+      "name": "Sri Lanka news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Sri+Lanka%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:19.984083+00:00",
+      "lastError": null,
+      "articleCount": 97
+    },
+    {
+      "id": "country-mwi",
+      "name": "Malawi news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Malawi%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:21.435755+00:00",
+      "lastError": null,
+      "articleCount": 50
+    },
+    {
+      "id": "country-zmb",
+      "name": "Zambia news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Zambia%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:22.883243+00:00",
+      "lastError": null,
+      "articleCount": 61
+    },
+    {
+      "id": "country-kaz",
+      "name": "Kazakhstan news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Kazakhstan%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:24.511089+00:00",
+      "lastError": null,
+      "articleCount": 99
+    },
+    {
+      "id": "country-tcd",
+      "name": "Chad news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Chad%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:26.022045+00:00",
+      "lastError": null,
+      "articleCount": 58
+    },
+    {
+      "id": "country-chl",
+      "name": "Chile news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Chile%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:27.506588+00:00",
+      "lastError": null,
+      "articleCount": 44
+    },
+    {
+      "id": "country-rou",
+      "name": "Romania news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Romania%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:29.102148+00:00",
+      "lastError": null,
+      "articleCount": 96
+    },
+    {
+      "id": "country-sen",
+      "name": "Senegal news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Senegal%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:30.512042+00:00",
+      "lastError": null,
+      "articleCount": 32
+    },
+    {
+      "id": "country-gtm",
+      "name": "Guatemala news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Guatemala%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:31.979538+00:00",
+      "lastError": null,
+      "articleCount": 43
+    },
+    {
+      "id": "country-ecu",
+      "name": "Ecuador news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Ecuador%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:33.419205+00:00",
+      "lastError": null,
+      "articleCount": 39
+    },
+    {
+      "id": "country-nld",
+      "name": "Netherlands news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Netherlands%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:34.901057+00:00",
+      "lastError": null,
+      "articleCount": 66
+    },
+    {
+      "id": "country-khm",
+      "name": "Cambodia news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Cambodia%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:36.362596+00:00",
+      "lastError": null,
+      "articleCount": 61
+    },
+    {
+      "id": "country-zwe",
+      "name": "Zimbabwe news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Zimbabwe%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:37.905819+00:00",
+      "lastError": null,
+      "articleCount": 85
+    },
+    {
+      "id": "country-gin",
+      "name": "Guinea news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Guinea%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:39.360838+00:00",
+      "lastError": null,
+      "articleCount": 68
+    },
+    {
+      "id": "country-ben",
+      "name": "Benin news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Benin%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:40.792286+00:00",
+      "lastError": null,
+      "articleCount": 29
+    },
+    {
+      "id": "country-rwa",
+      "name": "Rwanda news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Rwanda%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:42.372508+00:00",
+      "lastError": null,
+      "articleCount": 58
+    },
+    {
+      "id": "country-bdi",
+      "name": "Burundi news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Burundi%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:43.783539+00:00",
+      "lastError": null,
+      "articleCount": 35
+    },
+    {
+      "id": "country-bol",
+      "name": "Bolivia news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Bolivia%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:45.272594+00:00",
+      "lastError": null,
+      "articleCount": 53
+    },
+    {
+      "id": "country-tun",
+      "name": "Tunisia news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%22Tunisia%22+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:46.685531+00:00",
+      "lastError": null,
+      "articleCount": 32
+    },
+    {
+      "id": "region-central-asia",
+      "name": "Central Asia news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%28Kyrgyzstan+OR+Tajikistan+OR+Turkmenistan+OR+Uzbekistan%29+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:48.186250+00:00",
+      "lastError": null,
+      "articleCount": 72
+    },
+    {
+      "id": "region-south-caucasus",
+      "name": "South Caucasus news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%28Armenia+OR+Azerbaijan+OR+%22Georgia+Tbilisi%22%29+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:49.839483+00:00",
+      "lastError": null,
+      "articleCount": 99
+    },
+    {
+      "id": "region-western-balkans",
+      "name": "Western Balkans news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%28Serbia+OR+Bosnia+OR+Kosovo+OR+Montenegro+OR+%22North+Macedonia%22+OR+Albania%29+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:51.529818+00:00",
+      "lastError": null,
+      "articleCount": 76
+    },
+    {
+      "id": "region-baltics",
+      "name": "Baltic states news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%28Estonia+OR+Latvia+OR+Lithuania%29+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:53.134441+00:00",
+      "lastError": null,
+      "articleCount": 95
+    },
+    {
+      "id": "region-central-america",
+      "name": "Central America news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%28Honduras+OR+%22El+Salvador%22+OR+Nicaragua+OR+%22Costa+Rica%22+OR+Panama%29+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:54.869991+00:00",
+      "lastError": null,
+      "articleCount": 99
+    },
+    {
+      "id": "region-sahel",
+      "name": "Sahel news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%28Mali+OR+Niger+OR+Mauritania+OR+%22Burkina+Faso%22%29+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:56.549400+00:00",
+      "lastError": null,
+      "articleCount": 95
+    },
+    {
+      "id": "region-central-africa",
+      "name": "Central Africa news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%28%22Central+African+Republic%22+OR+Gabon+OR+%22Republic+of+Congo%22+OR+%22Equatorial+Guinea%22%29+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:29:59.139079+00:00",
+      "lastError": null,
+      "articleCount": 51
+    },
+    {
+      "id": "region-southern-africa",
+      "name": "Southern Africa news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%28Namibia+OR+Botswana+OR+Lesotho+OR+Eswatini%29+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:30:00.759720+00:00",
+      "lastError": null,
+      "articleCount": 59
+    },
+    {
+      "id": "region-west-africa",
+      "name": "West Africa news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%28Togo+OR+%22Sierra+Leone%22+OR+Liberia+OR+Gambia+OR+%22Guinea-Bissau%22%29+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:30:02.426666+00:00",
+      "lastError": null,
+      "articleCount": 99
+    },
+    {
+      "id": "region-horn-of-africa",
+      "name": "Horn of Africa news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%28Eritrea+OR+Djibouti+OR+Somalia+OR+%22South+Sudan%22%29+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:30:04.046666+00:00",
+      "lastError": null,
+      "articleCount": 100
+    },
+    {
+      "id": "region-himalaya-indian-ocean",
+      "name": "Bhutan, Maldives, Indian Ocean news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%28Bhutan+OR+Maldives+OR+Mauritius+OR+Seychelles+OR+Comoros%29+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:30:05.598748+00:00",
+      "lastError": null,
+      "articleCount": 73
+    },
+    {
+      "id": "region-mainland-se-asia",
+      "name": "Laos, Timor-Leste, Brunei news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%28Laos+OR+%22Timor-Leste%22+OR+Brunei%29+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:30:07.118735+00:00",
+      "lastError": null,
+      "articleCount": 56
+    },
+    {
+      "id": "region-southern-cone",
+      "name": "Paraguay and Uruguay news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%28Paraguay+OR+Uruguay%29+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:30:08.567890+00:00",
+      "lastError": null,
+      "articleCount": 42
+    },
+    {
+      "id": "region-small-gulf",
+      "name": "Kuwait, Bahrain, Oman news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%28Kuwait+OR+Bahrain+OR+Oman%29+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:30:10.179384+00:00",
+      "lastError": null,
+      "articleCount": 100
+    },
+    {
+      "id": "region-levant",
+      "name": "Jordan and Lebanon news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%28Jordan+OR+Lebanon%29+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:30:11.822257+00:00",
+      "lastError": null,
+      "articleCount": 100
+    },
+    {
+      "id": "region-eastern-europe",
+      "name": "Moldova and Belarus news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%28Moldova+OR+Belarus%29+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:30:13.367997+00:00",
+      "lastError": null,
+      "articleCount": 99
+    },
+    {
+      "id": "region-caribbean-states",
+      "name": "Caribbean states news (via Google News)",
+      "url": "https://news.google.com/rss/search?q=%28Haiti+OR+Jamaica+OR+%22Dominican+Republic%22+OR+%22Trinidad+and+Tobago%22+OR+Barbados+OR+Guyana+OR+Suriname%29+%28president+OR+%22prime+minister%22+OR+government+OR+minister+OR+election+OR+parliament+OR+talks%29+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "country-watch",
+      "maxItems": 15,
+      "lastFetch": "2026-10-05T16:30:15.089769+00:00",
+      "lastError": null,
+      "articleCount": 100
+    },
+    {
+      "id": "yonhap",
+      "name": "Yonhap News Agency",
+      "url": "https://en.yna.co.kr/RSS/news.xml",
+      "type": "rss",
+      "enabled": true,
+      "category": "national-agency",
+      "ownership": "publicly funded (South Korea)",
+      "sourceType": "national-agency",
+      "tier": 4,
+      "maxItems": 20,
+      "lastFetch": "2026-10-05T16:30:16.103769+00:00",
+      "lastError": null,
+      "articleCount": 110
+    },
+    {
+      "id": "agencia-brasil",
+      "name": "Agência Brasil",
+      "url": "https://agenciabrasil.ebc.com.br/en/rss/ultimasnoticias/feed.xml",
+      "type": "rss",
+      "enabled": true,
+      "category": "national-agency",
+      "ownership": "state-owned (Brazil)",
+      "sourceType": "national-agency",
+      "tier": 4,
+      "maxItems": 20,
+      "lastFetch": "2026-10-05T16:30:16.969179+00:00",
+      "lastError": null,
+      "articleCount": 10
+    },
+    {
+      "id": "antara",
+      "name": "Antara (via Google News)",
+      "url": "https://news.google.com/rss/search?q=site%3Aen.antaranews.com+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "national-agency",
+      "ownership": "state-owned (Indonesia)",
+      "sourceType": "national-agency",
+      "tier": 4,
+      "maxItems": 20,
+      "lastFetch": "2026-10-05T16:30:18.457369+00:00",
+      "lastError": null,
+      "articleCount": 98
+    },
+    {
+      "id": "vietnamplus",
+      "name": "VietnamPlus (via Google News)",
+      "url": "https://news.google.com/rss/search?q=site%3Avietnamplus.vn+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "national-agency",
+      "ownership": "state-run (Viet Nam)",
+      "sourceType": "national-agency",
+      "tier": 4,
+      "maxItems": 20,
+      "lastFetch": "2026-10-05T16:30:19.814006+00:00",
+      "lastError": null,
+      "articleCount": 75
+    },
+    {
+      "id": "pna-philippines",
+      "name": "Philippine News Agency (via Google News)",
+      "url": "https://news.google.com/rss/search?q=site%3Apna.gov.ph+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "national-agency",
+      "ownership": "state-run (Philippines)",
+      "sourceType": "national-agency",
+      "tier": 4,
+      "maxItems": 20,
+      "lastFetch": "2026-10-05T16:30:21.292064+00:00",
+      "lastError": null,
+      "articleCount": 79
+    },
+    {
+      "id": "bernama",
+      "name": "Bernama (via Google News)",
+      "url": "https://news.google.com/rss/search?q=site%3Abernama.com+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "national-agency",
+      "ownership": "state-owned (Malaysia)",
+      "sourceType": "national-agency",
+      "tier": 4,
+      "maxItems": 20,
+      "lastFetch": "2026-10-05T16:30:22.873912+00:00",
+      "lastError": null,
+      "articleCount": 89
+    },
+    {
+      "id": "nan-nigeria",
+      "name": "News Agency of Nigeria (via Google News)",
+      "url": "https://news.google.com/rss/search?q=site%3Anannews.ng+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "national-agency",
+      "ownership": "state-owned (Nigeria)",
+      "sourceType": "national-agency",
+      "tier": 4,
+      "maxItems": 20,
+      "lastFetch": "2026-10-05T16:30:24.308021+00:00",
+      "lastError": null,
+      "articleCount": 96
+    },
+    {
+      "id": "ahram-online",
+      "name": "Ahram Online (via Google News)",
+      "url": "https://news.google.com/rss/search?q=site%3Aenglish.ahram.org.eg+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "enabled": true,
+      "category": "national-agency",
+      "ownership": "state-owned (Egypt)",
+      "sourceType": "national-agency",
+      "tier": 4,
+      "maxItems": 20,
+      "lastFetch": "2026-10-05T16:30:25.797528+00:00",
+      "lastError": null,
+      "articleCount": 81
     }
   ],
-  "maxArticles": 1600,
+  "maxArticles": 3000,
   "maxSourceShare": 0.08
 }

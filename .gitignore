@@ -65,3 +65,8 @@ site/server/data/ai-usage.json
 site/server/data/ai-usage-batch.json
 site/server/data/un-journal.json
 site/server/data/elections.json
+site/server/data/trade-partners.json
+site/server/data/donor-tracker.json
+site/server/data/donor-news.json
+site/server/data/trade-products/
+site/server/data/*.lock

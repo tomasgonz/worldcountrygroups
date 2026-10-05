@@ -184,6 +184,8 @@ const navItems: NavItem[] = [
     children: [
       { to: '/votes', label: 'UN Votes', desc: 'General Assembly records' },
       { to: '/conflicts', label: 'Conflicts', desc: 'Armed conflict dashboard' },
+      { to: '/partners/trade', label: 'Trade partners', desc: 'Trade with emerging economies' },
+      { to: '/partners/donors', label: 'Donor tracker', desc: 'Aid budgets, cuts and donor news' },
       { to: '/speeches', label: 'Speeches', desc: 'UNGA speech analysis' },
       { to: '/quotes', label: 'Quotes', desc: 'Search leaders’ words since 1946' },
     ],

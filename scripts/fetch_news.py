@@ -13,10 +13,12 @@ import hashlib
 import json
 import os
 import re
+import time
 import sys
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from urllib.request import urlopen, Request
+import urllib.parse
 from xml.etree import ElementTree
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "site", "server", "data")
@@ -83,6 +85,17 @@ ALIASES = {
     "Haiti": "HTI", "Haitian": "HTI",
     "Cuba": "CUB", "Cuban": "CUB",
 }
+
+# Common names the World Bank list writes differently (added to ALIASES)
+ALIASES.update({
+    "Kyrgyzstan": "KGZ", "Hong Kong": "HKG", "Laos": "LAO", "Lao PDR": "LAO", "Czechia": "CZE", "Czech Republic": "CZE",
+    "Slovakia": "SVK", "Slovak Republic": "SVK", "Gambia": "GMB", "Bahamas": "BHS", "Micronesia": "FSM",
+    "Saint Kitts and Nevis": "KNA", "St Kitts": "KNA", "Saint Vincent and the Grenadines": "VCT", "Saint Lucia": "LCA",
+    "Brunei": "BRN", "Cape Verde": "CPV", "Cabo Verde": "CPV", "Eswatini": "SWZ", "Swaziland": "SWZ",
+    "Timor-Leste": "TLS", "East Timor": "TLS", "North Macedonia": "MKD", "Moldova": "MDA", "Yemen": "YEM",
+    "Vietnam": "VNM", "Viet Nam": "VNM", "Trinidad and Tobago": "TTO", "Sao Tome": "STP", "São Tomé": "STP",
+    "Republic of Congo": "COG", "Congo-Brazzaville": "COG", "Micronesian": "FSM", "Palestine": "PSE",
+})
 
 SHORT_NAMES = {"US", "UK", "UAE", "DRC", "PRC", "DPRK", "U.S.", "U.K."}
 
@@ -261,6 +274,88 @@ def compute_country_flags(country_iso3_list, flags_lookup):
     return sorted(flags)
 
 
+# ---- shared clean-up for search-based sources -------------------------------
+# Navigation and service pages that site-restricted news searches sometimes return
+NAV_JUNK = re.compile(
+    r"^(contact( us)?|service charter|helpline|photo album|portal kemlu|test_\d+|home|about( us)?|sitemap|"
+    r"consular services?|visa requirements?.*|embassy of .*|embajada (en|del?) .*|consulado .*|"
+    r"ministry of foreign affairs( of [a-z ]+)?|major tourist attractions)\b",
+    re.IGNORECASE)
+
+
+# Service and archive pages, recognisable anywhere in the title
+NAV_JUNK_ANY = re.compile(
+    r"\b(press releases? archive|archives?\b.*\d{4}$|notices?\b -|procedure and requirement|e-passport|passport services?|"
+    r"visa (application|requirements?|information)|consular (section|services?|information)|embassy'?s activities|"
+    r"recruitment|tenders?\b|vacanc(y|ies)|office hours|public holidays?|portal kemlu|목록)",
+    re.IGNORECASE)
+
+
+def clean_search_items(items, source):
+    """Tidy items from a source: strip Google News' ' - Site' title suffix and drop navigation pages."""
+    url = source.get("url", "")
+    exclude = re.compile(source["excludeTitle"], re.IGNORECASE) if source.get("excludeTitle") else None
+    out = []
+    for it in items:
+        t = it.get("title") or ""
+        if "news.google.com" in url and " - " in t:
+            head, tail = t.rsplit(" - ", 1)
+            if len(tail) <= 80 and len(head) >= 12:
+                t = head.strip()
+        it["title"] = t
+        if NAV_JUNK.match(t) or NAV_JUNK_ANY.search(t) or (exclude and exclude.search(t)) or len(t) < 12:
+            continue
+        if "news.google.com" in url and len(t.split()) < 4:
+            continue  # bare page names ("PTRI New York", "Wellington")
+        out.append(it)
+    return out
+
+
+def apply_source_meta(sources, tier_map, ownership=None):
+    """Sources may declare their own tier, type and ownership in the config."""
+    for s in sources:
+        if s.get("sourceType"):
+            tier_map[s["id"]] = {"tier": int(s.get("tier", 2)), "type": s["sourceType"]}
+        if ownership is not None and s.get("ownership"):
+            ownership[s["id"]] = s["ownership"]
+
+
+# ---- automatic gap filling -------------------------------------------------
+GAP_NAMES = {"KGZ": "Kyrgyzstan", "LAO": "Laos", "SVK": "Slovakia", "COG": "\"Republic of Congo\" OR Brazzaville",
+             "FSM": "\"Federated States of Micronesia\"", "KNA": "\"St Kitts and Nevis\" OR \"Saint Kitts and Nevis\"",
+             "VCT": "\"St Vincent and the Grenadines\" OR \"Saint Vincent and the Grenadines\"", "GMB": "\"The Gambia\" OR Gambian",
+             "STP": "\"Sao Tome and Principe\" OR \"São Tomé and Príncipe\"", "TTO": "\"Trinidad and Tobago\"",
+             "LCA": "\"St Lucia\" OR \"Saint Lucia\"", "SMR": "\"Republic of San Marino\" OR \"San Marino government\"",
+             "GRD": "Grenada", "MNG": "Mongolia OR Ulaanbaatar", "SLV": "\"El Salvador\" Bukele OR \"Salvadoran\""}
+GAP_TERMS = '(government OR president OR "prime minister" OR minister OR parliament OR election OR "United Nations") -football -soccer -score -cricket -"live stream"'
+
+
+def fill_coverage_gaps(patterns, max_countries=25):
+    """Search individually for UN member states that had no statements or news in the last 30 days
+    (from the latest data-health check), so quiet countries still get covered."""
+    try:
+        with open(os.path.join(DATA_DIR, "data-health.json")) as f:
+            gaps = (json.load(f).get("coverage") or {}).get("none") or []
+    except Exception:
+        return []
+    out = []
+    for g in gaps[:max_countries]:
+        iso3, name = g.get("iso3"), GAP_NAMES.get(g.get("iso3"), g.get("name", ""))
+        if not iso3 or not name:
+            continue
+        q = (f"({name})" if " OR " in name else f'"{name}"') + f" {GAP_TERMS} when:30d"
+        url = "https://news.google.com/rss/search?" + urllib.parse.urlencode({"q": q, "hl": "en-US", "gl": "US", "ceid": "US:en"})
+        time.sleep(1.0)
+        try:
+            items = clean_search_items(fetch_rss(url, "coverage-gap", patterns), {"url": url})[:8]
+        except Exception as e:
+            print(f"  Coverage gap {name}: ERROR - {e}", file=sys.stderr)
+            continue
+        out.extend(items)  # tagged by the normal country matcher, so namesakes don't count
+        print(f"  Coverage gap {name}: {len(items)} articles")
+    return out
+
+
 def enrich_article(article, *, now_iso, country_flags_lookup, existing=None):
     """Add Phase 1 metadata fields to an article record (modifies and returns it).
 
@@ -298,6 +393,13 @@ def enrich_article(article, *, now_iso, country_flags_lookup, existing=None):
 def build_country_map():
     """Build name->ISO3 lookup from country-stats.json + aliases."""
     mapping = dict(ALIASES)
+    try:
+        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "worldcountrygroups", "data", "groups", "world.json")) as f:
+            for c in json.load(f).get("countries", []):
+                if c.get("name") and c.get("iso3"):
+                    mapping.setdefault(c["name"], c["iso3"])
+    except Exception:
+        pass
     if os.path.exists(STATS_FILE):
         try:
             with open(STATS_FILE, "r") as f:
@@ -878,6 +980,7 @@ def main():
     config = load_news_config()
     if config and config.get("sources"):
         sources = [s for s in config["sources"] if s.get("enabled", True)]
+        apply_source_meta(config["sources"], TIER_TYPE_MAP, SOURCE_OWNERSHIP)
         max_articles = config.get("maxArticles", MAX_ARTICLES)
         print(f"  Config loaded: {len(sources)} enabled sources (of {len(config['sources'])} total)")
     else:
@@ -891,6 +994,8 @@ def main():
 
     if sources:
         for source in sources:
+            if "news.google.com" in source.get("url", ""):
+                time.sleep(1.0)  # be gentle with the news search service
             sid = source["id"]
             stype = source.get("type", "rss")
             url = source["url"]
@@ -911,6 +1016,7 @@ def main():
                 else:
                     articles = fetch_rss(url, sid, patterns, user_agent=ua)
 
+                articles = clean_search_items(articles, source)
                 all_articles.extend(articles)
                 print(f"  {name}: {len(articles)} articles")
 
@@ -922,6 +1028,7 @@ def main():
                 print(f"  {name}: ERROR - {err_msg}", file=sys.stderr)
                 if config:
                     update_source_status(config, sid, error=err_msg)
+        all_articles.extend(fill_coverage_gaps(patterns))
     else:
         # Fallback to hardcoded sources if no config
         from urllib.request import urlopen  # noqa: already imported

@@ -5,6 +5,8 @@ import { getCountryVDem, classifyRegimeLabel } from './vdem'
 import { getCountrySanctions, getCountrySanctionsListings, getSanctionsMeta } from './sanctions'
 import { getCountryConflict, getConflictMeta, getAllConflicts } from './conflict'
 import { getElections, getJournalDays } from './upcoming'
+import { TRADE_TOOLS, runTradeTool } from './ask-tools-trade'
+import { DONOR_TOOLS, runDonorTool } from './ask-tools-donors'
 import { getMilitaryCapabilities } from './military'
 import { getCountryVoteSummary, getCountryThemeStats, getCountryAlignmentScores, getBilateralVotingAlignment, searchResolutions, getRecentResolutions } from './unvotes'
 import { detectVotingBlocs } from './voting-blocs'
@@ -114,6 +116,8 @@ export const ASK_TOOLS: ToolDef[] = [
   { name: 'search_quotes', description: 'Verified quotes from General Debate speeches by words, country, speaker or years.', parameters: { type: 'object', properties: { query: { type: 'string' }, country: { type: 'string' }, speaker: { type: 'string' }, from_year: { type: 'integer' }, to_year: { type: 'integer' } } } },
   { name: 'person_profile', description: 'A leader, minister or UN official: current roles, General Debate speeches, statements delivered and recent mentions.', parameters: { type: 'object', properties: { name: { type: 'string' } }, required: ['name'] } },
   { name: 'recent_news_and_statements', description: 'Recent news and official statements (last weeks), optionally about a country and/or containing words.', parameters: { type: 'object', properties: { query: { type: 'string' }, country: { type: 'string' }, days: { type: 'integer', description: 'Default 14' }, limit: { type: 'integer', description: 'Default 12' } } } },
+  ...TRADE_TOOLS,
+  ...DONOR_TOOLS,
 ]
 
 // ---------------------------------------------------------------------------
@@ -385,5 +389,7 @@ export async function runTool(name: string, args: any, src: SourceCollector): Pr
       return { items: items.map((x: any) => ({ title: x.title, summary: (x.description || x.excerpt || '').slice(0, 240), source: x.source, kind: x.kind, date: (x.publishedAt || '').slice(0, 10), ref: src.add(x.title, x.url, x.kind) })) }
     }
   }
+  const extra = (await runTradeTool(name, args, src)) ?? (await runDonorTool(name, args, src))
+  if (extra !== undefined) return extra
   return { error: `Unknown tool ${name}` }
 }

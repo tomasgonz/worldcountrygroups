@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "updated_at": "2026-10-02T16:57:05Z",
+    "updated_at": "2026-10-03T07:00:37Z",
     "source": "TeleGeography Submarine Cable Map API",
     "total_cables": 712,
     "total_countries": 184
@@ -10189,7 +10189,7 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 21
+      "connectivity_rank": 20
     },
     "AG": {
       "cable_count": 4,
@@ -10245,7 +10245,7 @@
         "HR",
         "IT"
       ],
-      "connectivity_rank": 96
+      "connectivity_rank": 95
     },
     "AO": {
       "cable_count": 5,
@@ -10291,7 +10291,7 @@
         "TZ",
         "ZA"
       ],
-      "connectivity_rank": 80
+      "connectivity_rank": 79
     },
     "AR": {
       "cable_count": 8,
@@ -10321,7 +10321,7 @@
         "US",
         "WS"
       ],
-      "connectivity_rank": 141
+      "connectivity_rank": 142
     },
     "AU": {
       "cable_count": 36,
@@ -10403,7 +10403,7 @@
         "VC",
         "VG"
       ],
-      "connectivity_rank": 135
+      "connectivity_rank": 136
     },
     "BD": {
       "cable_count": 4,
@@ -10526,7 +10526,7 @@
         "TG",
         "ZA"
       ],
-      "connectivity_rank": 116
+      "connectivity_rank": 118
     },
     "BL": {
       "cable_count": 4,
@@ -10744,7 +10744,7 @@
         "UG",
         "ZA"
       ],
-      "connectivity_rank": 79
+      "connectivity_rank": 80
     },
     "CG": {
       "cable_count": 2,
@@ -10788,7 +10788,7 @@
         "TZ",
         "ZA"
       ],
-      "connectivity_rank": 147
+      "connectivity_rank": 145
     },
     "CI": {
       "cable_count": 6,
@@ -10842,7 +10842,7 @@
         "TZ",
         "ZA"
       ],
-      "connectivity_rank": 60
+      "connectivity_rank": 63
     },
     "CK": {
       "cable_count": 1,
@@ -10959,7 +10959,7 @@
         "VE",
         "VG"
       ],
-      "connectivity_rank": 35
+      "connectivity_rank": 36
     },
     "CR": {
       "cable_count": 4,
@@ -11200,7 +11200,7 @@
         "VC",
         "VG"
       ],
-      "connectivity_rank": 153
+      "connectivity_rank": 152
     },
     "DO": {
       "cable_count": 10,
@@ -11230,7 +11230,7 @@
         "VE",
         "VG"
       ],
-      "connectivity_rank": 41
+      "connectivity_rank": 40
     },
     "DZ": {
       "cable_count": 6,
@@ -11357,7 +11357,7 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 15
+      "connectivity_rank": 16
     },
     "ES": {
       "cable_count": 36,
@@ -11605,7 +11605,7 @@
         "TZ",
         "ZA"
       ],
-      "connectivity_rank": 77
+      "connectivity_rank": 82
     },
     "GB": {
       "cable_count": 66,
@@ -11684,7 +11684,7 @@
         "VC",
         "VG"
       ],
-      "connectivity_rank": 128
+      "connectivity_rank": 127
     },
     "GE": {
       "cable_count": 3,
@@ -11712,7 +11712,7 @@
         "SR",
         "TT"
       ],
-      "connectivity_rank": 132
+      "connectivity_rank": 133
     },
     "GG": {
       "cable_count": 5,
@@ -11775,7 +11775,7 @@
         "TZ",
         "ZA"
       ],
-      "connectivity_rank": 61
+      "connectivity_rank": 60
     },
     "GI": {
       "cable_count": 1,
@@ -11792,7 +11792,7 @@
         "PT",
         "SA"
       ],
-      "connectivity_rank": 174
+      "connectivity_rank": 173
     },
     "GL": {
       "cable_count": 2,
@@ -11825,7 +11825,7 @@
         "ST",
         "ZA"
       ],
-      "connectivity_rank": 167
+      "connectivity_rank": 164
     },
     "GN": {
       "cable_count": 1,
@@ -11849,7 +11849,7 @@
         "ST",
         "ZA"
       ],
-      "connectivity_rank": 164
+      "connectivity_rank": 165
     },
     "GP": {
       "cable_count": 4,
@@ -11897,7 +11897,7 @@
         "ST",
         "ZA"
       ],
-      "connectivity_rank": 95
+      "connectivity_rank": 98
     },
     "GR": {
       "cable_count": 21,
@@ -11956,7 +11956,7 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 20
+      "connectivity_rank": 19
     },
     "GT": {
       "cable_count": 6,
@@ -12034,7 +12034,7 @@
         "ST",
         "ZA"
       ],
-      "connectivity_rank": 166
+      "connectivity_rank": 167
     },
     "GY": {
       "cable_count": 3,
@@ -12076,7 +12076,7 @@
         "GR",
         "IT"
       ],
-      "connectivity_rank": 146
+      "connectivity_rank": 144
     },
     "HT": {
       "cable_count": 2,
@@ -12226,7 +12226,7 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 16
+      "connectivity_rank": 15
     },
     "IQ": {
       "cable_count": 4,
@@ -12484,7 +12484,7 @@
         "YT",
         "ZA"
       ],
-      "connectivity_rank": 45
+      "connectivity_rank": 44
     },
     "KH": {
       "cable_count": 3,
@@ -12508,7 +12508,7 @@
         "VN",
         "YE"
       ],
-      "connectivity_rank": 122
+      "connectivity_rank": 121
     },
     "KI": {
       "cable_count": 2,
@@ -12563,7 +12563,7 @@
         "YT",
         "ZA"
       ],
-      "connectivity_rank": 81
+      "connectivity_rank": 83
     },
     "KN": {
       "cable_count": 4,
@@ -12649,7 +12649,7 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 62
+      "connectivity_rank": 61
     },
     "KY": {
       "cable_count": 2,
@@ -12706,7 +12706,7 @@
         "VC",
         "VG"
       ],
-      "connectivity_rank": 152
+      "connectivity_rank": 153
     },
     "LK": {
       "cable_count": 9,
@@ -12763,7 +12763,7 @@
         "ST",
         "ZA"
       ],
-      "connectivity_rank": 165
+      "connectivity_rank": 163
     },
     "LT": {
       "cable_count": 3,
@@ -12854,7 +12854,7 @@
         "PT",
         "SA"
       ],
-      "connectivity_rank": 156
+      "connectivity_rank": 155
     },
     "MF": {
       "cable_count": 3,
@@ -12917,7 +12917,7 @@
         "TZ",
         "ZA"
       ],
-      "connectivity_rank": 84
+      "connectivity_rank": 78
     },
     "MH": {
       "cable_count": 2,
@@ -12955,7 +12955,7 @@
         "VN",
         "YE"
       ],
-      "connectivity_rank": 121
+      "connectivity_rank": 122
     },
     "MP": {
       "cable_count": 6,
@@ -13027,7 +13027,7 @@
         "ST",
         "ZA"
       ],
-      "connectivity_rank": 144
+      "connectivity_rank": 146
     },
     "MS": {
       "cable_count": 1,
@@ -13146,7 +13146,7 @@
         "US",
         "VE"
       ],
-      "connectivity_rank": 36
+      "connectivity_rank": 35
     },
     "MY": {
       "cable_count": 33,
@@ -13232,7 +13232,7 @@
         "TZ",
         "ZA"
       ],
-      "connectivity_rank": 98
+      "connectivity_rank": 96
     },
     "NA": {
       "cable_count": 2,
@@ -13252,7 +13252,7 @@
         "TG",
         "ZA"
       ],
-      "connectivity_rank": 155
+      "connectivity_rank": 156
     },
     "NC": {
       "cable_count": 4,
@@ -13336,7 +13336,7 @@
         "US",
         "VE"
       ],
-      "connectivity_rank": 169
+      "connectivity_rank": 168
     },
     "NL": {
       "cable_count": 11,
@@ -13485,7 +13485,7 @@
         "VE",
         "VG"
       ],
-      "connectivity_rank": 40
+      "connectivity_rank": 41
     },
     "PE": {
       "cable_count": 4,
@@ -13700,7 +13700,7 @@
         "US",
         "ZA"
       ],
-      "connectivity_rank": 19
+      "connectivity_rank": 21
     },
     "PW": {
       "cable_count": 2,
@@ -13765,7 +13765,7 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 44
+      "connectivity_rank": 45
     },
     "RE": {
       "cable_count": 4,
@@ -13873,7 +13873,7 @@
         "SG",
         "TL"
       ],
-      "connectivity_rank": 117
+      "connectivity_rank": 116
     },
     "SC": {
       "cable_count": 3,
@@ -13918,7 +13918,7 @@
         "TZ",
         "ZA"
       ],
-      "connectivity_rank": 118
+      "connectivity_rank": 117
     },
     "SD": {
       "cable_count": 5,
@@ -13962,7 +13962,7 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 83
+      "connectivity_rank": 77
     },
     "SE": {
       "cable_count": 28,
@@ -14039,7 +14039,7 @@
         "TG",
         "ZA"
       ],
-      "connectivity_rank": 173
+      "connectivity_rank": 174
     },
     "SL": {
       "cable_count": 1,
@@ -14063,7 +14063,7 @@
         "ST",
         "ZA"
       ],
-      "connectivity_rank": 163
+      "connectivity_rank": 166
     },
     "SN": {
       "cable_count": 5,
@@ -14114,7 +14114,7 @@
         "TZ",
         "ZA"
       ],
-      "connectivity_rank": 78
+      "connectivity_rank": 84
     },
     "SO": {
       "cable_count": 6,
@@ -14161,7 +14161,7 @@
         "YE",
         "ZA"
       ],
-      "connectivity_rank": 63
+      "connectivity_rank": 62
     },
     "SR": {
       "cable_count": 3,
@@ -14177,7 +14177,7 @@
         "PT",
         "TT"
       ],
-      "connectivity_rank": 133
+      "connectivity_rank": 132
     },
     "ST": {
       "cable_count": 2,
@@ -14201,7 +14201,7 @@
         "SN",
         "ZA"
       ],
-      "connectivity_rank": 145
+      "connectivity_rank": 147
     },
     "SX": {
       "cable_count": 3,
@@ -14224,7 +14224,7 @@
         "VC",
         "VG"
       ],
-      "connectivity_rank": 136
+      "connectivity_rank": 135
     },
     "SY": {
       "cable_count": 5,
@@ -14264,7 +14264,7 @@
         "US",
         "VE"
       ],
-      "connectivity_rank": 168
+      "connectivity_rank": 169
     },
     "TG": {
       "cable_count": 3,
@@ -14399,7 +14399,7 @@
         "NZ",
         "US"
       ],
-      "connectivity_rank": 142
+      "connectivity_rank": 141
     },
     "TR": {
       "cable_count": 6,
@@ -14522,7 +14522,7 @@
         "SO",
         "ZA"
       ],
-      "connectivity_rank": 82
+      "connectivity_rank": 81
     },
     "UA": {
       "cable_count": 3,
@@ -14658,7 +14658,7 @@
         "US",
         "VG"
       ],
-      "connectivity_rank": 127
+      "connectivity_rank": 128
     },
     "VE": {
       "cable_count": 6,

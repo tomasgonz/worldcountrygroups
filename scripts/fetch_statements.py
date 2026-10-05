@@ -13,6 +13,7 @@ import hashlib
 import json
 import os
 import re
+import time
 import sys
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
@@ -61,6 +62,17 @@ ALIASES = {
     "Cameroon": "CMR", "Chad": "TCD", "Mozambique": "MOZ",
     "Haiti": "HTI", "Cuba": "CUB",
 }
+
+# Common names the World Bank list writes differently (added to ALIASES)
+ALIASES.update({
+    "Kyrgyzstan": "KGZ", "Hong Kong": "HKG", "Laos": "LAO", "Lao PDR": "LAO", "Czechia": "CZE", "Czech Republic": "CZE",
+    "Slovakia": "SVK", "Slovak Republic": "SVK", "Gambia": "GMB", "Bahamas": "BHS", "Micronesia": "FSM",
+    "Saint Kitts and Nevis": "KNA", "St Kitts": "KNA", "Saint Vincent and the Grenadines": "VCT", "Saint Lucia": "LCA",
+    "Brunei": "BRN", "Cape Verde": "CPV", "Cabo Verde": "CPV", "Eswatini": "SWZ", "Swaziland": "SWZ",
+    "Timor-Leste": "TLS", "East Timor": "TLS", "North Macedonia": "MKD", "Moldova": "MDA", "Yemen": "YEM",
+    "Vietnam": "VNM", "Viet Nam": "VNM", "Trinidad and Tobago": "TTO", "Sao Tome": "STP", "São Tomé": "STP",
+    "Republic of Congo": "COG", "Congo-Brazzaville": "COG", "Micronesian": "FSM", "Palestine": "PSE",
+})
 
 SHORT_NAMES = {"US", "UK", "UAE", "DRC", "PRC", "DPRK", "U.S.", "U.K."}
 
@@ -145,6 +157,52 @@ TIER_TYPE_MAP = {
 }
 
 
+# ---- shared clean-up for search-based sources -------------------------------
+# Navigation and service pages that site-restricted news searches sometimes return
+NAV_JUNK = re.compile(
+    r"^(contact( us)?|service charter|helpline|photo album|portal kemlu|test_\d+|home|about( us)?|sitemap|"
+    r"consular services?|visa requirements?.*|embassy of .*|embajada (en|del?) .*|consulado .*|"
+    r"ministry of foreign affairs( of [a-z ]+)?|major tourist attractions)\b",
+    re.IGNORECASE)
+
+
+# Service and archive pages, recognisable anywhere in the title
+NAV_JUNK_ANY = re.compile(
+    r"\b(press releases? archive|archives?\b.*\d{4}$|notices?\b -|procedure and requirement|e-passport|passport services?|"
+    r"visa (application|requirements?|information)|consular (section|services?|information)|embassy'?s activities|"
+    r"recruitment|tenders?\b|vacanc(y|ies)|office hours|public holidays?|portal kemlu|목록)",
+    re.IGNORECASE)
+
+
+def clean_search_items(items, source):
+    """Tidy items from a source: strip Google News' ' - Site' title suffix and drop navigation pages."""
+    url = source.get("url", "")
+    exclude = re.compile(source["excludeTitle"], re.IGNORECASE) if source.get("excludeTitle") else None
+    out = []
+    for it in items:
+        t = it.get("title") or ""
+        if "news.google.com" in url and " - " in t:
+            head, tail = t.rsplit(" - ", 1)
+            if len(tail) <= 80 and len(head) >= 12:
+                t = head.strip()
+        it["title"] = t
+        if NAV_JUNK.match(t) or NAV_JUNK_ANY.search(t) or (exclude and exclude.search(t)) or len(t) < 12:
+            continue
+        if "news.google.com" in url and len(t.split()) < 4:
+            continue  # bare page names ("PTRI New York", "Wellington")
+        out.append(it)
+    return out
+
+
+def apply_source_meta(sources, tier_map, ownership=None):
+    """Sources may declare their own tier, type and ownership in the config."""
+    for s in sources:
+        if s.get("sourceType"):
+            tier_map[s["id"]] = {"tier": int(s.get("tier", 2)), "type": s["sourceType"]}
+        if ownership is not None and s.get("ownership"):
+            ownership[s["id"]] = s["ownership"]
+
+
 def load_country_flags():
     flags_file = os.path.join(DATA_DIR, "country-flags.json")
     if not os.path.exists(flags_file):
@@ -202,6 +260,13 @@ def enrich_statement(stmt, *, now_iso, country_flags_lookup, existing=None):
 
 def build_country_map():
     mapping = dict(ALIASES)
+    try:
+        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "worldcountrygroups", "data", "groups", "world.json")) as f:
+            for c in json.load(f).get("countries", []):
+                if c.get("name") and c.get("iso3"):
+                    mapping.setdefault(c["name"], c["iso3"])
+    except Exception:
+        pass
     if os.path.exists(STATS_FILE):
         try:
             with open(STATS_FILE, "r") as f:
@@ -1242,6 +1307,7 @@ def main():
         sources = [s for s in config["sources"] if s.get("enabled", True)]
         max_statements = config.get("maxStatements", MAX_STATEMENTS)
         print(f"  Config loaded: {len(sources)} enabled sources (of {len(config['sources'])} total)")
+        apply_source_meta(config["sources"], TIER_TYPE_MAP)
     else:
         print("  No config found — run the Nuxt server once to generate defaults")
         return
@@ -1249,6 +1315,8 @@ def main():
     all_statements = []
 
     for source in sources:
+        if "news.google.com" in source.get("url", ""):
+            time.sleep(1.0)  # be gentle with the news search service
         sid = source["id"]
         if "/pga/" in source.get("url", ""):
             # the PGA site moves to /pga/<session>/ every September
@@ -1276,6 +1344,7 @@ def main():
             else:
                 stmts = fetch_rss(url, sid, source_country, patterns)
 
+            stmts = clean_search_items(stmts, source)
             all_statements.extend(stmts)
             print(f"  {name}: {len(stmts)} statements")
             update_source_status(config, sid, statement_count=len(stmts))

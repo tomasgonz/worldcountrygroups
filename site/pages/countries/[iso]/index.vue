@@ -907,6 +907,28 @@
         </div>
       </div>
 
+      <!-- ==================== Partners: trade and aid ==================== -->
+      <div v-if="(country as any).iso3" id="cat-partners" class="mb-16 scroll-mt-24">
+        <div class="flex items-center gap-4 mb-8">
+          <h2 class="font-serif text-2xl font-bold text-primary-900 whitespace-nowrap">Trade and aid partners</h2>
+          <div class="flex-1 h-px bg-primary-200"></div>
+        </div>
+        <div id="sec-trade-partners" class="mb-10 scroll-mt-24">
+          <div class="flex items-baseline justify-between gap-2 mb-4">
+            <h3 class="font-serif text-lg font-bold text-primary-800">Trade with emerging economies</h3>
+            <NuxtLink :to="`/partners/trade?country=${(country as any).iso3}`" class="text-xs text-accent-600 hover:underline">Trade tracker &rarr;</NuxtLink>
+          </div>
+          <CountryTradePartners :iso3="(country as any).iso3" />
+        </div>
+        <div id="sec-aid-profile" class="mb-10 scroll-mt-24">
+          <div class="flex items-baseline justify-between gap-2 mb-4">
+            <h3 class="font-serif text-lg font-bold text-primary-800">Development aid</h3>
+            <NuxtLink :to="`/partners/donors?donor=${(country as any).iso3}`" class="text-xs text-accent-600 hover:underline">Donor tracker &rarr;</NuxtLink>
+          </div>
+          <CountryAidProfile :iso3="(country as any).iso3" :tip="false" />
+        </div>
+      </div>
+
       <!-- ==================== Category 6: Development & Connectivity ==================== -->
       <div v-if="hasEconomyInfra" id="cat-economy" class="mb-16 scroll-mt-24">
         <div class="flex items-center gap-4 mb-8">
@@ -1707,6 +1729,7 @@ const countrySections = [
   { id: 'cat-governance', label: 'Governance' },
   { id: 'cat-security', label: 'Security & Defense' },
   { id: 'cat-diplomacy', label: 'Diplomacy' },
+  { id: 'cat-partners', label: 'Trade & Aid Partners' },
   { id: 'cat-economy', label: 'Development & Connectivity' },
   { id: 'cat-media', label: 'Media & Events' },
   { id: 'cat-memberships', label: 'Memberships' },

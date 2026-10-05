@@ -816,6 +816,48 @@
 
     <!-- ═══ SOURCES ═══ -->
     <div v-show="tab === 'sources'">
+      <!-- Coverage -->
+      <div v-if="health?.coverage" id="coverage" class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8 scroll-mt-24">
+        <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1">
+          <h2 class="font-serif text-xl font-bold text-primary-900">Country coverage</h2>
+          <span class="text-xs text-primary-400">UN member states, last {{ health.coverage.days }} days</span>
+        </div>
+        <p class="text-xs text-primary-500 mb-4">How many statements and news items mention each country. Countries with nothing are searched for individually on every news run.</p>
+        <div class="grid grid-cols-3 gap-px bg-primary-100 rounded-xl overflow-hidden ring-1 ring-primary-100 mb-5 text-center">
+          <div class="bg-white py-3"><div class="font-serif text-2xl text-primary-900">{{ health.coverage.withStatements }}</div><div class="text-[11px] text-primary-500">with official statements</div></div>
+          <div class="bg-white py-3"><div class="font-serif text-2xl text-primary-900">{{ health.coverage.withNews }}</div><div class="text-[11px] text-primary-500">with news</div></div>
+          <div class="bg-white py-3"><div class="font-serif text-2xl" :class="health.coverage.none.length ? 'text-amber-700' : 'text-emerald-700'">{{ health.coverage.none.length }}</div><div class="text-[11px] text-primary-500">with nothing (of {{ health.coverage.countries }})</div></div>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div>
+            <h3 class="text-sm font-semibold text-primary-800 mb-2">Key countries</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-xs">
+                <thead><tr class="text-left text-primary-400 border-b border-primary-100"><th class="py-1.5 font-medium">Country</th><th class="py-1.5 font-medium text-right">Statements</th><th class="py-1.5 font-medium text-right">News</th></tr></thead>
+                <tbody>
+                  <tr v-for="r in [...health.coverage.key].sort((a: any, b: any) => (a.statements + a.news) - (b.statements + b.news))" :key="r.iso3" class="border-b border-primary-50">
+                    <td class="py-1.5 text-primary-800">{{ r.name }}</td>
+                    <td class="py-1.5 text-right tabular-nums" :class="r.statements ? 'text-primary-600' : 'text-amber-700'">{{ r.statements || 'none' }}</td>
+                    <td class="py-1.5 text-right tabular-nums" :class="r.news ? 'text-primary-600' : 'text-amber-700'">{{ r.news || 'none' }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <div>
+              <h3 class="text-sm font-semibold text-primary-800 mb-1">Nothing in {{ health.coverage.days }} days</h3>
+              <p v-if="health.coverage.none.length" class="text-xs text-primary-600 leading-relaxed">{{ health.coverage.none.map((r: any) => r.name).join(', ') }}</p>
+              <p v-else class="text-xs text-emerald-700">Every member state appears at least once.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-primary-800 mb-1">Thin (1–4 items)</h3>
+              <p class="text-xs text-primary-600 leading-relaxed">{{ health.coverage.thin.map((r: any) => `${r.name} (${r.statements + r.news})`).join(', ') || 'None' }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
     <!-- News Feed Status -->
     <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
       <h2 class="font-serif text-xl font-bold text-primary-900 mb-4">News Feed Status</h2>

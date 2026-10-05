@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Historical non-permanent membership of the UN Security Council (1946-2026). Terms are [start_year, end_year] pairs. Source: UN Security Council official records.",
-    "last_updated": "2026-10-02",
+    "last_updated": "2026-10-05",
     "current_terms_source": "https://www.un.org/securitycouncil/content/current-members"
   },
   "permanent": [

@@ -1,10 +1,10 @@
 {
   "_meta": {
-    "updated_at": "2026-10-02T21:12:33.932Z",
+    "updated_at": "2026-10-05T03:22:40.098Z",
     "sources": {
-      "worldbank": "2026-10-02T21:12:33.932Z",
-      "restcountries": "2026-10-02T21:12:33.932Z",
-      "undp": "2026-10-02T21:12:33.932Z"
+      "worldbank": "2026-10-05T03:22:40.098Z",
+      "restcountries": "2026-10-05T03:22:40.098Z",
+      "undp": "2026-10-05T03:22:40.098Z"
     },
     "country_count": 220
   },
@@ -3228,7 +3228,7 @@
     "capital": "Riga",
     "region": "Europe & Central Asia",
     "subregion": null,
-    "area_km2": 64590,
+    "area_km2": null,
     "income_group": "High income",
     "gdp": 44001275012.6141,
     "gdp_per_capita": 23578.9663562625,
@@ -3264,7 +3264,7 @@
     "life_expectancy": 71.121,
     "hdi": 0.718,
     "military_expenditure": 1573682777.31469,
-    "military_pct_gdp": 5.28705130951195,
+    "military_pct_gdp": null,
     "armed_forces_pct": 5.46606498194946,
     "data_year": {
       "gdp": 2024,
@@ -3369,7 +3369,7 @@
     "gdp_per_capita": 13270.1824401005,
     "population": 623525,
     "co2": null,
-    "life_expectancy": 77.890243902439,
+    "life_expectancy": null,
     "hdi": 0.844,
     "military_expenditure": 150033208.503973,
     "military_pct_gdp": 1.83253539270475,
@@ -3378,7 +3378,7 @@
       "gdp": 2024,
       "population": 2024,
       "co2": null,
-      "life_expectancy": 2024,
+      "life_expectancy": null,
       "hdi": 2022,
       "military_expenditure": 2024
     }
@@ -3420,7 +3420,7 @@
     "area_km2": 587295,
     "income_group": "Low income",
     "gdp": 17592832696.1336,
-    "gdp_per_capita": 550.37875528856,
+    "gdp_per_capita": null,
     "population": 31964956,
     "co2": 4.6827,
     "life_expectancy": 63.835,
@@ -3446,7 +3446,7 @@
     "subregion": null,
     "area_km2": 180,
     "income_group": "Upper middle income",
-    "gdp": 285000000,
+    "gdp": null,
     "gdp_per_capita": 7590.28443592202,
     "population": 37548,
     "co2": 0.0001,
@@ -3456,7 +3456,7 @@
     "military_pct_gdp": null,
     "armed_forces_pct": null,
     "data_year": {
-      "gdp": 2024,
+      "gdp": null,
       "population": 2024,
       "co2": 2024,
       "life_expectancy": 2024,

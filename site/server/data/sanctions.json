@@ -1,12 +1,12 @@
 {
  "_meta": {
-  "last_updated": "2026-10-02",
+  "last_updated": "2026-10-05",
   "regime_count": 15,
   "active_regime_count": 14,
   "source": "UN Security Council Consolidated List",
   "source_url": "https://main.un.org/securitycouncil/en/content/un-sc-consolidated-list",
-  "list_generated": "2026-10-01T23:00:06.597Z",
-  "list_etag": "\"0x8DF201003369D4E\"",
+  "list_generated": "2026-10-03T23:00:03.428Z",
+  "list_etag": "\"0x8DF21A2592D297D\"",
   "listed_individuals": 736,
   "listed_entities": 275,
   "latest_listing": "2026-07-22",

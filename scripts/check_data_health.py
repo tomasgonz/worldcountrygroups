@@ -118,6 +118,57 @@ def backup_status():
     return {"configured": configured, "lastSuccess": last, "ageHours": round(age_h, 1) if age_h is not None else None}
 
 
+KEY_COUNTRIES = ["ARG", "AUS", "BRA", "CAN", "CHN", "FRA", "DEU", "IND", "IDN", "ITA", "JPN", "KOR", "MEX", "RUS", "SAU",
+                 "ZAF", "TUR", "GBR", "USA", "EGY", "NGA", "ETH", "PAK", "BGD", "VNM", "PHL", "IRN", "COD", "KEN", "COL"]
+
+
+def as_list(v):
+    if isinstance(v, list):
+        return v
+    if isinstance(v, str) and v.startswith("["):
+        try:
+            return json.loads(v.replace("'", '"'))
+        except Exception:
+            return []
+    return []
+
+
+def coverage(days=30):
+    """How many statements and news items mention each country in the last `days` days."""
+    since = (datetime.now(timezone.utc).timestamp() - days * 86400)
+    def recent(item):
+        t = parse(item.get("publishedAt"))
+        return t is None or t.timestamp() >= since
+    st = [s for s in (load("statements-feed.json", {}) or {}).get("statements", []) if recent(s)]
+    nw = [a for a in (load("news-feed.json", {}) or {}).get("articles", []) if recent(a)]
+    sc, nc = {}, {}
+    for s in st:
+        for c in set(as_list(s.get("countries")) + ([s["country"]] if s.get("country") else [])):
+            sc[c] = sc.get(c, 0) + 1
+    for a in nw:
+        for c in set(as_list(a.get("countries"))):
+            nc[c] = nc.get(c, 0) + 1
+    try:
+        with open(os.path.join(ROOT, "worldcountrygroups", "data", "groups", "un.json")) as f:
+            members = [c["iso3"] for c in json.load(f).get("countries", []) if c.get("iso3")]
+    except Exception:
+        members = []
+    try:
+        with open(os.path.join(ROOT, "worldcountrygroups", "data", "groups", "world.json")) as f:
+            names = {c["iso3"]: c["name"] for c in json.load(f).get("countries", []) if c.get("iso3")}
+    except Exception:
+        names = {}
+    pool = members or list(names)
+    row = lambda c: {"iso3": c, "name": names.get(c, c), "statements": sc.get(c, 0), "news": nc.get(c, 0)}
+    return {
+        "days": days, "countries": len(pool),
+        "withStatements": sum(1 for c in pool if sc.get(c)), "withNews": sum(1 for c in pool if nc.get(c)),
+        "none": sorted([row(c) for c in pool if not sc.get(c) and not nc.get(c)], key=lambda r: r["name"]),
+        "thin": sorted([row(c) for c in pool if 0 < sc.get(c, 0) + nc.get(c, 0) < 5], key=lambda r: r["name"]),
+        "key": [row(c) for c in KEY_COUNTRIES],
+    }
+
+
 def compute():
     cfg = load("cron-config.json", {}) or {}
     status = load("job-status.json", {}) or {}
@@ -166,6 +217,10 @@ def compute():
     if gap["missingRecordedVotes"] >= 10:
         problems.append(f"UN voting data: {gap['missingRecordedVotes']} recorded General Assembly votes since "
                         f"{gap['latestVote']} are not in the per-country data")
+    cov = coverage()
+    quiet_key = [r["name"] for r in cov["key"] if r["statements"] + r["news"] == 0]
+    if quiet_key:
+        problems.append(f"Coverage: nothing in 30 days from or about {', '.join(quiet_key)}")
     backup = backup_status()
     if backup["configured"] and (backup["ageHours"] is None or backup["ageHours"] > 36):
         problems.append(f"Backup: no successful backup in the last 36 hours (last {backup['lastSuccess'] or 'never'})")
@@ -173,7 +228,7 @@ def compute():
     for j in jobs:
         counts[j["status"]] = counts.get(j["status"], 0) + 1
     return {"generatedAt": iso(now), "counts": counts, "problems": problems, "jobs": jobs,
-            "manual": manual, "votingGap": gap, "backup": backup}
+            "manual": manual, "votingGap": gap, "backup": backup, "coverage": cov}
 
 
 def send_email(to, subject, body):
