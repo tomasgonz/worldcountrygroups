@@ -1,11 +1,21 @@
 export default defineNuxtRouteMiddleware(async (to) => {
-  const publicPaths = ['/', '/about', '/sources', '/pulse', '/today', '/login', '/register', '/pending']
+  const publicPaths = ['/', '/about', '/sources', '/pulse', '/today', '/login', '/register', '/pending', '/shared']
   if (publicPaths.includes(to.path)) return
 
   const { state, fetchStatus } = useAuth()
 
   if (!state.value.loaded) {
     await fetchStatus()
+  }
+
+  // Visitors with a share link may open only the shared page (any filters or tabs on it;
+  // for an Ask answer, only that answer)
+  if (!state.value.authenticated && state.value.share) {
+    const target = new URL(state.value.share.path, 'http://x')
+    const samePage = to.path === target.pathname
+    const sameAnswer = target.pathname !== '/ask' || String(to.query.id || '') === (target.searchParams.get('id') || '')
+    if (samePage && sameAnswer) return
+    return navigateTo('/shared?reason=scope')
   }
 
   // Admin pages require admin role

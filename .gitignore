@@ -75,3 +75,4 @@ scripts/data/*.csv.gz
 site/server/data/archive.db*
 site/server/data/un-elections.json
 site/server/data/sg-selection.json
+site/server/data/share-links.json

@@ -1180,6 +1180,75 @@
 
         </div>
 
+    <!-- ═══ SHARING ═══ -->
+    <div v-show="tab === 'sharing'">
+      <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-6">
+        <h2 class="font-serif text-xl font-bold text-primary-900">Create a share link</h2>
+        <p class="text-xs text-primary-500 mt-1 mb-4">Anyone with the link can view that one page without an account: read-only, no other pages, no AI requests. You can also use “Share this page” in your user menu on any page, or “Share link” on an Ask answer.</p>
+        <form class="grid sm:grid-cols-2 gap-3" @submit.prevent="createShare">
+          <label class="text-xs text-primary-500 sm:col-span-2">Page (address or path)
+            <input v-model="shareForm.path" list="share-suggestions" class="mt-1 w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="/elections or https://worldcountrygroups.exe.xyz/countries/bra" required>
+            <datalist id="share-suggestions">
+              <option v-for="p in SHARE_SUGGESTIONS" :key="p.path" :value="p.path">{{ p.label }}</option>
+            </datalist>
+          </label>
+          <label class="text-xs text-primary-500">Label (shown to you and to the visitor)
+            <input v-model="shareForm.label" class="mt-1 w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="e.g. SG race for the ambassador">
+          </label>
+          <div class="grid grid-cols-2 gap-3">
+            <label class="text-xs text-primary-500">Expires after
+              <select v-model.number="shareForm.expiresDays" class="mt-1 w-full border border-primary-200 rounded-lg px-2 py-1.5 text-sm bg-white">
+                <option :value="1">1 day</option><option :value="7">7 days</option><option :value="30">30 days</option><option :value="90">90 days</option><option :value="0">Never</option>
+              </select>
+            </label>
+            <label class="text-xs text-primary-500">Max. opens (optional)
+              <input v-model.number="shareForm.maxViews" type="number" min="1" class="mt-1 w-full border border-primary-200 rounded-lg px-2 py-1.5 text-sm" placeholder="unlimited">
+            </label>
+          </div>
+          <div class="sm:col-span-2 flex flex-wrap items-center gap-3">
+            <button class="text-sm px-4 py-2 rounded-lg bg-primary-900 text-white hover:bg-primary-800">Create link</button>
+            <span v-if="shareMsg" class="text-xs" :class="shareMsg.ok ? 'text-emerald-700' : 'text-red-600'">{{ shareMsg.text }}</span>
+          </div>
+        </form>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8">
+        <div class="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+          <h2 class="font-serif text-xl font-bold text-primary-900">Shared links</h2>
+          <div class="flex rounded-full bg-primary-100 p-0.5 text-xs" role="tablist">
+            <button v-for="f in ['active', 'all']" :key="f" role="tab" :aria-selected="shareFilter === f" class="px-2.5 py-1 rounded-full"
+              :class="shareFilter === f ? 'bg-white shadow-sm text-primary-900' : 'text-primary-500'" @click="shareFilter = f">{{ f === 'active' ? 'Active' : 'All' }}</button>
+          </div>
+        </div>
+        <p v-if="!shownLinks.length" class="text-sm text-primary-400">No {{ shareFilter === 'active' ? 'active ' : '' }}links yet.</p>
+        <ul class="divide-y divide-primary-100">
+          <li v-for="l in shownLinks" :key="l.id" class="py-3 flex flex-wrap items-start gap-3">
+            <div class="min-w-0 flex-1">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-sm font-medium text-primary-900">{{ l.label }}</span>
+                <span class="text-[11px] px-2 py-0.5 rounded-full" :class="SHARE_STYLE[l.status]">{{ l.status }}</span>
+              </div>
+              <NuxtLink :to="l.path" class="text-xs text-accent-700 hover:underline break-all">{{ l.path }}</NuxtLink>
+              <div class="text-[11px] text-primary-400 mt-0.5">
+                {{ l.views }} {{ l.views === 1 ? 'open' : 'opens' }}<span v-if="l.maxViews"> of {{ l.maxViews }}</span>
+                · last opened {{ l.lastViewedAt ? formatTime(l.lastViewedAt) : 'never' }}
+                · created {{ formatTime(l.createdAt) }} by {{ l.createdBy }}
+                · {{ l.expiresAt ? (l.status === 'expired' ? 'expired ' : 'expires ') + formatTime(l.expiresAt) : 'no expiry' }}
+              </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-1.5">
+              <button class="text-xs px-2.5 py-1 rounded bg-primary-50 text-primary-700 hover:bg-primary-100" @click="copyShare(l)">{{ copiedShare === l.id ? 'Copied' : 'Copy link' }}</button>
+              <button v-if="l.status !== 'revoked'" class="text-xs px-2.5 py-1 rounded bg-primary-50 text-primary-700 hover:bg-primary-100" @click="shareAction(l, 'extend', 30)">+30 days</button>
+              <button v-if="l.status !== 'revoked'" class="text-xs px-2.5 py-1 rounded bg-amber-50 text-amber-700 hover:bg-amber-100" @click="shareAction(l, 'revoke')">Revoke</button>
+              <button v-else class="text-xs px-2.5 py-1 rounded bg-green-50 text-green-700 hover:bg-green-100" @click="shareAction(l, 'restore')">Restore</button>
+              <button class="text-xs px-2.5 py-1 rounded bg-red-50 text-red-700 hover:bg-red-100" @click="deleteShare(l)">{{ confirmDeleteShare === l.id ? 'Click again' : 'Delete' }}</button>
+            </div>
+          </li>
+        </ul>
+        <p class="text-[11px] text-primary-400 mt-4">Revoking stops a link at once, including for people who already opened it; deleting also removes it from this list. Visitors can't make AI requests or see anything outside the shared page.</p>
+      </div>
+    </div>
+
     <!-- ═══ BACKUP ═══ -->
     <div v-show="tab === 'backup'">
       <AdminBackupPanel class="mb-6" />
@@ -1826,7 +1895,7 @@ const route = useRoute()
 const router = useRouter()
 const ADMIN_TABS = [
   { id: 'overview', label: 'Overview' }, { id: 'ai', label: 'AI' }, { id: 'data', label: 'Data' },
-  { id: 'sources', label: 'Sources' }, { id: 'users', label: 'Users and access' }, { id: 'backup', label: 'Backup' },
+  { id: 'sources', label: 'Sources' }, { id: 'users', label: 'Users and access' }, { id: 'sharing', label: 'Sharing' }, { id: 'backup', label: 'Backup' },
 ] as const
 type TabId = typeof ADMIN_TABS[number]['id']
 const tab = ref<TabId>((ADMIN_TABS.some(t => t.id === route.query.tab) ? route.query.tab : 'overview') as TabId)
@@ -1998,6 +2067,49 @@ const usageTiles = computed(() => {
     { label: `per Ask question (${u.asks.count} asked)`, value: u.asks.avgCost !== null ? '$' + u.asks.avgCost.toFixed(3) : fmtTok(u.asks.avgTokens) + ' tok' },
   ]
 })
+
+// ---------- share links ----------
+const SHARE_SUGGESTIONS = [
+  { path: '/today', label: 'Today at the UN' }, { path: '/elections', label: 'Secretary-General race' }, { path: '/elections?tab=council', label: 'Security Council elections' },
+  { path: '/news', label: 'News analysis' }, { path: '/partners/trade', label: 'Trade partners' }, { path: '/partners/donors', label: 'Donor tracker' },
+  { path: '/un', label: 'UN Monitor' }, { path: '/speeches', label: 'General Debate speeches' }, { path: '/conflicts', label: 'Conflicts' },
+]
+const SHARE_STYLE: Record<string, string> = { active: 'bg-green-100 text-green-700', expired: 'bg-primary-100 text-primary-500', revoked: 'bg-amber-100 text-amber-800', 'used up': 'bg-primary-100 text-primary-500' }
+const shareLinks = ref<any[]>([])
+const shareFilter = ref('active')
+const shownLinks = computed(() => shareLinks.value.filter((l: any) => shareFilter.value === 'all' || l.status === 'active'))
+const shareForm = reactive({ path: '', label: '', expiresDays: 30, maxViews: null as number | null })
+const shareMsg = ref<{ ok: boolean; text: string } | null>(null)
+const copiedShare = ref('')
+const confirmDeleteShare = ref('')
+const shareUrlOf = (l: any) => `${location.origin}/s/${l.token}`
+async function loadShares() {
+  try { shareLinks.value = (await $fetch<any>('/api/admin/share-links')).links || [] } catch {}
+}
+async function createShare() {
+  shareMsg.value = null
+  try {
+    const r = await $fetch<any>('/api/admin/share-links', { method: 'POST', body: { ...shareForm } })
+    await loadShares()
+    const url = shareUrlOf(r.link)
+    try { await navigator.clipboard.writeText(url); shareMsg.value = { ok: true, text: `Link created and copied: ${url}` } } catch { shareMsg.value = { ok: true, text: `Link created: ${url}` } }
+    shareForm.path = ''; shareForm.label = ''; shareForm.maxViews = null
+  } catch (e: any) {
+    shareMsg.value = { ok: false, text: e?.data?.statusMessage || 'Could not create the link' }
+  }
+}
+async function copyShare(l: any) {
+  try { await navigator.clipboard.writeText(shareUrlOf(l)); copiedShare.value = l.id; setTimeout(() => { copiedShare.value = '' }, 2000) } catch { prompt('Copy this link', shareUrlOf(l)) }
+}
+async function shareAction(l: any, action: string, days?: number) {
+  await $fetch(`/api/admin/share-links/${l.id}`, { method: 'POST', body: { action, days } })
+  await loadShares()
+}
+async function deleteShare(l: any) {
+  if (confirmDeleteShare.value !== l.id) { confirmDeleteShare.value = l.id; setTimeout(() => { if (confirmDeleteShare.value === l.id) confirmDeleteShare.value = '' }, 3000); return }
+  confirmDeleteShare.value = ''
+  await shareAction(l, 'delete')
+}
 
 // ---------- data health ----------
 const health = ref<any>(null)
@@ -2222,6 +2334,7 @@ onMounted(async () => {
     loadHealth(),
     loadUsage(),
     loadBackupStatus(),
+    loadShares(),
     loadNewsSources(),
     loadNewsFeedStats(),
     loadStmtFeedStats(),

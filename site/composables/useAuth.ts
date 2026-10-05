@@ -8,6 +8,8 @@ interface AuthState {
   siteMode: 'public' | 'restricted'
   disabledPages: string[]
   loaded: boolean
+  /** set when a visitor without an account opened a share link */
+  share?: { path: string; label: string; sharedBy: string; expiresAt: string | null } | null
 }
 
 export function useAuth() {
@@ -40,6 +42,7 @@ export function useAuth() {
         siteMode: data.siteMode || 'restricted',
         disabledPages: data.disabledPages || [],
         loaded: true,
+        share: data.share || null,
       }
     } catch {
       state.value = {

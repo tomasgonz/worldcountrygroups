@@ -13,9 +13,9 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid lg:grid-cols-12 gap-8">
       <!-- ===================== Main ===================== -->
-      <main class="lg:col-span-8 min-w-0 space-y-6">
+      <main class="min-w-0 space-y-6" :class="guest ? 'lg:col-span-12 max-w-4xl' : 'lg:col-span-8'">
         <!-- Composer -->
-        <form class="bg-white rounded-2xl ring-1 ring-primary-200/70 p-5" @submit.prevent="ask()">
+        <form v-if="!guest" class="bg-white rounded-2xl ring-1 ring-primary-200/70 p-5" @submit.prevent="ask()">
           <textarea v-model="question" rows="3" maxlength="2000" :disabled="running"
             class="w-full resize-y rounded-xl ring-1 ring-primary-200 focus:ring-2 focus:ring-accent-400 focus:outline-none p-3 text-[15px]"
             placeholder="e.g. How has India's voting on Ukraine-related resolutions changed since 2022, and what did it say about Ukraine at the General Debate?"
@@ -47,12 +47,13 @@
             <span v-if="thread.length > 1" class="text-primary-500">{{ thread.length }} questions in this conversation</span>
             <span class="flex-1" />
             <button class="act" @click="downloadMd">Download conversation (.md)</button>
+            <button v-if="authState?.role === 'admin'" class="act" @click="shareLink">{{ shareMsg || 'Share link' }}</button>
             <template v-if="root?.mine">
               <button class="act" @click="toggleShare">{{ root.shared ? 'Stop sharing' : 'Share with team' }}</button>
               <button class="act text-red-600" @click="removeThread">{{ confirmDelete ? 'Click again to delete all' : 'Delete conversation' }}</button>
             </template>
           </div>
-          <AskTurn v-for="(t, i) in thread" :key="t.id" :turn="t" :index="i" :busy="running" :copied="copiedId === t.id"
+          <AskTurn v-for="(t, i) in thread" :key="t.id" :turn="t" :index="i" :busy="running" :copied="copiedId === t.id" :readonly="guest"
             @copy="copyTurn" @rerun="rerun" @review="review" @remove="removeTurn" />
         </template>
 
@@ -72,7 +73,7 @@
         <div v-if="errorMsg" class="rounded-2xl bg-red-50 ring-1 ring-red-200 p-4 text-sm text-red-700">{{ errorMsg }}</div>
 
         <!-- Follow-up -->
-        <form v-if="thread.length && !running" class="bg-white rounded-2xl ring-1 ring-accent-200 p-4" @submit.prevent="askFollowUp">
+        <form v-if="thread.length && !running && !guest" class="bg-white rounded-2xl ring-1 ring-accent-200 p-4" @submit.prevent="askFollowUp">
           <label for="followup" class="text-xs font-medium text-primary-600">Ask a follow-up</label>
           <textarea id="followup" v-model="followUp" rows="2" maxlength="2000"
             class="mt-1.5 w-full resize-y rounded-xl ring-1 ring-primary-200 focus:ring-2 focus:ring-accent-400 focus:outline-none p-3 text-[15px]"
@@ -90,7 +91,7 @@
       </main>
 
       <!-- ===================== History ===================== -->
-      <aside class="lg:col-span-4">
+      <aside v-if="!guest" class="lg:col-span-4">
         <div class="lg:sticky lg:top-24 bg-white rounded-2xl ring-1 ring-primary-200/70">
           <div class="px-5 pt-5 pb-3 border-b border-primary-100">
             <div class="flex items-center justify-between">
@@ -145,6 +146,7 @@ const EXAMPLES = [
   { label: 'G77 cohesion', q: 'How cohesive is the G77 in General Assembly votes, and which members break ranks most often?', mode: 'briefing', template: 'group' },
 ]
 const { state: authState } = useAuth()
+const guest = computed(() => !authState.value?.authenticated && !!authState.value?.share)
 const SCOPES = computed(() => [{ v: 'mine', label: 'Mine' }, { v: 'shared', label: 'Shared' }, ...(authState.value?.role === 'admin' ? [{ v: 'all', label: 'Everyone' }] : [])])
 
 const question = ref(String(route.query.q || ''))
@@ -162,7 +164,7 @@ const followMode = ref<'answer' | 'briefing'>('answer')
 // ---------- history ----------
 const scope = ref(['mine', 'shared', 'all'].includes(String(route.query.scope)) ? String(route.query.scope) : 'mine')
 const historyQuery = ref('')
-const { data: history, refresh: refreshHistory } = useFetch<any[]>('/api/ask', { query: computed(() => ({ scope: scope.value, q: historyQuery.value })), server: false })
+const { data: history, refresh: refreshHistory } = useFetch<any[]>('/api/ask', { query: computed(() => ({ scope: scope.value, q: historyQuery.value })), server: false, immediate: !guest.value })
 
 async function open(id: string, focusId?: string) {
   errorMsg.value = ''
@@ -243,6 +245,15 @@ async function rerun(turn: any) {
 }
 
 // ---------- actions ----------
+const shareMsg = ref('')
+async function shareLink() {
+  try {
+    const r = await $fetch<any>('/api/admin/share-links', { method: 'POST', body: { path: `/ask?id=${root.value.id}`, label: `Ask: ${root.value.question.slice(0, 90)}`, expiresDays: 30 } })
+    const url = `${location.origin}/s/${r.link.token}`
+    try { await navigator.clipboard.writeText(url); shareMsg.value = 'Link copied' } catch { shareMsg.value = url }
+    setTimeout(() => { if (shareMsg.value === 'Link copied') shareMsg.value = '' }, 3000)
+  } catch { shareMsg.value = 'Could not create link' }
+}
 const copiedId = ref('')
 function turnMarkdown(t: any, level = 1) {
   const src = (t.sources || []).map((s: any) => `${s.ref.slice(1)}. ${s.title} — ${s.url.startsWith('/') ? location.origin + s.url : s.url}`).join('\n')

@@ -1,5 +1,6 @@
 import { getSession } from '~/server/utils/auth'
 import { getSiteMode, getDisabledPages } from '~/server/utils/users'
+import { shareFromEvent } from '~/server/utils/share-links'
 
 export default defineEventHandler((event) => {
   const session = getSession(event)
@@ -7,10 +8,12 @@ export default defineEventHandler((event) => {
   const disabledPages = getDisabledPages()
 
   if (!session) {
+    const share = shareFromEvent(event)
     return {
       authenticated: false,
       siteMode,
       disabledPages,
+      share: share ? { path: share.path, label: share.label, sharedBy: share.createdBy, expiresAt: share.expiresAt } : null,
     }
   }
 

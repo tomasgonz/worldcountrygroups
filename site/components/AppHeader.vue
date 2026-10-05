@@ -2,7 +2,7 @@
   <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-primary-100">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-[72px]">
-        <NuxtLink to="/" class="flex items-center gap-3 group">
+        <NuxtLink :to="isGuest ? auth.state.value.share!.path : '/'" class="flex items-center gap-3 group">
           <div class="w-9 h-9 rounded-xl bg-primary-900 flex items-center justify-center group-hover:bg-primary-800 transition-colors">
             <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <circle cx="12" cy="12" r="10" />
@@ -13,7 +13,11 @@
           <span class="font-serif font-bold text-lg text-primary-900 whitespace-nowrap">World Country Groups</span>
         </NuxtLink>
         <div class="flex items-center gap-5">
-          <div class="hidden xl:flex items-center gap-5 text-sm whitespace-nowrap">
+          <div v-if="isGuest" class="hidden sm:flex items-center gap-2 text-xs text-primary-500 min-w-0">
+            <span class="px-2 py-0.5 rounded-full bg-sky-50 text-sky-800 ring-1 ring-sky-200 whitespace-nowrap">Shared view</span>
+            <span class="truncate max-w-[22rem]">{{ auth.state.value.share!.label }} · shared by {{ auth.state.value.share!.sharedBy }}</span>
+          </div>
+          <div v-if="!isGuest" class="hidden xl:flex items-center gap-5 text-sm whitespace-nowrap">
             <template v-for="item in navItems" :key="item.label">
               <!-- Direct link -->
               <NuxtLink
@@ -76,6 +80,13 @@
                   <NuxtLink v-if="auth.state.value.role === 'admin'" to="/admin" @click="userDropdownOpen = false" class="block px-4 py-2 text-sm text-primary-700 hover:bg-primary-50 transition-colors">
                     Admin
                   </NuxtLink>
+                  <button v-if="auth.state.value.role === 'admin'" class="block w-full text-left px-4 py-2 text-sm text-primary-700 hover:bg-primary-50 transition-colors" @click="shareThisPage">
+                    {{ shareState === 'working' ? 'Creating link…' : 'Share this page' }}
+                  </button>
+                  <div v-if="shareUrl" class="px-4 py-2 text-[11px] text-primary-600 bg-primary-50 break-all">
+                    {{ shareState === 'copied' ? 'Link copied' : 'Link' }}: {{ shareUrl }}
+                    <NuxtLink to="/admin?tab=sharing" class="block mt-1 text-accent-700 hover:underline" @click="userDropdownOpen = false">Manage shared links</NuxtLink>
+                  </div>
                   <div class="border-t border-primary-100 my-1"></div>
                   <button @click="handleLogout" class="block w-full text-left px-4 py-2 text-sm text-primary-400 hover:text-primary-900 hover:bg-primary-50 transition-colors">
                     Logout
@@ -100,7 +111,7 @@
           </div>
           <!-- Phone / tablet menu button -->
           <button
-            class="xl:hidden -mr-2 p-2 rounded-lg text-primary-700 hover:bg-primary-100"
+            v-if="!isGuest" class="xl:hidden -mr-2 p-2 rounded-lg text-primary-700 hover:bg-primary-100"
             :aria-expanded="mobileOpen" aria-controls="mobile-menu" aria-label="Menu"
             @click.stop="mobileOpen = !mobileOpen"
           >
@@ -143,6 +154,24 @@
 
 <script setup lang="ts">
 const auth = useAuth()
+const isGuest = computed(() => !auth.state.value.authenticated && !!auth.state.value.share)
+
+// Admins: create a share link for the page being viewed
+const shareUrl = ref('')
+const shareState = ref<'' | 'working' | 'copied' | 'made'>('')
+async function shareThisPage() {
+  shareState.value = 'working'
+  try {
+    const label = (document.title || route.path).replace(/ — World Country Groups$/, '')
+    const r = await $fetch<any>('/api/admin/share-links', { method: 'POST', body: { path: route.fullPath, label, expiresDays: 30 } })
+    shareUrl.value = `${location.origin}/s/${r.link.token}`
+    try { await navigator.clipboard.writeText(shareUrl.value); shareState.value = 'copied' } catch { shareState.value = 'made' }
+  } catch (e: any) {
+    shareUrl.value = ''
+    shareState.value = ''
+    alert(e?.data?.statusMessage || 'Could not create a link for this page')
+  }
+}
 const route = useRoute()
 const userDropdownOpen = ref(false)
 const userDropdownRef = ref<HTMLElement | null>(null)

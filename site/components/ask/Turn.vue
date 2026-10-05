@@ -40,10 +40,10 @@
 
     <footer class="px-6 py-3 border-t border-primary-100 flex flex-wrap items-center gap-2">
       <button class="act" @click="$emit('copy', turn)">{{ copied ? 'Copied' : 'Copy' }}</button>
-      <button class="act" :disabled="busy" @click="$emit('rerun', turn)">Re-run with current data</button>
+      <button v-if="!readonly" class="act" :disabled="busy" @click="$emit('rerun', turn)">Re-run with current data</button>
       <button v-if="index > 0 && turn.mine" class="act text-red-600" @click="del">{{ confirmDelete ? 'Click again to delete' : 'Delete' }}</button>
       <span class="flex-1" />
-      <div class="flex flex-wrap items-center gap-1.5">
+      <div v-if="!readonly" class="flex flex-wrap items-center gap-1.5">
         <input v-model="note" class="text-xs rounded-lg ring-1 ring-primary-200 px-2 py-1.5 w-44" placeholder="Review note (optional)" aria-label="Review note">
         <button class="act !text-emerald-700" @click="$emit('review', turn, 'verified', note); note = ''">Verified</button>
         <button class="act !text-red-700" @click="$emit('review', turn, 'incorrect', note); note = ''">Incorrect</button>
@@ -56,7 +56,7 @@
 <script setup lang="ts">
 import { marked } from 'marked'
 
-const props = defineProps<{ turn: any; index: number; busy?: boolean; copied?: boolean }>()
+const props = defineProps<{ turn: any; index: number; busy?: boolean; copied?: boolean; readonly?: boolean }>()
 const emit = defineEmits<{ copy: [any]; rerun: [any]; review: [any, string, string]; remove: [any] }>()
 const { highlight } = useBriefHighlight()
 
