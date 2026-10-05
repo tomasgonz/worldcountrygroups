@@ -57,7 +57,7 @@ const DEFAULT_JOBS: Def[] = [
   d('fetch-sanctions', 'UN Sanctions (Consolidated List)', 'scripts/fetch_sanctions.py', '30 5 * * *', true, ['sanctions.json'], 36, 10),
   d('fetch-conflicts', 'Conflict Events (UCDP)', 'scripts/fetch_conflicts.py', '15 4 * * 1', true, ['conflict-events.json'], 24 * 8, 30),
   d('build-search-index', 'Full-text search index (speeches, statements, news)', 'scripts/build_search_index.py --embed', '50 */4 * * *', true, ['search.db'], 9, 60),
-  d('fetch-elections', 'Elections calendar (Wikipedia)', 'scripts/fetch_elections.py', '10 4 * * *', true, ['elections.json'], 30, 5),
+  d('fetch-elections', 'Elections calendar (Wikipedia)', 'scripts/fetch_elections.py', '10 */6 * * *', true, ['elections.json'], 8, 5),
   { ...d('fetch-un-journal', 'UN Journal (meetings programme)', 'scripts/fetch_un_journal.py', '25 */3 * * *', true, ['un-journal.json'], 7, 10), allowShrink: true },
   d('fetch-trade-partners', 'Trade partners (IMF IMTS)', 'scripts/fetch_trade_partners.py', '30 5 * * 1', true, ['trade-partners.json'], 24 * 8, 15),
   d('fetch-donor-tracker', 'Aid donors (OECD DAC tracker)', 'scripts/fetch_donor_tracker.py', '30 4 * * 0', true, ['donor-tracker.json'], 24 * 8, 20),
