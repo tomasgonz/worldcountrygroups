@@ -5,6 +5,7 @@ import { getCountryVDem, classifyRegimeLabel } from './vdem'
 import { getCountrySanctions, getCountrySanctionsListings, getSanctionsMeta } from './sanctions'
 import { getCountryConflict, getConflictMeta, getAllConflicts } from './conflict'
 import { getElections, getJournalDays } from './upcoming'
+import { archiveSearch, archiveStats } from './news-analysis'
 import { TRADE_TOOLS, runTradeTool } from './ask-tools-trade'
 import { DONOR_TOOLS, runDonorTool } from './ask-tools-donors'
 import { getMilitaryCapabilities } from './military'
@@ -115,7 +116,7 @@ export const ASK_TOOLS: ToolDef[] = [
   { name: 'general_debate_overview', description: 'Session-level picture of a General Debate: most common themes and their change from the previous year, most-mentioned countries, crises discussed.', parameters: { type: 'object', properties: { session: { type: 'integer' } } } },
   { name: 'search_quotes', description: 'Verified quotes from General Debate speeches by words, country, speaker or years.', parameters: { type: 'object', properties: { query: { type: 'string' }, country: { type: 'string' }, speaker: { type: 'string' }, from_year: { type: 'integer' }, to_year: { type: 'integer' } } } },
   { name: 'person_profile', description: 'A leader, minister or UN official: current roles, General Debate speeches, statements delivered and recent mentions.', parameters: { type: 'object', properties: { name: { type: 'string' } }, required: ['name'] } },
-  { name: 'recent_news_and_statements', description: 'Recent news and official statements (last weeks), optionally about a country and/or containing words.', parameters: { type: 'object', properties: { query: { type: 'string' }, country: { type: 'string' }, days: { type: 'integer', description: 'Default 14' }, limit: { type: 'integer', description: 'Default 12' } } } },
+  { name: 'recent_news_and_statements', description: 'News and official statements, optionally about a country and/or containing words. Covers the last weeks by default; give from/to dates (YYYY-MM-DD) to search the full archive of everything collected since October 2026.', parameters: { type: 'object', properties: { query: { type: 'string' }, country: { type: 'string' }, days: { type: 'integer', description: 'Default 14' }, from: { type: 'string', description: 'Start date YYYY-MM-DD (searches the archive)' }, to: { type: 'string', description: 'End date YYYY-MM-DD' }, kind: { type: 'string', enum: ['news', 'statement', 'any'] }, limit: { type: 'integer', description: 'Default 12' } } } },
   ...TRADE_TOOLS,
   ...DONOR_TOOLS,
 ]
@@ -375,6 +376,17 @@ export async function runTool(name: string, args: any, src: SourceCollector): Pr
       }
     }
     case 'recent_news_and_statements': {
+      if (args.from || args.to) {
+        const iso = args.country ? resolveIso3(args.country) : null
+        if (args.country && !iso) return { error: `Unknown country "${args.country}"` }
+        const ws = String(args.query || '').split(/\s+/).filter((w: string) => w.length > 2)
+        const rows = archiveSearch({ iso3: iso, words: ws, from: args.from, to: args.to, kind: ['news', 'statement'].includes(args.kind) ? args.kind : undefined, limit: Math.min(25, args.limit || 12) })
+        const st = archiveStats()
+        return {
+          archive: st ? `Archive of ${st.items} items collected since ${st.firstDay}` : 'archive unavailable',
+          items: rows.map(x => ({ title: x.title, summary: (x.summary || '').slice(0, 240), outlet: x.outlet, ownership: x.ownership || undefined, kind: x.kind, date: (x.publishedAt || '').slice(0, 10), ref: src.add(x.title, x.url, x.kind) })),
+        }
+      }
       src.used('news-feed.json', 'statements-feed.json')
       const iso3 = args.country ? resolveIso3(args.country) : null
       const days = Math.min(60, Math.max(1, args.days || 14))

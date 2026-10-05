@@ -448,13 +448,15 @@ export async function refreshUNVotingData(): Promise<{
     const { readdirSync, createReadStream } = await import('fs')
     const localDir = join(process.env.HOME || '/home/exedev', 'worldcountrygroups', 'scripts', 'data')
     const localCsv = existsSync(localDir)
-      ? readdirSync(localDir).filter(f => /ga_voting.*\.csv$/i.test(f)).sort().pop()
+      ? readdirSync(localDir).filter(f => /ga_voting.*\.csv(\.gz)?$/i.test(f)).sort().pop()
       : undefined
     let sourceFile = UN_CSV_URL.split('/').pop()!
     let input: NodeJS.ReadableStream
     if (localCsv) {
       sourceFile = localCsv
-      input = createReadStream(join(localDir, localCsv))
+      const raw = createReadStream(join(localDir, localCsv))
+      // a compressed copy (.csv.gz) is read through gunzip
+      input = /\.gz$/i.test(localCsv) ? raw.pipe((await import('zlib')).createGunzip()) : raw
     } else {
       const resp = await fetch(UN_CSV_URL, { signal: AbortSignal.timeout(20 * 60_000) })
       if (!resp.ok || !resp.body) {

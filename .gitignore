@@ -71,3 +71,5 @@ site/server/data/donor-news.json
 site/server/data/trade-products/
 site/server/data/*.lock
 site/server/data/news-history.json
+scripts/data/*.csv.gz
+site/server/data/archive.db*

@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, writeFileSync, renameSync } from 'fs'
+import { existsSync, statSync } from 'fs'
 import { join } from 'path'
 import { readDataFile, dataFileMtime } from './data-file'
 import { getRegistry } from './wcg'
@@ -58,11 +58,23 @@ export const TOPICS: { id: string; label: string; re: RegExp }[] = [
   { id: 'sanctions', label: 'Sanctions', re: /\b(sanctions?|embargo|asset freeze|blacklist\w*)\b/i },
   { id: 'multilateral', label: 'UN & multilateral', re: /\b(united nations|security council|general assembly|unga|\bun\b|g20|g7|brics|nato|african union|asean|european union|\beu\b|wto|unhcr|unicef|osce)\b/i },
 ]
-const TOPIC_LABEL = Object.fromEntries(TOPICS.map(t => [t.id, t.label]))
-export const topicLabel = (id: string) => TOPIC_LABEL[id] || id
+/** Topic rules from news-topics.json (shared with the archive script), falling back to the list above. */
+function topicRules(): { id: string; label: string; re: RegExp }[] {
+  const f = readDataFile<any>('news-topics.json')
+  if (!f?.topics?.length) return TOPICS
+  if (_rules && _rulesSrc === f) return _rules
+  try {
+    _rules = f.topics.map((t: any) => ({ id: t.id, label: t.label, re: new RegExp(t.pattern, 'i') }))
+    _rulesSrc = f
+  } catch { _rules = TOPICS }
+  return _rules!
+}
+let _rules: { id: string; label: string; re: RegExp }[] | null = null
+let _rulesSrc: any = null
+export const topicLabel = (id: string) => topicRules().find(t => t.id === id)?.label || id
 
 function classify(text: string): string[] {
-  return TOPICS.filter(t => t.re.test(text)).map(t => t.id).slice(0, 4)
+  return topicRules().filter(t => t.re.test(text)).map(t => t.id).slice(0, 4)
 }
 
 // Outlets whose ownership matters to readers (by publication name as Google News reports it)
@@ -122,48 +134,51 @@ export function loadItems(): NewsItem[] {
   for (const s of readDataFile<any>('statements-feed.json')?.statements || []) if (s.source !== 'un-webtv-schedule') add(s, 'statement')
   out.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
   cache = { key, items: out }
-  try { updateHistory(out) } catch {}
   analysisCache.clear()
   return out
 }
 
-// ---------- daily history ----------
-// The feed only keeps the most recent items, so daily counts are kept separately and
-// merged by taking the larger value per day: counts grow as items arrive and are not
-// lost when old items leave the feed.
+// ---------- archive (every item ever collected; written by scripts/archive_feeds.py) ----------
 const DATA_DIR = process.env.WCG_SITE_DATA || join(process.env.HOME || '/home/exedev', 'worldcountrygroups/site/server/data')
-const HISTORY = join(DATA_DIR, 'news-history.json')
-interface DayCounts { total: number; countries: Record<string, number>; topics: Record<string, number> }
-interface History { startedAt: string; days: Record<string, DayCounts> }
-
-function readHistory(): History {
-  try { if (existsSync(HISTORY)) return JSON.parse(readFileSync(HISTORY, 'utf-8')) } catch {}
-  return { startedAt: new Date().toISOString().slice(0, 10), days: {} }
+const ARCHIVE = join(DATA_DIR, 'archive.db')
+let adb: any = null
+let adbIno = 0
+function archiveDb(): any | null {
+  if (!existsSync(ARCHIVE)) return null
+  const ino = statSync(ARCHIVE).ino
+  if (adb && ino === adbIno) return adb
+  try { adb?.close() } catch {}
+  const { DatabaseSync } = (process as any).getBuiltinModule('node:sqlite')
+  adb = new DatabaseSync(ARCHIVE, { readOnly: true })
+  adbIno = ino
+  return adb
 }
 
-function updateHistory(items: NewsItem[]) {
-  const h = readHistory()
-  const fresh: Record<string, DayCounts> = {}
-  for (const i of items) {
-    if (i.kind !== 'news') continue
-    const d = i.publishedAt.slice(0, 10)
-    const e = (fresh[d] ||= { total: 0, countries: {}, topics: {} })
-    e.total++
-    for (const c of i.countries) e.countries[c] = (e.countries[c] || 0) + 1
-    for (const t of i.topics) e.topics[t] = (e.topics[t] || 0) + 1
+/** Daily counts per country or topic from the archive (news only unless kind is given). */
+function archiveDaily(field: 'countries' | 'topics', dayKeys: string[], kind = 'news'): Map<string, number[]> | null {
+  const db = archiveDb()
+  if (!db) return null
+  const table = field === 'countries' ? 'item_countries' : 'item_topics'
+  const col = field === 'countries' ? 'iso3' : 'topic'
+  const idx = new Map(dayKeys.map((d, i) => [d, i]))
+  const rows = db.prepare(`SELECT day, ${col} AS k, COUNT(*) AS n FROM ${table} WHERE kind = ? AND day >= ? AND day <= ? GROUP BY day, ${col}`)
+    .all(kind, dayKeys[0], dayKeys[dayKeys.length - 1]) as any[]
+  const out = new Map<string, number[]>()
+  for (const r of rows) {
+    const i = idx.get(r.day)
+    if (i === undefined) continue
+    if (!out.has(r.k)) out.set(r.k, new Array(dayKeys.length).fill(0))
+    out.get(r.k)![i] = r.n
   }
-  for (const [d, e] of Object.entries(fresh)) {
-    const o = (h.days[d] ||= { total: 0, countries: {}, topics: {} })
-    o.total = Math.max(o.total, e.total)
-    for (const [k, v] of Object.entries(e.countries)) o.countries[k] = Math.max(o.countries[k] || 0, v)
-    for (const [k, v] of Object.entries(e.topics)) o.topics[k] = Math.max(o.topics[k] || 0, v)
-  }
-  const earliest = Object.keys(h.days).sort()[0]
-  if (earliest && earliest < h.startedAt) h.startedAt = earliest
-  const cutoff = new Date(Date.now() - 400 * 86400_000).toISOString().slice(0, 10)
-  for (const d of Object.keys(h.days)) if (d < cutoff) delete h.days[d]
-  writeFileSync(HISTORY + '.tmp', JSON.stringify(h))
-  renameSync(HISTORY + '.tmp', HISTORY)
+  return out
+}
+
+export function archiveStats(): { items: number; news: number; statements: number; firstDay: string | null; daysWithNews: number } | null {
+  const db = archiveDb()
+  if (!db) return null
+  const r = db.prepare("SELECT COUNT(*) AS items, SUM(kind = 'news') AS news FROM items").get() as any
+  const d = db.prepare("SELECT COUNT(*) AS n, MIN(day) AS first FROM (SELECT day FROM items WHERE kind = 'news' GROUP BY day HAVING COUNT(*) >= 20)").get() as any
+  return { items: r.items, news: r.news || 0, statements: r.items - (r.news || 0), firstDay: d.first, daysWithNews: d.n }
 }
 
 // ---------- story clustering ----------
@@ -303,7 +318,7 @@ export function newsAnalysis(f: AnalysisFilters) {
   const reg = getRegistry()
   const name = (iso3: string) => reg.getCountryMembership(iso3)?.name || iso3
   const iso2 = (iso3: string) => (reg.getCountryMembership(iso3) as any)?.iso2 || ''
-  const days = Math.min(30, Math.max(7, f.days || 14))
+  const days = Math.min(365, Math.max(7, f.days || 14))
   const scoped = filtered(items, f, regions)
   const news = scoped.filter(i => i.kind === 'news')
 
@@ -311,20 +326,11 @@ export function newsAnalysis(f: AnalysisFilters) {
 
   // countries: from the daily history when nothing is filtered, else from the items in the feed
   const unfiltered = !f.country && !f.topic && !f.region && !f.q && (!f.kind || f.kind === 'all')
-  const hist = readHistory()
-  const fromHistory = (field: 'countries' | 'topics') => {
-    const dayKeys: string[] = []
-    for (let i = days - 1; i >= 0; i--) dayKeys.push(new Date(Date.now() - i * 86400_000).toISOString().slice(0, 10))
-    const series = new Map<string, number[]>()
-    dayKeys.forEach((d, di) => {
-      for (const [k, v] of Object.entries(hist.days[d]?.[field] || {})) {
-        if (!series.has(k)) series.set(k, new Array(days).fill(0))
-        series.get(k)![di] = v
-      }
-    })
-    return { dayKeys, series }
-  }
-  const historyDays = Object.keys(hist.days).filter(d => (hist.days[d]?.total || 0) >= 20).length
+  const dayList: string[] = []
+  for (let i = days - 1; i >= 0; i--) dayList.push(new Date(Date.now() - i * 86400_000).toISOString().slice(0, 10))
+  const fromHistory = (field: 'countries' | 'topics') => ({ dayKeys: dayList, series: archiveDaily(field, dayList) || dailySeries(news, days, i => (field === 'countries' ? i.countries : i.topics)).series })
+  const arch = archiveStats()
+  const historyDays = arch?.daysWithNews || 0
   const { dayKeys, series: cSeries } = unfiltered ? fromHistory('countries') : dailySeries(news, days, i => i.countries)
   const countries = [...cSeries.entries()].map(([c, s]) => ({ iso3: c, iso2: iso2(c), name: name(c), series: s, ...momentum(s) }))
   // a trend needs a baseline: at least a week of days with real volume
@@ -374,7 +380,8 @@ export function newsAnalysis(f: AnalysisFilters) {
     days: dayKeys,
     stories,
     rising, last48, mostCovered, topics,
-    trends: { ready: trendsReady, historyDays, historyStart: hist.startedAt },
+    trends: { ready: trendsReady, historyDays, historyStart: arch?.firstDay || null },
+    archive: arch,
     regions: regionList,
     regionNames: [...new Set(Object.values(regions))].sort(),
     mix: [...mix.entries()].map(([k, v]) => ({ kind: k, count: v })).sort((a, b) => b.count - a.count),
@@ -387,10 +394,50 @@ export function newsAnalysis(f: AnalysisFilters) {
 /** The plain stream, newest first, with the same filters. */
 export function newsStream(f: AnalysisFilters, offset = 0, limit = 40) {
   const regions = regionMap()
-  const list = filtered(loadItems(), f, regions)
+  const live = filtered(loadItems(), f, regions)
+  let page = live.slice(offset, offset + limit)
+  let total = live.length
+  // past the live feed, continue with older items from the archive
+  const db = archiveDb()
+  if (db) {
+    const oldestLive = loadItems().reduce((m, i) => (i.publishedAt < m ? i.publishedAt : m), '9999')
+    const where: string[] = ['i.published_at < ?']
+    const params: any[] = [oldestLive]
+    let from = 'items i'
+    if (f.country) { from += ' JOIN item_countries c ON c.item_id = i.id'; where.push('c.iso3 = ?'); params.push(f.country) }
+    if (f.topic) { from += ' JOIN item_topics t ON t.item_id = i.id'; where.push('t.topic = ?'); params.push(f.topic) }
+    if (f.kind && f.kind !== 'all') { where.push('i.kind = ?'); params.push(f.kind) }
+    if (f.q) { where.push("(i.title || ' ' || i.summary || ' ' || i.outlet) LIKE ?"); params.push(`%${f.q}%`) }
+    const older = (db.prepare(`SELECT COUNT(*) AS n FROM ${from} WHERE ${where.join(' AND ')}`).get(...params) as any).n as number
+    total += older
+    if (page.length < limit && older) {
+      const skip = Math.max(0, offset - live.length)
+      const rows = db.prepare(`SELECT i.* FROM ${from} WHERE ${where.join(' AND ')} ORDER BY i.published_at DESC LIMIT ? OFFSET ?`)
+        .all(...params, limit - page.length, skip) as any[]
+      const extra: NewsItem[] = rows.map(r => ({
+        id: r.id, title: r.title, summary: r.summary || '', url: r.url, kind: r.kind, source: r.source, outlet: r.outlet,
+        ownership: r.ownership, sourceType: r.source_type, publishedAt: r.published_at,
+        countries: JSON.parse(r.countries || '[]'), topics: JSON.parse(r.topics || '[]'),
+      })).filter(i => !f.region || i.countries.some(c => regions[c] === f.region))
+      page = [...page, ...extra]
+    }
+  }
   const reg = getRegistry()
-  const page = list.slice(offset, offset + limit)
   const isos = new Set(page.flatMap(i => i.countries))
   const countryMeta = Object.fromEntries([...isos].map(c => [c, { name: reg.getCountryMembership(c)?.name || c, iso2: (reg.getCountryMembership(c) as any)?.iso2 || '' }]))
-  return { total: list.length, items: page, countryMeta }
+  return { total, items: page, countryMeta }
+}
+
+/** Search the archive by country, words and date range (for the Ask desk). */
+export function archiveSearch(o: { iso3?: string | null; words?: string[]; from?: string; to?: string; kind?: 'news' | 'statement'; limit?: number }) {
+  const db = archiveDb()
+  if (!db) return []
+  const where: string[] = ['i.day >= ?', 'i.day <= ?']
+  const params: any[] = [o.from || '0000', o.to || '9999']
+  let from = 'items i'
+  if (o.iso3) { from = 'item_countries c JOIN items i ON i.id = c.item_id'; where.push('c.iso3 = ?'); params.push(o.iso3) }
+  if (o.kind) { where.push('i.kind = ?'); params.push(o.kind) }
+  for (const w of (o.words || []).slice(0, 6)) { where.push("(i.title || ' ' || i.summary) LIKE ?"); params.push(`%${w}%`) }
+  return db.prepare(`SELECT i.id, i.kind, i.outlet, i.ownership, i.title, i.summary, i.url, i.published_at AS publishedAt, i.countries
+                     FROM ${from} WHERE ${where.join(' AND ')} ORDER BY i.published_at DESC LIMIT ?`).all(...params, Math.min(40, o.limit || 15)) as any[]
 }

@@ -11,6 +11,7 @@
         <p v-if="a" class="text-xs text-primary-400 mt-3">
           {{ a.totals.news.toLocaleString() }} articles and {{ a.totals.statements.toLocaleString() }} official statements from {{ a.totals.outlets }} outlets and offices,
           mentioning {{ a.totals.countries }} countries · updated {{ ago(a.generatedAt) }}
+          <template v-if="a.archive"> · archive of {{ a.archive.items.toLocaleString() }} items since {{ fmtDay(a.archive.firstDay) }}</template>
         </p>
       </div>
     </section>
@@ -128,6 +129,13 @@
 
       <!-- ===================== Side analysis ===================== -->
       <aside class="lg:col-span-4 space-y-6">
+        <div class="flex items-center justify-between gap-2">
+          <span class="text-xs text-primary-500">Trends over</span>
+          <div class="flex rounded-full bg-primary-100 p-0.5 text-xs" role="tablist" aria-label="Trend period">
+            <button v-for="d in [14, 30, 90]" :key="d" role="tab" :aria-selected="days === d" class="px-2.5 py-1 rounded-full"
+              :class="days === d ? 'bg-white shadow-sm text-primary-900' : 'text-primary-500'" @click="days = d">{{ d }} days</button>
+          </div>
+        </div>
         <!-- Countries -->
         <section class="card">
           <template v-if="a?.trends?.ready && a.rising.length">
@@ -231,6 +239,7 @@ const topic = ref(String(q0.topic || ''))
 const region = ref(String(q0.region || ''))
 const country = ref(String(q0.country || '').toUpperCase())
 const kind = ref<'all' | 'news' | 'statement'>((['news', 'statement'].includes(String(q0.kind)) ? q0.kind : 'all') as any)
+const days = ref([14, 30, 90].includes(Number(q0.days)) ? Number(q0.days) : 14)
 const debounced = ref(search.value)
 let t: any = null
 watch(search, v => { clearTimeout(t); t = setTimeout(() => { debounced.value = v }, 300) })
@@ -238,9 +247,10 @@ const params = computed(() => ({
   ...(debounced.value ? { q: debounced.value } : {}), ...(topic.value ? { topic: topic.value } : {}),
   ...(region.value ? { region: region.value } : {}), ...(country.value ? { country: country.value } : {}),
   ...(kind.value !== 'all' ? { kind: kind.value } : {}),
+  ...(days.value !== 14 ? { days: days.value } : {}),
 }))
 const anyFilter = computed(() => Object.keys(params.value).length > 0)
-function clearFilters() { search.value = ''; debounced.value = ''; topic.value = ''; region.value = ''; country.value = ''; kind.value = 'all' }
+function clearFilters() { search.value = ''; debounced.value = ''; topic.value = ''; region.value = ''; country.value = ''; kind.value = 'all'; days.value = 14 }
 watch(params, (p) => { router.replace({ query: p }); shownStories.value = 10; openStory.value = '' })
 
 // ---------- data ----------

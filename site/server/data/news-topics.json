@@ -1,0 +1,70 @@
+{
+  "_note": "Topic keywords shared by the News page (server/utils/news-analysis.ts) and the news archive (scripts/archive_feeds.py). Case-insensitive regular expressions; an item can have up to 4 topics.",
+  "topics": [
+    {
+      "id": "conflict",
+      "label": "Conflict & security",
+      "pattern": "\\b(war|wars|attack|attacks|airstrikes?|strikes? on|missiles?|troops|ceasefire|truce|military|drones?|shelling|clashes|insurgen\\w*|militants?|terror\\w*|hostages?|offensive|army|armed group|peacekeep\\w*|invasion|bombing)\\b"
+    },
+    {
+      "id": "diplomacy",
+      "label": "Diplomacy",
+      "pattern": "\\b(talks|summit|state visit|official visit|visits?|meets|met with|bilateral|foreign ministers?|envoys?|ambassadors?|diplomat\\w*|negotiat\\w*|accord|memorandum|counterpart|joint statement)\\b"
+    },
+    {
+      "id": "politics",
+      "label": "Elections & politics",
+      "pattern": "\\b(elections?|electoral|votes?|voters|polls?|parliament\\w*|coalition|opposition|coup|protests?|protesters|cabinet|impeach\\w*|referendum|constitution\\w*|prime minister|president\\w*)\\b"
+    },
+    {
+      "id": "economy",
+      "label": "Economy & trade",
+      "pattern": "\\b(trade|tariffs?|econom\\w*|inflation|gdp|investments?|debt|imf|world bank|exports?|imports?|budget|currency|markets?|growth|recession|bonds?|loans?|finance|financing|fiscal)\\b"
+    },
+    {
+      "id": "humanitarian",
+      "label": "Humanitarian",
+      "pattern": "\\b(humanitarian|refugees?|displaced|famine|hunger|food insecurity|cholera|relief|aid convoy|evacuat\\w*|casualties|civilians)\\b"
+    },
+    {
+      "id": "climate",
+      "label": "Climate & environment",
+      "pattern": "\\b(climate|emissions|floods?|flooding|droughts?|heatwaves?|cyclones?|hurricanes?|typhoons?|wildfires?|cop\\s?3\\d|biodiversity|deforestation|earthquakes?)\\b"
+    },
+    {
+      "id": "rights",
+      "label": "Rights & justice",
+      "pattern": "\\b(human rights|rights|courts?|icc|icj|trial|sentenced|convicted|journalists?|detention|detained|torture|executions?|freedom of|tribunal|genocide|war crimes)\\b"
+    },
+    {
+      "id": "energy",
+      "label": "Energy",
+      "pattern": "\\b(oil|gas|lng|energy|electricity|power plant|opec|renewables?|solar|pipeline|nuclear power|grid)\\b"
+    },
+    {
+      "id": "health",
+      "label": "Health",
+      "pattern": "\\b(health|disease|outbreaks?|vaccines?|ebola|mpox|malaria|pandemic|hospitals?|world health organi[sz]ation)\\b"
+    },
+    {
+      "id": "migration",
+      "label": "Migration",
+      "pattern": "\\b(migrants?|migration|asylum|deport\\w*|border crossings?|smuggling)\\b"
+    },
+    {
+      "id": "tech",
+      "label": "Technology & cyber",
+      "pattern": "\\b(artificial intelligence|ai|cyber\\w*|semiconductors?|chipmakers?|technology|satellites?|space agency|spacecraft)\\b"
+    },
+    {
+      "id": "sanctions",
+      "label": "Sanctions",
+      "pattern": "\\b(sanctions?|embargo|asset freeze|blacklist\\w*)\\b"
+    },
+    {
+      "id": "multilateral",
+      "label": "UN & multilateral",
+      "pattern": "\\b(united nations|security council|general assembly|unga|\\bun\\b|g20|g7|brics|nato|african union|asean|european union|\\beu\\b|wto|unhcr|unicef|osce)\\b"
+    }
+  ]
+}

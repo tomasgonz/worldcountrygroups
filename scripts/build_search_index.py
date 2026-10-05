@@ -211,24 +211,40 @@ def as_list(v):
 
 
 def index_feeds(con):
-    delete_src(con, "kind IN ('statement','news')", ())
-    rows = []
-    for s in (load("statements-feed.json", {}) or {}).get("statements", []):
-        text = s.get("title", "") + ("" if (s.get("excerpt") or "").startswith((s.get("title") or "")[:40]) else " — " + (s.get("excerpt") or ""))
-        d = (s.get("publishedAt") or "")[:10]
-        countries = as_list(s.get("countries")) or ([s["country"]] if s.get("country") else [])
-        rows.append(("statement", f"statement:{s.get('id')}", (countries or [""])[0], int(d[:4] or 0), None, d,
-                     s.get("speaker") or "", f"{s.get('title', '')[:140]} ({s.get('source', '').replace('-', ' ')})",
-                     s.get("url", ""), text.strip(), h(text)))
-    for a in (load("news-feed.json", {}) or {}).get("articles", []):
-        text = (a.get("title", "") + ". " + (a.get("description") or "")).strip()
-        d = (a.get("publishedAt") or "")[:10]
-        countries = as_list(a.get("countries"))
-        rows.append(("news", f"news:{a.get('id')}", (countries or [""])[0], int(d[:4] or 0), None, d, "",
-                     f"{a.get('title', '')[:140]} ({a.get('source', '').replace('-', ' ')})", a.get("url", ""), text, h(text)))
-    insert(con, rows)
+    """Index every archived article and statement (archive.db), adding only new ones each run."""
+    arch = os.path.join(DATA, "archive.db")
+    if not os.path.exists(arch):
+        print("  archive.db not found; run archive_feeds.py first")
+        return 0
+    if not meta_get(con, "feeds_from_archive", False):
+        # earlier versions re-indexed only the live feeds on each run; switch over once
+        delete_src(con, "kind IN ('statement','news')", ())
+        meta_set(con, "feeds_from_archive", True)
+        meta_set(con, "archive_cursor", "")
+    cursor = meta_get(con, "archive_cursor", "") or ""
+    a = sqlite3.connect(f"file:{arch}?mode=ro", uri=True, timeout=60)
+    rows = a.execute("""SELECT id, kind, outlet, countries, day, speaker, title, summary, url, archived_at
+                        FROM items WHERE archived_at > ? ORDER BY archived_at""", (cursor,)).fetchall()
+    a.close()
+    out = []
+    last = cursor
+    for iid, kind, outlet, countries, day, speaker, title, summary, url, archived_at in rows:
+        last = max(last, archived_at or "")
+        text = title if not summary else f"{title} — {summary}"
+        try:
+            iso = (json.loads(countries) or [""])[0]
+        except Exception:
+            iso = ""
+        out.append((kind, f"{kind}:{iid}", iso, int((day or "0")[:4] or 0), None, day or "", speaker or "",
+                    f"{title[:140]} ({outlet})", url or "", text, h(text)))
+    # an item re-archived with new tags keeps a single passage
+    for i in range(0, len(out), 500):
+        part = [r[1] for r in out[i:i + 500]]
+        delete_src(con, f"src IN ({','.join('?' * len(part))})", part)
+    insert(con, out)
+    meta_set(con, "archive_cursor", last)
     con.commit()
-    return len(rows)
+    return len(out)
 
 
 def api_key():
@@ -317,7 +333,7 @@ def main():
     changed, added = index_speeches(con, args.rebuild)
     print(f"Speeches: {changed} files re-indexed, {added} passages")
     feeds = index_feeds(con)
-    print(f"Statements and news: {feeds} items")
+    print(f"Statements and news from the archive: {feeds} new items")
     if args.embed:
         done, used = embed(con, args.max_tokens)
         print(f"Embeddings: {done} passages, {used:,} tokens")
