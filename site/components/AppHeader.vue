@@ -2,7 +2,7 @@
   <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-primary-100">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-[72px]">
-        <NuxtLink :to="isGuest ? auth.state.value.share!.path : '/'" class="flex items-center gap-3 group">
+        <NuxtLink :to="isGuest ? auth.state.value.share!.path : '/'" class="flex items-center gap-3 group shrink-0 mr-6">
           <div class="w-9 h-9 rounded-xl bg-primary-900 flex items-center justify-center group-hover:bg-primary-800 transition-colors">
             <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <circle cx="12" cy="12" r="10" />
@@ -111,6 +111,7 @@
             </NuxtLink>
           </div>
           <!-- Phone / tablet menu button -->
+          <SharePageButton v-if="auth.state.value.role === 'admin' && !route.path.startsWith('/admin')" />
           <button
             v-if="!isGuest" class="xl:hidden -mr-2 p-2 rounded-lg text-primary-700 hover:bg-primary-100"
             :aria-expanded="mobileOpen" aria-controls="mobile-menu" aria-label="Menu"
