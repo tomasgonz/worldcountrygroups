@@ -1632,7 +1632,7 @@
     },
     {
       "id": "agencia-brasil",
-      "name": "Agência Brasil",
+      "name": "Ag\u00eancia Brasil",
       "url": "https://agenciabrasil.ebc.com.br/en/rss/ultimasnoticias/feed.xml",
       "type": "rss",
       "enabled": true,
@@ -1736,6 +1736,6 @@
       "articleCount": 81
     }
   ],
-  "maxArticles": 3000,
+  "maxArticles": 6000,
   "maxSourceShare": 0.08
 }

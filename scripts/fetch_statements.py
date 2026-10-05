@@ -181,10 +181,20 @@ def clean_search_items(items, source):
     out = []
     for it in items:
         t = it.get("title") or ""
-        if "news.google.com" in url and " - " in t:
-            head, tail = t.rsplit(" - ", 1)
-            if len(tail) <= 80 and len(head) >= 12:
-                t = head.strip()
+        if "news.google.com" in url:
+            # Google News descriptions are just "<title>&nbsp;&nbsp;<outlet>": keep the outlet, drop the echo
+            for key in ("description", "excerpt"):
+                d = it.get(key) or ""
+                if "&nbsp;" in d:
+                    parts = [x.strip() for x in re.split(r"(?:&nbsp;)+", re.sub(r"<[^>]+>", " ", d)) if x.strip()]
+                    if len(parts) >= 2 and len(parts[-1]) <= 80:
+                        it.setdefault("outlet", parts[-1])
+                    it[key] = ""
+            if " - " in t:
+                head, tail = t.rsplit(" - ", 1)
+                if len(tail) <= 80 and len(head) >= 12:
+                    t = head.strip()
+                    it.setdefault("outlet", tail.strip())
         it["title"] = t
         if NAV_JUNK.match(t) or NAV_JUNK_ANY.search(t) or (exclude and exclude.search(t)) or len(t) < 12:
             continue
@@ -289,7 +299,8 @@ def compile_country_patterns(mapping):
         if name in SHORT_NAMES or len(name) <= 3:
             pat = re.compile(r'\b' + re.escape(name) + r'\b', re.IGNORECASE)
         else:
-            pat = re.compile(re.escape(name), re.IGNORECASE)
+            # whole words only: "Oman" must not match "woman", nor "Niger" "Nigeria"
+            pat = re.compile(r'(?<![A-Za-z])' + re.escape(name) + r'(?![A-Za-z])', re.IGNORECASE)
         patterns.append((pat, iso3))
     patterns.sort(key=lambda x: -len(x[0].pattern))
     return patterns
