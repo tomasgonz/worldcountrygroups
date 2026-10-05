@@ -4,6 +4,7 @@
       <p class="text-[11px] uppercase tracking-[0.14em] text-primary-500">Shared link</p>
       <h1 class="font-serif text-3xl text-primary-900 mt-2">{{ msg.title }}</h1>
       <p class="text-primary-600 mt-3 leading-relaxed">{{ msg.body }}</p>
+      <p class="text-xs text-primary-400 mt-4">Visits through shared links, including refused ones like this, are recorded (time, IP address, browser and device) and kept for one year.</p>
       <div class="mt-6 flex flex-wrap justify-center gap-3">
         <NuxtLink v-if="state.share" :to="state.share.path" class="px-4 py-2 rounded-xl bg-primary-900 text-white text-sm hover:bg-primary-800">Back to {{ state.share.label }}</NuxtLink>
         <NuxtLink to="/login" class="px-4 py-2 rounded-xl ring-1 ring-primary-200 text-sm text-primary-700 hover:bg-primary-50">Sign in</NuxtLink>

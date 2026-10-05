@@ -5,5 +5,6 @@
       <NuxtPage :transition="{ name: 'page', mode: 'out-in' }" />
     </main>
     <AppFooter />
+    <SharedVisitNotice />
   </div>
 </template>
