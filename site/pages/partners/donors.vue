@@ -1,7 +1,12 @@
 <template>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
     <VizTip />
-    <h1 class="font-serif text-3xl font-bold text-primary-900 mb-3">Donor tracker</h1>
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+      <h1 class="font-serif text-3xl font-bold text-primary-900">Donor tracker</h1>
+      <div class="flex rounded-full bg-primary-100 p-0.5 text-sm" role="tablist" aria-label="View">
+        <button v-for="m in VIEWS" :key="m.v" role="tab" :aria-selected="view === m.v" class="px-4 py-1.5 rounded-full" :class="view === m.v ? 'bg-white shadow-sm text-primary-900 font-medium' : 'text-primary-500'" @click="setView(m.v)">{{ m.label }}</button>
+      </div>
+    </div>
     <p class="text-primary-500 mb-2 max-w-3xl">
       Who gives official development assistance (ODA), how much, how close each donor is to the 0.7% of national income target,
       where the money goes, and who is cutting. With the latest news from donor agencies.
@@ -16,6 +21,8 @@
       </template>
     </p>
 
+    <AidRecipientsView v-if="view === 'recipients'" />
+    <template v-else>
     <div v-if="pending" class="space-y-4">
       <div v-for="i in 4" :key="i" class="skeleton h-24 rounded-2xl" />
     </div>
@@ -241,6 +248,7 @@
         </p>
       </section>
     </template>
+    </template>
   </div>
 </template>
 
@@ -275,6 +283,12 @@ const SORTS = [{ key: 'oda', label: 'Volume' }, { key: 'gni', label: '% of GNI' 
 
 const route = useRoute()
 const router = useRouter()
+const VIEWS = [{ v: 'donors', label: 'Donors' }, { v: 'recipients', label: 'Recipients' }] as const
+const view = ref<'donors' | 'recipients'>(route.query.view === 'recipients' ? 'recipients' : 'donors')
+function setView(v: 'donors' | 'recipients') {
+  view.value = v
+  router.replace({ query: v === 'recipients' ? { view: 'recipients' } : {} })
+}
 const { show, hide } = useVizTip()
 
 const { data, pending } = useFetch<Overview>('/api/donors')
