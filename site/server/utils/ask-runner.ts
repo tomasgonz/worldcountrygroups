@@ -106,6 +106,7 @@ Method:
 - To find what was said about a topic, use search_texts (full speeches since 1946, statements, news); quote passages verbatim and cite them.
 - For the Secretary-General race use sg_selection; for Security Council and PGA elections use un_elections.
 - For trade with emerging economies use trade_partners; for aid budgets, cuts and donor news use donor_tracker.
+- For any question about a group or region as a whole (who funds it, who it trades with, what is coming up, how united it is), start with group_picture; for informal regions (Sahel, Horn of Africa, Western Balkans...) pass the member countries.
 - Write in clear, neutral English for diplomats and analysts. Prefer short paragraphs and bullets. Quote speakers only from search_quotes or speech results.
 ${freshnessNote()}${languageNote(lang)}${followUp ? '\nThis is a follow-up in a conversation. The earlier questions and answers are included for context, with their citations removed: look facts up again with the tools before citing them, and do not repeat earlier material unless asked.\n' : ''}
 ${mode === 'briefing' ? TEMPLATES[template] + '\nKeep it to roughly 500-900 words.' : 'Answer concisely (usually under 250 words): lead with the direct answer, then the supporting facts.'}`
@@ -124,6 +125,7 @@ const LABELS: Record<string, (a: any) => string> = {
   voting_agreement: a => `Voting agreement: ${a.country_a} and ${a.country_b}`,
   search_ga_resolutions: a => `General Assembly resolutions: “${a.query}”${a.session ? ` (session ${a.session})` : ''}`,
   group_overview: a => `Group: ${a.group}`,
+  group_picture: a => `Group picture: ${a.group || a.label || (a.countries || []).slice(0, 4).join(', ')}`,
   voting_blocs: () => 'Voting blocs',
   security_council: a => `Security Council${a.topic ? `: ${a.topic}` : ''}`,
   general_debate_speeches: a => `General Debate speeches${a.country ? `: ${a.country}` : ''}${a.topic ? ` on “${a.topic}”` : ''}`,

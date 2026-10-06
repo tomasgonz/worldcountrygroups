@@ -433,6 +433,10 @@ def main():
         tot = recv_total.get(rc, {})
         if not lat and not tot:
             continue
+        # net aid by type of donor in the latest year (countries, EU institutions, multilaterals, private)
+        by_kind = {"country": 0.0, "eu": 0.0, "multilateral": 0.0, "private": 0.0}
+        for d, v in lat:
+            by_kind[item(d, 0)["kind"]] += v or 0
         recipients[rc] = {
             "name": world_names.get(rc, rc),
             "year": final_year,
@@ -440,6 +444,7 @@ def main():
             "series": [{"year": y, "usd": tot[y]} for y in sorted(tot)],
             "top_donors": [item(d, v, True) for d, v in lat[:10] if v > 0],
             "top_donors_5y": [item(d, v) for d, v in five[:10] if v > 0],
+            "by_kind": {k: round(v) for k, v in by_kind.items()},
         }
     ranked = sorted((r for r in recipients if recipients[r].get("total")), key=lambda r: -recipients[r]["total"])
     for i, rc in enumerate(ranked):

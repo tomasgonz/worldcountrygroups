@@ -52,17 +52,21 @@ function rowFor(iso3: string, r: Recip, st: Record<string, any>) {
 
 /** Recipient table, optionally for one group, with the group's totals and donors. */
 export function recipientsView(gid?: string | null) {
-  const rec = recipients()
-  const st = stats()
-  const reg = getRegistry()
   let members: string[] | null = null
   let group: any = null
   if (gid) {
-    const g: any = reg.getGroup(gid)
+    const g: any = getRegistry().getGroup(gid)
     if (!g) return null
     members = (g.countries || []).map((c: any) => c.iso3)
     group = { gid, name: g.name, acronym: g.acronym, size: members!.length }
   }
+  return { group, ...aidForCountries(members) }
+}
+
+/** Aid received by any set of countries (all recipients when null): totals, trend, rows and donors. */
+export function aidForCountries(members: string[] | null) {
+  const rec = recipients()
+  const st = stats()
   const isos = Object.keys(rec).filter(i => !members || members.includes(i))
   const rows = isos.map(i => rowFor(i, rec[i], st)).sort((a, b) => b.total - a.total)
   const years = [...new Set(rows.flatMap(r => r.series.map(s => s.year)))].sort()
@@ -72,7 +76,7 @@ export function recipientsView(gid?: string | null) {
   const prevTotal = series.find(s => s.year === latestYear - 1)?.usd || 0
   const pop = rows.reduce((a, r) => a + (st[r.iso3]?.population || 0), 0)
   return {
-    group, latestYear, recipients: rows.length,
+    latestYear, recipients: rows.length,
     notReceiving: members ? members.filter(m => !rec[m]).length : null,
     total, change1y: pct(total, prevTotal), perCapita: pop ? Math.round((total / pop) * 10) / 10 : null,
     series, rows, ...groupDonors(isos, latestYear, total),
@@ -95,8 +99,10 @@ function groupDonors(isos: string[], year: number, total: number) {
   const reg = getRegistry()
   const list = [...by.values()].filter(d => d.usd > 0).sort((a, b) => b.usd - a.usd)
   const sum = list.reduce((a, d) => a + d.usd, 0)
-  // flows cover donor countries only; the rest comes from multilateral institutions (World Bank, EU, UN funds…)
-  const multilateral = Math.max(0, total - sum)
+  // flows cover donor countries only; multilateral institutions (World Bank, EU, UN funds…) come from each
+  // recipient's breakdown by donor type. Net figures: negative when loan repayments exceed new aid.
+  const rec = recipients() as Record<string, any>
+  const multilateral = isos.reduce((a, i) => a + (rec[i]?.by_kind ? (rec[i].by_kind.multilateral || 0) + (rec[i].by_kind.eu || 0) : 0), 0)
   const donors = list.slice(0, 15).map(d => ({
     code: d.donor, name: donorNames[d.donor]?.name || reg.getCountryMembership(d.donor)?.name || d.donor,
     iso2: (reg.getCountryMembership(d.donor) as any)?.iso2 || null,

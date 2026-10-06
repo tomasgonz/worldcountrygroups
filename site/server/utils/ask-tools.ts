@@ -14,6 +14,7 @@ import { getMilitaryCapabilities } from './military'
 import { getCountryVoteSummary, getCountryThemeStats, getCountryAlignmentScores, getBilateralVotingAlignment, searchResolutions, getRecentResolutions } from './unvotes'
 import { detectVotingBlocs } from './voting-blocs'
 import { groupLoyalty } from './voting-dynamics'
+import { groupPicture } from './group-picture'
 import { getCountrySpeeches, getAllSpeeches } from './speeches'
 import { getRecentStatements } from './statements-feed'
 import { getRecentNews } from './news-feed'
@@ -119,6 +120,7 @@ export const ASK_TOOLS: ToolDef[] = [
   { name: 'search_quotes', description: 'Verified quotes from General Debate speeches by words, country, speaker or years.', parameters: { type: 'object', properties: { query: { type: 'string' }, country: { type: 'string' }, speaker: { type: 'string' }, from_year: { type: 'integer' }, to_year: { type: 'integer' } } } },
   { name: 'person_profile', description: 'A leader, minister or UN official: current roles, General Debate speeches, statements delivered and recent mentions.', parameters: { type: 'object', properties: { name: { type: 'string' } }, required: ['name'] } },
   { name: 'recent_news_and_statements', description: 'News and official statements, optionally about a country and/or containing words. Covers the last weeks by default; give from/to dates (YYYY-MM-DD) to search the full archive of everything collected since October 2026.', parameters: { type: 'object', properties: { query: { type: 'string' }, country: { type: 'string' }, days: { type: 'integer', description: 'Default 14' }, from: { type: 'string', description: 'Start date YYYY-MM-DD (searches the archive)' }, to: { type: 'string', description: 'End date YYYY-MM-DD' }, kind: { type: 'string', enum: ['news', 'statement', 'any'] }, limit: { type: 'integer', description: 'Default 12' } } } },
+  { name: 'group_picture', description: 'Everything the trackers know about a group of countries, added up: official development aid received (total, per person, trend, top recipients, main donor countries and the multilateral share), goods trade with the big partners (China, India, US, EU... share of the members\' trade now and five years ago), national elections in the next year, Security Council seats held or sought, UN voting cohesion, and the week\'s news by country and topic. Give a known group (e.g. "LDCs", "African Union", "ASEAN", "SIDS") or, for an informal set such as "the Sahel" or "the Horn of Africa", the list of countries.', parameters: { type: 'object', properties: { group: { type: 'string', description: 'Group acronym or name' }, countries: { type: 'array', items: { type: 'string' }, description: 'Instead of a group: the countries (names or ISO codes)' }, label: { type: 'string', description: 'Name for the list of countries, e.g. "Sahel"' } } } },
   ...TRADE_TOOLS,
   ...DONOR_TOOLS,
   ...UNELECTION_TOOLS,
@@ -197,6 +199,62 @@ export async function runTool(name: string, args: any, src: SourceCollector): Pr
         coverage: `Recorded votes up to ${latestVoteDate()} (session ${r.meta.lastSession})`,
         ...recentGaTotals(args.query, src),
       }
+    }
+    case 'group_picture': {
+      const gid = args.group ? groupId(args.group) : null
+      if (args.group && !gid && !args.countries?.length) return { error: `Unknown group "${args.group}"; pass the member countries instead` }
+      const isos = gid ? undefined : [...new Set<string>((args.countries || []).map((c: string) => resolveIso3(c)).filter(Boolean) as string[])]
+      if (!gid && !isos?.length) return { error: 'Give a group or a list of countries' }
+      src.used('donor-tracker.json', 'oecd-oda.json', 'trade-partners.json', 'elections.json', 'un-elections.json', 'archive.db')
+      const p = groupPicture({ gid, isos })
+      if (!p) return { error: 'No members found' }
+      const label = p.group.name ? `${p.group.name}${p.group.acronym ? ` (${p.group.acronym})` : ''}` : (args.label || 'Selected countries')
+      const bn = (v: number) => round(v / 1e9, 2)
+      const out: any = {
+        group: label, members: p.group.size,
+        member_names: gid ? undefined : isos!.map(i => countryName(i)),
+        ref: gid ? src.add(`${label}: group page`, `${SITE}/groups/${gid}`, 'page') : undefined,
+      }
+      if (p.aid) {
+        out.aid_received = {
+          year: p.aid.year, recipients: p.aid.recipients, total_bn_usd: bn(p.aid.totalUsd), change_vs_prev_year_pct: p.aid.change1y, usd_per_person: p.aid.perCapita,
+          from_multilateral_institutions_pct: p.aid.multilateralShare, from_multilateral_institutions_bn_usd: bn(p.aid.multilateralTotal),
+          trend_bn_usd: p.aid.series.slice(-6).map(s => ({ year: s.year, bn: bn(s.usd) })),
+          top_recipients: p.aid.topRecipients.map(r => ({ country: r.name, bn_usd: bn(r.usd), change_pct: r.change1y, usd_per_person: r.perCapita })),
+          main_donor_countries: p.aid.topDonors.map(d => ({ donor: d.name, bn_usd: bn(d.usd), share_of_all_aid_pct: d.share, change_pct: d.change1y })),
+          note: 'OECD DAC2A, ODA disbursements in current USD. Net figures (a negative amount means loan repayments exceeded new aid). Donor countries are bilateral flows; the multilateral figures cover the World Bank (IDA), EU institutions, UN funds and development banks.',
+          ref: gid ? src.add(`Aid received: ${label}`, `${SITE}/partners/donors?view=recipients&group=${gid}`, 'page') : src.add('Donor tracker: aid by recipient (OECD DAC2A)', `${SITE}/partners/donors?view=recipients`, 'page'),
+        }
+      }
+      if (p.trade) {
+        out.trade = {
+          year: p.trade.year, compared_with: p.trade.baseYear, members_with_data: p.trade.members,
+          total_goods_trade_bn_usd: round(p.trade.totalMusd / 1000, 1), exports_bn_usd: round(p.trade.exportsMusd / 1000, 1), imports_bn_usd: round(p.trade.importsMusd / 1000, 1),
+          emerging_partners_share_pct: p.trade.emergingShare, emerging_partners_share_5y_earlier_pct: p.trade.emergingShare5y,
+          partners: p.trade.partners.slice(0, 10).map((x: any) => ({ partner: x.name, kind: x.group, share_pct: x.share, share_5y_earlier_pct: x.share5y, change_pts: x.change5y, trade_bn_usd: round(x.tradeMusd / 1000, 1), top_partner_of_members: x.topPartnerOf })),
+          note: p.trade.note,
+          ref: src.add('Trade partner tracker (IMF Direction of Trade Statistics)', `${SITE}/partners/trade`, 'page'),
+        }
+      }
+      const el = p.elections
+      if (el.ahead.length || el.recent.length) {
+        const eref = src.add('National elections calendar', `${SITE}/elections?tab=national`, 'page')
+        out.national_elections = { next_12_months: el.ahead.map(e => ({ country: e.country, date: e.date, type: e.type })), last_45_days: el.recent.map(e => ({ country: e.country, date: e.date, type: e.type })), ref: eref }
+      }
+      const c = p.council
+      if (c.sitting.length || c.elected.length || c.candidates.length) {
+        out.security_council = { members_now: c.sitting.map(x => x.permanent ? `${x.name} (permanent)` : `${x.name} (${x.term})`), elected_for_next_term: c.elected.map(x => `${x.name} (${x.term})`), candidates: c.candidates.map(x => `${x.name} (${x.term})`), ref: src.add('Security Council elections', `${SITE}/elections?tab=council`, 'page') }
+      }
+      if (p.voting) out.un_voting_cohesion = { median_member_with_group_majority_pct: p.voting.median, contested_votes_last_5_sessions: p.voting.contested, least_aligned: p.voting.leastLoyal.map(m => ({ country: m.name, with_majority_pct: m.pct })) }
+      if (p.news) {
+        out.news_last_7_days = {
+          articles: p.news.total, previous_7_days: p.news.prev ?? 'archive does not cover the week before yet',
+          most_covered: p.news.byCountry.slice(0, 6).map(x => ({ country: x.name, articles: x.n, ...(x.prev != null ? { previous_week: x.prev } : {}) })),
+          topics: p.news.topics.map(t => ({ topic: t.label, articles: t.n })),
+          latest: p.news.latest.slice(0, 6).map((n: any) => ({ title: n.title, outlet: n.outlet, date: String(n.publishedAt || '').slice(0, 10), ref: src.add(n.title, n.url, n.kind === 'statement' ? 'statement' : 'news') })),
+        }
+      }
+      return out
     }
     case 'group_overview': {
       const gid = groupId(args.group)

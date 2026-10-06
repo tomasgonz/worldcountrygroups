@@ -42,8 +42,8 @@
         <section class="card">
           <h3 class="h3">Who funds {{ v.group ? 'these countries' : 'recipients' }}</h3>
           <p class="sub">Donor countries in {{ v.latestYear }}: amount, share of all aid received, and change on the year before</p>
-          <div v-if="v.multilateralTotal" class="mb-3 text-xs text-primary-600 bg-primary-50 rounded-lg px-3 py-2">
-            Multilateral institutions (World Bank, EU, UN funds, development banks) provided <strong>{{ aidUsd(v.multilateralTotal) }}</strong>, {{ v.multilateralShare }}% of the total; countries provided the rest.
+          <div v-if="v.multilateralTotal > 0" class="mb-3 text-xs text-primary-600 bg-primary-50 rounded-lg px-3 py-2">
+            Multilateral institutions (World Bank, EU, UN funds, development banks) provided <strong>{{ aidUsd(v.multilateralTotal) }}</strong>, {{ v.multilateralShare }}% of the total; donor countries and private foundations provided the rest.
           </div>
           <ul class="space-y-1.5">
             <li v-for="d in v.donors.slice(0, 10)" :key="d.code" class="flex items-center gap-2 text-sm">

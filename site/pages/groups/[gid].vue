@@ -60,6 +60,8 @@
       </div>
 
 
+      <GroupsGroupPicture :gid="gid" />
+
       <div id="cat-overview" class="mb-16 scroll-mt-24">
         <div class="flex items-center gap-4 mb-8">
           <h2 class="font-serif text-2xl font-bold text-primary-900 whitespace-nowrap">Overview</h2>
@@ -1349,7 +1351,7 @@
           </div>
           <div
             v-else-if="suggestionsContent"
-            class="prose prose-sm prose-primary max-w-none prose-headings:font-serif prose-headings:text-primary-900 prose-h2:text-base prose-h2:mt-5 prose-h2:mb-2 prose-p:text-primary-700 prose-p:leading-relaxed prose-p:mb-3 prose-ul:my-2 prose-li:text-primary-700 prose-li:my-0.5"
+            class="overflow-x-auto prose prose-sm prose-primary max-w-none prose-headings:font-serif prose-headings:text-primary-900 prose-h2:text-base prose-h2:mt-5 prose-h2:mb-2 prose-p:text-primary-700 prose-p:leading-relaxed prose-p:mb-3 prose-ul:my-2 prose-li:text-primary-700 prose-li:my-0.5"
             v-html="renderedSuggestions"
           ></div>
           <div v-if="suggestionsGeneratedAt" class="flex items-center justify-between mt-3 pt-2 border-t border-primary-50">
@@ -1912,6 +1914,7 @@ const hasMediaEvents = computed(() => groupGdeltData.value?.has_data)
 
 // Section navigation
 const groupSections = [
+  { id: 'cat-now', label: 'At a glance' },
   { id: 'cat-overview', label: 'Overview' },
   { id: 'cat-united-nations', label: 'United Nations' },
   { id: 'cat-governance', label: 'Governance' },

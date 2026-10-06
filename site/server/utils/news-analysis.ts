@@ -469,3 +469,50 @@ export function archiveSince(sinceIso: string, o: { iso3s?: string[]; kind?: 'ne
   const sel = o.iso3s?.length ? 'SELECT i.*, c.iso3 AS matched' : 'SELECT i.*, NULL AS matched'
   return db.prepare(`${sel} FROM ${from} WHERE ${where.join(' AND ')} ORDER BY i.published_at DESC LIMIT ?`).all(...params, Math.min(500, o.limit || 200)) as any[]
 }
+
+/** News about a set of countries over the last days: per-country counts (with the period before), topics and latest items. */
+export function archiveForCountries(isos: string[], days = 7, limit = 12) {
+  const db = archiveDb()
+  if (!db || !isos.length) return null
+  const today = new Date()
+  const from = new Date(today.getTime() - days * 86400_000).toISOString().slice(0, 10)
+  const before = new Date(today.getTime() - 2 * days * 86400_000).toISOString().slice(0, 10)
+  const marks = isos.map(() => '?').join(',')
+  const counts = db.prepare(`SELECT iso3, SUM(day >= ?) AS n, SUM(day < ?) AS prev FROM item_countries
+                             WHERE kind = 'news' AND day >= ? AND iso3 IN (${marks}) GROUP BY iso3`)
+    .all(from, from, before, ...isos) as any[]
+  const topics = db.prepare(`SELECT t.topic AS topic, COUNT(DISTINCT t.item_id) AS n FROM item_topics t
+                             JOIN item_countries c ON c.item_id = t.item_id
+                             WHERE t.kind = 'news' AND t.day >= ? AND c.iso3 IN (${marks}) GROUP BY t.topic ORDER BY n DESC LIMIT 8`)
+    .all(from, ...isos) as any[]
+  const items = db.prepare(`SELECT DISTINCT i.id, i.kind, i.outlet, i.title, i.url, i.published_at AS publishedAt, i.countries
+                            FROM item_countries c JOIN items i ON i.id = c.item_id
+                            WHERE c.day >= ? AND c.iso3 IN (${marks}) ORDER BY i.published_at DESC LIMIT ?`)
+    .all(from, ...isos, limit * 3) as any[]
+  const seen = new Set<string>()
+  const latest = items.filter((i) => {
+    const k = String(i.title || '').toLowerCase().slice(0, 60)
+    if (seen.has(k)) return false
+    seen.add(k)
+    return true
+  }).slice(0, limit).map(i => ({ ...i, countries: parseCountries(i.countries).filter(c => isos.includes(c)) }))
+  const total = counts.reduce((a, c) => a + (c.n || 0), 0)
+  // the week before only counts once the archive covers all of it
+  const first = (db.prepare("SELECT substr(MIN(archived_at), 1, 10) AS d FROM items WHERE kind = 'news'").get() as any)?.d || '9999'
+  const prev = first <= before ? counts.reduce((a, c) => a + (c.prev || 0), 0) : null
+  return {
+    days, total, prev,
+    byCountry: counts.map(c => ({ iso3: c.iso3, n: c.n || 0, prev: prev === null ? null : c.prev || 0 })).filter(c => c.n > 0).sort((a, b) => b.n - a.n),
+    topics: topics.map(t => ({ id: t.topic, label: topicLabel(t.topic), n: t.n })),
+    latest,
+  }
+}
+
+function parseCountries(v: any): string[] {
+  try {
+    const a = JSON.parse(v || '[]')
+    return Array.isArray(a) ? a : []
+  } catch {
+    return []
+  }
+}
