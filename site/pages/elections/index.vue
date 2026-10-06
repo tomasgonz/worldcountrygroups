@@ -17,16 +17,40 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <ElectionsSgSelection v-if="tab === 'sg'" />
-      <ElectionsSecurityCouncilElections v-else-if="tab === 'council'" />
-      <ElectionsPgaElections v-else-if="tab === 'pga'" />
-      <ElectionsNationalElections v-else />
+      <template v-else-if="tab === 'council'">
+        <ElectionsNewsList class="mb-6" :title="`The race for seats in ${news?.council?.year || 'the next election'}`" subtitle="Campaigns of declared candidates and coverage of the next Security Council election." :items="councilNews" :updated="news?.updated" />
+        <ElectionsSecurityCouncilElections />
+      </template>
+      <template v-else-if="tab === 'pga'">
+        <ElectionsNewsList class="mb-6" :title="`The race for the ${news?.pga?.session ? ordinal(news.pga.session) : 'next'} session`" :subtitle="news?.pga?.group ? `It is the ${news.pga.group}'s turn; candidates usually emerge in the months before the June election.` : ''" :items="news?.pga?.race || []" :updated="news?.updated" empty="No candidate has been reported yet." />
+        <ElectionsPgaElections />
+        <ElectionsNewsList class="mt-6" title="The current President in the news" :items="news?.pga?.current_president || []" :updated="news?.updated" />
+      </template>
+      <template v-else>
+        <ElectionsNewsList class="mb-6" title="Latest election news" subtitle="Coverage of national elections in the coming three months and the past two weeks." :items="nationalNews" :updated="news?.updated" />
+        <ElectionsNationalElections :news="news?.national || {}" />
+      </template>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 const route = useRoute()
+const { data: news } = useFetch<any>('/api/elections/news', { server: false })
+const councilNews = computed(() => {
+  const c = news.value?.council
+  if (!c) return []
+  const tagged = Object.values<any>(c.candidates || {}).flatMap(x => x.items.map((it: any) => ({ ...it, tag: x.name })))
+  const seen = new Set<string>()
+  return [...c.general, ...tagged].filter(it => (seen.has(it.url) ? false : (seen.add(it.url), true))).sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+})
+const nationalNews = computed(() => {
+  const seen = new Set<string>()
+  return Object.values<any>(news.value?.national || {}).flatMap(e => e.items.map((it: any) => ({ ...it, tag: e.country })))
+    .filter(it => (seen.has(it.url) ? false : (seen.add(it.url), true))).sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+})
 const router = useRouter()
+const ordinal = (n: number) => { const s = ['th', 'st', 'nd', 'rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]) }
 const TABS = [
   { id: 'sg', label: 'Secretary-General' },
   { id: 'council', label: 'Security Council' },

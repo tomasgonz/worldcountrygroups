@@ -326,10 +326,15 @@ export async function runTool(name: string, args: any, src: SourceCollector): Pr
         const iso3 = args.country ? resolveIso3(args.country) : undefined
         if (args.country && !iso3) return { error: `Unknown country "${args.country}"` }
         const list = getElections({ iso3: iso3 || undefined, status: args.include_past_elections ? 'all' : 'upcoming', withinDays: iso3 ? undefined : Math.min(365, args.days || 120), limit: 40 })
-        out.elections = list.map(e => ({
-          date: e.date, precision: e.precision, country: e.country, type: e.type, description: e.description, status: e.status,
-          ref: src.add(`Elections: ${e.country} ${e.date} (Wikipedia national electoral calendar)`, e.source_url, 'calendar'),
-        }))
+        const enews = readDataFile<any>('election-news.json')?.national || {}
+        out.elections = list.map(e => {
+          const n: any = Object.values<any>(enews).find((x: any) => x.iso3 === e.iso3 && x.date === e.date)
+          return {
+            date: e.date, precision: e.precision, country: e.country, type: e.type, description: e.description, status: e.status,
+            ref: src.add(`Elections: ${e.country} ${e.date} (Wikipedia national electoral calendar)`, e.source_url, 'calendar'),
+            recent_news: (n?.items || []).slice(0, 4).map((x: any) => ({ title: x.title, outlet: x.outlet, date: (x.date || '').slice(0, 10), ref: src.add(x.title, x.url, 'news') })),
+          }
+        })
         out.elections_note = 'From Wikipedia national electoral calendars (CC BY-SA); dates can change.'
       }
       return out

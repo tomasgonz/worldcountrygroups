@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "last_updated": "2026-10-05",
+    "last_updated": "2026-10-06",
     "days": 120,
     "source": "Dag Hammarskjöld Library, Security Council meetings tables"
   },
@@ -652,22 +652,6 @@
       "outcome": "",
       "press_release": "https://www.un.org/press/en/2026/sc16381.doc.htm",
       "record": "https://docs.un.org/S/PV.10167"
-    },
-    {
-      "meeting": "S/PV.10166",
-      "date": "2026-06-08",
-      "topic": "Maintenance of peace and security of Ukraine",
-      "outcome": "",
-      "press_release": "https://www.un.org/press/en/2026/sc16380.doc.htm",
-      "record": "https://docs.un.org/S/PV.10166"
-    },
-    {
-      "meeting": "S/PV.10165",
-      "date": "2026-06-08",
-      "topic": "The situation in Afghanistan",
-      "outcome": "",
-      "press_release": "https://www.un.org/press/en/2026/sc16379.doc.htm",
-      "record": "https://docs.un.org/S/PV.10165"
     }
   ],
   "presidential_statements": [

@@ -65,6 +65,7 @@ const DEFAULT_JOBS: Def[] = [
   d('archive-feeds', 'News and statements archive', 'scripts/archive_feeds.py', '10 * * * *', true, ['archive.db'], 3, 10),
   d('fetch-un-elections', 'UN elections (Security Council, PGA)', 'scripts/fetch_un_elections.py', '40 5 * * *', true, ['un-elections.json'], 72, 10),
   d('fetch-sg-selection', 'UN Secretary-General selection', 'scripts/fetch_sg_selection.py', '40 */3 * * *', true, ['sg-selection.json'], 8, 10),
+  d('fetch-election-news', 'Elections news (Security Council, PGA, national)', 'scripts/fetch_election_news.py', '35 */6 * * *', true, ['election-news.json'], 8, 10),
   d('fetch-alliances', 'Alliances (CoW)', 'scripts/fetch_cow_alliances.py', '0 6 * * 0', false, ['cow-alliances.json'], null),
   d('health-check', 'Data health check and alerts', 'scripts/check_data_health.py --email', '50 * * * *', true, [], null, 5),
 ]

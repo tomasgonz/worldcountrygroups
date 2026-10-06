@@ -46,7 +46,14 @@
               <span v-if="e.status === 'upcoming'" class="text-[11px] text-primary-400">{{ countdown(e) }}</span>
             </div>
             <div class="text-sm text-primary-600 mt-0.5">{{ e.description }}</div>
+            <ul v-if="newsFor(e).length" class="mt-2 space-y-1">
+              <li v-for="n in newsFor(e).slice(0, openNews === (e.iso3 + e.date) ? 8 : 2)" :key="n.url" class="text-xs leading-snug">
+                <a :href="n.url" target="_blank" rel="noopener" class="text-primary-800 hover:text-accent-700">{{ n.title }}</a>
+                <span class="text-primary-400"> · {{ n.outlet }}</span>
+              </li>
+            </ul>
             <div class="mt-1 flex flex-wrap gap-3 text-xs">
+              <button v-if="newsFor(e).length > 2" class="text-accent-700 hover:underline" @click="openNews = openNews === (e.iso3 + e.date) ? '' : e.iso3 + e.date">{{ openNews === (e.iso3 + e.date) ? 'Less news' : `More news (${newsFor(e).length})` }}</button>
               <a v-if="e.article_url" :href="e.article_url" target="_blank" rel="noopener" class="text-accent-700 hover:underline">Background</a>
               <NuxtLink v-if="e.iso3" :to="askLink(e)" class="text-accent-700 hover:underline">Brief me on this election &rarr;</NuxtLink>
             </div>
@@ -61,7 +68,14 @@
 <script setup lang="ts">
 import { isoToFlag, useCountries } from '~/composables/useGroups'
 
+const props = withDefaults(defineProps<{ news?: Record<string, any> }>(), { news: () => ({}) })
 const { show, hide } = useVizTip()
+/** News for one election: matched by country and date. */
+function newsFor(e: any): any[] {
+  const hit = Object.values<any>(props.news).find(n => n.iso3 === e.iso3 && n.date === e.date)
+  return hit?.items || []
+}
+const openNews = ref('')
 const WHEN = [{ v: 'upcoming', label: 'Upcoming' }, { v: 'past', label: 'Recently held' }] as const
 const when = ref<'upcoming' | 'past'>('upcoming')
 const q = ref('')
