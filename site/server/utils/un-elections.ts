@@ -2,7 +2,8 @@ import { readDataFile } from './data-file'
 import { getRegistry } from './wcg'
 
 /**
- * UN election trackers (Security Council seats, President of the General Assembly).
+ * UN election trackers (Security Council seats, President of the General Assembly, Human Rights
+ * Council, ECOSOC, International Court of Justice).
  * Data: server/data/un-elections.json (scripts/fetch_un_elections.py). Terms served per
  * country are derived from unsc-history.json (not duplicated) plus the members elected in
  * the latest election whose terms have not started yet.
@@ -45,6 +46,79 @@ export interface PgaRow {
   contested: boolean; person_slug?: string
   vote?: { year: number; winner: string; winner_country: string; runner_up: string; runner_up_country: string; votes_winner: number; votes_runner_up: number }
 }
+// ---- Human Rights Council / ECOSOC / International Court of Justice
+export interface BodyMember extends CountryRef { term_end: number; term_start?: number; second_term?: boolean; replaced_by?: string; term_end_original?: number }
+export interface HrcCandidate extends CountryRef {
+  endorsed_by_group?: boolean; pledge?: { symbol: string; url: string } | null
+  votes?: number | null; elected?: boolean | null; incumbent?: boolean
+}
+export interface HrcElection {
+  year: number; term: string; status?: 'upcoming'; date: string | null; date_text: string | null; date_source?: string | null
+  seats: Partial<Record<GroupCode, number>>; candidates: Partial<Record<GroupCode, HrcCandidate[]>>; contested: Partial<Record<GroupCode, boolean>>
+  results: HrcCandidate[]; elected?: CountryRef[]; unsuccessful?: HrcCandidate[]; outgoing?: BodyMember[]
+  required_majority: number; majority_rule?: string; notable: string[]
+  source: string | null; votes_source?: string | null; secondary_source?: string | null
+  verified: boolean; verification_note?: string | null; votes_note?: string; candidates_cross_checked?: boolean | null
+}
+export interface HrcData {
+  year: number; seats_total: number; seats_by_group: Record<GroupCode, number>; rules: string
+  members: BodyMember[]; latest_election: HrcElection; next_election: HrcElection
+}
+export interface EcosocElected extends CountryRef { votes?: number | null }
+export interface EcosocData {
+  year: number; seats_total: number; seats_by_group: Record<GroupCode, number>; rules: string
+  members: BodyMember[]; members_verified: boolean; members_notes: string[]
+  latest_election: {
+    year: number; date: string; term: string; seats: Partial<Record<GroupCode, number>>
+    elected: EcosocElected[]; elected_by_group: Partial<Record<GroupCode, EcosocElected[]>>
+    by_election: (CountryRef & { term: string; replaces: string; note: string })[]
+    vacancies: Partial<Record<GroupCode, number>>; present_and_voting: number | null; required_majority: number | null; majority_rule: string
+    notable: string[]; unverified: string[]; sources: { title: string; url: string }[]
+    checks: { url: string; status: number; confirmed: boolean; not_found: string[] }[]
+    library_confirms: boolean | null; wikipedia_confirms: boolean | null; verified: boolean
+  }
+  next_election: {
+    year: number; term: string; status: 'upcoming'; date: string | null; date_text: string
+    seats: Partial<Record<GroupCode, number>>; outgoing: (BodyMember & { note?: string })[]; candidates: Record<string, never>; verified: boolean; note: string
+  }
+}
+export interface IcjJudge {
+  name: string; surname: string; iso3: string | null; iso2?: string | null; nationality: string; group: GroupCode | null
+  role: 'president' | 'vice-president' | 'judge'; member_since: string | null; current_term_from: string | null; career: string
+  term_end: number | null; term_end_derived: string | null
+}
+export interface IcjResult {
+  name: string; ga: (number | null)[]; sc: (number | null)[]; ga_majority: boolean; sc_majority: boolean; elected: boolean; on_court: boolean
+  nationality: string | null; iso3: string | null; iso2?: string | null; regional_group: GroupCode | string | null; nominating_groups: number | null
+}
+export interface IcjRound { label: string; date: string | null }
+export interface IcjByElection {
+  date: string; elected: string; country: string; iso3: string | null; iso2?: string | null; replaces: string; term_end: number
+  candidates: number; ga_votes: number; ga_present: number; sc_votes: number; rounds_ga: number; rounds_sc: number
+  ga_required: number; sc_required: number; source: string; on_court: boolean; verified: boolean
+}
+export interface IcjCandidate {
+  name: string | null; iso3: string | null; iso2?: string | null; country: string | null; group: GroupCode | null
+  nominating_groups: string[] | null; incumbent: boolean; source: string; note: string | null
+}
+export interface IcjData {
+  year: number; seats_total: number; rules: string; judges: IcjJudge[]
+  latest_election: {
+    year: number; term: string; seats: number; date: string | null; ga_required: number; sc_required: number
+    ga_rounds: IcjRound[]; sc_rounds: IcjRound[]; results: IcjResult[]; elected: string[]; unsuccessful: string[]
+    notable: string[]; source: string; verified: boolean; verification_note: string
+  }
+  by_elections: IcjByElection[]
+  next_election: {
+    year: number; term: string; seats: number; status: 'upcoming' | 'held'; date: string | null; date_text: string | null
+    ga_required: number; sc_required: number
+    ending_terms: { name: string; iso3: string | null; iso2?: string | null; nationality: string; group: GroupCode | null; running: boolean }[]
+    candidates: IcjCandidate[]; ballots: { ga_required: number; sc_required: number; ga_rounds: IcjRound[]; sc_rounds: IcjRound[]; results: { name: string; ga: (number | null)[]; sc: (number | null)[] }[] } | null
+    checks: { url: string; status: number; confirmed: boolean; not_found: string[] }[]
+    verified: boolean; verification_note: string | null; notable: string[]
+  }
+}
+
 export interface UnElections {
   _meta: { updated_at: string; sources: SourceRef[]; notes: string[]; unmatched_countries: string[] }
   groups: Record<GroupCode, string>
@@ -63,6 +137,9 @@ export interface UnElections {
     contested_text: string
     list: PgaRow[]
   }
+  hrc?: HrcData
+  ecosoc?: EcosocData
+  icj?: IcjData
 }
 
 export interface CountryTerms {
@@ -167,3 +244,23 @@ export function getPgaElections() {
     ...d.pga,
   }
 }
+
+function bodySection<K extends 'hrc' | 'ecosoc' | 'icj'>(key: K) {
+  const d = getUnElections()
+  const body = d?.[key]
+  if (!d || !body) return null
+  return {
+    meta: { updated_at: d._meta.updated_at, notes: d._meta.notes, sources: sectionSources(d, key) },
+    groups: d.groups,
+    ...(body as NonNullable<UnElections[K]>),
+  }
+}
+
+/** Human Rights Council: members by regional group with term ends, latest election (votes vs the 97 needed), next election. */
+export function getHrcElections() { return bodySection('hrc') }
+
+/** ECOSOC: members with term ends, latest June election, seats up next year. */
+export function getEcosocElections() { return bodySection('ecosoc') }
+
+/** International Court of Justice: judges and term ends, latest triennial election (GA and Security Council rounds), by-elections, next election. */
+export function getIcjElections() { return bodySection('icj') }

@@ -2,6 +2,10 @@ import { existsSync, readFileSync, writeFileSync, renameSync, unlinkSync } from 
 import { join } from 'path'
 import { getUserById, deleteUser, getUsers } from './users'
 import { listAsks } from './ask-runner'
+import { getFeed, deleteFeed } from './calendar-feeds'
+import { deleteUserSchedules, listSchedules } from './briefing-schedules'
+import { deleteUserAlerts, getSettings } from './alerts'
+import { clearUser, getNotifications } from './notifications'
 
 /**
  * Everything the site holds about one user: for data access/portability requests and for
@@ -25,6 +29,10 @@ export function exportUserData(id: string) {
     account,
     emailDigestState: digest,
     questions: asks,
+    scheduledBriefings: listSchedules(id),
+    alertSettings: getSettings(id),
+    notifications: getNotifications(id),
+    calendarSubscription: getFeed(id),
   }
 }
 
@@ -42,6 +50,10 @@ export function eraseUser(id: string): { questions: number } {
     writeFileSync(dp + '.tmp', JSON.stringify(d, null, 2))
     renameSync(dp + '.tmp', dp)
   }
+  deleteUserSchedules(id)
+  deleteUserAlerts(id)
+  clearUser(id)
+  deleteFeed(id)
   deleteUser(id)
   return { questions }
 }

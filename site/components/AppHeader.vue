@@ -2,7 +2,7 @@
   <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-primary-100">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-[72px]">
-        <NuxtLink :to="isGuest ? auth.state.value.share!.path : '/'" class="flex items-center gap-3 group shrink-0 mr-6">
+        <NuxtLink :to="isGuest ? auth.state.value.share!.path : '/'" class="flex items-center gap-2 sm:gap-3 group shrink-0 mr-2 sm:mr-6">
           <div class="w-9 h-9 rounded-xl bg-primary-900 flex items-center justify-center group-hover:bg-primary-800 transition-colors">
             <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <circle cx="12" cy="12" r="10" />
@@ -10,9 +10,9 @@
               <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
             </svg>
           </div>
-          <span class="font-serif font-bold text-lg text-primary-900 whitespace-nowrap">World Country Groups</span>
+          <span class="font-serif font-bold text-base sm:text-lg text-primary-900 whitespace-nowrap">World Country Groups</span>
         </NuxtLink>
-        <div class="flex items-center gap-5">
+        <div class="flex items-center gap-1 sm:gap-3 xl:gap-5 min-w-0">
           <div v-if="isGuest" class="flex items-center gap-2 text-xs text-primary-500 min-w-0">
             <span class="px-2 py-0.5 rounded-full bg-sky-50 text-sky-800 ring-1 ring-sky-200 whitespace-nowrap">Shared view</span>
             <span class="hidden md:inline truncate max-w-[22rem]">{{ auth.state.value.share!.label }}</span>
@@ -112,6 +112,7 @@
           </div>
           <!-- Phone / tablet menu button -->
           <SharePageButton v-if="auth.state.value.role === 'admin' && !route.path.startsWith('/admin')" />
+          <NotificationBell v-if="auth.state.value.authenticated" />
           <button
             v-if="!isGuest" class="xl:hidden -mr-2 p-2 rounded-lg text-primary-700 hover:bg-primary-100"
             :aria-expanded="mobileOpen" aria-controls="mobile-menu" aria-label="Menu"

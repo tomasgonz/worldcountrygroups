@@ -8,7 +8,7 @@ site/server/data/.internal-token (created here if missing, readable only by
 this user and root).
 
 Usage:
-  refresh_site_data.py country|themes
+  refresh_site_data.py country|themes|briefings|alerts
 """
 
 import json
@@ -35,13 +35,14 @@ def token():
 
 def main():
     target = sys.argv[1] if len(sys.argv) > 1 else ""
-    if target not in ("country", "themes"):
+    if target not in ("country", "themes", "briefings", "alerts"):
         print(__doc__)
         return 2
-    req = urllib.request.Request(f"{SITE}/api/internal/refresh?target={target}", method="POST",
+    path = f"/api/internal/run?task={target}" if target in ("briefings", "alerts") else f"/api/internal/refresh?target={target}"
+    req = urllib.request.Request(f"{SITE}{path}", method="POST",
                                  headers={"X-Internal-Token": token()})
     try:
-        with urllib.request.urlopen(req, timeout=1500) as r:
+        with urllib.request.urlopen(req, timeout=3300) as r:
             res = json.loads(r.read() or b"{}")
     except urllib.error.HTTPError as e:
         print(f"HTTP {e.code}: {e.read()[:300]!r}")

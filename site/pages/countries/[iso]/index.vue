@@ -33,6 +33,11 @@
           </div>
         </div>
         <CountryNextElection v-if="(country as any).iso3" :iso3="(country as any).iso3" />
+        <div v-if="(country as any).iso3" class="mt-4 flex flex-wrap gap-2 text-sm">
+          <NuxtLink :to="`/countries/${iso}/news`" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full ring-1 ring-primary-200 text-primary-800 hover:bg-primary-50">News &amp; statements &rarr;</NuxtLink>
+          <NuxtLink :to="`/countries/${iso}/speeches`" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full ring-1 ring-primary-200 text-primary-800 hover:bg-primary-50">UN speeches &rarr;</NuxtLink>
+          <NuxtLink :to="`/countries/${iso}/votes`" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full ring-1 ring-primary-200 text-primary-800 hover:bg-primary-50">Voting record &rarr;</NuxtLink>
+        </div>
         <AskButtons v-if="(country as any).iso3" kind="country" :name="(country as any).name" :iso3="(country as any).iso3" class="mt-4" />
       </div>
 

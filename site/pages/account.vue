@@ -138,6 +138,11 @@
       </div>
     </div>
 
+    <!-- Alerts and scheduled briefings -->
+    <AccountAlertSettings class="mt-8" />
+    <AccountBriefingSchedules class="mt-8" :has-email="!!profile?.email" />
+    <AccountCalendarSettings class="mt-8" />
+
     <!-- Your data -->
     <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mt-8">
       <h2 class="font-serif text-xl font-bold text-primary-900 mb-2">Your data and privacy</h2>

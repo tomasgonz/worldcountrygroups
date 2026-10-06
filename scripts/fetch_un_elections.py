@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""UN election trackers: Security Council non-permanent seats and the President of the
-General Assembly (PGA).
+"""UN election trackers: Security Council non-permanent seats, the President of the General
+Assembly (PGA), the Human Rights Council (hrc), ECOSOC (ecosoc) and the International Court of
+Justice (icj).
 
 Sources (no keys, polite UA, no bot-check bypassing):
   - Wikipedia via the MediaWiki parse API: "<year> United Nations Security Council election"
@@ -10,6 +11,15 @@ Sources (no keys, polite UA, no bot-check bypassing):
     and the election page of the latest PGA election; probed for the next election page.
   - Security Council Report "What's in Blue" election preview (cross-check of candidates).
   - site/server/data/unsc-history.json (read only): current composition and term ends.
+  - HRC: OHCHR membership by regional group (official), the GA "Elections and appointments" page per
+    session (https://www.un.org/en/ga/<session>/meetings/elections/hrc.shtml: candidates, seats,
+    winners) and ISHR's #HRCelections<year> campaign page (election date, final vote tally).
+  - ECOSOC: Wikipedia current-members table (terms) cross-checked with the UN Dag Hammarskjöld
+    Library membership-by-year list; the latest June election is recorded in ECOSOC_ELECTIONS
+    (press reports; press.un.org has a bot check) and cross-checked live.
+  - ICJ: https://www.icj-cij.org/current-members (judges, roles, term starts -> term ends), Wikipedia
+    "<year> International Court of Justice judges election" (GA and Security Council rounds), and
+    ICJ_NEXT_CANDIDATES / ICJ_BY_ELECTIONS (sourced, cross-checked) until official pages exist.
 
 Output: site/server/data/un-elections.json  (atomic write; the previous file is kept if
 the fetch fails; exit code 1 on failure).
@@ -69,7 +79,9 @@ NAME_ALIASES = {
     "saint vincent and the grenadines": "VCT", "saint lucia": "LCA", "sao tome and principe": "STP",
     "são tomé and príncipe": "STP", "east germany": "DEU", "west germany": "DEU", "germany": "DEU",
     "united republic of tanzania": "TZA", "federal republic of germany": "DEU",
-    "venezuela": "VEN",
+    "venezuela": "VEN", "republic of moldova": "MDA", "lao people's democratic republic": "LAO",
+    "iran (islamic republic of)": "IRN", "syrian arab republic": "SYR", "united states of america": "USA",
+    "korea": "KOR", "south korea": "KOR", "the netherlands": "NLD", "britain": "GBR",
 }
 
 PRETTY = {  # registry (World Bank style) names that read badly in UI
@@ -227,7 +239,7 @@ class Countries:
         self.unknown = set()
 
     def iso3(self, name):
-        n = re.sub(r"\s+", " ", (name or "").replace(" ", " ")).strip().lower()
+        n = re.sub(r"\s+", " ", (name or "").replace(" ", " ").replace("’", "'")).strip().lower()
         n = re.sub(r"^the ", "", n) if n not in self.names else n
         if n in self.names:
             return self.names[n]
@@ -428,10 +440,12 @@ def iso_date(s):
     m = re.match(r"(\d{1,2})(?: and \d{1,2})? ([A-Z][a-z]+) (\d{4})", s)
     if not m:
         return None
-    try:
-        return datetime.strptime(f"{m.group(1)} {m.group(2)} {m.group(3)}", "%d %B %Y").strftime("%Y-%m-%d")
-    except ValueError:
-        return None
+    for fmt in ("%d %B %Y", "%d %b %Y"):
+        try:
+            return datetime.strptime(f"{m.group(1)} {m.group(2)} {m.group(3)}", fmt).strftime("%Y-%m-%d")
+        except ValueError:
+            pass
+    return None
 
 
 def sc_election(year, C, terms):
@@ -694,6 +708,767 @@ def pga_next_official(next_session):
     return {"url": None, "candidates": [], "tried": tried}
 
 
+# ---------------------------------------------------------------- shared (HRC / ECOSOC / ICJ)
+
+GA_MEMBERS = 193
+GA_ABS_MAJORITY = GA_MEMBERS // 2 + 1   # 97: "majority of the members of the General Assembly"
+SC_ABS_MAJORITY = 8                    # ICJ Statute art. 10: absolute majority of the 15 Council members
+
+
+def page_text(h):
+    return clean(h or "")
+
+
+def country(C, name, group=None):
+    """Country record from a free-text name (official UN spellings accepted)."""
+    nm = re.sub(r"\s*\*+\s*$", "", re.sub(r"\s+", " ", (name or "").replace(" ", " "))).strip()
+    nm = re.sub(r"^(the|and) ", "", nm, flags=re.I)
+    iso = C.iso3(nm)
+    return {"iso3": iso, "name": C.name(iso) if iso in PRETTY else (nm or C.name(iso)), "group": group or C.group.get(iso)}
+
+
+def split_names(s):
+    """'A, B, United Kingdom of Great Britain and Northern Ireland, and C' -> names (commas only; 'and' joins the last)."""
+    parts = [re.sub(r"^and\s+", "", x.strip()) for x in s.strip().rstrip(".").split(",")]
+    if len(parts) == 1 and " and " in parts[0]:
+        parts = parts[0].split(" and ")
+    return [x for x in parts if x]
+
+
+def by_group(items):
+    out = {}
+    for it in items:
+        if it.get("group"):
+            out.setdefault(it["group"], []).append(it)
+    return {g: out[g] for g in GROUP_ORDER if g in out}
+
+
+# ---------------------------------------------------------------- Human Rights Council
+
+HRC_SEATS = {"AG": 13, "APG": 13, "EEG": 6, "GRULAC": 8, "WEOG": 7}
+OHCHR_BY_GROUP = "https://www.ohchr.org/en/hr-bodies/hrc/members-by-group"
+OHCHR_ELECTIONS = "https://www.ohchr.org/en/hr-bodies/hrc/hrc-elections"
+
+
+def hrc_members(C):
+    """Official current membership (OHCHR, by regional group, with the year each term expires)."""
+    status, body = http_get(OHCHR_BY_GROUP, tries=2)
+    if status != 200 or not body:
+        raise RuntimeError(f"OHCHR membership page unavailable (HTTP {status})")
+    t = page_text(body)
+    ym = re.search(r"Membership of the Human Rights Council, 1 January - 31 December (\d{4})", t)
+    i = t.find("TERM EXPIRES IN")
+    j = t.find("second consecutive term", i)
+    seg = t[i + len("TERM EXPIRES IN"): j if j > 0 else None]
+    parts = re.split(r"(AFRICAN|ASIA-PACIFIC|EASTERN EUROPEAN|LATIN AMERICAN AND CARIBBEAN|WESTERN EUROPEAN AND OTHER) STATES \((\d+)\)", seg)
+    members = []
+    for k in range(1, len(parts) - 2, 3):
+        g = group_from_label(parts[k].lower() if parts[k] != "ASIA-PACIFIC" else "asia")
+        for nm, star, yr in re.findall(r"\s*(.+?)(\*?)\s*\((\d{4})\)", parts[k + 2]):
+            c = country(C, nm, g)
+            c.update({"term_end": int(yr), "second_term": bool(star)})
+            members.append(c)
+    if len(members) != 47:
+        raise RuntimeError(f"HRC membership parsed {len(members)} members, expected 47")
+    add_source("OHCHR: Membership of the Human Rights Council by regional group", OHCHR_BY_GROUP, "hrc.members")
+    return (int(ym.group(1)) if ym else None), members
+
+
+def hrc_ga_page(session, C):
+    """GA 'Elections and appointments' page for the HRC election held during a session (None if absent)."""
+    url = f"https://www.un.org/en/ga/{session}/meetings/elections/hrc.shtml"
+    status, body = http_get(url, tries=2)
+    if status != 200 or "Human Rights Council" not in body:
+        return None
+    t = page_text(body)
+    out = {"session": session, "url": url}
+    dm = re.search(r"Election of the Human Rights Council: (\S+ [A-Z][a-z]+ \d{4})", t)
+    out["date_text"] = dm.group(1) if dm else None
+    out["date"] = iso_date(out["date_text"]) if dm else None
+    tm = re.search(r"Candidates to the election for the term (\d{4})\s*[-–]\s*(\d{4})", t)
+    if not tm:
+        return None
+    out["term_start"], out["term_end"] = int(tm.group(1)), int(tm.group(2))
+    em = re.search(r"On (\d{1,2} [A-Z][a-z]+ \d{4}), the General Assembly elected the following (\d+) members for a three-year term (?:of office )?beginning on 1 January (\d{4}): (.+?)(?= In accordance| Member States who)", t)
+    out["elected"] = []
+    if em and int(em.group(3)) == out["term_start"]:
+        out["held_on"] = iso_date(em.group(1))
+        out["elected"] = [country(C, n) for n in split_names(em.group(4))]
+    # candidates table: one column per regional group, header "<Group> (N vacant seats)"
+    hi = body.find("Candidates to the election")
+    tbl = re.search(r"<table.*?</table>", body[hi:], flags=re.S)
+    notes = {}
+    for num, txt in re.findall(r"<sup>\s*(\d+)(?:&nbsp;|\s)*</sup>\s*([^<]+)", body[hi:hi + (tbl.end() if tbl else 0) + 1500]):
+        if "endorsed" in txt.lower():
+            notes[num] = clean(txt)
+    seats, cands, cols = {}, {}, []
+    if tbl:
+        rows = table_rows(tbl.group(0))
+        for kind, attrs, cell in (rows[0] if rows else []):
+            lab = clean(cell)
+            g = group_from_label(lab)
+            sm = re.search(r"\((\d+) vacant seats?\)", lab)
+            cols.append(g)
+            if g and sm:
+                seats[g] = int(sm.group(1))
+        for r in rows[1:]:
+            for ci, (kind, attrs, cell) in enumerate(r):
+                g = cols[ci] if ci < len(cols) else None
+                sups = re.findall(r"<sup>\s*(\d+)\s*</sup>", cell)
+                pledge = re.search(r'href="([^"]+)"[^>]*>\s*\[(A/[^\]]+)\]', cell)
+                nm = clean(re.sub(r"<sup>.*?</sup>|<a\b.*?</a>", "", cell, flags=re.S))
+                if not nm or not g:
+                    continue
+                c = country(C, nm, g)
+                c["endorsed_by_group"] = any("endorsed" in notes.get(x, "").lower() for x in sups)
+                c["pledge"] = {"symbol": pledge.group(2), "url": html.unescape(pledge.group(1))} if pledge else None
+                cands.setdefault(g, []).append(c)
+    out["seats"] = {g: seats[g] for g in GROUP_ORDER if g in seats}
+    out["candidates"] = {g: cands[g] for g in GROUP_ORDER if g in cands}
+    out["held"] = bool(out["elected"])
+    # current members table ("Name (YYYY) *": asterisk = second consecutive term)
+    mi = body.find("List of current members")
+    mt = re.search(r"<table.*?</table>", body[mi:], flags=re.S) if mi > 0 else None
+    out["second_term"] = set()
+    if mt:
+        for m in re.finditer(r"([^<>()]+?(?:\([^()]*\))?)\s*\((\d{4})\)\s*\*", clean(re.sub(r"</t[dh]>", " | ", mt.group(0))).replace("|", "\n")):
+            c = country(C, m.group(1).strip(" |"))
+            if c["iso3"]:
+                out["second_term"].add(c["iso3"])
+    out["second_term"] = sorted(out["second_term"])
+    return out
+
+
+def ishr_campaign(year, C):
+    """ISHR #HRCelections<year> campaign page: election date, candidate lists and (after the vote) the vote tally."""
+    url = f"https://ishr.ch/campaigns/hrcelections{year}/"
+    status, body = http_get(url, tries=2)
+    if status != 200 or not body:
+        return {"url": url, "status": status, "checked": False}
+    t = page_text(body)
+    out = {"url": url, "status": status, "checked": True, "votes": {}}
+    dm = re.search(r"(?:will happen|took place|was held|will be held) on (\d{1,2} [A-Z][a-z]+ \d{4})", t)
+    out["date"] = iso_date(dm.group(1)) if dm else None
+    ti = t.find("final tally")
+    if ti > 0:
+        seg = t[ti: t.find("Who is running", ti) if t.find("Who is running", ti) > 0 else ti + 1500]
+        for m in re.finditer(r"(?:[,:]\s*|\band\s+|\)\s*)(?:the\s+)?([A-Z][^(),:]*?)\s*\((\d{2,3})(?: votes)?\)", seg):
+            c = country(C, m.group(1))
+            if c["iso3"]:
+                out["votes"][c["iso3"]] = int(m.group(2))
+    return out
+
+
+def members_year_next(year_members, today):
+    return (year_members or today.year) + 1
+
+
+def hrc_section(C, today):
+    year_members, members = hrc_members(C)
+    cur_session = today.year - 1945 if today.month >= 9 else today.year - 1946
+    pages = []
+    for s in (cur_session + 1, cur_session, cur_session - 1, cur_session - 2):
+        p = hrc_ga_page(s, C)
+        if p:
+            pages.append(p)
+    if not pages:
+        raise RuntimeError("no GA Human Rights Council election page found")
+    pages.sort(key=lambda p: -p["term_start"])
+    latest_p = next((p for p in pages if p["held"]), None)
+    if not latest_p:
+        raise RuntimeError("no held HRC election found on GA pages")
+    nxt_p = next((p for p in pages if p["term_start"] == latest_p["term_start"] + 1), None)
+    member_iso = {m["iso3"]: m for m in members}
+    # OHCHR flags only some second terms; the GA page of the current cycle marks all of them
+    ga_cur = next((p for p in pages if p["term_start"] == members_year_next(year_members, today)), None) or pages[0]
+    for m in members:
+        m["second_term"] = m["second_term"] or m["iso3"] in ga_cur.get("second_term", set())
+
+    def race(p, ishr, held):
+        cands = p["candidates"]
+        elected_iso = {e["iso3"] for e in p["elected"]}
+        results = []
+        for g in GROUP_ORDER:
+            for c in cands.get(g, []):
+                r = dict(c)
+                r["votes"] = ishr.get("votes", {}).get(c["iso3"]) if held else None
+                r["elected"] = c["iso3"] in elected_iso if held else None
+                m = member_iso.get(c["iso3"])
+                r["incumbent"] = bool(m) and m["term_end"] == p["term_start"] - 1
+                results.append(r)
+        contested = {g: len(cands.get(g, [])) > n for g, n in p["seats"].items()}
+        return results, contested
+
+    # ---- latest
+    y = latest_p["term_start"] - 1
+    ishr = ishr_campaign(y, C)
+    results, contested = race(latest_p, ishr, True)
+    add_source(f"UN General Assembly: Human Rights Council election {y} ({latest_p['session']}th session)", latest_p["url"], "hrc.latest_election")
+    if ishr.get("votes"):
+        add_source(f"ISHR #HRCelections{y}: final vote tally", ishr["url"], "hrc.latest_election")
+    unsuccessful = [r for r in results if r["elected"] is False]
+    second = [m["name"] for m in members if m["second_term"] and m["iso3"] in {e["iso3"] for e in latest_p["elected"]} and m["term_end"] == latest_p["term_end"]]
+    notable = []
+    n_c, n_s = len(results), sum(latest_p["seats"].values())
+    if not any(contested.values()):
+        notable.append(f"Every regional group ran a clean slate: {n_c} candidates for {n_s} seats, so the vote was uncontested.")
+    else:
+        for g, v in contested.items():
+            if v:
+                notable.append(f"{GROUPS[g][0]}: contested, {len(latest_p['candidates'].get(g, []))} candidates for {latest_p['seats'][g]} seat(s).")
+    for u in unsuccessful:
+        notable.append(f"{u['name']} failed to win a seat" + (f" ({u['votes']} votes)" if u.get("votes") else "") + ".")
+    voted = [r for r in results if r.get("votes")]
+    if voted:
+        lo = min(voted, key=lambda r: r["votes"])
+        hi = max(voted, key=lambda r: r["votes"])
+        notable.append(f"Most votes: {hi['name']} ({hi['votes']}); fewest among those elected: {lo['name']} ({lo['votes']}), against {GA_ABS_MAJORITY} needed.")
+    if second:
+        notable.append("Re-elected for a second consecutive term (not eligible again in " + str(latest_p["term_end"] + 1) + "): " + ", ".join(second) + ".")
+    tally_ok = bool(voted) and len(voted) == len(latest_p["elected"])
+    latest = {
+        "year": y, "term": f"{latest_p['term_start']}–{latest_p['term_end']}",
+        "date": latest_p.get("held_on") or latest_p["date"], "date_text": latest_p["date_text"],
+        "seats": latest_p["seats"], "candidates": latest_p["candidates"], "contested": contested,
+        "results": results, "elected": latest_p["elected"], "unsuccessful": unsuccessful,
+        "required_majority": GA_ABS_MAJORITY, "majority_rule": f"Absolute majority of the {GA_MEMBERS} members of the General Assembly ({GA_ABS_MAJORITY} votes), secret ballot, one round per seat until filled.",
+        "notable": notable, "source": latest_p["url"],
+        "votes_source": ishr["url"] if ishr.get("votes") else None,
+        "verified": True,
+        "verification_note": None if tally_ok else "Vote counts not available from the parsed sources; winners are from the official GA page.",
+        "votes_note": "Winners and candidates: official GA page. Vote counts: ISHR's published final tally (civil-society source; the official record is the GA plenary verbatim record).",
+    }
+
+    # ---- next
+    ny = y + 1
+    ishr_n = ishr_campaign(ny, C)
+    outgoing = [m for m in members if m["term_end"] == ny]
+    if nxt_p:
+        add_source(f"UN General Assembly: Human Rights Council election {ny} ({nxt_p['session']}th session)", nxt_p["url"], "hrc.next_election")
+        if ishr_n.get("checked"):
+            add_source(f"ISHR #HRCelections{ny}: candidates and election date", ishr_n["url"], "hrc.next_election")
+        results_n, contested_n = race(nxt_p, {}, False)
+        for r in results_n:
+            m = member_iso.get(r["iso3"])
+            r["incumbent"] = bool(m) and m["term_end"] == ny
+        date = nxt_p["date"] or ishr_n.get("date")
+        nn = sum(len(v) for v in nxt_p["candidates"].values())
+        notable_n = []
+        if nxt_p["seats"] and not any(contested_n.values()) and all(len(nxt_p["candidates"].get(g, [])) == s for g, s in nxt_p["seats"].items()):
+            notable_n.append(f"All five regional groups have clean slates so far: {nn} candidates for {sum(nxt_p['seats'].values())} seats.")
+        for g, v in contested_n.items():
+            if v:
+                notable_n.append(f"{GROUPS[g][0]}: contested, {len(nxt_p['candidates'].get(g, []))} candidates for {nxt_p['seats'][g]} seat(s).")
+            elif len(nxt_p["candidates"].get(g, [])) < nxt_p["seats"][g]:
+                notable_n.append(f"{GROUPS[g][0]}: fewer candidates ({len(nxt_p['candidates'].get(g, []))}) than seats ({nxt_p['seats'][g]}) so far.")
+        rerun = [r["name"] for r in results_n if r["incumbent"]]
+        if rerun:
+            notable_n.append("Seeking re-election: " + ", ".join(rerun) + ".")
+        barred = [m["name"] for m in outgoing if m["second_term"]]
+        if barred:
+            notable_n.append("Barred from immediate re-election after two consecutive terms: " + ", ".join(barred) + ".")
+        ishr_names = None
+        if ishr_n.get("checked"):
+            tt = page_text(http_get(ishr_n["url"], tries=1)[1])
+            ishr_names = all((r["name"].split(" ")[0] in tt) or (r["iso3"] and C.name(r["iso3"]).split(" ")[0] in tt) for r in results_n)
+        nxt = {
+            "year": ny, "term": f"{nxt_p['term_start']}–{nxt_p['term_end']}", "status": "upcoming",
+            "date": date, "date_text": None if date else (nxt_p["date_text"] or f"October {ny}"),
+            "date_source": "GA page" if nxt_p["date"] else ("ISHR" if ishr_n.get("date") else None),
+            "seats": nxt_p["seats"], "candidates": nxt_p["candidates"], "contested": contested_n, "results": results_n,
+            "outgoing": outgoing, "notable": notable_n, "required_majority": GA_ABS_MAJORITY,
+            "source": nxt_p["url"], "secondary_source": ishr_n["url"] if ishr_n.get("checked") else None,
+            "verified": True, "candidates_cross_checked": ishr_names,
+            "verification_note": "Candidate list as published by the GA (Member States that announced in writing); it can change until the vote." +
+                                 ("" if nxt_p["date"] else " Election date from ISHR (the GA page has no date yet)."),
+        }
+    else:
+        nxt = {"year": ny, "term": f"{ny + 1}–{ny + 3}", "status": "upcoming", "date": ishr_n.get("date"),
+               "date_text": f"October {ny} (expected)", "seats": {}, "candidates": {}, "contested": {}, "results": [],
+               "outgoing": outgoing, "notable": [], "required_majority": GA_ABS_MAJORITY, "source": None,
+               "verified": False, "verification_note": "The GA has not published the candidate page yet."}
+    add_source("OHCHR: Human Rights Council elections (past elections, rules)", OHCHR_ELECTIONS, "hrc")
+    return {
+        "year": year_members or today.year,
+        "seats_total": 47, "seats_by_group": HRC_SEATS,
+        "rules": "47 members elected directly and individually by secret ballot by an absolute majority of the General Assembly "
+                 f"({GA_ABS_MAJORITY} votes); three-year terms starting 1 January; not eligible for immediate re-election after two consecutive terms. "
+                 "Elections take place each October for about a third of the seats.",
+        "members": members,
+        "latest_election": latest,
+        "next_election": nxt,
+    }
+
+
+# ---------------------------------------------------------------- ECOSOC
+
+ECOSOC_SEATS = {"AG": 14, "APG": 11, "EEG": 6, "GRULAC": 10, "WEOG": 13}
+LIB_ECOSOC = "https://research.un.org/en/unmembers/ecosocmembers"
+WIKI_ECOSOC = "United_Nations_Economic_and_Social_Council"
+
+# Latest election: no official page is reachable without a bot check (press.un.org), so the result is
+# recorded here from the cited reports and cross-checked live (Xinhua text; UN Library list once updated;
+# Wikipedia's members table once it has the new row). Update after each June election.
+ECOSOC_ELECTIONS = {
+    2026: {
+        "date": "2026-06-04", "term": "2027–2029", "term_start": 2027, "term_end": 2029,
+        "seats": {"AG": 5, "APG": 3, "EEG": 1, "GRULAC": 4, "WEOG": 5},
+        "elected": {"AG": ["Angola", "Eritrea", "Guinea", "Morocco", "Senegal"],
+                    "APG": ["Malaysia", "Maldives", "Republic of Korea"],
+                    "EEG": ["North Macedonia"],
+                    "GRULAC": ["Bolivia", "Brazil", "Guatemala"],
+                    "WEOG": ["United Kingdom", "France", "Germany", "Ireland", "Portugal"]},
+        "by_election": [{"name": "Luxembourg", "group": "WEOG", "term": "2027", "replaces": "Switzerland",
+                         "note": "Elected for a one-year term (rotation within WEOG), replacing Switzerland for the rest of its term."}],
+        "vacancies": {"GRULAC": 1},
+        "votes": {"MYS": 184, "MDV": 183},
+        "present_and_voting": 186,
+        "notable": [
+            "Only 17 of 18 seats were filled: one Latin American and Caribbean seat remained vacant after the voting (to be filled in a later round).",
+            "Luxembourg was elected in a by-election for 2027, replacing Switzerland under a rotation arrangement within WEOG.",
+            "First election of the Maldives to the Council (183 votes); Malaysia had the highest tally reported (184 of 186 present and voting).",
+        ],
+        "sources": [
+            {"title": "Xinhua: 17 states elected into UN Economic and Social Council for 3-year term (4 June 2026)",
+             "url": "https://english.news.cn/20260605/980c2f89f3264916b1beb395025647e8/c.html", "check": ["Angola", "Eritrea", "Guinea", "Morocco", "Senegal", "Malaysia", "Maldives", "Guatemala", "Portugal", "Luxembourg", "remains to be filled"]},
+            {"title": "President of the General Assembly: letter on the June 2026 elections (13 January 2026)",
+             "url": "https://www.un.org/pga/wp-content/uploads/sites/110/2026/01/PGA-Letter_Upcoming-Elections-2026.pdf", "check": []},
+            {"title": "Edition.mv: Maldives elected to UN Economic and Social Council (183 votes)", "url": "https://edition.mv/news/51485", "check": ["183"]},
+            {"title": "Malaysia, Ministry of Foreign Affairs: Malaysia elected to ECOSOC for 2027-2029 (184 of 186 votes)",
+             "url": "https://www.kln.gov.my/web/guest/-/malaysia-elected-to-the-united-nations-economic-and-social-council-ecosoc-for-the-term-2027-2029", "check": []},
+        ],
+        "unverified": ["The country holding the remaining Latin American and Caribbean seat (vacancy) and the round-by-round votes are not published in an accessible official source.",
+                       "Vote counts only for Malaysia and the Maldives (from national announcements)."],
+    },
+}
+
+
+def ecosoc_wiki_terms(C):
+    """Wikipedia 'Current members' table: rows by term, cells by group, with per-member exceptions like 'Italy (2025)'."""
+    h = wiki_parse(WIKI_ECOSOC)
+    if h is None:
+        raise RuntimeError("ECOSOC Wikipedia page missing")
+    i = h.find('id="Current_members')
+    tbl = re.search(r'<table class="wikitable.*?</table>', h[i:], flags=re.S)
+    if not tbl:
+        raise RuntimeError("ECOSOC members table not found")
+    rows = table_rows(tbl.group(0))
+    cols = [group_from_label(clean(c[2])) for c in rows[0][1:]]
+    out = []
+    for r in rows[1:]:
+        tm = re.match(r"(\d{4})\s*[–-]\s*(\d{4})", clean(r[0][2]))
+        if not tm:
+            continue
+        a, b = int(tm.group(1)), int(tm.group(2))
+        for ci, (kind, attrs, cell) in enumerate(r[1:]):
+            g = cols[ci] if ci < len(cols) else None
+            for item in re.split(r"<br\s*/?>", cell):
+                ls = links(item)
+                if not ls:
+                    continue
+                txt = clean(item)
+                am = re.search(r"\((\d{4})(?:\s*[–-]\s*(\d{4}))?\)", txt)
+                s, e = (int(am.group(1)), int(am.group(2) or am.group(1))) if am else (a, b)
+                c = country(C, ls[0], g)
+                c.update({"term_start": s, "term_end": e, "row_term": f"{a}–{b}"})
+                out.append(c)
+    add_source("Wikipedia: United Nations Economic and Social Council (current members)", WIKI + WIKI_ECOSOC, "ecosoc.members")
+    return out
+
+
+def ecosoc_library(C):
+    """Dag Hammarskjöld Library: official ECOSOC membership by year {year: set(iso3)}."""
+    status, body = http_get(LIB_ECOSOC, tries=2)
+    if status != 200:
+        return {}
+    i = body.find("ECOSOC Membership by Year")
+    tbl = re.search(r"<table.*?</table>", body[i:], flags=re.S)
+    out = {}
+    for r in table_rows(tbl.group(0)) if tbl else []:
+        if len(r) < 2:
+            continue
+        y = to_int(r[0][2])
+        if not y:
+            continue
+        txt = re.sub(r"\(partial list pending elections\)", "", clean(r[1][2]))
+        isos = {country(C, n)["iso3"] for n in txt.split(",") if n.strip()}
+        out[y] = {"members": isos, "partial": "partial list" in clean(r[1][2])}
+    add_source("UN Dag Hammarskjöld Library: ECOSOC membership by year", LIB_ECOSOC, "ecosoc.members")
+    return out
+
+
+def ecosoc_section(C, today):
+    y = today.year
+    terms = ecosoc_wiki_terms(C)
+    lib = ecosoc_library(C)
+    members = [dict(t) for t in terms if t["term_start"] <= y <= t["term_end"]]
+    members.sort(key=lambda m: (GROUP_ORDER.index(m["group"]) if m["group"] in GROUP_ORDER else 9, m["term_end"], m["name"]))
+    lib_y = lib.get(y, {}).get("members") or set()
+    mine = {m["iso3"] for m in members}
+    members_verified = bool(lib_y) and lib_y == mine
+    notes = []
+    if len(members) != 54:
+        notes.append(f"Parsed {len(members)} current members (expected 54).")
+    if lib_y and lib_y != mine:
+        notes.append("Differences with the UN Library list: missing " + ", ".join(sorted(x or "?" for x in lib_y - mine)) +
+                     "; extra " + ", ".join(sorted(x or "?" for x in mine - lib_y)))
+
+    # latest election: the most recent June election on record (curated, cross-checked)
+    held = sorted([k for k, v in ECOSOC_ELECTIONS.items() if v["date"] <= today.strftime("%Y-%m-%d")], reverse=True)
+    if not held:
+        raise RuntimeError("no ECOSOC election recorded")
+    ly = held[0]
+    e = ECOSOC_ELECTIONS[ly]
+    checks = []
+    for s in e["sources"]:
+        add_source(s["title"], s["url"], "ecosoc.latest_election")
+        if s["check"]:
+            st, body = http_get(s["url"], tries=1)
+            t = page_text(body)
+            missing = [w for w in s["check"] if w not in t]
+            checks.append({"url": s["url"], "status": st, "confirmed": st == 200 and not missing, "not_found": missing})
+    elected = []
+    for g in GROUP_ORDER:
+        for n in e["elected"].get(g, []):
+            c = country(C, n, g)
+            c["votes"] = e["votes"].get(c["iso3"])
+            elected.append(c)
+    # once the Library / Wikipedia publish the next year's list, confirm the winners there too
+    nxt_lib = lib.get(e["term_start"], {})
+    lib_confirms = None
+    if nxt_lib.get("members"):
+        lib_confirms = all(c["iso3"] in nxt_lib["members"] for c in elected) if not nxt_lib.get("partial") or any(c["iso3"] in nxt_lib["members"] for c in elected) else None
+    wiki_new = [t for t in terms if t["term_start"] == e["term_start"] and t["term_end"] == e["term_end"]]
+    wiki_confirms = ({t["iso3"] for t in wiki_new} >= {c["iso3"] for c in elected}) if wiki_new else None
+    by_el = [dict(country(C, b["name"], b["group"]), term=b["term"], replaces=b["replaces"], note=b["note"]) for b in e["by_election"]]
+    pav = e.get("present_and_voting")
+    latest = {
+        "year": ly, "date": e["date"], "term": e["term"], "seats": e["seats"], "elected": elected,
+        "elected_by_group": by_group(elected), "by_election": by_el, "vacancies": e["vacancies"],
+        "present_and_voting": pav, "required_majority": (pav * 2 + 2) // 3 if pav else None,
+        "majority_rule": "Two-thirds of the members present and voting (rule 83 of the GA rules of procedure: ECOSOC elections are an 'important question').",
+        "notable": e["notable"], "unverified": e["unverified"],
+        "sources": [{"title": s["title"], "url": s["url"]} for s in e["sources"]],
+        "checks": checks, "library_confirms": lib_confirms, "wikipedia_confirms": wiki_confirms,
+        "verified": all(c["confirmed"] for c in checks) and lib_confirms is not False and wiki_confirms is not False,
+    }
+    # by-elections that hand a member's remaining year(s) to another state (e.g. WEOG rotation)
+    for b in by_el:
+        m = next((x for x in members if x["name"] == b["replaces"] or x["iso3"] == country(C, b["replaces"])["iso3"]), None)
+        start = int(str(b["term"])[:4])
+        if m and m["term_end"] >= start:
+            m["term_end_original"] = m["term_end"]
+            m["term_end"] = start - 1
+            m["replaced_by"] = b["name"]
+    # outgoing at the end of this year = seats filled in the latest election (when it elected the next term)
+    ny = ly + 1
+    ending = [m for m in members if m["term_end"] == ny] if ly == y else [m for m in members if m["term_end"] == y]
+    for b in by_el:
+        bs = str(b["term"]).split("–")
+        if int(bs[-1]) == ny:
+            ending.append({"iso3": b["iso3"], "name": b["name"], "group": b["group"], "term_start": int(bs[0]), "term_end": ny,
+                           "row_term": None, "note": f"one-year term replacing {b['replaces']}"})
+    seats_next = {}
+    for m in ending:
+        seats_next[m["group"]] = seats_next.get(m["group"], 0) + 1
+    nxt = {
+        "year": ny, "term": f"{ny + 1}–{ny + 3}", "status": "upcoming",
+        "date": None, "date_text": f"June {ny} (expected; the GA elects ECOSOC members in early June)",
+        "seats": {g: seats_next[g] for g in GROUP_ORDER if g in seats_next},
+        "outgoing": ending,
+        "candidates": {}, "verified": False,
+        "note": "Candidacies for ECOSOC are usually agreed within regional groups and announced shortly before the vote; none is tracked yet." +
+                (f" Still pending from {ly}: " + ", ".join(f"{n} {GROUPS[g][0]} seat" for g, n in e["vacancies"].items()) + "." if e["vacancies"] else ""),
+    }
+    return {
+        "year": y, "seats_total": 54, "seats_by_group": ECOSOC_SEATS,
+        "rules": "54 members elected by the General Assembly for overlapping three-year terms (18 a year) by secret ballot; "
+                 "a two-thirds majority of members present and voting is required; outgoing members can be re-elected immediately.",
+        "members": members, "members_verified": members_verified, "members_notes": notes,
+        "latest_election": latest, "next_election": nxt,
+    }
+
+
+# ---------------------------------------------------------------- International Court of Justice
+
+ICJ_MEMBERS_URL = "https://www.icj-cij.org/current-members"
+ICJ_CYCLE_BASE = 2024  # regular terms end on 5 February of 2024, 2027, 2030, 2033 ...
+
+# 2026 regular election (3 November 2026). No Wikipedia page or accessible official list yet: candidates as reported,
+# with the Secretary-General's note of 1 July 2026 (via Boeglin, IUS360) as the reference for the list of nominees.
+ICJ_NEXT_CANDIDATES = [
+    {"name": "Dapo Akande", "country": "United Kingdom", "url": "https://www.gov.uk/government/publications/uk-candidate-for-the-international-court-of-justice-election-2026-professor-dapo-akande-election-brochure"},
+    {"name": "François Alabrune", "country": "France", "url": "https://onu.delegfrance.org/francois-alabrune-candidate-for-judge-at-the-international-court-of-justice"},
+    {"name": "Olufemi Elias", "country": "Nigeria", "url": "https://businessday.ng/news/article/nigeria-nominates-olufemi-elias-as-candidate-for-world-court/",
+     "note": "Listed in the Secretary-General's note of 1 July 2026 (per IUS360) but not in the Korean foreign ministry's list of eight on 26 September 2026: may have withdrawn (unconfirmed)."},
+    {"name": "Mahmoud Daifallah Hmoud", "country": "Jordan", "url": "https://news.sbs.co.kr/english/article.do?news_id=N1008770603"},
+    {"name": "Luz del Carmen Ibáñez Carranza", "country": "Peru", "url": "https://ius360.com/la-eleccion-de-los-jueces-en-la-corte-internacional-de-justicia-cij-en-la-recta-final/",
+     "note": "Listed in the Secretary-General's note of 1 July 2026 (per IUS360) but not in the Korean foreign ministry's list of eight on 26 September 2026: may have withdrawn (unconfirmed)."},
+    {"name": "Charles Chernor Jalloh", "country": "Sierra Leone", "url": "https://charlesjalloh.com/"},
+    {"name": "Rena Lee", "country": "Singapore", "url": "https://www.mfa.gov.sg/Newsroom/Announcements-and-Highlights/2024/12/20241202-ICJ-Candidature"},
+    {"name": "Phoebe Okowa", "country": "Kenya", "url": "https://en.wikipedia.org/wiki/Phoebe_Okowa",
+     "nominating_groups": ["Bahamas", "Brazil", "Burkina Faso", "Colombia", "Denmark", "Djibouti", "Ecuador", "Finland", "France", "Georgia", "Greece", "Guatemala", "Hungary", "Kenya", "Latvia", "Malta", "Mauritius", "Namibia", "Netherlands", "Norway", "Senegal", "Singapore", "Slovakia", "Slovenia", "Spain", "Sweden"]},
+    {"name": "Paik Jin-hyun", "country": "Republic of Korea", "url": "https://www.koreaherald.com/article/10435355"},
+    {"name": None, "country": "Ecuador", "url": "https://en.sedaily.com/politics/2026/09/26/korea-bids-for-first-icj-judge-seat-in-november-vote",
+     "note": "Candidate's name not confirmed in the sources checked."},
+]
+ICJ_NEXT_SOURCES = [
+    {"title": "Seoul Economic Daily: Korea bids for first ICJ judge seat in November vote (26 Sep 2026: eight candidates, vote on 3 November)",
+     "url": "https://en.sedaily.com/politics/2026/09/26/korea-bids-for-first-icj-judge-seat-in-november-vote", "check": ["Nov. 3", "Ecuador", "Sierra Leone"]},
+    {"title": "SBS News: South Korea launches first bid for ICJ seat (election scheduled for November 3)",
+     "url": "https://news.sbs.co.kr/english/article.do?news_id=N1008770603", "check": ["November 3"]},
+    {"title": "The Wire: As India launches UNSC bid, its 14-year run at the ICJ quietly ends",
+     "url": "https://m.thewire.in/article/world/as-india-launches-unsc-bid-its-14-year-run-at-the-icj-quietly-ends/amp", "check": []},
+    {"title": "IUS360 (N. Boeglin): ICJ elections, final stretch (candidates per the Secretary-General's note of 1 July 2026)",
+     "url": "https://ius360.com/la-eleccion-de-los-jueces-en-la-corte-internacional-de-justicia-cij-en-la-recta-final/", "check": ["Nigeria, Jordania, Perú, Sierra Leone, Singapur, Kenia"]},
+]
+ICJ_BY_ELECTIONS = [
+    {"date": "2025-05-27", "elected": "Mahmoud Daifallah Hmoud", "country": "Jordan", "replaces": "Nawaf Salam (Lebanon), resigned January 2025",
+     "term_end": 2027, "candidates": 1, "ga_votes": 178, "ga_present": 181, "sc_votes": 15, "rounds_ga": 1, "rounds_sc": 1,
+     "source": "https://news.un.org/en/story/2025/05/1163721", "check": ["178", "Hmoud"]},
+    {"date": "2025-11-12", "elected": "Phoebe Okowa", "country": "Kenya", "replaces": "Abdulqawi Yusuf (Somalia), resigned 30 September 2025",
+     "term_end": 2027, "candidates": 4, "ga_votes": 106, "ga_present": 185, "sc_votes": 8, "rounds_ga": 4, "rounds_sc": 3,
+     "source": "https://en.wikipedia.org/wiki/Phoebe_Okowa", "check": ["106", "eight votes"]},
+]
+
+
+def icj_judges(C):
+    status, body = http_get(ICJ_MEMBERS_URL, tries=2)
+    if status != 200 or "judges-wrap" not in body:
+        raise RuntimeError(f"ICJ current members page unavailable (HTTP {status})")
+    out = []
+    for blk in re.findall(r'<div class="col-sm-9">(.*?)(?=<div class="judges-wrap|<div class="col-sm-3"|$)', body, flags=re.S):
+        hm = re.search(r"<h1[^>]*>(.*?)</h1>", blk, flags=re.S)
+        cm = re.search(r"<h4>(.*?)</h4>", blk, flags=re.S)
+        pm = re.search(r"<h5>(.*?)</h5>", blk, flags=re.S)
+        if not (hm and cm):
+            continue
+        toks = clean(hm.group(1)).split()
+        role = toks.pop(0) if toks and toks[0] in ("President", "Vice-President", "Judge") else "Judge"
+        sur = [t for t in toks if re.fullmatch(r"[A-ZÀ-ÖØ-Þ][A-ZÀ-ÖØ-Þ'\-]+", t)]
+        given = [t for t in toks if t not in sur]
+        surname = " ".join(w.capitalize() if "-" not in w else "-".join(x.capitalize() for x in w.split("-")) for w in sur)
+        ctry = clean(cm.group(1))
+        c = country(C, ctry)
+        name = f"{surname} {' '.join(given)}" if c["iso3"] == "CHN" else f"{' '.join(given)} {surname}".strip()
+        txt = clean(pm.group(1)) if pm else ""
+        since = re.search(r"Member of the Court since (\d{1,2} [A-Z][a-z]+ \d{4})", txt)
+        rm = re.search(r"re-elected (as from [^;]+)", txt)
+        rel = re.findall(r"as from (\d{1,2} [A-Z][a-z]+ \d{4})", rm.group(1)) if rm else []
+        start = iso_date(rel[-1]) if rel else (iso_date(since.group(1)) if since else None)
+        out.append({"name": name, "surname": surname, "iso3": c["iso3"], "nationality": C.name(c["iso3"]) if c["iso3"] else ctry, "group": c["group"],
+                    "role": {"President": "president", "Vice-President": "vice-president"}.get(role, "judge"),
+                    "member_since": iso_date(since.group(1)) if since else None, "current_term_from": start,
+                    "career": txt, "term_end": None, "term_end_derived": None})
+    if len(out) != 15:
+        raise RuntimeError(f"ICJ: parsed {len(out)} judges, expected 15")
+    # term ends: a regular term starting 6 February Y ends 5 February Y+9; a judge elected to a casual vacancy
+    # completes the predecessor's term, deduced from which triennial class is short of its five seats.
+    classes = {}
+    for j in out:
+        s = j["current_term_from"] or ""
+        if s[5:] == "02-06":
+            j["term_end"] = int(s[:4]) + 9
+            j["term_end_derived"] = "regular nine-year term"
+            classes[j["term_end"]] = classes.get(j["term_end"], 0) + 1
+    year = int(datetime.now(timezone.utc).strftime("%Y"))
+    upcoming = [y for y in range(ICJ_CYCLE_BASE, year + 12, 3) if y > year or (y == year and datetime.now(timezone.utc).strftime("%m-%d") < "02-06")][:3]
+    short = [y for y in upcoming for _ in range(5 - classes.get(y, 0))]
+    pending = [j for j in out if j["term_end"] is None]
+    if len(short) == len(pending) and len(set(short)) == 1:
+        for j in pending:
+            j["term_end"] = short[0]
+            j["term_end_derived"] = "completes a predecessor's term (casual vacancy)"
+    elif pending:
+        for j in pending:
+            j["term_end_derived"] = "unknown: casual vacancy, class could not be deduced"
+    add_source("International Court of Justice: Current Members", ICJ_MEMBERS_URL, "icj.judges")
+    return out
+
+
+def icj_wiki_election(year, C):
+    page = f"{year}_International_Court_of_Justice_judges_election"
+    h = wiki_parse(page)
+    if h is None:
+        return None
+    url = WIKI + page
+    cands = []
+    ballots = None
+    for tbl in re.findall(r'<table class="wikitable.*?</table>', h, flags=re.S):
+        rows = table_rows(tbl)
+        head = " ".join(clean(c[2]) for c in rows[0]) if rows else ""
+        if "Nominating national groups" in head:
+            grp = None
+            for r in rows[1:]:
+                cells = [clean(c[2]) for c in r]
+                if len(cells) == 4:
+                    grp, vac, cand, nom = cells
+                elif len(cells) == 3:
+                    vac, cand, nom = cells
+                elif len(cells) == 2:
+                    cand, nom = cells
+                else:
+                    continue
+                fl = re.search(r'class="flagicon".*?<img alt="([^"]+)"', r[-2][2], flags=re.S)
+                nat = fl.group(1) if fl else None
+                cands.append({"name": cand, "regional_group": group_from_label(grp or "") or grp, "nominating_groups": [x.strip() for x in nom.split(",") if x.strip()], "nationality": nat})
+        elif "General Assembly" in head and "Security Council" in head:
+            gm = re.search(r"General Assembly majority = (\d+)", head)
+            sm = re.search(r"Security Council majority = (\d+)", head)
+            hdr = [clean(c[2]) for c in rows[1]] if len(rows) > 1 else []
+            # header row: first GA rounds then SC rounds (the two bodies vote separately)
+            n_ga = 0
+            ga_cols = [i for i, x in enumerate(hdr)]
+            colspans = [re.search(r'colspan="(\d+)"', c[1]) for c in rows[0][1:]]
+            spans = [int(m.group(1)) if m else 1 for m in colspans]
+            n_ga = spans[0] if spans else 1
+            labels = [re.sub(r"\s+\d{1,2} [A-Z][a-z]+ \d{4}$", "", x) for x in hdr]
+            dates = [iso_date(re.search(r"(\d{1,2} [A-Z][a-z]+ \d{4})", x).group(1)) if re.search(r"\d{1,2} [A-Z][a-z]+ \d{4}", x) else None for x in hdr]
+            res = []
+            for r in rows[2:]:
+                cells = [clean(c[2]) for c in r]
+                if len(cells) < 2:
+                    continue
+                vals = [to_int(v) if v else None for v in cells[1:]]
+                fl = re.search(r'class="flagicon".*?<img alt="([^"]+)"', r[0][2], flags=re.S)
+                res.append({"name": cells[0], "flag": fl.group(1) if fl else None, "ga": vals[:n_ga], "sc": vals[n_ga:]})
+            ballots = {"ga_required": int(gm.group(1)) if gm else GA_ABS_MAJORITY, "sc_required": int(sm.group(1)) if sm else SC_ABS_MAJORITY,
+                       "ga_rounds": [{"label": labels[i], "date": dates[i]} for i in range(min(n_ga, len(labels)))],
+                       "sc_rounds": [{"label": labels[i], "date": dates[i]} for i in range(n_ga, len(labels))],
+                       "results": res}
+    lead = clean(h[:h.find("<h2") if "<h2" in h else 3000])
+    return {"year": year, "candidates": cands, "ballots": ballots, "source": url, "lead": lead[:600]}
+
+
+def same_judge(j, name):
+    """Does an ICJ judge record refer to this candidate name? (surname match, accents kept)"""
+    n = (name or "").lower()
+    return bool(n) and (j["surname"].lower() in n or j["name"].lower() == n)
+
+
+def icj_section(C, today):
+    judges = icj_judges(C)
+    by_name = {j["name"].lower(): j for j in judges}
+    y = today.year
+    # latest regular (triennial) election with a Wikipedia results page
+    reg_years = [yy for yy in range(ICJ_CYCLE_BASE - 1 + 3 * ((y - ICJ_CYCLE_BASE + 1) // 3), y - 10, -3)]
+    latest = None
+    for yy in reg_years:
+        e = icj_wiki_election(yy, C)
+        if e and e["ballots"]:
+            latest = e
+            break
+    if not latest:
+        raise RuntimeError("no ICJ regular election results parsed")
+    add_source(f"Wikipedia: {latest['year']} International Court of Justice judges election", latest["source"], "icj.latest_election")
+    b = latest["ballots"]
+    res = []
+    cand_map = {c["name"].lower(): c for c in latest["candidates"]}
+    for r in b["results"]:
+        ga_last = next((v for v in reversed(r["ga"]) if v is not None), None)
+        sc_last = next((v for v in reversed(r["sc"]) if v is not None), None)
+        ga_ok = any((v or 0) >= b["ga_required"] for v in r["ga"])
+        sc_ok = (sc_last or 0) >= b["sc_required"]
+        cm = cand_map.get(r["name"].lower()) or next((c for k, c in cand_map.items() if r["name"].split()[-1].lower() in k), None)
+        j = next((jj for jj in judges if same_judge(jj, r["name"])), None)
+        nat = country(C, r["flag"]) if r.get("flag") else ({"iso3": j["iso3"], "name": j["nationality"]} if j else {"iso3": None, "name": None})
+        res.append({"name": r["name"], "ga": r["ga"], "sc": r["sc"], "ga_majority": ga_ok, "sc_majority": sc_ok,
+                    "elected": bool(j) or (ga_ok and sc_ok), "on_court": bool(j),
+                    "nationality": nat["name"], "iso3": nat["iso3"],
+                    "regional_group": cm["regional_group"] if cm else None,
+                    "nominating_groups": len(cm["nominating_groups"]) if cm else None})
+    elected = [r for r in res if r["elected"]]
+    lost = [r for r in res if not r["elected"]]
+    notable = []
+    if len(b["sc_rounds"]) > 1:
+        notable.append(f"The Security Council needed {len(b['sc_rounds'])} rounds; the General Assembly {len(b['ga_rounds'])}.")
+    for r in lost:
+        if r["ga_majority"] or r["sc_majority"]:
+            notable.append(f"{r['name']} won a majority in the {'General Assembly' if r['ga_majority'] else 'Security Council'} but not in the other body.")
+    gev = next((r for r in lost if "Gevorgian" in r["name"]), None)
+    if gev:
+        notable.append("Sitting judge (and former Vice-President) Kirill Gevorgian lost re-election: the first time since 1946 that Russia/the USSR has no judge on the Court.")
+    lat = {
+        "year": latest["year"], "term": f"{latest['year'] + 1}–{latest['year'] + 10}", "seats": 5,
+        "date": (b["ga_rounds"][0]["date"] if b["ga_rounds"] else None),
+        "ga_required": b["ga_required"], "sc_required": b["sc_required"],
+        "ga_rounds": b["ga_rounds"], "sc_rounds": b["sc_rounds"], "results": res,
+        "elected": [r["name"] for r in elected], "unsuccessful": [r["name"] for r in lost], "notable": notable,
+        "source": latest["source"], "verified": all(r["on_court"] for r in elected),
+        "verification_note": "Results from Wikipedia (citing UN records); winners cross-checked against the ICJ's current-members page.",
+    }
+    # by-elections since then
+    bys = []
+    for e in ICJ_BY_ELECTIONS:
+        if e["date"] < f"{latest['year'] + 1}-01-01":
+            continue
+        st, body = http_get(e["source"], tries=1)
+        t = page_text(body)
+        ok = st == 200 and all(w in t for w in e["check"])
+        j = next((jj for jj in judges if same_judge(jj, e["elected"])), None)
+        add_source(f"{e['elected']} elected to the ICJ ({e['date']})", e["source"], "icj.by_elections")
+        bys.append({k: v for k, v in e.items() if k != "check"} | {
+            "iso3": country(C, e["country"])["iso3"], "ga_required": GA_ABS_MAJORITY, "sc_required": SC_ABS_MAJORITY,
+            "on_court": bool(j), "verified": ok and bool(j)})
+    # next regular election
+    ny = next(yy for yy in range(ICJ_CYCLE_BASE - 1, y + 4, 3) if yy >= y and (yy > latest["year"]))
+    ending = [j for j in judges if j["term_end"] == ny + 1]
+    nw = icj_wiki_election(ny, C)
+    checks = []
+    for s in ICJ_NEXT_SOURCES:
+        add_source(s["title"], s["url"], "icj.next_election")
+        if not s["check"]:
+            continue
+        st, body = http_get(s["url"], tries=1)
+        t = page_text(body)
+        missing = [w for w in s["check"] if w not in t]
+        checks.append({"url": s["url"], "status": st, "confirmed": st == 200 and not missing, "not_found": missing})
+    date = "2026-11-03" if ny == 2026 and any(c["confirmed"] for c in checks[:2]) else None
+    cands = []
+    if nw and nw["candidates"]:
+        add_source(f"Wikipedia: {ny} International Court of Justice judges election", nw["source"], "icj.next_election")
+        for c in nw["candidates"]:
+            cc = country(C, c["nationality"]) if c["nationality"] else {"iso3": None, "name": None}
+            cands.append({"name": c["name"], "iso3": cc["iso3"], "country": cc["name"], "group": c["regional_group"],
+                          "nominating_groups": c["nominating_groups"], "incumbent": any(same_judge(j, c["name"]) for j in judges),
+                          "source": nw["source"], "note": None})
+    elif ny == 2026:
+        for c in ICJ_NEXT_CANDIDATES:
+            cc = country(C, c["country"])
+            inc = any(same_judge(j, c["name"]) for j in judges)
+            cands.append({"name": c["name"], "iso3": cc["iso3"], "country": cc["name"], "group": cc["group"],
+                          "nominating_groups": c.get("nominating_groups"), "incumbent": inc, "source": c["url"], "note": c.get("note")})
+    ballots_n = nw["ballots"] if nw and nw["ballots"] else None
+    nxt = {
+        "year": ny, "term": f"{ny + 1}–{ny + 10}", "seats": 5, "status": "held" if ballots_n else "upcoming",
+        "date": date, "date_text": None if date else f"November {ny} (expected)",
+        "ga_required": GA_ABS_MAJORITY, "sc_required": SC_ABS_MAJORITY,
+        "ending_terms": [{"name": j["name"], "iso3": j["iso3"], "nationality": j["nationality"], "group": j["group"],
+                          "running": any(same_judge(j, c["name"]) for c in cands)} for j in ending],
+        "candidates": cands, "ballots": ballots_n, "checks": checks,
+        "verified": bool(nw and nw["candidates"]),
+        "verification_note": None if (nw and nw["candidates"]) else
+            "No Wikipedia page or accessible official list (Secretary-General's note) yet: candidates compiled from national announcements and press, "
+            "with a reported discrepancy (the SG's July note lists ten nominees, the Korean foreign ministry eight in late September).",
+        "notable": [],
+    }
+    if ny == 2026:
+        nxt["notable"] = [
+            "France (Alabrune) and the United Kingdom (Akande) both field candidates for what is customarily the Western European seat now held by French judge Ronny Abraham (seats are not formally allocated); the UK has had no judge since 2018.",
+            "India's Dalveer Bhandari and Brazil's Leonardo Brant are not standing again (no Indian or Brazilian candidate reported).",
+            "Two judges elected to casual vacancies in 2025 seek full terms: Mahmoud Hmoud (Jordan) and Phoebe Okowa (Kenya).",
+            "Republic of Korea's first-ever ICJ bid (Paik Jin-hyun), in a three-way Asia-Pacific race with Jordan and Singapore.",
+        ]
+    return {
+        "year": y, "seats_total": 15,
+        "rules": "15 judges with nine-year terms; a third of the Court (five seats) is renewed every three years. Candidates are nominated by "
+                 "national groups of the Permanent Court of Arbitration. The General Assembly and the Security Council vote separately and "
+                 f"simultaneously; a candidate needs an absolute majority in both ({GA_ABS_MAJORITY} in the GA, {SC_ABS_MAJORITY} in the Council; "
+                 "permanent members have no veto). Terms start on 6 February.",
+        "judges": judges, "latest_election": lat, "by_elections": bys, "next_election": nxt,
+    }
+
+
 # ---------------------------------------------------------------- main
 
 def build():
@@ -799,6 +1574,25 @@ def build():
     if eeg_rule:
         next_pga["rule_detail"] = "The Eastern European Group holds the presidency in years ending in 2 and 7."
 
+    # --- Human Rights Council, ECOSOC, International Court of Justice: each section is independent; on failure
+    # the previous file's section is kept (and the failure noted) so SC/PGA data still refreshes.
+    try:
+        prev = json.load(open(OUTPUT_FILE))
+    except Exception:
+        prev = {}
+    extra = {}
+    for key, fn in (("hrc", hrc_section), ("ecosoc", ecosoc_section), ("icj", icj_section)):
+        try:
+            extra[key] = fn(C, now)
+        except Exception as e:  # keep the previous section
+            log(f"  {key} failed: {e}")
+            notes.append(f"{key}: refresh failed ({e}); showing data from the previous run")
+            if prev.get(key):
+                extra[key] = prev[key]
+                for src in prev.get("_meta", {}).get("sources", []):
+                    if src["section"].split(".")[0] == key:
+                        add_source(src["title"], src["url"], src["section"])
+
     out = {
         "_meta": {
             "updated_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -808,7 +1602,11 @@ def build():
                 "Results, candidates and winners are parsed from Wikipedia election pages; the latest election is cross-checked "
                 "against Security Council Report and unsc-history.json (see verified flags).",
                 "Groups follow UN electoral practice: Türkiye votes with WEOG, Israel sits in WEOG, the USA is a WEOG observer.",
-                "Other GA elections (ECOSOC, Human Rights Council) are not tracked yet.",
+                "Human Rights Council: official membership (OHCHR) and GA election pages; vote counts from ISHR's published tally.",
+                "ECOSOC: current members from Wikipedia cross-checked with the UN Library; the latest June election is recorded from "
+                "press reports (UN press pages sit behind a bot check) and cross-checked live.",
+                "ICJ: judges and term ends from the Court's site; the latest regular election from Wikipedia; 2026 candidates from "
+                "national announcements and press (unverified until an official list or Wikipedia page is available).",
             ],
             "unmatched_countries": sorted(C.unknown),
         },
@@ -828,6 +1626,7 @@ def build():
             "contested_text": rot_txt[:1200],
             "list": sorted(lst, key=lambda p: (p["year"], p["session"] or 0)),
         },
+        **extra,
     }
     add_iso2(out, C)
     return out
@@ -862,6 +1661,11 @@ def main():
     log(f"Wrote {OUTPUT_FILE}: SC latest {le['year']} elected {[e['name'] for e in le['elected']]}; "
         f"history {len(sc['history'])}; PGA list {len(out['pga']['list'])}; current {out['pga']['current']['name']}; "
         f"next PGA group {out['pga']['next']['group']}")
+    for k in ("hrc", "ecosoc", "icj"):
+        x = out.get(k)
+        if x:
+            le, ne = x.get("latest_election") or {}, x.get("next_election") or {}
+            log(f"  {k}: latest {le.get('year')} {le.get('date')} elected {len(le.get('elected') or [])}; next {ne.get('year')} {ne.get('date') or ne.get('date_text')}")
 
 
 if __name__ == "__main__":

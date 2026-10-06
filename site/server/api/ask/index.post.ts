@@ -30,7 +30,7 @@ export default defineEventHandler(async (event) => {
       // keep proxies from closing a quiet connection while the model works
       const ping = setInterval(() => send({ type: 'ping' }), 15000)
       try {
-        await runAsk({ question, mode, template, userId: user.id, userName: user.displayName || user.username, rerunOf: body?.rerunOf, parentId, onEvent: send })
+        await runAsk({ question, mode, template, userId: user.id, userName: user.displayName || user.username, rerunOf: body?.rerunOf, parentId, language: typeof body?.language === 'string' ? body.language : undefined, onEvent: send })
       } finally {
         clearInterval(ping)
         controller.close()

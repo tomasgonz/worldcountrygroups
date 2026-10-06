@@ -34,6 +34,8 @@ export interface AskRecord {
   parentId?: string   // the answer this follows up on
   threadId?: string   // first question of the conversation
   usage?: { input: number; output: number; cached: number; calls: number }
+  language?: string   // answer language code (en, es, fr, ar, zh, ru, pt, de)
+  scheduleId?: string // set when produced by a scheduled briefing
 }
 
 const TEMPLATES: Record<AskTemplate, string> = {
@@ -83,7 +85,15 @@ function freshnessNote(): string {
   } catch { return '' }
 }
 
-function systemPrompt(mode: AskMode, template: AskTemplate, followUp = false) {
+export const ASK_LANGUAGES: Record<string, string> = { en: 'English', es: 'Spanish', fr: 'French', ar: 'Arabic', zh: 'Chinese (simplified)', ru: 'Russian', pt: 'Portuguese', de: 'German' }
+
+function languageNote(lang?: string) {
+  if (!lang || lang === 'en' || !ASK_LANGUAGES[lang]) return ''
+  const name = ASK_LANGUAGES[lang]
+  return `\nLanguage: write the whole answer in ${name}, including headings and table headers. Keep proper names, document symbols (e.g. A/RES/80/1) and the citation markers [S1] unchanged. Give quotations in their original language followed by a ${name} translation in brackets when the original is not ${name}.\n`
+}
+
+function systemPrompt(mode: AskMode, template: AskTemplate, followUp = false, lang?: string) {
   const today = new Date().toISOString().slice(0, 10)
   return `You are the research desk of World Country Groups, a database on countries, international groups and the United Nations. Today is ${today}.
 
@@ -97,7 +107,7 @@ Method:
 - For the Secretary-General race use sg_selection; for Security Council and PGA elections use un_elections.
 - For trade with emerging economies use trade_partners; for aid budgets, cuts and donor news use donor_tracker.
 - Write in clear, neutral English for diplomats and analysts. Prefer short paragraphs and bullets. Quote speakers only from search_quotes or speech results.
-${freshnessNote()}${followUp ? '\nThis is a follow-up in a conversation. The earlier questions and answers are included for context, with their citations removed: look facts up again with the tools before citing them, and do not repeat earlier material unless asked.\n' : ''}
+${freshnessNote()}${languageNote(lang)}${followUp ? '\nThis is a follow-up in a conversation. The earlier questions and answers are included for context, with their citations removed: look facts up again with the tools before citing them, and do not repeat earlier material unless asked.\n' : ''}
 ${mode === 'briefing' ? TEMPLATES[template] + '\nKeep it to roughly 500-900 words.' : 'Answer concisely (usually under 250 words): lead with the direct answer, then the supporting facts.'}`
 }
 
@@ -189,13 +199,14 @@ export function asksToday(userId: string): number {
 }
 
 export async function runAsk(opts: {
-  question: string; mode: AskMode; template: AskTemplate; userId: string; userName: string; rerunOf?: string; parentId?: string
+  question: string; mode: AskMode; template: AskTemplate; userId: string; userName: string; rerunOf?: string; parentId?: string; language?: string; scheduleId?: string
   onEvent: (ev: any) => void
 }): Promise<AskRecord> {
   const rec: AskRecord = {
     id: Date.now().toString(36) + randomBytes(3).toString('hex'),
     userId: opts.userId, userName: opts.userName, question: opts.question.trim(), mode: opts.mode, template: opts.template,
     createdAt: new Date().toISOString(), status: 'running', shared: false, steps: [], rerunOf: opts.rerunOf,
+    language: ASK_LANGUAGES[opts.language || ''] ? opts.language : 'en', scheduleId: opts.scheduleId,
   }
   const parent = opts.parentId ? getAsk(opts.parentId) : null
   if (parent) {
@@ -209,7 +220,7 @@ export async function runAsk(opts: {
   let sessionRef: ToolSession | null = null
   try {
     const history = parent ? historyFor(parent.id) : []
-    const session = new ToolSession(systemPrompt(opts.mode, opts.template, history.length > 0), rec.question, ASK_TOOLS,
+    const session = new ToolSession(systemPrompt(opts.mode, opts.template, history.length > 0, rec.language), rec.question, ASK_TOOLS,
       { task: 'ask', maxTokens: opts.mode === 'briefing' ? 16000 : 8000 }, history)
     sessionRef = session
     const provider: any = session.provider

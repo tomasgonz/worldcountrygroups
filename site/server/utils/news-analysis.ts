@@ -375,6 +375,15 @@ export function newsAnalysis(f: AnalysisFilters) {
   }
   const untagged = news.filter(i => !i.topics.length).length
 
+  // one country in focus: its daily coverage from the archive (complete, not just the live feed)
+  let focus: any = null
+  if (f.country) {
+    const fd: string[] = []
+    for (let i = 29; i >= 0; i--) fd.push(new Date(Date.now() - i * 86400_000).toISOString().slice(0, 10))
+    const news30 = archiveDaily('countries', fd)?.get(f.country) || new Array(30).fill(0)
+    const st30 = archiveDaily('countries', fd, 'statement')?.get(f.country) || new Array(30).fill(0)
+    focus = { iso3: f.country, days: fd, news: news30, statements: st30, collectingSince: arch?.firstDay || null }
+  }
   const metaIsos = new Set<string>([...stories.flatMap(st => [...st.countries, ...st.coverage.flatMap(c => c.countries)]), ...cSeries.keys()])
   const countryMeta = Object.fromEntries([...metaIsos].map(c => [c, { name: name(c), iso2: iso2(c) }]))
   const out = {
@@ -384,7 +393,7 @@ export function newsAnalysis(f: AnalysisFilters) {
     totals: { items: scoped.length, news: news.length, statements: scoped.length - news.length, outlets: new Set(scoped.map(i => i.outlet.toLowerCase())).size, countries: cSeries.size, topicCoverage: news.length ? 1 - untagged / news.length : 0 },
     days: dayKeys,
     stories,
-    rising, last48, mostCovered, topics,
+    rising, last48, mostCovered, topics, focus,
     trends: { ready: trendsReady, historyDays, historyStart: arch?.firstDay || null },
     archive: arch,
     regions: regionList,
@@ -445,4 +454,18 @@ export function archiveSearch(o: { iso3?: string | null; words?: string[]; from?
   for (const w of (o.words || []).slice(0, 6)) { where.push("(i.title || ' ' || i.summary) LIKE ?"); params.push(`%${w}%`) }
   return db.prepare(`SELECT i.id, i.kind, i.outlet, i.ownership, i.title, i.summary, i.url, i.published_at AS publishedAt, i.countries
                      FROM ${from} WHERE ${where.join(' AND ')} ORDER BY i.published_at DESC LIMIT ?`).all(...params, Math.min(40, o.limit || 15)) as any[]
+}
+
+/** Items archived after a moment (for alerts): optionally only some countries, kinds or words. */
+export function archiveSince(sinceIso: string, o: { iso3s?: string[]; kind?: 'news' | 'statement'; words?: string[]; limit?: number } = {}) {
+  const db = archiveDb()
+  if (!db) return []
+  const where: string[] = ['i.archived_at > ?', "i.day >= ?"]
+  const params: any[] = [sinceIso, new Date(Date.now() - 10 * 86400_000).toISOString().slice(0, 10)]
+  let from = 'items i'
+  if (o.iso3s?.length) { from = 'item_countries c JOIN items i ON i.id = c.item_id'; where.push(`c.iso3 IN (${o.iso3s.map(() => '?').join(',')})`); params.push(...o.iso3s) }
+  if (o.kind) { where.push('i.kind = ?'); params.push(o.kind) }
+  if (o.words?.length) { where.push(`(${o.words.map(() => "(' ' || lower(i.title) || ' ') LIKE ?").join(' OR ')})`); params.push(...o.words.map(w => `%${w.toLowerCase()}%`)) }
+  const sel = o.iso3s?.length ? 'SELECT i.*, c.iso3 AS matched' : 'SELECT i.*, NULL AS matched'
+  return db.prepare(`${sel} FROM ${from} WHERE ${where.join(' AND ')} ORDER BY i.published_at DESC LIMIT ?`).all(...params, Math.min(500, o.limit || 200)) as any[]
 }

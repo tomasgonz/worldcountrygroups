@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid lg:grid-cols-12 gap-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
       <!-- ===================== Stories ===================== -->
       <main class="lg:col-span-8 min-w-0">
         <div class="flex items-baseline justify-between mb-3">

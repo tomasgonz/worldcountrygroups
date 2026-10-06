@@ -34,6 +34,7 @@ site/server/data/users.json
 # Secrets and per-user / runtime state (never commit)
 site/server/data/ai-config.json
 site/server/data/digest-state.json
+site/server/data/calendar-feeds.json
 site/server/data/ai-analysis-cache.json
 site/server/data/cron-config.json
 site/server/data/*.tmp
@@ -80,3 +81,6 @@ site/server/data/share-access.jsonl
 site/server/data/privacy-requests.json
 site/server/data/privacy-policy.json
 site/server/data/election-news.json
+site/server/data/notifications.json
+site/server/data/briefing-schedules.json
+site/server/data/alerts.json

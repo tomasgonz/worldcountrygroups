@@ -16,7 +16,7 @@
 
     <div v-if="turn.status === 'done'" class="px-6 py-5">
       <VizHighlightLegend v-if="index === 0" class="mb-4" />
-      <div class="brief prose max-w-none" v-html="html" />
+      <div class="brief prose max-w-none" :dir="turn.language === 'ar' ? 'rtl' : 'auto'" v-html="html" />
       <details class="mt-5 text-xs text-primary-500">
         <summary class="cursor-pointer">How this was researched ({{ turn.steps?.length || 0 }} lookups)</summary>
         <ol class="mt-2 list-decimal pl-5 space-y-0.5"><li v-for="(s, i) in turn.steps" :key="i">{{ s.label }}</li></ol>
@@ -40,6 +40,7 @@
 
     <footer class="px-6 py-3 border-t border-primary-100 flex flex-wrap items-center gap-2">
       <button class="act" @click="$emit('copy', turn)">{{ copied ? 'Copied' : 'Copy' }}</button>
+      <AskExportButtons v-if="turn.status === 'done'" :id="turn.id" />
       <button v-if="!readonly" class="act" :disabled="busy" @click="$emit('rerun', turn)">Re-run with current data</button>
       <button v-if="index > 0 && turn.mine" class="act text-red-600" @click="del">{{ confirmDelete ? 'Click again to delete' : 'Delete' }}</button>
       <span class="flex-1" />

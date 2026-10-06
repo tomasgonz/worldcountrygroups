@@ -25,6 +25,9 @@
               <button v-for="m in MODES" :key="m.v" type="button" role="tab" :aria-selected="mode === m.v" class="px-3 py-1 rounded-full"
                 :class="mode === m.v ? 'bg-white text-primary-900 shadow-sm' : 'text-primary-500 hover:text-primary-800'" @click="mode = m.v">{{ m.label }}</button>
             </div>
+            <select v-model="language" class="text-sm rounded-lg ring-1 ring-primary-200 px-2 py-1.5 bg-white" aria-label="Answer language" title="Language of the answer">
+              <option v-for="l in LANGUAGES" :key="l.v" :value="l.v">{{ l.label }}</option>
+            </select>
             <select v-if="mode === 'briefing'" v-model="template" class="text-sm rounded-lg ring-1 ring-primary-200 px-2 py-1.5 bg-white" aria-label="Briefing type">
               <option v-for="t in TEMPLATES" :key="t.v" :value="t.v">{{ t.label }}</option>
             </select>
@@ -46,13 +49,21 @@
             <span v-if="root?.shared" class="px-2 py-0.5 rounded-full bg-sky-50 text-sky-800 ring-1 ring-sky-200">Shared with the team</span>
             <span v-if="thread.length > 1" class="text-primary-500">{{ thread.length }} questions in this conversation</span>
             <span class="flex-1" />
+            <span v-if="thread.length > 1" class="text-xs text-primary-500">Whole conversation:</span>
+            <AskExportButtons v-if="thread.length > 1" :id="root.id" thread />
             <button class="act" @click="downloadMd">Download conversation (.md)</button>
+            <button v-if="!guest" class="act" @click="scheduling = !scheduling">{{ scheduling ? 'Close' : 'Schedule…' }}</button>
             <button v-if="authState?.role === 'admin'" class="act" @click="shareLink">{{ shareMsg || 'Share link' }}</button>
             <template v-if="root?.mine">
               <button class="act" @click="toggleShare">{{ root.shared ? 'Stop sharing' : 'Share with team' }}</button>
               <button class="act text-red-600" @click="removeThread">{{ confirmDelete ? 'Click again to delete all' : 'Delete conversation' }}</button>
             </template>
           </div>
+          <div v-if="scheduling" class="bg-white rounded-2xl ring-1 ring-accent-200 p-4">
+            <div class="text-sm font-medium text-primary-900 mb-2">Repeat this as a scheduled briefing</div>
+            <AccountScheduleForm :model="scheduleModel" submit-label="Schedule it" @cancel="scheduling = false" @save="createSchedule" />
+          </div>
+          <p v-if="scheduleMsg" class="text-sm text-emerald-700">{{ scheduleMsg }} <NuxtLink to="/account#briefings" class="underline">Manage scheduled briefings</NuxtLink></p>
           <AskTurn v-for="(t, i) in thread" :key="t.id" :turn="t" :index="i" :busy="running" :copied="copiedId === t.id" :readonly="guest"
             @copy="copyTurn" @rerun="rerun" @review="review" @remove="removeTurn" />
         </template>
@@ -152,6 +163,13 @@ const SCOPES = computed(() => [{ v: 'mine', label: 'Mine' }, { v: 'shared', labe
 const question = ref(String(route.query.q || ''))
 const mode = ref<'answer' | 'briefing'>(route.query.mode === 'briefing' ? 'briefing' : 'answer')
 const template = ref(TEMPLATES.some(t => t.v === route.query.template) ? String(route.query.template) : 'free')
+const LANGUAGES = [
+  { v: 'en', label: 'English' }, { v: 'es', label: 'Español' }, { v: 'fr', label: 'Français' }, { v: 'ar', label: 'العربية' },
+  { v: 'zh', label: '中文' }, { v: 'ru', label: 'Русский' }, { v: 'pt', label: 'Português' }, { v: 'de', label: 'Deutsch' },
+]
+const language = ref('en')
+onMounted(() => { try { const l = localStorage.getItem('wcg-ask-lang'); if (l && LANGUAGES.some(x => x.v === l)) language.value = l } catch {} })
+watch(language, (l) => { try { localStorage.setItem('wcg-ask-lang', l) } catch {} })
 const running = ref(false)
 const steps = ref<string[]>([])
 const pendingQuestion = ref('')
@@ -229,19 +247,33 @@ async function ask() {
   const text = question.value.trim()
   if (text.length < 5 || running.value) return
   thread.value = []
-  const id = await stream({ question: text, mode: mode.value, template: template.value })
+  const id = await stream({ question: text, mode: mode.value, template: template.value, language: language.value })
   if (id) { await open(id); question.value = '' }
 }
 async function askFollowUp() {
   const text = followUp.value.trim()
   const parent = thread.value[thread.value.length - 1]
   if (text.length < 3 || running.value || !parent) return
-  const id = await stream({ question: text, mode: followMode.value, template: followMode.value === 'briefing' ? (root.value?.template || 'free') : 'free', parentId: parent.id })
+  const id = await stream({ question: text, mode: followMode.value, template: followMode.value === 'briefing' ? (root.value?.template || 'free') : 'free', parentId: parent.id, language: parent.language || language.value })
   if (id) { followUp.value = ''; await open(root.value?.id || id, id) }
 }
 async function rerun(turn: any) {
-  const id = await stream({ question: turn.question, mode: turn.mode, template: turn.template, rerunOf: turn.id, ...(turn.parentId ? { parentId: turn.parentId } : {}) })
+  const id = await stream({ question: turn.question, mode: turn.mode, template: turn.template, rerunOf: turn.id, language: turn.language || 'en', ...(turn.parentId ? { parentId: turn.parentId } : {}) })
   if (id) await open(turn.parentId ? root.value.id : id, id)
+}
+
+// ---------- scheduling ----------
+const scheduling = ref(false)
+const scheduleMsg = ref('')
+const scheduleModel = computed(() => ({
+  title: (root.value?.question || '').slice(0, 80), question: root.value?.question || '', mode: root.value?.mode || 'briefing',
+  template: root.value?.template || 'free', language: root.value?.language || language.value, frequency: 'weekly', weekday: 1, day: 1, hour: 6, email: true,
+}))
+async function createSchedule(f: any) {
+  try {
+    await $fetch('/api/briefings', { method: 'POST', body: f })
+    scheduling.value = false; scheduleMsg.value = 'Scheduled.'
+  } catch (e: any) { scheduleMsg.value = e?.data?.statusMessage || 'Could not schedule' }
 }
 
 // ---------- actions ----------
