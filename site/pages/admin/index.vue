@@ -346,6 +346,70 @@
     </div>
 
     <!-- AI usage and cost -->
+    <!-- AI spending -->
+    <div id="ai-spend" class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-6 scroll-mt-24">
+      <div class="flex flex-wrap items-baseline justify-between gap-2">
+        <h2 class="font-serif text-xl font-bold text-primary-900">AI spending</h2>
+        <span v-if="spend" class="text-[11px] px-2 py-0.5 rounded-full" :class="spend.source === 'billed' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-800'">{{ spend.source === 'billed' ? 'Billed amounts from OpenAI' : 'Estimated from usage' }}</span>
+      </div>
+      <p class="text-xs text-primary-500 mt-1 mb-4">{{ spend?.source === 'billed' ? `What OpenAI has billed, updated every 3 hours (last ${spend.settings.lastFetch ? formatTime(spend.settings.lastFetch) : 'never'}).` : 'Estimated from tokens used × the prices below. Add an OpenAI Admin key to see the amounts OpenAI actually bills.' }}</p>
+      <template v-if="spend">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-px bg-primary-100 rounded-xl overflow-hidden ring-1 ring-primary-100">
+          <div class="bg-white px-4 py-3"><div class="font-serif text-2xl text-primary-900 tabular-nums">{{ usd(spend.monthToDate) }}</div><div class="text-[11px] text-primary-500">this month so far</div></div>
+          <div class="bg-white px-4 py-3"><div class="font-serif text-2xl text-primary-900 tabular-nums">{{ usd(spend.projected) }}</div><div class="text-[11px] text-primary-500">projected for the month</div></div>
+          <div class="bg-white px-4 py-3"><div class="font-serif text-2xl text-primary-900 tabular-nums">{{ usd(spend.dailyRate) }}</div><div class="text-[11px] text-primary-500">per day (last 7 days)</div></div>
+          <div class="bg-white px-4 py-3"><div class="font-serif text-2xl tabular-nums" :class="(spend.budgetUsedPct || 0) >= 100 ? 'text-red-700' : (spend.budgetUsedPct || 0) >= 80 ? 'text-amber-700' : 'text-primary-900'">{{ spend.budget ? `${spend.budgetUsedPct}%` : '–' }}</div><div class="text-[11px] text-primary-500">{{ spend.budget ? `of ${usd(spend.budget)} budget` : 'no budget set' }}</div></div>
+        </div>
+        <div v-if="spend.budget" class="mt-3 h-2.5 rounded-full bg-primary-100 overflow-hidden relative" :aria-label="`${spend.budgetUsedPct}% of the monthly budget used`">
+          <div class="h-full rounded-full" :class="spend.budgetUsedPct >= 100 ? 'bg-[#e34948]' : spend.budgetUsedPct >= 80 ? 'bg-[#eda100]' : 'bg-[#2a78d6]'" :style="{ width: Math.min(100, spend.budgetUsedPct) + '%' }" />
+          <div class="absolute top-0 h-full border-l-2 border-dashed border-primary-500" :style="{ left: Math.min(100, spend.projected / spend.budget * 100) + '%' }" :title="`Projected: ${usd(spend.projected)}`" />
+        </div>
+        <p v-if="spend.unpricedTokensThisMonth && spend.source !== 'billed'" class="text-xs text-amber-700 mt-2">{{ fmtTok(spend.unpricedTokensThisMonth) }} tokens this month have no price yet, so the estimate is too low. Enter prices below.</p>
+
+        <div class="grid lg:grid-cols-2 gap-6 mt-5">
+          <div>
+            <h3 class="text-sm font-semibold text-primary-800 mb-2">By month</h3>
+            <div class="flex items-end gap-1 h-24">
+              <div v-for="m in spend.months" :key="m.month" class="flex-1 h-full flex flex-col justify-end" tabindex="0"
+                @mousemove="showTip($event, monthLabel(m.month), [{ text: m.billed !== null ? `${usd(m.billed)} billed` : `${usd(m.estimated)} estimated`, color: '#2a78d6' }])" @mouseleave="hideTip">
+                <div class="w-full rounded-t-[3px]" :class="monthVal(m) ? 'bg-[#2a78d6]' : 'bg-primary-100'" :style="{ height: monthVal(m) ? Math.max(4, monthVal(m) / maxMonthSpend * 100) + '%' : '2px' }" />
+              </div>
+            </div>
+            <div class="flex gap-1 mt-1"><span v-for="m in spend.months" :key="m.month" class="flex-1 text-center text-[10px] text-primary-400">{{ monthLabel(m.month).slice(0, 3) }}</span></div>
+            <template v-if="spend.billedLineItems?.length">
+              <h3 class="text-sm font-semibold text-primary-800 mt-4 mb-1">Billed this month, by item</h3>
+              <ul class="text-xs divide-y divide-primary-50"><li v-for="li in spend.billedLineItems.slice(0, 8)" :key="li.item" class="py-1 flex justify-between"><span class="text-primary-700">{{ li.item }}</span><span class="tabular-nums">{{ usd(li.usd) }}</span></li></ul>
+            </template>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold text-primary-800 mb-2">Ask questions this month, by person</h3>
+            <table v-if="spend.byPerson.length" class="w-full text-xs">
+              <thead><tr class="text-left text-primary-400 border-b border-primary-100"><th class="py-1 font-medium">Person</th><th class="py-1 font-medium text-right">Questions</th><th class="py-1 font-medium text-right">Tokens</th><th class="py-1 font-medium text-right">Est. cost</th></tr></thead>
+              <tbody><tr v-for="p in spend.byPerson" :key="p.name" class="border-b border-primary-50"><td class="py-1">{{ p.name }}</td><td class="py-1 text-right tabular-nums">{{ p.questions }}</td><td class="py-1 text-right tabular-nums">{{ fmtTok(p.tokens) }}</td><td class="py-1 text-right tabular-nums">{{ p.usd ? usd(p.usd) : '–' }}</td></tr></tbody>
+            </table>
+            <p v-else class="text-xs text-primary-400">No questions this month yet.</p>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-primary-100 grid sm:grid-cols-2 gap-4">
+          <form class="space-y-1" @submit.prevent="saveSpend({ budget: budgetDraft })">
+            <label class="block text-xs text-primary-500">Monthly budget (USD) — you'll be notified at 50%, 80% and 100%</label>
+            <div class="flex gap-2"><input v-model="budgetDraft" type="number" min="0" step="1" class="w-32 border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="e.g. 50"><button class="text-xs px-3 py-1.5 rounded-lg bg-primary-900 text-white">Save</button><button v-if="spend.budget" type="button" class="text-xs px-3 py-1.5 rounded-lg bg-primary-100 text-primary-600" @click="saveSpend({ budget: null })">Remove</button></div>
+          </form>
+          <form class="space-y-1" @submit.prevent="saveSpend({ adminKey: keyDraft })">
+            <label class="block text-xs text-primary-500">OpenAI Admin key, for billed amounts {{ spend.settings.hasAdminKey ? `(set: ${spend.settings.adminKeyHint})` : '' }}</label>
+            <div class="flex gap-2"><input v-model="keyDraft" type="password" autocomplete="off" class="flex-1 min-w-0 border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="sk-admin-…"><button class="text-xs px-3 py-1.5 rounded-lg bg-primary-900 text-white">Save</button>
+              <button v-if="spend.settings.hasAdminKey" type="button" class="text-xs px-3 py-1.5 rounded-lg bg-primary-100 text-primary-600" @click="saveSpend({ action: 'refresh' })">Refresh now</button>
+              <button v-if="spend.settings.hasAdminKey" type="button" class="text-xs px-3 py-1.5 rounded-lg bg-red-50 text-red-700" @click="saveSpend({ adminKey: '' })">Remove</button></div>
+            <p class="text-[11px] text-primary-400">Create one at platform.openai.com → Settings → Organization → Admin keys (read access to usage is enough). It is used only to read costs, never to make AI requests.</p>
+            <p v-if="spend.settings.lastError" class="text-[11px] text-red-600">Last fetch failed: {{ spend.settings.lastError }}</p>
+          </form>
+        </div>
+        <p v-if="spendMsg" class="text-xs mt-2" :class="spendMsg.ok ? 'text-emerald-700' : 'text-red-600'">{{ spendMsg.text }}</p>
+      </template>
+      <div v-else class="text-sm text-primary-400">Loading…</div>
+    </div>
+
     <div id="ai-usage" class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8 scroll-mt-24">
       <VizTip />
       <div class="flex flex-wrap items-baseline justify-between gap-3 mb-1">
@@ -2030,6 +2094,9 @@ const attention = computed<Attention[]>(() => {
   if (openPrivacy.length) out.push({ key: 'privacy', level: 'problem', title: `${openPrivacy.length} privacy ${openPrivacy.length === 1 ? 'request' : 'requests'} to answer`, detail: 'Data-protection requests must be answered within one month.', tab: 'users', anchor: 'privacy-requests', action: 'Open requests' })
   const pending = users.value.filter((u: any) => u.status === 'pending').length
   if (pending) out.push({ key: 'pending', level: 'problem', title: `${pending} ${pending === 1 ? 'person is' : 'people are'} waiting for approval`, tab: 'users', action: 'Review' })
+  const sp = spend.value
+  if (sp?.budget && sp.budgetUsedPct >= 80) out.push({ key: 'budget', level: 'problem', title: `AI spending is at ${sp.budgetUsedPct}% of the monthly budget`, detail: `${usd(sp.monthToDate)} so far, ${usd(sp.projected)} projected for the month.`, tab: 'ai', anchor: 'ai-spend', action: 'See spending' })
+  else if (sp?.budget && sp.projected > sp.budget) out.push({ key: 'budget-proj', level: 'note', title: `AI spending is on course to exceed the budget (${usd(sp.projected)} projected vs ${usd(sp.budget)})`, tab: 'ai', anchor: 'ai-spend', action: 'See spending' })
   const unpriced = (usage.value?.byModel || []).filter((m: any) => m.input + m.output > 0 && !m.price)
   if (unpriced.length) out.push({ key: 'prices', level: 'setup', title: `No price set for ${unpriced.map((m: any) => m.model).join(', ')}`, detail: 'Enter USD per million tokens so AI costs show in dollars.', tab: 'ai', anchor: 'ai-usage', action: 'Enter prices' })
   const failing = newsSources.value.filter((x: any) => x.enabled && x.lastError)
@@ -2051,7 +2118,7 @@ const overviewTiles = computed(() => {
   const b = backupStatus.value
   return [
     { label: 'scheduled datasets up to date', value: h ? `${(h.counts.ok || 0) + (h.counts.running || 0)} / ${enabled}` : '…', tab: 'data' as TabId },
-    { label: u?.total?.cost ? 'AI cost, last 30 days' : 'AI tokens, last 30 days', value: u ? (u.total.cost ? '$' + u.total.cost.toFixed(2) : fmtTok(u.total.input + u.total.output)) : '…', tab: 'ai' as TabId },
+    { label: spend.value ? `AI spend this month (${spend.value.source})${spend.value.budget ? ` · ${spend.value.budgetUsedPct}% of budget` : ''}` : 'AI spend this month', value: spend.value ? usd(spend.value.monthToDate) : '…', tab: 'ai' as TabId },
     { label: 'questions asked, last 30 days', value: u ? String(u.asks.count) : '…', tab: 'ai' as TabId },
     { label: 'last backup', value: !b ? '…' : !b.configured ? 'Not set up' : b.lastResult?.lastFinishedAt ? formatTime(b.lastResult.lastFinishedAt).split(',')[0] : 'Never', tab: 'backup' as TabId },
   ]
@@ -2264,6 +2331,29 @@ async function deleteShare(l: any) {
   confirmDeleteShare.value = ''
   await shareAction(l, 'delete')
 }
+
+// ---------- AI spending ----------
+const spend = ref<any>(null)
+const budgetDraft = ref<string | number>('')
+const keyDraft = ref('')
+const spendMsg = ref<{ ok: boolean; text: string } | null>(null)
+async function loadSpend() {
+  try { spend.value = await $fetch('/api/admin/ai-spend'); budgetDraft.value = spend.value.budget ?? '' } catch {}
+}
+async function saveSpend(body: any) {
+  spendMsg.value = null
+  try {
+    const r = await $fetch<any>('/api/admin/ai-spend', { method: 'POST', body })
+    keyDraft.value = ''
+    if (r.refresh && !r.refresh.ok) spendMsg.value = { ok: false, text: `Saved, but OpenAI refused: ${r.refresh.error}` }
+    else spendMsg.value = { ok: true, text: r.refresh?.ok ? `Billed costs loaded (${r.refresh.days} days).` : 'Saved.' }
+    await loadSpend()
+  } catch (e: any) { spendMsg.value = { ok: false, text: e?.data?.statusMessage || 'Could not save' } }
+}
+const usd = (v: number) => (v >= 100 ? `$${Math.round(v)}` : v >= 1 ? `$${v.toFixed(2)}` : `$${(v || 0).toFixed(3)}`)
+const monthVal = (m: any) => (m.billed !== null ? m.billed : m.estimated) || 0
+const maxMonthSpend = computed(() => Math.max(0.0001, ...((spend.value?.months || []).map(monthVal))))
+const monthLabel = (m: string) => new Date(m + '-15T12:00:00Z').toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })
 
 // ---------- data health ----------
 const health = ref<any>(null)
@@ -2487,6 +2577,7 @@ onMounted(async () => {
     loadCronJobs(),
     loadHealth(),
     loadUsage(),
+    loadSpend(),
     loadBackupStatus(),
     loadShares(),
     loadPrivacy(),
