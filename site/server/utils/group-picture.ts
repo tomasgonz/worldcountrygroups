@@ -6,6 +6,7 @@ import { getElections } from './upcoming'
 import { getCountryTerms } from './un-elections'
 import { groupLoyalty } from './voting-dynamics'
 import { TRADE_FILE } from './trade-partners'
+import { getRecentResolutions } from './unvotes'
 
 /**
  * One picture of a group (or any list of countries), joining the trackers: aid received,
@@ -98,7 +99,16 @@ export function groupPicture(o: { gid?: string | null; isos?: string[]; newsDays
   const aid = aidForCountries(isos)
   const loyal = g ? groupLoyalty(o.gid!, 5) : null
   const news = archiveForCountries(isos, o.newsDays || 7, 12)
+  const votes = getRecentResolutions(5)
+  const voteSessions = [...new Set(votes.map((r: any) => r.s))].sort((a: any, b: any) => a - b)
+  const asOf = {
+    aid: readDataFile<any>('donor-tracker.json')?._meta?.updated_at || null,
+    trade: readDataFile<any>(TRADE_FILE)?._meta?.last_updated || null,
+    elections: readDataFile<any>('elections.json')?._meta?.last_updated || null,
+    votes: { from: voteSessions[0] ?? null, to: voteSessions[voteSessions.length - 1] ?? null, lastVote: votes.reduce((m: string, r: any) => (r.d > m ? r.d : m), '') || null },
+  }
   return {
+    asOf,
     group: g ? { gid: o.gid, name: g.name, acronym: g.acronym, size: isos.length } : { gid: null, name: null, acronym: null, size: isos.length },
     aid: aid.recipients ? {
       year: aid.latestYear, recipients: aid.recipients, totalUsd: aid.total, change1y: aid.change1y, perCapita: aid.perCapita,

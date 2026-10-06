@@ -4,7 +4,7 @@
       <h2 class="font-serif text-2xl font-bold text-primary-900 whitespace-nowrap">At a glance</h2>
       <div class="flex-1 h-px bg-primary-200" />
     </div>
-    <p class="text-sm text-primary-500 mb-6">The trackers added up for the {{ p.group.size }} members: aid, trade, elections, UN seats and votes, and this week's news.</p>
+    <p class="text-sm text-primary-500 mb-6">The trackers added up for the {{ p.group.size }} members: aid, trade, elections, UN seats and votes, and this week's news. Each panel explains how its figures are calculated; see also <NuxtLink to="/sources#method-groups" class="text-accent-600 hover:text-accent-700 underline">sources and methodology</NuxtLink>.</p>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
       <!-- Aid received -->
@@ -40,6 +40,15 @@
             <p v-else-if="p.aid.multilateralTotal < 0" class="text-xs text-primary-500 mt-2">Members repaid multilateral lenders {{ aidUsd(-p.aid.multilateralTotal) }} more than they received from them (net).</p>
           </div>
         </div>
+        <MethodNote>
+          <p><strong>Source.</strong> OECD Development Assistance Committee, table DAC2A: net official development assistance (ODA) disbursements in current US dollars, {{ p.aid.year }} (the latest year with detail by recipient; later years exist only as preliminary donor totals). Data downloaded {{ day(p.asOf.aid) }}.</p>
+          <p><strong>Total.</strong> The sum over the {{ p.aid.recipients }} members on the OECD list of aid recipients; other members (mostly high-income) count as zero. "Net" means disbursements minus loan principal repaid, so a country's figure can be negative.</p>
+          <p><strong>Change.</strong> On the previous year, in current dollars: not adjusted for inflation or exchange rates.</p>
+          <p><strong>Per person.</strong> Aid divided by population (World Bank, latest year), using only members with a population figure in both parts of the division.</p>
+          <p><strong>Donor countries.</strong> Each country's bilateral aid to the members, as a share of all aid they received. What a country gives to the World Bank, the EU or UN funds is counted under those institutions, not the country, so nothing is counted twice.</p>
+          <p><strong>Multilateral institutions.</strong> Net disbursements by the World Bank (IDA), regional development banks, UN funds, the Global Fund, EU institutions and similar bodies. The remainder is private foundations that report to the OECD.</p>
+          <p><strong>Not covered.</strong> China and other providers that do not report to the OECD.</p>
+        </MethodNote>
       </section>
 
       <!-- Trade -->
@@ -68,6 +77,15 @@
           </li>
         </ul>
         <p class="text-xs text-primary-400 mt-2">{{ p.trade.members }} members with data. Trade between members is included.</p>
+        <MethodNote>
+          <p><strong>Source.</strong> IMF International Merchandise Trade Statistics (IMTS): goods only, current US dollars, {{ p.trade.year }} compared with {{ p.trade.baseYear }}. Data downloaded {{ day(p.asOf.trade) }}.</p>
+          <p><strong>Total trade.</strong> Exports (free on board) plus imports (including cost, insurance and freight) of the {{ p.trade.members }} members with data, as reported by the members. The IMF fills gaps with what partners declare (mirror data) and staff estimates, so figures for small or non-reporting economies rely largely on their partners.</p>
+          <p><strong>Share.</strong> The members' combined trade with a partner divided by their combined trade with the world. Larger economies weigh more: this is the group's share, not an average of members' shares.</p>
+          <p><strong>Change.</strong> Difference in percentage points between {{ p.trade.baseYear }} and {{ p.trade.year }}.</p>
+          <p><strong>Partners tracked.</strong> Emerging: China, India, Brazil, Türkiye, Saudi Arabia, United Arab Emirates, Qatar, Russia, Indonesia, South Africa, Mexico. Traditional: United States, EU-27, Japan, United Kingdom. Trade with all other countries is in the total but not listed.</p>
+          <p><strong>Within the group.</strong> Trade between members is part of the total; a partner that is itself a member is not listed. The EU-27 counts as one partner, and for EU members it includes trade with other EU members.</p>
+          <p><strong>Caution.</strong> Goods routed through trading hubs (UAE, Singapore, the Netherlands) can inflate those hubs' shares; services are not included.</p>
+        </MethodNote>
       </section>
 
       <!-- Elections -->
@@ -92,6 +110,11 @@
             </li>
           </ul>
         </template>
+        <MethodNote>
+          <p><strong>Source.</strong> Wikipedia's national electoral calendars for 2026 and 2027 (CC BY-SA), checked every 6 hours; last updated {{ day(p.asOf.elections) }}.</p>
+          <p><strong>Included.</strong> Direct national votes in member countries: presidential, parliamentary and general elections, and national referendums. Indirect elections (for example a president chosen by parliament) are left out.</p>
+          <p><strong>Dates.</strong> Where only the month is known, the month is shown. Dates can move; snap elections appear once they are announced.</p>
+        </MethodNote>
       </section>
 
       <!-- UN -->
@@ -118,6 +141,14 @@
           <div v-if="p.council.candidates.length"><span class="lead">Candidates: </span>
             <span v-for="(c, i) in p.council.candidates" :key="c.iso3">{{ i ? ', ' : '' }}{{ c.name }}<span class="text-primary-400"> ({{ c.term }})</span></span></div>
         </div>
+        <MethodNote>
+          <template v-if="p.voting">
+            <p><strong>Votes used.</strong> Recorded General Assembly votes in sessions {{ p.asOf.votes.from }}–{{ p.asOf.votes.to }}, up to {{ day(p.asOf.votes.lastVote) }}. Only <em>contested</em> votes count: at least 100 countries voting, and at least 10% of them departing from the overall majority. Near-unanimous votes would make every group look united.</p>
+            <p><strong>Group position.</strong> For each vote, the most common choice among members (yes, no or abstain; absences are ignored).</p>
+            <p><strong>Score.</strong> The share of a member's votes that matched the group position. Members with fewer than 15 such votes are left out. The headline figure is the median member: half vote with the group more often, half less.</p>
+          </template>
+          <p><strong>Security Council.</strong> Current elected and permanent members, members elected for the next term, and declared candidates, from UN election records and the Council's membership history.</p>
+        </MethodNote>
       </section>
 
       <!-- News -->
@@ -149,6 +180,13 @@
             </li>
           </ul>
         </div>
+        <MethodNote>
+          <p><strong>Source.</strong> This site's news archive: news outlets and official sources collected every hour (archive kept since {{ day(p.news.archiveSince) }}). Headlines include official statements; the counts are news articles only.</p>
+          <p><strong>Matching.</strong> An article counts for a member when the country's name or a common short form appears as a whole word in its title or summary ("Niger" does not match "Nigeria"), or when the source covers only that country.</p>
+          <p><strong>Counting.</strong> The total counts each article once, even if it names several members, so the per-country figures can add up to more than the total. The comparison with the week before appears only once the archive covers that week in full.</p>
+          <p><strong>Topics.</strong> Assigned by keyword rules; an article can have more than one.</p>
+          <p><strong>Caution.</strong> Counts measure media attention in the outlets we follow, not the importance of events.</p>
+        </MethodNote>
       </section>
     </div>
   </div>
@@ -170,6 +208,7 @@ const newsChange = computed(() => (p.value?.news?.prev ? ((p.value.news.total - 
 const barW = (v: number | null, max: number) => `${Math.max(2, ((v || 0) / max) * 100)}%`
 const pts = (v: number | null) => (v == null ? '–' : `${v > 0 ? '+' : v < 0 ? '−' : ''}${Math.abs(v).toFixed(1)}`)
 const tradeUsd = (musd: number) => (musd >= 1e6 ? `$${(musd / 1e6).toFixed(1)}tn` : aidUsd(musd * 1e6))
+const day = (iso: string | null | undefined) => (iso ? aidDate(iso) : 'unknown')
 function when(e: any) {
   if (e.precision === 'day') return aidDate(e.date)
   if (e.precision === 'month') return new Date(e.date + '-01T00:00:00Z').toLocaleDateString('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' })

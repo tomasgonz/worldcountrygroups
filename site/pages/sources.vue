@@ -303,6 +303,20 @@
             </div>
           </div>
 
+          <!-- Group dashboards: aid, trade, elections, voting, news -->
+          <div id="method-groups" class="scroll-mt-24">
+            <h3 class="font-semibold text-primary-900 mb-2">Group Dashboards ("At a glance") and Aid by Recipient</h3>
+            <div class="text-sm text-primary-600 space-y-2">
+              <p>Group pages add up the site's trackers for the members. Each panel carries its own note; the rules are:</p>
+              <p><strong>Aid received.</strong> OECD DAC table DAC2A, net ODA disbursements from all official donors in current US dollars, latest year with recipient detail. Group total = sum over members on the OECD recipient list (others count as zero). Net = disbursements minus loan repayments, so it can be negative. Year-on-year changes are nominal (not adjusted for inflation or exchange rates). Per person = aid / World Bank population, using only members with a population figure in both parts of the division. Donor-country shares are bilateral flows over total aid received; contributions countries make to multilateral bodies are attributed to those bodies, so nothing is counted twice. The multilateral share is net disbursements by the World Bank (IDA), regional development banks, UN funds, the Global Fund and EU institutions. China and other non-reporting providers are not covered.</p>
+              <p><strong>Trade.</strong> IMF International Merchandise Trade Statistics (goods only, current US dollars), latest full year compared with five years earlier. A partner's share = the members' combined trade (exports + imports) with that partner / their combined trade with the world, so larger economies weigh more. Changes are in percentage points. Fifteen partners are tracked (11 emerging, 4 traditional); trade between members is included and member partners are not listed; the EU-27 is one partner. The IMF fills reporting gaps with partner (mirror) data and estimates; trading hubs can inflate bilateral figures.</p>
+              <p><strong>Elections.</strong> Wikipedia national electoral calendars (CC BY-SA), checked every 6 hours. Direct national votes only (presidential, parliamentary, general, referendums); indirect elections are excluded.</p>
+              <p><strong>UN voting cohesion.</strong> Recorded General Assembly votes in the last five sessions, contested votes only (at least 100 countries voting and at least 10% departing from the overall majority). The group position on each vote is the members' most common choice (yes, no or abstain; absences ignored). A member's score is the share of its votes matching that position (minimum 15 votes); the headline is the median member.</p>
+              <p><strong>News.</strong> The site's hourly news archive. An article counts for a member when the country's name or a common short form appears as a whole word in the title or summary, or when the source covers only that country. Totals count each article once; per-country counts can add up to more. Topics come from keyword rules. Counts reflect attention in the outlets followed, not the importance of events.</p>
+              <p><strong>Research desk.</strong> When the Ask desk answers questions about a group or region, it uses these same figures, with these notes attached, and cites the pages they come from.</p>
+            </div>
+          </div>
+
           <!-- Country Rankings -->
           <div>
             <h3 class="font-semibold text-primary-900 mb-2">Country Rankings within Groups</h3>

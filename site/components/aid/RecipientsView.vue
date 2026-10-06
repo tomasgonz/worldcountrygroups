@@ -101,7 +101,7 @@
       <!-- groups compared -->
       <section v-if="compare.length" class="card">
         <h3 class="h3">Groups compared</h3>
-        <p class="sub">ODA received by members of each group (latest year). Countries belong to several groups, so totals overlap.</p>
+        <p class="sub">ODA received by members of each group (latest year). Countries belong to several groups, so totals overlap. Whole-world and UN-membership groups are left out.</p>
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
             <thead><tr class="text-left text-[11px] uppercase tracking-wider text-primary-400 border-b border-primary-100">
@@ -120,13 +120,30 @@
         </div>
         <button v-if="compare.length > showGroups" class="mt-2 text-xs text-accent-700 hover:underline" @click="showGroups = compare.length">Show all {{ compare.length }} groups</button>
       </section>
+
+      <!-- methodology -->
+      <section class="card">
+        <h3 class="h3">How these numbers are calculated</h3>
+        <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-xs text-primary-600 leading-relaxed method">
+          <p><strong>Source.</strong> OECD Development Assistance Committee, table DAC2A: net official development assistance (ODA) disbursements from all official donors, current US dollars. Recipient detail runs to {{ v.latestYear }}; later years exist only as preliminary donor totals. Data downloaded {{ v.updatedAt ? aidDate(v.updatedAt) : 'unknown' }}.</p>
+          <p><strong>Net.</strong> Disbursements minus loan principal repaid in the same year. A country repaying more than it receives (often a middle-income borrower) shows a negative figure.</p>
+          <p><strong>Group totals.</strong> The sum over members on the OECD list of aid recipients; other members count as zero (shown as "receiving" out of the group size). Countries belong to several groups, so group totals overlap and cannot be added up.</p>
+          <p><strong>Change.</strong> On the previous year, in current dollars: not adjusted for inflation or exchange rates, so part of a change can be price or currency movement.</p>
+          <p><strong>Per person.</strong> Aid divided by population (World Bank, latest year). For a group, only members with a population figure are used, in both parts of the division.</p>
+          <p><strong>% of GDP.</strong> Aid divided by gross domestic product in current dollars (World Bank, latest year). Aid and GDP years can differ by a year.</p>
+          <p><strong>Donor countries.</strong> Bilateral net ODA from each OECD-reporting country to the recipients, as a share of all aid received. Contributions a country makes to the World Bank, the EU or UN funds are counted under those institutions, not the country, so nothing is counted twice.</p>
+          <p><strong>Multilateral institutions.</strong> Net disbursements by the World Bank (IDA), regional development banks, UN funds, the Global Fund, EU institutions and similar bodies. The rest comes from private foundations that report to the OECD (such as the Gates Foundation).</p>
+          <p><strong>Main donor (table).</strong> The largest single provider of each recipient, which can be a country or an institution, with its share of the recipient's total.</p>
+          <p><strong>Not covered.</strong> China and other providers that do not report to the OECD, private investment, remittances and military aid.</p>
+        </div>
+      </section>
     </template>
   </div>
 </template>
 
 <script setup lang="ts">
 import { isoToFlag } from '~/composables/useGroups'
-import { aidUsd, aidChange } from '~/composables/useAidFormat'
+import { aidUsd, aidChange, aidDate } from '~/composables/useAidFormat'
 
 /** Aid seen from the receiving side, by country and by group. */
 const route = useRoute()
@@ -164,6 +181,7 @@ function scrollTop() { window.scrollTo({ top: 0, behavior: 'smooth' }) }
 .card { @apply bg-white rounded-2xl ring-1 ring-primary-200/70 p-5 sm:p-6 min-w-0; }
 .h3 { @apply font-serif text-xl font-bold text-primary-900; }
 .sub { @apply text-xs text-primary-500 mt-1 mb-3; }
+.method strong { @apply font-medium text-primary-800; }
 .tile { @apply bg-white rounded-2xl ring-1 ring-primary-200/70 p-4; }
 .tl { @apply text-[11px] uppercase tracking-wider text-primary-400; }
 .tv { @apply font-serif text-2xl sm:text-3xl font-bold text-primary-900 tabular-nums; }

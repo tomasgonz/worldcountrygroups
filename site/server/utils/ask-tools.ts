@@ -222,7 +222,7 @@ export async function runTool(name: string, args: any, src: SourceCollector): Pr
           trend_bn_usd: p.aid.series.slice(-6).map(s => ({ year: s.year, bn: bn(s.usd) })),
           top_recipients: p.aid.topRecipients.map(r => ({ country: r.name, bn_usd: bn(r.usd), change_pct: r.change1y, usd_per_person: r.perCapita })),
           main_donor_countries: p.aid.topDonors.map(d => ({ donor: d.name, bn_usd: bn(d.usd), share_of_all_aid_pct: d.share, change_pct: d.change1y })),
-          note: 'OECD DAC2A, ODA disbursements in current USD. Net figures (a negative amount means loan repayments exceeded new aid). Donor countries are bilateral flows; the multilateral figures cover the World Bank (IDA), EU institutions, UN funds and development banks.',
+          note: 'OECD DAC2A, ODA disbursements in current USD; changes are nominal (not inflation-adjusted). Group total = sum over members on the OECD recipient list. Per person uses only members with a population figure (World Bank). Net figures (a negative amount means loan repayments exceeded new aid). Donor countries are bilateral flows; the multilateral figures cover the World Bank (IDA), EU institutions, UN funds and development banks.',
           ref: gid ? src.add(`Aid received: ${label}`, `${SITE}/partners/donors?view=recipients&group=${gid}`, 'page') : src.add('Donor tracker: aid by recipient (OECD DAC2A)', `${SITE}/partners/donors?view=recipients`, 'page'),
         }
       }
@@ -239,15 +239,16 @@ export async function runTool(name: string, args: any, src: SourceCollector): Pr
       const el = p.elections
       if (el.ahead.length || el.recent.length) {
         const eref = src.add('National elections calendar', `${SITE}/elections?tab=national`, 'page')
-        out.national_elections = { next_12_months: el.ahead.map(e => ({ country: e.country, date: e.date, type: e.type })), last_45_days: el.recent.map(e => ({ country: e.country, date: e.date, type: e.type })), ref: eref }
+        out.national_elections = { method: 'Wikipedia national electoral calendars, refreshed every 6 hours; direct national votes only (indirect elections excluded); month-only dates are approximate.', next_12_months: el.ahead.map(e => ({ country: e.country, date: e.date, type: e.type })), last_45_days: el.recent.map(e => ({ country: e.country, date: e.date, type: e.type })), ref: eref }
       }
       const c = p.council
       if (c.sitting.length || c.elected.length || c.candidates.length) {
         out.security_council = { members_now: c.sitting.map(x => x.permanent ? `${x.name} (permanent)` : `${x.name} (${x.term})`), elected_for_next_term: c.elected.map(x => `${x.name} (${x.term})`), candidates: c.candidates.map(x => `${x.name} (${x.term})`), ref: src.add('Security Council elections', `${SITE}/elections?tab=council`, 'page') }
       }
-      if (p.voting) out.un_voting_cohesion = { median_member_with_group_majority_pct: p.voting.median, contested_votes_last_5_sessions: p.voting.contested, least_aligned: p.voting.leastLoyal.map(m => ({ country: m.name, with_majority_pct: m.pct })) }
+      if (p.voting) out.un_voting_cohesion = { method: `Recorded General Assembly votes, sessions ${p.asOf.votes.from}-${p.asOf.votes.to} (to ${p.asOf.votes.lastVote}); contested votes only (>=100 voting, >=10% departing from the overall majority). Group position = members' most common vote; member score = share matching it (min. 15 votes); headline = median member.`, median_member_with_group_majority_pct: p.voting.median, contested_votes_last_5_sessions: p.voting.contested, least_aligned: p.voting.leastLoyal.map(m => ({ country: m.name, with_majority_pct: m.pct })) }
       if (p.news) {
         out.news_last_7_days = {
+          method: 'Site news archive (hourly). Articles matched to members by whole-word country names in title or summary; total counts each article once; topics from keyword rules. Measures media attention, not importance.',
           articles: p.news.total, previous_7_days: p.news.prev ?? 'archive does not cover the week before yet',
           most_covered: p.news.byCountry.slice(0, 6).map(x => ({ country: x.name, articles: x.n, ...(x.prev != null ? { previous_week: x.prev } : {}) })),
           topics: p.news.topics.map(t => ({ topic: t.label, articles: t.n })),

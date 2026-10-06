@@ -37,15 +37,15 @@ function rowFor(iso3: string, r: Recip, st: Record<string, any>) {
   const s = st[iso3] || {}
   const donors = (r.top_donors || []).filter((d: any) => d.usd > 0)
   const top = donors[0]
-  const listed = donors.reduce((a: number, d: any) => a + d.usd, 0)
-  const multi = donors.filter((d: any) => d.kind !== 'country').reduce((a: number, d: any) => a + d.usd, 0)
+  const bk: any = (r as any).by_kind
+  const multi = bk ? (bk.multilateral || 0) + (bk.eu || 0) : null
   return {
     iso3, iso2: s.iso2 || null, name: r.name, year: latest, total: r.total,
     change1y: prev !== null ? pct(r.total, prev) : null, change3y: three !== null ? pct(r.total, three) : null,
     perCapita: s.population ? Math.round((r.total / s.population) * 10) / 10 : null,
     pctGdp: s.gdp ? Math.round((r.total / s.gdp) * 10000) / 100 : null,
     topDonor: top ? { name: top.name, iso3: top.iso3 || null, usd: top.usd, share: r.total ? Math.round((top.usd / r.total) * 1000) / 10 : null } : null,
-    multilateralShare: listed ? Math.round((multi / listed) * 1000) / 10 : null,
+    multilateralShare: multi !== null && r.total > 0 ? Math.round((multi / r.total) * 1000) / 10 : null,
     series: r.series,
   }
 }
@@ -60,7 +60,7 @@ export function recipientsView(gid?: string | null) {
     members = (g.countries || []).map((c: any) => c.iso3)
     group = { gid, name: g.name, acronym: g.acronym, size: members!.length }
   }
-  return { group, ...aidForCountries(members) }
+  return { group, updatedAt: readDataFile<any>('donor-tracker.json')?._meta?.updated_at || null, ...aidForCountries(members) }
 }
 
 /** Aid received by any set of countries (all recipients when null): totals, trend, rows and donors. */
@@ -74,11 +74,14 @@ export function aidForCountries(members: string[] | null) {
   const latestYear = years[years.length - 1]
   const total = series.find(s => s.year === latestYear)?.usd || 0
   const prevTotal = series.find(s => s.year === latestYear - 1)?.usd || 0
-  const pop = rows.reduce((a, r) => a + (st[r.iso3]?.population || 0), 0)
+  // per person: only recipients with a population figure, in numerator and denominator alike
+  const withPop = rows.filter(r => st[r.iso3]?.population)
+  const pop = withPop.reduce((a, r) => a + st[r.iso3].population, 0)
+  const aidWithPop = withPop.reduce((a, r) => a + (valAt(rec[r.iso3], latestYear) || 0), 0)
   return {
     latestYear, recipients: rows.length,
     notReceiving: members ? members.filter(m => !rec[m]).length : null,
-    total, change1y: pct(total, prevTotal), perCapita: pop ? Math.round((total / pop) * 10) / 10 : null,
+    total, change1y: pct(total, prevTotal), perCapita: pop ? Math.round((aidWithPop / pop) * 10) / 10 : null,
     series, rows, ...groupDonors(isos, latestYear, total),
   }
 }
@@ -120,7 +123,9 @@ export function compareGroups() {
     const latest = Math.max(...members.map(i => rec[i].year))
     const total = members.reduce((a, i) => a + (valAt(rec[i], latest) || 0), 0)
     const prev = members.reduce((a, i) => a + (valAt(rec[i], latest - 1) || 0), 0)
-    const pop = members.reduce((a, i) => a + (st[i]?.population || 0), 0)
-    return { ...g, year: latest, total, change1y: pct(total, prev), perCapita: pop ? Math.round((total / pop) * 10) / 10 : null }
+    const withPop = members.filter(i => st[i]?.population)
+    const pop = withPop.reduce((a, i) => a + st[i].population, 0)
+    const aidWithPop = withPop.reduce((a, i) => a + (valAt(rec[i], latest) || 0), 0)
+    return { ...g, year: latest, total, change1y: pct(total, prev), perCapita: pop ? Math.round((aidWithPop / pop) * 10) / 10 : null }
   }).sort((a, b) => b.total - a.total)
 }

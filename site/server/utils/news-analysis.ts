@@ -496,12 +496,15 @@ export function archiveForCountries(isos: string[], days = 7, limit = 12) {
     seen.add(k)
     return true
   }).slice(0, limit).map(i => ({ ...i, countries: parseCountries(i.countries).filter(c => isos.includes(c)) }))
-  const total = counts.reduce((a, c) => a + (c.n || 0), 0)
+  // distinct articles: one that mentions several members counts once in the total (and once for each member below)
+  const tot = db.prepare(`SELECT COUNT(DISTINCT CASE WHEN day >= ? THEN item_id END) AS n, COUNT(DISTINCT CASE WHEN day < ? THEN item_id END) AS prev
+                          FROM item_countries WHERE kind = 'news' AND day >= ? AND iso3 IN (${marks})`).get(from, from, before, ...isos) as any
+  const total = tot?.n || 0
   // the week before only counts once the archive covers all of it
   const first = (db.prepare("SELECT substr(MIN(archived_at), 1, 10) AS d FROM items WHERE kind = 'news'").get() as any)?.d || '9999'
-  const prev = first <= before ? counts.reduce((a, c) => a + (c.prev || 0), 0) : null
+  const prev = first <= before ? tot?.prev || 0 : null
   return {
-    days, total, prev,
+    days, total, prev, archiveSince: first,
     byCountry: counts.map(c => ({ iso3: c.iso3, n: c.n || 0, prev: prev === null ? null : c.prev || 0 })).filter(c => c.n > 0).sort((a, b) => b.n - a.n),
     topics: topics.map(t => ({ id: t.topic, label: topicLabel(t.topic), n: t.n })),
     latest,
