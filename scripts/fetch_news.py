@@ -431,7 +431,8 @@ def compile_country_patterns(mapping):
     patterns = []
     for name, iso3 in mapping.items():
         if name in SHORT_NAMES or len(name) <= 3:
-            pat = re.compile(r'\b' + re.escape(name) + r'\b', re.IGNORECASE)
+            # short forms (US, UK, UAE) are matched case-sensitively: "us" is not the United States
+            pat = re.compile(r'\b' + re.escape(name) + r'\b')
         else:
             # whole words only: "Oman" must not match "woman", nor "Niger" "Nigeria"
             pat = re.compile(r'(?<![A-Za-z])' + re.escape(name) + r'(?![A-Za-z])', re.IGNORECASE)

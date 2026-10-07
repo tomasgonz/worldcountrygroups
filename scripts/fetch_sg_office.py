@@ -303,6 +303,10 @@ def main():
             stmts[k] = rec
         time.sleep(1.2)
 
+    for r in stmts.values():  # re-tag with the current matcher
+        r["countries"] = sorted(tag_countries(r["title"], patterns))
+    for r in appts.values():
+        r["dutyCountries"] = sorted(tag_countries(r.get("post") or "", patterns))
     a_list = sorted(appts.values(), key=lambda a: a["date"], reverse=True)
     s_list = sorted(stmts.values(), key=lambda s: s["date"], reverse=True)
     # keep statements for two years; appointments indefinitely

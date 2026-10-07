@@ -221,6 +221,7 @@ const navItems: NavItem[] = [
       { to: '/conflicts', label: 'Conflicts', desc: 'Armed conflict dashboard' },
       { to: '/partners/trade', label: 'Trade partners', desc: 'Trade with emerging economies' },
       { to: '/partners/donors', label: 'Donor tracker', desc: 'Aid budgets, cuts and donor news' },
+      { to: '/un-budget', label: 'UN budget & reform', desc: 'Fifth Committee, dues and UN80' },
       { to: '/speeches', label: 'Speeches', desc: 'UNGA speech analysis' },
       { to: '/quotes', label: 'Quotes', desc: 'Search leaders’ words since 1946' },
     ],

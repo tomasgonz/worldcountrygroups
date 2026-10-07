@@ -182,6 +182,8 @@
           <div class="flex-1 h-px bg-primary-200"></div>
         </div>
 
+        <CountryUnFootprint :iso="iso" :name="(country as any).name" />
+
         <!-- UN Voting Record -->
         <div id="sec-un-voting" class="mb-10 scroll-mt-24">
           <h3 class="font-serif text-lg font-bold text-primary-800 mb-4">UN Voting Record</h3>

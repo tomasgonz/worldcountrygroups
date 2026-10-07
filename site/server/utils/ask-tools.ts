@@ -16,6 +16,7 @@ import { detectVotingBlocs } from './voting-blocs'
 import { groupLoyalty } from './voting-dynamics'
 import { groupPicture } from './group-picture'
 import { sgOffice } from './sg-office'
+import { payers, session as c5Session, searchStatements, budgetNews, countryBudget } from './un-budget'
 import { getCountrySpeeches, getAllSpeeches } from './speeches'
 import { getRecentStatements } from './statements-feed'
 import { getRecentNews } from './news-feed'
@@ -123,6 +124,7 @@ export const ASK_TOOLS: ToolDef[] = [
   { name: 'recent_news_and_statements', description: 'News and official statements, optionally about a country and/or containing words. Covers the last weeks by default; give from/to dates (YYYY-MM-DD) to search the full archive of everything collected since October 2026.', parameters: { type: 'object', properties: { query: { type: 'string' }, country: { type: 'string' }, days: { type: 'integer', description: 'Default 14' }, from: { type: 'string', description: 'Start date YYYY-MM-DD (searches the archive)' }, to: { type: 'string', description: 'End date YYYY-MM-DD' }, kind: { type: 'string', enum: ['news', 'statement', 'any'] }, limit: { type: 'integer', description: 'Default 12' } } } },
   { name: 'group_picture', description: 'Everything the trackers know about a group of countries, added up: official development aid received (total, per person, trend, top recipients, main donor countries and the multilateral share), goods trade with the big partners (China, India, US, EU... share of the members\' trade now and five years ago), national elections in the next year, Security Council seats held or sought, UN voting cohesion, and the week\'s news by country and topic. Give a known group (e.g. "LDCs", "African Union", "ASEAN", "SIDS") or, for an informal set such as "the Sahel" or "the Horn of Africa", the list of countries.', parameters: { type: 'object', properties: { group: { type: 'string', description: 'Group acronym or name' }, countries: { type: 'array', items: { type: 'string' }, description: 'Instead of a group: the countries (names or ISO codes)' }, label: { type: 'string', description: 'Name for the list of countries, e.g. "Sahel"' } } } },
   { name: 'sg_office', description: "The UN Secretary-General's office: recent statements, messages, remarks and readouts (headlines, dates, links, countries named), and senior appointments (person, nationality, post, duty country: resident coordinators, envoys and special representatives, under/assistant secretaries-general, peace operations leaders). Filter by country (statements naming it; appointees of that nationality or posted there), by words, or by appointment category. Coverage: appointments since 2023 (most complete for resident coordinators), statements for the last 12 months.", parameters: { type: 'object', properties: { what: { type: 'string', enum: ['statements', 'appointments', 'both'] }, country: { type: 'string' }, query: { type: 'string', description: 'Words in the headline or post, e.g. "Sudan", "climate", "Special Envoy"' }, category: { type: 'string', enum: ['resident-coordinator', 'envoy', 'mission', 'senior', 'body'] }, limit: { type: 'integer', description: 'Items per list, up to 25 (default 12)' } } } },
+  { name: 'un_budget', description: "The UN regular budget, dues and reform, and the Fifth Committee (administrative and budgetary questions): what delegations and groups (G77 and China, EU, African Group, ASEAN, CARICOM, CANZ...) said in this session's statements (searchable full text, with passages), the agenda and decisions; who has paid their dues in full this year (honour roll, amount, date), each country's share of the budget (scale of assessments) and its change, countries under Article 19 (arrears), and news on the liquidity crisis and the UN80 reform. Give a country for its dues and statements, a group or words to search statements, or nothing for an overview.", parameters: { type: 'object', properties: { country: { type: 'string' }, group: { type: 'string', description: 'Speaking group, e.g. "G77", "European Union", "African Group"' }, query: { type: 'string', description: 'Words to find in statements and news, e.g. "liquidity", "special political missions", "post reductions"' }, agenda_item: { type: 'string', description: 'Fifth Committee agenda item number, e.g. "138"' } } } },
   ...TRADE_TOOLS,
   ...DONOR_TOOLS,
   ...UNELECTION_TOOLS,
@@ -280,6 +282,40 @@ export async function runTool(name: string, args: any, src: SourceCollector): Pr
         out.appointments_matching = r.appointmentsTotal
         if (!iso3 && !args.query && !args.category) out.appointees_last_3_years_by_region = r.stats.byRegion
       }
+      return out
+    }
+    case 'un_budget': {
+      const iso3 = args.country ? resolveIso3(args.country) : null
+      if (args.country && !iso3) return { error: `Unknown country "${args.country}"` }
+      src.used('fifth-committee.json')
+      const s = c5Session()
+      if (!s) return { error: 'Budget data not collected yet' }
+      const pageRef = src.add('UN budget, dues and reform', `${SITE}/un-budget`, 'page')
+      const p = payers()
+      const out: any = { ref: pageRef, session: { n: s.n, main_session: s.mainSession, statements: s.statementsCount, data_updated: s.updatedAt } }
+      if (iso3) {
+        const c: any = countryBudget(iso3)
+        out.country = c ? {
+          name: countryName(iso3), share_of_regular_budget_pct: c.pct, previous_scale_pct: c.prevPct, scale_period: c.period, rank_by_share: c.rank,
+          paid_in_full_this_year: c.paid ?? null, paid_on: c.paidDate || null, amount_usd: c.paidUsd || null, paid_within_due_period: c.onTime ?? null,
+          under_article_19: c.article19 ?? false, honour_roll_as_of: c.asOf,
+        } : { name: countryName(iso3), note: 'Not found in the scale of assessments' }
+      }
+      if (iso3 || args.group || args.query || args.agenda_item) {
+        const hits = searchStatements({ query: args.query || null, country: iso3, group: args.group || null, item: args.agenda_item || null, limit: 8 })
+        out.statements = hits.map(h => ({ speaker: h.speaker, on_behalf_of: h.onBehalfOf, date: h.date, agenda_items: h.items, topic: h.topic, passages: h.passages, ref: src.add(`${h.onBehalfOf ? `${h.speaker} on behalf of ${h.onBehalfOf}` : h.speaker}, Fifth Committee, ${h.topic || 'statement'} (${h.date})`, h.url, 'statement') }))
+        if (!hits.length) out.statements_note = 'No matching statements this session.'
+      }
+      if (!iso3 && !args.group && !args.agenda_item) {
+        out.dues = p ? { as_of: p.asOf, paid_in_full: p.paidCount, members: p.members, paid_within_due_period: p.onTimeCount, unpaid_count: p.unpaidCount, unpaid_share_of_budget_pct: p.unpaidShare,
+          largest_not_paid_in_full: p.unpaidLargest.slice(0, 8).map((r: any) => ({ country: r.name, share_pct: r.pct })), article_19: (p.article19?.countries || []).map((c: any) => c.country),
+          largest_contributors: p.rows.slice(0, 10).map((r: any) => ({ country: r.name, share_pct: r.pct, previous_pct: r.prevPct, paid_in_full: r.paid })),
+          note: 'Honour roll = regular budget paid in full; partial payments are not shown. Shares are the 2025-2027 scale of assessments.', ref: src.add('UN Committee on Contributions: honour roll and scale of assessments', 'https://www.un.org/en/ga/contributions/honourroll.shtml', 'dataset') } : null
+        out.agenda_discussed = s.discussed.slice(0, 8).map((it: any) => ({ items: it.items, topic: it.topic, dates: it.dates, speakers: it.statements.filter((x: any) => !x.official).map((x: any) => x.group && x.group !== 'Officials' ? `${x.group} (${x.speaker})` : x.speaker) }))
+        out.decisions = s.decisions.map((r: any) => ({ draft: r.draft, description: r.description, action: r.action, resolution: r.resolution }))
+      }
+      const news = budgetNews({ q: args.query || null, limit: 8 })
+      out.news = news.items.map((n: any) => ({ date: n.date.slice(0, 10), title: n.title, outlet: n.outlet, topics: n.topics, ref: src.add(n.title, n.url, 'news') }))
       return out
     }
     case 'group_overview': {
