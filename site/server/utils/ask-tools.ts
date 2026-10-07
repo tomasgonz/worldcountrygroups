@@ -15,6 +15,7 @@ import { getCountryVoteSummary, getCountryThemeStats, getCountryAlignmentScores,
 import { detectVotingBlocs } from './voting-blocs'
 import { groupLoyalty } from './voting-dynamics'
 import { groupPicture } from './group-picture'
+import { sgOffice } from './sg-office'
 import { getCountrySpeeches, getAllSpeeches } from './speeches'
 import { getRecentStatements } from './statements-feed'
 import { getRecentNews } from './news-feed'
@@ -121,6 +122,7 @@ export const ASK_TOOLS: ToolDef[] = [
   { name: 'person_profile', description: 'A leader, minister or UN official: current roles, General Debate speeches, statements delivered and recent mentions.', parameters: { type: 'object', properties: { name: { type: 'string' } }, required: ['name'] } },
   { name: 'recent_news_and_statements', description: 'News and official statements, optionally about a country and/or containing words. Covers the last weeks by default; give from/to dates (YYYY-MM-DD) to search the full archive of everything collected since October 2026.', parameters: { type: 'object', properties: { query: { type: 'string' }, country: { type: 'string' }, days: { type: 'integer', description: 'Default 14' }, from: { type: 'string', description: 'Start date YYYY-MM-DD (searches the archive)' }, to: { type: 'string', description: 'End date YYYY-MM-DD' }, kind: { type: 'string', enum: ['news', 'statement', 'any'] }, limit: { type: 'integer', description: 'Default 12' } } } },
   { name: 'group_picture', description: 'Everything the trackers know about a group of countries, added up: official development aid received (total, per person, trend, top recipients, main donor countries and the multilateral share), goods trade with the big partners (China, India, US, EU... share of the members\' trade now and five years ago), national elections in the next year, Security Council seats held or sought, UN voting cohesion, and the week\'s news by country and topic. Give a known group (e.g. "LDCs", "African Union", "ASEAN", "SIDS") or, for an informal set such as "the Sahel" or "the Horn of Africa", the list of countries.', parameters: { type: 'object', properties: { group: { type: 'string', description: 'Group acronym or name' }, countries: { type: 'array', items: { type: 'string' }, description: 'Instead of a group: the countries (names or ISO codes)' }, label: { type: 'string', description: 'Name for the list of countries, e.g. "Sahel"' } } } },
+  { name: 'sg_office', description: "The UN Secretary-General's office: recent statements, messages, remarks and readouts (headlines, dates, links, countries named), and senior appointments (person, nationality, post, duty country: resident coordinators, envoys and special representatives, under/assistant secretaries-general, peace operations leaders). Filter by country (statements naming it; appointees of that nationality or posted there), by words, or by appointment category. Coverage: appointments since 2023 (most complete for resident coordinators), statements for the last 12 months.", parameters: { type: 'object', properties: { what: { type: 'string', enum: ['statements', 'appointments', 'both'] }, country: { type: 'string' }, query: { type: 'string', description: 'Words in the headline or post, e.g. "Sudan", "climate", "Special Envoy"' }, category: { type: 'string', enum: ['resident-coordinator', 'envoy', 'mission', 'senior', 'body'] }, limit: { type: 'integer', description: 'Items per list, up to 25 (default 12)' } } } },
   ...TRADE_TOOLS,
   ...DONOR_TOOLS,
   ...UNELECTION_TOOLS,
@@ -254,6 +256,29 @@ export async function runTool(name: string, args: any, src: SourceCollector): Pr
           topics: p.news.topics.map(t => ({ topic: t.label, articles: t.n })),
           latest: p.news.latest.slice(0, 6).map((n: any) => ({ title: n.title, outlet: n.outlet, date: String(n.publishedAt || '').slice(0, 10), ref: src.add(n.title, n.url, n.kind === 'statement' ? 'statement' : 'news') })),
         }
+      }
+      return out
+    }
+    case 'sg_office': {
+      const iso3 = args.country ? resolveIso3(args.country) : null
+      if (args.country && !iso3) return { error: `Unknown country "${args.country}"` }
+      src.used('sg-office.json')
+      const n = Math.min(25, Math.max(1, args.limit || 12))
+      const r = sgOffice({ country: iso3, q: args.query || null, category: args.category || null, statements: n, appointments: n })
+      if (!r) return { error: 'Secretary-General data is not collected yet' }
+      const what = args.what || 'both'
+      const out: any = {
+        coverage: `Headlines collected from UN sites (press.un.org, un.org/sg, UN News) via Google News, updated ${String(r.meta.updatedAt || '').slice(0, 16)}. Appointments since ${String(r.stats.appointmentsSince || '').slice(0, 10)}; counts are a lower bound except for resident coordinators.`,
+        ref: src.add('UN Monitor: Secretary-General statements and appointments', `${SITE}/un#sg`, 'page'),
+      }
+      if (what !== 'appointments') {
+        out.statements = r.statements.map((x: any) => ({ date: x.date.slice(0, 10), type: x.kind, headline: x.title, countries: x.countriesC.map((c: any) => c.name), ref: src.add(x.title, x.url, 'statement') }))
+        out.statements_matching = r.statementsTotal
+      }
+      if (what !== 'statements') {
+        out.appointments = r.appointments.map((a: any) => ({ date: a.date.slice(0, 10), person: a.person, nationality: a.nationalityC?.name || null, post: a.post, category: a.category, duty_countries: a.duty.map((c: any) => c?.name), acting: a.acting || undefined, ref: src.add(a.title, a.url, 'news') }))
+        out.appointments_matching = r.appointmentsTotal
+        if (!iso3 && !args.query && !args.category) out.appointees_last_3_years_by_region = r.stats.byRegion
       }
       return out
     }

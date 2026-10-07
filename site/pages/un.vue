@@ -191,6 +191,9 @@
         </div>
       </section>
 
+      <!-- ===================== Secretary-General ===================== -->
+      <UnSgOffice />
+
       <!-- ===================== Secretariat / rights / humanitarian ===================== -->
       <section id="system" class="scroll-mt-24">
         <SectionHead title="Across the UN system" :updated="d.freshness.statements" note="Official statements and reporting" />
@@ -236,6 +239,7 @@ const SECTIONS = [
   { id: 'council', label: 'Security Council' },
   { id: 'analysis', label: 'Council analysis' },
   { id: 'assembly', label: 'General Assembly' },
+  { id: 'sg', label: 'Secretary-General' },
   { id: 'secretariat', label: 'Secretariat' },
   { id: 'rights', label: 'Human rights & justice' },
   { id: 'humanitarian', label: 'Humanitarian' },

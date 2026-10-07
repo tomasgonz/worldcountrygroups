@@ -8,7 +8,7 @@
       "country": "USA",
       "category": "p5-mission",
       "enabled": true,
-      "lastFetch": "2026-10-06T12:00:01.685380+00:00",
+      "lastFetch": "2026-10-07T00:00:01.578012+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -20,7 +20,7 @@
       "country": "GBR",
       "category": "p5-mission",
       "enabled": true,
-      "lastFetch": "2026-10-06T12:00:02.151572+00:00",
+      "lastFetch": "2026-10-07T00:00:01.927857+00:00",
       "lastError": null,
       "statementCount": 20
     },
@@ -51,7 +51,7 @@
         "dateSelector": ".news-text__item__meta-date",
         "baseUrl": "https://russiaun.ru"
       },
-      "lastFetch": "2026-10-06T12:00:03.505395+00:00",
+      "lastFetch": "2026-10-07T00:00:03.991473+00:00",
       "lastError": null,
       "statementCount": 6
     },
@@ -69,7 +69,7 @@
         "linkSelector": "a",
         "baseUrl": "https://www.fmprc.gov.cn/eng/xw/fyrbt"
       },
-      "lastFetch": "2026-10-06T12:00:04.078302+00:00",
+      "lastFetch": "2026-10-07T00:00:04.847541+00:00",
       "lastError": null,
       "statementCount": 14
     },
@@ -81,7 +81,7 @@
       "country": "DEU",
       "category": "major-mission",
       "enabled": true,
-      "lastFetch": "2026-10-06T12:00:05.840206+00:00",
+      "lastFetch": "2026-10-07T00:00:06.613662+00:00",
       "lastError": null,
       "statementCount": 20
     },
@@ -156,7 +156,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-06T12:00:07.047048+00:00",
+      "lastFetch": "2026-10-07T00:00:08.301277+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -168,7 +168,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-06T12:00:08.306195+00:00",
+      "lastFetch": "2026-10-07T00:00:09.179592+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -180,7 +180,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-06T12:00:08.467524+00:00",
+      "lastFetch": "2026-10-07T00:00:09.331830+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -204,9 +204,9 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-06T12:02:58.558196+00:00",
+      "lastFetch": "2026-10-07T00:03:30.118345+00:00",
       "lastError": null,
-      "statementCount": 15
+      "statementCount": 13
     },
     {
       "id": "who",
@@ -228,7 +228,7 @@
       "country": "",
       "category": "io-agency",
       "enabled": true,
-      "lastFetch": "2026-10-06T12:02:58.781741+00:00",
+      "lastFetch": "2026-10-07T00:03:30.338780+00:00",
       "lastError": null,
       "statementCount": 150
     },
@@ -240,7 +240,7 @@
       "country": "",
       "category": "io-agency",
       "enabled": true,
-      "lastFetch": "2026-10-06T12:02:59.025226+00:00",
+      "lastFetch": "2026-10-07T00:03:30.614198+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -264,7 +264,7 @@
       "country": "",
       "category": "regional-org",
       "enabled": true,
-      "lastFetch": "2026-10-06T12:02:59.387932+00:00",
+      "lastFetch": "2026-10-07T00:03:30.974507+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -283,7 +283,7 @@
         "articleUrlPrefix": "/uzbekistan/news/",
         "baseUrl": "https://www.un.int"
       },
-      "lastFetch": "2026-10-06T12:03:00.551930+00:00",
+      "lastFetch": "2026-10-07T00:03:32.430257+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -302,7 +302,7 @@
         "datePattern": "/official-statements/(\\d{8})",
         "datePatternFormat": "MMDDYYYY"
       },
-      "lastFetch": "2026-10-06T12:03:02.122184+00:00",
+      "lastFetch": "2026-10-07T00:03:33.838416+00:00",
       "lastError": null,
       "statementCount": 6
     },
@@ -314,9 +314,9 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:02.468059+00:00",
+      "lastFetch": "2026-10-07T00:03:34.128033+00:00",
       "lastError": null,
-      "statementCount": 32
+      "statementCount": 34
     },
     {
       "id": "un-pga",
@@ -326,7 +326,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:03.292761+00:00",
+      "lastFetch": "2026-10-07T00:03:35.031840+00:00",
       "lastError": "XML parse error: not well-formed (invalid token): line 18, column 69",
       "statementCount": 0
     },
@@ -338,9 +338,9 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:05.597074+00:00",
+      "lastFetch": "2026-10-07T00:03:36.613454+00:00",
       "lastError": null,
-      "statementCount": 83
+      "statementCount": 87
     },
     {
       "id": "icj",
@@ -350,7 +350,7 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:07.222210+00:00",
+      "lastFetch": "2026-10-07T00:03:38.239501+00:00",
       "lastError": null,
       "statementCount": 98
     },
@@ -362,9 +362,9 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:08.850744+00:00",
+      "lastFetch": "2026-10-07T00:03:39.864257+00:00",
       "lastError": null,
-      "statementCount": 95
+      "statementCount": 94
     },
     {
       "id": "dppa",
@@ -374,9 +374,9 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:10.127715+00:00",
+      "lastFetch": "2026-10-07T00:03:41.224791+00:00",
       "lastError": null,
-      "statementCount": 23
+      "statementCount": 27
     },
     {
       "id": "icc",
@@ -386,9 +386,9 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:11.734449+00:00",
+      "lastFetch": "2026-10-07T00:03:42.810814+00:00",
       "lastError": null,
-      "statementCount": 78
+      "statementCount": 81
     },
     {
       "id": "un-spokesperson",
@@ -398,9 +398,21 @@
       "country": "",
       "category": "un-official",
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:13.398272+00:00",
+      "lastFetch": "2026-10-07T00:03:44.478218+00:00",
       "lastError": null,
-      "statementCount": 94
+      "statementCount": 95
+    },
+    {
+      "id": "un-sg-press",
+      "name": "UN Secretary-General: statements, messages and remarks (press.un.org via Google News)",
+      "url": "https://news.google.com/rss/search?q=site%3Apress.un.org%20%22Secretary-General%22%20-appoints%20when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
+      "type": "rss",
+      "country": "",
+      "category": "un-official",
+      "enabled": true,
+      "lastFetch": null,
+      "lastError": null,
+      "statementCount": 0
     },
     {
       "id": "india-mea",
@@ -413,9 +425,9 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:14.822037+00:00",
+      "lastFetch": "2026-10-07T00:03:45.959802+00:00",
       "lastError": null,
-      "statementCount": 68
+      "statementCount": 79
     },
     {
       "id": "brazil-itamaraty",
@@ -428,7 +440,7 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:16.016590+00:00",
+      "lastFetch": "2026-10-07T00:03:47.159185+00:00",
       "lastError": null,
       "statementCount": 4
     },
@@ -443,9 +455,9 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:17.269327+00:00",
+      "lastFetch": "2026-10-07T00:03:48.424940+00:00",
       "lastError": null,
-      "statementCount": 20
+      "statementCount": 19
     },
     {
       "id": "indonesia-kemlu",
@@ -458,9 +470,9 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:18.470134+00:00",
+      "lastFetch": "2026-10-07T00:03:49.636212+00:00",
       "lastError": null,
-      "statementCount": 0
+      "statementCount": 1
     },
     {
       "id": "turkey-mfa",
@@ -473,9 +485,9 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:20.090475+00:00",
+      "lastFetch": "2026-10-07T00:03:51.183523+00:00",
       "lastError": null,
-      "statementCount": 72
+      "statementCount": 71
     },
     {
       "id": "japan-mofa",
@@ -488,7 +500,7 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:21.627643+00:00",
+      "lastFetch": "2026-10-07T00:03:52.783875+00:00",
       "lastError": null,
       "statementCount": 94
     },
@@ -503,9 +515,9 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:22.863876+00:00",
+      "lastFetch": "2026-10-07T00:03:54.035003+00:00",
       "lastError": null,
-      "statementCount": 11
+      "statementCount": 10
     },
     {
       "id": "argentina-cancilleria",
@@ -518,7 +530,7 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:24.130642+00:00",
+      "lastFetch": "2026-10-07T00:03:55.347344+00:00",
       "lastError": null,
       "statementCount": 2
     },
@@ -533,9 +545,9 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:25.364225+00:00",
+      "lastFetch": "2026-10-07T00:03:56.576494+00:00",
       "lastError": null,
-      "statementCount": 21
+      "statementCount": 22
     },
     {
       "id": "canada-gac",
@@ -548,7 +560,7 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:26.782351+00:00",
+      "lastFetch": "2026-10-07T00:03:58.021264+00:00",
       "lastError": null,
       "statementCount": 79
     },
@@ -563,9 +575,9 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:28.429275+00:00",
+      "lastFetch": "2026-10-07T00:03:59.712103+00:00",
       "lastError": null,
-      "statementCount": 86
+      "statementCount": 89
     },
     {
       "id": "spain-exteriores",
@@ -578,9 +590,9 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:29.733733+00:00",
+      "lastFetch": "2026-10-07T00:04:00.963075+00:00",
       "lastError": null,
-      "statementCount": 17
+      "statementCount": 19
     },
     {
       "id": "mexico-sre",
@@ -593,9 +605,9 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:31.027323+00:00",
+      "lastFetch": "2026-10-07T00:04:02.246737+00:00",
       "lastError": null,
-      "statementCount": 39
+      "statementCount": 38
     },
     {
       "id": "thailand-mfa",
@@ -608,9 +620,9 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:32.400928+00:00",
+      "lastFetch": "2026-10-07T00:04:03.619537+00:00",
       "lastError": null,
-      "statementCount": 44
+      "statementCount": 42
     },
     {
       "id": "singapore-mfa",
@@ -623,9 +635,9 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:33.811769+00:00",
+      "lastFetch": "2026-10-07T00:04:04.974276+00:00",
       "lastError": null,
-      "statementCount": 27
+      "statementCount": 16
     },
     {
       "id": "kazakhstan-mfa",
@@ -638,7 +650,7 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:35.277495+00:00",
+      "lastFetch": "2026-10-07T00:04:06.462990+00:00",
       "lastError": null,
       "statementCount": 93
     },
@@ -653,9 +665,9 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:36.546318+00:00",
+      "lastFetch": "2026-10-07T00:04:07.713637+00:00",
       "lastError": null,
-      "statementCount": 26
+      "statementCount": 23
     },
     {
       "id": "pakistan-mofa",
@@ -668,7 +680,7 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:38.118903+00:00",
+      "lastFetch": "2026-10-07T00:04:09.329805+00:00",
       "lastError": null,
       "statementCount": 82
     },
@@ -683,7 +695,7 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:39.668045+00:00",
+      "lastFetch": "2026-10-07T00:04:10.912291+00:00",
       "lastError": null,
       "statementCount": 97
     },
@@ -698,9 +710,9 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:41.059648+00:00",
+      "lastFetch": "2026-10-07T00:04:12.352596+00:00",
       "lastError": null,
-      "statementCount": 27
+      "statementCount": 30
     },
     {
       "id": "vietnam-mofa",
@@ -713,9 +725,9 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:42.414877+00:00",
+      "lastFetch": "2026-10-07T00:04:13.762898+00:00",
       "lastError": null,
-      "statementCount": 36
+      "statementCount": 30
     },
     {
       "id": "bangladesh-mofa",
@@ -728,9 +740,9 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:43.896667+00:00",
+      "lastFetch": "2026-10-07T00:04:15.252983+00:00",
       "lastError": null,
-      "statementCount": 30
+      "statementCount": 31
     },
     {
       "id": "nigeria-mfa",
@@ -743,7 +755,7 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:46.449959+00:00",
+      "lastFetch": "2026-10-07T00:04:16.580470+00:00",
       "lastError": null,
       "statementCount": 10
     },
@@ -758,7 +770,7 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:48.016445+00:00",
+      "lastFetch": "2026-10-07T00:04:18.173005+00:00",
       "lastError": null,
       "statementCount": 100
     },
@@ -773,7 +785,7 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:49.594339+00:00",
+      "lastFetch": "2026-10-07T00:04:19.760659+00:00",
       "lastError": null,
       "statementCount": 100,
       "ownership": "state-run (Saudi Arabia)"
@@ -789,7 +801,7 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:51.148004+00:00",
+      "lastFetch": "2026-10-07T00:04:21.393655+00:00",
       "lastError": null,
       "statementCount": 98,
       "ownership": "state-run (UAE)"
@@ -805,9 +817,9 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:52.733225+00:00",
+      "lastFetch": "2026-10-07T00:04:23.007539+00:00",
       "lastError": null,
-      "statementCount": 93,
+      "statementCount": 95,
       "ownership": "state-run (Qatar)"
     },
     {
@@ -821,7 +833,7 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:54.284833+00:00",
+      "lastFetch": "2026-10-07T00:04:24.597693+00:00",
       "lastError": null,
       "statementCount": 98,
       "ownership": "state-run (Algeria)"
@@ -837,9 +849,9 @@
       "tier": 2,
       "maxItems": 25,
       "enabled": true,
-      "lastFetch": "2026-10-06T12:03:56.063307+00:00",
-      "lastError": null,
-      "statementCount": 10
+      "lastFetch": "2026-10-07T00:04:55.490884+00:00",
+      "lastError": "Failed to fetch https://mfa.gov.gh/index.php/feed/",
+      "statementCount": 0
     }
   ],
   "maxStatements": 2600,
