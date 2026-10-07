@@ -16,6 +16,7 @@ import { detectVotingBlocs } from './voting-blocs'
 import { groupLoyalty } from './voting-dynamics'
 import { groupPicture } from './group-picture'
 import { sgOffice } from './sg-office'
+import { leadership } from './un-leadership'
 import { payers, session as c5Session, searchStatements, budgetNews, countryBudget } from './un-budget'
 import { getCountrySpeeches, getAllSpeeches } from './speeches'
 import { getRecentStatements } from './statements-feed'
@@ -125,6 +126,7 @@ export const ASK_TOOLS: ToolDef[] = [
   { name: 'group_picture', description: 'Everything the trackers know about a group of countries, added up: official development aid received (total, per person, trend, top recipients, main donor countries and the multilateral share), goods trade with the big partners (China, India, US, EU... share of the members\' trade now and five years ago), national elections in the next year, Security Council seats held or sought, UN voting cohesion, and the week\'s news by country and topic. Give a known group (e.g. "LDCs", "African Union", "ASEAN", "SIDS") or, for an informal set such as "the Sahel" or "the Horn of Africa", the list of countries.', parameters: { type: 'object', properties: { group: { type: 'string', description: 'Group acronym or name' }, countries: { type: 'array', items: { type: 'string' }, description: 'Instead of a group: the countries (names or ISO codes)' }, label: { type: 'string', description: 'Name for the list of countries, e.g. "Sahel"' } } } },
   { name: 'sg_office', description: "The UN Secretary-General's office: recent statements, messages, remarks and readouts (headlines, dates, links, countries named), and senior appointments (person, nationality, post, duty country: resident coordinators, envoys and special representatives, under/assistant secretaries-general, peace operations leaders). Filter by country (statements naming it; appointees of that nationality or posted there), by words, or by appointment category. Coverage: appointments since 2023 (most complete for resident coordinators), statements for the last 12 months.", parameters: { type: 'object', properties: { what: { type: 'string', enum: ['statements', 'appointments', 'both'] }, country: { type: 'string' }, query: { type: 'string', description: 'Words in the headline or post, e.g. "Sudan", "climate", "Special Envoy"' }, category: { type: 'string', enum: ['resident-coordinator', 'envoy', 'mission', 'senior', 'body'] }, limit: { type: 'integer', description: 'Items per list, up to 25 (default 12)' } } } },
   { name: 'un_budget', description: "The UN regular budget, dues and reform, and the Fifth Committee (administrative and budgetary questions): what delegations and groups (G77 and China, EU, African Group, ASEAN, CARICOM, CANZ...) said in this session's statements (searchable full text, with passages), the agenda and decisions; who has paid their dues in full this year (honour roll, amount, date), each country's share of the budget (scale of assessments) and its change, countries under Article 19 (arrears), and news on the liquidity crisis and the UN80 reform. Give a country for its dues and statements, a group or words to search statements, or nothing for an overview.", parameters: { type: 'object', properties: { country: { type: 'string' }, group: { type: 'string', description: 'Speaking group, e.g. "G77", "European Union", "African Group"' }, query: { type: 'string', description: 'Words to find in statements and news, e.g. "liquidity", "special political missions", "post reductions"' }, agenda_item: { type: 'string', description: 'Fifth Committee agenda item number, e.g. "138"' } } } },
+  { name: 'un_leadership', description: "Who leads the UN: the Secretary-General, Deputy Secretary-General, Presidents of the General Assembly and ECOSOC, and the heads of key departments, funds and programmes (DPPA, DPO, OCHA, OHCHR, UNHCR, UNDP, UNICEF, WFP, DESA, DMSPC and others): current holder, nationality, since when, and their recent statements (UN-site headlines). Give an office (e.g. \"OCHA\", \"President of the General Assembly\", \"peacekeeping\") or a person's name; nothing lists all offices.", parameters: { type: 'object', properties: { office: { type: 'string' }, person: { type: 'string' }, query: { type: 'string', description: 'Words to find in their statements' } } } },
   ...TRADE_TOOLS,
   ...DONOR_TOOLS,
   ...UNELECTION_TOOLS,
@@ -317,6 +319,30 @@ export async function runTool(name: string, args: any, src: SourceCollector): Pr
       const news = budgetNews({ q: args.query || null, limit: 8 })
       out.news = news.items.map((n: any) => ({ date: n.date.slice(0, 10), title: n.title, outlet: n.outlet, topics: n.topics, ref: src.add(n.title, n.url, 'news') }))
       return out
+    }
+    case 'un_leadership': {
+      const L = leadership()
+      if (!L) return { error: 'Leadership data not collected yet' }
+      src.used('un-leadership.json')
+      const qf = fold(args.office || '')
+      const pf = fold(args.person || '')
+      const words = fold(args.query || '').split(/\s+/).filter((w: string) => w.length > 2)
+      let offs = L.offices
+      if (qf) offs = offs.filter((o: any) => fold(`${o.short} ${o.label} ${(o.terms || []).join(' ')}`).includes(qf) || qf.split(/\s+/).every((w: string) => fold(`${o.short} ${o.label} ${(o.terms || []).join(' ')}`).includes(w)))
+      if (pf) offs = offs.filter((o: any) => o.holder && fold(o.holder.name).includes(pf))
+      const pageRef = src.add('UN leadership', `${SITE}/un-leadership`, 'page')
+      const detail = offs.length <= 3
+      return {
+        ref: pageRef, official_list_copied: L.roster?.pastedAt?.slice(0, 10) || null,
+        offices: offs.map((o: any) => ({
+          office: o.label, short: o.short,
+          holder: o.holder ? { name: o.holder.name, nationality: o.holder.country?.name || null, since: o.holder.since || null, source: o.holder.source, needs_confirmation: !!o.holder.stale } : 'not confirmed',
+          note: o.note || undefined,
+          statements: (detail ? o.statements.filter((s: any) => !words.length || words.some((w: string) => fold(s.title).includes(w))).slice(0, 8) : o.statements.slice(0, 2))
+            .map((s: any) => ({ date: s.date.slice(0, 10), headline: s.title, ref: src.add(s.title, s.url, 'statement') })),
+        })),
+        note: 'Holders from the UN leadership page (when copied in), appointment announcements, the PGA site, ECOSOC election news and Wikidata; statements are UN-site headlines naming the office or holder.',
+      }
     }
     case 'group_overview': {
       const gid = groupId(args.group)

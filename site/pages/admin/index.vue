@@ -880,6 +880,7 @@
 
     <!-- ═══ SOURCES ═══ -->
     <div v-show="tab === 'sources'">
+      <AdminLeadershipRoster />
       <!-- Coverage -->
       <div v-if="health?.coverage" id="coverage" class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-8 scroll-mt-24">
         <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1">

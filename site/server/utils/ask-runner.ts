@@ -105,6 +105,7 @@ Method:
 - When a dataset is old or its refresh is failing (see Data currency below), say so where it affects the answer.
 - To find what was said about a topic, use search_texts (full speeches since 1946, statements, news); quote passages verbatim and cite them.
 - For what the current Secretary-General has said or whom he has appointed, use sg_office.
+- For who heads a UN office (PGA, ECOSOC President, USGs, agency heads) and what they said, use un_leadership.
 - For the UN budget, dues, arrears, the liquidity crisis, UN80 reform or the Fifth Committee, use un_budget.
 - For the Secretary-General race use sg_selection; for Security Council and PGA elections use un_elections.
 - For trade with emerging economies use trade_partners; for aid budgets, cuts and donor news use donor_tracker.
@@ -127,6 +128,7 @@ const LABELS: Record<string, (a: any) => string> = {
   voting_agreement: a => `Voting agreement: ${a.country_a} and ${a.country_b}`,
   search_ga_resolutions: a => `General Assembly resolutions: “${a.query}”${a.session ? ` (session ${a.session})` : ''}`,
   group_overview: a => `Group: ${a.group}`,
+  un_leadership: a => `UN leadership${a.office ? `: ${a.office}` : ''}${a.person ? `: ${a.person}` : ''}`,
   un_budget: a => `UN budget and Fifth Committee${a.country ? `: ${a.country}` : ''}${a.group ? ` (${a.group})` : ''}${a.query ? ` “${a.query}”` : ''}`,
   sg_office: a => `Secretary-General's office${a.what && a.what !== 'both' ? `: ${a.what}` : ''}${a.country ? ` (${a.country})` : ''}${a.query ? ` “${a.query}”` : ''}`,
   group_picture: a => `Group picture: ${a.group || a.label || (a.countries || []).slice(0, 4).join(', ')}`,

@@ -256,6 +256,8 @@ def main():
     queries += [("s", f"{STATEMENT_QUERY} after:{a} before:{b}") for a, b in s_windows]
     q_windows = windows(1095 if not backfilled.get("senior") else 92, 92, now)
     queries += [("a", f"{q} after:{a} before:{b}") for q in SENIOR_QUERIES for a, b in q_windows]
+    if not backfilled.get("senior2017"):  # the current Secretary-General's whole tenure, for heads of departments
+        queries += [("a", f"{q} after:{a} before:{b}") for q in SENIOR_QUERIES[:2] for a, b in windows((now.date() - datetime(2017, 1, 1, tzinfo=timezone.utc).date()).days, 92, now)]
     queries += [("x", q) for q in EXTRA_QUERIES]
     print(f"  {len(queries)} searches ({len(a_windows)} appointment windows, {len(s_windows)} statement windows)")
 
@@ -326,7 +328,7 @@ def main():
             "category_labels": CATEGORY_LABELS,
             "kind_labels": KIND_LABELS,
             "seen_this_run": {"appointments": seen_a, "statements": seen_s},
-            "backfilled": {"appointments": True, "statements": True, "senior": True},
+            "backfilled": {"appointments": True, "statements": True, "senior": True, "senior2017": True},
         },
         "appointments": a_list,
         "statements": s_list,
