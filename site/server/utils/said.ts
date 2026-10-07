@@ -3,6 +3,7 @@ import { join } from 'path'
 import { createHash } from 'crypto'
 import { readDataFile } from './data-file'
 import { callLLM, isAIConfigured } from './llm-client'
+import { getRegistry } from './wcg'
 
 /**
  * "What was said": notable quotes of the day and the week for a section of the site.
@@ -27,12 +28,13 @@ interface Cand {
   quote: string
   context: string
   speakerHint: string | null
+  iso3?: string | null
   title: string
   url: string
   outlet: string
   date: string
 }
-export interface SaidQuote { quote: string; speaker: string; role: string | null; why: string | null; title: string; url: string; outlet: string; date: string }
+export interface SaidQuote { quote: string; speaker: string; role: string | null; why: string | null; title: string; url: string; outlet: string; date: string; iso3?: string | null }
 interface Store { sections: Record<string, Record<string, { hash: string; quotes: SaidQuote[]; updatedAt: string; candidates: number; method: string }>> }
 
 function load(): Store {
@@ -132,7 +134,7 @@ function feedCands(days: number, onlyOffices?: (id: string) => boolean): Omit<Ca
     const who = o.holder?.name ? `${o.holder.name} (${o.label})` : o.label
     for (const st of o.statements || []) {
       if (st.date < since) continue
-      for (const q of extractQuotes(st.title)) out.push({ quote: q, context: st.title, speakerHint: who, title: st.title, url: st.url, outlet: st.host || 'UN', date: st.date })
+      for (const q of extractQuotes(st.title)) out.push({ quote: q, context: st.title, speakerHint: who, iso3: 'UN', title: st.title, url: st.url, outlet: st.host || 'UN', date: st.date })
     }
   }
   return out
@@ -154,13 +156,13 @@ function candidates(section: SaidSection, days: number): Omit<Cand, 'id'>[] {
       if (!s.textKey || !s.date || s.date < since || s.official) continue
       const who = s.onBehalfOf ? `${s.speaker} on behalf of ${s.onBehalfOf}` : (s.iso3 || /European Union/.test(s.speaker) ? s.speaker : officialName(s.speaker))
       const sents = statementSentences(texts[s.textKey] || '').slice(0, 10)
-      for (const q of sents) out.push({ quote: q, context: `Fifth Committee, ${s.topic || 'statement'}: statement by ${who}`, speakerHint: who, title: `${who}: ${s.topic || 'Fifth Committee statement'}`, url: s.url, outlet: 'Fifth Committee statement', date: `${s.date}T12:00:00Z` })
+      for (const q of sents) out.push({ quote: q, context: `Fifth Committee, ${s.topic || 'statement'}: statement by ${who}`, speakerHint: who, iso3: s.iso3 || (/European Union/.test(s.speaker) ? 'EU' : null), title: `${who}: ${s.topic || 'Fifth Committee statement'}`, url: s.url, outlet: 'Fifth Committee statement', date: `${s.date}T12:00:00Z` })
     }
     // officials' introductions (Controller, ACABQ, OIOS) are often the most informative on figures
     for (const s of f?.statements || []) {
       if (!s.textKey || !s.date || s.date < since || !s.official) continue
       const who = officialName(s.speaker)
-      for (const q of statementSentences(texts[s.textKey] || '').slice(0, 5)) out.push({ quote: q, context: `Fifth Committee, ${s.topic || 'statement'}: ${who}`, speakerHint: who, title: `${who}: ${s.topic || 'Fifth Committee'}`, url: s.url, outlet: 'Fifth Committee statement', date: `${s.date}T12:00:00Z` })
+      for (const q of statementSentences(texts[s.textKey] || '').slice(0, 5)) out.push({ quote: q, context: `Fifth Committee, ${s.topic || 'statement'}: ${who}`, speakerHint: who, iso3: 'UN', title: `${who}: ${s.topic || 'Fifth Committee'}`, url: s.url, outlet: 'Fifth Committee statement', date: `${s.date}T12:00:00Z` })
     }
     out.push(...archiveCands("(title LIKE '%budget%' OR title LIKE '%liquidity%' OR title LIKE '%arrears%' OR title LIKE '%dues%' OR title LIKE '%UN80%' OR title LIKE '%Fifth Committee%' OR summary LIKE '%Fifth Committee%' OR summary LIKE '%liquidity crisis%' OR summary LIKE '%UN80%') AND (" + UN_WHERE + ")", [], days))
     return out
@@ -182,7 +184,7 @@ function candidates(section: SaidSection, days: number): Omit<Cand, 'id'>[] {
 function fold(s: string) { return (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase() }
 
 async function pick(section: SaidSection, window: 'today' | 'week', cands: Cand[], max: number): Promise<{ quotes: SaidQuote[]; method: string }> {
-  const asQuote = (c: Cand, speaker: string, role: string | null, why: string | null): SaidQuote => ({ quote: c.quote, speaker, role, why, title: c.title, url: c.url, outlet: c.outlet, date: c.date })
+  const asQuote = (c: Cand, speaker: string, role: string | null, why: string | null): SaidQuote => ({ quote: c.quote, speaker, role, why, title: c.title, url: c.url, outlet: c.outlet, date: c.date, iso3: c.iso3 ?? null })
   if (!cands.length) return { quotes: [], method: 'none' }
   if (!isAIConfigured()) {
     const quotes = cands.filter(c => c.speakerHint && c.quote.split(/\s+/).length >= 8).slice(0, max).map(c => asQuote(c, c.speakerHint!, null, null))
@@ -224,6 +226,7 @@ Answer with JSON only: [{"id": 12, "speaker": "Volker Türk", "role": "UN High C
 
 /** Refresh every section (called every 3 hours); the model is only asked when the candidates have changed. */
 export async function runSaid(): Promise<Record<string, any>> {
+  if (!existsSync(REPO)) syncRepository()
   const store = load()
   const report: Record<string, any> = {}
   for (const section of Object.keys(SAID_SECTIONS) as SaidSection[]) {
@@ -236,6 +239,7 @@ export async function runSaid(): Promise<Record<string, any>> {
       if (prev && prev.hash === hash && prev.quotes.length) { report[`${section}/${window}`] = 'unchanged'; continue }
       const r = await pick(section, window, cands, max)
       store.sections[section][window] = { hash, quotes: r.quotes, updatedAt: new Date().toISOString(), candidates: cands.length, method: r.method }
+      addToRepository(section, r.quotes)
       report[`${section}/${window}`] = `${r.quotes.length} of ${cands.length} (${r.method})`
       save(store)
     }
@@ -247,4 +251,104 @@ export function getSaid(section: string) {
   const s = load().sections[section]
   if (!s) return null
   return { today: s.today || null, week: s.week || null }
+}
+
+// ---------------------------------------------------------------- quote repository
+// Picked quotes are kept for good in quotes-said.json, in the same shape as the General Debate
+// repository (quotes-index.json, which is rebuilt from the speeches), and searched together with it.
+const REPO = join(DATA_DIR, 'quotes-said.json')
+const UN_ROLE = /\b(Guterres|Secretary-General|Under-Secretary|High Commissioner|High Representative|Executive Director|Administrator|Emergency Relief|Spokesperson|President of the (General Assembly|Economic and Social Council)|UN chief|UN rights chief|UN refugee chief|Controller|Chair of the|Committee on Contributions|Board of Auditors|UNICEF|UNHCR|WFP|UNDP|OCHA|UNFPA|UN Women|UNEP|UNRWA|Special (Envoy|Representative|Rapporteur|Adviser)|United Nations)\b/i
+const THEME: Record<string, string[]> = { budget: ['reform_un'], un: [], leadership: [] }
+
+function countryOf(q: SaidQuote): { iso3: string; iso2: string; country: string } {
+  const reg = getRegistry()
+  if (q.iso3 && q.iso3 !== 'UN') {
+    if (q.iso3 === 'EU') return { iso3: 'EU', iso2: 'EU', country: 'European Union' }
+    const m: any = reg.getCountryMembership(q.iso3)
+    return { iso3: q.iso3, iso2: m?.iso2 || '', country: m?.name || q.iso3 }
+  }
+  if (q.iso3 === 'UN' || UN_ROLE.test(`${q.speaker} ${q.role || ''}`)) return { iso3: 'UN', iso2: '', country: 'United Nations' }
+  // a country named in the speaker line ("Pakistan", "Uruguay on behalf of …")
+  const hay = q.speaker
+  // the first country named ("Australia on behalf of Canada, Australia and New Zealand" → Australia)
+  let best: any = null
+  let bestAt = Infinity
+  for (const c of reg.getAllCountries() as any[]) {
+    if (!c.iso3 || !c.name) continue
+    const m = new RegExp(`(^|[^A-Za-z])${c.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}([^A-Za-z]|$)`).exec(hay)
+    if (m && (m.index < bestAt || (m.index === bestAt && c.name.length > best.name.length))) { best = c; bestAt = m.index }
+  }
+  return best ? { iso3: best.iso3, iso2: best.iso2 || '', country: best.name } : { iso3: '', iso2: '', country: '' }
+}
+
+function levelOf(q: SaidQuote, iso3: string) {
+  if (iso3 === 'UN') return 'UN official'
+  if (/on behalf of/i.test(q.speaker)) return 'Group of countries'
+  return iso3 ? 'Delegation' : ''
+}
+
+function gaSession(d: string) {
+  const dt = new Date(d)
+  return dt.getUTCFullYear() - 1945 - ((dt.getUTCMonth() + 1) * 100 + dt.getUTCDate() < 909 ? 1 : 0)
+}
+
+function loadRepo(): { _meta: any; quotes: any[] } {
+  try {
+    return existsSync(REPO) ? JSON.parse(readFileSync(REPO, 'utf-8')) : { _meta: {}, quotes: [] }
+  } catch {
+    return { _meta: {}, quotes: [] }
+  }
+}
+
+/** UN officials by name and office, from the leadership page ("Guterres" → "António Guterres", Secretary-General). */
+function normaliseOfficial(q: SaidQuote): SaidQuote {
+  const L = readDataFile<any>('un-leadership.json')
+  const who = fold(`${q.speaker} ${q.role || ''}`)
+  for (const o of L?.offices || []) {
+    const name: string | undefined = o.holder?.name
+    if (!name) continue
+    const sn = fold(name.split(/\s+/).pop() || '')
+    const byName = sn.length > 3 && new RegExp(`\\b${sn}\\b`).test(who)
+    const byOffice = fold(q.speaker) === fold(o.label) || (o.label.length > 25 && who.includes(fold(o.label)))
+    if (byName || byOffice) {
+      const people = readDataFile<any>('people-index.json')?.people || []
+      const p = people.find((x: any) => fold(x.name).endsWith(sn))
+      return { ...q, speaker: p?.name || name, role: o.label, iso3: 'UN' }
+    }
+  }
+  return q
+}
+
+function addToRepository(section: SaidSection, quotes: SaidQuote[]) {
+  quotes = quotes.map(normaliseOfficial)
+  if (!quotes.length) return
+  const repo = loadRepo()
+  const have = new Set(repo.quotes.map((x: any) => x.q.toLowerCase().slice(0, 120)))
+  let added = 0
+  for (const q of quotes) {
+    const k = q.quote.toLowerCase().slice(0, 120)
+    if (have.has(k)) continue
+    have.add(k)
+    const c = countryOf(q)
+    const date = (q.date || new Date().toISOString()).slice(0, 10)
+    repo.quotes.push({
+      id: `said-${createHash('sha1').update(q.quote + q.url).digest('hex').slice(0, 12)}`, q: q.quote,
+      iso3: c.iso3, iso2: c.iso2, country: c.country, session: gaSession(date), year: Number(date.slice(0, 4)), date,
+      speaker: q.speaker, title: q.role || '', level: levelOf(q, c.iso3), themes: THEME[section] || [], tone: '',
+      status: 'exact', url: q.url, source: 'statements', sourceLabel: q.outlet, context: q.why || null, section, addedAt: new Date().toISOString(),
+    })
+    added++
+  }
+  if (!added) return
+  repo._meta = { generated: new Date().toISOString(), total: repo.quotes.length, source: 'Quotes picked for "What was said": copied verbatim from statements, UN press releases and news headlines' }
+  const text = JSON.stringify(repo)
+  writeFileSync(REPO + '.tmp', text)
+  renameSync(REPO + '.tmp', REPO)
+}
+
+/** Backfill: add every quote currently shown in the panels (used once when the repository is created). */
+export function syncRepository() {
+  const store = load()
+  for (const [section, wins] of Object.entries(store.sections)) for (const w of Object.values(wins)) addToRepository(section as SaidSection, w.quotes)
+  return loadRepo().quotes.length
 }

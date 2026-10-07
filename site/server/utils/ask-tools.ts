@@ -120,7 +120,7 @@ export const ASK_TOOLS: ToolDef[] = [
   { name: 'security_council', description: 'Security Council: current members and presidency, recent decisions with votes, vetoes and meetings; optionally filtered by topic words.', parameters: { type: 'object', properties: { topic: { type: 'string', description: 'e.g. "Haiti", "Ukraine", "Middle East"' }, since: { type: 'string', description: 'ISO date, default one year ago' } } } },
   { name: 'general_debate_speeches', description: "UN General Debate speeches (AI-analysed): a country's speeches with summary, themes, policy positions and stance on conflicts; or, with a topic, which countries addressed it in a session.", parameters: { type: 'object', properties: { country: { type: 'string' }, topic: { type: 'string', description: 'Word or phrase to look for in summaries and positions' }, session: { type: 'integer', description: 'e.g. 81 for 2026' } } } },
   { name: 'general_debate_overview', description: 'Session-level picture of a General Debate: most common themes and their change from the previous year, most-mentioned countries, crises discussed.', parameters: { type: 'object', properties: { session: { type: 'integer' } } } },
-  { name: 'search_quotes', description: 'Verified quotes from General Debate speeches by words, country, speaker or years.', parameters: { type: 'object', properties: { query: { type: 'string' }, country: { type: 'string' }, speaker: { type: 'string' }, from_year: { type: 'integer' }, to_year: { type: 'integer' } } } },
+  { name: 'search_quotes', description: 'Verified quotes from General Debate speeches since 1946, and notable quotes from recent statements, UN briefings and Fifth Committee statements (copied verbatim), by words, country, speaker or years.', parameters: { type: 'object', properties: { query: { type: 'string' }, country: { type: 'string' }, speaker: { type: 'string' }, from_year: { type: 'integer' }, to_year: { type: 'integer' } } } },
   { name: 'person_profile', description: 'A leader, minister or UN official: current roles, General Debate speeches, statements delivered and recent mentions.', parameters: { type: 'object', properties: { name: { type: 'string' } }, required: ['name'] } },
   { name: 'recent_news_and_statements', description: 'News and official statements, optionally about a country and/or containing words. Covers the last weeks by default; give from/to dates (YYYY-MM-DD) to search the full archive of everything collected since October 2026.', parameters: { type: 'object', properties: { query: { type: 'string' }, country: { type: 'string' }, days: { type: 'integer', description: 'Default 14' }, from: { type: 'string', description: 'Start date YYYY-MM-DD (searches the archive)' }, to: { type: 'string', description: 'End date YYYY-MM-DD' }, kind: { type: 'string', enum: ['news', 'statement', 'any'] }, limit: { type: 'integer', description: 'Default 12' } } } },
   { name: 'group_picture', description: 'Everything the trackers know about a group of countries, added up: official development aid received (total, per person, trend, top recipients, main donor countries and the multilateral share), goods trade with the big partners (China, India, US, EU... share of the members\' trade now and five years ago), national elections in the next year, Security Council seats held or sought, UN voting cohesion, and the week\'s news by country and topic. Give a known group (e.g. "LDCs", "African Union", "ASEAN", "SIDS") or, for an informal set such as "the Sahel" or "the Horn of Africa", the list of countries.', parameters: { type: 'object', properties: { group: { type: 'string', description: 'Group acronym or name' }, countries: { type: 'array', items: { type: 'string' }, description: 'Instead of a group: the countries (names or ISO codes)' }, label: { type: 'string', description: 'Name for the list of countries, e.g. "Sahel"' } } } },
@@ -504,16 +504,17 @@ export async function runTool(name: string, args: any, src: SourceCollector): Pr
       }
     }
     case 'search_quotes': {
-      src.used('quotes-index.json')
-      const file = readDataFile<any>('quotes-index.json')
+      src.used('quotes-index.json', 'quotes-said.json')
+      const file = { quotes: [...(readDataFile<any>('quotes-index.json')?.quotes || []), ...(readDataFile<any>('quotes-said.json')?.quotes || [])] }
       const iso3 = args.country ? resolveIso3(args.country) : null
       const q = fold(args.query || ''), sp = fold(args.speaker || '')
       const hits = (file?.quotes || []).filter((x: any) => x.status !== 'unverified'
         && (!iso3 || x.iso3 === iso3) && (!sp || fold(x.speaker).includes(sp))
         && (!args.from_year || x.year >= args.from_year) && (!args.to_year || x.year <= args.to_year)
         && (!q || q.split(/\s+/).every((w: string) => fold(x.q).includes(w))))
-        .sort((a: any, b: any) => b.year - a.year).slice(0, 10)
-      return { quotes: hits.map((x: any) => ({ quote: x.q, country: x.country, speaker: x.speaker || null, year: x.year, verification: x.status, ref: src.add(`${x.country} ${x.year}: “${x.q.slice(0, 60)}…”`, `${SITE}/quotes?q=${encodeURIComponent('"' + x.q.slice(0, 40) + '"')}`, 'quote') })) }
+        .sort((a: any, b: any) => String(b.date || b.year).localeCompare(String(a.date || a.year))).slice(0, 10)
+      return { quotes: hits.map((x: any) => ({ quote: x.q, country: x.country || null, speaker: x.speaker || null, role: x.title || null, date: x.date || x.year, source: x.source === 'statements' ? (x.sourceLabel || 'statement') : 'General Debate speech', verification: x.status,
+        ref: x.source === 'statements' ? src.add(`${x.speaker}: “${x.q.slice(0, 60)}…”`, x.url, 'quote') : src.add(`${x.country} ${x.year}: “${x.q.slice(0, 60)}…”`, `${SITE}/quotes?q=${encodeURIComponent('"' + x.q.slice(0, 40) + '"')}`, 'quote') })) }
     }
     case 'person_profile': {
       src.used('people-index.json')

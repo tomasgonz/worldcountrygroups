@@ -4,11 +4,12 @@
     <!-- ===================== Hero + search ===================== -->
     <section class="bg-white border-b border-primary-100">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
-        <p class="text-[11px] uppercase tracking-[0.14em] text-primary-500">UN General Debate &middot; 1946&ndash;{{ latestYear }}</p>
+        <p class="text-[11px] uppercase tracking-[0.14em] text-primary-500">UN General Debate since 1946 &middot; statements and briefings</p>
         <h1 class="font-serif text-4xl sm:text-5xl text-primary-900 mt-2 leading-[1.05]">Quote explorer</h1>
         <p class="text-primary-500 mt-3 max-w-3xl leading-relaxed">
-          Search {{ meta ? meta.total.toLocaleString() : '' }} key passages from leaders' and delegations' speeches at the General Assembly.
-          Each quote is checked against the speech text before it is shown.
+          Search {{ meta ? meta.total.toLocaleString() : '' }} key passages from leaders' and delegations' speeches at the General Assembly<span v-if="meta?.statements">,
+          and {{ meta.statements.toLocaleString() }} quotes from recent statements, UN briefings and Fifth Committee debates</span>.
+          Each quote is checked against its source before it is shown.
         </p>
 
         <form class="mt-6 flex gap-2 max-w-3xl" role="search" @submit.prevent="apply">
@@ -63,6 +64,14 @@
               <option v-for="l in LEVELS" :key="l" :value="l">{{ l }}</option>
             </select>
             <span class="text-[11px] text-primary-400">Speaker names and titles are recorded from 2025 onward.</span>
+          </label>
+          <label class="block">
+            <span class="lbl">Source</span>
+            <select v-model="f.source" class="ctl" @change="apply">
+              <option value="">All sources</option>
+              <option value="debate">General Debate speeches</option>
+              <option value="statements">Statements and briefings (since 2026)</option>
+            </select>
           </label>
           <label class="block">
             <span class="lbl">Verification</span>
@@ -140,21 +149,22 @@
           <li v-for="x in items" :key="x.id" class="bg-white rounded-2xl ring-1 ring-primary-200/70 p-6 group">
             <blockquote class="font-serif text-xl sm:text-[1.35rem] leading-snug text-primary-900" v-html="'&ldquo;' + highlight(x.q) + '&rdquo;'" />
             <div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
-              <span class="text-lg leading-none">{{ flag(x.iso2) }}</span>
+              <span v-if="x.iso2" class="text-lg leading-none">{{ flag(x.iso2) }}</span>
               <NuxtLink v-if="x.speaker" :to="`/people?q=${encodeURIComponent(x.speaker)}`" class="font-medium text-primary-800 hover:text-accent-700">{{ x.speaker }}</NuxtLink>
               <span v-if="x.title" class="text-primary-500">{{ x.title }},</span>
-              <button class="text-primary-700 hover:text-accent-700" @click="f.country = x.iso3; apply()">{{ x.country }}</button>
+              <button v-if="x.country" class="text-primary-700 hover:text-accent-700" @click="f.country = x.iso3; apply()">{{ x.country }}</button>
               <span class="text-primary-300">&middot;</span>
               <span class="text-primary-500 tabular-nums">{{ x.date ? fmtDate(x.date) : x.year }}</span>
-              <span class="text-primary-400 text-xs">(session {{ x.session }})</span>
+              <span v-if="x.source === 'statements'" class="text-primary-400 text-xs">{{ x.sourceLabel }}</span>
+              <span v-else class="text-primary-400 text-xs">(General Debate, session {{ x.session }})</span>
             </div>
             <div class="mt-3 flex flex-wrap items-center gap-2">
               <span class="text-[11px] px-2 py-0.5 rounded-full ring-1" :class="STATUS[x.status].cls" :title="STATUS[x.status].hint">{{ STATUS[x.status].label }}</span>
               <button v-for="t in x.themes.slice(0, 3)" :key="t" class="text-[11px] px-2 py-0.5 rounded-full bg-primary-50 text-primary-600 hover:bg-primary-100" @click="f.theme = t; apply()">{{ themeLabel(t) }}</button>
               <span class="flex-1" />
               <button class="text-xs text-primary-500 hover:text-accent-700" @click="copy(x)">{{ copied === x.id ? 'Copied' : 'Copy citation' }}</button>
-              <NuxtLink :to="`/countries/${x.iso3.toLowerCase()}/speeches`" class="text-xs text-primary-500 hover:text-accent-700">Read the speech</NuxtLink>
-              <a v-if="x.url" :href="x.url" target="_blank" rel="noopener" class="text-xs text-primary-500 hover:text-accent-700">UN record</a>
+              <NuxtLink v-if="x.source !== 'statements'" :to="`/countries/${x.iso3.toLowerCase()}/speeches`" class="text-xs text-primary-500 hover:text-accent-700">Read the speech</NuxtLink>
+              <a v-if="x.url" :href="x.url" target="_blank" rel="noopener" class="text-xs text-primary-500 hover:text-accent-700">{{ x.source === 'statements' ? 'Source' : 'UN record' }}</a>
             </div>
           </li>
         </ul>
@@ -179,7 +189,7 @@
 <script setup lang="ts">
 import { isoToFlag, useCountries } from '~/composables/useGroups'
 
-useHead({ title: 'Quote explorer — UN General Debate' })
+useHead({ title: 'Quote explorer — World Country Groups' })
 const route = useRoute()
 const router = useRouter()
 const { show: tipShow, hide: tipHide } = useVizTip()
@@ -208,7 +218,7 @@ const STATUS: Record<string, { label: string; cls: string; hint: string }> = {
 // ---------- filter state, synced with the URL ----------
 const fromQuery = () => ({
   q: String(route.query.q || ''), country: String(route.query.country || ''), speaker: String(route.query.speaker || ''),
-  theme: String(route.query.theme || ''), level: String(route.query.level || ''),
+  theme: String(route.query.theme || ''), level: String(route.query.level || ''), source: String(route.query.source || ''),
   from: Number(route.query.from) || (undefined as number | undefined), to: Number(route.query.to) || (undefined as number | undefined),
   status: String(route.query.status || 'verified'), sort: String(route.query.sort || ''),
 })
@@ -227,7 +237,7 @@ function apply() {
   router.replace({ query: params.value })
 }
 function reset() {
-  Object.assign(f, { q: '', country: '', speaker: '', theme: '', level: '', from: undefined, to: undefined, status: 'verified', sort: 'newest' })
+  Object.assign(f, { q: '', country: '', speaker: '', theme: '', level: '', source: '', from: undefined, to: undefined, status: 'verified', sort: 'newest' })
   draft.value = ''
   router.replace({ query: {} })
 }
@@ -276,6 +286,7 @@ const chips = computed(() => {
   if (f.speaker) out.push({ key: 'speaker', label: f.speaker })
   if (f.theme) out.push({ key: 'theme', label: themeLabel(f.theme) })
   if (f.level) out.push({ key: 'level', label: f.level })
+  if (f.source) out.push({ key: 'source', label: f.source === 'debate' ? 'General Debate' : 'Statements and briefings' })
   if (f.from || f.to) out.push({ key: 'years', label: `${f.from || 1946}–${f.to || latestYear}` })
   return out
 })
@@ -298,7 +309,9 @@ const copied = ref('')
 async function copy(x: any) {
   const who = [x.speaker, x.title].filter(Boolean).join(', ')
   const when = x.date ? fmtDate(x.date) : String(x.year)
-  const cite = `“${x.q}” — ${who ? who + ', ' : ''}${x.country}, UN General Assembly General Debate, ${when} (session ${x.session}).${x.url ? ' ' + x.url : ''}`
+  const cite = x.source === 'statements'
+    ? `“${x.q}” — ${who}${x.country && !who.includes(x.country) ? ', ' + x.country : ''}, ${x.sourceLabel || 'statement'}, ${when}.${x.url ? ' ' + x.url : ''}`
+    : `“${x.q}” — ${who ? who + ', ' : ''}${x.country}, UN General Assembly General Debate, ${when} (session ${x.session}).${x.url ? ' ' + x.url : ''}`
   try { await navigator.clipboard.writeText(cite); copied.value = x.id; setTimeout(() => { copied.value = '' }, 2000) } catch {}
 }
 </script>
