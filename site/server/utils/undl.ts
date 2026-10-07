@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, writeFileSync, renameSync } from 'fs'
+import { existsSync, readFileSync, writeFileSync, renameSync, statSync, chownSync } from 'fs'
 import { join } from 'path'
 
 /** UN Digital Library API: the admin's personal key, stored privately on the server. */
@@ -18,6 +18,8 @@ function load(): Cfg {
 function save(c: Cfg) {
   writeFileSync(FILE + '.tmp', JSON.stringify(c, null, 2), { mode: 0o600 })
   renameSync(FILE + '.tmp', FILE)
+  // the scheduled jobs run as the data directory's owner, not as the server's user
+  try { const st = statSync(DATA_DIR); chownSync(FILE, st.uid, st.gid) } catch {}
 }
 
 export function undlKey() { return load().key }
@@ -40,7 +42,8 @@ export function setUndlKey(key: string | null) {
 export async function testUndl() {
   const c = load()
   if (!c.key) throw new Error('No key saved')
-  const url = `${UNDL_API}/search?${new URLSearchParams({ cc: 'Voting Data', rg: '3', sf: 'latest first', so: 'd', format: 'json' })}`
+  // the key is accepted on the library's search with MARCXML output (the /api/v1 endpoints are not enabled for it)
+  const url = `https://digitallibrary.un.org/search?${new URLSearchParams({ cc: 'Voting Data', rg: '3', sf: 'latest first', so: 'd', of: 'xm' })}`
   let status = 0
   let detail = ''
   let sample: any = null
@@ -48,12 +51,19 @@ export async function testUndl() {
     const r = await fetch(url, { headers: { Authorization: `Token ${c.key}`, Accept: 'application/json', 'User-Agent': 'WorldCountryGroups/1.0 (research)' }, signal: AbortSignal.timeout(30_000) })
     status = r.status
     const text = await r.text()
-    try { sample = JSON.parse(text) } catch { sample = null }
-    detail = sample ? JSON.stringify(sample).slice(0, 600) : text.slice(0, 300)
+    if (text.trimStart().startsWith('<?xml')) {
+      const ids = [...text.matchAll(/<controlfield tag="001">(\d+)</g)].map(m => m[1])
+      const titles = [...text.matchAll(/<datafield tag="245"[^>]*>\s*<subfield code="a">([^<]+)/g)].map(m => m[1])
+      sample = { records: ids.length }
+      detail = `Read ${ids.length} voting records, newest: ${titles[0] || ids[0] || ''}`
+    } else {
+      try { sample = JSON.parse(text) } catch { sample = null }
+      detail = sample ? JSON.stringify(sample).slice(0, 600) : text.slice(0, 300)
+    }
   } catch (e: any) {
     detail = String(e?.message || e)
   }
-  const ok = status === 200 && !!sample && !sample.error
+  const ok = status === 200 && !!sample && !sample.error && (sample.records ?? 1) > 0
   c.lastTest = { at: new Date().toISOString(), ok, status, detail: detail.slice(0, 600) }
   save(c)
   return { ok, status, detail: c.lastTest.detail }

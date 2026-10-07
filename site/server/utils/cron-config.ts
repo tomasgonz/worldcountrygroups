@@ -68,6 +68,7 @@ const DEFAULT_JOBS: Def[] = [
   d('fetch-fifth-committee', 'UN budget, reform and Fifth Committee', 'scripts/fetch_fifth_committee.py', '20 */4 * * *', true, ['fifth-committee.json'], 10, 20),
   d('fetch-un-leadership', 'UN leadership: office holders and statements', 'scripts/fetch_un_leadership.py', '15 */6 * * *', true, ['un-leadership.json'], 14, 20),
   d('build-said', 'What was said (quotes of the day and week)', 'scripts/refresh_site_data.py said', '35 */3 * * *', true, ['said.json'], 8, 15),
+  d('fetch-undl-votes', 'General Assembly votes (UN Digital Library API)', 'scripts/fetch_undl_votes.py', '15 6 * * *', true, ['undl-votes-status.json'], 26, 40),
   d('fetch-sg-office', 'Secretary-General appointments and statements', 'scripts/fetch_sg_office.py', '50 */3 * * *', true, ['sg-office.json'], 8, 15),
   d('fetch-election-news', 'Elections news (Security Council, PGA, national)', 'scripts/fetch_election_news.py', '35 */6 * * *', true, ['election-news.json'], 8, 10),
   d('run-briefings', 'Scheduled briefings', 'scripts/refresh_site_data.py briefings', '5 * * * *', true, [], null, 55),
