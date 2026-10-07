@@ -328,6 +328,14 @@ def main():
                       "source": "Dag Hammarskjöld Library, General Assembly resolutions tables"},
             "resolutions": sorted(ga, key=lambda r: (r["date"] or "", r["id"]), reverse=True),
         }
+    # member-by-member votes from the UN Digital Library (scripts/undl_sc.py), when collected
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from undl_sc import merge as undl_merge
+        rep = undl_merge(unsc=out["unsc-votes.json"], write=False)
+        print(f"  Digital Library member votes: {rep.get('filled', 0)} filled, {rep.get('added', 0)} added")
+    except Exception as e:  # noqa: BLE001
+        print(f"  Digital Library merge skipped: {e}")
     for name, data in out.items():
         path = os.path.join(DATA, name)
         tmp = path + ".tmp"
