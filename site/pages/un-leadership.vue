@@ -25,6 +25,8 @@
         Updated {{ stamp(d.updatedAt) }}.
       </p>
 
+      <SaidPanel section="leadership" />
+
       <section v-for="(label, gid) in d.groups" :id="`g-${gid}`" :key="gid" class="scroll-mt-24">
         <div class="head"><h2 class="font-serif text-2xl text-primary-900">{{ label }}</h2></div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">

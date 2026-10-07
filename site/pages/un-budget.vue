@@ -29,6 +29,8 @@
         </div>
       </div>
 
+      <SaidPanel section="budget" />
+
       <!-- ===================== Fifth Committee ===================== -->
       <section id="committee" class="scroll-mt-24">
         <div class="head"><h2 class="font-serif text-3xl text-primary-900">Fifth Committee, {{ ordinal(S.n) }} session</h2>

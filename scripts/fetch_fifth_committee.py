@@ -111,7 +111,7 @@ def parse_statements(sess, patterns):
             lang = (re.search(r"_([a-z]{2})\.pdf$", href) or [None, None])[1]
             ob = ON_BEHALF.search(label)
             speaker = ON_BEHALF.sub("", label).strip()
-            official = bool(re.match(r"^(Introductory remarks|Address by|Statement by the (Controller|Under-Secretary|Secretary-General|Chair))", label, re.I))
+            official = bool(re.match(r"^(Introductory remarks|Address by|Presentation (of|by)|Statement by the (Controller|Under-Secretary|Secretary-General|Chair))", label, re.I))
             iso = None if official else (sorted(tag_countries(speaker, patterns)) or [None])[0]
             out.append({
                 "items": items, "topic": topic or None, "date": date, "speaker": speaker, "onBehalfOf": ob.group(1) if ob else None,

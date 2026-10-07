@@ -35,6 +35,8 @@
         </div>
       </div>
 
+      <SaidPanel section="un" />
+
       <!-- ===================== Security Council ===================== -->
       <section id="council" class="scroll-mt-24">
         <SectionHead title="Security Council" :updated="d.freshness.council" note="Official record, Dag Hammarskjöld Library" />

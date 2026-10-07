@@ -60,6 +60,7 @@ export const AI_TASKS = [
   { id: 'meeting-doc', label: 'Bilateral meeting brief', group: 'Documents', hint: 'Talking points document' },
   { id: 'risk-score', label: 'Risk scores', group: 'Quick tasks', hint: 'Short structured scoring' },
   { id: 'anomalies', label: 'Anomaly detection', group: 'Quick tasks', hint: 'Short structured output' },
+  { id: 'said', label: 'What was said (quote picks)', group: 'Quick tasks', hint: 'Chooses notable quotes every 3 hours; short structured output' },
   { id: 'group-suggestions', label: 'Group suggestions', group: 'Quick tasks', hint: 'Short structured output' },
   { id: 'smart-search', label: 'Smart search', group: 'Quick tasks', hint: 'Interprets search queries; speed matters' },
   { id: 'chat', label: 'Intelligence chat', group: 'Chat', hint: 'Interactive answers; speed matters' },
