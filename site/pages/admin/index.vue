@@ -536,6 +536,7 @@
 
     <!-- ═══ DATA ═══ -->
     <div v-show="tab === 'data'">
+      <AdminUndlKey />
     <!-- Data health -->
     <div id="data-health" class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-6 scroll-mt-24">
       <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1">

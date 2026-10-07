@@ -85,3 +85,6 @@ site/server/data/notifications.json
 site/server/data/briefing-schedules.json
 site/server/data/alerts.json
 site/server/data/ai-spend.json
+
+# UN Digital Library API key
+site/server/data/undl-config.json
