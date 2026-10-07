@@ -24,7 +24,7 @@ export interface AlertSettings {
   email: 'instant' | 'daily' | 'off'
   dailyHour: number              // UTC
 }
-interface AlertState { lastCheck?: string; elections?: Record<string, string>; sgPolls?: number; sgNominees?: string[]; attention?: Record<string, string>; pending?: AlertItem[]; lastDaily?: string }
+interface AlertState { lastCheck?: string; elections?: Record<string, string>; sgPolls?: number; sgPollStatus?: Record<string, string>; sgNominees?: string[]; attention?: Record<string, string>; pending?: AlertItem[]; lastDaily?: string }
 interface AlertItem { kind: string; title: string; body?: string; url?: string }
 interface Store { settings: Record<string, AlertSettings>; state: Record<string, AlertState> }
 
@@ -135,11 +135,21 @@ function collect(userId: string, cfg: AlertSettings & { followed: string[] }, st
     const sg = readDataFile<any>('sg-selection.json')
     const polls = sg?.process?.straw_polls || []
     const nominees = (sg?.candidates || []).map((c: any) => `${c.name}:${c.status}`)
-    if (!first && st.sgPolls !== undefined && polls.length > st.sgPolls) {
-      const p = polls[polls.length - 1]
-      const top = [...(p.results || [])].sort((a: any, b: any) => (b.encourage || 0) - (a.encourage || 0)).slice(0, 3)
-      out.push({ kind: 'sg', title: `Secretary-General race: straw poll ${p.n || polls.length} results`, body: top.map((r: any) => `• ${r.candidate}: ${r.encourage} encourage, ${r.discourage} discourage`).join('\n'), url: '/elections' })
+    // one alert when a straw poll is announced, another when its (leaked) results are published
+    const prevStatus = st.sgPollStatus || (st.sgPolls !== undefined ? Object.fromEntries(polls.slice(0, st.sgPolls).map((p: any) => [String(p.n), p.results?.length ? 'results' : 'held'])) : null)
+    if (!first && prevStatus) {
+      for (const p of polls) {
+        const was = prevStatus[String(p.n)]
+        const has = p.results?.length > 0
+        if (has && was !== 'results') {
+          const top = [...p.results].sort((a: any, b: any) => (b.encourage || 0) - (a.encourage || 0)).slice(0, 4)
+          out.push({ kind: 'sg', title: `Secretary-General race: results of straw poll ${p.n} (${fmt(p.date)})`, body: top.map((r: any) => `• ${r.candidate}: ${r.encourage} encouraged, ${r.discourage} discouraged, ${r.no_opinion ?? 0} no opinion`).join('\n'), url: '/elections' })
+        } else if (!has && !was) {
+          out.push({ kind: 'sg', title: p.status === 'expected' ? `Secretary-General race: straw poll ${p.n} expected on ${fmt(p.date)}` : `Secretary-General race: straw poll ${p.n} held on ${fmt(p.date)}; results not yet public`, body: p.colour_coded ? 'Colour-coded ballots: permanent members\' votes will be distinguishable.' : undefined, url: '/elections' })
+        }
+      }
     }
+    st.sgPollStatus = Object.fromEntries(polls.map((p: any) => [String(p.n), p.results?.length ? 'results' : (p.status || 'held')]))
     if (!first && st.sgNominees) {
       for (const n of nominees) if (!st.sgNominees.includes(n)) {
         const [nm, status] = n.split(':')

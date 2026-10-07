@@ -856,14 +856,24 @@ def main():
         if not nm or "secretary-general" not in tl:
             continue
         n = ordw.get(nm.group(1)) or int(re.sub(r"\D", "", nm.group(1)))
-        rec = {"url": it["url"], "title": it["title"], "date": (it["date"] or "")[:10], "colour_coded": None}
+        rec = {"url": it["url"], "title": it["title"], "date": (it["date"] or "")[:10], "colour_coded": None, "scheduled": None}
         prev_poll = next((x for x in ((prev.get("process") or {}).get("straw_polls") or []) if x.get("n") == n and x.get("scr_url") == it["url"]), None)
-        if prev_poll and prev_poll.get("scr_colour_coded") is not None:
+        if prev_poll and prev_poll.get("scr_colour_coded") is not None and prev_poll.get("scr_scheduled"):
             rec["colour_coded"] = prev_poll["scr_colour_coded"]
+            rec["scheduled"] = prev_poll["scr_scheduled"]
         else:
             try:
                 body = strip(fetch(it["url"]).decode("utf-8", "replace"))
-                if re.search(r"no difference between the ballots|same ballots?|identical ballots|yet to begin using colou?r-coded", body, re.I):
+                # the day of the vote: "Tomorrow morning (7 October)", "This afternoon (7 October)", "on 7 October"
+                md = re.search(r"(?:Tomorrow|Today|This (?:morning|afternoon)|Tomorrow (?:morning|afternoon))[^(]{0,20}\((\d{1,2} [A-Z][a-z]+)\)", body) \
+                    or re.search(r"straw poll[^.]{0,80}?\bon (\d{1,2} [A-Z][a-z]+)", body)
+                if md:
+                    try:
+                        y = int(rec["date"][:4]) if rec["date"] else now.year
+                        rec["scheduled"] = datetime.strptime(f"{md.group(1)} {y}", "%d %B %Y").date().isoformat()
+                    except ValueError:
+                        pass
+                if re.search(r"no difference between the ballots|same ballots?|identical ballots|yet to begin using colou?r-coded|no distinction between the ballots", body, re.I):
                     rec["colour_coded"] = False
                 elif re.search(r"(?:first|will use|using|be used)[^.]{0,80}colou?r-coded ballots|colou?r-coded ballots[^.]{0,60}(?:will be|are expected to be|were) used", body, re.I):
                     rec["colour_coded"] = True
@@ -1115,13 +1125,18 @@ def main():
                           "scr_url": (scr_polls.get(fp["n"]) or {}).get("url"), "results_official": False})
     for n, s in scr_polls.items():  # announced/held per SCR, not in either list
         if not any(p["n"] == n for p in polls) and s.get("date") and s["date"] <= today:
-            polls.append({"n": n, "date": s["date"], "colour_coded": bool(s.get("colour_coded")), "ballot_note": "Results not yet reported",
+            when = s.get("scheduled") or s["date"]
+            polls.append({"n": n, "date": when, "colour_coded": bool(s.get("colour_coded")),
+                          "ballot_note": "Expected; results are not released officially and usually leak within hours" if when > today else "Results not yet public (they usually leak within hours of the vote)",
+                          "scr_scheduled": s.get("scheduled"), "scr_colour_coded": s.get("colour_coded"),
                           "candidates_voted": None, "ballots_cast": None, "results": [], "source_url": s["url"],
                           "sources": [{"name": "Security Council Report: What's in Blue", "url": s["url"]}], "scr_url": s["url"], "results_official": False})
     if not polls and prev.get("process", {}).get("straw_polls"):
         polls = prev["process"]["straw_polls"]
         source_status["straw_polls"] = "kept from previous run"
     polls.sort(key=lambda p: (p["date"] or "", p["n"]))
+    for p in polls:
+        p["status"] = "results" if p.get("results") else ("expected" if (p.get("date") or "") > today else "held")
     if wp_polls and f8_polls and len(wp_polls) != len(f8_polls):
         discrepancies.append(f"Wikipedia table has {len(wp_polls)} straw polls; 1 for 8 Billion lists {len(f8_polls)}")
 

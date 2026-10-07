@@ -64,7 +64,7 @@ const DEFAULT_JOBS: Def[] = [
   d('fetch-donor-news', 'Donor news', 'scripts/fetch_donor_news.py', '20 */6 * * *', true, ['donor-news.json'], 13, 10),
   d('archive-feeds', 'News and statements archive', 'scripts/archive_feeds.py', '10 * * * *', true, ['archive.db'], 3, 10),
   d('fetch-un-elections', 'UN elections (Security Council, PGA)', 'scripts/fetch_un_elections.py', '40 5 * * *', true, ['un-elections.json'], 72, 10),
-  d('fetch-sg-selection', 'UN Secretary-General selection', 'scripts/fetch_sg_selection.py', '40 */3 * * *', true, ['sg-selection.json'], 8, 10),
+  d('fetch-sg-selection', 'UN Secretary-General selection', 'scripts/fetch_sg_selection.py', '40 * * * *', true, ['sg-selection.json'], 8, 10),
   d('fetch-sg-office', 'Secretary-General appointments and statements', 'scripts/fetch_sg_office.py', '50 */3 * * *', true, ['sg-office.json'], 8, 15),
   d('fetch-election-news', 'Elections news (Security Council, PGA, national)', 'scripts/fetch_election_news.py', '35 */6 * * *', true, ['election-news.json'], 8, 10),
   d('run-briefings', 'Scheduled briefings', 'scripts/refresh_site_data.py briefings', '5 * * * *', true, [], null, 55),

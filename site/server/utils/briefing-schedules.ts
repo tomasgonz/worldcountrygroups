@@ -72,7 +72,8 @@ export function deleteUserSchedules(userId: string) { save(load().filter(s => s.
 
 function strawPollMarker(): string {
   const sg = readDataFile<any>('sg-selection.json')
-  const polls = sg?.process?.straw_polls || []
+  // count polls with published results, so a briefing waits for results rather than the announcement
+  const polls = (sg?.process?.straw_polls || []).filter((p: any) => p.results?.length)
   return String(polls.length)
 }
 
