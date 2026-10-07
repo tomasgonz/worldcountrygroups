@@ -11,10 +11,10 @@ import { getRegistry } from './wcg'
 const DATA_DIR = process.env.WCG_SITE_DATA || join(process.env.HOME || '/home/exedev', 'worldcountrygroups/site/server/data')
 const ROSTER = join(DATA_DIR, 'un-leadership-roster.json')
 
-export interface RosterEntry { name: string; title: string; section: string | null }
+export interface RosterEntry { name: string; title: string; section: string | null; entity?: string | null }
 interface Roster { pastedAt: string; pastedBy: string; source: string; entries: RosterEntry[] }
 
-const TITLE = /\b(Secretary-General|Under-Secretary-General|Assistant Secretary-General|Executive Director|Executive Secretary|High Commissioner|High Representative|Administrator|Director-General|Director General|Chef de Cabinet|Legal Counsel|Controller|Special (Adviser|Advisor|Envoy|Representative|Coordinator)|Emergency Relief Coordinator|President|Rector|Chair|Chief Executive|Head of|Secretary of|Coordinator|Commissioner-General)\b/i
+const TITLE = /\b(Secretary-General|Under-Secretary-General|Assistant Secretary-General|Executive Director|Executive Secretary|High Commissioner|High Representative|Administrator|Director-General|Director General|Chef de Cabinet|Legal Counsel|Controller|Special (Adviser|Advisor|Envoy|Representative|Coordinator)|Emergency Relief Coordinator|President|Rector|Chair|Chief Executive|Head of|Secretary of|Coordinator|Commissioner-General|Force Commander|Ombudsman|Advocate|Officer|Registrar|Representative|Director|Envoy|Adviser|Executive Secretary|Commander)\b/i
 const NOT_NAME = /\b(United Nations|Department|Office|Programme|Fund|Commission|Council|Organization|Agency|Secretariat|Funds|Regional|Leadership|Team|Read more|Biography|Bio|Menu|Search|Home)\b/i
 
 function looksLikeName(s: string) {
@@ -38,7 +38,9 @@ export function parseRoster(text: string): RosterEntry[] {
       // title line: the name is the nearest preceding name-like line (photo captions sometimes sit between)
       for (let j = i - 1; j >= Math.max(0, i - 3); j--) {
         if (looksLikeName(lines[j])) {
-          if (!out.some(e => e.name === cleanName(lines[j]) && e.title === l)) out.push({ name: cleanName(lines[j]), title: l, section })
+          // the UN page puts the entity (OCHA, DPPA - DPO, SCR 2792…) on the line before the name
+          const ent = j > 0 && /^[A-Z0-9][A-Z0-9 \-\/&]{1,24}$/.test(lines[j - 1]) ? lines[j - 1] : null
+          if (!out.some(e => e.name === cleanName(lines[j]) && e.title === l)) out.push({ name: cleanName(lines[j]), title: l, section, entity: ent })
           break
         }
         if (TITLE.test(lines[j])) break
@@ -65,7 +67,7 @@ export function saveRoster(text: string, by: string) {
 
 // department or agency names, for titles written "Under-Secretary-General, Department of …" or "Executive Director, … Fund"
 const UNIT: Record<string, RegExp> = {
-  dppa: /Political and Peacebuilding|Political Affairs/i, dpo: /Peace Operations|Peacekeeping/i, oda: /Disarmament/i, oct: /Counter-Terrorism/i,
+  dppa: /Political and Peacebuilding|Political Affairs/i, dpo: /Peace Operations|Peacekeeping/i, oda: /Disarmament/i, oct: /Office of Counter-Terrorism|UNOCT/i,
   ocha: /Humanitarian Affairs|Emergency Relief|OCHA/i, ohchr: /Human Rights|OHCHR/i, unhcr: /Refugees|UNHCR/i,
   desa: /Economic and Social Affairs|DESA/i, undp: /Development Programme|UNDP/i, unicef: /Children's Fund|Children’s Fund|UNICEF/i,
   wfp: /World Food Programme|WFP/i, unfpa: /Population Fund|UNFPA/i, unwomen: /UN[- ]Women|Gender Equality and the Empowerment of Women/i,
@@ -76,8 +78,8 @@ const HEAD = /Under-Secretary-General|Executive Director|Administrator|High Comm
 
 function matchOffice(o: any, e: RosterEntry): boolean {
   const t = e.title
-  if (UNIT[o.id] && HEAD.test(t) && UNIT[o.id].test(t) && !/^(Deputy|Assistant)\b/i.test(t) && !/\b(Deputy|Assistant) (Executive|High|Secretary)/i.test(t)) return true
-  if (/^(Deputy|Assistant)\b/i.test(t) && o.id !== 'dsg') return false
+  if (UNIT[o.id] && HEAD.test(t) && UNIT[o.id].test(t) && !/^(Deputy|Assistant|Associate)\b/i.test(t) && !/\b(Deputy|Assistant) (Executive|High|Secretary)/i.test(t)) return true
+  if (/^(Deputy|Assistant|Associate)\b/i.test(t) && o.id !== 'dsg') return false
   if (o.id === 'sg') return /^Secretary-General\b/i.test(t)
   if (o.id === 'dsg') return /^Deputy Secretary-General\b/i.test(t)
   if (o.postRe && new RegExp(o.postRe, 'i').test(t)) return true
@@ -110,7 +112,7 @@ export function leadership(o: { roster?: RosterEntry[] | null } = {}) {
         note = `Newer appointment announced on ${evidence!.since}; the UN leadership list (pasted ${roster!.pastedAt.slice(0, 10)}) named ${e.name}.`
       } else {
         const same = evidence && evidence.name.toLowerCase().split(' ').pop() === e.name.toLowerCase().split(' ').pop()
-        holder = { name: e.name, title: e.title, kind: 'official', source: 'UN leadership team page', url: roster!.source, since: same ? evidence!.since : null,
+        holder = { name: e.name, title: e.title, entity: e.entity || null, acting: /^(Acting|Ad Interim)\b/i.test(e.title), kind: 'official', source: 'UN leadership team page', url: roster!.source, since: same ? evidence!.since : null,
           iso3: same ? evidence!.iso3 : null, nationality: same ? evidence!.nationality : null, slug: same ? evidence!.slug : null, image: same ? evidence!.image : null, listedOn: roster!.pastedAt.slice(0, 10), stale: false }
       }
     }

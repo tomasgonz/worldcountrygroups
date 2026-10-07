@@ -61,6 +61,16 @@ OFFICES = [
     ("management", "dss", "Under-Secretary-General for Safety and Security", "DSS", r"Under-Secretary-General for Safety and Security", None, ["Department of Safety and Security"]),
     ("management", "ola", "Legal Counsel (Office of Legal Affairs)", "OLA", r"Under-Secretary-General for Legal Affairs|Legal Counsel", None, ["Legal Counsel", "Office of Legal Affairs"]),
 ]
+UNIT = {
+    "dppa": re.compile(r"Political and Peacebuilding|Political Affairs", re.I), "dpo": re.compile(r"Peace Operations|Peacekeeping", re.I), "oda": re.compile(r"Disarmament", re.I),
+    "oct": re.compile(r"Office of Counter-Terrorism|UNOCT", re.I), "ocha": re.compile(r"Humanitarian Affairs|Emergency Relief|OCHA", re.I), "ohchr": re.compile(r"Human Rights|OHCHR", re.I),
+    "unhcr": re.compile(r"Refugees|UNHCR", re.I), "desa": re.compile(r"Economic and Social Affairs|DESA", re.I), "undp": re.compile(r"Development Programme|UNDP", re.I),
+    "unicef": re.compile(r"Children.s Fund|UNICEF", re.I), "wfp": re.compile(r"World Food Programme|WFP", re.I), "unfpa": re.compile(r"Population Fund|UNFPA", re.I),
+    "unwomen": re.compile(r"UN[- ]Women|Gender Equality and the Empowerment of Women", re.I), "unep": re.compile(r"Environment Programme|UNEP", re.I),
+    "dmspc": re.compile(r"Management Strategy|DMSPC", re.I), "dos": re.compile(r"Operational Support", re.I), "dgc": re.compile(r"Global Communications", re.I),
+    "dss": re.compile(r"Safety and Security", re.I), "ola": re.compile(r"Legal Affairs|Legal Counsel", re.I),
+}
+HEAD = re.compile(r"Under-Secretary-General|Executive Director|Administrator|High Commissioner|High Representative|Legal Counsel|Emergency Relief Coordinator", re.I)
 GROUPS = {"principals": "Principal organs", "peace": "Peace and security", "humanitarian": "Humanitarian and human rights",
           "development": "Development, funds and programmes", "management": "Management and support"}
 
@@ -126,6 +136,7 @@ def main():
             return default
 
     prev = load(OUT, {})
+    roster = load(os.path.join(DATA_DIR, "un-leadership-roster.json"), {})
     overrides = load(OVERRIDES, {})
     sg = load(os.path.join(DATA_DIR, "sg-office.json"), {})
     people = load(os.path.join(DATA_DIR, "people-index.json"), {}).get("people", [])
@@ -182,6 +193,16 @@ def main():
                                       "kind": "people", "slug": p.get("slug"), "image": p.get("imagePath") or p.get("image")})
         if oid == "ecosoc" and ecosoc:
             cands.append({"name": ecosoc["name"], "iso3": cmap.get(ecosoc.get("nationalityName") or ""), "since": ecosoc["since"], "source": ecosoc["source"], "url": ecosoc["url"], "kind": "election"})
+        # the official list pasted from un.org (same matching as the site: department/agency name + head title)
+        for e in roster.get("entries", []):
+            t = e.get("title", "")
+            if re.match(r"^(Deputy|Assistant|Associate)\b", t) and oid != "dsg":
+                continue
+            unit = UNIT.get(oid)
+            hit = (oid == "dsg" and re.match(r"^Deputy Secretary-General\b", t)) or (unit and HEAD.search(t) and unit.search(t)) or (post_re and re.search(post_re, t, re.I))
+            if hit:
+                cands.append({"name": e["name"], "iso3": None, "since": (roster.get("pastedAt") or "")[:10], "source": "UN leadership team page", "url": roster.get("source"), "kind": "roster"})
+                break
         # most recent evidence wins; an override always wins
         cands.sort(key=lambda c: (c["kind"] == "override", c.get("since") or ""), reverse=True)
         holder = cands[0] if cands else None
@@ -204,13 +225,19 @@ def main():
     # statements: headlines on UN sites naming the office or its holder
     first = not (prev.get("_meta") or {}).get("statementsBackfilled")
     prev_stmts = {o["id"]: o.get("statements", []) for o in prev.get("offices", [])}
-    win = windows(120 if first else 14, 14, now)
+    prev_as = {o["id"]: o.get("searchedAs") for o in prev.get("offices", [])}
     for o in offices:
         if o["id"] == "sg":
             o["statements"] = [{"title": s["title"], "url": s["url"], "date": s["date"], "host": s.get("source"), "countries": s.get("countries", [])} for s in sg.get("statements", [])[:60]]
             continue
-        names = [o["holder"]["name"]] if o.get("holder") else []
-        sn = surname(names[0]) if names else None
+        full = o["holder"]["name"] if o.get("holder") else None
+        parts = [w for w in re.split(r"\s+", re.sub(r"^((Lieutenant |Major[- ])?General|LG|MG)\s+", "", full or "")) if w]
+        short_name = f"{parts[0]} {parts[-1]}" if len(parts) >= 2 else full  # "Jean-Pierre Lacroix", as the news writes it
+        names = [short_name] if short_name else []
+        sn = surname(full) if full else None
+        o["searchedAs"] = short_name
+        # a new holder (or the first run) gets four months of history; otherwise the last two weeks
+        win = windows(120 if first or prev_as.get(o["id"]) != short_name else 14, 14, now)
         words = [f'"{t}"' for t in o["terms"]] + ([f'"{names[0]}"'] if names else [])
         title_re = re.compile("|".join([re.escape(t) for t in o["terms"]] + ([re.escape(sn)] if sn and len(sn) > 3 else [])), re.I)
         got = {re.sub(r"[^a-z0-9]+", " ", s["title"].lower())[:120]: s for s in prev_stmts.get(o["id"], [])}

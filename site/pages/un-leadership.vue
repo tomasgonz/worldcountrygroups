@@ -41,6 +41,7 @@
                   <div v-else class="font-serif text-lg text-primary-900 leading-tight">{{ o.holder.name }}</div>
                   <div class="text-xs text-primary-500">
                     <span v-if="o.holder.country">{{ flag(o.holder.country.iso2) }} {{ o.holder.country.name }} · </span>
+                    <span v-if="o.holder.acting" class="text-amber-700">acting · </span>
                     <span v-if="o.holder.since">since {{ day(o.holder.since) }}</span>
                     <span v-else-if="o.holder.listedOn">on the UN list of {{ day(o.holder.listedOn) }}</span>
                   </div>
@@ -66,7 +67,7 @@
         <div class="card">
           <input v-model.trim="q" type="search" placeholder="Find a name or post…" class="w-full sm:w-64 text-sm px-3 py-1 rounded-lg ring-1 ring-sky-200 focus:ring-[#009edb] outline-none mb-3">
           <ul class="grid md:grid-cols-2 gap-x-8 gap-y-1.5 text-sm">
-            <li v-for="(e, i) in others" :key="i"><span class="text-primary-900">{{ e.name }}</span> <span class="text-primary-500">— {{ e.title }}</span></li>
+            <li v-for="(e, i) in others" :key="i"><span v-if="e.entity" class="text-[10px] font-semibold text-[#0077b6] mr-1">{{ e.entity }}</span><span class="text-primary-900">{{ e.name }}</span> <span class="text-primary-500">— {{ e.title }}</span></li>
           </ul>
         </div>
       </section>
@@ -119,7 +120,7 @@ const feed = computed(() => {
   const seen = new Set<string>()
   return list.sort((a: any, b: any) => b.date.localeCompare(a.date)).filter((s: any) => (seen.has(s.url) ? false : (seen.add(s.url), true)))
 })
-const others = computed(() => (d.value?.roster?.others || []).filter((e: any) => !q.value || `${e.name} ${e.title}`.toLowerCase().includes(q.value.toLowerCase())))
+const others = computed(() => (d.value?.roster?.others || []).filter((e: any) => !q.value || `${e.name} ${e.title} ${e.entity || ''}`.toLowerCase().includes(q.value.toLowerCase())))
 function pick(id: string) {
   follow.value = follow.value === id ? '' : id
   showFeed.value = 25
