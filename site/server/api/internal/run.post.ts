@@ -4,6 +4,7 @@ import { runAlerts } from '~/server/utils/alerts'
 import { fetchBilled, checkBudget } from '~/server/utils/ai-spend'
 import { runSaid } from '~/server/utils/said'
 import { refreshUNBriefing } from '~/server/utils/un-briefing'
+import { gaVotes } from '~/server/utils/ga-assembly'
 import { refreshUNVotingData } from '~/server/utils/data-fetcher'
 
 /** Scheduler entry point (scripts/refresh_site_data.py briefings|alerts): ?task=briefings|alerts */
@@ -14,7 +15,7 @@ export default defineEventHandler(async (event) => {
   if (task === 'alerts') return { ok: true, ...(await runAlerts()) }
   if (task === 'said') return { ok: true, sections: await runSaid() }
   if (task === 'un-briefing') return { ok: true, ...(await refreshUNBriefing()) }
-  if (task === 'votes-import') { const r = await refreshUNVotingData(); return { ok: r.ok, ...r } }
+  if (task === 'votes-import') { const r = await refreshUNVotingData(); try { gaVotes() } catch {} return { ok: r.ok, ...r } }
   if (task === 'ai-costs') {
     const f = await fetchBilled()
     const fired = await checkBudget()

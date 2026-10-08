@@ -222,6 +222,7 @@ const navItems: NavItem[] = [
       { to: '/partners/trade', label: 'Trade partners', desc: 'Trade with emerging economies' },
       { to: '/partners/donors', label: 'Donor tracker', desc: 'Aid budgets, cuts and donor news' },
       { to: '/un-budget', label: 'UN budget & reform', desc: 'Fifth Committee, dues and UN80' },
+      { to: '/un-assembly', label: 'General Assembly & ECOSOC', desc: 'Votes, groups, committees' },
       { to: '/un-leadership', label: 'UN leadership', desc: 'Principals and senior officials' },
       { to: '/speeches', label: 'Speeches', desc: 'UNGA speech analysis' },
       { to: '/quotes', label: 'Quotes', desc: 'Search leaders’ words since 1946' },

@@ -17,6 +17,7 @@ import { groupLoyalty } from './voting-dynamics'
 import { groupPicture } from './group-picture'
 import { sgOffice } from './sg-office'
 import { leadership } from './un-leadership'
+import { gaVotes, gaCommittees, ecosoc } from './ga-assembly'
 import { payers, session as c5Session, searchStatements, budgetNews, countryBudget } from './un-budget'
 import { getCountrySpeeches, getAllSpeeches } from './speeches'
 import { getRecentStatements } from './statements-feed'
@@ -127,6 +128,7 @@ export const ASK_TOOLS: ToolDef[] = [
   { name: 'sg_office', description: "The UN Secretary-General's office: recent statements, messages, remarks and readouts (headlines, dates, links, countries named), and senior appointments (person, nationality, post, duty country: resident coordinators, envoys and special representatives, under/assistant secretaries-general, peace operations leaders). Filter by country (statements naming it; appointees of that nationality or posted there), by words, or by appointment category. Coverage: appointments since 2023 (most complete for resident coordinators), statements for the last 12 months.", parameters: { type: 'object', properties: { what: { type: 'string', enum: ['statements', 'appointments', 'both'] }, country: { type: 'string' }, query: { type: 'string', description: 'Words in the headline or post, e.g. "Sudan", "climate", "Special Envoy"' }, category: { type: 'string', enum: ['resident-coordinator', 'envoy', 'mission', 'senior', 'body'] }, limit: { type: 'integer', description: 'Items per list, up to 25 (default 12)' } } } },
   { name: 'un_budget', description: "The UN regular budget, dues and reform, and the Fifth Committee (administrative and budgetary questions): what delegations and groups (G77 and China, EU, African Group, ASEAN, CARICOM, CANZ...) said in this session's statements (searchable full text, with passages), the agenda and decisions; who has paid their dues in full this year (honour roll, amount, date), each country's share of the budget (scale of assessments) and its change, countries under Article 19 (arrears), and news on the liquidity crisis and the UN80 reform. Give a country for its dues and statements, a group or words to search statements, or nothing for an overview.", parameters: { type: 'object', properties: { country: { type: 'string' }, group: { type: 'string', description: 'Speaking group, e.g. "G77", "European Union", "African Group"' }, query: { type: 'string', description: 'Words to find in statements and news, e.g. "liquidity", "special political missions", "post reductions"' }, agenda_item: { type: 'string', description: 'Fifth Committee agenda item number, e.g. "138"' } } } },
   { name: 'un_leadership', description: "Who leads the UN: the Secretary-General, Deputy Secretary-General, Presidents of the General Assembly and ECOSOC, and the heads of key departments, funds and programmes (DPPA, DPO, OCHA, OHCHR, UNHCR, UNDP, UNICEF, WFP, DESA, DMSPC and others): current holder, nationality, since when, and their recent statements (UN-site headlines). Give an office (e.g. \"OCHA\", \"President of the General Assembly\", \"peacekeeping\") or a person's name; nothing lists all offices.", parameters: { type: 'object', properties: { office: { type: 'string' }, person: { type: 'string' }, query: { type: 'string', description: 'Words to find in their statements' } } } },
+  { name: 'general_assembly', description: "The General Assembly as a whole and ECOSOC: analysis of the latest session's recorded votes (most divided votes, cohesion of the EU, G77, African Union, OIC, ASEAN, NAM and regional groups and who breaks ranks, the countries furthest from the majority and the biggest shifts since the previous session, how often the US, China, Russia and the EU vote with the majority and with each other, recent US-China splits); the six Main Committees (chairs, next meetings, latest coverage) and plenary; ECOSOC (president, members by region, meetings). For one country's or group's own record use un_voting_record or group_overview.", parameters: { type: 'object', properties: { part: { type: 'string', enum: ['votes', 'committees', 'ecosoc', 'all'], description: 'Default all' } } } },
   ...TRADE_TOOLS,
   ...DONOR_TOOLS,
   ...UNELECTION_TOOLS,
@@ -343,6 +345,36 @@ export async function runTool(name: string, args: any, src: SourceCollector): Pr
         })),
         note: 'Holders from the UN leadership page (when copied in), appointment announcements, the PGA site, ECOSOC election news and Wikidata; statements are UN-site headlines naming the office or holder.',
       }
+    }
+    case 'general_assembly': {
+      const part = args.part || 'all'
+      src.used('un-votes-summary.json', 'ga-assembly.json', 'un-journal.json', 'un-elections.json')
+      const ref = src.add('General Assembly and ECOSOC', `${SITE}/un-assembly`, 'page')
+      const out: any = { ref }
+      if (part === 'all' || part === 'votes') {
+        const v = gaVotes()
+        if (v) out.votes = {
+          session_analysed: v.focus, compared_with: v.prev, recorded_votes: v.counts.recorded, contested_votes: v.counts.contested, last_vote: v.lastVote,
+          most_divided: v.divided.slice(0, 6).map((r: any) => ({ title: r.title.replace(/\s*:\s*resolution.*$/i, ''), date: r.date, yes: r.tally.yes, no: r.tally.no, abstain: r.tally.abstain, ref: src.add(r.title.slice(0, 90), `https://digitallibrary.un.org/record/${r.id}`, 'resolution') })),
+          group_cohesion_pct: v.groups.map((g: any) => ({ group: g.acronym, now: g.cohesion, previous_session: g.cohesionPrev, most_often_apart: g.outliers.slice(0, 3).map((o: any) => `${o.name} (${o.pct}%)`) })),
+          with_majority_pct: v.powers.map((p: any) => ({ who: p.label, now: p.withMajority, previous_session: p.withMajorityPrev, agreement_with: Object.fromEntries(p.pairs.map((x: any) => [x.label, x.pct])) })),
+          furthest_from_majority: v.mavericks.slice(0, 8).map((m: any) => `${m.name} ${m.pct}% (prev. ${m.prev ?? '–'}%)`),
+          biggest_shifts: v.movers.slice(0, 6).map((m: any) => `${m.name}: ${m.prev}% → ${m.pct}%`),
+          note: 'Contested recorded votes only (>=100 voting, >=10% departing from the majority). Source: UN Digital Library voting records.',
+        }
+      }
+      if (part === 'all' || part === 'committees') {
+        const a = gaCommittees()
+        out.committees = a.committees.map((c: any) => ({ committee: `${c.name} (${c.mandate})`, chair: c.bureau ? `${c.bureau.chair} (${c.bureau.country})` : null,
+          next_meetings: c.next.map((m: any) => `${m.date} ${m.time}: ${m.agenda[0] || m.title}`), latest: c.press.slice(0, 3).map((p: any) => ({ title: p.title, date: p.date.slice(0, 10), ref: src.add(p.title, p.url, 'news') })) }))
+        out.plenary = { next: a.plenary.next.map((m: any) => `${m.date} ${m.time}: ${m.agenda.join('; ') || m.title}`), latest: a.plenary.press.slice(0, 4).map((p: any) => ({ title: p.title, date: p.date.slice(0, 10), ref: src.add(p.title, p.url, 'news') })) }
+      }
+      if (part === 'all' || part === 'ecosoc') {
+        const e = ecosoc()
+        out.ecosoc = { president: e.president, members_by_group: Object.fromEntries(Object.entries(e.members).map(([g, l]: any) => [g, l.map((m: any) => m.name)])), term_ends_this_year: e.leaving.map((m: any) => m.name),
+          upcoming: e.meetings.upcoming.map((m: any) => `${m.date}: ${m.organ}`), latest: e.press.map((p: any) => ({ title: p.title, ref: src.add(p.title, p.url, 'news') })) }
+      }
+      return out
     }
     case 'group_overview': {
       const gid = groupId(args.group)
