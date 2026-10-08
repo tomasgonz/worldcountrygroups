@@ -73,7 +73,7 @@
                 </button>
                 <div v-if="userDropdownOpen" class="absolute right-0 mt-2 w-48 bg-white rounded-xl border border-primary-100 shadow-lg py-1 z-50">
                   <NuxtLink to="/dashboard" @click="userDropdownOpen = false" class="block px-4 py-2 text-sm text-primary-700 hover:bg-primary-50 transition-colors">
-                    Dashboard
+                    My watchlist
                   </NuxtLink>
                   <NuxtLink to="/account" @click="userDropdownOpen = false" class="block px-4 py-2 text-sm text-primary-700 hover:bg-primary-50 transition-colors">
                     Account
@@ -141,7 +141,7 @@
       <div class="border-t border-primary-100 px-4 py-3 space-y-1">
         <template v-if="auth.state.value.authenticated">
           <div class="px-3 py-1 text-xs text-primary-400">Signed in as {{ auth.state.value.displayName || auth.state.value.username }}</div>
-          <NuxtLink to="/dashboard" class="block px-3 py-2 rounded-lg text-primary-700 hover:bg-primary-50">Dashboard</NuxtLink>
+          <NuxtLink to="/dashboard" class="block px-3 py-2 rounded-lg text-primary-700 hover:bg-primary-50">My watchlist</NuxtLink>
           <NuxtLink to="/account" class="block px-3 py-2 rounded-lg text-primary-700 hover:bg-primary-50">Account</NuxtLink>
           <NuxtLink v-if="auth.state.value.role === 'admin'" to="/admin" class="block px-3 py-2 rounded-lg text-primary-700 hover:bg-primary-50">Admin</NuxtLink>
           <button class="block w-full text-left px-3 py-2 rounded-lg text-primary-500 hover:bg-primary-50" @click="handleLogout">Logout</button>

@@ -44,7 +44,7 @@ const DEFAULT_JOBS: Def[] = [
     ['unsc-votes.json', 'unsc-vetoes.json', 'unsc-history.json', 'unsc-activity.json', 'ga-resolutions.json'], 13),
   d('build-people', 'People directory', 'scripts/build_people.py', '40 */6 * * *', true, ['people-index.json'], 13),
   d('fetch-gdelt', 'Media Coverage (GDELT)', 'scripts/fetch_gdelt.py', '30 2 * * *', true, ['gdelt-data.json'], 30),
-  d('send-digests', 'Watchlist Email Digests', 'scripts/send_digests.py', '0 7 * * *', true, [], null),
+  d('send-digests', 'Watchlist email digests', 'scripts/refresh_site_data.py watch-digest', '5 7-23 * * *', true, [], null, 15),
   d('update-general-debate', 'UN General Debate (Sep-Oct daily)', 'scripts/update_general_debate.py', '0 5 * 9,10 *', true, ['un-speeches-index.json', 'quotes-index.json'], null, 90),
   d('refresh-country-stats', 'Country statistics (World Bank)', 'scripts/refresh_site_data.py country', '20 3 * * 1', true, ['country-stats.json'], 24 * 8, 30),
   d('fetch-oda', 'Aid (OECD ODA)', 'scripts/fetch_oecd_oda.py', '0 4 * * 0', true, ['oecd-oda.json'], 24 * 8),
@@ -202,9 +202,10 @@ export function syncCrontab() {
   const marker = '# WCG-MANAGED'
   const cronLog = join(JOB_LOG_DIR, 'cron.log')
   // Run as the project owner so scripts find its Python packages and data files keep one owner
-  const lines = config.jobs.filter(j => j.enabled && /^[a-z0-9-]+$/.test(j.id)).map(j => {
+  // only well-formed schedules reach the crontab: five fields of digits and * / , - (no newlines or commands)
+  const lines = config.jobs.filter(j => j.enabled && /^[a-z0-9-]+$/.test(j.id) && /^[\d*/,\-]+( [\d*/,\-]+){4}$/.test(String(j.schedule).trim())).map(j => {
     const [cmd, argv] = pythonCommand(RUNNER, [j.id])
-    return `${j.schedule} ${[cmd, ...argv].join(' ')} >> ${cronLog} 2>&1 ${marker}`
+    return `${String(j.schedule).trim()} ${[cmd, ...argv].join(' ')} >> ${cronLog} 2>&1 ${marker}`
   })
   let existing = ''
   try { existing = execSync('crontab -l 2>/dev/null', { encoding: 'utf-8' }) } catch {}

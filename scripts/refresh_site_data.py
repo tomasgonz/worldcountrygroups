@@ -8,7 +8,7 @@ site/server/data/.internal-token (created here if missing, readable only by
 this user and root).
 
 Usage:
-  refresh_site_data.py country|themes|briefings|alerts|ai-costs|said|votes-import|un-briefing
+  refresh_site_data.py country|themes|briefings|alerts|ai-costs|said|votes-import|un-briefing|watch-digest
 """
 
 import json
@@ -35,10 +35,10 @@ def token():
 
 def main():
     target = sys.argv[1] if len(sys.argv) > 1 else ""
-    if target not in ("country", "themes", "briefings", "alerts", "ai-costs", "said", "votes-import", "un-briefing"):
+    if target not in ("country", "themes", "briefings", "alerts", "ai-costs", "said", "votes-import", "un-briefing", "watch-digest"):
         print(__doc__)
         return 2
-    path = f"/api/internal/run?task={target}" if target in ("briefings", "alerts", "ai-costs", "said", "votes-import", "un-briefing") else f"/api/internal/refresh?target={target}"
+    path = f"/api/internal/run?task={target}" if target in ("briefings", "alerts", "ai-costs", "said", "votes-import", "un-briefing", "watch-digest") else f"/api/internal/refresh?target={target}"
     req = urllib.request.Request(f"{SITE}{path}", method="POST",
                                  headers={"X-Internal-Token": token()})
     try:
