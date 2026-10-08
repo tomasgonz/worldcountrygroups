@@ -19,6 +19,9 @@ export interface ShareLink {
   views: number
   lastViewedAt: string | null
   revokedAt: string | null
+  /** 'page': the one standing link for a page, meant to be passed on; 'custom': a separate one-off link */
+  kind?: 'page' | 'custom'
+  replacedBy?: string | null
 }
 
 export const SHARE_COOKIE = 'wcg_share'
@@ -63,9 +66,20 @@ export function normalisePath(input: string): string | null {
   return p
 }
 
-export function createShareLink(o: { path: string; label?: string; expiresDays?: number | null; maxViews?: number | null; createdBy: string }): ShareLink {
+/** The page's standing link, if one is active. */
+export function pageLinkFor(path: string): ShareLink | null {
+  const p = normalisePath(path)
+  if (!p) return null
+  return load().find(l => l.kind === 'page' && l.path === p && linkStatus(l) === 'active') || null
+}
+
+export function createShareLink(o: { path: string; label?: string; expiresDays?: number | null; maxViews?: number | null; createdBy: string; kind?: 'page' | 'custom' }): ShareLink {
   const path = normalisePath(o.path)
   if (!path) throw new Error('That page cannot be shared (admin, account and login pages are excluded)')
+  if (o.kind === 'page') {
+    const existing = pageLinkFor(path)
+    if (existing) return existing  // one standing link per page
+  }
   const links = load().slice()
   const days = o.expiresDays && o.expiresDays > 0 ? Math.min(3650, o.expiresDays) : null
   const link: ShareLink = {
@@ -75,17 +89,31 @@ export function createShareLink(o: { path: string; label?: string; expiresDays?:
     createdAt: new Date().toISOString(), createdBy: o.createdBy,
     expiresAt: days ? new Date(Date.now() + days * 86400_000).toISOString() : null,
     maxViews: o.maxViews && o.maxViews > 0 ? Math.min(100000, Math.floor(o.maxViews)) : null,
-    views: 0, lastViewedAt: null, revokedAt: null,
+    views: 0, lastViewedAt: null, revokedAt: null, kind: o.kind === 'page' ? 'page' : 'custom',
   }
   links.push(link)
   save(links)
   return link
 }
 
-export function updateShareLink(id: string, action: 'revoke' | 'restore' | 'delete' | 'extend', days?: number) {
+export function updateShareLink(id: string, action: 'revoke' | 'restore' | 'delete' | 'extend' | 'replace', days?: number, by = 'admin') {
   const links = load().slice()
   const i = links.findIndex(l => l.id === id)
   if (i < 0) throw new Error('Link not found')
+  if (action === 'replace') {
+    // a new address for the same page; the old one stops working at once
+    const old = links[i]
+    const fresh = createShareLink({ path: old.path, label: old.label, createdBy: by, kind: 'custom', maxViews: old.maxViews,
+      expiresDays: old.expiresAt ? Math.max(1, Math.ceil((new Date(old.expiresAt).getTime() - Date.now()) / 86400_000)) : null })
+    const all = load().slice()
+    const j = all.findIndex(l => l.id === old.id)
+    const k = all.findIndex(l => l.id === fresh.id)
+    all[k] = { ...all[k], kind: old.kind || 'custom' }
+    all[j] = { ...all[j], revokedAt: new Date().toISOString(), replacedBy: fresh.id }
+    save(all)
+    return all[k]
+  }
+  if (action === 'restore' && links[i].kind === 'page' && pageLinkFor(links[i].path)) throw new Error('This page already has an active link')
   if (action === 'delete') { links.splice(i, 1); save(links); return null }
   const l = { ...links[i] }
   if (action === 'revoke') l.revokedAt = new Date().toISOString()

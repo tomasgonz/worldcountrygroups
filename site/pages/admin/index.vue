@@ -1276,7 +1276,7 @@
     <div v-show="tab === 'sharing'">
       <div class="bg-white rounded-2xl border border-primary-100 p-6 sm:p-8 mb-6">
         <h2 class="font-serif text-xl font-bold text-primary-900">Create a share link</h2>
-        <p class="text-xs text-primary-500 mt-1 mb-4">Anyone with the link can view that one page without an account: read-only, no other pages, no AI requests. You can also use “Share this page” in your user menu on any page, or “Share link” on an Ask answer.</p>
+        <p class="text-xs text-primary-500 mt-1 mb-4">Anyone with the link can view that one page without an account: read-only, no other pages, no AI requests. Each page has one standing <strong>page link</strong> that people can pass on; replace it to issue a new address (the old one stops working) or revoke it. You can also use the share button at the top of any page, or “Share link” on an Ask answer.</p>
         <form class="grid sm:grid-cols-2 gap-3" @submit.prevent="createShare">
           <label class="text-xs text-primary-500 sm:col-span-2">Page (address or path)
             <input v-model="shareForm.path" list="share-suggestions" class="mt-1 w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="/elections or https://worldcountrygroups.exe.xyz/countries/bra" required>
@@ -1284,6 +1284,10 @@
               <option v-for="p in SHARE_SUGGESTIONS" :key="p.path" :value="p.path">{{ p.label }}</option>
             </datalist>
           </label>
+          <div class="sm:col-span-2 flex flex-wrap gap-4 text-sm text-primary-700">
+            <label class="flex items-center gap-1.5"><input v-model="shareForm.kind" type="radio" value="page"> Page link: one per page, meant to be passed on (returned as is if the page has one)</label>
+            <label class="flex items-center gap-1.5"><input v-model="shareForm.kind" type="radio" value="custom"> Separate private link (e.g. for one person)</label>
+          </div>
           <label class="text-xs text-primary-500">Label (shown to you and to the visitor)
             <input v-model="shareForm.label" class="mt-1 w-full border border-primary-200 rounded-lg px-3 py-1.5 text-sm" placeholder="e.g. SG race for the ambassador">
           </label>
@@ -1308,8 +1312,8 @@
         <div class="flex flex-wrap items-baseline justify-between gap-2 mb-3">
           <h2 class="font-serif text-xl font-bold text-primary-900">Shared links</h2>
           <div class="flex rounded-full bg-primary-100 p-0.5 text-xs" role="tablist">
-            <button v-for="f in ['active', 'all']" :key="f" role="tab" :aria-selected="shareFilter === f" class="px-2.5 py-1 rounded-full"
-              :class="shareFilter === f ? 'bg-white shadow-sm text-primary-900' : 'text-primary-500'" @click="shareFilter = f">{{ f === 'active' ? 'Active' : 'All' }}</button>
+            <button v-for="f in ['active', 'page', 'all']" :key="f" role="tab" :aria-selected="shareFilter === f" class="px-2.5 py-1 rounded-full"
+              :class="shareFilter === f ? 'bg-white shadow-sm text-primary-900' : 'text-primary-500'" @click="shareFilter = f">{{ f === 'active' ? 'Active' : f === 'page' ? 'Page links' : 'All' }}</button>
           </div>
         </div>
         <p v-if="!shownLinks.length" class="text-sm text-primary-400">No {{ shareFilter === 'active' ? 'active ' : '' }}links yet.</p>
@@ -1319,6 +1323,8 @@
               <div class="flex flex-wrap items-center gap-2">
                 <span class="text-sm font-medium text-primary-900">{{ l.label }}</span>
                 <span class="text-[11px] px-2 py-0.5 rounded-full" :class="SHARE_STYLE[l.status]">{{ l.status }}</span>
+                <span v-if="l.kind === 'page'" class="text-[11px] px-2 py-0.5 rounded-full bg-sky-50 text-sky-800" title="The standing link of this page, meant to be passed on">page link</span>
+                <span v-if="l.replacedBy" class="text-[11px] text-primary-400">replaced</span>
               </div>
               <NuxtLink :to="l.path" class="text-xs text-accent-700 hover:underline break-all">{{ l.path }}</NuxtLink>
               <div class="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-primary-700">
@@ -1338,6 +1344,7 @@
               <button class="text-xs px-2.5 py-1 rounded bg-primary-50 text-primary-700 hover:bg-primary-100" @click="copyShare(l)">{{ copiedShare === l.id ? 'Copied' : 'Copy link' }}</button>
               <button class="text-xs px-2.5 py-1 rounded bg-primary-50 text-primary-700 hover:bg-primary-100" :aria-expanded="logOpen === l.id" @click="toggleLog(l.id)">{{ logOpen === l.id ? 'Hide log' : 'Access log' }}</button>
               <button v-if="l.status !== 'revoked'" class="text-xs px-2.5 py-1 rounded bg-primary-50 text-primary-700 hover:bg-primary-100" @click="shareAction(l, 'extend', 30)">+30 days</button>
+              <button v-if="l.status === 'active'" class="text-xs px-2.5 py-1 rounded bg-primary-50 text-primary-700 hover:bg-primary-100" title="Issue a new address for the same page; this one stops working" @click="shareAction(l, 'replace')">Replace</button>
               <button v-if="l.status !== 'revoked'" class="text-xs px-2.5 py-1 rounded bg-amber-50 text-amber-700 hover:bg-amber-100" @click="shareAction(l, 'revoke')">Revoke</button>
               <button v-else class="text-xs px-2.5 py-1 rounded bg-green-50 text-green-700 hover:bg-green-100" @click="shareAction(l, 'restore')">Restore</button>
               <button class="text-xs px-2.5 py-1 rounded bg-red-50 text-red-700 hover:bg-red-100" @click="deleteShare(l)">{{ confirmDeleteShare === l.id ? 'Click again' : 'Delete' }}</button>
@@ -2300,8 +2307,8 @@ const AccessLog = defineComponent({
   },
 })
 const shareFilter = ref('active')
-const shownLinks = computed(() => shareLinks.value.filter((l: any) => shareFilter.value === 'all' || l.status === 'active'))
-const shareForm = reactive({ path: '', label: '', expiresDays: 30, maxViews: null as number | null })
+const shownLinks = computed(() => shareLinks.value.filter((l: any) => shareFilter.value === 'all' || (shareFilter.value === 'page' ? l.kind === 'page' && l.status !== 'revoked' : l.status === 'active')))
+const shareForm = reactive({ path: '', label: '', expiresDays: 0, maxViews: null as number | null, kind: 'page' as 'page' | 'custom' })
 const shareMsg = ref<{ ok: boolean; text: string } | null>(null)
 const copiedShare = ref('')
 const confirmDeleteShare = ref('')
