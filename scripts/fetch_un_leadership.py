@@ -205,7 +205,15 @@ def main():
                 break
         # most recent evidence wins; an override always wins
         cands.sort(key=lambda c: (c["kind"] == "override", c.get("since") or ""), reverse=True)
-        holder = cands[0] if cands else None
+        holder = dict(cands[0]) if cands else None
+        if holder and holder.get("kind") == "roster":
+            # the official list proves who holds the post, not since when: take the start date from the same person's other records
+            sn = holder["name"].split()[-1].lower()
+            same = next((c for c in cands[1:] if c.get("name") and c["name"].split()[-1].lower() == sn and c.get("since")), None)
+            holder["listedOn"] = holder.get("since")
+            holder["since"] = same["since"] if same else None
+            if same and not holder.get("iso3"):
+                holder["iso3"] = same.get("iso3")
         if holder:
             # enrich from the people index (photo, page) and nationality from appointments
             pp = next((p for p in people if p["name"].lower() == holder["name"].lower() or holder["name"].lower() in [a.lower() for a in p.get("aliases", [])]), None)
