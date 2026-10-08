@@ -525,8 +525,8 @@ function renderCitations(text: string): string {
     const links = ids.split(',').map((s: string) => s.trim()).map((id: string) => {
       const c = citations.value[id]
       if (!c) return ''
-      const title = `${c.title} — ${c.source}`.replace(/"/g, '&quot;')
-      return `<a href="${c.url}" target="_blank" rel="noopener" title="${title}" class="cite-link">${id.replace(/^[ns]/, '')}</a>`
+      const title = escapeHtml(`${c.title} — ${c.source}`)
+      return `<a href="${safeUrl(c.url)}" target="_blank" rel="noopener" title="${title}" class="cite-link">${escapeHtml(id.replace(/^[ns]/, ''))}</a>`
     }).filter(Boolean)
     return links.length ? `<sup class="cite">${links.join('')}</sup>` : ''
   })

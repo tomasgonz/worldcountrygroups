@@ -1,3 +1,4 @@
+import { checkLoginAllowed, recordLoginFailure } from '~/server/utils/login-throttle'
 import { getUserByUsername, verifyPassword } from '~/server/utils/users'
 import { createSessionToken, setSessionCookie } from '~/server/utils/auth'
 
@@ -10,8 +11,11 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, statusMessage: 'Username and password required' })
   }
 
+  checkLoginAllowed(event, username)
+
   const user = getUserByUsername(username)
   if (!user || user.role !== 'admin' || !verifyPassword(password, user.passwordHash, user.salt)) {
+    recordLoginFailure(event, username)
     throw createError({ statusCode: 401, statusMessage: 'Invalid credentials' })
   }
 

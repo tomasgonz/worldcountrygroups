@@ -612,17 +612,17 @@ const newsNarrative = computed(() => {
 
   // Lead with top headline
   const lead = articles[0]
-  if (lead) parts.push(`Leading the coverage: <em>${lead.title}</em> (${lead.source}, ${lead.timeAgo}).`)
+  if (lead) parts.push(`Leading the coverage: <em>${escapeHtml(lead.title)}</em> (${escapeHtml(lead.source)}, ${escapeHtml(lead.timeAgo)}).`)
 
   // Countries in focus
   if (topCountries.length) {
-    parts.push(`Countries in focus include <strong>${topCountries.join('</strong>, <strong>')}</strong>.`)
+    parts.push(`Countries in focus include <strong>${topCountries.map(escapeHtml).join('</strong>, <strong>')}</strong>.`)
   }
 
   // Second headline for breadth
   if (articles.length > 2) {
     const second = articles[1]
-    parts.push(`Also notable: <em>${second.title}</em>.`)
+    parts.push(`Also notable: <em>${escapeHtml(second.title)}</em>.`)
   }
 
   return parts.join(' ')

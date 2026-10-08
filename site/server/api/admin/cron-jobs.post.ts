@@ -14,6 +14,9 @@ export default defineEventHandler(async (event) => {
       const { job } = body
       if (!job?.id || !job?.script || !job?.schedule) throw new Error('Missing required job fields (id, script, schedule)')
       if (!/^scripts\/[\w.\-/]+\.py(\s+[\w.\-=]+)*$/.test(job.script) || job.script.includes('..')) throw new Error('Script must be a .py file under scripts/')
+      if (!/^[a-z0-9][a-z0-9-]{1,60}$/.test(String(job.id))) throw new Error('Job id: lower-case letters, digits and dashes')
+      if (!/^[\d*/,\- ]+$/.test(String(job.schedule)) || String(job.schedule).trim().split(/\s+/).length !== 5) throw new Error('Schedule must be a 5-field cron expression')
+      job.schedule = String(job.schedule).trim()
       addCronJob({
         id: job.id, label: job.label || job.id, script: job.script, schedule: job.schedule, enabled: job.enabled ?? false,
         lastRun: null, lastError: null, logFile: '',

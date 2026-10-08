@@ -24,7 +24,8 @@ export default defineEventHandler((event) => {
   }
   recordView(link.id)
   logAccess(event, { event: 'open', linkId: link.id, label: link.label, path: link.path })
-  const maxAge = link.expiresAt ? Math.max(60, Math.floor((new Date(link.expiresAt).getTime() - Date.now()) / 1000)) : 60 * 60 * 24 * 90
+  // access from a link lasts at most 7 days per visit (or until the link expires): opening it again renews it
+  const maxAge = Math.min(60 * 60 * 24 * 7, link.expiresAt ? Math.max(60, Math.floor((new Date(link.expiresAt).getTime() - Date.now()) / 1000)) : Infinity)
   setCookie(event, SHARE_COOKIE, token, { httpOnly: true, sameSite: 'lax', secure: true, path: '/', maxAge })
   setHeader(event, 'cache-control', 'no-store')
   return sendRedirect(event, link.path, 302)

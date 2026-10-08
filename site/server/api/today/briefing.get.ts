@@ -1,3 +1,4 @@
+import { isAdminRequest } from '~/server/utils/request-role'
 import { readFileSync, existsSync } from 'fs'
 import { join } from 'path'
 import { isAIConfigured, callLLM } from '~/server/utils/llm-client'
@@ -87,7 +88,8 @@ export default defineEventHandler(async (event) => {
   }
 
   const query = getQuery(event)
-  const force = query.force === 'true'
+  // regenerating costs money: only admins may force it
+  const force = query.force === 'true' && isAdminRequest(event)
 
   const now = new Date()
   const todayKey = getNYTodayKey(now)

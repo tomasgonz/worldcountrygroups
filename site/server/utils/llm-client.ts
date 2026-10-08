@@ -23,7 +23,18 @@ export function getAIStatus(): { configured: boolean; provider: string | null } 
   return { configured: !!p, provider: p ? p.name : null }
 }
 
+
+// A ceiling on AI calls per hour across the whole site, so a loop (or an abuser) cannot run up the bill.
+const HOURLY_CAP = Number(process.env.WCG_AI_CALLS_PER_HOUR) || 300
+let capWindow = { start: Date.now(), n: 0 }
+function aiCallAllowed() {
+  if (Date.now() - capWindow.start > 3600_000) capWindow = { start: Date.now(), n: 0 }
+  capWindow.n++
+  if (capWindow.n > HOURLY_CAP) throw new Error(`The site's hourly limit of ${HOURLY_CAP} AI requests has been reached; try again later`)
+}
+
 export async function callLLM(messages: LLMMessage[], options?: LLMOptions): Promise<string> {
+  aiCallAllowed()
   const provider = options?.provider || getProviderForTask(options?.task)
   if (!provider) throw new Error('No AI provider configured')
 
@@ -36,6 +47,7 @@ export async function callLLM(messages: LLMMessage[], options?: LLMOptions): Pro
 }
 
 export async function callLLMStream(messages: LLMMessage[], options?: LLMOptions): Promise<ReadableStream<string>> {
+  aiCallAllowed()
   const provider = options?.provider || getProviderForTask(options?.task)
   if (!provider) throw new Error('No AI provider configured')
 
@@ -260,6 +272,7 @@ export async function callLLMWithTools(
   tools: ToolDef[],
   options?: LLMOptions,
 ): Promise<{ content: string; toolCalls: ToolCall[]; assistantMessage: any; provider: AIProviderConfig; usage: Usage | null }> {
+  aiCallAllowed()
   const provider = options?.provider || getProviderForTask(options?.task)
   if (!provider) throw new Error('No AI provider configured')
   if (provider.type === 'anthropic') {

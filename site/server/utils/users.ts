@@ -68,7 +68,7 @@ function loadData(): UsersData {
 
 function saveData(data: UsersData): void {
   if (!existsSync(DATA_DIR)) mkdirSync(DATA_DIR, { recursive: true })
-  writeFileSync(DATA_PATH, JSON.stringify(data, null, 2), 'utf-8')
+  writeFileSync(DATA_PATH, JSON.stringify(data, null, 2), { encoding: 'utf-8', mode: 0o600 })
   cache = data
 }
 
@@ -170,7 +170,10 @@ export function ensureAdminUser(): void {
   const hasAdmin = data.users.some((u) => u.role === 'admin')
   if (hasAdmin) return
 
-  const { hash, salt } = hashPassword('Wcg0676!!')
+  // first start only: a password from the environment, or a random one printed once to the service log
+  const initial = process.env.WCG_INITIAL_ADMIN_PASSWORD || randomBytes(12).toString('base64url')
+  if (!process.env.WCG_INITIAL_ADMIN_PASSWORD) console.warn(`[users] created admin 'tomas' with one-time password: ${initial} (change it on the account page)`)
+  const { hash, salt } = hashPassword(initial)
   const admin: User = {
     id: randomBytes(16).toString('hex'),
     username: 'tomas',

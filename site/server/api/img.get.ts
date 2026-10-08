@@ -29,7 +29,8 @@ export default defineEventHandler(async (event) => {
   const res = await fetch(url.toString(), { headers: { 'User-Agent': 'WorldCountryGroups/1.0 (+https://worldcountrygroups.exe.xyz)' }, redirect: 'follow', signal: AbortSignal.timeout(20_000) })
     .catch(() => null)
   const type = res?.headers.get('content-type') || ''
-  if (!res || !res.ok || !/^image\//.test(type)) throw createError({ statusCode: 404, statusMessage: 'Image not available' })
+  // raster images only: SVG can carry script and would run on this site's origin
+  if (!res || !res.ok || !/^image\/(jpeg|png|gif|webp|avif)/.test(type)) throw createError({ statusCode: 404, statusMessage: 'Image not available' })
   const final = new URL(res.url)
   if (!HOSTS.test(final.hostname)) throw createError({ statusCode: 400, statusMessage: 'Image host not allowed' })
   const buf = Buffer.from(await res.arrayBuffer())

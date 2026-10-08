@@ -1,4 +1,4 @@
-import { createHmac } from 'crypto'
+import { createHmac, timingSafeEqual } from 'crypto'
 import type { H3Event } from 'h3'
 import { getSessionSecret, getUserById, type User } from './users'
 
@@ -26,7 +26,7 @@ export function verifySessionToken(token: string): { userId: string; role: strin
 
   const payload = `${userId}.${role}.${timestampStr}`
   const expected = createHmac('sha256', secret).update(payload).digest('hex')
-  if (hmac !== expected) return null
+  if (hmac.length !== expected.length || !timingSafeEqual(Buffer.from(hmac), Buffer.from(expected))) return null
 
   return { userId, role, timestamp }
 }
@@ -40,8 +40,8 @@ export function getSession(event: H3Event): { userId: string; role: string; time
 
   const user = getUserById(session.userId)
   if (!user) return null
-
-  return { ...session, user }
+  // the role is the user's current one, so demoting or suspending someone takes effect at once
+  return { ...session, role: user.role, user }
 }
 
 export function requireAuth(event: H3Event): { userId: string; role: string; user: User } {

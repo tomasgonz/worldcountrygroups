@@ -9,6 +9,20 @@ export default defineEventHandler((event) => {
   // Only protect API routes
   if (!path.startsWith('/api/')) return
 
+  // Cross-site request forgery: changes must come from the site's own pages (browsers send
+  // Sec-Fetch-Site and Origin; other *.exe.xyz sites count as "same-site", so only same-origin passes)
+  if (!['GET', 'HEAD', 'OPTIONS'].includes(event.method) && !path.startsWith('/api/internal/')) {
+    const site = getRequestHeader(event, 'sec-fetch-site')
+    const origin = getRequestHeader(event, 'origin')
+    let originHost: string | null = null
+    try { originHost = origin && origin !== 'null' ? new URL(origin).host : (origin === 'null' ? 'null' : null) } catch { originHost = 'invalid' }
+    const ownHost = getRequestHost(event, { xForwardedHost: true })
+    const allowed = new Set([ownHost, 'www.worldcountrygroups.org', 'worldcountrygroups.org', 'worldcountrygroups.exe.xyz', 'localhost:3000'])
+    if ((site && site !== 'same-origin' && site !== 'none') || (originHost && !allowed.has(originHost))) {
+      throw createError({ statusCode: 403, statusMessage: 'Cross-site request refused' })
+    }
+  }
+
   // Page-view reports from share-link visitors (the handler checks the link)
   if (path === '/api/share-beacon') return
   if (path === '/api/share-optout') return

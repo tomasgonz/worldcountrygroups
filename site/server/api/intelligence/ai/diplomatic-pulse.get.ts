@@ -1,3 +1,4 @@
+import { isAdminRequest } from '~/server/utils/request-role'
 import { isAIConfigured, callLLM } from '~/server/utils/llm-client'
 import { getProviderForTask, getPulseStyleConfig, type PulseStyleConfig, type PulseTone } from '~/server/utils/ai-config'
 import { buildDiplomaticPulsePrompt } from '~/server/utils/ai-prompts'
@@ -15,14 +16,15 @@ export default defineEventHandler(async (event) => {
   }
 
   const query = getQuery(event)
-  const force = query.force === 'true'
+  // regenerating costs money: only admins may force it
+  const force = query.force === 'true' && isAdminRequest(event)
 
   // Parse style params from query, merge with saved config
   const savedStyle = getPulseStyleConfig()
   const styleParams: PulseStyleConfig = {
     tone: (VALID_TONES.includes(query.tone as PulseTone) ? query.tone : savedStyle.tone) as PulseTone,
-    temperature: query.temperature ? Math.max(0, Math.min(1.5, parseFloat(query.temperature as string) || savedStyle.temperature)) : savedStyle.temperature,
-    speakerStyleAdherence: query.speakerStyleAdherence ? Math.max(0, Math.min(100, parseInt(query.speakerStyleAdherence as string) || savedStyle.speakerStyleAdherence)) : savedStyle.speakerStyleAdherence,
+    temperature: query.temperature && isAdminRequest(event) ? Math.max(0, Math.min(1.5, parseFloat(query.temperature as string) || savedStyle.temperature)) : savedStyle.temperature,
+    speakerStyleAdherence: query.speakerStyleAdherence && isAdminRequest(event) ? Math.max(0, Math.min(100, parseInt(query.speakerStyleAdherence as string) || savedStyle.speakerStyleAdherence)) : savedStyle.speakerStyleAdherence,
   }
 
   const cacheKey = `diplomatic-pulse:weekly:${styleParams.tone}:t${styleParams.temperature}:s${styleParams.speakerStyleAdherence}`

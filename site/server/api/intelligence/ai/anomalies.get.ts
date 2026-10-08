@@ -1,3 +1,4 @@
+import { isAdminRequest } from '~/server/utils/request-role'
 import { isAIConfigured, callLLM } from '~/server/utils/llm-client'
 import { getProviderForTask } from '~/server/utils/ai-config'
 import { buildAnomalyDetectionPrompt } from '~/server/utils/ai-prompts'
@@ -10,7 +11,8 @@ export default defineEventHandler(async (event) => {
   }
 
   const query = getQuery(event)
-  const force = query.force === 'true'
+  // regenerating costs money: only admins may force it
+  const force = query.force === 'true' && isAdminRequest(event)
   const cacheKey = 'anomalies:global'
 
   if (!force) {

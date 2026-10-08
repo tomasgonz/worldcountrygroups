@@ -98,7 +98,7 @@ function loadData(): AIConfig {
 
 function saveData(data: AIConfig) {
   if (!existsSync(DATA_DIR)) mkdirSync(DATA_DIR, { recursive: true })
-  writeFileSync(DATA_PATH, JSON.stringify(data, null, 2))
+  writeFileSync(DATA_PATH, JSON.stringify(data, null, 2), { mode: 0o600 })
   cache = data
 }
 
