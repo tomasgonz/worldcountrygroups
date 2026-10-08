@@ -519,3 +519,13 @@ function parseCountries(v: any): string[] {
     return []
   }
 }
+
+/** How many archived items about a country since a day, by kind (news / statement). */
+export function archiveCounts(iso3: string, fromDay: string): { news: number; statement: number } {
+  const db = archiveDb()
+  if (!db) return { news: 0, statement: 0 }
+  const rows = db.prepare('SELECT kind, COUNT(*) AS n FROM item_countries WHERE iso3 = ? AND day >= ? GROUP BY kind').all(iso3, fromDay) as any[]
+  const out = { news: 0, statement: 0 }
+  for (const r of rows) if (r.kind === 'news' || r.kind === 'statement') out[r.kind as 'news' | 'statement'] = r.n
+  return out
+}

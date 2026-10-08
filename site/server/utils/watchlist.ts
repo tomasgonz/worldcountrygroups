@@ -1,7 +1,7 @@
 import { readDataFile } from './data-file'
 import { getRegistry } from './wcg'
 import { getUserPreferences, updateUserPreferences } from './users'
-import { archiveSearch, archiveForCountries } from './news-analysis'
+import { archiveSearch, archiveForCountries, archiveCounts } from './news-analysis'
 import { getRecentResolutions } from './unvotes'
 import { getElections } from './upcoming'
 import { sgOffice } from './sg-office'
@@ -50,14 +50,15 @@ function majority(v: Record<string, string>) {
 }
 
 function countryNews(iso3: string, since: string, limit = 4) {
-  const items = archiveSearch({ iso3, from: since.slice(0, 10), limit: 40 }) as any[]
-  const news = items.filter(i => i.kind === 'news')
-  const statements = items.filter(i => i.kind === 'statement')
+  const from = since.slice(0, 10)
+  const counts = archiveCounts(iso3, from)
   const pick = (l: any[]) => l.slice(0, limit).map(i => ({ title: i.title, url: i.url, outlet: i.outlet, date: i.publishedAt }))
-  return { newsCount: news.length, statementCount: statements.length, news: pick(news), statements: pick(statements) }
+  const news = archiveSearch({ iso3, from, kind: 'news', limit }) as any[]
+  const statements = archiveSearch({ iso3, from, kind: 'statement', limit }) as any[]
+  return { newsCount: counts.news, statementCount: counts.statement, news: pick(news), statements: pick(statements) }
 }
 
-function countryItem(iso3: string, since: string) {
+export function countryItem(iso3: string, since: string) {
   const c = country(iso3)
   const ga = getRecentResolutions(2).filter(r => r.d >= since.slice(0, 10) && r.v[iso3])
     .sort((a, b) => b.d.localeCompare(a.d))

@@ -48,6 +48,8 @@
       <CountryLeaders v-if="(country as any).iso3" :iso3="(country as any).iso3" />
 
       <!-- ==================== Category 1: Overview ==================== -->
+      <CountryGlance v-if="(country as any).iso3" :iso="(country as any).iso3" />
+
       <div id="cat-overview" class="mb-16 scroll-mt-24">
         <div class="flex items-center gap-4 mb-8">
           <h2 class="font-serif text-2xl font-bold text-primary-900 whitespace-nowrap">Overview</h2>
