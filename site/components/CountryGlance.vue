@@ -11,7 +11,7 @@
         <div v-if="g.withMajority" class="sub">contested votes, session {{ g.withMajority.session }} · rank {{ g.withMajority.rank }} of {{ g.withMajority.of }}</div>
       </a>
       <div class="tile">
-        <div class="big text-lg leading-snug">{{ g.nextElection ? g.nextElection.type : 'None scheduled' }}</div><div class="lbl">next national election</div>
+        <div class="big text-lg leading-snug first-letter:uppercase">{{ g.nextElection ? g.nextElection.type : 'None scheduled' }}</div><div class="lbl">next national election</div>
         <div v-if="g.nextElection" class="sub">{{ g.nextElection.precision === 'day' ? day(g.nextElection.date) : g.nextElection.date }}</div>
       </div>
       <a href="#cat-united-nations" class="tile">

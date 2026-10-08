@@ -9,7 +9,7 @@
       <SectionNav
         :sections="visibleSections"
         :active-section="activeSection"
-        @navigate="sectionScrollTo"
+        @navigate="openAndScroll"
       />
 
       <!-- Breadcrumb -->
@@ -49,12 +49,19 @@
 
       <!-- ==================== Category 1: Overview ==================== -->
       <CountryGlance v-if="(country as any).iso3" :iso="(country as any).iso3" />
+      <div class="flex justify-end gap-3 text-xs -mt-8 mb-8">
+        <button type="button" class="text-accent-700 hover:underline" @click="setAllCats(true)">Expand all sections</button>
+        <button type="button" class="text-accent-700 hover:underline" @click="setAllCats(false)">Collapse all</button>
+      </div>
 
-      <div id="cat-overview" class="mb-16 scroll-mt-24">
-        <div class="flex items-center gap-4 mb-8">
+      <div id="cat-overview" class="scroll-mt-24" :class="isOpen('cat-overview') ? 'mb-16' : 'mb-8'">
+        <div class="flex items-center gap-4 mb-8 cursor-pointer select-none" @click="toggleCat('cat-overview')">
           <h2 class="font-serif text-2xl font-bold text-primary-900 whitespace-nowrap">Overview</h2>
           <div class="flex-1 h-px bg-primary-200"></div>
+          <button type="button" class="shrink-0 text-xs px-2.5 py-1 rounded-full ring-1 ring-primary-200 text-primary-600 hover:bg-primary-50" :aria-expanded="isOpen('cat-overview')" @click.stop="toggleCat('cat-overview')">{{ isOpen('cat-overview') ? 'Hide' : 'Show' }}</button>
         </div>
+        <p v-if="!isOpen('cat-overview')" class="-mt-6 text-sm text-primary-400 cursor-pointer" @click="toggleCat('cat-overview')">Key statistics</p>
+        <div v-show="isOpen('cat-overview')">
 
         <!-- Zone A: Speech Summary Banner -->
         <div v-if="latestSpeech" class="bg-white rounded-2xl border border-primary-100 p-6 mb-6">
@@ -176,13 +183,17 @@
           </div>
         </div>
       </div>
+      </div>
 
       <!-- ==================== Category 2: United Nations ==================== -->
-      <div id="cat-united-nations" class="mb-16 scroll-mt-24">
-        <div class="flex items-center gap-4 mb-8">
+      <div id="cat-united-nations" class="scroll-mt-24" :class="isOpen('cat-united-nations') ? 'mb-16' : 'mb-8'">
+        <div class="flex items-center gap-4 mb-8 cursor-pointer select-none" @click="toggleCat('cat-united-nations')">
           <h2 class="font-serif text-2xl font-bold text-primary-900 whitespace-nowrap">United Nations</h2>
           <div class="flex-1 h-px bg-primary-200"></div>
+          <button type="button" class="shrink-0 text-xs px-2.5 py-1 rounded-full ring-1 ring-primary-200 text-primary-600 hover:bg-primary-50" :aria-expanded="isOpen('cat-united-nations')" @click.stop="toggleCat('cat-united-nations')">{{ isOpen('cat-united-nations') ? 'Hide' : 'Show' }}</button>
         </div>
+        <p v-if="!isOpen('cat-united-nations')" class="-mt-6 text-sm text-primary-400 cursor-pointer" @click="toggleCat('cat-united-nations')">Voting record · Security Council · Speeches · UN budget and Secretariat</p>
+        <div v-show="isOpen('cat-united-nations')">
 
         <CountryUnFootprint :iso="iso" :name="(country as any).name" />
 
@@ -484,93 +495,279 @@
           </div>
         </div>
       </div>
+      </div>
 
-      <!-- ==================== Category 3: Governance ==================== -->
-      <div v-if="hasGovernance" id="cat-governance" class="mb-16 scroll-mt-24">
-        <div class="flex items-center gap-4 mb-8">
-          <h2 class="font-serif text-2xl font-bold text-primary-900 whitespace-nowrap">Governance</h2>
+      <!-- ==================== Category 5: Diplomacy ==================== -->
+      <div v-if="hasDiplomacy" id="cat-diplomacy" class="scroll-mt-24" :class="isOpen('cat-diplomacy') ? 'mb-16' : 'mb-8'">
+        <div class="flex items-center gap-4 mb-8 cursor-pointer select-none" @click="toggleCat('cat-diplomacy')">
+          <h2 class="font-serif text-2xl font-bold text-primary-900 whitespace-nowrap">Diplomacy</h2>
           <div class="flex-1 h-px bg-primary-200"></div>
+          <button type="button" class="shrink-0 text-xs px-2.5 py-1 rounded-full ring-1 ring-primary-200 text-primary-600 hover:bg-primary-50" :aria-expanded="isOpen('cat-diplomacy')" @click.stop="toggleCat('cat-diplomacy')">{{ isOpen('cat-diplomacy') ? 'Hide' : 'Show' }}</button>
         </div>
+        <p v-if="!isOpen('cat-diplomacy')" class="-mt-6 text-sm text-primary-400 cursor-pointer" @click="toggleCat('cat-diplomacy')">Treaties · Sanctions · Visa</p>
+        <div v-show="isOpen('cat-diplomacy')">
 
-        <!-- Democracy (V-Dem) -->
-        <div v-if="democracyData?.has_data" id="sec-democracy" class="mb-10 scroll-mt-24">
-          <h3 class="font-serif text-lg font-bold text-primary-800 mb-4">Democracy Indices</h3>
-          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            <div v-if="democracyData.latest?.v2x_polyarchy != null" class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Electoral Democracy</div>
-              <div class="text-2xl font-serif font-bold text-primary-900">{{ democracyData.latest.v2x_polyarchy.toFixed(2) }}</div>
-            </div>
-            <div v-if="democracyData.latest?.v2x_libdem != null" class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Liberal Democracy</div>
-              <div class="text-2xl font-serif font-bold text-primary-900">{{ democracyData.latest.v2x_libdem.toFixed(2) }}</div>
-            </div>
-            <div v-if="democracyData.latest?.v2x_partipdem != null" class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Participatory</div>
-              <div class="text-2xl font-serif font-bold text-primary-900">{{ democracyData.latest.v2x_partipdem.toFixed(2) }}</div>
-            </div>
-            <div v-if="democracyData.latest?.v2x_egaldem != null" class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Egalitarian</div>
-              <div class="text-2xl font-serif font-bold text-primary-900">{{ democracyData.latest.v2x_egaldem.toFixed(2) }}</div>
-            </div>
-            <div v-if="democracyData.latest?.v2x_rule != null" class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Rule of Law</div>
-              <div class="text-2xl font-serif font-bold text-primary-900">{{ democracyData.latest.v2x_rule.toFixed(2) }}</div>
-            </div>
-            <div v-if="democracyData.latest?.v2x_civlib != null" class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Civil Liberties</div>
-              <div class="text-2xl font-serif font-bold text-primary-900">{{ democracyData.latest.v2x_civlib.toFixed(2) }}</div>
-            </div>
-            <div v-if="democracyData.latest?.v2x_freexp_altinf != null" class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Press Freedom</div>
-              <div class="text-2xl font-serif font-bold text-primary-900">{{ democracyData.latest.v2x_freexp_altinf.toFixed(2) }}</div>
-            </div>
-            <div v-if="democracyData.latest?.v2x_corr != null" class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Corruption</div>
-              <div class="text-2xl font-serif font-bold text-primary-900">{{ democracyData.latest.v2x_corr.toFixed(2) }}</div>
-            </div>
-          </div>
-          <p class="text-xs text-primary-300 mt-3">Source: V-Dem {{ democracyData.latest?.year ? `(${democracyData.latest.year})` : '' }} &mdash; Scale 0-1</p>
-        </div>
-
-        <!-- Diplomatic Recognition -->
-        <div v-if="recognitionData?.entities?.length" id="sec-recognition" class="mb-10 scroll-mt-24">
-          <h3 class="font-serif text-lg font-bold text-primary-800 mb-4">Diplomatic Recognition</h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Treaty Status -->
+        <div v-if="treatiesData?.treaties?.length" id="sec-treaties" class="mb-10 scroll-mt-24">
+          <h3 class="font-serif text-lg font-bold text-primary-800 mb-4">Treaty Status</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div
-              v-for="e in recognitionData.entities"
-              :key="e.entity.id"
+              v-for="t in treatiesData.treaties"
+              :key="t.treaty.id"
               class="bg-white rounded-2xl border p-5"
               :class="{
-                'border-emerald-200': e.stance === 'recognizes',
-                'border-amber-200': e.stance === 'withdrawn',
-                'border-primary-100': e.stance === 'does_not_recognize',
+                'border-emerald-200': t.status === 'party',
+                'border-amber-200': t.status === 'signatory',
+                'border-red-200': t.status === 'withdrawn',
+                'border-primary-100': t.status === 'none',
               }"
             >
-              <div class="flex items-center justify-between gap-2 mb-1">
-                <span class="text-sm font-medium text-primary-800">{{ e.entity.name }}</span>
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <span class="text-sm font-medium text-primary-800">{{ t.treaty.short_name }}</span>
                 <span
                   class="text-xs font-semibold px-2 py-0.5 rounded-full whitespace-nowrap"
                   :class="{
-                    'bg-emerald-100 text-emerald-700': e.stance === 'recognizes',
-                    'bg-amber-100 text-amber-700': e.stance === 'withdrawn',
-                    'bg-gray-100 text-gray-500': e.stance === 'does_not_recognize',
+                    'bg-emerald-100 text-emerald-700': t.status === 'party',
+                    'bg-amber-100 text-amber-700': t.status === 'signatory',
+                    'bg-red-100 text-red-700': t.status === 'withdrawn',
+                    'bg-gray-100 text-gray-500': t.status === 'none',
                   }"
-                >{{ e.stance === 'recognizes' ? 'Recognizes' : e.stance === 'withdrawn' ? 'Withdrawn' : 'Does Not Recognize' }}</span>
+                >{{ t.status === 'party' ? 'Party' : t.status === 'signatory' ? 'Signatory Only' : t.status === 'withdrawn' ? 'Withdrawn' : 'Not Party' }}</span>
               </div>
-              <div class="text-xs text-primary-400">
-                Declared {{ e.entity.declared }} &middot; {{ e.entity.total_recognizers }} countries recognize &middot; {{ e.entity.un_status.replace(/-/g, ' ') }}
-              </div>
+              <div class="text-xs text-primary-400">{{ t.treaty.category }} &middot; {{ t.treaty.adopted }}</div>
             </div>
           </div>
         </div>
+
+        <!-- Sanctions -->
+        <div v-if="sanctionsData" id="sec-sanctions" class="mb-10 scroll-mt-24">
+          <h3 class="font-serif text-lg font-bold text-primary-800 mb-4">Sanctions</h3>
+          <div v-if="sanctionsData.sanctioned" class="space-y-3">
+            <div
+              v-for="r in sanctionsData.regimes"
+              :key="r.id"
+              class="bg-white rounded-2xl border border-red-200 p-5"
+            >
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-sm font-medium text-primary-800">{{ r.name }}</span>
+                <span class="text-xs text-primary-400">{{ r.resolution }}</span>
+              </div>
+              <div class="text-xs text-primary-400 mb-2">
+                Established {{ r.established }}
+                <template v-if="r.listed_individuals != null">
+                  &middot; {{ r.listed_individuals }} individuals and {{ r.listed_entities }} entities listed
+                </template>
+                <template v-if="r.latest_listing">&middot; latest listing {{ r.latest_listing }}</template>
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  v-for="m in r.measures"
+                  :key="m"
+                  class="text-xs px-2 py-0.5 rounded-full bg-red-50 text-red-600"
+                >{{ m.replace(/_/g, ' ') }}</span>
+              </div>
+              <p v-if="r.note" class="text-xs text-primary-400 mt-2">{{ r.note }}</p>
+              <div v-if="r.recent_listings?.length" class="mt-3 border-t border-red-100 pt-2">
+                <div class="text-[10px] text-primary-400 font-medium uppercase tracking-wider mb-1">Most recent listings</div>
+                <div v-for="l in r.recent_listings" :key="l.reference" class="flex items-baseline gap-2 text-xs py-0.5">
+                  <span class="text-primary-400 tabular-nums w-20 shrink-0">{{ l.listed_on }}</span>
+                  <span class="text-primary-700 flex-1 min-w-0 truncate">{{ l.name }}</span>
+                  <span class="text-primary-400 shrink-0">{{ l.reference }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-else class="bg-primary-50 rounded-2xl border border-primary-100 p-6 text-center">
+            <p class="text-primary-400 text-sm">No active UN sanctions against this country.</p>
+          </div>
+          <div
+            v-if="sanctionsData.listings && (sanctionsData.listings.individuals || sanctionsData.listings.entities)"
+            class="mt-3 bg-white rounded-2xl border border-primary-100 p-5"
+          >
+            <div class="text-sm text-primary-700">
+              On the UN Security Council Consolidated List:
+              <strong>{{ sanctionsData.listings.individuals }}</strong> individuals with this nationality
+              and <strong>{{ sanctionsData.listings.entities }}</strong> entities located here.
+            </div>
+            <div class="flex flex-wrap gap-1.5 mt-2">
+              <span
+                v-for="b in sanctionsData.listings.by_regime"
+                :key="b.id"
+                class="text-xs px-2 py-0.5 rounded-full bg-primary-50 text-primary-600"
+              >{{ b.name }}: {{ b.count }}</span>
+            </div>
+            <div v-if="sanctionsData.listings.recent?.length" class="mt-3 border-t border-primary-100 pt-2">
+              <div class="text-[10px] text-primary-400 font-medium uppercase tracking-wider mb-1">Recently listed</div>
+              <div v-for="l in sanctionsData.listings.recent.slice(0, 5)" :key="l.reference" class="flex items-baseline gap-2 text-xs py-0.5">
+                <span class="text-primary-400 tabular-nums w-20 shrink-0">{{ l.listed_on }}</span>
+                <span class="text-primary-700 flex-1 min-w-0 truncate">{{ l.name }}</span>
+                <span class="text-primary-400 shrink-0">{{ l.reference }}</span>
+              </div>
+            </div>
+          </div>
+          <p v-if="sanctionsData.source?.list_generated" class="text-[11px] text-primary-400 mt-2">
+            Source: <a :href="sanctionsData.source.url || 'https://main.un.org/securitycouncil/en/content/un-sc-consolidated-list'" target="_blank" rel="noopener" class="underline hover:text-primary-600">UN Security Council Consolidated List</a>,
+            generated {{ sanctionsData.source.list_generated.slice(0, 10) }}.
+          </p>
+        </div>
+
+        <!-- Visa / Passport - MOVED here from after Alliances -->
+        <div v-if="visaData?.has_data" id="sec-visa" class="mb-10 scroll-mt-24">
+          <h3 class="font-serif text-lg font-bold text-primary-800 mb-4">Passport &amp; Visa</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Mobility Score</div>
+              <div class="text-2xl font-serif font-bold text-primary-900">{{ visaData.mobility_score }}</div>
+              <div v-if="visaData.mobility_rank" class="text-xs text-primary-400 mt-1">Rank #{{ visaData.mobility_rank }}</div>
+            </div>
+            <div class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Visa Free</div>
+              <div class="text-2xl font-serif font-bold text-green-600">{{ visaData.visa_free }}</div>
+            </div>
+            <div class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Visa on Arrival</div>
+              <div class="text-2xl font-serif font-bold text-blue-600">{{ visaData.visa_on_arrival }}</div>
+            </div>
+            <div class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Visa Required</div>
+              <div class="text-2xl font-serif font-bold text-amber-600">{{ visaData.visa_required }}</div>
+            </div>
+          </div>
+          <p class="text-xs text-primary-300 mt-3">Source: Passport Index Dataset</p>
+        </div>
+      </div>
+      </div>
+
+      <!-- ==================== Partners: trade and aid ==================== -->
+      <div v-if="(country as any).iso3" id="cat-partners" class="scroll-mt-24" :class="isOpen('cat-partners') ? 'mb-16' : 'mb-8'">
+        <div class="flex items-center gap-4 mb-8 cursor-pointer select-none" @click="toggleCat('cat-partners')">
+          <h2 class="font-serif text-2xl font-bold text-primary-900 whitespace-nowrap">Trade and aid partners</h2>
+          <div class="flex-1 h-px bg-primary-200"></div>
+          <button type="button" class="shrink-0 text-xs px-2.5 py-1 rounded-full ring-1 ring-primary-200 text-primary-600 hover:bg-primary-50" :aria-expanded="isOpen('cat-partners')" @click.stop="toggleCat('cat-partners')">{{ isOpen('cat-partners') ? 'Hide' : 'Show' }}</button>
+        </div>
+        <p v-if="!isOpen('cat-partners')" class="-mt-6 text-sm text-primary-400 cursor-pointer" @click="toggleCat('cat-partners')">Trade partners · Aid</p>
+        <div v-show="isOpen('cat-partners')">
+        <div id="sec-trade-partners" class="mb-10 scroll-mt-24">
+          <div class="flex items-baseline justify-between gap-2 mb-4">
+            <h3 class="font-serif text-lg font-bold text-primary-800">Trade with emerging economies</h3>
+            <NuxtLink :to="`/partners/trade?country=${(country as any).iso3}`" class="text-xs text-accent-600 hover:underline">Trade tracker &rarr;</NuxtLink>
+          </div>
+          <CountryTradePartners :iso3="(country as any).iso3" />
+        </div>
+        <div id="sec-aid-profile" class="mb-10 scroll-mt-24">
+          <div class="flex items-baseline justify-between gap-2 mb-4">
+            <h3 class="font-serif text-lg font-bold text-primary-800">Development aid</h3>
+            <NuxtLink :to="`/partners/donors?donor=${(country as any).iso3}`" class="text-xs text-accent-600 hover:underline">Donor tracker &rarr;</NuxtLink>
+          </div>
+          <CountryAidProfile :iso3="(country as any).iso3" :tip="false" />
+        </div>
+      </div>
+      </div>
+
+      <!-- ==================== Category 6: Development & Connectivity ==================== -->
+      <div v-if="hasEconomyInfra" id="cat-economy" class="scroll-mt-24" :class="isOpen('cat-economy') ? 'mb-16' : 'mb-8'">
+        <div class="flex items-center gap-4 mb-8 cursor-pointer select-none" @click="toggleCat('cat-economy')">
+          <h2 class="font-serif text-2xl font-bold text-primary-900 whitespace-nowrap">Development &amp; Connectivity</h2>
+          <div class="flex-1 h-px bg-primary-200"></div>
+          <button type="button" class="shrink-0 text-xs px-2.5 py-1 rounded-full ring-1 ring-primary-200 text-primary-600 hover:bg-primary-50" :aria-expanded="isOpen('cat-economy')" @click.stop="toggleCat('cat-economy')">{{ isOpen('cat-economy') ? 'Hide' : 'Show' }}</button>
+        </div>
+        <p v-if="!isOpen('cat-economy')" class="-mt-6 text-sm text-primary-400 cursor-pointer" @click="toggleCat('cat-economy')">Aid flows · Submarine cables</p>
+        <div v-show="isOpen('cat-economy')">
+
+        <!-- Foreign Aid (ODA) -->
+        <div v-if="odaData?.has_data" id="sec-oda" class="mb-10 scroll-mt-24">
+          <h3 class="font-serif text-lg font-bold text-primary-800 mb-4">Foreign Aid (ODA)</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+            <div v-if="odaData.is_donor" class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Total Given</div>
+              <div class="text-xl font-serif font-bold text-primary-900">{{ formatODA(odaData.total_given) }}</div>
+            </div>
+            <div v-if="odaData.total_received > 0" class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Total Received</div>
+              <div class="text-xl font-serif font-bold text-primary-900">{{ formatODA(odaData.total_received) }}</div>
+            </div>
+            <div v-if="odaData.oda_gni_ratio" class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">ODA/GNI Ratio</div>
+              <div class="text-xl font-serif font-bold text-primary-900">{{ odaData.oda_gni_ratio.toFixed(2) }}%<span v-if="odaData.oda_gni_year" class="text-xs font-sans font-normal text-primary-400 ml-1">({{ odaData.oda_gni_year }})</span></div>
+            </div>
+            <div v-if="odaData.donor_rank" class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Donor Rank</div>
+              <div class="text-xl font-serif font-bold text-primary-900">#{{ odaData.donor_rank }}</div>
+            </div>
+            <div v-if="odaData.recipient_rank" class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Recipient Rank</div>
+              <div class="text-xl font-serif font-bold text-primary-900">#{{ odaData.recipient_rank }}</div>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div v-if="odaData.top_recipients?.length">
+              <h3 class="text-sm font-semibold text-primary-700 mb-3">Top Recipients</h3>
+              <div class="space-y-2">
+                <div v-for="p in odaData.top_recipients.slice(0, 5)" :key="p.iso3" class="flex justify-between text-sm">
+                  <span class="text-primary-600">{{ countryLookup.get(p.iso3)?.name || p.iso3 }}</span>
+                  <span class="text-primary-400 tabular-nums">{{ formatODA(p.total) }}</span>
+                </div>
+              </div>
+            </div>
+            <div v-if="odaData.top_donors?.length">
+              <h3 class="text-sm font-semibold text-primary-700 mb-3">Top Donors</h3>
+              <div class="space-y-2">
+                <div v-for="p in odaData.top_donors.slice(0, 5)" :key="p.iso3" class="flex justify-between text-sm">
+                  <span class="text-primary-600">{{ countryLookup.get(p.iso3)?.name || p.iso3 }}</span>
+                  <span class="text-primary-400 tabular-nums">{{ formatODA(p.total) }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="text-xs text-primary-300 mt-3">Source: OECD DAC, net ODA 2020&ndash;2024 in current USD</p>
+        </div>
+
+        <!-- Submarine Cables -->
+        <div v-if="cablesData?.has_data" id="sec-cables" class="mb-10 scroll-mt-24">
+          <h3 class="font-serif text-lg font-bold text-primary-800 mb-4">Submarine Cables</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+            <div class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Cables</div>
+              <div class="text-2xl font-serif font-bold text-primary-900">{{ cablesData.cable_count }}</div>
+            </div>
+            <div class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Landing Points</div>
+              <div class="text-2xl font-serif font-bold text-primary-900">{{ cablesData.landing_points }}</div>
+            </div>
+            <div class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Connected Countries</div>
+              <div class="text-2xl font-serif font-bold text-primary-900">{{ cablesData.connected_countries?.length || 0 }}</div>
+            </div>
+            <div v-if="cablesData.connectivity_rank" class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Connectivity Rank</div>
+              <div class="text-2xl font-serif font-bold text-primary-900">#{{ cablesData.connectivity_rank }}</div>
+            </div>
+          </div>
+          <div v-if="cablesData.cables?.length" class="space-y-2">
+            <h3 class="text-sm font-semibold text-primary-700 mb-2">Notable Cables</h3>
+            <div v-for="c in cablesData.cables.slice(0, 8)" :key="c.id" class="bg-white rounded-xl border border-primary-100 px-4 py-2.5 flex items-center justify-between text-sm">
+              <span class="text-primary-700 font-medium">{{ c.name }}</span>
+              <div class="flex items-center gap-3 text-xs text-primary-400">
+                <span v-if="c.rfs_year">{{ c.rfs_year }}</span>
+                <span v-if="c.length_km">{{ (c.length_km / 1000).toFixed(0) }}K km</span>
+                <span>{{ c.landing_countries?.length || 0 }} countries</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-xs text-primary-300 mt-3">Source: TeleGeography Submarine Cable Map</p>
+        </div>
+      </div>
       </div>
 
       <!-- ==================== Category 4: Security & Defense ==================== -->
-      <div id="cat-security" class="mb-16 scroll-mt-24">
-        <div class="flex items-center gap-4 mb-8">
+      <div id="cat-security" class="scroll-mt-24" :class="isOpen('cat-security') ? 'mb-16' : 'mb-8'">
+        <div class="flex items-center gap-4 mb-8 cursor-pointer select-none" @click="toggleCat('cat-security')">
           <h2 class="font-serif text-2xl font-bold text-primary-900 whitespace-nowrap">Security &amp; Defense</h2>
           <div class="flex-1 h-px bg-primary-200"></div>
+          <button type="button" class="shrink-0 text-xs px-2.5 py-1 rounded-full ring-1 ring-primary-200 text-primary-600 hover:bg-primary-50" :aria-expanded="isOpen('cat-security')" @click.stop="toggleCat('cat-security')">{{ isOpen('cat-security') ? 'Hide' : 'Show' }}</button>
         </div>
+        <p v-if="!isOpen('cat-security')" class="-mt-6 text-sm text-primary-400 cursor-pointer" @click="toggleCat('cat-security')">Military · Arms trade · Alliances</p>
+        <div v-show="isOpen('cat-security')">
 
         <!-- Military & Defense -->
         <div id="sec-military" class="mb-10 scroll-mt-24">
@@ -778,263 +975,101 @@
           <p class="text-xs text-primary-300 mt-3">Source: Correlates of War Formal Alliances v4.1. Data ends in 2012, so later treaties and accessions (e.g. NATO enlargement since 2004) are not shown.</p>
         </div>
       </div>
+      </div>
 
-      <!-- ==================== Category 5: Diplomacy ==================== -->
-      <div v-if="hasDiplomacy" id="cat-diplomacy" class="mb-16 scroll-mt-24">
-        <div class="flex items-center gap-4 mb-8">
-          <h2 class="font-serif text-2xl font-bold text-primary-900 whitespace-nowrap">Diplomacy</h2>
+      <!-- ==================== Category 3: Governance ==================== -->
+      <div v-if="hasGovernance" id="cat-governance" class="scroll-mt-24" :class="isOpen('cat-governance') ? 'mb-16' : 'mb-8'">
+        <div class="flex items-center gap-4 mb-8 cursor-pointer select-none" @click="toggleCat('cat-governance')">
+          <h2 class="font-serif text-2xl font-bold text-primary-900 whitespace-nowrap">Governance</h2>
           <div class="flex-1 h-px bg-primary-200"></div>
+          <button type="button" class="shrink-0 text-xs px-2.5 py-1 rounded-full ring-1 ring-primary-200 text-primary-600 hover:bg-primary-50" :aria-expanded="isOpen('cat-governance')" @click.stop="toggleCat('cat-governance')">{{ isOpen('cat-governance') ? 'Hide' : 'Show' }}</button>
+        </div>
+        <p v-if="!isOpen('cat-governance')" class="-mt-6 text-sm text-primary-400 cursor-pointer" @click="toggleCat('cat-governance')">Democracy · Recognition</p>
+        <div v-show="isOpen('cat-governance')">
+
+        <!-- Democracy (V-Dem) -->
+        <div v-if="democracyData?.has_data" id="sec-democracy" class="mb-10 scroll-mt-24">
+          <h3 class="font-serif text-lg font-bold text-primary-800 mb-4">Democracy Indices</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div v-if="democracyData.latest?.v2x_polyarchy != null" class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Electoral Democracy</div>
+              <div class="text-2xl font-serif font-bold text-primary-900">{{ democracyData.latest.v2x_polyarchy.toFixed(2) }}</div>
+            </div>
+            <div v-if="democracyData.latest?.v2x_libdem != null" class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Liberal Democracy</div>
+              <div class="text-2xl font-serif font-bold text-primary-900">{{ democracyData.latest.v2x_libdem.toFixed(2) }}</div>
+            </div>
+            <div v-if="democracyData.latest?.v2x_partipdem != null" class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Participatory</div>
+              <div class="text-2xl font-serif font-bold text-primary-900">{{ democracyData.latest.v2x_partipdem.toFixed(2) }}</div>
+            </div>
+            <div v-if="democracyData.latest?.v2x_egaldem != null" class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Egalitarian</div>
+              <div class="text-2xl font-serif font-bold text-primary-900">{{ democracyData.latest.v2x_egaldem.toFixed(2) }}</div>
+            </div>
+            <div v-if="democracyData.latest?.v2x_rule != null" class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Rule of Law</div>
+              <div class="text-2xl font-serif font-bold text-primary-900">{{ democracyData.latest.v2x_rule.toFixed(2) }}</div>
+            </div>
+            <div v-if="democracyData.latest?.v2x_civlib != null" class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Civil Liberties</div>
+              <div class="text-2xl font-serif font-bold text-primary-900">{{ democracyData.latest.v2x_civlib.toFixed(2) }}</div>
+            </div>
+            <div v-if="democracyData.latest?.v2x_freexp_altinf != null" class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Press Freedom</div>
+              <div class="text-2xl font-serif font-bold text-primary-900">{{ democracyData.latest.v2x_freexp_altinf.toFixed(2) }}</div>
+            </div>
+            <div v-if="democracyData.latest?.v2x_corr != null" class="bg-white rounded-2xl border border-primary-100 p-5">
+              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Corruption</div>
+              <div class="text-2xl font-serif font-bold text-primary-900">{{ democracyData.latest.v2x_corr.toFixed(2) }}</div>
+            </div>
+          </div>
+          <p class="text-xs text-primary-300 mt-3">Source: V-Dem {{ democracyData.latest?.year ? `(${democracyData.latest.year})` : '' }} &mdash; Scale 0-1</p>
         </div>
 
-        <!-- Treaty Status -->
-        <div v-if="treatiesData?.treaties?.length" id="sec-treaties" class="mb-10 scroll-mt-24">
-          <h3 class="font-serif text-lg font-bold text-primary-800 mb-4">Treaty Status</h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Diplomatic Recognition -->
+        <div v-if="recognitionData?.entities?.length" id="sec-recognition" class="mb-10 scroll-mt-24">
+          <h3 class="font-serif text-lg font-bold text-primary-800 mb-4">Diplomatic Recognition</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div
-              v-for="t in treatiesData.treaties"
-              :key="t.treaty.id"
+              v-for="e in recognitionData.entities"
+              :key="e.entity.id"
               class="bg-white rounded-2xl border p-5"
               :class="{
-                'border-emerald-200': t.status === 'party',
-                'border-amber-200': t.status === 'signatory',
-                'border-red-200': t.status === 'withdrawn',
-                'border-primary-100': t.status === 'none',
+                'border-emerald-200': e.stance === 'recognizes',
+                'border-amber-200': e.stance === 'withdrawn',
+                'border-primary-100': e.stance === 'does_not_recognize',
               }"
             >
-              <div class="flex items-start justify-between gap-2 mb-2">
-                <span class="text-sm font-medium text-primary-800">{{ t.treaty.short_name }}</span>
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-sm font-medium text-primary-800">{{ e.entity.name }}</span>
                 <span
                   class="text-xs font-semibold px-2 py-0.5 rounded-full whitespace-nowrap"
                   :class="{
-                    'bg-emerald-100 text-emerald-700': t.status === 'party',
-                    'bg-amber-100 text-amber-700': t.status === 'signatory',
-                    'bg-red-100 text-red-700': t.status === 'withdrawn',
-                    'bg-gray-100 text-gray-500': t.status === 'none',
+                    'bg-emerald-100 text-emerald-700': e.stance === 'recognizes',
+                    'bg-amber-100 text-amber-700': e.stance === 'withdrawn',
+                    'bg-gray-100 text-gray-500': e.stance === 'does_not_recognize',
                   }"
-                >{{ t.status === 'party' ? 'Party' : t.status === 'signatory' ? 'Signatory Only' : t.status === 'withdrawn' ? 'Withdrawn' : 'Not Party' }}</span>
+                >{{ e.stance === 'recognizes' ? 'Recognizes' : e.stance === 'withdrawn' ? 'Withdrawn' : 'Does Not Recognize' }}</span>
               </div>
-              <div class="text-xs text-primary-400">{{ t.treaty.category }} &middot; {{ t.treaty.adopted }}</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Sanctions -->
-        <div v-if="sanctionsData" id="sec-sanctions" class="mb-10 scroll-mt-24">
-          <h3 class="font-serif text-lg font-bold text-primary-800 mb-4">Sanctions</h3>
-          <div v-if="sanctionsData.sanctioned" class="space-y-3">
-            <div
-              v-for="r in sanctionsData.regimes"
-              :key="r.id"
-              class="bg-white rounded-2xl border border-red-200 p-5"
-            >
-              <div class="flex items-center gap-3 mb-2">
-                <span class="text-sm font-medium text-primary-800">{{ r.name }}</span>
-                <span class="text-xs text-primary-400">{{ r.resolution }}</span>
-              </div>
-              <div class="text-xs text-primary-400 mb-2">
-                Established {{ r.established }}
-                <template v-if="r.listed_individuals != null">
-                  &middot; {{ r.listed_individuals }} individuals and {{ r.listed_entities }} entities listed
-                </template>
-                <template v-if="r.latest_listing">&middot; latest listing {{ r.latest_listing }}</template>
-              </div>
-              <div class="flex flex-wrap gap-1.5">
-                <span
-                  v-for="m in r.measures"
-                  :key="m"
-                  class="text-xs px-2 py-0.5 rounded-full bg-red-50 text-red-600"
-                >{{ m.replace(/_/g, ' ') }}</span>
-              </div>
-              <p v-if="r.note" class="text-xs text-primary-400 mt-2">{{ r.note }}</p>
-              <div v-if="r.recent_listings?.length" class="mt-3 border-t border-red-100 pt-2">
-                <div class="text-[10px] text-primary-400 font-medium uppercase tracking-wider mb-1">Most recent listings</div>
-                <div v-for="l in r.recent_listings" :key="l.reference" class="flex items-baseline gap-2 text-xs py-0.5">
-                  <span class="text-primary-400 tabular-nums w-20 shrink-0">{{ l.listed_on }}</span>
-                  <span class="text-primary-700 flex-1 min-w-0 truncate">{{ l.name }}</span>
-                  <span class="text-primary-400 shrink-0">{{ l.reference }}</span>
-                </div>
+              <div class="text-xs text-primary-400">
+                Declared {{ e.entity.declared }} &middot; {{ e.entity.total_recognizers }} countries recognize &middot; {{ e.entity.un_status.replace(/-/g, ' ') }}
               </div>
             </div>
           </div>
-          <div v-else class="bg-primary-50 rounded-2xl border border-primary-100 p-6 text-center">
-            <p class="text-primary-400 text-sm">No active UN sanctions against this country.</p>
-          </div>
-          <div
-            v-if="sanctionsData.listings && (sanctionsData.listings.individuals || sanctionsData.listings.entities)"
-            class="mt-3 bg-white rounded-2xl border border-primary-100 p-5"
-          >
-            <div class="text-sm text-primary-700">
-              On the UN Security Council Consolidated List:
-              <strong>{{ sanctionsData.listings.individuals }}</strong> individuals with this nationality
-              and <strong>{{ sanctionsData.listings.entities }}</strong> entities located here.
-            </div>
-            <div class="flex flex-wrap gap-1.5 mt-2">
-              <span
-                v-for="b in sanctionsData.listings.by_regime"
-                :key="b.id"
-                class="text-xs px-2 py-0.5 rounded-full bg-primary-50 text-primary-600"
-              >{{ b.name }}: {{ b.count }}</span>
-            </div>
-            <div v-if="sanctionsData.listings.recent?.length" class="mt-3 border-t border-primary-100 pt-2">
-              <div class="text-[10px] text-primary-400 font-medium uppercase tracking-wider mb-1">Recently listed</div>
-              <div v-for="l in sanctionsData.listings.recent.slice(0, 5)" :key="l.reference" class="flex items-baseline gap-2 text-xs py-0.5">
-                <span class="text-primary-400 tabular-nums w-20 shrink-0">{{ l.listed_on }}</span>
-                <span class="text-primary-700 flex-1 min-w-0 truncate">{{ l.name }}</span>
-                <span class="text-primary-400 shrink-0">{{ l.reference }}</span>
-              </div>
-            </div>
-          </div>
-          <p v-if="sanctionsData.source?.list_generated" class="text-[11px] text-primary-400 mt-2">
-            Source: <a :href="sanctionsData.source.url || 'https://main.un.org/securitycouncil/en/content/un-sc-consolidated-list'" target="_blank" rel="noopener" class="underline hover:text-primary-600">UN Security Council Consolidated List</a>,
-            generated {{ sanctionsData.source.list_generated.slice(0, 10) }}.
-          </p>
-        </div>
-
-        <!-- Visa / Passport - MOVED here from after Alliances -->
-        <div v-if="visaData?.has_data" id="sec-visa" class="mb-10 scroll-mt-24">
-          <h3 class="font-serif text-lg font-bold text-primary-800 mb-4">Passport &amp; Visa</h3>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Mobility Score</div>
-              <div class="text-2xl font-serif font-bold text-primary-900">{{ visaData.mobility_score }}</div>
-              <div v-if="visaData.mobility_rank" class="text-xs text-primary-400 mt-1">Rank #{{ visaData.mobility_rank }}</div>
-            </div>
-            <div class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Visa Free</div>
-              <div class="text-2xl font-serif font-bold text-green-600">{{ visaData.visa_free }}</div>
-            </div>
-            <div class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Visa on Arrival</div>
-              <div class="text-2xl font-serif font-bold text-blue-600">{{ visaData.visa_on_arrival }}</div>
-            </div>
-            <div class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Visa Required</div>
-              <div class="text-2xl font-serif font-bold text-amber-600">{{ visaData.visa_required }}</div>
-            </div>
-          </div>
-          <p class="text-xs text-primary-300 mt-3">Source: Passport Index Dataset</p>
         </div>
       </div>
-
-      <!-- ==================== Partners: trade and aid ==================== -->
-      <div v-if="(country as any).iso3" id="cat-partners" class="mb-16 scroll-mt-24">
-        <div class="flex items-center gap-4 mb-8">
-          <h2 class="font-serif text-2xl font-bold text-primary-900 whitespace-nowrap">Trade and aid partners</h2>
-          <div class="flex-1 h-px bg-primary-200"></div>
-        </div>
-        <div id="sec-trade-partners" class="mb-10 scroll-mt-24">
-          <div class="flex items-baseline justify-between gap-2 mb-4">
-            <h3 class="font-serif text-lg font-bold text-primary-800">Trade with emerging economies</h3>
-            <NuxtLink :to="`/partners/trade?country=${(country as any).iso3}`" class="text-xs text-accent-600 hover:underline">Trade tracker &rarr;</NuxtLink>
-          </div>
-          <CountryTradePartners :iso3="(country as any).iso3" />
-        </div>
-        <div id="sec-aid-profile" class="mb-10 scroll-mt-24">
-          <div class="flex items-baseline justify-between gap-2 mb-4">
-            <h3 class="font-serif text-lg font-bold text-primary-800">Development aid</h3>
-            <NuxtLink :to="`/partners/donors?donor=${(country as any).iso3}`" class="text-xs text-accent-600 hover:underline">Donor tracker &rarr;</NuxtLink>
-          </div>
-          <CountryAidProfile :iso3="(country as any).iso3" :tip="false" />
-        </div>
-      </div>
-
-      <!-- ==================== Category 6: Development & Connectivity ==================== -->
-      <div v-if="hasEconomyInfra" id="cat-economy" class="mb-16 scroll-mt-24">
-        <div class="flex items-center gap-4 mb-8">
-          <h2 class="font-serif text-2xl font-bold text-primary-900 whitespace-nowrap">Development &amp; Connectivity</h2>
-          <div class="flex-1 h-px bg-primary-200"></div>
-        </div>
-
-        <!-- Foreign Aid (ODA) -->
-        <div v-if="odaData?.has_data" id="sec-oda" class="mb-10 scroll-mt-24">
-          <h3 class="font-serif text-lg font-bold text-primary-800 mb-4">Foreign Aid (ODA)</h3>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-            <div v-if="odaData.is_donor" class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Total Given</div>
-              <div class="text-xl font-serif font-bold text-primary-900">{{ formatODA(odaData.total_given) }}</div>
-            </div>
-            <div v-if="odaData.total_received > 0" class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Total Received</div>
-              <div class="text-xl font-serif font-bold text-primary-900">{{ formatODA(odaData.total_received) }}</div>
-            </div>
-            <div v-if="odaData.oda_gni_ratio" class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">ODA/GNI Ratio</div>
-              <div class="text-xl font-serif font-bold text-primary-900">{{ odaData.oda_gni_ratio.toFixed(2) }}%<span v-if="odaData.oda_gni_year" class="text-xs font-sans font-normal text-primary-400 ml-1">({{ odaData.oda_gni_year }})</span></div>
-            </div>
-            <div v-if="odaData.donor_rank" class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Donor Rank</div>
-              <div class="text-xl font-serif font-bold text-primary-900">#{{ odaData.donor_rank }}</div>
-            </div>
-            <div v-if="odaData.recipient_rank" class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Recipient Rank</div>
-              <div class="text-xl font-serif font-bold text-primary-900">#{{ odaData.recipient_rank }}</div>
-            </div>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div v-if="odaData.top_recipients?.length">
-              <h3 class="text-sm font-semibold text-primary-700 mb-3">Top Recipients</h3>
-              <div class="space-y-2">
-                <div v-for="p in odaData.top_recipients.slice(0, 5)" :key="p.iso3" class="flex justify-between text-sm">
-                  <span class="text-primary-600">{{ countryLookup.get(p.iso3)?.name || p.iso3 }}</span>
-                  <span class="text-primary-400 tabular-nums">{{ formatODA(p.total) }}</span>
-                </div>
-              </div>
-            </div>
-            <div v-if="odaData.top_donors?.length">
-              <h3 class="text-sm font-semibold text-primary-700 mb-3">Top Donors</h3>
-              <div class="space-y-2">
-                <div v-for="p in odaData.top_donors.slice(0, 5)" :key="p.iso3" class="flex justify-between text-sm">
-                  <span class="text-primary-600">{{ countryLookup.get(p.iso3)?.name || p.iso3 }}</span>
-                  <span class="text-primary-400 tabular-nums">{{ formatODA(p.total) }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <p class="text-xs text-primary-300 mt-3">Source: OECD DAC, net ODA 2020&ndash;2024 in current USD</p>
-        </div>
-
-        <!-- Submarine Cables -->
-        <div v-if="cablesData?.has_data" id="sec-cables" class="mb-10 scroll-mt-24">
-          <h3 class="font-serif text-lg font-bold text-primary-800 mb-4">Submarine Cables</h3>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-            <div class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Cables</div>
-              <div class="text-2xl font-serif font-bold text-primary-900">{{ cablesData.cable_count }}</div>
-            </div>
-            <div class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Landing Points</div>
-              <div class="text-2xl font-serif font-bold text-primary-900">{{ cablesData.landing_points }}</div>
-            </div>
-            <div class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Connected Countries</div>
-              <div class="text-2xl font-serif font-bold text-primary-900">{{ cablesData.connected_countries?.length || 0 }}</div>
-            </div>
-            <div v-if="cablesData.connectivity_rank" class="bg-white rounded-2xl border border-primary-100 p-5">
-              <div class="text-xs text-primary-400 font-medium uppercase tracking-wider mb-2">Connectivity Rank</div>
-              <div class="text-2xl font-serif font-bold text-primary-900">#{{ cablesData.connectivity_rank }}</div>
-            </div>
-          </div>
-          <div v-if="cablesData.cables?.length" class="space-y-2">
-            <h3 class="text-sm font-semibold text-primary-700 mb-2">Notable Cables</h3>
-            <div v-for="c in cablesData.cables.slice(0, 8)" :key="c.id" class="bg-white rounded-xl border border-primary-100 px-4 py-2.5 flex items-center justify-between text-sm">
-              <span class="text-primary-700 font-medium">{{ c.name }}</span>
-              <div class="flex items-center gap-3 text-xs text-primary-400">
-                <span v-if="c.rfs_year">{{ c.rfs_year }}</span>
-                <span v-if="c.length_km">{{ (c.length_km / 1000).toFixed(0) }}K km</span>
-                <span>{{ c.landing_countries?.length || 0 }} countries</span>
-              </div>
-            </div>
-          </div>
-          <p class="text-xs text-primary-300 mt-3">Source: TeleGeography Submarine Cable Map</p>
-        </div>
       </div>
 
       <!-- ==================== Category 7: Media & Events ==================== -->
-      <div id="cat-media" class="mb-16 scroll-mt-24">
-        <div class="flex items-center gap-4 mb-8">
+      <div id="cat-media" class="scroll-mt-24" :class="isOpen('cat-media') ? 'mb-16' : 'mb-8'">
+        <div class="flex items-center gap-4 mb-8 cursor-pointer select-none" @click="toggleCat('cat-media')">
           <h2 class="font-serif text-2xl font-bold text-primary-900 whitespace-nowrap">Media &amp; Events</h2>
           <div class="flex-1 h-px bg-primary-200"></div>
+          <button type="button" class="shrink-0 text-xs px-2.5 py-1 rounded-full ring-1 ring-primary-200 text-primary-600 hover:bg-primary-50" :aria-expanded="isOpen('cat-media')" @click.stop="toggleCat('cat-media')">{{ isOpen('cat-media') ? 'Hide' : 'Show' }}</button>
         </div>
+        <p v-if="!isOpen('cat-media')" class="-mt-6 text-sm text-primary-400 cursor-pointer" @click="toggleCat('cat-media')">News coverage and events</p>
+        <div v-show="isOpen('cat-media')">
 
         <!-- GDELT Events & Tone -->
         <div id="sec-gdelt" class="mb-10 scroll-mt-24">
@@ -1195,13 +1230,17 @@
           </div>
         </div>
       </div>
+      </div>
 
       <!-- ==================== Category 8: Memberships ==================== -->
-      <div id="cat-memberships" class="mb-16 scroll-mt-24">
-        <div class="flex items-center gap-4 mb-8">
+      <div id="cat-memberships" class="scroll-mt-24" :class="isOpen('cat-memberships') ? 'mb-16' : 'mb-8'">
+        <div class="flex items-center gap-4 mb-8 cursor-pointer select-none" @click="toggleCat('cat-memberships')">
           <h2 class="font-serif text-2xl font-bold text-primary-900 whitespace-nowrap">Memberships</h2>
           <div class="flex-1 h-px bg-primary-200"></div>
+          <button type="button" class="shrink-0 text-xs px-2.5 py-1 rounded-full ring-1 ring-primary-200 text-primary-600 hover:bg-primary-50" :aria-expanded="isOpen('cat-memberships')" @click.stop="toggleCat('cat-memberships')">{{ isOpen('cat-memberships') ? 'Hide' : 'Show' }}</button>
         </div>
+        <p v-if="!isOpen('cat-memberships')" class="-mt-6 text-sm text-primary-400 cursor-pointer" @click="toggleCat('cat-memberships')">Groups</p>
+        <div v-show="isOpen('cat-memberships')">
 
         <div id="sec-memberships" class="scroll-mt-24">
           <h3 class="font-serif text-lg font-bold text-primary-800 mb-4">
@@ -1306,6 +1345,8 @@
           </div>
         </div>
       </div>
+      </div>
+
     </template>
 
     <div v-else class="space-y-6">
@@ -1735,13 +1776,32 @@ const hasEconomyInfra = computed(() =>
 const countrySections = [
   { id: 'cat-overview', label: 'Overview' },
   { id: 'cat-united-nations', label: 'United Nations' },
-  { id: 'cat-governance', label: 'Governance' },
-  { id: 'cat-security', label: 'Security & Defense' },
   { id: 'cat-diplomacy', label: 'Diplomacy' },
   { id: 'cat-partners', label: 'Trade & Aid Partners' },
   { id: 'cat-economy', label: 'Development & Connectivity' },
+  { id: 'cat-security', label: 'Security & Defense' },
+  { id: 'cat-governance', label: 'Governance' },
   { id: 'cat-media', label: 'Media & Events' },
   { id: 'cat-memberships', label: 'Memberships' },
 ]
 const { visibleSections, activeSection, scrollTo: sectionScrollTo } = useSectionNav(countrySections)
+// collapsible sections: Overview and United Nations open by default; the browser remembers choices
+const SEC_TO_CAT: Record<string, string> = {"sec-statistics": "cat-overview", "sec-un-voting": "cat-united-nations", "sec-unsc-membership": "cat-united-nations", "sec-unsc-vetoes": "cat-united-nations", "sec-unsc-voting-record": "cat-united-nations", "sec-speeches": "cat-united-nations", "sec-treaties": "cat-diplomacy", "sec-sanctions": "cat-diplomacy", "sec-visa": "cat-diplomacy", "sec-trade-partners": "cat-partners", "sec-aid-profile": "cat-partners", "sec-oda": "cat-economy", "sec-cables": "cat-economy", "sec-military": "cat-security", "sec-arms-trade": "cat-security", "sec-alliances": "cat-security", "sec-democracy": "cat-governance", "sec-recognition": "cat-governance", "sec-gdelt": "cat-media", "sec-memberships": "cat-memberships"}
+const openCats = ref<Record<string, boolean>>({ 'cat-overview': true, 'cat-united-nations': true })
+onMounted(() => {
+  try { const saved = JSON.parse(localStorage.getItem('wcg-country-sections') || 'null'); if (saved) openCats.value = { ...openCats.value, ...saved } } catch {}
+  const hash = (location.hash || '').slice(1)
+  const cat = hash.startsWith('cat-') ? hash : SEC_TO_CAT[hash]
+  if (cat && !openCats.value[cat]) { openCats.value = { ...openCats.value, [cat]: true }; nextTick(() => document.getElementById(hash)?.scrollIntoView()) }
+})
+const saveCats = () => { try { localStorage.setItem('wcg-country-sections', JSON.stringify(openCats.value)) } catch {} }
+const isOpen = (id: string) => !!openCats.value[id]
+function toggleCat(id: string) { openCats.value = { ...openCats.value, [id]: !openCats.value[id] }; saveCats() }
+function setAllCats(open: boolean) { openCats.value = Object.fromEntries(countrySections.map(c => [c.id, open])); saveCats() }
+function openAndScroll(id: string) {
+  const cat = id.startsWith('cat-') ? id : SEC_TO_CAT[id]
+  if (cat && !openCats.value[cat]) { openCats.value = { ...openCats.value, [cat]: true }; saveCats() }
+  nextTick(() => sectionScrollTo(id))
+}
+
 </script>
