@@ -17,6 +17,7 @@
           <a v-for="s in SECTIONS" :key="s.id" :href="`#${s.id}`" class="px-3 py-1.5 rounded-full bg-white ring-1 ring-sky-200 text-primary-700 hover:ring-[#009edb] hover:text-[#0077b6]">{{ s.label }}</a>
           <NuxtLink to="/un-budget" class="px-3 py-1.5 rounded-full bg-[#0077b6] text-white hover:bg-[#005f92]">Budget, dues &amp; reform →</NuxtLink>
           <NuxtLink to="/un-leadership" class="px-3 py-1.5 rounded-full bg-[#0077b6] text-white hover:bg-[#005f92]">Leadership →</NuxtLink>
+          <AdminRegenerate :sources="[{ id: 'un-briefing' }, { id: 'fetch-unsc', label: 'Council and Assembly record' }, { id: 'fetch-statements', label: 'Statements' }, { id: 'fetch-sg-office', label: 'Secretary-General: statements and appointments' }, { id: 'said' }, { id: 'fetch-un-journal', label: 'Coming up (UN Journal)' }]" />
         </nav>
       </div>
     </header>
@@ -131,7 +132,7 @@
 
       <!-- ===================== AI analysis ===================== -->
       <section id="analysis" class="scroll-mt-24">
-        <SectionHead title="Council analysis" note="AI reading of the official record, refreshed every few hours" />
+        <SectionHead title="Council analysis" note="AI reading of the official record, rewritten every 4 hours" />
         <div class="card">
           <div v-if="aiPending" class="space-y-2"><div v-for="i in 4" :key="i" class="skeleton h-4 rounded" /></div>
           <template v-else-if="aiHtml">

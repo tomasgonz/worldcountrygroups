@@ -8,6 +8,7 @@
         <p class="text-primary-500 mt-3 max-w-3xl leading-relaxed">
           The race for the next UN Secretary-General, elections to the Security Council, the Human Rights Council, ECOSOC and the International Court of Justice, the President of the General Assembly, and national elections around the world.
         </p>
+        <AdminRegenerate class="mt-3" :sources="[{ id: 'fetch-sg-selection', label: 'Secretary-General race (candidates, straw polls)' }, { id: 'fetch-un-elections', label: 'Security Council, PGA, HRC, ECOSOC and ICJ elections' }, { id: 'fetch-elections', label: 'National elections calendar' }, { id: 'fetch-election-news', label: 'Election news' }]" />
         <nav class="mt-6 flex gap-1 overflow-x-auto -mb-px" role="tablist" aria-label="Elections">
           <button v-for="t in TABS" :key="t.id" role="tab" :aria-selected="tab === t.id" class="shrink-0 px-4 py-2.5 text-sm border-b-2 transition-colors"
             :class="tab === t.id ? 'border-primary-900 text-primary-900 font-medium' : 'border-transparent text-primary-500 hover:text-primary-800'" @click="setTab(t.id)">{{ t.label }}</button>

@@ -13,6 +13,7 @@
         <nav class="mt-5 flex flex-wrap gap-2 text-sm" aria-label="Sections">
           <a v-for="(label, id) in d?.groups || {}" :key="id" :href="`#g-${id}`" class="px-3 py-1.5 rounded-full bg-white ring-1 ring-sky-200 text-primary-700 hover:ring-[#009edb] hover:text-[#0077b6]">{{ label }}</a>
           <a href="#feed" class="px-3 py-1.5 rounded-full bg-white ring-1 ring-sky-200 text-primary-700 hover:ring-[#009edb] hover:text-[#0077b6]">Latest statements</a>
+          <AdminRegenerate :sources="[{ id: 'fetch-sg-office', label: 'Appointments and SG statements' }, { id: 'fetch-un-leadership', label: 'Office holders and their statements' }, { id: 'said' }]" />
         </nav>
       </div>
     </header>

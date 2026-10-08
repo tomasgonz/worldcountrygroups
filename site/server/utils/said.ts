@@ -225,7 +225,7 @@ Answer with JSON only: [{"id": 12, "speaker": "Volker Türk", "role": "UN High C
 }
 
 /** Refresh every section (called every 3 hours); the model is only asked when the candidates have changed. */
-export async function runSaid(): Promise<Record<string, any>> {
+export async function runSaid(o: { force?: boolean } = {}): Promise<Record<string, any>> {
   if (!existsSync(REPO)) syncRepository()
   const store = load()
   const report: Record<string, any> = {}
@@ -236,7 +236,7 @@ export async function runSaid(): Promise<Record<string, any>> {
       const cands: Cand[] = raw.slice(0, 160).map((c, i) => ({ ...c, id: i + 1 }))
       const hash = createHash('sha1').update(cands.map(c => c.quote).sort().join('|')).digest('hex').slice(0, 16)
       const prev = store.sections[section][window]
-      if (prev && prev.hash === hash && prev.quotes.length) { report[`${section}/${window}`] = 'unchanged'; continue }
+      if (!o.force && prev && prev.hash === hash && prev.quotes.length) { report[`${section}/${window}`] = 'unchanged'; continue }
       const r = await pick(section, window, cands, max)
       store.sections[section][window] = { hash, quotes: r.quotes, updatedAt: new Date().toISOString(), candidates: cands.length, method: r.method }
       addToRepository(section, r.quotes)
@@ -351,4 +351,10 @@ export function syncRepository() {
   const store = load()
   for (const [section, wins] of Object.entries(store.sections)) for (const w of Object.values(wins)) addToRepository(section as SaidSection, w.quotes)
   return loadRepo().quotes.length
+}
+
+export function saidUpdatedAt(): string | null {
+  let latest: string | null = null
+  for (const wins of Object.values(load().sections)) for (const w of Object.values(wins)) if (!latest || w.updatedAt > latest) latest = w.updatedAt
+  return latest
 }

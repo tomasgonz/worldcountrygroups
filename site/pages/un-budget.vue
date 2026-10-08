@@ -13,6 +13,7 @@
         </p>
         <nav class="mt-5 flex flex-wrap gap-2 text-sm" aria-label="Sections">
           <a v-for="s in SECTIONS" :key="s.id" :href="`#${s.id}`" class="px-3 py-1.5 rounded-full bg-white ring-1 ring-sky-200 text-primary-700 hover:ring-[#009edb] hover:text-[#0077b6]">{{ s.label }}</a>
+          <AdminRegenerate :sources="[{ id: 'fetch-fifth-committee', label: 'Fifth Committee, dues, scale, UN80 and coverage' }, { id: 'said' }]" />
         </nav>
       </div>
     </header>
