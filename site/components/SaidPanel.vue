@@ -18,13 +18,13 @@
       </figure>
     </div>
     <MethodNote title="How quotes are chosen">
-      <p>Every quote is copied word for word from its source, linked under each card: headlines and summaries in the site's news archive (UN sources and coverage of the UN) and, for the budget, the text of statements delivered in the Fifth Committee. {{ current?.method === 'ai' ? 'An AI model chooses the most substantive among the candidates found and names the speaker; it cannot write or alter a quote, and a speaker who is not named in the source is rejected.' : 'The most recent quotes with a known speaker are shown.' }} Updated every 3 hours ({{ current?.candidates ?? 0 }} candidates {{ win === 'today' ? 'in the last 24 hours' : 'this week' }}).</p>
+      <p>Every quote is copied word for word from its source, linked under each card: the full text of UN News stories, headlines and summaries in the site's news archive (UN sources and coverage of the UN) and, for the budget, the text of statements delivered in the Fifth Committee. {{ current?.method === 'ai' ? 'An AI model chooses the most substantive among the candidates found and names the speaker; it cannot write or alter a quote, and a speaker who is not named in the source is rejected.' : 'The most recent quotes with a known speaker are shown.' }} Updated every 3 hours ({{ current?.candidates ?? 0 }} candidates {{ win === 'today' ? 'in the last 24 hours' : 'this week' }}).</p>
     </MethodNote>
   </section>
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{ section: 'un' | 'budget' | 'leadership' }>()
+const props = defineProps<{ section: 'un' | 'budget' | 'leadership' | 'assembly' }>()
 const WINDOWS = [{ id: 'today', label: 'Today' }, { id: 'week', label: 'This week' }] as const
 const { data: d } = useFetch<any>('/api/said', { query: { section: props.section }, lazy: true, server: false })
 const win = ref<'today' | 'week'>('today')

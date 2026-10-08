@@ -20,6 +20,7 @@ export const SAID_SECTIONS = {
   un: 'UN Monitor',
   budget: 'Budget, dues and reform',
   leadership: 'UN leadership',
+  assembly: 'General Assembly and ECOSOC',
 } as const
 export type SaidSection = keyof typeof SAID_SECTIONS
 
@@ -140,13 +141,33 @@ function feedCands(days: number, onlyOffices?: (id: string) => boolean): Omit<Ca
   return out
 }
 
+/** Quoted passages from the full text of UN News stories (quote-texts.json), with their paragraph for attribution. */
+function storyCands(days: number, keep?: (context: string) => boolean): Omit<Cand, 'id'>[] {
+  const since = sinceIso(days)
+  const out: Omit<Cand, 'id'>[] = []
+  for (const [url, st] of Object.entries<any>(readDataFile<any>('quote-texts.json') || {})) {
+    if ((st.date || '') < since) continue
+    for (const q of st.quotes || []) {
+      if (keep && !keep(`${st.title} ${q.context}`)) continue
+      out.push({ quote: q.q, context: `${st.title}. ${q.context}`.slice(0, 900), speakerHint: null, title: st.title, url, outlet: 'UN News', date: st.date })
+    }
+  }
+  return out
+}
+
+const GA_TERMS = /General Assembly|First Committee|Second Committee|Third Committee|Fourth Committee|Fifth Committee|Sixth Committee|ECOSOC|Economic and Social Council|President of the Assembly/i
+
 function dedupe(list: Omit<Cand, 'id'>[]) {
   const seen = new Set<string>()
   return list.filter(c => { const k = c.quote.toLowerCase().slice(0, 80); if (seen.has(k)) return false; seen.add(k); return true })
 }
 
 function candidates(section: SaidSection, days: number): Omit<Cand, 'id'>[] {
-  if (section === 'un') return dedupe([...archiveCands(UN_WHERE, [], days), ...feedCands(days, id => ['sg', 'pga', 'ecosoc', 'dsg'].includes(id))])
+  if (section === 'un') return dedupe([...storyCands(days), ...archiveCands(UN_WHERE, [], days), ...feedCands(days, id => ['sg', 'pga', 'ecosoc', 'dsg'].includes(id))])
+  if (section === 'assembly') {
+    return dedupe([...storyCands(days, c => GA_TERMS.test(c)), ...feedCands(days, id => ['pga', 'ecosoc'].includes(id)),
+      ...archiveCands("(title LIKE '%General Assembly%' OR title LIKE '%Committee%' OR title LIKE '%ECOSOC%' OR summary LIKE '%General Assembly%') AND (" + UN_WHERE + ")", [], days)])
+  }
   if (section === 'budget') {
     const out: Omit<Cand, 'id'>[] = []
     const f = readDataFile<any>('fifth-committee.json')
@@ -176,9 +197,11 @@ function candidates(section: SaidSection, days: number): Omit<Cand, 'id'>[] {
     if (sn && sn.length > 3) terms.push(sn)
     for (const t of o.terms || []) if (t.length > 8) terms.push(t)
   }
+  const termRe = terms.length ? new RegExp(terms.map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|'), 'i') : null
+  const stories = termRe ? storyCands(days, c => termRe.test(c)) : []
   if (!terms.length) return dedupe(feedCands(days, id => id !== 'sg'))
   const where = terms.slice(0, 60).map(() => '(title LIKE ? OR summary LIKE ?)').join(' OR ')
-  return dedupe([...feedCands(days, id => id !== 'sg'), ...archiveCands(`(${where}) AND (${UN_WHERE} OR url LIKE '%unicef.org%' OR url LIKE '%unhcr.org%' OR url LIKE '%wfp.org%' OR url LIKE '%undp.org%' OR url LIKE '%ohchr.org%')`, terms.slice(0, 60).flatMap(t => [`%${t}%`, `%${t}%`]), days)])
+  return dedupe([...stories, ...feedCands(days, id => id !== 'sg'), ...archiveCands(`(${where}) AND (${UN_WHERE} OR url LIKE '%unicef.org%' OR url LIKE '%unhcr.org%' OR url LIKE '%wfp.org%' OR url LIKE '%undp.org%' OR url LIKE '%ohchr.org%')`, terms.slice(0, 60).flatMap(t => [`%${t}%`, `%${t}%`]), days)])
 }
 
 function fold(s: string) { return (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase() }
@@ -258,7 +281,7 @@ export function getSaid(section: string) {
 // repository (quotes-index.json, which is rebuilt from the speeches), and searched together with it.
 const REPO = join(DATA_DIR, 'quotes-said.json')
 const UN_ROLE = /\b(Guterres|Secretary-General|Under-Secretary|High Commissioner|High Representative|Executive Director|Administrator|Emergency Relief|Spokesperson|President of the (General Assembly|Economic and Social Council)|UN chief|UN rights chief|UN refugee chief|Controller|Chair of the|Committee on Contributions|Board of Auditors|UNICEF|UNHCR|WFP|UNDP|OCHA|UNFPA|UN Women|UNEP|UNRWA|Special (Envoy|Representative|Rapporteur|Adviser)|United Nations)\b/i
-const THEME: Record<string, string[]> = { budget: ['reform_un'], un: [], leadership: [] }
+const THEME: Record<string, string[]> = { budget: ['reform_un'], un: [], leadership: [], assembly: [] }
 
 function countryOf(q: SaidQuote): { iso3: string; iso2: string; country: string } {
   const reg = getRegistry()

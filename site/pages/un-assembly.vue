@@ -13,7 +13,7 @@
         </p>
         <nav class="mt-5 flex flex-wrap gap-2 text-sm" aria-label="Sections">
           <a v-for="s in SECTIONS" :key="s.id" :href="`#${s.id}`" class="px-3 py-1.5 rounded-full bg-white ring-1 ring-sky-200 text-primary-700 hover:ring-[#009edb] hover:text-[#0077b6]">{{ s.label }}</a>
-          <AdminRegenerate :sources="[{ id: 'fetch-undl-votes', label: 'General Assembly votes (Digital Library)' }, { id: 'fetch-ga-assembly', label: 'Committee bureaus, press and ECOSOC' }, { id: 'fetch-un-journal', label: 'Meetings (UN Journal)' }, { id: 'fetch-un-elections', label: 'ECOSOC membership and elections' }]" />
+          <AdminRegenerate :sources="[{ id: 'fetch-undl-votes', label: 'General Assembly votes (Digital Library)' }, { id: 'fetch-ga-assembly', label: 'Committee bureaus, press and ECOSOC' }, { id: 'fetch-un-journal', label: 'Meetings (UN Journal)' }, { id: 'fetch-un-elections', label: 'ECOSOC membership and elections' }, { id: 'fetch-quote-texts', label: 'UN News full texts (quotes)' }, { id: 'said' }]" />
         </nav>
       </div>
     </header>
@@ -27,6 +27,8 @@
           <div v-if="t.sub" class="text-[11px] mt-0.5 text-primary-400">{{ t.sub }}</div>
         </div>
       </div>
+
+      <SaidPanel section="assembly" />
 
       <!-- ===================== Votes ===================== -->
       <section v-if="V" id="votes" class="scroll-mt-24">
