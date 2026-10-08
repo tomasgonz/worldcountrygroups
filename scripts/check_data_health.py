@@ -289,6 +289,10 @@ def compute():
     quiet_key = [r["name"] for r in cov["key"] if r["statements"] + r["news"] == 0]
     if quiet_key:
         problems.append(f"Coverage: nothing in 30 days from or about {', '.join(quiet_key)}")
+    lead = (load("un-leadership.json", {}) or {}).get("_meta", {}).get("roster") or {}
+    if lead and ((lead.get("ageDays") or 0) > 60 or (lead.get("appointmentsSince") or 0) >= 3):
+        problems.append(f"Reminder: refresh the UN leadership list (Admin › Sources): copied {lead.get('ageDays')} days ago, "
+                        f"{lead.get('appointmentsSince', 0)} senior appointments announced since")
     backup = backup_status()
     if backup["configured"] and (backup["ageHours"] is None or backup["ageHours"] > 36):
         problems.append(f"Backup: no successful backup in the last 36 hours (last {backup['lastSuccess'] or 'never'})")

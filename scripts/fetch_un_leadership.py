@@ -222,6 +222,78 @@ def main():
         offices.append({"id": oid, "group": group, "label": label, "short": short, "holder": holder, "postRe": post_re, "peopleRole": people_role,
                         "evidence": [{k: c.get(k) for k in ("name", "since", "source", "url", "kind")} for c in cands[:4]], "terms": terms})
 
+    # ---- upkeep: General Assembly approvals, departures and stand-ins, nationalities
+    ga_approvals = []
+    try:
+        for q in ['"General Assembly" approves appointment OR "elects" "High Commissioner" when:1y',
+                  '"General Assembly" approves appointment "Secretary-General" when:1y']:
+            ga_approvals += fetch_items(q)
+            time.sleep(1.0)
+    except Exception as e:  # noqa: BLE001
+        log(f"  ! approvals: {e}")
+    roster_by = {}
+    for o in offices:
+        h = o.get("holder")
+        # approvals: "General Assembly Approves Appointment of <name> as <post>" / "elects <name> (<country>) as <post>"
+        for it in ga_approvals:
+            if not OFFICIAL.search(it["host"]):
+                continue
+            m = re.search(r"(?:Approves Appointment of|Elects|elected)\s+([A-Z][\w'’.\- ]{3,60}?)\s+(?:\(([^)]+)\)\s+)?(?:as|to be)\s+(.+)$", it["title"], re.I)
+            if m and o.get("postRe") and re.search(o["postRe"], m.group(3), re.I) and (not h or h.get("since", "") < it["date"][:10]) and (not h or m.group(1).split()[-1] not in h["name"]):
+                o["note"] = f"General Assembly approved {m.group(1).strip()} ({it['date'][:10]})"
+                o["holder"] = h = {"name": m.group(1).strip(), "iso3": cmap.get(m.group(2) or ""), "since": it["date"][:10], "source": it["outlet"] or "UN", "url": it["url"], "kind": "ga-approval"}
+        if not h or o["id"] == "sg":  # the Secretary-General's succession is followed on the elections pages
+            continue
+        # departures and acting heads, from headlines naming the holder
+        parts = [w for w in h["name"].split() if w]
+        short = f"{parts[0]} {parts[-1]}" if len(parts) >= 2 else h["name"]
+        try:
+            items = fetch_items(f'"{short}" ("step down" OR "steps down" OR resigns OR resignation OR "end of his term" OR "end of her term" OR "concludes" OR "departure") when:120d')
+        except Exception:  # noqa: BLE001
+            items = []
+        for it in items:
+            if parts[-1] in it["title"] and re.search(r"step(s|ping)? down|resign|departure|leav(es|ing) (the|his|her) post|end of (his|her) (term|tenure)|concludes (his|her) (term|tenure)", it["title"], re.I) \
+                    and it["date"][:10] >= (h.get("since") or "0000"):
+                o["transition"] = {"title": it["title"], "url": it["url"], "date": it["date"][:10], "source": it["outlet"]}
+                break
+        time.sleep(0.8)
+    # acting heads / officers-in-charge announced for tracked offices
+    try:
+        acting = fetch_items('"Officer-in-Charge" OR "Acting Under-Secretary-General" OR "acting head" United Nations when:120d')
+    except Exception:  # noqa: BLE001
+        acting = []
+    for it in acting:
+        if not OFFICIAL.search(it["host"]):
+            continue
+        for o in offices:
+            if o.get("postRe") and re.search(o["postRe"].replace("^", ""), it["title"], re.I) and re.search(r"Officer-in-Charge|Acting", it["title"], re.I):
+                o["transition"] = o.get("transition") or {"title": it["title"], "url": it["url"], "date": it["date"][:10], "source": it["outlet"], "acting": True}
+    # nationalities: from appointment announcements (same surname), then Wikidata citizenship
+    nat_cache = {k: v for k, v in ((prev.get("_meta") or {}).get("nationalities", {})).items() if v}
+    lookups = 0
+    for o in offices:
+        h = o.get("holder")
+        if not h or h.get("iso3"):
+            continue
+        sn = h["name"].split()[-1].lower()
+        hit = next((a for a in appts if a.get("person") and a["person"].split()[-1].lower() == sn and a.get("nationality")), None)
+        if hit:
+            h["iso3"] = hit["nationality"]
+        elif h["name"] in nat_cache:
+            h["iso3"] = nat_cache[h["name"]]
+        elif lookups < 6:  # Wikidata asks for gentle use: a few lookups per run, a few seconds apart
+            lookups += 1
+            found = wikidata_citizenship(h["name"])
+            if found:
+                h["iso3"] = nat_cache[h["name"]] = found
+            time.sleep(4)
+        h["nationality"] = iso_name.get(h["iso3"]) if h.get("iso3") else None
+    # roster reminder: how old the pasted official list is, and senior appointments announced since
+    pasted = (roster.get("pastedAt") or "")[:10]
+    since_list = [a for a in appts if pasted and a["date"][:10] > pasted and a.get("category") in ("senior", "envoy", "mission")]
+    roster_status = {"pastedAt": pasted or None, "ageDays": (now.date() - datetime.fromisoformat(pasted).date()).days if pasted else None,
+                     "appointmentsSince": len(since_list), "examples": [f"{a['person']}: {a['post']}" for a in since_list[:5]]}
+
     # statements: headlines on UN sites naming the office or its holder
     first = not (prev.get("_meta") or {}).get("statementsBackfilled")
     prev_stmts = {o["id"]: o.get("statements", []) for o in prev.get("offices", [])}
@@ -257,6 +329,7 @@ def main():
 
     out = {
         "_meta": {"updated_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"), "statementsBackfilled": True, "ecosoc": ecosoc, "groups": GROUPS,
+                  "nationalities": nat_cache, "roster": roster_status,
                   "method": "Holders from overrides, the Secretary-General's appointment press releases, the people index (Wikidata, the PGA's site) and ECOSOC's election headline; statements are UN-site headlines naming the office or holder."},
         "offices": offices,
     }
@@ -265,6 +338,39 @@ def main():
         json.dump(out, f, ensure_ascii=False)
     os.replace(tmp, OUT)
     log(f"wrote {OUT}: {sum(1 for o in offices if o.get('holder'))}/{len(offices)} holders confirmed")
+
+
+WD_UA = "WorldCountryGroups/1.0 (https://www.worldcountrygroups.org; research site) python-urllib"
+
+
+def wikidata_citizenship(name):
+    """ISO3 of a person's country of citizenship on Wikidata (first exact-name match that has one)."""
+    import urllib.parse
+    UA = WD_UA  # noqa: N806
+    try:
+        q = urllib.parse.urlencode({"action": "wbsearchentities", "search": name, "language": "en", "type": "item", "limit": 3, "format": "json"})
+        with urlopen(Request(f"https://www.wikidata.org/w/api.php?{q}", headers={"User-Agent": UA}), timeout=30) as r:
+            hits = json.loads(r.read()).get("search", [])
+        for h in hits:
+            q2 = urllib.parse.urlencode({"action": "wbgetentities", "ids": h["id"], "props": "claims", "format": "json"})
+            with urlopen(Request(f"https://www.wikidata.org/w/api.php?{q2}", headers={"User-Agent": UA}), timeout=30) as r:
+                cl = json.loads(r.read())["entities"][h["id"]].get("claims", {})
+            if not any(c["mainsnak"].get("datavalue", {}).get("value", {}).get("id") == "Q5" for c in cl.get("P31", [])):
+                continue
+            for c in cl.get("P27", []):
+                cid = c["mainsnak"].get("datavalue", {}).get("value", {}).get("id")
+                if not cid:
+                    continue
+                q3 = urllib.parse.urlencode({"action": "wbgetentities", "ids": cid, "props": "claims", "format": "json"})
+                with urlopen(Request(f"https://www.wikidata.org/w/api.php?{q3}", headers={"User-Agent": UA}), timeout=30) as r:
+                    cc = json.loads(r.read())["entities"][cid].get("claims", {})
+                iso = next((x["mainsnak"]["datavalue"]["value"] for x in cc.get("P298", []) if x["mainsnak"].get("datavalue")), None)
+                if iso:
+                    return iso
+            return None
+    except Exception:  # noqa: BLE001
+        return None
+    return None
 
 
 def ga_session(now):

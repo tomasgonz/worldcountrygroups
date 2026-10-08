@@ -119,5 +119,5 @@ export function leadership(o: { roster?: RosterEntry[] | null } = {}) {
     return { ...off, holder: holder ? { ...holder, country: country(holder.iso3) } : null, note, statements: off.statements || [] }
   })
   const others = roster ? roster.entries.filter((_: any, i: number) => !used.has(i)) : []
-  return { updatedAt: f._meta?.updated_at, groups: f._meta?.groups || {}, offices, roster: roster ? { pastedAt: roster.pastedAt, count: roster.entries.length, others } : null }
+  return { updatedAt: f._meta?.updated_at, groups: f._meta?.groups || {}, offices, roster: roster ? { pastedAt: roster.pastedAt, count: roster.entries.length, others } : null, rosterStatus: f._meta?.roster || null }
 }

@@ -20,6 +20,9 @@
 
     <div v-if="!d" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10"><div class="skeleton h-96 rounded-2xl" /></div>
     <div v-else class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+      <div v-if="isAdmin && reminder" class="rounded-xl bg-amber-50 ring-1 ring-amber-200 px-4 py-3 text-sm text-amber-900">
+        Time to refresh the official list: {{ reminder }}. <NuxtLink to="/admin?tab=sources" class="underline">Paste the leadership page in Admin → Sources</NuxtLink>.
+      </div>
       <p class="text-xs text-primary-500">
         <template v-if="d.roster">Holders from the UN's leadership team page (copied {{ day(d.roster.pastedAt) }}), with appointments announced since.</template>
         <template v-else>Holders from appointment announcements and public records; the UN's own leadership list has not been loaded yet.</template>
@@ -52,6 +55,9 @@
             </div>
             <div v-if="o.holder?.stale" class="mt-2 text-[11px] px-2 py-1 rounded bg-amber-50 text-amber-800">Based on a {{ (o.holder.since || '').slice(0, 4) }} announcement: needs confirmation.</div>
             <div v-if="o.note" class="mt-2 text-[11px] px-2 py-1 rounded bg-sky-50 text-[#0077b6]">{{ o.note }}</div>
+            <div v-if="o.transition" class="mt-2 text-[11px] px-2 py-1 rounded bg-amber-50 text-amber-800">
+              {{ o.transition.acting ? 'Acting head reported' : 'Post in transition' }}: <a :href="o.transition.url" target="_blank" rel="noopener" class="underline" @click.stop>{{ o.transition.title }}</a> ({{ day(o.transition.date) }})
+            </div>
             <ul v-if="o.statements.length" class="mt-3 space-y-1.5 border-t border-sky-50 pt-2">
               <li v-for="s in o.statements.slice(0, 2)" :key="s.url" class="text-[13px] leading-snug">
                 <a :href="s.url" target="_blank" rel="noopener" class="text-primary-800 hover:text-[#0077b6]" @click.stop>{{ s.title }}</a>
@@ -95,7 +101,7 @@
       </section>
 
       <MethodNote>
-        <p><strong>Who holds each office.</strong> The UN's own <a href="https://www.un.org/sg/en/leadership-team" target="_blank" rel="noopener">Leadership team</a> page is the reference, but it blocks automated reading, so an editor copies it into the site from time to time (date shown above). Between copies, and for offices it does not list (the Presidents of the General Assembly and ECOSOC), holders come from evidence: the Secretary-General's appointment announcements (collected back to 2017), the General Assembly President's own site, ECOSOC's election announcement and Wikidata. When a newer appointment is announced after the list was copied, the card says so. Holders known only from an announcement more than six years old are marked as needing confirmation; an office with no evidence shows "holder not confirmed" rather than a guess.</p>
+        <p><strong>Who holds each office.</strong> The UN's own <a href="https://www.un.org/sg/en/leadership-team" target="_blank" rel="noopener">Leadership team</a> page is the reference, but it blocks automated reading, so an editor copies it into the site from time to time (date shown above). Between copies, and for offices it does not list (the Presidents of the General Assembly and ECOSOC), holders come from evidence: the Secretary-General's appointment announcements (collected back to 2017), the General Assembly President's own site, ECOSOC's election announcement and Wikidata. When a newer appointment is announced after the list was copied, the card says so; reported departures and acting heads are flagged as "post in transition" with the source, and General Assembly approvals (for posts it confirms) are picked up. Nationalities come from appointment announcements or Wikidata. Holders known only from an announcement more than six years old are marked as needing confirmation; an office with no evidence shows "holder not confirmed" rather than a guess.</p>
         <p><strong>Statements.</strong> Headlines on UN websites (press releases, UN News, departments' and agencies' own sites) that name the office or its holder, as indexed by Google News, over the last year. The Secretary-General's come from the dedicated tracker on the UN Monitor. Headline matching can include items about the office rather than by its holder.</p>
       </MethodNote>
     </div>
@@ -120,6 +126,16 @@ const feed = computed(() => {
     .flatMap((o: any) => o.statements.map((s: any) => ({ ...s, office: o.short })))
   const seen = new Set<string>()
   return list.sort((a: any, b: any) => b.date.localeCompare(a.date)).filter((s: any) => (seen.has(s.url) ? false : (seen.add(s.url), true)))
+})
+const { state: auth } = useAuth()
+const isAdmin = computed(() => auth.value?.role === 'admin')
+const reminder = computed(() => {
+  const r = d.value?.rosterStatus
+  if (!r) return d.value && !d.value.roster ? 'it has never been copied' : ''
+  const why: string[] = []
+  if (r.ageDays != null && r.ageDays > 60) why.push(`copied ${r.ageDays} days ago`)
+  if (r.appointmentsSince >= 3) why.push(`${r.appointmentsSince} senior appointments announced since`)
+  return why.join(' and ')
 })
 const others = computed(() => (d.value?.roster?.others || []).filter((e: any) => !q.value || `${e.name} ${e.title} ${e.entity || ''}`.toLowerCase().includes(q.value.toLowerCase())))
 function pick(id: string) {
