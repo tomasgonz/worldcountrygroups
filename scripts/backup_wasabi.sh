@@ -31,13 +31,17 @@ cp /etc/systemd/system/worldcountrygroups.service "$STAGE/" 2>/dev/null || true
 cp /etc/nginx/sites-available/default "$STAGE/nginx-default" 2>/dev/null || true
 sudo -n crontab -l > "$STAGE/root-crontab" 2>/dev/null || true
 
+rc=0
 restic backup --tag wcg --one-file-system \
   --exclude "$PROJECT/site/node_modules" \
   --exclude "$PROJECT/site/.output" \
   --exclude "$PROJECT/site/.nuxt" \
   --exclude "**/__pycache__" \
   --exclude "**/*.tmp" \
-  "$PROJECT" "$STAGE"
+  "$PROJECT" "$STAGE" || rc=$?
+# exit code 3: the snapshot was saved but some files could not be read; carry on, and say so
+if [ "$rc" -ne 0 ] && [ "$rc" -ne 3 ]; then exit "$rc"; fi
+[ "$rc" -eq 3 ] && echo "Warning: snapshot saved, but some files could not be read (see above)"
 
 # Keep 7 daily, 4 weekly and 12 monthly snapshots
 restic forget --tag wcg --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --prune

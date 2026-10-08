@@ -1,4 +1,5 @@
 import { existsSync, readFileSync, writeFileSync, renameSync } from 'fs'
+import { ownLikeFolder } from './own-file'
 import { join } from 'path'
 import { getUsageData, costOf } from './ai-usage'
 import { getUsers } from './users'
@@ -32,6 +33,7 @@ function save(s: SpendStore) {
   const text = JSON.stringify(s, null, 2)
   writeFileSync(FILE + '.tmp', text, { mode: 0o600 })
   renameSync(FILE + '.tmp', FILE)
+  ownLikeFolder(FILE)
 }
 
 export function spendSettings() {

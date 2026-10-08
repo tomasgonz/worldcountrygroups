@@ -1,4 +1,5 @@
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'fs'
+import { ownLikeFolder } from './own-file'
 import { join } from 'path'
 import { createHash, randomBytes, timingSafeEqual } from 'crypto'
 import { getUserById } from './users'
@@ -61,6 +62,7 @@ function save(data: Record<string, CalendarFeed>) {
   const tmp = `${FEEDS_PATH}.${process.pid}.tmp`
   writeFileSync(tmp, JSON.stringify(data, null, 2), { encoding: 'utf-8', mode: 0o600 })
   renameSync(tmp, FEEDS_PATH)
+  ownLikeFolder(FEEDS_PATH)
 }
 
 const newToken = () => randomBytes(24).toString('base64url') // 32 characters

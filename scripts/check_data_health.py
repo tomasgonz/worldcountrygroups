@@ -34,7 +34,7 @@ GATEWAY = "http://169.254.169.254/gateway/email/send"
 
 # Datasets with no automatic source: shown with their age, never alerted on
 MANUAL = [
-    ("un-votes-resolutions.json", "UN General Assembly votes by country", "Upload the UN Digital Library voting CSV in Admin"),
+    ("un-votes-resolutions.json", "UN General Assembly votes by country", "Collected daily from the UN Digital Library (API key); a CSV can still be uploaded in Admin"),
     ("military-capabilities.json", "Military capabilities", "Curated by hand"),
     ("treaties.json", "Treaties", "Curated by hand"),
     ("recognition.json", "Recognition disputes", "Curated by hand"),
@@ -169,11 +169,74 @@ def coverage(days=30):
     }
 
 
+HISTORY = os.path.join(DATA, "data-health-history.json")
+
+
+def count_items(name):
+    """How many records a dataset holds: rows for .db files, else the length of its main list or map."""
+    path = os.path.join(DATA, name)
+    if not os.path.exists(path):
+        return None
+    try:
+        if name.endswith(".db"):
+            import sqlite3
+            con = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
+            try:
+                return con.execute("SELECT COUNT(*) FROM items").fetchone()[0]
+            finally:
+                con.close()
+        if not name.endswith(".json"):
+            return None
+        with open(path) as f:
+            d = json.load(f)
+        if isinstance(d, list):
+            return len(d)
+        if isinstance(d, dict):
+            sizes = [len(v) for k, v in d.items() if k != "_meta" and isinstance(v, (list, dict))]
+            return max(sizes) if sizes else None
+    except Exception:  # noqa: BLE001
+        return None
+    return None
+
+
+def track_counts(jobs_cfg, now):
+    """Record item counts when a job's output changes; flag a sudden drop against recent runs."""
+    try:
+        with open(HISTORY) as f:
+            hist = json.load(f)
+    except Exception:  # noqa: BLE001
+        hist = {"jobs": {}, "seen": {}}
+    out = {}
+    for j in jobs_cfg:
+        outs = j.get("outputs") or []
+        if not outs:
+            continue
+        main = outs[0]
+        t = mtime(main)
+        series = hist["jobs"].setdefault(j["id"], [])
+        if t and hist["seen"].get(main) != iso(t):
+            n = count_items(main)
+            if n is not None:
+                series.append({"at": iso(t), "n": n})
+                del series[:-30]
+            hist["seen"][main] = iso(t)
+        latest = series[-1]["n"] if series else None
+        prev = sorted(x["n"] for x in series[-7:-1])
+        median = prev[len(prev) // 2] if prev else None
+        shrunk = bool(latest is not None and median and median >= 20 and latest < 0.5 * median and not j.get("allowShrink"))
+        out[j["id"]] = {"items": latest, "typical": median, "shrunk": shrunk, "trend": [x["n"] for x in series[-12:]]}
+    with open(HISTORY + ".tmp", "w") as f:
+        json.dump(hist, f)
+    os.replace(HISTORY + ".tmp", HISTORY)
+    return out
+
+
 def compute():
     cfg = load("cron-config.json", {}) or {}
     status = load("job-status.json", {}) or {}
     now = datetime.now(timezone.utc)
     jobs = []
+    sizes = track_counts(cfg.get("jobs", []), now)
     for j in cfg.get("jobs", []):
         st = status.get(j["id"], {})
         outs = j.get("outputs") or []
@@ -193,6 +256,8 @@ def compute():
             state = "failing"
         elif max_age and (age_h is None or age_h > max_age):
             state = "stale"
+        elif sizes.get(j["id"], {}).get("shrunk"):
+            state = "shrunk"
         else:
             state = "ok"
         jobs.append({
@@ -204,6 +269,8 @@ def compute():
             "ok": st.get("ok"), "error": st.get("error"), "durationSec": st.get("durationSec"),
             "consecutiveFailures": fails, "tail": st.get("tail") or [], "trigger": st.get("trigger"),
             "lastSkipped": st.get("lastSkipped"),
+            "items": sizes.get(j["id"], {}).get("items"), "typicalItems": sizes.get(j["id"], {}).get("typical"),
+            "trend": sizes.get(j["id"], {}).get("trend", []),
         })
     manual = []
     for f, label, how in MANUAL:
@@ -214,6 +281,7 @@ def compute():
     problems = [f"{j['label']}: {j['status']}" + (f" ({j['error']})" if j["status"] == "failing" and j["error"] else
                                                   f" (last refreshed {j['refreshedAt'] or 'never'})" if j["status"] == "stale" else "")
                 for j in jobs if j["status"] in ("failing", "stale")]
+    problems += [f"{j['label']}: only {j['items']} items, usually about {j['typicalItems']} (a source may have changed)" for j in jobs if j["status"] == "shrunk"]
     if gap["missingRecordedVotes"] >= 10:
         problems.append(f"UN voting data: {gap['missingRecordedVotes']} recorded General Assembly votes since "
                         f"{gap['latestVote']} are not in the per-country data")

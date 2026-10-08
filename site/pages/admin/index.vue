@@ -546,7 +546,7 @@
       <p class="text-xs text-primary-500 mb-4">Every job runs with a time limit, one retry and a check that its files are valid; a broken download never replaces good data. Checked hourly{{ health ? `, last at ${formatTime(health.generatedAt)}` : '' }}.</p>
       <div v-if="health" class="space-y-4">
         <div class="flex flex-wrap gap-2 text-xs">
-          <span v-for="k in ['ok','running','stale','failing','disabled']" v-show="health.counts[k]" :key="k" class="px-2.5 py-1 rounded-full font-medium" :class="HEALTH_STYLE[k]">{{ health.counts[k] }} {{ HEALTH_LABEL[k].toLowerCase() }}</span>
+          <span v-for="k in ['ok','running','stale','failing','shrunk','disabled']" v-show="health.counts[k]" :key="k" class="px-2.5 py-1 rounded-full font-medium" :class="HEALTH_STYLE[k]">{{ health.counts[k] }} {{ HEALTH_LABEL[k].toLowerCase() }}</span>
         </div>
         <div v-if="health.problems.length" class="rounded-xl bg-red-50 ring-1 ring-red-200 px-4 py-3">
           <div class="text-sm font-medium text-red-800 mb-1">Needs attention</div>
@@ -656,6 +656,10 @@
               </td>
               <td class="px-3 py-2.5">
                 <span class="text-xs font-medium px-2 py-0.5 rounded-full whitespace-nowrap" :class="HEALTH_STYLE[hj(job.id)?.status || (job.enabled ? 'ok' : 'disabled')]">{{ HEALTH_LABEL[hj(job.id)?.status || (job.enabled ? 'ok' : 'disabled')] }}</span>
+                <div v-if="hj(job.id)?.items != null" class="flex items-center gap-1.5 mt-1" :title="`${hj(job.id).items} items now${hj(job.id).typicalItems ? `, usually about ${hj(job.id).typicalItems}` : ''}`">
+                  <svg v-if="(hj(job.id).trend || []).length > 1" width="56" height="14" class="shrink-0" aria-hidden="true"><polyline :points="spark(hj(job.id).trend)" fill="none" :stroke="hj(job.id).status === 'shrunk' ? '#e34948' : '#2a78d6'" stroke-width="1.5" /></svg>
+                  <span class="text-[10px] tabular-nums" :class="hj(job.id).status === 'shrunk' ? 'text-orange-700' : 'text-primary-500'">{{ hj(job.id).items.toLocaleString() }} items</span>
+                </div>
                 <div v-if="job.maxAgeHours" class="text-[10px] text-primary-400 mt-0.5">expected every {{ job.maxAgeHours >= 48 ? Math.round(job.maxAgeHours / 24) + ' days' : job.maxAgeHours + ' h' }}</div>
               </td>
               <td class="px-3 py-2.5">
@@ -2367,10 +2371,14 @@ const monthLabel = (m: string) => new Date(m + '-15T12:00:00Z').toLocaleDateStri
 // ---------- data health ----------
 const health = ref<any>(null)
 const alertEmails = ref('')
-const HEALTH_LABEL: Record<string, string> = { ok: 'Up to date', running: 'Running', stale: 'Stale', failing: 'Failing', disabled: 'Disabled' }
+const HEALTH_LABEL: Record<string, string> = { ok: 'Up to date', running: 'Running', stale: 'Stale', failing: 'Failing', shrunk: 'Shrunk', disabled: 'Disabled' }
 const HEALTH_STYLE: Record<string, string> = {
   ok: 'bg-green-100 text-green-700', running: 'bg-blue-100 text-blue-700', stale: 'bg-amber-100 text-amber-800',
-  failing: 'bg-red-100 text-red-700', disabled: 'bg-primary-100 text-primary-400',
+  failing: 'bg-red-100 text-red-700', shrunk: 'bg-orange-100 text-orange-800', disabled: 'bg-primary-100 text-primary-400',
+}
+function spark(v: number[]) {
+  const max = Math.max(...v), min = Math.min(...v), span = Math.max(1, max - min)
+  return v.map((n, i) => `${(i / Math.max(1, v.length - 1)) * 54 + 1},${13 - ((n - min) / span) * 12}`).join(' ')
 }
 const hj = (id: string) => (health.value?.jobs || []).find((j: any) => j.id === id)
 const fmtDay = (d: string) => (d ? new Date(d.length === 10 ? d + 'T12:00:00Z' : d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '')
