@@ -4,6 +4,7 @@
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
         <p class="text-[11px] uppercase tracking-[0.14em] text-primary-500">People</p>
         <h1 class="font-serif text-4xl sm:text-5xl text-primary-900 mt-2 leading-[1.05]">Who's who in world affairs</h1>
+      <NuxtLink to="/people/permanent-representatives" class="inline-flex items-center gap-1.5 mt-3 text-sm px-3 py-1.5 rounded-full bg-primary-900 text-white hover:bg-primary-800">Permanent Representatives in New York →</NuxtLink>
         <p class="text-primary-500 mt-3 max-w-3xl leading-relaxed">
           Heads of state and government, foreign ministers, UN officials and General Debate speakers: their roles, speeches, quotes,
           the statements they delivered and where they are mentioned.

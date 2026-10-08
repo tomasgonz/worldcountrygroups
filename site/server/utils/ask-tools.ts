@@ -18,6 +18,7 @@ import { groupPicture } from './group-picture'
 import { sgOffice } from './sg-office'
 import { leadership } from './un-leadership'
 import { gaVotes, gaCommittees, ecosoc } from './ga-assembly'
+import { missions, missionFor } from './un-missions'
 import { payers, session as c5Session, searchStatements, budgetNews, countryBudget } from './un-budget'
 import { getCountrySpeeches, getAllSpeeches } from './speeches'
 import { getRecentStatements } from './statements-feed'
@@ -129,6 +130,7 @@ export const ASK_TOOLS: ToolDef[] = [
   { name: 'un_budget', description: "The UN regular budget, dues and reform, and the Fifth Committee (administrative and budgetary questions): what delegations and groups (G77 and China, EU, African Group, ASEAN, CARICOM, CANZ...) said in this session's statements (searchable full text, with passages), the agenda and decisions; who has paid their dues in full this year (honour roll, amount, date), each country's share of the budget (scale of assessments) and its change, countries under Article 19 (arrears), and news on the liquidity crisis and the UN80 reform. Give a country for its dues and statements, a group or words to search statements, or nothing for an overview.", parameters: { type: 'object', properties: { country: { type: 'string' }, group: { type: 'string', description: 'Speaking group, e.g. "G77", "European Union", "African Group"' }, query: { type: 'string', description: 'Words to find in statements and news, e.g. "liquidity", "special political missions", "post reductions"' }, agenda_item: { type: 'string', description: 'Fifth Committee agenda item number, e.g. "138"' } } } },
   { name: 'un_leadership', description: "Who leads the UN: the Secretary-General, Deputy Secretary-General, Presidents of the General Assembly and ECOSOC, and the heads of key departments, funds and programmes (DPPA, DPO, OCHA, OHCHR, UNHCR, UNDP, UNICEF, WFP, DESA, DMSPC and others): current holder, nationality, since when, and their recent statements (UN-site headlines). Give an office (e.g. \"OCHA\", \"President of the General Assembly\", \"peacekeeping\") or a person's name; nothing lists all offices.", parameters: { type: 'object', properties: { office: { type: 'string' }, person: { type: 'string' }, query: { type: 'string', description: 'Words to find in their statements' } } } },
   { name: 'general_assembly', description: "The General Assembly as a whole and ECOSOC: analysis of the latest session's recorded votes (most divided votes, cohesion of the EU, G77, African Union, OIC, ASEAN, NAM and regional groups and who breaks ranks, the countries furthest from the majority and the biggest shifts since the previous session, how often the US, China, Russia and the EU vote with the majority and with each other, recent US-China splits); the six Main Committees (chairs, next meetings, latest coverage) and plenary; ECOSOC (president, members by region, meetings). For one country's or group's own record use un_voting_record or group_overview.", parameters: { type: 'object', properties: { part: { type: 'string', enum: ['votes', 'committees', 'ecosoc', 'all'], description: 'Default all' } } } },
+  { name: 'permanent_representatives', description: "Permanent Representatives (ambassadors) to the UN in New York, from the UN Blue Book: a country's Permanent Representative, deputies, credentials date and mission contact; or, without a country, the newest arrivals, longest-serving, missions without a PR, and the share of women.", parameters: { type: 'object', properties: { country: { type: 'string' } } } },
   ...TRADE_TOOLS,
   ...DONOR_TOOLS,
   ...UNELECTION_TOOLS,
@@ -375,6 +377,23 @@ export async function runTool(name: string, args: any, src: SourceCollector): Pr
           upcoming: e.meetings.upcoming.map((m: any) => `${m.date}: ${m.organ}`), latest: e.press.map((p: any) => ({ title: p.title, ref: src.add(p.title, p.url, 'news') })) }
       }
       return out
+    }
+    case 'permanent_representatives': {
+      src.used('un-missions.json')
+      const ref = src.add('Permanent Representatives in New York (UN Blue Book)', `${SITE}/people/permanent-representatives`, 'page')
+      if (args.country) {
+        const iso3 = resolveIso3(args.country)
+        if (!iso3) return { error: `Unknown country "${args.country}"` }
+        const m = missionFor(iso3)
+        if (!m) return { error: 'No mission found in the Blue Book' }
+        return { ref, country: m.entity, permanent_representative: m.head ? { name: m.head.name, title: m.head.title, rank: m.head.rank, credentials_presented: m.head.credentials, appointed: m.head.appointed } : null,
+          acting_head: m.head ? undefined : m.acting, deputies: m.deputies, mission: { address: m.address, telephone: m.telephone, website: m.website }, data_as_of: m.updatedAt }
+      }
+      const all = missions()
+      if (!all) return { error: 'Not collected yet' }
+      return { ref, stats: all.stats, newest: all.recent.map((m: any) => `${m.head.name} (${m.entity}), credentials ${m.head.credentials}`),
+        longest_serving: all.longest.map((m: any) => `${m.head.name} (${m.entity}), since ${m.since}`),
+        without_pr: all.missions.filter((m: any) => m.member && !m.head).map((m: any) => `${m.entity}${m.acting ? `: ${m.acting.name} (${m.acting.function || m.acting.rank})` : ''}`) }
     }
     case 'group_overview': {
       const gid = groupId(args.group)

@@ -1,6 +1,20 @@
 <template>
   <div v-if="d && hasAny" id="sec-un-secretariat" class="mb-10 scroll-mt-24">
     <h3 class="font-serif text-lg font-bold text-primary-800 mb-4">UN budget and Secretariat</h3>
+    <div v-if="d.mission" class="mb-4 rounded-xl border border-primary-100 bg-white p-4 text-sm flex flex-wrap gap-x-8 gap-y-2">
+      <div>
+        <div class="lbl">Permanent Representative in New York</div>
+        <template v-if="d.mission.head"><span class="font-medium text-primary-900">{{ d.mission.head.name }}</span> <span class="text-xs text-primary-500">since {{ day(d.mission.head.credentials || d.mission.head.appointed) }}</span></template>
+        <template v-else-if="d.mission.acting"><span class="text-primary-800">{{ d.mission.acting.name }}</span> <span class="text-xs text-amber-700">{{ d.mission.acting.function || d.mission.acting.rank }}; no Permanent Representative listed</span></template>
+        <span v-else class="text-primary-400">No head of mission listed</span>
+        <div v-if="d.mission.deputies?.length" class="text-xs text-primary-500 mt-0.5">Deputies: {{ d.mission.deputies.join(', ') }}</div>
+      </div>
+      <div class="text-xs text-primary-500">
+        <div class="lbl">Mission</div>
+        {{ d.mission.address }}<span v-if="d.mission.telephone"> · Tel. {{ d.mission.telephone }}</span>
+        <NuxtLink to="/people/permanent-representatives" class="block text-accent-600 hover:text-accent-700 mt-0.5">All Permanent Representatives →</NuxtLink>
+      </div>
+    </div>
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
       <!-- dues -->
       <div v-if="b?.pct != null" class="card">
@@ -72,7 +86,7 @@
 const props = defineProps<{ iso: string; name: string }>()
 const { data: d } = useFetch<any>(() => `/api/countries/${props.iso}/un-footprint`, { lazy: true, server: false })
 const b = computed(() => d.value?.budget)
-const hasAny = computed(() => !!d.value && (b.value?.pct != null || d.value.nationals.length || d.value.postedHere.length || d.value.sgStatements.length))
+const hasAny = computed(() => !!d.value && (!!d.value.mission || b.value?.pct != null || d.value.nationals.length || d.value.postedHere.length || d.value.sgStatements.length))
 const year = computed(() => (b.value?.asOf || '').match(/\d{4}/)?.[0] || new Date().getFullYear())
 const day = (iso: string | null) => (iso ? new Date(iso.length === 10 ? iso + 'T12:00:00Z' : iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }) : '–')
 const usd = (v: number) => (v >= 1e6 ? `$${(v / 1e6).toFixed(1)}m` : v >= 1e3 ? `$${Math.round(v / 1e3)}k` : `$${v}`)

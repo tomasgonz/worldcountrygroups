@@ -72,6 +72,7 @@ const DEFAULT_JOBS: Def[] = [
   d('fetch-undl-sc-votes', 'Security Council member votes (UN Digital Library API)', 'scripts/undl_sc.py', '45 6 * * *', true, ['undl-sc-votes.json'], 26, 40),
   d('fetch-undl-votes', 'General Assembly votes (UN Digital Library API)', 'scripts/fetch_undl_votes.py', '15 6 * * *', true, ['undl-votes-status.json'], 26, 40),
   d('fetch-ga-assembly', 'General Assembly committees and ECOSOC: bureaus and press', 'scripts/fetch_ga_assembly.py', '5 */6 * * *', true, ['ga-assembly.json'], 14, 20),
+  d('fetch-un-missions', 'Permanent Missions in New York (UN Blue Book)', 'scripts/fetch_un_missions.py', '50 5 * * *', true, ['un-missions.json'], 30, 10),
   d('fetch-sg-office', 'Secretary-General appointments and statements', 'scripts/fetch_sg_office.py', '50 */3 * * *', true, ['sg-office.json'], 8, 15),
   d('fetch-election-news', 'Elections news (Security Council, PGA, national)', 'scripts/fetch_election_news.py', '35 */6 * * *', true, ['election-news.json'], 8, 10),
   d('run-briefings', 'Scheduled briefings', 'scripts/refresh_site_data.py briefings', '5 * * * *', true, [], null, 55),

@@ -1,6 +1,7 @@
 import { getRegistry } from '~/server/utils/wcg'
 import { countryBudget } from '~/server/utils/un-budget'
 import { sgOffice } from '~/server/utils/sg-office'
+import { missionFor } from '~/server/utils/un-missions'
 
 /** A country at the UN Secretariat: budget share and dues, Fifth Committee statements, appointments, SG statements naming it. */
 export default defineEventHandler((event) => {
@@ -13,6 +14,7 @@ export default defineEventHandler((event) => {
   return {
     iso3,
     budget: countryBudget(iso3),
+    mission: missionFor(iso3),
     nationals: appts.filter((a: any) => a.nationality === iso3).slice(0, 12),
     postedHere: appts.filter((a: any) => a.dutyCountries.includes(iso3) && a.nationality !== iso3).slice(0, 8),
     sgStatements: sg?.statements || [],
