@@ -384,7 +384,7 @@ def main():
     all_items, pages = [], []
     for y in years:
         page = f"{y}_national_electoral_calendar"
-        url = f"{API}?action=parse&page={urllib.parse.quote(page)}&prop=text|revid&format=json&formatversion=2&redirects=1"
+        url = f"{API}?action=parse&page={urllib.parse.quote(page)}&prop=text|revid&format=json&formatversion=2&redirects=1&parser=legacy"  # Parsoid (the default) breaks the table parsing
         try:
             data = get_json(url)
         except Exception as e:  # noqa: BLE001

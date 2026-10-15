@@ -138,8 +138,10 @@ def http_get(url, tries=3, accept="text/html,application/json"):
 
 def wiki_parse(page):
     """Rendered HTML of a Wikipedia page, or None if it does not exist."""
+    # parser=legacy: the API default became Parsoid HTML (id="mw…" on every tag, ./Title links), which the
+    # parsers below do not read; without it seats, candidates and the infobox come back empty.
     q = urllib.parse.urlencode({"action": "parse", "page": page, "prop": "text", "format": "json",
-                                "formatversion": "2", "redirects": "1"})
+                                "formatversion": "2", "redirects": "1", "parser": "legacy"})
     status, body = http_get(f"{WIKI_API}?{q}", accept="application/json")
     time.sleep(0.7)
     if status != 200 or not body:

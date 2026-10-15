@@ -419,7 +419,7 @@ def parse_official(raw):
 
 def wp_parse():
     q = urllib.parse.urlencode({"action": "parse", "page": WP_TITLE, "prop": "text|revid", "format": "json",
-                                "redirects": 1, "formatversion": 2})
+                                "redirects": 1, "formatversion": 2, "parser": "legacy"})  # not Parsoid, the new default
     d = fetch_json(f"{WP_API}?{q}")
     p = d.get("parse") or {}
     if not p.get("text"):
