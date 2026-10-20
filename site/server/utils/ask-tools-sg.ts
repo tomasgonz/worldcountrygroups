@@ -30,7 +30,11 @@ function pollRow(p: SgStrawPoll, src: Src) {
     n: p.n,
     date: p.date,
     colour_coded: p.colour_coded,
-    results: p.results.map(r => ({ candidate: r.candidate, e: r.encourage, d: r.discourage, n: r.no_opinion, ...(p.colour_coded ? { p5_encourage: r.p5_encourage, p5_discourage: r.p5_discourage } : {}) })),
+    results: p.results.map(r => ({
+      candidate: r.candidate, e: r.encourage, d: r.discourage, n: r.no_opinion,
+      ...(p.colour_coded ? { p5_encourage: r.p5_encourage, p5_discourage: r.p5_discourage } : {}),
+      ...(r.p5_encourage_n != null ? { p5: { e: r.p5_encourage_n, d: r.p5_discourage_n, n: r.p5_no_opinion_n } } : {}),
+    })),
     ref: src.add(`Security Council straw poll ${p.n} (${p.date})`, p.source_url, 'news'),
   }
 }

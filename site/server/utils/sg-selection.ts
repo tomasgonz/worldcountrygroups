@@ -62,6 +62,10 @@ export interface SgPollResult {
   no_opinion: number
   p5_encourage: boolean | null
   p5_discourage: boolean | null
+  // colour-coded polls: how many of the 5 permanent members voted each way
+  p5_encourage_n?: number | null
+  p5_discourage_n?: number | null
+  p5_no_opinion_n?: number | null
 }
 
 export interface SgStrawPoll {

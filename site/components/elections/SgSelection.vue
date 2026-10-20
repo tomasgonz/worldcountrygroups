@@ -135,13 +135,14 @@
             <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm" :style="{ background: AQUA }" />Encourage</span>
             <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm" :style="{ background: GREY }" />No opinion</span>
             <span class="inline-flex items-center gap-1.5"><span class="w-px h-3 border-l-2 border-dashed border-primary-500" />9 votes</span>
+            <span v-if="p5Col" class="inline-flex items-center gap-1"><span class="font-bold text-emerald-700">✓</span><span class="font-bold text-red-700">✕</span> P5: permanent members among them</span>
           </div>
 
           <div v-if="!sel.results.length" class="text-sm text-primary-500">Results for this poll have not been reported in a form we can read yet.</div>
 
           <div v-else-if="!showTable" class="space-y-1.5">
             <div v-for="r in sel.results" :key="r.candidate_id"
-              class="grid items-center gap-2" style="grid-template-columns: minmax(6.5rem, 30%) 1fr 2.2rem">
+              class="grid items-center gap-2" :style="{ gridTemplateColumns: pollCols }">
               <span class="text-[13px] text-primary-800 truncate" :title="r.candidate">{{ r.candidate }}</span>
               <div class="relative h-7 rounded-md hover:bg-primary-50 cursor-default" tabindex="0"
                 :aria-label="`${r.candidate}: ${r.encourage} encourage, ${r.discourage} discourage, ${r.no_opinion} no opinion`"
@@ -159,17 +160,22 @@
                   :style="{ left: 'calc(50% + 1px)', width: pct(r.encourage), background: AQUA }">
                   <span v-if="r.encourage >= 2" class="text-[10px] font-semibold text-white tabular-nums">{{ r.encourage }}</span>
                 </div>
-                <span v-if="r.p5_discourage" class="absolute left-0 top-0 text-[10px] font-bold text-red-700" title="At least one permanent member discouraged">P5✕</span>
-                <span v-if="r.p5_encourage" class="absolute right-0 top-0 text-[10px] font-bold text-emerald-700" title="At least one permanent member encouraged">P5✓</span>
               </div>
               <span class="text-[11px] tabular-nums text-primary-500 text-right" :title="`${r.no_opinion} no opinion`">
                 <span class="inline-block w-2 h-2 rounded-sm align-middle mr-0.5" :style="{ background: GREY }" />{{ r.no_opinion }}
               </span>
+              <span v-if="p5Col" class="text-[11px] font-bold tabular-nums whitespace-nowrap text-right">
+                <span v-if="r.p5_encourage" class="text-emerald-700"
+                  :title="r.p5_encourage_n != null ? `${r.p5_encourage_n} of the 5 permanent members encouraged` : 'At least one permanent member encouraged'">✓{{ r.p5_encourage_n ?? '' }}</span>
+                <span v-if="r.p5_discourage" class="text-red-700 ml-1"
+                  :title="r.p5_discourage_n != null ? `${r.p5_discourage_n} of the 5 permanent members discouraged` : 'At least one permanent member discouraged'">✕{{ r.p5_discourage_n ?? '' }}</span>
+              </span>
             </div>
-            <div class="grid gap-2 text-[10px] text-primary-400 tabular-nums" style="grid-template-columns: minmax(6.5rem, 30%) 1fr 2.2rem">
+            <div class="grid gap-2 text-[10px] text-primary-400 tabular-nums" :style="{ gridTemplateColumns: pollCols }">
               <span />
-              <div class="flex justify-between"><span>15 ← discourage</span><span>0</span><span>encourage → 15</span></div>
+              <div class="flex justify-between"><span>15<span class="hidden sm:inline"> ← discourage</span></span><span>0</span><span><span class="hidden sm:inline">encourage → </span>15</span></div>
               <span />
+              <span v-if="p5Col" class="text-right">P5</span>
             </div>
           </div>
 
@@ -185,13 +191,16 @@
                 <tr v-for="c in tableRows" :key="c.id" class="border-t border-primary-100">
                   <td class="py-1.5 pr-3 text-primary-800 whitespace-nowrap">{{ c.name }}</td>
                   <td v-for="p in polls" :key="p.n" class="py-1.5 px-2 text-center tabular-nums whitespace-nowrap text-primary-700">
-                    <template v-if="cell(p, c.id)">{{ cell(p, c.id)!.encourage }}–{{ cell(p, c.id)!.discourage }}–{{ cell(p, c.id)!.no_opinion }}</template>
+                    <template v-if="cell(p, c.id)">
+                      {{ cell(p, c.id)!.encourage }}–{{ cell(p, c.id)!.discourage }}–{{ cell(p, c.id)!.no_opinion }}
+                      <div v-if="hasP5n(cell(p, c.id)!)" class="text-[10px] text-primary-400">P5 {{ cell(p, c.id)!.p5_encourage_n }}–{{ cell(p, c.id)!.p5_discourage_n }}–{{ cell(p, c.id)!.p5_no_opinion_n }}</div>
+                    </template>
                     <span v-else class="text-primary-300">–</span>
                   </td>
                 </tr>
               </tbody>
             </table>
-            <p class="text-[11px] text-primary-400 mt-1">Encourage–discourage–no opinion.</p>
+            <p class="text-[11px] text-primary-400 mt-1">Encourage–discourage–no opinion.<template v-if="anyColour"> P5: the permanent members' votes among them (colour-coded polls).</template></p>
           </div>
 
           <p class="mt-3 text-[11px] text-primary-400">
@@ -364,7 +373,10 @@ interface Cand {
   photo: string | null; photo_official: string | null
   news_count_60d: number; poll_history: PollPoint[]; latest_poll: PollPoint | null
 }
-interface PollResult { candidate: string; candidate_id: string; encourage: number; discourage: number; no_opinion: number; p5_encourage: boolean | null; p5_discourage: boolean | null }
+interface PollResult {
+  candidate: string; candidate_id: string; encourage: number; discourage: number; no_opinion: number; p5_encourage: boolean | null; p5_discourage: boolean | null
+  p5_encourage_n?: number | null; p5_discourage_n?: number | null; p5_no_opinion_n?: number | null
+}
 interface Poll { n: number; date: string; colour_coded: boolean; ballot_note: string | null; results: PollResult[]; source_url: string; sources: { name: string; url: string }[] }
 interface Ev { date: string; kind: string; title: string; url: string | null; detail: string | null; upcoming: boolean }
 interface Mentioned { id: string; name: string; slug: string | null; role: string | null; iso2: string | null; status: string | null; why: string | null; evidence: { title: string; url: string; date: string | null }[]; mention_count_60d: number; first_mentioned: string | null; wikipedia_url: string | null }
@@ -415,14 +427,19 @@ watchEffect(() => { if (!selN.value && latestPoll.value) selN.value = latestPoll
 const sel = computed(() => polls.value.find(p => p.n === selN.value) || null)
 const showTable = ref(false)
 const pct = (v: number) => `${(Math.min(v, 15) / 15) * 50}%`
+const hasP5n = (r: PollResult) => r.p5_encourage_n != null && r.p5_discourage_n != null
+const p5Col = computed(() => !!sel.value?.results.some(r => r.p5_encourage || r.p5_discourage))
+const pollCols = computed(() => `minmax(6.5rem, 30%) 1fr 2.2rem${p5Col.value ? ' 2.8rem' : ''}`)
 function tipPoll(r: PollResult, e: MouseEvent | FocusEvent) {
+  const of = (k: number | null | undefined) => (hasP5n(r) ? ` (${k ?? 0} P5)` : '')
   const lines: { text: string; color?: string }[] = [
-    { text: `${r.encourage} encourage`, color: AQUA },
-    { text: `${r.discourage} discourage`, color: RED },
-    { text: `${r.no_opinion} no opinion`, color: GREY },
+    { text: `${r.encourage} encourage${of(r.p5_encourage_n)}`, color: AQUA },
+    { text: `${r.discourage} discourage${of(r.p5_discourage_n)}`, color: RED },
+    { text: `${r.no_opinion} no opinion${of(r.p5_no_opinion_n)}`, color: GREY },
   ]
-  if (r.p5_discourage) lines.push({ text: 'At least one P5 discourage (possible veto)', color: RED })
-  if (r.p5_encourage) lines.push({ text: 'At least one P5 encourage', color: AQUA })
+  if (r.p5_discourage) lines.push({ text: hasP5n(r) ? `${r.p5_discourage_n} P5 discourage (possible veto)` : 'At least one P5 discourage (possible veto)', color: RED })
+  else if (hasP5n(r)) lines.push({ text: 'No P5 discourage', color: AQUA })
+  if (r.p5_encourage && !hasP5n(r)) lines.push({ text: 'At least one P5 encourage', color: AQUA })
   lines.push({ text: r.encourage >= 9 ? 'Reaches the 9-vote threshold' : `${9 - r.encourage} short of 9 encourage` })
   show(e, `${r.candidate} · poll ${sel.value?.n}`, lines)
 }
