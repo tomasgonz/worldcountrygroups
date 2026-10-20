@@ -501,10 +501,11 @@ def parse_wp_polls(t, refs):
             break
     if not table:
         return [], {}
-    # legend: colour -> meaning (only used if the P5 colour coding appears in the cells)
+    # legend: colour -> meaning (only used if the P5 colour coding appears in the cells);
+    # the meaning is in the swatch's row, with the key word in <b>
     legend = {}
-    for lm in re.finditer(r"background(?:-color)?:\s*([#\w]+)[^>]*>(?:\s*<[^>]+>)*[^<]*</[^>]+>\s*(?:<[^>]+>\s*)*([^<]{0,160})", after):
-        txt = lm.group(2).lower()
+    for lm in re.finditer(r"background(?:-color)?:\s*([#\w]+)[^>]*>(.*?)</tr>", after, re.S):
+        txt = strip(lm.group(2)).lower()[:200]
         if "encourag" in txt:
             legend[lm.group(1).lower()] = "p5_encourage"
         elif "discourag" in txt:
@@ -517,7 +518,8 @@ def parse_wp_polls(t, refs):
         txt = strip(re.sub(r"<sup.*?</sup>", "", c["html"], flags=re.S))
         polls.append({"label": txt, "date_text": txt, "refs": [refs[i] for i in cell_refs(c["html"]) if i in refs]})
     results = [[] for _ in polls]
-    coloured = [False for _ in polls]
+    coloured = [False for _ in polls]  # P5 counts in the cells
+    marked = [False for _ in polls]  # only legend colours (editors also shade non-colour-coded polls)
     for r in rows[2:]:
         if not r:
             continue
@@ -536,23 +538,30 @@ def parse_wp_polls(t, refs):
             trip = cells[pi * 3:pi * 3 + 3]
             if len(trip) < 3:
                 continue
-            nums = []
+            nums, p5 = [], []
             for c in trip:
-                mm = re.match(r"^\s*(\d{1,2})\s*$", c["text"])
+                # colour-coded polls read "8 (2P)": 8 votes, 2 of them from permanent members
+                mm = re.match(r"^\s*(\d{1,2})\s*(?:\(\s*(\d)\s*P\s*\))?\s*$", c["text"])
                 nums.append(int(mm.group(1)) if mm else None)
+                p5.append(int(mm.group(2)) if mm and mm.group(2) else None)
             if None in nums:
                 continue  # withdrawn / not yet nominated
             row = {"candidate": name, "country_text": flag_alt.group(1) if flag_alt else None,
                    "encourage": nums[0], "discourage": nums[1], "no_opinion": nums[2],
-                   "p5_encourage": None, "p5_discourage": None}
-            for c in trip:
-                if c["bg"] and c["bg"] in legend:
-                    row[legend[c["bg"]]] = True
-                    coloured[pi] = True
+                   "p5_encourage": None, "p5_discourage": None,
+                   "p5_encourage_n": p5[0], "p5_discourage_n": p5[1], "p5_no_opinion_n": p5[2]}
+            if None not in p5:
+                row["p5_encourage"], row["p5_discourage"] = p5[0] > 0, p5[1] > 0
+                coloured[pi] = True
+            else:
+                for c in trip:
+                    if c["bg"] and c["bg"] in legend:
+                        row[legend[c["bg"]]] = True
+                        marked[pi] = True
             results[pi].append(row)
     out = []
     for pi, p in enumerate(polls):
-        out.append({"label": p["label"], "refs": p["refs"], "results": results[pi], "wp_coloured": coloured[pi]})
+        out.append({"label": p["label"], "refs": p["refs"], "results": results[pi], "wp_coloured": coloured[pi], "wp_marked": marked[pi]})
     return out, legend
 
 
@@ -673,8 +682,9 @@ def parse_f8_candidates(raw):
     t = re.sub(r"<(script|style)[^>]*>.*?</\1>", "", raw, flags=re.S)
     section = None
     out = []
-    pat = re.compile(r'<h([12])[^>]*>(.*?)</h\1>|<div class="image-title sqs-dynamic-text"\s*>(.*?)</div>\s*</div>\s*'
-                     r'(?:<div class="image-subtitle-wrapper"[^>]*>\s*<div class="image-subtitle sqs-dynamic-text"\s*>(.*?)</div>)?', re.S)
+    # Squarespace class: sqs-dynamic-text until Oct 2026, then sqs-cdk-dynamic-text
+    pat = re.compile(r'<h([12])[^>]*>(.*?)</h\1>|<div class="image-title sqs-[\w-]*dynamic-text"\s*>(.*?)</div>\s*</div>\s*'
+                     r'(?:<div class="image-subtitle-wrapper"[^>]*>\s*<div class="image-subtitle sqs-[\w-]*dynamic-text"\s*>(.*?)</div>)?', re.S)
     for m in pat.finditer(t):
         if m.group(2) is not None:
             section = strip(m.group(2)).lower()
@@ -718,6 +728,11 @@ RACE = re.compile(r"\b(race|candida\w*|nominat\w*|straw poll|poll\b|bid|contende
 OTHER_ORGS = re.compile(r"\b(OSCE|NATO|OPEC|ASEAN|OAS|OECD|Commonwealth|Interpol|IMO|ITU|WMO|CARICOM|SADC|ECOWAS|SICA|"
                         r"Arab League|OIC|GCC|BIMSTEC|SAARC|AALCO|ICAO|UNCTAD Secretary-General Rebeca Grynspan (?:said|says|warns))\b", re.I)
 UN_WORD = re.compile(r"\bU\.?N\.?\b|United Nations|Naciones Unidas|ONU\b", re.I)
+# a headline reporting that a candidate has left the race (not that they might, or were urged to)
+WITHDREW = re.compile(r"\b(withdr(?:aws|ew|awn|awing|awal)|pull(?:s|ed)? out|quits?|drops? out|dropped out|bows? out|exits? (?:the )?race|"
+                      r"ends? (?:his|her) (?:bid|candidacy|campaign)|abandons?|se retire|retire sa candidature|renonce|se retira|retira su)\b", re.I)
+NOT_WITHDREW = re.compile(r"\b(not|never|no plans|refus\w*|den(?:y|ies|ied)|urg\w*|calls? (?:on|for)|demand\w*|should|must|may|might|could|"
+                          r"would|consider\w*|rumou?r\w*|mulls?|weighs?|pressure\w*|asked to|if)\b|n't\b|\?", re.I)
 
 
 def is_race_item(text):
@@ -999,6 +1014,12 @@ def main():
             sm = re.search(r"announced withdrawal on (\d{1,2} \w+ \d{4})", f8c.get("section", ""))
             if sm:
                 announced = parse_day(sm.group(1))
+        # reported withdrawals, for when the UN has not yet posted a joint letter (checked with the news below)
+        reported = []
+        if f8c and "withdrawn" in f8c["section"]:
+            reported.append((announced, "1 for 8 Billion: withdrawn candidates", F8_CANDIDATES))
+        if wpc and wpc.get("withdrew"):
+            reported.append((wpc["withdrew"], "Wikipedia: 2026 United Nations Secretary-General selection", WP_URL))
         region = countries.region.get(nat) if nat else None
 
         prev_roles = (wpc or {}).get("previous_roles") or []
@@ -1033,7 +1054,9 @@ def main():
             "status": "withdrawn" if withdrawn else "nominated",
             "withdrawal_date": withdrawal_date,
             "withdrawal_announced": announced,
+            "withdrawal_announced_url": None,
             "withdrawals": withdrawals,
+            "_reported_withdrawal": reported,
             "gender": oc["gender"],
             "region_group": region[1] if region else (wpc or {}).get("region"),
             "region_group_code": region[0] if region else None,
@@ -1085,13 +1108,19 @@ def main():
             c = match_cand(r["candidate"])
             results.append({"candidate": c["name"] if c else r["candidate"], "candidate_id": c["id"] if c else slugify(r["candidate"]),
                             "encourage": r["encourage"], "discourage": r["discourage"], "no_opinion": r["no_opinion"],
-                            "p5_encourage": r["p5_encourage"], "p5_discourage": r["p5_discourage"]})
+                            "p5_encourage": r["p5_encourage"], "p5_discourage": r["p5_discourage"],
+                            "p5_encourage_n": r["p5_encourage_n"], "p5_discourage_n": r["p5_discourage_n"],
+                            "p5_no_opinion_n": r["p5_no_opinion_n"]})
         results.sort(key=lambda r: (-r["encourage"], r["discourage"]))
         scr = scr_polls.get(n)
         if not scr:
             pp = next((x for x in (prev.get("process", {}).get("straw_polls") or []) if x.get("n") == n and x.get("scr_url")), None)
             scr = {"url": pp["scr_url"], "colour_coded": pp.get("scr_colour_coded")} if pp else None
         scr_cc = (scr or {}).get("colour_coded")
+        colour_coded = bool(p["wp_coloured"] or scr_cc is True or (p["wp_marked"] and scr_cc is None))
+        if not colour_coded:  # shading on an identical-ballot poll is an editor's guess, not a P5 vote
+            for r in results:
+                r["p5_encourage"] = r["p5_discourage"] = None
         srcs = [{"name": r["text"][:120], "url": r["url"]} for r in p["refs"] if r.get("url")]
         srcs.append({"name": "Wikipedia straw poll table", "url": WP_URL})
         if f8m:
@@ -1102,9 +1131,9 @@ def main():
         total = sum(r["encourage"] + r["discourage"] + r["no_opinion"] for r in results)
         polls.append({
             "n": n, "date": date,
-            "colour_coded": bool(p["wp_coloured"] or scr_cc is True),
+            "colour_coded": colour_coded,
             "ballot_note": ("Identical ballots for all 15 members: P5 votes cannot be told apart (Security Council Report)"
-                            if scr_cc is False or not p["wp_coloured"] else "Colour-coded ballots: P5 votes are distinguishable"),
+                            if not colour_coded else "Colour-coded ballots: P5 votes are distinguishable"),
             "candidates_voted": len(results),
             "ballots_cast": total,
             "results": results,
@@ -1275,6 +1304,31 @@ def main():
     for c in candidates:
         c["news_count_60d"] = sum(1 for n in out_news if c["id"] in n["candidates_mentioned"])
 
+    # A withdrawal is announced days before the UN posts the joint letter. Count it once
+    # 1 for 8 Billion or Wikipedia lists it, or headlines from 3+ outlets report it.
+    for c in candidates:
+        reported = c.pop("_reported_withdrawal")
+        pc = next((x for x in prev.get("candidates") or [] if x.get("id") == c["id"]), {})
+        if c["status"] != "nominated":
+            if c["status"] == "withdrawn" and not c["withdrawal_announced"]:  # keep the date it was announced, once the letter is up
+                c["withdrawal_announced"] = pc.get("withdrawal_announced")
+                c["withdrawal_announced_url"] = pc.get("withdrawal_announced_url")
+            continue
+        heads = sorted((n for n in out_news if c["id"] in n["in_headline"] and n["date"][:10] >= (c["nomination_date"] or "")
+                        and WITHDREW.search(n["title"]) and not NOT_WITHDREW.search(n["title"])), key=lambda n: n["date"])
+        if not reported and len({n["outlet"] or n["url"] for n in heads}) < 3:
+            continue
+        days = sorted([d for d, _, _ in reported if d] + [n["date"][:10] for n in heads])
+        c["status"] = "withdrawn"
+        c["withdrawal_announced"] = days[0] if days else (pc.get("withdrawal_announced") or today)
+        c["withdrawal_announced_url"] = heads[0]["url"] if heads else reported[0][2]
+        have = {s["url"] for s in c["sources"]}
+        c["sources"] += [{"name": name, "url": url} for _, name, url in reported if url not in have]
+        c["sources"] += [{"name": f"{n['outlet'] or 'News'}: {n['title']}"[:160], "url": n["url"]} for n in heads[:3]]
+        discrepancies.append(f"{c['name']}: withdrawal announced {c['withdrawal_announced']} ({len(heads)} news reports"
+                             f"{', ' + ', '.join(name.split(':')[0] for _, name, _ in reported) if reported else ''}); "
+                             "the UN page has no joint letter on it yet")
+
     also = []
     for key, m in mentioned.items():
         hits = [n for n in out_news if key in n["also_mentioned"]]
@@ -1323,7 +1377,8 @@ def main():
                (f"{c['name']} withdrawn" if full else f"{', '.join(countries.name.get(i, i) for i in w['by'])} withdraws its nomination of {c['name']}"),
                w["url"] or OFFICIAL_URL, c["id"], w.get("symbol"))
         if c["withdrawal_announced"] and c["withdrawal_announced"] != c["withdrawal_date"]:
-            ev(c["withdrawal_announced"], "withdrawal", f"{c['name']} announces withdrawal from the race", F8_CANDIDATES, c["id"])
+            ev(c["withdrawal_announced"], "withdrawal", f"{c['name']} announces withdrawal from the race",
+               c["withdrawal_announced_url"] or F8_CANDIDATES, c["id"])
     for d in dialogues:
         ev(d["date"], "dialogue", f"General Assembly interactive dialogue with {d['candidate']}", d["webcast_url"] or OFFICIAL_URL, d["candidate_id"], d["time"])
     if off_proc.get("town_hall"):
