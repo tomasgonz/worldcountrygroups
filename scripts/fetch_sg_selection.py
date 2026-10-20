@@ -14,8 +14,11 @@ Builds site/server/data/sg-selection.json from live sources (stdlib only):
     rumoured / ruled-out names, list of straw polls held.
   * Security Council Report (What's in Blue feed): straw-poll briefings (ballot format,
     i.e. whether colour-coded) and the monthly programme-of-work outlook.
-  * PassBlue (WordPress search feed) and Google News RSS: news, poll corroboration and
-    how often "also mentioned" names appear in coverage.
+  * PassBlue (WordPress API: its race category, full texts) and Google News RSS: news, poll
+    corroboration and how often "also mentioned" names appear in coverage.
+  * Press names: sentences in that coverage that float possible candidates are read by the
+    site's AI model (only new sentences, once); the names it finds, each with a verbatim
+    quote, are kept in sg-press-names.json and join "also mentioned".
   * Wikidata / Wikimedia Commons: photos and citizenship for names without other data.
   * The site's own archive.db: news/statements already collected by the site.
 
@@ -27,6 +30,7 @@ previous file is left untouched and the script exits 1. Secondary sources that f
 back to the values from the previous run (recorded in _meta.source_status).
 """
 
+import hashlib
 import html
 import json
 import os
@@ -47,6 +51,8 @@ DATA_DIR = os.path.join(ROOT, "site", "server", "data")
 OUTPUT_FILE = os.path.join(DATA_DIR, "sg-selection.json")
 ARCHIVE_DB = os.path.join(DATA_DIR, "archive.db")
 PEOPLE_FILE = os.path.join(DATA_DIR, "people-index.json")
+PRESS_NAMES_FILE = os.path.join(DATA_DIR, "sg-press-names.json")  # names found in coverage, kept between runs
+AI_CONFIG = os.path.join(DATA_DIR, "ai-config.json")
 GROUPS_DIR = os.path.join(ROOT, "worldcountrygroups", "data", "groups")
 
 UA = "WorldCountryGroups/1.0 (+https://worldcountrygroups.exe.xyz)"
@@ -61,8 +67,8 @@ F8_CANDIDATES = "https://1for8billion.org/candidates-and-speculation"
 F8_POLLS = "https://1for8billion.org/straw-polls-2026"
 SCR_FEED = "https://www.securitycouncilreport.org/whatsinblue/feed"
 SCR_SG_FEED = "https://www.securitycouncilreport.org/whatsinblue/tag/appointment-of-the-secretary-general/feed"
-PASSBLUE_SEARCH = "https://passblue.com/feed/?s=" + urllib.parse.quote("secretary-general")
-PASSBLUE_POLLS = "https://passblue.com/feed/?s=" + urllib.parse.quote("straw poll")
+PASSBLUE_API = "https://passblue.com/wp-json/wp/v2"  # its RSS feeds carry a single item since Oct 2026
+PASSBLUE_RACE_CATEGORY = "sg-election-2026"
 
 # Process documents read when this tracker was built (2026-10-05). They are static
 # official letters; the facts below are quoted from them, with their URLs.
@@ -800,6 +806,172 @@ def archive_items(since_day):
     return out
 
 
+def passblue_posts():
+    """PassBlue's race category and a 'secretary-general' search, newest first, with full texts."""
+    cat = fetch_json(f"{PASSBLUE_API}/categories?slug={PASSBLUE_RACE_CATEGORY}&_fields=id")
+    queries = ([f"categories={cat[0]['id']}&per_page=30"] if cat else []) + ["search=secretary-general&orderby=date&per_page=20"]
+    out, seen = [], set()
+    for q in queries:
+        for p in fetch_json(f"{PASSBLUE_API}/posts?{q}&_fields=date_gmt,link,title,excerpt,content"):
+            if p["link"] in seen:
+                continue
+            seen.add(p["link"])
+            text = strip(p["content"]["rendered"])
+            out.append({"title": strip(p["title"]["rendered"]), "url": p["link"], "date": iso_utc(p["date_gmt"] + "Z"),
+                        "outlet": "PassBlue", "summary": (strip(p["excerpt"]["rendered"]) or text)[:600], "text": text[:40000]})
+    return out
+
+
+# ---------------------------------------------------------------------------- press names
+
+# a sentence that may float a possible candidate (the model decides whether it does)
+RUMOUR = re.compile(r"dark[- ]horse|rumou?r\w*|floated|floating|speculat\w*|tipped|in the (?:mix|wings|running)|"
+                    r"(?:possible|potential|prospective|likely|new|late|fresh|surprise|other) (?:candidate|nominee|entrant|entry|contender|name)s?|"
+                    r"could (?:enter|join|be nominated|throw)|may (?:enter|be nominated|nominate)|under consideration|"
+                    r"consider\w* (?:a bid|running|nominating|a candidacy|entering|putting)|names? (?:circulating|being floated|mentioned)|"
+                    r"(?:eyeing|mulling|weighing|exploring) (?:a )?(?:bid|run|candidacy)|ruled? (?:himself|herself|themselves) out|"
+                    r"expressed interest|interest in the (?:job|post|position)|throw (?:his|her|their) hat|enter the race", re.I)
+PRESS_STATUSES = ("rumoured", "expressed_interest", "ruled_out")
+PRESS_PROMPT = """You read passages from news coverage of the 2026 selection of the next UN Secretary-General.
+List the people a passage presents as a possible future candidate: rumoured, floated, tipped, a "dark horse",
+being considered by a government, saying they are interested, or ruling themselves out.
+Leave out: the official nominees listed below; people quoted only as sources, commentators or officials;
+backers of a candidate; past Secretaries-General; anyone else mentioned in passing.
+Answer in JSON: {"people": [{"name": their full name (if the passage gives only a surname, your best identification
+of the full name from the context), "surname_only": true if the passage gives only the surname, "country": the country of their nationality as a country name
+(e.g. "Jamaica", not "Jamaican") if the passage says or clearly implies it, else null, "role": their current post as a short
+title with capitals and no leading article (e.g. "Chief of Staff to the UN Secretary-General") if the passage says it,
+else null, "status": "rumoured" | "expressed_interest" | "ruled_out", "passage": the passage id,
+"quote": the shortest verbatim excerpt (under 200 characters) that shows it}]}.
+An empty list is a fine answer."""
+
+
+def press_passages(items, since):
+    """Rumour sentences (with their neighbours) and rumour headlines from race coverage in the window."""
+    out = {}
+    for it in items:
+        if (it.get("date") or "")[:10] < since:
+            continue
+        body = it.get("text") or (it.get("summary") or "" if it.get("via") in ("scr", "archive") else "")
+        if not (is_race_item(it["title"]) or (body and SG_CTX.search(body[:4000]))):
+            continue
+        chunks = [it["title"]] if RUMOUR.search(it["title"]) else []
+        sents = re.split(r"(?<=[.!?”\"])\s+(?=[A-Z“\"])", body) if body else []
+        chunks += [" ".join(sents[max(0, i - 1):i + 2])[:900] for i, s in enumerate(sents) if RUMOUR.search(s)]
+        for ch in chunks:
+            pid = hashlib.sha1(fold(ch).encode()).hexdigest()[:12]
+            out.setdefault(pid, {"id": pid, "text": ch, "title": it["title"], "url": it["url"],
+                                 "date": (it.get("date") or "")[:10], "outlet": it.get("outlet") or "News"})
+    return list(out.values())
+
+
+def ai_provider(task):
+    """The site's AI settings: the provider assigned to this task, else the active one (OpenAI-type only)."""
+    try:
+        with open(AI_CONFIG, encoding="utf-8") as f:
+            cfg = json.load(f)
+    except (OSError, ValueError):
+        return None
+    provs = [p for p in cfg.get("providers") or [] if p.get("enabled") and p.get("apiKey") and p.get("type") == "openai"]
+    for pid in ((cfg.get("taskModels") or {}).get(task), cfg.get("activeProvider")):
+        p = next((x for x in provs if x["id"] == pid), None)
+        if p:
+            return p
+    return provs[0] if provs else None
+
+
+def ask_json(provider, system, user, task):
+    import ai_usage
+    model = provider["model"]
+    new_params = re.match(r"^(o\d|gpt-([5-9]|\d{2})|gpt-4\.5)", model or "")  # as the site's llm-client
+    body = {"model": model, "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
+            ("max_completion_tokens" if new_params else "max_tokens"): 8000, "response_format": {"type": "json_object"}}
+    if not new_params:
+        body["temperature"] = 0
+    req = urllib.request.Request((provider.get("baseUrl") or "https://api.openai.com/v1").rstrip("/") + "/chat/completions",
+                                 data=json.dumps(body).encode(), method="POST",
+                                 headers={"Content-Type": "application/json", "Authorization": f"Bearer {provider['apiKey']}"})
+    try:
+        with urllib.request.urlopen(req, timeout=240) as r:
+            res = json.loads(r.read())
+    except urllib.error.HTTPError as e:
+        ai_usage.record(task, "OpenAI", model, failed=True)
+        raise RuntimeError(f"AI provider error {e.code}: {e.read()[:200]!r}") from None
+    u = res.get("usage") or {}
+    ai_usage.record(task, "OpenAI", model, u.get("prompt_tokens", 0), u.get("completion_tokens", 0),
+                    (u.get("prompt_tokens_details") or {}).get("cached_tokens", 0))
+    return json.loads(res["choices"][0]["message"]["content"] or "{}")
+
+
+def load_press_names():
+    try:
+        with open(PRESS_NAMES_FILE, encoding="utf-8") as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return {"seen": {}, "names": {}}
+
+
+def update_press_names(items, nominee_names, since, today):
+    """Send passages not seen before to the model, merge the names it finds into the kept state."""
+    state = load_press_names()
+    passages = [p for p in press_passages(items, since) if p["id"] not in state["seen"]]
+    log(f"  {len(passages)} new passages")
+    provider = ai_provider("sg-press-names") if passages else None
+    if passages and not provider:
+        raise RuntimeError("no enabled OpenAI provider in the site's AI settings")
+    nominees = "; ".join(dict.fromkeys(nominee_names))
+    found = 0
+    for i in range(0, len(passages), 40):
+        batch = passages[i:i + 40]
+        by_id = {p["id"]: p for p in batch}
+        user = f"Official nominees (leave out): {nominees}\n\n" + "\n\n".join(
+            f"[{p['id']}] ({p['outlet']}, {p['date']}, \"{p['title'][:120]}\")\n{p['text']}" for p in batch)
+        res = ask_json(provider, PRESS_PROMPT, user, "sg-press-names")
+        people = res.get("people") or []
+        # a full name the model filled in from a bare surname must be a Wikipedia article (whose title is then used);
+        # without the last word too, for double surnames ("María Ángela Holguín Cuéllar")
+        guessed = [strip(x.get("name") or "") for x in people if x.get("surname_only")]
+        known = wp_page_info(guessed + [n.rsplit(" ", 1)[0] for n in guessed if len(n.split()) > 2]) if guessed else {}
+        for x in people:
+            src = by_id.get(x.get("passage"))
+            name = strip(x.get("name") or "")
+            words = fold(name).split()
+            if not src or len(words) < 2 or not any(re.search(rf"\b{re.escape(w)}\b", fold(src["text"])) for w in words[1:]):
+                continue  # a surname must be in the passage it came from
+            if x.get("surname_only"):
+                art = next((known[n] for n in (name, name.rsplit(" ", 1)[0]) if (known.get(n) or {}).get("wikidata")), None)
+                if not art:
+                    log(f"  ? {name}: only a surname in the passage and no Wikipedia article under that name; left out")
+                    continue
+                name = urllib.parse.unquote(art["page_url"].rsplit("/", 1)[1]).replace("_", " ")
+            if any(same_person(name, n) for n in nominee_names):
+                continue
+            quote = strip(x.get("quote") or "")[:240]
+            if not quote or fold(quote)[:60] not in fold(src["text"]):
+                quote = next((s for s in re.split(r"(?<=[.!?])\s+", src["text"]) if any(w in fold(s) for w in words[1:])), src["text"])[:240]
+            key = next((k for k, v in state["names"].items() if same_person(v["name"], name)), slugify(name))
+            rec = state["names"].setdefault(key, {"name": name, "country": None, "role": None, "status": None, "status_date": "", "evidence": []})
+            rec["country"] = rec["country"] or x.get("country")
+            rec["role"] = x.get("role") or rec["role"]
+            status = x.get("status") if x.get("status") in PRESS_STATUSES else "rumoured"
+            if src["date"] >= rec["status_date"]:
+                rec["status"], rec["status_date"] = status, src["date"]
+            if not any(e["url"] == src["url"] for e in rec["evidence"]):
+                rec["evidence"].append({"title": src["title"], "url": src["url"], "date": src["date"], "outlet": src["outlet"], "quote": quote})
+                found += 1
+        for p in batch:
+            state["seen"][p["id"]] = today
+    log(f"  {found} new mentions; {len(state['names'])} names kept")
+    keep = (datetime.fromisoformat(today) - timedelta(days=180)).date().isoformat()
+    state["seen"] = {k: v for k, v in state["seen"].items() if v >= keep}
+    state["names"] = {k: v for k, v in state["names"].items() if max((e["date"] for e in v["evidence"]), default="") >= keep}
+    tmp = PRESS_NAMES_FILE + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(state, f, ensure_ascii=False, indent=1)
+    os.replace(tmp, PRESS_NAMES_FILE)
+    return state["names"]
+
+
 # ---------------------------------------------------------------------------- main build
 
 def load_previous():
@@ -925,15 +1097,13 @@ def main():
         '"next UN secretary-general" OR "next U.N. secretary-general"',
         '"UN chief" race candidates',
         '"Security Council" "straw poll" secretary-general',
+        '"secretary-general" ("dark horse" OR rumored OR rumoured OR speculation OR "new candidate" OR "enter the race") UN',
     ]
     for i, q in enumerate(general_q):
         gather(q, f"general-{i + 1}")
-    for key, url in (("passblue_search", PASSBLUE_SEARCH), ("passblue_polls", PASSBLUE_POLLS)):
-        items = try_source(key, lambda u=url: parse_rss(fetch(u, accept="application/rss+xml")))
-        for it in items or []:
-            it["via"] = "passblue"
-            it["outlet"] = "PassBlue"
-            news_raw.append(it)
+    for it in try_source("passblue", passblue_posts) or []:
+        it["via"] = "passblue"
+        news_raw.append(it)
     for it in scr_sg + scr_items:
         news_raw.append(dict(it, via="scr", outlet="Security Council Report: What's in Blue"))
     arch = try_source("archive_db", archive_items, since) or []
@@ -1219,6 +1389,35 @@ def main():
         if "1 for 8 Billion" not in rec["listed_by"]:
             rec["listed_by"].append("1 for 8 Billion")
 
+    # names floated in coverage (kept between runs), newest quote first. Those found in earlier runs join
+    # here and get the lookups and news searches below; this run's news is read for new ones further down.
+    def merge_press(names):
+        added = []
+        for pn in names.values():
+            ev = sorted(pn["evidence"], key=lambda e: e["date"], reverse=True)
+            if not ev or ev[0]["date"] < since or any(same_person(pn["name"], n) for n in nominee_names):
+                continue
+            outlets = list(dict.fromkeys(e["outlet"] for e in ev))
+            press_ev = [{"title": f"{e['outlet']}, {e['date']}: “{e['quote']}”"[:300], "url": e["url"], "date": e["date"]} for e in ev[:4]]
+            key = next((k for k, v in mentioned.items() if same_person(v["name"], pn["name"])), None)
+            if key:
+                rec = mentioned[key]
+                rec["evidence"] = press_ev + [e for e in rec["evidence"] if e["url"] not in {p["url"] for p in press_ev}]
+                rec["listed_by"] += [o for o in outlets if o not in rec["listed_by"]]
+                continue
+            e0 = ev[0]
+            lead = {"ruled_out": "Ruled out, according to", "expressed_interest": "Interest reported by"}.get(pn["status"], "Named as a possible candidate by")
+            day = datetime.fromisoformat(e0["date"]).strftime("%-d %B %Y")
+            key = slugify(pn["name"])
+            mentioned[key] = {
+                "name": pn["name"], "status": pn["status"], "why": f"{lead} {e0['outlet']} ({day}): “{e0['quote']}”",
+                "wiki_title": None, "role": pn.get("role"), "iso3": countries.resolve(pn["country"]) if pn.get("country") else None,
+                "evidence": press_ev, "listed_by": outlets, "_qid": None, "wikipedia_url": None}
+            added.append(key)
+        return added
+
+    merge_press(load_press_names()["names"])
+
     # role / nationality from Wikipedia + Wikidata where 1 for 8 Billion has none
     more_titles = [m["wiki_title"] for m in mentioned.values() if m.get("wiki_title") and m["wiki_title"] not in page_info]
     more_titles += [m["name"] for m in mentioned.values() if not m.get("wiki_title") and m["name"] not in page_info]
@@ -1253,6 +1452,12 @@ def main():
     for key, m in mentioned.items():
         nm = re.sub(r"\s+[A-Z]\.\s+", " ", m["name"])
         gather(f'"{nm}" ("secretary-general" OR "UN chief")', f"mention:{key}")
+
+    log("press names …")
+    press = try_source("press_names", update_press_names, news_raw, nominee_names, since, today)
+    for key in merge_press(press or {}):  # new this run: Wikipedia/Wikidata details come on the next run
+        log(f"  new name: {mentioned[key]['name']}")
+        gather(f'"{mentioned[key]["name"]}" ("secretary-general" OR "UN chief")', f"mention:{key}")
 
     cand_pats = {c["id"]: [re.compile(p) for p in name_patterns(c["official_name"]) + name_patterns(c["name"])] for c in candidates}
     ment_pats = {k: [re.compile(p) for p in name_patterns(m["name"])[:1] or [re.escape(fold(m["name"]))]] for k, m in mentioned.items()}
