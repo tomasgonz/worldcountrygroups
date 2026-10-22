@@ -1,8 +1,9 @@
-import { getSgSelection, getSgNews, getSgSummary } from '~/server/utils/sg-selection'
+import { getSgSelection, getSgNews, getSgSummary, getSgMarkets } from '~/server/utils/sg-selection'
 
 /**
  * UN Secretary-General selection tracker: official nominees, process timeline, dialogues,
- * Security Council straw polls (leaked tallies), "also mentioned" names (not candidates) and news.
+ * Security Council straw polls (leaked tallies), "also mentioned" names (not candidates), news and
+ * prediction-market prices (Polymarket; null until scripts/fetch_sg_markets.py has run).
  * Query: candidate (id, name or surname) filters the news stream; news_limit (default 120).
  */
 export default defineEventHandler((event) => {
@@ -16,5 +17,6 @@ export default defineEventHandler((event) => {
     ...d,
     summary: getSgSummary(),
     news: getSgNews({ candidate, limit }),
+    markets: getSgMarkets(),
   }
 })

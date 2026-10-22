@@ -77,6 +77,10 @@
               <div class="text-[11px] text-primary-400 mb-1">Straw poll {{ c.latest_poll.n }} ({{ fmtDate(c.latest_poll.date) }})</div>
               <MiniBallot :e="c.latest_poll.encourage" :dd="c.latest_poll.discourage" :n="c.latest_poll.no_opinion" />
             </div>
+            <button v-if="mFor(c.id)" type="button" class="mt-2 text-left text-[11px] text-primary-500 hover:text-accent-700" @click="scrollToMarket()">
+              Betting market <span class="font-semibold text-primary-800 tabular-nums">{{ fmtPct(mFor(c.id)!.price) }}</span>
+              <template v-if="mFor(c.id)!.thin && mFor(c.id)!.bid != null && mFor(c.id)!.ask != null"> · thin, bids {{ fmtPct(mFor(c.id)!.bid!) }} to asks {{ fmtPct(mFor(c.id)!.ask!) }}</template>
+            </button>
             <div class="mt-auto pt-3 flex flex-wrap gap-x-3 gap-y-1 text-xs">
               <a v-if="c.vision_statement_url" :href="c.vision_statement_url" target="_blank" rel="noopener" class="text-primary-700 underline decoration-dotted hover:text-accent-700">Vision statement</a>
               <a v-if="c.cv_url" :href="c.cv_url" target="_blank" rel="noopener" class="text-primary-700 underline decoration-dotted hover:text-accent-700">CV</a>
@@ -238,6 +242,108 @@
         </div>
       </section>
 
+      <!-- ================= PREDICTION MARKET ================= -->
+      <section v-if="market" ref="marketEl" class="bg-white rounded-2xl ring-1 ring-primary-200/70 p-5 sm:p-6">
+        <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1">
+          <h3 class="font-serif text-xl font-bold text-primary-900">What the betting market expects</h3>
+          <button v-if="mSeries.length" type="button" class="text-xs text-primary-500 underline decoration-dotted" @click="showMTable = !showMTable">{{ showMTable ? 'Show chart' : 'Show as table' }}</button>
+        </div>
+        <p class="text-sm text-primary-500 mb-4">
+          Prices on <a :href="market.url" target="_blank" rel="noopener" class="underline decoration-dotted">Polymarket</a>, a real-money prediction market, read as the chance traders put on each person becoming Secretary-General.
+          They are bets, not votes, and a few trades can move them: where the best offers to buy and to sell are more than 10 points apart, the last trade is shown and the gap is drawn as a band.
+        </p>
+
+        <div class="grid gap-2 text-[10px] uppercase tracking-wider text-primary-400 mb-1" :style="{ gridTemplateColumns: M_COLS }">
+          <span /><span /><span class="text-right">Chance</span><span class="text-right">7 days</span>
+        </div>
+        <div class="space-y-1.5">
+          <div v-for="o in market.outcomes" :key="o.market_name" class="grid items-center gap-2" :style="{ gridTemplateColumns: M_COLS }">
+            <span class="text-[13px] text-primary-800 flex items-center gap-1.5 min-w-0" :title="o.name">
+              <span class="w-3 h-0.5 rounded-full shrink-0" :style="{ background: mColour.get(o.market_name) || 'transparent' }" />
+              <span class="min-w-0 flex flex-wrap items-center gap-x-1.5">
+                <span class="truncate max-w-full">{{ o.name }}</span>
+                <span v-if="o.race_status && o.race_status !== 'candidate'" class="text-[10px] uppercase tracking-wider px-1 rounded bg-primary-50 text-primary-500">{{ o.race_status === 'mentioned' ? 'not nominated' : o.race_status }}</span>
+              </span>
+            </span>
+            <div class="relative h-6 rounded-md hover:bg-primary-50 cursor-default" tabindex="0" :aria-label="mAria(o)"
+              @mousemove="tipMarket(o, $event)" @mouseleave="hide" @focus="tipMarket(o, $event)" @blur="hide">
+              <div v-if="o.thin && o.bid != null && o.ask != null" class="absolute top-1/2 -translate-y-1/2 h-4 rounded-[4px]"
+                :style="{ left: mPct(o.bid), width: mPct(o.ask - o.bid), background: GREY, opacity: 0.55 }" />
+              <div class="absolute top-1/2 -translate-y-1/2 left-0 h-2.5 rounded-r-[4px]" :style="{ width: mPct(o.price), background: SLATE }" />
+            </div>
+            <span class="text-sm font-semibold tabular-nums text-right text-primary-900 leading-tight">
+              {{ fmtPct(o.price) }}<span v-if="o.thin" class="block text-[10px] font-normal text-primary-400">thin</span>
+            </span>
+            <span class="text-[11px] tabular-nums text-right text-primary-500">{{ fmtPts(o.change_1w) }}</span>
+          </div>
+          <div class="grid gap-2 text-[10px] text-primary-400 tabular-nums" :style="{ gridTemplateColumns: M_COLS }">
+            <span /><div class="flex justify-between"><span>0</span><span>{{ Math.round(mMax * 100) }}%</span></div><span /><span class="text-right">pts</span>
+          </div>
+        </div>
+        <p class="mt-2 text-[11px] text-primary-500">{{ sumNote }}</p>
+
+        <!-- price history -->
+        <div v-if="mSeries.length" class="mt-6">
+          <h4 class="text-xs font-medium uppercase tracking-wider text-primary-400 mb-2">{{ showMTable ? 'Price at the end of each straw-poll day (UTC)' : 'Over time' }}</h4>
+          <div v-show="!showMTable" ref="mWrap">
+            <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-primary-600 mb-2">
+              <span v-for="s in mSeries" :key="s.key" class="inline-flex items-center gap-1.5"><span class="w-3 h-0.5 rounded-full" :style="{ background: s.colour }" />{{ s.name }}</span>
+              <span class="inline-flex items-center gap-1.5"><span class="h-3 border-l border-dashed border-primary-400" />Straw poll</span>
+            </div>
+            <svg :width="MW" :height="MH" class="block max-w-full select-none touch-pan-y" role="img" :aria-label="mChartAria"
+              @pointermove="mMove" @pointerleave="mLeave">
+              <g v-for="t in mYTicks" :key="t">
+                <line :x1="ML" :x2="MW - MR" :y1="my(t)" :y2="my(t)" stroke="#e2e8f0" stroke-width="1" />
+                <text :x="ML - 6" :y="my(t) + 3.5" text-anchor="end" fill="#94a3b8" font-size="10">{{ Math.round(t * 100) }}%</text>
+              </g>
+              <text v-for="m in mMonths" :key="m.t" :x="mx(m.t)" :y="MH - 6" text-anchor="middle" fill="#94a3b8" font-size="10">{{ m.label }}</text>
+              <g v-for="p in mPolls" :key="p.n">
+                <line :x1="mx(p.t)" :x2="mx(p.t)" :y1="MT" :y2="MH - MB" stroke="#94a3b8" stroke-width="1" stroke-dasharray="2 3" />
+                <text v-if="mPollLabelled.has(p.n)" :x="mx(p.t)" :y="MT - 3" text-anchor="middle" fill="#94a3b8" font-size="9">P{{ p.n }}</text>
+              </g>
+              <polyline v-for="s in mSeries" :key="s.key" :points="s.points" fill="none" :stroke="s.colour" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+              <g v-for="l in mEndLabels" :key="l.key">
+                <circle :cx="l.x" :cy="l.cy" r="3.5" :fill="l.colour" stroke="#fff" stroke-width="2" />
+                <text :x="l.x + 8" :y="l.y + 3.5" font-size="11" fill="#334155">{{ l.label }}</text>
+              </g>
+              <g v-if="mHover">
+                <line :x1="mHover.x" :x2="mHover.x" :y1="MT" :y2="MH - MB" stroke="#475569" stroke-width="1" />
+                <circle v-for="pt in mHover.pts" :key="pt.key" :cx="mHover.x" :cy="pt.y" r="4" :fill="pt.colour" stroke="#fff" stroke-width="2" />
+              </g>
+            </svg>
+            <p class="text-[11px] text-primary-400 mt-1">Every 12 hours since the market opened{{ market.opened ? ` (${fmtDate(market.opened)})` : '' }}, ending at the price shown above; the {{ mSeries.length }} highest-priced names. Polymarket records the midpoint, so thin prices can jump at the last point.</p>
+          </div>
+          <div v-if="showMTable" class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="text-left text-[11px] uppercase tracking-wider text-primary-400">
+                  <th class="py-1 pr-3 font-medium">Name</th>
+                  <th v-for="p in mPolls" :key="p.n" class="py-1 px-2 font-medium text-center whitespace-nowrap">Poll {{ p.n }}<br><span class="normal-case tracking-normal">{{ fmtDate(p.date, true) }}</span></th>
+                  <th class="py-1 px-2 font-medium text-center">Now</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="o in market.outcomes" :key="o.market_name" class="border-t border-primary-100">
+                  <td class="py-1.5 pr-3 text-primary-800 whitespace-nowrap">{{ o.name }}</td>
+                  <td v-for="p in mPolls" :key="p.n" class="py-1.5 px-2 text-center tabular-nums text-primary-700">
+                    <template v-if="priceAt(o, p.end) != null">{{ fmtPct(priceAt(o, p.end)!) }}</template><span v-else class="text-primary-300">–</span>
+                  </td>
+                  <td class="py-1.5 px-2 text-center tabular-nums font-semibold text-primary-900">{{ fmtPct(o.price) }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <p class="mt-4 text-[11px] text-primary-400">
+          ${{ fmtMoney(market.volume) }} traded, ${{ fmtMoney(market.volume_24h) }} in the last 24 hours · updated {{ fmtDateTime(markets!._meta.updated_at) }} ·
+          <a :href="market.url" target="_blank" rel="noopener" class="underline decoration-dotted">{{ market.title }}</a>
+          <template v-for="s in markets!._meta.skipped" :key="s.url">
+            · Not shown: <a :href="s.url" target="_blank" rel="noopener" class="underline decoration-dotted">{{ s.title }}</a> ({{ s.reason }})
+          </template>
+        </p>
+      </section>
+
       <!-- ================= TIMELINE ================= -->
       <section class="bg-white rounded-2xl ring-1 ring-primary-200/70 p-5 sm:p-6">
         <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1">
@@ -381,6 +487,13 @@ interface Poll { n: number; date: string; colour_coded: boolean; ballot_note: st
 interface Ev { date: string; kind: string; title: string; url: string | null; detail: string | null; upcoming: boolean }
 interface Mentioned { id: string; name: string; slug: string | null; role: string | null; iso2: string | null; status: string | null; why: string | null; evidence: { title: string; url: string; date: string | null }[]; mention_count_60d: number; first_mentioned: string | null; wikipedia_url: string | null }
 interface News { title: string; url: string; outlet: string | null; date: string; candidates_mentioned: string[]; also_mentioned: string[] }
+interface MOutcome {
+  name: string; market_name: string; person_id: string | null; race_status: string | null
+  price: number; bid: number | null; ask: number | null; last: number | null; spread: number | null; thin: boolean
+  change_1d: number | null; change_1w: number | null; volume: number; volume_24h: number; url: string; history: [number, number][]
+}
+interface Market { slug: string; title: string; url: string; opened: string | null; volume: number; volume_24h: number; liquidity: number; price_sum: number; outcomes: MOutcome[] }
+interface Markets { _meta: { updated_at: string; skipped: { title: string; url: string; reason: string }[]; notes: string[] }; markets: Market[] }
 interface SgData {
   _meta: { updated_at: string; status_line: string; notes: string[]; discrepancies: string[]; sources: { name: string; url: string }[]; window_days: number }
   process: {
@@ -393,6 +506,7 @@ interface SgData {
   candidates: Cand[]
   also_mentioned: Mentioned[]
   news: News[]
+  markets: Markets | null
 }
 
 const OFFICIAL = 'https://www.un.org/en/sg-selection-and-appointment'
@@ -403,6 +517,8 @@ const GREY = '#cbd5e1'
 const BLUE = '#2a78d6'
 const ORANGE = '#eb6834'
 const AMBER = '#eda100'
+const SLATE = '#475569'
+const SERIES = [BLUE, ORANGE, AQUA, AMBER] // categorical order, validated as a set
 
 const { data, pending } = useFetch<SgData>('/api/un-elections/sg', { query: { news_limit: 400 }, server: false })
 const d = computed(() => data.value || null)
@@ -465,6 +581,152 @@ function tipTrend(name: string, hh: PollPoint, e: MouseEvent) {
     { text: `${hh.no_opinion} no opinion`, color: GREY },
   ])
 }
+
+// ---- prediction market ----
+const markets = computed(() => d.value?.markets || null)
+const market = computed(() => markets.value?.markets[0] || null)
+const mByPerson = computed(() => new Map((market.value?.outcomes || []).filter(o => o.person_id).map(o => [o.person_id!, o])))
+const mFor = (id: string) => mByPerson.value.get(id) || null
+const M_COLS = 'minmax(6.5rem, 30%) 1fr 2.8rem 2.6rem'
+const mMax = computed(() => {
+  const top = Math.max(0.1, ...(market.value?.outcomes || []).map(o => Math.max(o.price, o.thin && o.ask != null ? o.ask : 0)))
+  return Math.min(1, Math.ceil(top * 10) / 10)
+})
+const mPct = (v: number) => `${(Math.max(0, v) / mMax.value) * 100}%`
+const fmtPct = (v: number) => (v < 0.001 ? '0%' : v < 0.1 ? `${(v * 100).toFixed(1)}%` : `${Math.round(v * 100)}%`)
+function fmtPts(c: number | null) {
+  if (c == null) return '–'
+  const p = Math.round(c * 100)
+  return p > 0 ? `+${p}` : p < 0 ? `−${-p}` : '0'
+}
+const fmtMoney = (v: number) => (v >= 1e6 ? `${(v / 1e6).toFixed(1)}m` : v >= 1e3 ? `${Math.round(v / 1e3)}k` : String(Math.round(v)))
+const sumNote = computed(() => {
+  const pct = Math.round((market.value?.price_sum ?? 0) * 100)
+  if (pct >= 100) return `The prices add up to ${pct}%, more than 100%, because thin prices overlap.`
+  return `The prices add up to ${pct}%. In a clean market they would make 100%; the other ${100 - pct} points are roughly the chance of someone not listed, blurred by thin prices.`
+})
+const mAria = (o: MOutcome) => `${o.name}: ${fmtPct(o.price)}${o.thin ? ', thin market' : ''}; ${fmtPts(o.change_1w)} points in a week`
+function tipMarket(o: MOutcome, e: MouseEvent | FocusEvent) {
+  const lines: { text: string; color?: string }[] = [
+    { text: `${fmtPct(o.price)} ${o.thin ? 'last trade (buyers and sellers far apart)' : 'midpoint of bid and ask'}`, color: SLATE },
+  ]
+  if (o.bid != null && o.ask != null) lines.push({ text: `Best bid ${fmtPct(o.bid)} · best ask ${fmtPct(o.ask)}`, color: GREY })
+  if (o.change_1w != null) lines.push({ text: `${fmtPts(o.change_1d)} pts in a day · ${fmtPts(o.change_1w)} pts in a week` })
+  lines.push({ text: `$${fmtMoney(o.volume)} traded on this name` })
+  show(e, o.name, lines)
+}
+const marketEl = ref<HTMLElement | null>(null)
+function scrollToMarket() { nextTick(() => marketEl.value?.scrollIntoView({ behavior: 'smooth', block: 'start' })) }
+
+// price history chart: sized to its container so text stays at its real size
+const showMTable = ref(false)
+const mWrap = ref<HTMLElement | null>(null)
+const MW = ref(720)
+const MH = 240
+const ML = 36
+const MR = computed(() => (MW.value < 500 ? 104 : 130))
+const MT = 16
+const MB = 22
+let mRo: ResizeObserver | null = null
+watch(mWrap, (el) => {
+  mRo?.disconnect()
+  if (!el || typeof ResizeObserver === 'undefined') return
+  mRo = new ResizeObserver(([en]) => { if (en.contentRect.width) MW.value = Math.max(300, Math.round(en.contentRect.width)) })
+  mRo.observe(el)
+})
+onBeforeUnmount(() => mRo?.disconnect())
+
+const nowT = computed(() => Math.floor(new Date(markets.value?._meta.updated_at || Date.now()).getTime() / 1000))
+const mRaw = computed(() => {
+  const outs = (market.value?.outcomes || []).filter(o => o.history.length).slice(0, SERIES.length)
+  const byName = [...outs].sort((a, b) => a.name.localeCompare(b.name)) // colour follows the person, not the rank
+  return outs.map((o) => {
+    const data = [...o.history]
+    if (data[data.length - 1][0] >= nowT.value - 3600) data.pop()
+    data.push([nowT.value, o.price])
+    return { key: o.market_name, name: o.name, colour: SERIES[byName.indexOf(o)], data }
+  })
+})
+const mColour = computed(() => new Map(mRaw.value.map(s => [s.key, s.colour])))
+const mT0 = computed(() => Math.min(...mRaw.value.map(s => s.data[0][0])))
+const mYMax = computed(() => Math.min(1, Math.ceil((Math.max(0.05, ...mRaw.value.flatMap(s => s.data.map(x => x[1]))) + 0.02) * 10) / 10))
+const mx = (t: number) => ML + ((t - mT0.value) / Math.max(1, nowT.value - mT0.value)) * (MW.value - ML - MR.value)
+const my = (p: number) => MT + (1 - p / mYMax.value) * (MH - MT - MB)
+const mSeries = computed(() => mRaw.value.map(s => ({ ...s, points: s.data.map(([t, p]) => `${mx(t)},${my(p)}`).join(' ') })))
+const mYTicks = computed(() => {
+  const step = mYMax.value > 0.5 ? 0.2 : 0.1
+  const out: number[] = []
+  for (let v = 0; v <= mYMax.value + 1e-9; v += step) out.push(Math.round(v * 100) / 100)
+  return out
+})
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const mMonths = computed(() => {
+  const out: { t: number; label: string }[] = []
+  const d0 = new Date(mT0.value * 1000)
+  const every = MW.value < 520 ? 2 : 1
+  for (let y = d0.getUTCFullYear(), m = d0.getUTCMonth() + 1, i = 0; ; m++) {
+    if (m > 11) { m = 0; y++ }
+    const t = Date.UTC(y, m, 1) / 1000
+    if (t > nowT.value) break
+    if (i++ % every === 0) out.push({ t, label: MON[m] })
+  }
+  return out
+})
+// straw polls are held in New York in the afternoon: drawn at 20:00 UTC; the table reads the price at the day's end
+const mPolls = computed(() => polls.value
+  .map(p => ({ n: p.n, date: p.date, t: Date.parse(`${p.date}T20:00:00Z`) / 1000, end: Date.parse(`${p.date}T23:59:59Z`) / 1000 }))
+  .filter(p => p.t >= mT0.value && p.t <= nowT.value))
+const mPollLabelled = computed(() => {
+  const keep = new Set<number>()
+  let lastX = Infinity
+  for (const p of [...mPolls.value].reverse()) if (lastX - mx(p.t) >= 18) { keep.add(p.n); lastX = mx(p.t) }
+  return keep
+})
+function priceAt(o: MOutcome, t: number) {
+  let best: number | null = null
+  for (const [ts, p] of o.history) {
+    if (ts > t) break
+    best = ts >= t - 2 * 86400 ? p : null
+  }
+  return best
+}
+const shortName = (name: string) => { const w = name.split(' '); return w.length >= 4 ? w[2] : w.slice(1).join(' ') || name }
+const mEndLabels = computed(() => {
+  const ls = mRaw.value.map((s) => {
+    const [t, p] = s.data[s.data.length - 1]
+    return { key: s.key, colour: s.colour, x: mx(t), cy: my(p), y: my(p), label: `${shortName(s.name)} ${fmtPct(p)}` }
+  }).sort((a, b) => a.y - b.y)
+  for (let i = 1; i < ls.length; i++) if (ls[i].y - ls[i - 1].y < 13) ls[i].y = ls[i - 1].y + 13
+  const over = ls.length ? ls[ls.length - 1].y - (MH - MB) : 0
+  if (over > 0) for (const l of ls) l.y -= over
+  return ls
+})
+const mChartAria = computed(() => `Prediction-market price over time: ${mRaw.value.map(s => `${s.name} now ${fmtPct(s.data[s.data.length - 1][1])}`).join('; ')}`)
+const mHover = ref<{ x: number; pts: { key: string; y: number; colour: string }[] } | null>(null)
+function mMove(e: PointerEvent) {
+  const r = (e.currentTarget as SVGSVGElement).getBoundingClientRect()
+  const x = (e.clientX - r.left) * (MW.value / r.width)
+  if (x < ML || x > MW.value - MR.value + 4 || !mRaw.value.length) { mLeave(); return }
+  const t = mT0.value + ((x - ML) / (MW.value - ML - MR.value)) * (nowT.value - mT0.value)
+  // snap to the nearest point of the longest series, then read every series there
+  const grid = mRaw.value.reduce((a, s) => (s.data.length > a.length ? s.data : a), [] as [number, number][])
+  let snap = grid[0][0]
+  for (const [ts] of grid) if (Math.abs(ts - t) < Math.abs(snap - t)) snap = ts
+  const pts: { key: string; y: number; colour: string }[] = []
+  const rows: { text: string; color: string; v: number }[] = []
+  for (const s of mRaw.value) {
+    let near: [number, number] | null = null
+    for (const pt of s.data) if (!near || Math.abs(pt[0] - snap) < Math.abs(near[0] - snap)) near = pt
+    if (!near || Math.abs(near[0] - snap) > 13 * 3600) continue
+    pts.push({ key: s.key, y: my(near[1]), colour: s.colour })
+    rows.push({ text: `${fmtPct(near[1])}  ${s.name}`, color: s.colour, v: near[1] })
+  }
+  rows.sort((a, b) => b.v - a.v)
+  const poll = mPolls.value.find(p => Math.abs(p.t - snap) < 18 * 3600)
+  mHover.value = { x: mx(snap), pts }
+  show(e, fmtDateTime(new Date(snap * 1000).toISOString()), [...rows.map(({ text, color }) => ({ text, color })), ...(poll ? [{ text: `Straw poll ${poll.n}` }] : [])])
+}
+function mLeave() { mHover.value = null; hide() }
 
 // ---- timeline ----
 const KINDS = [

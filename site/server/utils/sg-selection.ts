@@ -7,6 +7,7 @@ import { readDataFile } from './data-file'
  */
 
 export const SG_FILE = 'sg-selection.json'
+export const SG_MARKETS_FILE = 'sg-markets.json'
 export const SG_OFFICIAL_URL = 'https://www.un.org/en/sg-selection-and-appointment'
 
 export interface SgSource { name: string; url: string }
@@ -157,6 +158,52 @@ export interface SgSelection {
   news: SgNewsItem[]
 }
 
+/** One person's price in a prediction market (scripts/fetch_sg_markets.py → sg-markets.json). */
+export interface SgMarketOutcome {
+  name: string                 // our name for the person when matched, else the market's
+  market_name: string
+  person_id: string | null     // official candidate or "also mentioned" id
+  race_status: 'candidate' | 'withdrawn' | 'selected' | 'mentioned' | null
+  price: number                // 0-1: bid/ask midpoint, or the last trade when the spread is over 0.10
+  bid: number | null
+  ask: number | null
+  last: number | null
+  spread: number | null
+  thin: boolean
+  change_1d: number | null
+  change_1w: number | null
+  volume: number
+  volume_24h: number
+  url: string
+  history: [number, number][]  // [unix seconds, price], every 12 h
+}
+
+export interface SgMarket {
+  source: 'Polymarket'
+  slug: string
+  title: string
+  url: string
+  opened: string | null
+  closes: string | null
+  volume: number
+  volume_24h: number
+  liquidity: number
+  open_interest: number
+  price_sum: number
+  outcomes: SgMarketOutcome[]
+}
+
+export interface SgMarkets {
+  _meta: {
+    updated_at: string
+    sources: SgSource[]
+    skipped: { title: string; url: string; liquidity: number; volume: number; reason: string }[]
+    unmatched: string[]
+    notes: string[]
+  }
+  markets: SgMarket[]
+}
+
 export function getSgSelection(): SgSelection | null {
   return readDataFile<SgSelection>(SG_FILE)
 }
@@ -185,6 +232,14 @@ export function findSgMentioned(query: string): SgAlsoMentioned | null {
   return d.also_mentioned.find(m => m.id === q.replace(/ /g, '-') || fold(m.name) === q)
     || d.also_mentioned.find(m => fold(m.name).split(' ').slice(1).some(t => t.length >= 3 && q.split(' ').includes(t)))
     || null
+}
+
+/** Prediction-market prices, without the hourly snapshot log the file also keeps. */
+export function getSgMarkets(): SgMarkets | null {
+  const d = readDataFile<SgMarkets & { snapshots?: unknown[] }>(SG_MARKETS_FILE)
+  if (!d) return null
+  const { snapshots: _s, ...rest } = d
+  return rest
 }
 
 export function getSgStrawPolls(): SgStrawPoll[] {
