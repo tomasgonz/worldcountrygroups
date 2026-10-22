@@ -10,8 +10,10 @@ Builds site/server/data/sg-markets.json from Polymarket's public APIs (no key, s
 
 Polymarket can list the same question more than once. Events with less than MIN_LIQUIDITY dollars
 on their order books are not shown (their prices are a handful of stray orders); they are named in
-_meta.skipped. The price shown follows Polymarket's own rule: the midpoint of bid and ask, or the
-last trade when the two are more than 10 points apart (such outcomes are flagged "thin").
+_meta.skipped. The price is the midpoint of the best bid and best ask, as in Polymarket's price
+history. Polymarket's site shows the last trade instead when the two are more than 10 points apart,
+but on a thin book one $3 trade then moves the figure by 30 points; such outcomes are flagged
+"thin" and keep their bid, ask and last trade.
 
 Market names are matched to the official candidates and "also mentioned" names in
 sg-selection.json, so the page can tie a price to a candidate.
@@ -47,7 +49,7 @@ KNOWN_SLUGS = ["next-secretary-general-of-the-united-nations"]  # found 2026-10-
 TITLE_RE = re.compile(r"secretary[- ]general of the (un|united nations)\b", re.I)
 
 MIN_LIQUIDITY = 10_000      # dollars on the order books for an event to be shown
-THIN_SPREAD = 0.10          # Polymarket shows the last trade instead of the midpoint above this gap
+THIN_SPREAD = 0.10          # a bid-ask gap above this marks a thin price
 HISTORY_FIDELITY = 720      # minutes between history points (12 h)
 MAX_SNAPSHOTS = 24 * 120    # hourly runs: about four months
 
@@ -172,10 +174,7 @@ def read_outcome(m, people, event_slug):
         return None
     bid, ask, last = num(m.get("bestBid")), num(m.get("bestAsk")), num(m.get("lastTradePrice"))
     spread = round(ask - bid, 4) if bid is not None and ask is not None else None
-    if spread is not None and spread <= THIN_SPREAD:
-        price = round((bid + ask) / 2, 4)
-    else:
-        price = last if last is not None else (round((bid + ask) / 2, 4) if spread is not None else None)
+    price = round((bid + ask) / 2, 4) if spread is not None else last
     if price is None:
         return None
     try:
@@ -284,8 +283,8 @@ def main():
             "notes": [
                 "Polymarket is a real-money prediction market. A price of 12¢ on a person means traders, on balance, "
                 "put roughly a 12% chance on that person becoming Secretary-General.",
-                f"Price shown: the midpoint of the best bid and best ask, or the last trade when they are more than "
-                f"{THIN_SPREAD * 100:.0f} points apart (Polymarket's own rule); such prices are marked thin.",
+                f"Price shown: the midpoint of the best bid and best ask. Where they are more than "
+                f"{THIN_SPREAD * 100:.0f} points apart the price is marked thin: few orders, and a small trade can move it.",
                 "The market resolves on who is appointed, not on straw polls. It is not a poll of Council members.",
             ],
         },

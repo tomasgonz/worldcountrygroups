@@ -250,7 +250,7 @@
         </div>
         <p class="text-sm text-primary-500 mb-4">
           Prices on <a :href="market.url" target="_blank" rel="noopener" class="underline decoration-dotted">Polymarket</a>, a real-money prediction market, read as the chance traders put on each person becoming Secretary-General.
-          They are bets, not votes, and a few trades can move them: where the best offers to buy and to sell are more than 10 points apart, the last trade is shown and the gap is drawn as a band.
+          They are bets, not votes. Each price is the midpoint between the best offer to buy and the best offer to sell; where those are more than 10 points apart the price is thin and the gap is drawn as a band.
         </p>
 
         <div class="grid gap-2 text-[10px] uppercase tracking-wider text-primary-400 mb-1" :style="{ gridTemplateColumns: M_COLS }">
@@ -311,7 +311,7 @@
                 <circle v-for="pt in mHover.pts" :key="pt.key" :cx="mHover.x" :cy="pt.y" r="4" :fill="pt.colour" stroke="#fff" stroke-width="2" />
               </g>
             </svg>
-            <p class="text-[11px] text-primary-400 mt-1">Every 12 hours since the market opened{{ market.opened ? ` (${fmtDate(market.opened)})` : '' }}, ending at the price shown above; the {{ mSeries.length }} highest-priced names. Polymarket records the midpoint, so thin prices can jump at the last point.</p>
+            <p class="text-[11px] text-primary-400 mt-1">Every 12 hours since the market opened{{ market.opened ? ` (${fmtDate(market.opened)})` : '' }}, up to the price shown above; the {{ mSeries.length }} highest-priced names.</p>
           </div>
           <div v-if="showMTable" class="overflow-x-auto">
             <table class="w-full text-sm">
@@ -343,6 +343,9 @@
           </template>
         </p>
       </section>
+
+      <!-- ================= FORECASTS: market, model, your own call ================= -->
+      <ElectionsSgForecast v-if="d.forecast" :sg="d" />
 
       <!-- ================= TIMELINE ================= -->
       <section class="bg-white rounded-2xl ring-1 ring-primary-200/70 p-5 sm:p-6">
@@ -507,6 +510,7 @@ interface SgData {
   also_mentioned: Mentioned[]
   news: News[]
   markets: Markets | null
+  forecast: unknown | null // rendered by SgForecast.vue
 }
 
 const OFFICIAL = 'https://www.un.org/en/sg-selection-and-appointment'
@@ -608,9 +612,10 @@ const sumNote = computed(() => {
 const mAria = (o: MOutcome) => `${o.name}: ${fmtPct(o.price)}${o.thin ? ', thin market' : ''}; ${fmtPts(o.change_1w)} points in a week`
 function tipMarket(o: MOutcome, e: MouseEvent | FocusEvent) {
   const lines: { text: string; color?: string }[] = [
-    { text: `${fmtPct(o.price)} ${o.thin ? 'last trade (buyers and sellers far apart)' : 'midpoint of bid and ask'}`, color: SLATE },
+    { text: `${fmtPct(o.price)} midpoint of bid and ask${o.thin ? ' (thin: far apart)' : ''}`, color: SLATE },
   ]
   if (o.bid != null && o.ask != null) lines.push({ text: `Best bid ${fmtPct(o.bid)} · best ask ${fmtPct(o.ask)}`, color: GREY })
+  if (o.last != null) lines.push({ text: `Last trade ${fmtPct(o.last)}` })
   if (o.change_1w != null) lines.push({ text: `${fmtPts(o.change_1d)} pts in a day · ${fmtPts(o.change_1w)} pts in a week` })
   lines.push({ text: `$${fmtMoney(o.volume)} traded on this name` })
   show(e, o.name, lines)

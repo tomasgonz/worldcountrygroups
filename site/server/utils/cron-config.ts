@@ -66,6 +66,7 @@ const DEFAULT_JOBS: Def[] = [
   d('fetch-un-elections', 'UN elections (Security Council, PGA)', 'scripts/fetch_un_elections.py', '40 5 * * *', true, ['un-elections.json'], 72, 10),
   d('fetch-sg-selection', 'UN Secretary-General selection', 'scripts/fetch_sg_selection.py', '40 * * * *', true, ['sg-selection.json'], 8, 10),
   d('fetch-sg-markets', 'UN Secretary-General race: prediction market (Polymarket)', 'scripts/fetch_sg_markets.py', '45 * * * *', true, ['sg-markets.json'], 4, 5),
+  d('model-sg-forecast', 'UN Secretary-General race: forecast model', 'scripts/model_sg_forecast.py', '50 * * * *', true, ['sg-forecast.json'], 4, 5),
   d('fetch-fifth-committee', 'UN budget, reform and Fifth Committee', 'scripts/fetch_fifth_committee.py', '20 */4 * * *', true, ['fifth-committee.json'], 10, 20),
   d('fetch-un-leadership', 'UN leadership: office holders and statements', 'scripts/fetch_un_leadership.py', '15 */6 * * *', true, ['un-leadership.json'], 14, 20),
   d('build-un-briefing', 'UN Monitor: Council analysis (AI)', 'scripts/refresh_site_data.py un-briefing', '50 */4 * * *', true, [], null, 15),

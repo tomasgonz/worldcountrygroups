@@ -8,6 +8,7 @@ import { readDataFile } from './data-file'
 
 export const SG_FILE = 'sg-selection.json'
 export const SG_MARKETS_FILE = 'sg-markets.json'
+export const SG_FORECAST_FILE = 'sg-forecast.json'
 export const SG_OFFICIAL_URL = 'https://www.un.org/en/sg-selection-and-appointment'
 
 export interface SgSource { name: string; url: string }
@@ -204,6 +205,30 @@ export interface SgMarkets {
   markets: SgMarket[]
 }
 
+/** The rule-based forecast (scripts/model_sg_forecast.py → sg-forecast.json). '_other' = someone not yet nominated. */
+export interface SgForecastRow {
+  id: string
+  name: string
+  prob: number
+  weight: number | null
+  p_reach_9: number | null
+  p_no_veto: number | null
+  trend: number | null
+  vetoes: number | null        // P5 discourages: counted (colour-coded poll) or expected
+  vetoes_known: boolean
+  polled: boolean
+  basis: string
+}
+
+export interface SgForecast {
+  _meta: { updated_at: string; params: Record<string, number>; basis: string; selected: string | null; notes: string[] }
+  current: SgForecastRow[]
+  someone_else: number
+  by_poll: { n: number; date: string; colour_coded: boolean; probs: Record<string, number> }[]
+  backtest: Record<string, { winner: string; source: string; by_poll: { n: number; date: string; p_winner: number; rank: number; leader: string; p_leader: number; p_other: number }[] }>
+  history?: { at: string; probs: Record<string, number>; basis_poll: number | null }[]
+}
+
 export function getSgSelection(): SgSelection | null {
   return readDataFile<SgSelection>(SG_FILE)
 }
@@ -239,6 +264,14 @@ export function getSgMarkets(): SgMarkets | null {
   const d = readDataFile<SgMarkets & { snapshots?: unknown[] }>(SG_MARKETS_FILE)
   if (!d) return null
   const { snapshots: _s, ...rest } = d
+  return rest
+}
+
+/** The model's forecast, without its change log (used for scoring). */
+export function getSgForecast(): SgForecast | null {
+  const d = readDataFile<SgForecast>(SG_FORECAST_FILE)
+  if (!d) return null
+  const { history: _h, ...rest } = d
   return rest
 }
 
