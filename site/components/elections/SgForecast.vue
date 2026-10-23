@@ -2,7 +2,7 @@
   <section class="bg-white rounded-2xl ring-1 ring-primary-200/70 p-5 sm:p-6">
     <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1">
       <h3 class="font-serif text-xl font-bold text-primary-900">Forecasts</h3>
-      <span class="text-xs text-primary-400">Model as of {{ f._meta.basis }}</span>
+      <span class="text-xs text-primary-400">Model: {{ (f._meta.runs || 0).toLocaleString('en-GB') }} simulated races, as of {{ f._meta.basis }}</span>
     </div>
     <p class="text-sm text-primary-500 mb-3">
       The betting market and a model built on the Council's own rule: a candidate needs 9 of 15 votes and no veto from a permanent member.
@@ -44,6 +44,9 @@
     <p v-if="marketOther != null" class="mt-2 text-[11px] text-primary-400">
       Market "someone else": what its prices leave over after the official candidates, including withdrawn and unlisted names.
     </p>
+    <p v-if="f._meta.deadlock_share != null" class="mt-1 text-[11px] text-primary-400">
+      In {{ pct(f._meta.deadlock_share) }} of the simulated races nobody had 9 votes and no veto left by mid-December; the deadlock rule decided those (see how the model works).
+    </p>
 
     <!-- model after each poll -->
     <details class="mt-5 group">
@@ -82,12 +85,17 @@
         <li v-for="(b, year) in f.backtest" :key="year">
           <span class="font-medium text-primary-800">{{ year }}, {{ b.winner }}:</span>
           {{ b.by_poll.map(s => pct(s.p_winner)).join(' → ') }} after each straw poll<template v-if="b.by_poll.every(s => s.rank === 1)">; ranked first every time</template>.
+          <span v-if="b.by_poll[0]?.closed_form_p_winner != null" class="text-primary-400">Closed form: {{ b.by_poll.map(s => pct(s.closed_form_p_winner!)).join(' → ') }}.</span>
           <a :href="b.source" target="_blank" rel="noopener" class="text-primary-400 underline decoration-dotted">poll table</a>
         </li>
       </ul>
       <p class="mt-2 text-[11px] text-primary-400">
-        Settings: {{ Object.entries(f._meta.params).map(([k, v]) => `${k.replace(/_/g, ' ')} ${v}`).join(' · ') }}.
+        Judgement settings: {{ Object.entries(f._meta.params).map(([k, v]) => `${k.replace(/_/g, ' ')} ${v}`).join(' · ') }}.
+        <template v-if="f._meta.fit">Fitted: drift {{ f._meta.fit.tau }} and poll noise {{ f._meta.fit.s }} votes.</template>
         Two races are a small check: both front-runners led from the first poll, so the test says little about deadlocks.
+      </p>
+      <p v-if="closedForm.length" class="mt-1 text-[11px] text-primary-400">
+        Closed form, without simulation (Beta-averaged veto lifts, fixed newcomer weights): {{ closedForm.join(' · ') }}.
       </p>
     </details>
 
@@ -163,13 +171,21 @@
 
 <script setup lang="ts">
 // Rows mirror server/utils/sg-selection.ts (SgForecast) and sg-my-forecast.ts (MyForecast).
-interface FRow { id: string; name: string; prob: number; p_reach_9: number | null; p_no_veto: number | null; vetoes: number | null; vetoes_known: boolean; polled: boolean; basis: string }
+interface FRow {
+  id: string; name: string; prob: number; se: number | null; p_viable: number | null; p_by_rule: number | null
+  p_reach_9: number | null; level: number | null; level_sd: number | null; latest_e: number | null
+  vetoes: number | null; vetoes_known: boolean; polled: boolean; basis: string; closed_form: number | null
+}
 interface Forecast {
-  _meta: { updated_at: string; params: Record<string, number>; basis: string; notes: string[] }
+  _meta: {
+    updated_at: string; params: Record<string, number | string>; basis: string; notes: string[]
+    runs?: number; deadlock_share?: number; fit?: { tau: number; s: number }
+  }
   current: FRow[]
   someone_else: number
+  closed_form?: { someone_else: number }
   by_poll: { n: number; date: string; probs: Record<string, number> }[]
-  backtest: Record<string, { winner: string; source: string; by_poll: { n: number; p_winner: number; rank: number }[] }>
+  backtest: Record<string, { winner: string; source: string; by_poll: { n: number; p_winner: number; rank: number; closed_form_p_winner?: number }[] }>
 }
 interface Mine { at: string; probs: Record<string, number>; other: number; note?: string }
 interface Score { resolved: boolean; winner: { id: string; name: string } | null; from?: string | null; to?: string | null; days?: number; scores?: { who: string; label: string; brier: number; p_winner: number }[] }
@@ -294,13 +310,21 @@ const rowAria = (r: Row) => series.value.map(s => `${s.label} ${r[s.key] != null
 function tipRow(r: Row, e: MouseEvent | FocusEvent) {
   const lines: { text: string; color?: string }[] = series.value.map(s => ({ text: `${r[s.key] != null ? pct(r[s.key]!) : '–'} ${s.label}`, color: s.colour }))
   const m = r.detail
-  if (m?.polled && m.p_reach_9 != null && m.p_no_veto != null) {
-    lines.push({ text: `Model: ${pct(m.p_reach_9)} chance of 9 votes × ${pct(m.p_no_veto)} chance every P5 veto is lifted` })
+  if (m?.p_viable != null) {
+    lines.push({ text: `Model: clears 9 votes and every veto in ${pct(m.p_viable)} of runs; wins ${pct(m.p_by_rule || 0)} more through the deadlock rule` })
+  }
+  if (m?.polled && m.level != null && m.level_sd != null) {
+    lines.push({ text: `Support, polls pooled: ${m.level.toFixed(1)} ± ${m.level_sd.toFixed(1)} votes (latest poll ${m.latest_e})` })
   } else if (m && !m.polled) {
-    lines.push({ text: 'Model: not yet polled, weighted as a new entrant' })
+    lines.push({ text: 'Not yet polled: support and vetoes drawn like past late entrants' })
   }
   show(e, r.name, lines)
 }
+
+const closedForm = computed(() => [
+  ...f.value.current.filter(r => (r.closed_form ?? 0) >= 0.005).sort((a, b) => (b.closed_form ?? 0) - (a.closed_form ?? 0)).map(r => `${r.name} ${pct(r.closed_form!)}`),
+  ...(f.value.closed_form ? [`someone else ${pct(f.value.closed_form.someone_else)}`] : []),
+])
 
 // ---- model by poll ----
 const pollIds = computed(() => {

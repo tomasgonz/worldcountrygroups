@@ -250,7 +250,7 @@
         </div>
         <p class="text-sm text-primary-500 mb-4">
           Prices on <a :href="market.url" target="_blank" rel="noopener" class="underline decoration-dotted">Polymarket</a>, a real-money prediction market, read as the chance traders put on each person becoming Secretary-General.
-          They are bets, not votes. Each price is the midpoint between the best offer to buy and the best offer to sell; where those are more than 10 points apart the price is thin and the gap is drawn as a band.
+          They are bets, not votes. Each price is the midpoint between the best offer to buy and the best offer to sell. Where those are more than 10 points apart the price is thin: the gap is drawn as a band, and the price is the average of the latest trades worth $25 together.
         </p>
 
         <div class="grid gap-2 text-[10px] uppercase tracking-wider text-primary-400 mb-1" :style="{ gridTemplateColumns: M_COLS }">
@@ -493,6 +493,7 @@ interface News { title: string; url: string; outlet: string | null; date: string
 interface MOutcome {
   name: string; market_name: string; person_id: string | null; race_status: string | null
   price: number; bid: number | null; ask: number | null; last: number | null; spread: number | null; thin: boolean
+  price_basis?: string; trades_usd?: number | null
   change_1d: number | null; change_1w: number | null; volume: number; volume_24h: number; url: string; history: [number, number][]
 }
 interface Market { slug: string; title: string; url: string; opened: string | null; volume: number; volume_24h: number; liquidity: number; price_sum: number; outcomes: MOutcome[] }
@@ -612,7 +613,7 @@ const sumNote = computed(() => {
 const mAria = (o: MOutcome) => `${o.name}: ${fmtPct(o.price)}${o.thin ? ', thin market' : ''}; ${fmtPts(o.change_1w)} points in a week`
 function tipMarket(o: MOutcome, e: MouseEvent | FocusEvent) {
   const lines: { text: string; color?: string }[] = [
-    { text: `${fmtPct(o.price)} midpoint of bid and ask${o.thin ? ' (thin: far apart)' : ''}`, color: SLATE },
+    { text: o.price_basis === 'recent trades' ? `${fmtPct(o.price)} average of the latest trades ($${Math.round(o.trades_usd || 0)})` : `${fmtPct(o.price)} midpoint of bid and ask`, color: SLATE },
   ]
   if (o.bid != null && o.ask != null) lines.push({ text: `Best bid ${fmtPct(o.bid)} · best ask ${fmtPct(o.ask)}`, color: GREY })
   if (o.last != null) lines.push({ text: `Last trade ${fmtPct(o.last)}` })

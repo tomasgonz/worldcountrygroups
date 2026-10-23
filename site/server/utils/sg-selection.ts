@@ -205,27 +205,41 @@ export interface SgMarkets {
   markets: SgMarket[]
 }
 
-/** The rule-based forecast (scripts/model_sg_forecast.py → sg-forecast.json). '_other' = someone not yet nominated. */
+/** The simulated forecast (scripts/model_sg_forecast.py → sg-forecast.json). '_other' = someone not yet nominated. */
 export interface SgForecastRow {
   id: string
   name: string
-  prob: number
-  weight: number | null
+  prob: number                 // share of simulated races won
+  se: number                   // Monte Carlo standard error
+  p_viable: number             // share of runs with 9+ votes and no veto left
+  p_by_rule: number            // share of runs won through the deadlock rule
+  polled: boolean
+  latest_e: number | null
+  level: number | null         // support, polls pooled (Kalman filter): mean and sd
+  level_sd: number | null
+  final_sd: number | null
   p_reach_9: number | null
-  p_no_veto: number | null
-  trend: number | null
   vetoes: number | null        // P5 discourages: counted (colour-coded poll) or expected
   vetoes_known: boolean
-  polled: boolean
+  closed_form: number | null   // the same race without simulation
   basis: string
 }
 
 export interface SgForecast {
-  _meta: { updated_at: string; params: Record<string, number>; basis: string; selected: string | null; notes: string[] }
+  _meta: {
+    updated_at: string; method: string; basis: string; selected: string | null; notes: string[]
+    runs: number; deadlock_share: number; settled_share: number; polls_left: number
+    fit: { tau: number; s: number; loglik: number }
+    veto_prior: { a: number; b: number; mean: number }; deadlock_prior: { a: number; b: number }
+    entrant_prior: { mean: number; sd: number; p_a: number; p_b: number; n: number }
+    params: Record<string, number | string>
+  }
   current: SgForecastRow[]
   someone_else: number
+  someone_else_se: number
+  closed_form: { someone_else: number }
   by_poll: { n: number; date: string; colour_coded: boolean; probs: Record<string, number> }[]
-  backtest: Record<string, { winner: string; source: string; by_poll: { n: number; date: string; p_winner: number; rank: number; leader: string; p_leader: number; p_other: number }[] }>
+  backtest: Record<string, { winner: string; source: string; by_poll: { n: number; date: string; p_winner: number; rank: number; leader: string; p_leader: number; p_other: number; closed_form_p_winner: number }[] }>
   history?: { at: string; probs: Record<string, number>; basis_poll: number | null }[]
 }
 

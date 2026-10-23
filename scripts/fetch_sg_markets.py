@@ -7,13 +7,16 @@ Builds site/server/data/sg-markets.json from Polymarket's public APIs (no key, s
     events and reads each outcome's best bid, best ask, last trade, volume and price change.
   * CLOB API (clob.polymarket.com/prices-history): the price history of each outcome, every 12 h
     since the market opened.
+  * Data API (data-api.polymarket.com/trades): recent trades, for outcomes with a thin order book.
 
 Polymarket can list the same question more than once. Events with less than MIN_LIQUIDITY dollars
 on their order books are not shown (their prices are a handful of stray orders); they are named in
-_meta.skipped. The price is the midpoint of the best bid and best ask, as in Polymarket's price
-history. Polymarket's site shows the last trade instead when the two are more than 10 points apart,
-but on a thin book one $3 trade then moves the figure by 30 points; such outcomes are flagged
-"thin" and keep their bid, ask and last trade.
+_meta.skipped. The price is the midpoint of the best bid and best ask. When the two are more than
+10 points apart (flagged "thin") neither the midpoint nor the last trade can be trusted: an empty
+book put Otunnu's midpoint at 20% against trades near 2%, and one 3-share trade moved Nusseibeh's
+last price from 43% to 11%. Thin prices are therefore the volume-weighted average of the latest
+trades in the Yes shares worth THIN_TRADES_USD together (within THIN_TRADES_DAYS), kept inside
+the current bid and ask.
 
 Market names are matched to the official candidates and "also mentioned" names in
 sg-selection.json, so the page can tie a price to a candidate.
@@ -43,6 +46,7 @@ SG_FILE = os.path.join(DATA_DIR, "sg-selection.json")
 UA = "WorldCountryGroups/1.0 (+https://worldcountrygroups.exe.xyz)"
 GAMMA = "https://gamma-api.polymarket.com"
 CLOB = "https://clob.polymarket.com"
+DATA_API = "https://data-api.polymarket.com"
 EVENT_URL = "https://polymarket.com/event/"
 SEARCH_TERMS = ["Secretary-General of the United Nations", "Secretary-General of the UN"]
 KNOWN_SLUGS = ["next-secretary-general-of-the-united-nations"]  # found 2026-10-22; searched for as well
@@ -50,6 +54,8 @@ TITLE_RE = re.compile(r"secretary[- ]general of the (un|united nations)\b", re.I
 
 MIN_LIQUIDITY = 10_000      # dollars on the order books for an event to be shown
 THIN_SPREAD = 0.10          # a bid-ask gap above this marks a thin price
+THIN_TRADES_USD = 25        # thin prices: average the latest trades worth this much together
+THIN_TRADES_DAYS = 30
 HISTORY_FIDELITY = 720      # minutes between history points (12 h)
 MAX_SNAPSHOTS = 24 * 120    # hourly runs: about four months
 
@@ -164,6 +170,30 @@ def price_history(token_id):
     return [[int(x["t"]), round(float(x["p"]), 4)] for x in res.get("history") or [] if "t" in x and "p" in x]
 
 
+def recent_trades_price(condition_id):
+    """Volume-weighted price of the latest Yes-share trades worth THIN_TRADES_USD together: (price, usd, n) or None."""
+    try:
+        trades = get_json(f"{DATA_API}/trades?{urllib.parse.urlencode({'market': condition_id, 'limit': 200})}")
+    except RuntimeError as e:
+        log(f"trades failed for {condition_id[:12]}…: {e}")
+        return None
+    since = time.time() - THIN_TRADES_DAYS * 86400
+    yes = sorted((t for t in trades or [] if t.get("outcome") == "Yes" and (t.get("timestamp") or 0) >= since),
+                 key=lambda t: -t["timestamp"])
+    shares = usd = 0.0
+    n = 0
+    for t in yes:
+        p, s = num(t.get("price")), num(t.get("size"))
+        if p is None or not s:
+            continue
+        shares += s
+        usd += p * s
+        n += 1
+        if usd >= THIN_TRADES_USD:
+            break
+    return (usd / shares, usd, n) if shares else None
+
+
 def read_outcome(m, people, event_slug):
     """One person's Yes market, or None for placeholders ("Person X", "Other") and dead outcomes."""
     name = (m.get("groupItemTitle") or "").strip()
@@ -174,7 +204,15 @@ def read_outcome(m, people, event_slug):
         return None
     bid, ask, last = num(m.get("bestBid")), num(m.get("bestAsk")), num(m.get("lastTradePrice"))
     spread = round(ask - bid, 4) if bid is not None and ask is not None else None
-    price = round((bid + ask) / 2, 4) if spread is not None else last
+    thin = spread is None or spread > THIN_SPREAD
+    price, basis, vwap = (round((bid + ask) / 2, 4), "midpoint", None) if spread is not None else (last, "last trade", None)
+    if thin and m.get("conditionId"):
+        vwap = recent_trades_price(m["conditionId"])
+        if vwap:
+            price = vwap[0]
+            if bid is not None and ask is not None:
+                price = min(max(price, bid), ask)
+            price, basis = round(price, 4), "recent trades"
     if price is None:
         return None
     try:
@@ -195,7 +233,10 @@ def read_outcome(m, people, event_slug):
         "race_status": race,
         "price": round(price, 4),
         "bid": bid, "ask": ask, "last": last, "spread": spread,
-        "thin": spread is None or spread > THIN_SPREAD,
+        "thin": thin,
+        "price_basis": basis,
+        "trades_usd": round(vwap[1], 2) if vwap else None,
+        "trades_n": vwap[2] if vwap else None,
         "change_1d": num(m.get("oneDayPriceChange")),
         "change_1w": num(m.get("oneWeekPriceChange")),
         "volume": round(volume),
@@ -284,7 +325,8 @@ def main():
                 "Polymarket is a real-money prediction market. A price of 12¢ on a person means traders, on balance, "
                 "put roughly a 12% chance on that person becoming Secretary-General.",
                 f"Price shown: the midpoint of the best bid and best ask. Where they are more than "
-                f"{THIN_SPREAD * 100:.0f} points apart the price is marked thin: few orders, and a small trade can move it.",
+                f"{THIN_SPREAD * 100:.0f} points apart (thin), the average price of the latest trades worth "
+                f"${THIN_TRADES_USD} together, kept between the bid and the ask.",
                 "The market resolves on who is appointed, not on straw polls. It is not a poll of Council members.",
             ],
         },
