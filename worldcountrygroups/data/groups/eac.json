@@ -2,7 +2,7 @@
   "gid": "eac",
   "acronym": "EAC",
   "name": "East African Community",
-  "description": "The East African Community (EAC) is a regional intergovernmental organisation of 6 Partner States: the Republics of Burundi, Kenya, Rwanda, South Sudan, the United Republic of Tanzania, and the Republic of Uganda, with its headquarters in Arusha, Tanzania.",
+  "description": "The East African Community (EAC) is a regional intergovernmental organisation of 8 Partner States: the Republics of Burundi, Kenya, Rwanda, South Sudan, the United Republic of Tanzania, and the Republic of Uganda, with its headquarters in Arusha, Tanzania. South Sudan joined in 2016, the Democratic Republic of the Congo in 2022 and Somalia in 2024.",
   "classifier": "EAC",
   "domains": [
     "Africa"
@@ -12,6 +12,11 @@
       "name": "Burundi",
       "iso2": "BI",
       "iso3": "BDI"
+    },
+    {
+      "name": "Congo, Dem. Rep.",
+      "iso2": "CD",
+      "iso3": "COD"
     },
     {
       "name": "Kenya",
@@ -24,6 +29,16 @@
       "iso3": "RWA"
     },
     {
+      "name": "Somalia",
+      "iso2": "SO",
+      "iso3": "SOM"
+    },
+    {
+      "name": "South Sudan",
+      "iso2": "SS",
+      "iso3": "SSD"
+    },
+    {
       "name": "Tanzania",
       "iso2": "TZ",
       "iso3": "TZA"
@@ -33,5 +48,6 @@
       "iso2": "UG",
       "iso3": "UGA"
     }
-  ]
+  ],
+  "updated": "2026-10-30"
 }

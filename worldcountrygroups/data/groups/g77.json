@@ -175,8 +175,8 @@
     },
     {
       "name": "Congo, Dem. Rep.",
-      "iso2": "",
-      "iso3": ""
+      "iso2": "CD",
+      "iso3": "COD"
     },
     {
       "name": "Djibouti",
@@ -678,5 +678,6 @@
       "iso2": "ZW",
       "iso3": "ZWE"
     }
-  ]
+  ],
+  "updated": "2026-10-30"
 }

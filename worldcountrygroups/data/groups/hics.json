@@ -79,9 +79,14 @@
       "iso3": "CHE"
     },
     {
-      "name": "Channel Islands",
-      "iso2": "",
-      "iso3": ""
+      "name": "Jersey",
+      "iso2": "JE",
+      "iso3": "JEY"
+    },
+    {
+      "name": "Guernsey",
+      "iso2": "GG",
+      "iso3": "GGY"
     },
     {
       "name": "Chile",
@@ -250,8 +255,8 @@
     },
     {
       "name": "Macao SAR, China",
-      "iso2": "",
-      "iso3": ""
+      "iso2": "MO",
+      "iso3": "MAC"
     },
     {
       "name": "St. Martin (French part)",
@@ -419,9 +424,10 @@
       "iso3": "VGB"
     },
     {
-      "name": "Virgin Islands (U.S.)",
-      "iso2": "",
-      "iso3": ""
+      "name": "United States Virgin Islands",
+      "iso2": "VI",
+      "iso3": "VIR"
     }
-  ]
+  ],
+  "updated": "2026-10-30"
 }

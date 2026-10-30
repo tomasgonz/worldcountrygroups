@@ -399,7 +399,7 @@ def race_at(sg, day, polls):
 
 
 def explain(row, latest):
-    if not row["polled"]:
+    if not row["polled"] or not latest:
         return "Not yet in a straw poll: drawn like past late entrants"
     head = f"Poll {latest['n']}: {latest['encourage']} for, {latest['discourage']} against"
     if row["vetoes_known"]:

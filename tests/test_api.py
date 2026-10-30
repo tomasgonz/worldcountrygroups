@@ -38,7 +38,7 @@ def test_get_group_countries():
     resp = client.get("/groups/brics/countries")
     assert resp.status_code == 200
     data = resp.json()
-    assert len(data) == 5
+    assert len(data) == 10
     names = {c["name"] for c in data}
     assert "Brazil" in names
 

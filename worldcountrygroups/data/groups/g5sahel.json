@@ -2,7 +2,7 @@
   "gid": "g5sahel",
   "acronym": "G5 Sahel",
   "name": "G5 Sahel",
-  "description": "An institutional framework for security and development coordination in the Sahel region, founded in 2014.",
+  "description": "An institutional framework for security and development coordination in the Sahel region, founded in 2014. Mali withdrew in May 2022 and Burkina Faso and Niger in December 2023; Chad and Mauritania then dissolved the organisation on 6 December 2023. Membership shown as at dissolution.",
   "classifier": "G5 Sahel",
   "domains": [
     "Africa",
@@ -34,5 +34,6 @@
       "iso2": "NE",
       "iso3": "NER"
     }
-  ]
+  ],
+  "updated": "2026-10-30"
 }

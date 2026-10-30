@@ -7,7 +7,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:00:01.750233+00:00",
+      "lastFetch": "2026-10-30T19:28:32.667128+00:00",
       "lastError": null,
       "articleCount": 30
     },
@@ -18,7 +18,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-06T12:00:06.495555+00:00",
+      "lastFetch": "2026-10-30T19:28:33.918387+00:00",
       "lastError": null,
       "articleCount": 1
     },
@@ -40,9 +40,9 @@
       "type": "atom",
       "enabled": true,
       "category": "government",
-      "lastFetch": "2026-10-06T12:00:06.796280+00:00",
+      "lastFetch": "2026-10-30T19:28:33.991114+00:00",
       "lastError": null,
-      "articleCount": 20
+      "articleCount": 19
     },
     {
       "id": "al-jazeera",
@@ -51,7 +51,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-06T12:00:06.908904+00:00",
+      "lastFetch": "2026-10-30T19:28:34.103879+00:00",
       "lastError": null,
       "articleCount": 25
     },
@@ -62,7 +62,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-06T12:00:07.118844+00:00",
+      "lastFetch": "2026-10-30T19:28:34.317551+00:00",
       "lastError": null,
       "articleCount": 96
     },
@@ -73,7 +73,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:00:07.358589+00:00",
+      "lastFetch": "2026-10-30T19:28:34.996173+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -84,7 +84,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:00:08.026052+00:00",
+      "lastFetch": "2026-10-30T19:28:35.694621+00:00",
       "lastError": null,
       "articleCount": 20
     },
@@ -95,7 +95,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-06T12:00:09.290848+00:00",
+      "lastFetch": "2026-10-30T19:28:36.849699+00:00",
       "lastError": null,
       "articleCount": 15
     },
@@ -106,7 +106,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-06T12:00:09.440503+00:00",
+      "lastFetch": "2026-10-30T19:28:37.012490+00:00",
       "lastError": null,
       "articleCount": 50
     },
@@ -117,7 +117,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-06T12:00:10.944837+00:00",
+      "lastFetch": "2026-10-30T19:28:38.405946+00:00",
       "lastError": null,
       "articleCount": 12
     },
@@ -128,7 +128,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-06T12:00:11.338995+00:00",
+      "lastFetch": "2026-10-30T19:28:38.822487+00:00",
       "lastError": null,
       "articleCount": 20
     },
@@ -139,7 +139,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-06T12:00:11.477469+00:00",
+      "lastFetch": "2026-10-30T19:28:38.978781+00:00",
       "lastError": null,
       "articleCount": 24
     },
@@ -150,9 +150,9 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-06T12:00:11.818344+00:00",
+      "lastFetch": "2026-10-30T19:28:39.307240+00:00",
       "lastError": null,
-      "articleCount": 134
+      "articleCount": 126
     },
     {
       "id": "google-news-diplomacy",
@@ -161,9 +161,9 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-06T12:00:13.446954+00:00",
+      "lastFetch": "2026-10-30T19:28:40.927883+00:00",
       "lastError": null,
-      "articleCount": 80
+      "articleCount": 92
     },
     {
       "id": "us-state-dept",
@@ -172,7 +172,7 @@
       "type": "state-sitemap",
       "enabled": true,
       "category": "government",
-      "lastFetch": "2026-10-06T12:00:20.494479+00:00",
+      "lastFetch": "2026-10-30T19:28:42.259487+00:00",
       "lastError": null,
       "articleCount": 20
     },
@@ -184,7 +184,7 @@
       "userAgent": "browser",
       "enabled": true,
       "category": "government",
-      "lastFetch": "2026-10-06T12:00:22.174074+00:00",
+      "lastFetch": "2026-10-30T19:28:44.059588+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -206,7 +206,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:00:22.537518+00:00",
+      "lastFetch": "2026-10-30T19:28:44.480481+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -217,7 +217,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-06T12:00:22.603211+00:00",
+      "lastFetch": "2026-10-30T19:28:44.570617+00:00",
       "lastError": null,
       "articleCount": 25
     },
@@ -228,7 +228,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-06T12:00:30.843264+00:00",
+      "lastFetch": "2026-10-30T19:28:50.633898+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -251,7 +251,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:00:30.954721+00:00",
+      "lastFetch": "2026-10-30T19:28:50.707415+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -262,7 +262,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-06T12:00:32.558890+00:00",
+      "lastFetch": "2026-10-30T19:28:52.422513+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -273,9 +273,9 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-06T12:00:34.611045+00:00",
+      "lastFetch": "2026-10-30T19:28:54.120286+00:00",
       "lastError": null,
-      "articleCount": 100
+      "articleCount": 76
     },
     {
       "id": "geneva-solutions",
@@ -284,9 +284,9 @@
       "type": "news-sitemap",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:00:36.986642+00:00",
+      "lastFetch": "2026-10-30T19:29:14.390086+00:00",
       "lastError": null,
-      "articleCount": 4
+      "articleCount": 16
     },
     {
       "id": "un-reform",
@@ -295,9 +295,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:00:38.502815+00:00",
+      "lastFetch": "2026-10-30T19:29:15.862226+00:00",
       "lastError": null,
-      "articleCount": 69
+      "articleCount": 74
     },
     {
       "id": "un-budget",
@@ -306,9 +306,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:00:40.147303+00:00",
+      "lastFetch": "2026-10-30T19:29:17.187696+00:00",
       "lastError": null,
-      "articleCount": 99
+      "articleCount": 23
     },
     {
       "id": "un-development",
@@ -317,9 +317,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:00:41.786899+00:00",
+      "lastFetch": "2026-10-30T19:29:18.724841+00:00",
       "lastError": null,
-      "articleCount": 99
+      "articleCount": 43
     },
     {
       "id": "oas",
@@ -328,9 +328,9 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-06T12:00:43.634703+00:00",
+      "lastFetch": "2026-10-30T19:29:20.086874+00:00",
       "lastError": null,
-      "articleCount": 99
+      "articleCount": 26
     },
     {
       "id": "arab-league",
@@ -339,9 +339,9 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-06T12:00:45.247574+00:00",
+      "lastFetch": "2026-10-30T19:29:21.536864+00:00",
       "lastError": null,
-      "articleCount": 99
+      "articleCount": 53
     },
     {
       "id": "osce",
@@ -350,9 +350,9 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-06T12:00:46.838748+00:00",
+      "lastFetch": "2026-10-30T19:29:23.122101+00:00",
       "lastError": null,
-      "articleCount": 99
+      "articleCount": 98
     },
     {
       "id": "sco",
@@ -361,7 +361,7 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-06T12:00:48.419041+00:00",
+      "lastFetch": "2026-10-30T19:29:24.739968+00:00",
       "lastError": null,
       "articleCount": 99
     },
@@ -372,9 +372,9 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-06T12:00:50.157064+00:00",
+      "lastFetch": "2026-10-30T19:29:26.145660+00:00",
       "lastError": null,
-      "articleCount": 99
+      "articleCount": 26
     },
     {
       "id": "oic",
@@ -383,9 +383,9 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-06T12:00:51.789199+00:00",
+      "lastFetch": "2026-10-30T19:29:27.779922+00:00",
       "lastError": null,
-      "articleCount": 99
+      "articleCount": 100
     },
     {
       "id": "global-policy-forum",
@@ -394,7 +394,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:00:52.848477+00:00",
+      "lastFetch": "2026-10-30T19:29:28.821896+00:00",
       "lastError": null,
       "articleCount": 2
     },
@@ -405,7 +405,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:00:54.396950+00:00",
+      "lastFetch": "2026-10-30T19:29:30.384592+00:00",
       "lastError": null,
       "articleCount": 93
     },
@@ -416,9 +416,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:00:55.772063+00:00",
+      "lastFetch": "2026-10-30T19:29:31.751024+00:00",
       "lastError": null,
-      "articleCount": 24
+      "articleCount": 19
     },
     {
       "id": "un-desa-sdgs",
@@ -427,20 +427,20 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:00:57.737509+00:00",
+      "lastFetch": "2026-10-30T19:29:33.750316+00:00",
       "lastError": null,
       "articleCount": 9
     },
     {
       "id": "whats-in-blue",
-      "name": "Security Council Report: What's in Blue",
-      "url": "https://www.securitycouncilreport.org/whatsinblue/feed",
+      "name": "Security Council Report (via Google News)",
+      "url": "https://news.google.com/rss/search?q=site%3Asecuritycouncilreport.org+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen",
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:00:58.235607+00:00",
+      "lastFetch": "2026-10-30T19:29:34.951157+00:00",
       "lastError": null,
-      "articleCount": 10
+      "articleCount": 12
     },
     {
       "id": "ipi-global-observatory",
@@ -449,7 +449,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:01:00.027961+00:00",
+      "lastFetch": "2026-10-30T19:29:36.412415+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -460,7 +460,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:01:01.646351+00:00",
+      "lastFetch": "2026-10-30T19:29:38.723270+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -471,7 +471,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:01:02.657129+00:00",
+      "lastFetch": "2026-10-30T19:29:39.953811+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -482,7 +482,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:01:02.816437+00:00",
+      "lastFetch": "2026-10-30T19:29:40.159591+00:00",
       "lastError": null,
       "articleCount": 50
     },
@@ -493,9 +493,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:01:04.637401+00:00",
+      "lastFetch": "2026-10-30T19:29:41.801071+00:00",
       "lastError": null,
-      "articleCount": 12
+      "articleCount": 11
     },
     {
       "id": "un-news-peace",
@@ -504,7 +504,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:01:04.758290+00:00",
+      "lastFetch": "2026-10-30T19:29:41.995932+00:00",
       "lastError": null,
       "articleCount": 30
     },
@@ -515,7 +515,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:01:04.876522+00:00",
+      "lastFetch": "2026-10-30T19:29:42.200128+00:00",
       "lastError": null,
       "articleCount": 30
     },
@@ -526,7 +526,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:01:05.084787+00:00",
+      "lastFetch": "2026-10-30T19:29:42.313447+00:00",
       "lastError": null,
       "articleCount": 30
     },
@@ -537,7 +537,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:01:05.200735+00:00",
+      "lastFetch": "2026-10-30T19:29:42.518776+00:00",
       "lastError": null,
       "articleCount": 30
     },
@@ -548,7 +548,7 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:01:05.334050+00:00",
+      "lastFetch": "2026-10-30T19:29:42.640394+00:00",
       "lastError": null,
       "articleCount": 30
     },
@@ -559,7 +559,7 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-06T12:01:06.527348+00:00",
+      "lastFetch": "2026-10-30T19:29:44.196700+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -570,7 +570,7 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-06T12:01:06.611820+00:00",
+      "lastFetch": "2026-10-30T19:29:44.301133+00:00",
       "lastError": null,
       "articleCount": 20
     },
@@ -581,7 +581,7 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-06T12:01:09.004704+00:00",
+      "lastFetch": "2026-10-30T19:29:48.448422+00:00",
       "lastError": null,
       "articleCount": 20
     },
@@ -592,9 +592,9 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-06T12:01:09.397608+00:00",
+      "lastFetch": "2026-10-30T19:29:48.695301+00:00",
       "lastError": null,
-      "articleCount": 33
+      "articleCount": 32
     },
     {
       "id": "daily-maverick",
@@ -603,9 +603,9 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-06T12:01:10.219153+00:00",
+      "lastFetch": "2026-10-30T19:29:49.204756+00:00",
       "lastError": null,
-      "articleCount": 50
+      "articleCount": 51
     },
     {
       "id": "premium-times",
@@ -614,7 +614,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-06T12:01:11.209290+00:00",
+      "lastFetch": "2026-10-30T19:29:49.869403+00:00",
       "lastError": null,
       "articleCount": 15
     },
@@ -625,7 +625,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-06T12:01:11.734514+00:00",
+      "lastFetch": "2026-10-30T19:29:50.411289+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -636,7 +636,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-06T12:01:11.849983+00:00",
+      "lastFetch": "2026-10-30T19:29:50.490666+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -647,9 +647,9 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-06T12:01:42.260457+00:00",
-      "lastError": "Failed to fetch https://caribbeannewsglobal.com/feed/",
-      "articleCount": 0
+      "lastFetch": "2026-10-30T19:29:50.824823+00:00",
+      "lastError": null,
+      "articleCount": 14
     },
     {
       "id": "rnz-pacific",
@@ -658,7 +658,7 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-06T12:01:42.334409+00:00",
+      "lastFetch": "2026-10-30T19:29:50.891620+00:00",
       "lastError": null,
       "articleCount": 15
     },
@@ -669,7 +669,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-06T12:01:42.977999+00:00",
+      "lastFetch": "2026-10-30T19:29:51.532303+00:00",
       "lastError": null,
       "articleCount": 50
     },
@@ -680,9 +680,9 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-06T12:01:43.885831+00:00",
+      "lastFetch": "2026-10-30T19:29:52.794070+00:00",
       "lastError": null,
-      "articleCount": 24
+      "articleCount": 27
     },
     {
       "id": "straits-times-world",
@@ -691,7 +691,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-06T12:01:44.070161+00:00",
+      "lastFetch": "2026-10-30T19:29:53.035120+00:00",
       "lastError": null,
       "articleCount": 50
     },
@@ -702,7 +702,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-06T12:01:44.237898+00:00",
+      "lastFetch": "2026-10-30T19:29:53.226962+00:00",
       "lastError": null,
       "articleCount": 60
     },
@@ -724,7 +724,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-06T12:01:44.346278+00:00",
+      "lastFetch": "2026-10-30T19:29:53.328726+00:00",
       "lastError": null,
       "articleCount": 20
     },
@@ -735,9 +735,9 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-06T12:01:44.416777+00:00",
+      "lastFetch": "2026-10-30T19:29:53.386555+00:00",
       "lastError": null,
-      "articleCount": 10
+      "articleCount": 9
     },
     {
       "id": "bbc-world",
@@ -746,9 +746,9 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-06T12:01:44.508441+00:00",
+      "lastFetch": "2026-10-30T19:29:53.541912+00:00",
       "lastError": null,
-      "articleCount": 26
+      "articleCount": 37
     },
     {
       "id": "guardian-world",
@@ -757,7 +757,7 @@
       "type": "rss",
       "enabled": true,
       "category": "wire",
-      "lastFetch": "2026-10-06T12:01:44.823224+00:00",
+      "lastFetch": "2026-10-30T19:29:53.876852+00:00",
       "lastError": null,
       "articleCount": 45
     },
@@ -768,9 +768,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:01:46.348997+00:00",
+      "lastFetch": "2026-10-30T19:29:55.487068+00:00",
       "lastError": null,
-      "articleCount": 79
+      "articleCount": 78
     },
     {
       "id": "gnews-wfp",
@@ -779,9 +779,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:01:47.810974+00:00",
+      "lastFetch": "2026-10-30T19:29:56.862326+00:00",
       "lastError": null,
-      "articleCount": 53
+      "articleCount": 37
     },
     {
       "id": "gnews-unicef",
@@ -790,9 +790,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:01:49.402795+00:00",
+      "lastFetch": "2026-10-30T19:29:58.470775+00:00",
       "lastError": null,
-      "articleCount": 95
+      "articleCount": 99
     },
     {
       "id": "gnews-who",
@@ -801,9 +801,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:01:50.907516+00:00",
+      "lastFetch": "2026-10-30T19:30:00.141825+00:00",
       "lastError": null,
-      "articleCount": 57
+      "articleCount": 73
     },
     {
       "id": "gnews-african-union",
@@ -812,7 +812,7 @@
       "type": "rss",
       "enabled": true,
       "category": "regional-org",
-      "lastFetch": "2026-10-06T12:01:52.586437+00:00",
+      "lastFetch": "2026-10-30T19:30:01.707641+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -823,9 +823,9 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-06T12:01:54.034138+00:00",
+      "lastFetch": "2026-10-30T19:30:03.058571+00:00",
       "lastError": null,
-      "articleCount": 63
+      "articleCount": 40
     },
     {
       "id": "gnews-pacific-forum",
@@ -834,9 +834,9 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-06T12:01:55.389629+00:00",
+      "lastFetch": "2026-10-30T19:30:04.598266+00:00",
       "lastError": null,
-      "articleCount": 45
+      "articleCount": 62
     },
     {
       "id": "gnews-sids",
@@ -845,9 +845,9 @@
       "type": "rss",
       "enabled": true,
       "category": "lldc-sids",
-      "lastFetch": "2026-10-06T12:01:56.751411+00:00",
+      "lastFetch": "2026-10-30T19:30:05.974133+00:00",
       "lastError": null,
-      "articleCount": 43
+      "articleCount": 16
     },
     {
       "id": "gnews-un-sg",
@@ -856,9 +856,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:01:58.112133+00:00",
+      "lastFetch": "2026-10-30T19:30:07.512187+00:00",
       "lastError": null,
-      "articleCount": 38
+      "articleCount": 37
     },
     {
       "id": "gnews-un-pga",
@@ -867,9 +867,9 @@
       "type": "rss",
       "enabled": true,
       "category": "institutional",
-      "lastFetch": "2026-10-06T12:01:59.569401+00:00",
+      "lastFetch": "2026-10-30T19:30:08.847089+00:00",
       "lastError": null,
-      "articleCount": 43
+      "articleCount": 10
     },
     {
       "id": "country-bgd",
@@ -879,9 +879,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:01.292171+00:00",
+      "lastFetch": "2026-10-30T19:30:10.590003+00:00",
       "lastError": null,
-      "articleCount": 100
+      "articleCount": 98
     },
     {
       "id": "country-phl",
@@ -891,9 +891,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:03.031039+00:00",
+      "lastFetch": "2026-10-30T19:30:12.133498+00:00",
       "lastError": null,
-      "articleCount": 97
+      "articleCount": 58
     },
     {
       "id": "country-cod",
@@ -903,9 +903,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:04.477830+00:00",
+      "lastFetch": "2026-10-30T19:30:13.687000+00:00",
       "lastError": null,
-      "articleCount": 40
+      "articleCount": 42
     },
     {
       "id": "country-vnm",
@@ -915,9 +915,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:06.128483+00:00",
+      "lastFetch": "2026-10-30T19:30:15.541140+00:00",
       "lastError": null,
-      "articleCount": 81
+      "articleCount": 100
     },
     {
       "id": "country-tza",
@@ -927,9 +927,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:07.652521+00:00",
+      "lastFetch": "2026-10-30T19:30:17.277100+00:00",
       "lastError": null,
-      "articleCount": 55
+      "articleCount": 96
     },
     {
       "id": "country-ita",
@@ -939,7 +939,7 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:09.394670+00:00",
+      "lastFetch": "2026-10-30T19:30:19.083095+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -951,9 +951,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:11.081728+00:00",
+      "lastFetch": "2026-10-30T19:30:20.884005+00:00",
       "lastError": null,
-      "articleCount": 100
+      "articleCount": 99
     },
     {
       "id": "country-mmr",
@@ -963,9 +963,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:12.779644+00:00",
+      "lastFetch": "2026-10-30T19:30:22.612007+00:00",
       "lastError": null,
-      "articleCount": 99
+      "articleCount": 95
     },
     {
       "id": "country-col",
@@ -975,9 +975,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:14.442495+00:00",
+      "lastFetch": "2026-10-30T19:30:23.993091+00:00",
       "lastError": null,
-      "articleCount": 91
+      "articleCount": 32
     },
     {
       "id": "country-dza",
@@ -987,9 +987,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:16.152741+00:00",
+      "lastFetch": "2026-10-30T19:30:25.724509+00:00",
       "lastError": null,
-      "articleCount": 100
+      "articleCount": 99
     },
     {
       "id": "country-irq",
@@ -999,9 +999,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:17.841438+00:00",
+      "lastFetch": "2026-10-30T19:30:27.354372+00:00",
       "lastError": null,
-      "articleCount": 100
+      "articleCount": 96
     },
     {
       "id": "country-arg",
@@ -1011,9 +1011,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:19.557297+00:00",
+      "lastFetch": "2026-10-30T19:30:29.120238+00:00",
       "lastError": null,
-      "articleCount": 99
+      "articleCount": 100
     },
     {
       "id": "country-mar",
@@ -1023,9 +1023,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:21.348091+00:00",
+      "lastFetch": "2026-10-30T19:30:30.610239+00:00",
       "lastError": null,
-      "articleCount": 99
+      "articleCount": 51
     },
     {
       "id": "country-ago",
@@ -1035,9 +1035,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:22.798252+00:00",
+      "lastFetch": "2026-10-30T19:30:31.927794+00:00",
       "lastError": null,
-      "articleCount": 34
+      "articleCount": 21
     },
     {
       "id": "country-pol",
@@ -1047,9 +1047,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:24.362467+00:00",
+      "lastFetch": "2026-10-30T19:30:33.562882+00:00",
       "lastError": null,
-      "articleCount": 61
+      "articleCount": 74
     },
     {
       "id": "country-uzb",
@@ -1059,9 +1059,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:25.990239+00:00",
+      "lastFetch": "2026-10-30T19:30:35.047864+00:00",
       "lastError": null,
-      "articleCount": 99
+      "articleCount": 68
     },
     {
       "id": "country-moz",
@@ -1071,9 +1071,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:27.490178+00:00",
+      "lastFetch": "2026-10-30T19:30:36.698776+00:00",
       "lastError": null,
-      "articleCount": 46
+      "articleCount": 74
     },
     {
       "id": "country-gha",
@@ -1083,9 +1083,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:29.422800+00:00",
+      "lastFetch": "2026-10-30T19:30:38.414902+00:00",
       "lastError": null,
-      "articleCount": 99
+      "articleCount": 98
     },
     {
       "id": "country-per",
@@ -1095,9 +1095,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:30.924563+00:00",
+      "lastFetch": "2026-10-30T19:30:39.746633+00:00",
       "lastError": null,
-      "articleCount": 40
+      "articleCount": 22
     },
     {
       "id": "country-mdg",
@@ -1107,7 +1107,7 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:32.392974+00:00",
+      "lastFetch": "2026-10-30T19:30:41.197242+00:00",
       "lastError": null,
       "articleCount": 24
     },
@@ -1119,9 +1119,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:33.956846+00:00",
+      "lastFetch": "2026-10-30T19:30:42.600430+00:00",
       "lastError": null,
-      "articleCount": 48
+      "articleCount": 20
     },
     {
       "id": "country-npl",
@@ -1131,7 +1131,7 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:35.621738+00:00",
+      "lastFetch": "2026-10-30T19:30:44.304644+00:00",
       "lastError": null,
       "articleCount": 98
     },
@@ -1143,9 +1143,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:37.099576+00:00",
+      "lastFetch": "2026-10-30T19:30:45.631664+00:00",
       "lastError": null,
-      "articleCount": 45
+      "articleCount": 21
     },
     {
       "id": "country-ven",
@@ -1155,9 +1155,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:38.785704+00:00",
+      "lastFetch": "2026-10-30T19:30:47.213717+00:00",
       "lastError": null,
-      "articleCount": 100
+      "articleCount": 87
     },
     {
       "id": "country-syr",
@@ -1167,9 +1167,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:40.477442+00:00",
+      "lastFetch": "2026-10-30T19:30:48.998068+00:00",
       "lastError": null,
-      "articleCount": 99
+      "articleCount": 100
     },
     {
       "id": "country-bfa",
@@ -1179,7 +1179,7 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:41.993543+00:00",
+      "lastFetch": "2026-10-30T19:30:50.540770+00:00",
       "lastError": null,
       "articleCount": 53
     },
@@ -1191,9 +1191,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:43.662042+00:00",
+      "lastFetch": "2026-10-30T19:30:52.275659+00:00",
       "lastError": null,
-      "articleCount": 96
+      "articleCount": 100
     },
     {
       "id": "country-mwi",
@@ -1203,9 +1203,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:45.186035+00:00",
+      "lastFetch": "2026-10-30T19:30:53.577508+00:00",
       "lastError": null,
-      "articleCount": 49
+      "articleCount": 29
     },
     {
       "id": "country-zmb",
@@ -1215,9 +1215,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:46.748104+00:00",
+      "lastFetch": "2026-10-30T19:30:55.151798+00:00",
       "lastError": null,
-      "articleCount": 63
+      "articleCount": 73
     },
     {
       "id": "country-kaz",
@@ -1227,9 +1227,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:48.427639+00:00",
+      "lastFetch": "2026-10-30T19:30:56.861602+00:00",
       "lastError": null,
-      "articleCount": 99
+      "articleCount": 100
     },
     {
       "id": "country-tcd",
@@ -1239,9 +1239,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:49.968559+00:00",
+      "lastFetch": "2026-10-30T19:30:58.392567+00:00",
       "lastError": null,
-      "articleCount": 58
+      "articleCount": 51
     },
     {
       "id": "country-chl",
@@ -1251,9 +1251,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:51.493688+00:00",
+      "lastFetch": "2026-10-30T19:30:59.979926+00:00",
       "lastError": null,
-      "articleCount": 42
+      "articleCount": 60
     },
     {
       "id": "country-rou",
@@ -1263,9 +1263,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:53.217961+00:00",
+      "lastFetch": "2026-10-30T19:31:01.427382+00:00",
       "lastError": null,
-      "articleCount": 96
+      "articleCount": 56
     },
     {
       "id": "country-sen",
@@ -1275,9 +1275,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:54.685825+00:00",
+      "lastFetch": "2026-10-30T19:31:03.106183+00:00",
       "lastError": null,
-      "articleCount": 35
+      "articleCount": 73
     },
     {
       "id": "country-gtm",
@@ -1287,9 +1287,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:56.167222+00:00",
+      "lastFetch": "2026-10-30T19:31:04.399728+00:00",
       "lastError": null,
-      "articleCount": 38
+      "articleCount": 10
     },
     {
       "id": "country-ecu",
@@ -1299,9 +1299,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:57.700600+00:00",
+      "lastFetch": "2026-10-30T19:31:05.940553+00:00",
       "lastError": null,
-      "articleCount": 44
+      "articleCount": 53
     },
     {
       "id": "country-nld",
@@ -1311,9 +1311,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:02:59.326955+00:00",
+      "lastFetch": "2026-10-30T19:31:07.670224+00:00",
       "lastError": null,
-      "articleCount": 76
+      "articleCount": 100
     },
     {
       "id": "country-khm",
@@ -1323,9 +1323,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:00.843431+00:00",
+      "lastFetch": "2026-10-30T19:31:09.232345+00:00",
       "lastError": null,
-      "articleCount": 52
+      "articleCount": 76
     },
     {
       "id": "country-zwe",
@@ -1335,9 +1335,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:02.566500+00:00",
+      "lastFetch": "2026-10-30T19:31:10.554636+00:00",
       "lastError": null,
-      "articleCount": 85
+      "articleCount": 26
     },
     {
       "id": "country-gin",
@@ -1347,9 +1347,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:04.123070+00:00",
+      "lastFetch": "2026-10-30T19:31:12.062405+00:00",
       "lastError": null,
-      "articleCount": 66
+      "articleCount": 44
     },
     {
       "id": "country-ben",
@@ -1359,9 +1359,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:05.603319+00:00",
+      "lastFetch": "2026-10-30T19:31:13.433860+00:00",
       "lastError": null,
-      "articleCount": 31
+      "articleCount": 32
     },
     {
       "id": "country-rwa",
@@ -1371,9 +1371,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:07.151184+00:00",
+      "lastFetch": "2026-10-30T19:31:15.040226+00:00",
       "lastError": null,
-      "articleCount": 57
+      "articleCount": 73
     },
     {
       "id": "country-bdi",
@@ -1383,9 +1383,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:08.588415+00:00",
+      "lastFetch": "2026-10-30T19:31:16.367039+00:00",
       "lastError": null,
-      "articleCount": 29
+      "articleCount": 17
     },
     {
       "id": "country-bol",
@@ -1395,9 +1395,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:10.136444+00:00",
+      "lastFetch": "2026-10-30T19:31:17.818290+00:00",
       "lastError": null,
-      "articleCount": 51
+      "articleCount": 31
     },
     {
       "id": "country-tun",
@@ -1407,9 +1407,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:11.586785+00:00",
+      "lastFetch": "2026-10-30T19:31:19.241895+00:00",
       "lastError": null,
-      "articleCount": 30
+      "articleCount": 33
     },
     {
       "id": "region-central-asia",
@@ -1419,9 +1419,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:13.139561+00:00",
+      "lastFetch": "2026-10-30T19:31:20.706616+00:00",
       "lastError": null,
-      "articleCount": 70
+      "articleCount": 61
     },
     {
       "id": "region-south-caucasus",
@@ -1431,7 +1431,7 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:14.841130+00:00",
+      "lastFetch": "2026-10-30T19:31:22.402339+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -1443,9 +1443,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:16.646643+00:00",
+      "lastFetch": "2026-10-30T19:31:24.073130+00:00",
       "lastError": null,
-      "articleCount": 95
+      "articleCount": 91
     },
     {
       "id": "region-baltics",
@@ -1455,9 +1455,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:18.368124+00:00",
+      "lastFetch": "2026-10-30T19:31:25.716915+00:00",
       "lastError": null,
-      "articleCount": 97
+      "articleCount": 86
     },
     {
       "id": "region-central-america",
@@ -1467,9 +1467,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:20.098768+00:00",
+      "lastFetch": "2026-10-30T19:31:27.490579+00:00",
       "lastError": null,
-      "articleCount": 73
+      "articleCount": 96
     },
     {
       "id": "region-sahel",
@@ -1479,9 +1479,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:21.835825+00:00",
+      "lastFetch": "2026-10-30T19:31:28.997552+00:00",
       "lastError": null,
-      "articleCount": 98
+      "articleCount": 40
     },
     {
       "id": "region-central-africa",
@@ -1491,9 +1491,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:23.467583+00:00",
+      "lastFetch": "2026-10-30T19:31:30.598786+00:00",
       "lastError": null,
-      "articleCount": 49
+      "articleCount": 46
     },
     {
       "id": "region-southern-africa",
@@ -1503,9 +1503,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:24.966607+00:00",
+      "lastFetch": "2026-10-30T19:31:32.064485+00:00",
       "lastError": null,
-      "articleCount": 45
+      "articleCount": 61
     },
     {
       "id": "region-west-africa",
@@ -1515,9 +1515,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:26.733841+00:00",
+      "lastFetch": "2026-10-30T19:31:33.772037+00:00",
       "lastError": null,
-      "articleCount": 99
+      "articleCount": 94
     },
     {
       "id": "region-horn-of-africa",
@@ -1527,9 +1527,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:28.445997+00:00",
+      "lastFetch": "2026-10-30T19:31:35.540598+00:00",
       "lastError": null,
-      "articleCount": 100
+      "articleCount": 99
     },
     {
       "id": "region-himalaya-indian-ocean",
@@ -1539,9 +1539,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:30.077279+00:00",
+      "lastFetch": "2026-10-30T19:31:37.251921+00:00",
       "lastError": null,
-      "articleCount": 81
+      "articleCount": 100
     },
     {
       "id": "region-mainland-se-asia",
@@ -1551,9 +1551,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:31.749595+00:00",
+      "lastFetch": "2026-10-30T19:31:38.786966+00:00",
       "lastError": null,
-      "articleCount": 79
+      "articleCount": 47
     },
     {
       "id": "region-southern-cone",
@@ -1563,9 +1563,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:33.276106+00:00",
+      "lastFetch": "2026-10-30T19:31:40.243310+00:00",
       "lastError": null,
-      "articleCount": 39
+      "articleCount": 41
     },
     {
       "id": "region-small-gulf",
@@ -1575,7 +1575,7 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:35.065074+00:00",
+      "lastFetch": "2026-10-30T19:31:41.956912+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -1587,7 +1587,7 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:36.850326+00:00",
+      "lastFetch": "2026-10-30T19:31:43.836658+00:00",
       "lastError": null,
       "articleCount": 100
     },
@@ -1599,9 +1599,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:38.510801+00:00",
+      "lastFetch": "2026-10-30T19:31:45.485509+00:00",
       "lastError": null,
-      "articleCount": 97
+      "articleCount": 98
     },
     {
       "id": "region-caribbean-states",
@@ -1611,9 +1611,9 @@
       "enabled": true,
       "category": "country-watch",
       "maxItems": 15,
-      "lastFetch": "2026-10-06T12:03:40.387574+00:00",
+      "lastFetch": "2026-10-30T19:31:47.315101+00:00",
       "lastError": null,
-      "articleCount": 100
+      "articleCount": 94
     },
     {
       "id": "yonhap",
@@ -1626,9 +1626,9 @@
       "sourceType": "national-agency",
       "tier": 4,
       "maxItems": 20,
-      "lastFetch": "2026-10-06T12:03:41.681499+00:00",
+      "lastFetch": "2026-10-30T19:31:48.381909+00:00",
       "lastError": null,
-      "articleCount": 100
+      "articleCount": 88
     },
     {
       "id": "agencia-brasil",
@@ -1641,7 +1641,7 @@
       "sourceType": "national-agency",
       "tier": 4,
       "maxItems": 20,
-      "lastFetch": "2026-10-06T12:03:42.576973+00:00",
+      "lastFetch": "2026-10-30T19:31:49.094603+00:00",
       "lastError": null,
       "articleCount": 10
     },
@@ -1656,9 +1656,9 @@
       "sourceType": "national-agency",
       "tier": 4,
       "maxItems": 20,
-      "lastFetch": "2026-10-06T12:03:44.079706+00:00",
+      "lastFetch": "2026-10-30T19:31:50.436950+00:00",
       "lastError": null,
-      "articleCount": 99
+      "articleCount": 48
     },
     {
       "id": "vietnamplus",
@@ -1671,9 +1671,9 @@
       "sourceType": "national-agency",
       "tier": 4,
       "maxItems": 20,
-      "lastFetch": "2026-10-06T12:03:45.479225+00:00",
+      "lastFetch": "2026-10-30T19:31:51.814969+00:00",
       "lastError": null,
-      "articleCount": 78
+      "articleCount": 69
     },
     {
       "id": "pna-philippines",
@@ -1686,9 +1686,9 @@
       "sourceType": "national-agency",
       "tier": 4,
       "maxItems": 20,
-      "lastFetch": "2026-10-06T12:03:46.733638+00:00",
+      "lastFetch": "2026-10-30T19:31:53.371901+00:00",
       "lastError": null,
-      "articleCount": 1
+      "articleCount": 99
     },
     {
       "id": "bernama",
@@ -1701,9 +1701,9 @@
       "sourceType": "national-agency",
       "tier": 4,
       "maxItems": 20,
-      "lastFetch": "2026-10-06T12:03:48.345639+00:00",
+      "lastFetch": "2026-10-30T19:31:54.923600+00:00",
       "lastError": null,
-      "articleCount": 90
+      "articleCount": 97
     },
     {
       "id": "nan-nigeria",
@@ -1716,9 +1716,9 @@
       "sourceType": "national-agency",
       "tier": 4,
       "maxItems": 20,
-      "lastFetch": "2026-10-06T12:03:49.884036+00:00",
+      "lastFetch": "2026-10-30T19:31:56.464624+00:00",
       "lastError": null,
-      "articleCount": 97
+      "articleCount": 98
     },
     {
       "id": "ahram-online",
@@ -1731,9 +1731,9 @@
       "sourceType": "national-agency",
       "tier": 4,
       "maxItems": 20,
-      "lastFetch": "2026-10-06T12:03:51.439509+00:00",
+      "lastFetch": "2026-10-30T19:31:57.971041+00:00",
       "lastError": null,
-      "articleCount": 84
+      "articleCount": 88
     }
   ],
   "maxArticles": 6000,

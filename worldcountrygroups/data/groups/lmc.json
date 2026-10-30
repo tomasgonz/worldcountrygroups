@@ -184,9 +184,9 @@
       "iso3": "PNG"
     },
     {
-      "name": "West Bank and Gaza",
-      "iso2": "",
-      "iso3": ""
+      "name": "State of Palestine",
+      "iso2": "PS",
+      "iso3": "PSE"
     },
     {
       "name": "Senegal",
@@ -258,5 +258,6 @@
       "iso2": "ZW",
       "iso3": "ZWE"
     }
-  ]
+  ],
+  "updated": "2026-10-30"
 }

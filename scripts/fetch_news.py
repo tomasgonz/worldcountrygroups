@@ -95,6 +95,7 @@ ALIASES.update({
     "Timor-Leste": "TLS", "East Timor": "TLS", "North Macedonia": "MKD", "Moldova": "MDA", "Yemen": "YEM",
     "Vietnam": "VNM", "Viet Nam": "VNM", "Trinidad and Tobago": "TTO", "Sao Tome": "STP", "São Tomé": "STP",
     "Republic of Congo": "COG", "Congo-Brazzaville": "COG", "Micronesian": "FSM", "Palestine": "PSE",
+    "Trinidad": "TTO", "Tobago": "TTO", "Trinidadian": "TTO",
 })
 
 SHORT_NAMES = {"US", "UK", "UAE", "DRC", "PRC", "DPRK", "U.S.", "U.K."}
@@ -1130,6 +1131,17 @@ def main():
     share = (config or {}).get("maxSourceShare", 0.08)
     overrides = {src["id"]: src["maxItems"] for src in (config or {}).get("sources", []) if src.get("maxItems")}
     merged = cap_per_source(merged, max_articles, share=share, overrides=overrides)
+    # The quiet-country searches (fill_coverage_gaps) return what Google crawled lately, much of it
+    # published weeks earlier, so the newest-first cap cut them before anyone saw them: keep anything
+    # from the last 90 days, which is what a quiet country's page can show.
+    try:
+        from datetime import timedelta as _timedelta
+        kept = {a["id"] for a in merged}
+        cutoff = datetime.now(timezone.utc) - _timedelta(days=90)
+        merged += [a for a in existing_by_id.values()
+                   if a.get("source") == "coverage-gap" and a["id"] not in kept and _sort_key(a) >= cutoff]
+    except Exception as e:
+        print(f"  coverage-gap keep: {e}", file=sys.stderr)
     for item in merged:
         item["publishedAt"] = to_utc_iso(item.get("publishedAt"), item.get("publishedAt"))
     # ownership labels apply to every kept item, including ones fetched in earlier runs

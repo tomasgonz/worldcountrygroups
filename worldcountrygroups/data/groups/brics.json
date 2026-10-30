@@ -2,7 +2,7 @@
   "gid": "brics",
   "acronym": "BRICS",
   "name": "BRICS",
-  "description": "BRICS is the acronym coined for an association of five major emerging national economies.",
+  "description": "BRICS is the acronym coined for the original five emerging economies (Brazil, Russia, India, China, South Africa). Egypt, Ethiopia, Iran and the United Arab Emirates joined on 1 January 2024 and Indonesia on 6 January 2025. Saudi Arabia was invited in 2024 and is listed by the group’s chairs but has not formally confirmed its membership; see BRICS+ for the list including it.",
   "classifier": "BRICS",
   "domains": [
     "Africa",
@@ -20,9 +20,29 @@
       "iso3": "CHN"
     },
     {
+      "name": "Egypt, Arab Rep.",
+      "iso2": "EG",
+      "iso3": "EGY"
+    },
+    {
+      "name": "Ethiopia",
+      "iso2": "ET",
+      "iso3": "ETH"
+    },
+    {
       "name": "India",
       "iso2": "IN",
       "iso3": "IND"
+    },
+    {
+      "name": "Indonesia",
+      "iso2": "ID",
+      "iso3": "IDN"
+    },
+    {
+      "name": "Iran",
+      "iso2": "IR",
+      "iso3": "IRN"
     },
     {
       "name": "Russian Federation",
@@ -33,6 +53,12 @@
       "name": "South Africa",
       "iso2": "ZA",
       "iso3": "ZAF"
+    },
+    {
+      "name": "United Arab Emirates",
+      "iso2": "AE",
+      "iso3": "ARE"
     }
-  ]
+  ],
+  "updated": "2026-10-30"
 }

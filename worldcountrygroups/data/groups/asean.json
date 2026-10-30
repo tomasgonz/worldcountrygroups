@@ -2,7 +2,7 @@
   "gid": "asean",
   "acronym": "ASEAN",
   "name": "Association of Southeast Asian Nations",
-  "description": "The Association of Southeast Asian Nations[9] (ASEAN; /ˈɑːsiɑːn/ AH-see-ahn,[10] /ˈɑːziɑːn/ AH-zee-ahn)[11][12] is a regional intergovernmental organization comprising ten countries in Southeast Asia, which promotes intergovernmental cooperation and facilitates economic, political, security, military, educational, and sociocultural integration among its members and other countries in Asia.",
+  "description": "The Association of Southeast Asian Nations (ASEAN; /ˈɑːsiɑːn/ AH-see-ahn, /ˈɑːziɑːn/ AH-zee-ahn) is a regional intergovernmental organization comprising ten countries in Southeast Asia, which promotes intergovernmental cooperation and facilitates economic, political, security, military, educational, and sociocultural integration among its members and other countries in Asia. Timor-Leste became the eleventh member on 26 October 2025.",
   "classifier": "ASEAN",
   "domains": [
     "UNGA"
@@ -54,9 +54,15 @@
       "iso3": "THA"
     },
     {
+      "name": "Timor-Leste",
+      "iso2": "TL",
+      "iso3": "TLS"
+    },
+    {
       "name": "Vietnam",
       "iso2": "VN",
       "iso3": "VNM"
     }
-  ]
+  ],
+  "updated": "2026-10-30"
 }

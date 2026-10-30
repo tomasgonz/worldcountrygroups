@@ -2,7 +2,7 @@
   "gid": "eurozone",
   "acronym": "Eurozone",
   "name": "Eurozone",
-  "description": "The monetary union of 20 EU member states that have adopted the euro as their common currency.",
+  "description": "The monetary union of 21 EU member states that have adopted the euro as their common currency. Bulgaria adopted the euro on 1 January 2026.",
   "classifier": "Eurozone",
   "domains": [
     "Europe"
@@ -17,6 +17,11 @@
       "name": "Belgium",
       "iso2": "BE",
       "iso3": "BEL"
+    },
+    {
+      "name": "Bulgaria",
+      "iso2": "BG",
+      "iso3": "BGR"
     },
     {
       "name": "Croatia",
@@ -108,5 +113,6 @@
       "iso2": "ES",
       "iso3": "ESP"
     }
-  ]
+  ],
+  "updated": "2026-10-30"
 }

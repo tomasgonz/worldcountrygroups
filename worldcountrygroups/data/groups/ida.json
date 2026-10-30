@@ -60,8 +60,8 @@
     },
     {
       "name": "Congo, Dem. Rep.",
-      "iso2": "",
-      "iso3": ""
+      "iso2": "CD",
+      "iso3": "COD"
     },
     {
       "name": "Cote d'Ivoire",
@@ -298,5 +298,6 @@
       "iso2": "ZM",
       "iso3": "ZMB"
     }
-  ]
+  ],
+  "updated": "2026-10-30"
 }

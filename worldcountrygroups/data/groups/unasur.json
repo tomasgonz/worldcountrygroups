@@ -2,7 +2,7 @@
   "gid": "unasur",
   "acronym": "UNASUR",
   "name": "Union of South American Nations",
-  "description": "The Union of South American Nations (UNASUR) is an intergovernmental regional organization comprising twelve South American countries. Established in 2008 by the Constitutive Treaty of the Union of South American Nations, it aims to build an integrated region in political, social, cultural, economic, and environmental matters.",
+  "description": "The Union of South American Nations (UNASUR) is an intergovernmental regional organization comprising twelve South American countries. Established in 2008 by the Constitutive Treaty of the Union of South American Nations, it aims to build an integrated region in political, social, cultural, economic, and environmental matters. Most members withdrew in 2018–2020 and the organisation has been dormant since; Brazil announced its return in 2023. Membership shown as at the founding treaty.",
   "classifier": "Regional Integration",
   "domains": [
     "South America"
@@ -68,5 +68,6 @@
       "iso2": "VE",
       "iso3": "VEN"
     }
-  ]
+  ],
+  "updated": "2026-10-30"
 }

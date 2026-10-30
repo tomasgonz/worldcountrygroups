@@ -170,9 +170,10 @@
       "iso3": "URY"
     },
     {
-      "name": "Venezuela (Bolivarian  Republic of)",
-      "iso2": "",
-      "iso3": ""
+      "name": "Venezuela",
+      "iso2": "VE",
+      "iso3": "VEN"
     }
-  ]
+  ],
+  "updated": "2026-10-30"
 }

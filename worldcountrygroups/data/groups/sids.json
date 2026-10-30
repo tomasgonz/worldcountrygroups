@@ -2,7 +2,7 @@
   "gid": "sids",
   "acronym": "SIDS",
   "name": "Small Island Developing States",
-  "description": "Small Island Developing States (SIDS) are a group of small island countries that tend to share similar sustainable development challenges, including small but growing populations, limited resources, remoteness, susceptibility to natural disasters, vulnerability to external shocks, excessive dependence on international trade, and fragile environments.",
+  "description": "Small Island Developing States (SIDS) are a group of small island countries that tend to share similar sustainable development challenges, including small but growing populations, limited resources, remoteness, susceptibility to natural disasters, vulnerability to external shocks, excessive dependence on international trade, and fragile environments. Follows the UN list: 38 Member States plus the 18 associate members of the regional commissions.",
   "classifier": "United Nations",
   "domains": [
     "UNGA"
@@ -59,9 +59,9 @@
       "iso3": "CPV"
     },
     {
-      "name": "Commonwealth of Northern Marianas",
-      "iso2": "",
-      "iso3": ""
+      "name": "Northern Mariana Islands",
+      "iso2": "MP",
+      "iso3": "MNP"
     },
     {
       "name": "Comoros",
@@ -164,11 +164,6 @@
       "iso3": "NRU"
     },
     {
-      "name": "Netherlands Antilles",
-      "iso2": "",
-      "iso3": ""
-    },
-    {
       "name": "New Caledonia",
       "iso2": "NC",
       "iso3": "NCL"
@@ -259,14 +254,40 @@
       "iso3": "TUV"
     },
     {
-      "name": "US Virgin Islands",
-      "iso2": "",
-      "iso3": ""
+      "name": "United States Virgin Islands",
+      "iso2": "VI",
+      "iso3": "VIR"
     },
     {
       "name": "Vanuatu",
       "iso2": "VU",
       "iso3": "VUT"
+    },
+    {
+      "name": "Bermuda",
+      "iso2": "BM",
+      "iso3": "BMU"
+    },
+    {
+      "name": "Cayman Islands",
+      "iso2": "KY",
+      "iso3": "CYM"
+    },
+    {
+      "name": "Curacao",
+      "iso2": "CW",
+      "iso3": "CUW"
+    },
+    {
+      "name": "Sint Maarten (Dutch part)",
+      "iso2": "SX",
+      "iso3": "SXM"
+    },
+    {
+      "name": "Turks and Caicos Islands",
+      "iso2": "TC",
+      "iso3": "TCA"
     }
-  ]
+  ],
+  "updated": "2026-10-30"
 }

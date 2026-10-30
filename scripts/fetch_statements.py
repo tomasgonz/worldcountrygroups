@@ -585,6 +585,67 @@ def fetch_rss(url, source_id, source_country, patterns):
     return statements
 
 
+def fetch_wp_pages(api_url, source_id, source_country, cfg, patterns, limit=30):
+    """WordPress sites that publish no feed (the PGA site since its 81st-session move): list the
+    child pages of a section through the REST API, newest first. `api_url` is the site's
+    .../wp-json/wp/v2/pages endpoint; scrapeConfig.parentSlug names the section (e.g. "speeches")."""
+    from urllib.parse import quote
+    base = api_url.rstrip("/")
+    parent_slug = (cfg or {}).get("parentSlug")
+    parent_id = None
+    if parent_slug:
+        raw = fetch_url(f"{base}?slug={quote(parent_slug)}&_fields=id,slug", accept="application/json")
+        if not raw:
+            raise Exception(f"Failed to fetch {base} (slug {parent_slug})")
+        found = [x for x in json.loads(raw) if x.get("slug") == parent_slug]
+        if not found:
+            raise Exception(f"No page with slug {parent_slug!r} at {base}")
+        parent_id = found[0]["id"]
+    q = f"{base}?per_page={limit}&orderby=date&order=desc&_fields=id,date_gmt,link,title,content"
+    if parent_id:
+        q += f"&parent={parent_id}"
+    raw = fetch_url(q, accept="application/json")
+    if not raw:
+        raise Exception(f"Failed to fetch {q}")
+    statements = []
+    for page in json.loads(raw):
+        from html import unescape as _unescape
+        title = _unescape(strip_html((page.get("title") or {}).get("rendered") or "")).strip()
+        link = page.get("link") or ""
+        if not title or not link:
+            continue
+        # The page body opens with a breadcrumb, the office-holder's name and a "Readout / New York / date"
+        # line; the excerpt is the first real paragraph after those.
+        desc = ""
+        for para in re.findall(r"<p[^>]*>(.*?)</p>", (page.get("content") or {}).get("rendered") or "", re.S):
+            text = re.sub(r"\s+", " ", _unescape(strip_html(para))).strip()
+            if len(text) < 80 or re.match(r"(Documents\s*/|H\.E\.|On this page|Readout|Statement|New York\b)", text) and len(text) < 160:
+                continue
+            desc = text
+            break
+        try:
+            published = datetime.fromisoformat(page["date_gmt"]).replace(tzinfo=timezone.utc).isoformat()
+        except Exception:
+            published = datetime.now(timezone.utc).isoformat()
+        countries = tag_countries(f"{title} {desc}", patterns)
+        if source_country:
+            countries.add(source_country)
+        statements.append({
+            "id": make_id(title, link),
+            "title": title,
+            "url": link,
+            "source": source_id,
+            "country": source_country,
+            "countries": sorted(countries),
+            "publishedAt": published,
+            "speaker": extract_speaker(title) or (cfg or {}).get("speaker", ""),
+            "type": classify_statement_type(title),
+            "excerpt": desc[:400],
+            "topics": detect_topics(title, desc),
+        })
+    return statements
+
+
 # ---------------------------------------------------------------------------
 # HTML scraping using stdlib html.parser
 # ---------------------------------------------------------------------------
@@ -1351,6 +1412,8 @@ def main():
             elif stype == "html-regex":
                 scrape_cfg = source.get("scrapeConfig", {})
                 stmts = fetch_html_regex(url, sid, source_country, scrape_cfg, patterns)
+            elif stype == "wp-pages":
+                stmts = fetch_wp_pages(url, sid, source_country, source.get("scrapeConfig", {}), patterns)
             elif stype == "webtv-schedule":
                 stmts = fetch_webtv_schedule(url, sid, source_country, patterns)
             else:

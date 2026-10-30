@@ -776,6 +776,39 @@ def hrc_members(C):
     return (int(ym.group(1)) if ym else None), members
 
 
+def hrc_members_ga(C, today):
+    """Fallback for hrc_members when OHCHR answers 403: the GA 'Elections and appointments' page carries
+    the same list ('List of current members', one column per regional group, 'Name (year the term ends) *')."""
+    cur_session = today.year - 1945 if today.month >= 9 else today.year - 1946
+    for s in (cur_session, cur_session + 1, cur_session - 1):
+        url = f"https://www.un.org/en/ga/{s}/meetings/elections/hrc.shtml"
+        status, body = http_get(url, tries=2)
+        if status != 200 or "List of members, sorted by regional groups" not in body:
+            continue
+        i = body.find('summary="List of members, sorted by regional groups"')
+        tbl = body[i:body.find("</table>", i)]
+        rows = re.findall(r"<tr[^>]*>(.*?)</tr>", tbl, re.S)
+        cols = []
+        for h in (page_text(x).lower() for x in re.findall(r"<th[^>]*>(.*?)</th>", rows[0], re.S)):
+            cols.append("AG" if h.startswith("african") else "APG" if h.startswith("asia") else "EEG" if h.startswith("eastern")
+                        else "GRULAC" if h.startswith("latin") else "WEOG" if h.startswith("western") else None)
+        members = []
+        for row in rows[1:]:
+            for k, cell in enumerate(re.findall(r"<td[^>]*>(.*?)</td>", row, re.S)):
+                m = re.match(r"(.+?)\s*\((\d{4})\)\s*(\*?)\s*$", page_text(cell).strip())
+                if not m or k >= len(cols) or not cols[k]:
+                    continue
+                c = country(C, m.group(1), cols[k])
+                c.update({"term_end": int(m.group(2)), "second_term": bool(m.group(3))})
+                members.append(c)
+        if len(members) != 47:
+            raise RuntimeError(f"GA page membership parsed {len(members)} members, expected 47")
+        ym = re.search(r"will retire on 31 December (\d{4})", page_text(body))
+        add_source(f"UN General Assembly: Human Rights Council membership (elections page, {s}th session)", url, "hrc.members")
+        return (int(ym.group(1)) if ym else None), members
+    raise RuntimeError("no GA elections page with the Human Rights Council membership list")
+
+
 def hrc_ga_page(session, C):
     """GA 'Elections and appointments' page for the HRC election held during a session (None if absent)."""
     url = f"https://www.un.org/en/ga/{session}/meetings/elections/hrc.shtml"
@@ -866,7 +899,11 @@ def members_year_next(year_members, today):
 
 
 def hrc_section(C, today):
-    year_members, members = hrc_members(C)
+    try:
+        year_members, members = hrc_members(C)
+    except RuntimeError as e:
+        print(f"  hrc: {e}; reading the membership from the GA elections page instead")
+        year_members, members = hrc_members_ga(C, today)
     cur_session = today.year - 1945 if today.month >= 9 else today.year - 1946
     pages = []
     for s in (cur_session + 1, cur_session, cur_session - 1, cur_session - 2):

@@ -15,13 +15,14 @@
     },
     {
       "name": "Congo, Dem. Rep.",
-      "iso2": "",
-      "iso3": ""
+      "iso2": "CD",
+      "iso3": "COD"
     },
     {
       "name": "Rwanda",
       "iso2": "RW",
       "iso3": "RWA"
     }
-  ]
+  ],
+  "updated": "2026-10-30"
 }

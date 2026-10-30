@@ -7,7 +7,7 @@ from worldcountrygroups.core import GroupRegistry
 def test_list_groups():
     groups = worldcountrygroups.list_groups()
     assert isinstance(groups, list)
-    assert len(groups) == 117
+    assert len(groups) == 121
     assert groups == sorted(groups)
     assert "eu" in groups
     assert "brics" in groups
@@ -35,7 +35,7 @@ def test_get_group_not_found():
 def test_get_countries():
     countries = worldcountrygroups.get_countries("brics")
     assert countries is not None
-    assert len(countries) == 5
+    assert len(countries) == 10
     names = {c.name for c in countries}
     assert "Brazil" in names
     assert "China" in names
@@ -88,7 +88,7 @@ def test_registry_singleton():
 def test_registry_list_summaries():
     reg = GroupRegistry()
     summaries = reg.list_summaries()
-    assert len(summaries) == 117
+    assert len(summaries) == 121
     for s in summaries:
         assert s.country_count >= 0
 

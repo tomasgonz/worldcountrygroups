@@ -2,7 +2,7 @@
   "gid": "g20",
   "acronym": "G20",
   "name": "G20",
-  "description": "Originated in 1999 at the level of Finance Ministers and Central Bank Governors, the G20 gathered for high-level discussions on macro-financial issues. In the wake of the 2008 global financial crisis, the G20 was elevated to include the leaders of member countries. The first G20 Leaders Summit took place in Washington D.C. in November 2008. Consequently, the G20 agenda expanded beyond macro-financial issues, to include socio-economic and development issues. Throughout the year, representatives from G20 countries gather to discuss financial and socioeconomic issues.​",
+  "description": "Originated in 1999 at the level of Finance Ministers and Central Bank Governors, the G20 gathered for high-level discussions on macro-financial issues. In the wake of the 2008 global financial crisis, the G20 was elevated to include the leaders of member countries. The first G20 Leaders Summit took place in Washington D.C. in November 2008. Consequently, the G20 agenda expanded beyond macro-financial issues, to include socio-economic and development issues. Throughout the year, representatives from G20 countries gather to discuss financial and socioeconomic issues.​ The African Union became a permanent member in September 2023, alongside the European Union and 19 countries.",
   "classifier": "G20",
   "domains": [
     "Asia",
@@ -93,9 +93,9 @@
       "iso3": "ZAF"
     },
     {
-      "name": "​​​Turkey",
-      "iso2": "",
-      "iso3": ""
+      "name": "Turkey",
+      "iso2": "TR",
+      "iso3": "TUR"
     },
     {
       "name": "United Kingdom",
@@ -111,6 +111,12 @@
       "name": "European Union",
       "iso2": "",
       "iso3": ""
+    },
+    {
+      "name": "African Union",
+      "iso2": "",
+      "iso3": ""
     }
-  ]
+  ],
+  "updated": "2026-10-30"
 }

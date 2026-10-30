@@ -1098,6 +1098,7 @@ def main():
         '"UN chief" race candidates',
         '"Security Council" "straw poll" secretary-general',
         '"secretary-general" ("dark horse" OR rumored OR rumoured OR speculation OR "new candidate" OR "enter the race") UN',
+        'site:securitycouncilreport.org ("Secretary-General" OR "straw poll")',  # their own feed answers 403 since Oct 2026
     ]
     for i, q in enumerate(general_q):
         gather(q, f"general-{i + 1}")

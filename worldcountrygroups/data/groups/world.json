@@ -209,9 +209,14 @@
       "iso3": "TCD"
     },
     {
-      "name": "Channel Islands",
-      "iso2": "",
-      "iso3": ""
+      "name": "Jersey",
+      "iso2": "JE",
+      "iso3": "JEY"
+    },
+    {
+      "name": "Guernsey",
+      "iso2": "GG",
+      "iso3": "GGY"
     },
     {
       "name": "Chile",
@@ -229,19 +234,9 @@
       "iso3": "COL"
     },
     {
-      "name": "Commonwealth of Northern Marianas",
-      "iso2": "",
-      "iso3": ""
-    },
-    {
       "name": "Comoros",
       "iso2": "KM",
       "iso3": "COM"
-    },
-    {
-      "name": "Congo, Dem. Rep.",
-      "iso2": "",
-      "iso3": ""
     },
     {
       "name": "Congo, Dem. Rep.",
@@ -359,11 +354,6 @@
       "iso3": "ETH"
     },
     {
-      "name": "European Union",
-      "iso2": "",
-      "iso3": ""
-    },
-    {
       "name": "Faroe Islands",
       "iso2": "FO",
       "iso3": "FRO"
@@ -465,8 +455,8 @@
     },
     {
       "name": "Holy See",
-      "iso2": "",
-      "iso3": ""
+      "iso2": "VA",
+      "iso3": "VAT"
     },
     {
       "name": "Honduras",
@@ -625,8 +615,8 @@
     },
     {
       "name": "Macao SAR, China",
-      "iso2": "",
-      "iso3": ""
+      "iso2": "MO",
+      "iso3": "MAC"
     },
     {
       "name": "Madagascar",
@@ -737,11 +727,6 @@
       "name": "Netherlands",
       "iso2": "NL",
       "iso3": "NLD"
-    },
-    {
-      "name": "Netherlands Antilles",
-      "iso2": "",
-      "iso3": ""
     },
     {
       "name": "New Caledonia",
@@ -1079,9 +1064,9 @@
       "iso3": "TUV"
     },
     {
-      "name": "US Virgin Islands",
-      "iso2": "",
-      "iso3": ""
+      "name": "United States Virgin Islands",
+      "iso2": "VI",
+      "iso3": "VIR"
     },
     {
       "name": "Uganda",
@@ -1129,24 +1114,9 @@
       "iso3": "VEN"
     },
     {
-      "name": "Venezuela (Bolivarian  Republic of)",
-      "iso2": "",
-      "iso3": ""
-    },
-    {
       "name": "Vietnam",
       "iso2": "VN",
       "iso3": "VNM"
-    },
-    {
-      "name": "Virgin Islands (U.S.)",
-      "iso2": "",
-      "iso3": ""
-    },
-    {
-      "name": "West Bank and Gaza",
-      "iso2": "",
-      "iso3": ""
     },
     {
       "name": "Yemen",
@@ -1162,11 +1132,7 @@
       "name": "Zimbabwe",
       "iso2": "ZW",
       "iso3": "ZWE"
-    },
-    {
-      "name": "​​​Turkey",
-      "iso2": "",
-      "iso3": ""
     }
-  ]
+  ],
+  "updated": "2026-10-30"
 }
