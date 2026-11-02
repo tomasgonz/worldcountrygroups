@@ -563,7 +563,12 @@ def parse_wp_polls(t, refs):
                 for c in trip:
                     if c["bg"] and c["bg"] in legend:
                         row[legend[c["bg"]]] = True
-                        marked[pi] = True
+                        # 15 members, 10 of them elected: 11 or more votes of one kind include a P5 vote by
+                        # arithmetic alone, so editors shade such cells even when the ballots were identical.
+                        # Only a shaded cell of 10 or fewer says they knew which ballots were the P5's.
+                        vm = re.match(r"^\s*(\d{1,2})", c["text"])
+                        if vm and int(vm.group(1)) <= 10:
+                            marked[pi] = True
             results[pi].append(row)
     out = []
     for pi, p in enumerate(polls):
@@ -974,6 +979,41 @@ def update_press_names(items, nominee_names, since, today):
 
 # ---------------------------------------------------------------------------- main build
 
+# What a Security Council Report preview says about the ballots of the poll it announces.
+# The articles also recall earlier rounds ("the sixth straw poll featured coloured ballots") and
+# positions taken in the consultations ("some members argued for coloured ballot papers"), so the
+# reading is per clause: it must look ahead (tomorrow, will, expected to) and state a plan, not a wish.
+SCR_BALLOT_TOPIC = re.compile(r"ballot|straw poll|\bpoll\b|voting|balloting", re.I)
+SCR_BALLOT_FORWARD = re.compile(r"\btomorrow|\btoday|this (?:morning|afternoon|week)|\bwill\b|expected to|is to be|are to be|set to|scheduled", re.I)
+SCR_BALLOT_WISH = re.compile(r"\b(?:argued?|arguing|call(?:ed|ing)? for|push(?:ed|ing)?|press(?:ed|ing)?|prefer(?:red|s)?|propos(?:ed|al|ing)|"
+                             r"suggest(?:ed|ing)?|want(?:ed|s)?|favou?r(?:ed|s)?|advocat(?:ed|ing)|urg(?:ed|ing)|might|could|would|whether|if\b|"
+                             r"unclear|possib|option)\b", re.I)
+SCR_BALLOT_COLOURED = re.compile(r"colou?r(?:ed|-coded)\s+(?:ballot|straw poll|poll|round|voting|balloting)|different(?:ly)?[- ]colou?red|"
+                                 r"colou?r-coding|coloured ballot papers", re.I)
+SCR_BALLOT_IDENTICAL = re.compile(r"undifferentiated|identical ballots?|same ballots?|no difference between the ballots|no distinction between|"
+                                  r"yet to begin using colou?r|not (?:yet )?(?:be )?colou?r-coded|without colou?r|uniform ballots?", re.I)
+
+
+def scr_ballot_type(body):
+    """False = identical ballots for all 15, True = colour-coded (P5 distinguishable), None = the article does not say."""
+    for s in re.split(r"(?<=[.!?\u201d])\s+(?=[A-Z\u201c(])", body):
+        if not SCR_BALLOT_TOPIC.search(s):
+            continue
+        for cl in re.split(r"[,;:\u2014\u2013]|\s(?:while|although|whereas|unlike|but)\s", s):
+            if not (SCR_BALLOT_TOPIC.search(cl) and SCR_BALLOT_FORWARD.search(cl)) or SCR_BALLOT_WISH.search(cl):
+                continue
+            if SCR_BALLOT_IDENTICAL.search(cl):
+                return False
+            if SCR_BALLOT_COLOURED.search(cl):
+                return True
+    # whole-article fallback (the wording used up to the fifth poll of 2026)
+    if re.search(r"no difference between the ballots|same ballots?|identical ballots|yet to begin using colou?r-coded|no distinction between the ballots", body, re.I):
+        return False
+    if re.search(r"(?:first|will use|using|be used)[^.]{0,80}colou?r-coded ballots|colou?r-coded ballots[^.]{0,60}(?:will be|are expected to be|were) used", body, re.I):
+        return True
+    return None
+
+
 def load_previous():
     try:
         with open(OUTPUT_FILE, encoding="utf-8") as f:
@@ -1060,10 +1100,7 @@ def main():
                         rec["scheduled"] = datetime.strptime(f"{md.group(1)} {y}", "%d %B %Y").date().isoformat()
                     except ValueError:
                         pass
-                if re.search(r"no difference between the ballots|same ballots?|identical ballots|yet to begin using colou?r-coded|no distinction between the ballots", body, re.I):
-                    rec["colour_coded"] = False
-                elif re.search(r"(?:first|will use|using|be used)[^.]{0,80}colou?r-coded ballots|colou?r-coded ballots[^.]{0,60}(?:will be|are expected to be|were) used", body, re.I):
-                    rec["colour_coded"] = True
+                rec["colour_coded"] = scr_ballot_type(body)
             except Exception as e:  # noqa: BLE001
                 log(f"  ! SCR article: {e}")
         scr_polls[n] = rec
