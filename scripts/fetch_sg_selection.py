@@ -469,19 +469,25 @@ def parse_wp_candidates(t, refs):
         rows = wp_rows(table)
         if not rows:
             continue
-        hdr = [strip(c["html"]).lower() for c in rows[0]]
-        if "candidate" not in hdr or "nominator" not in hdr:
+        hdr = []
+        for c in rows[0]:
+            span = re.search(r'colspan="(\d+)"', c["attrs"])
+            hdr += [strip(c["html"]).lower()] * (int(span.group(1)) if span else 1)
+        name_key = "candidate" if "candidate" in hdr else ("name" if "name" in hdr else None)  # "Candidate" until Oct 2026, then "Name"
+        if not name_key or "nominator" not in hdr:
             continue
-        ix = {h: i for i, h in enumerate(hdr)}
+        ix = {h: i for i, h in enumerate(hdr)}  # the last cell under a heading: "Name" spans photo + name since Oct 2026
+        photo_ix = ix["photo"] if "photo" in ix else (hdr.index(name_key) if hdr.count(name_key) > 1 else None)
         for r in rows[1:]:
             if len(r) < len(hdr) - 1:
                 continue
             cell = lambda k: r[ix[k]]["html"] if k in ix and ix[k] < len(r) else ""  # noqa: E731
-            c_html = cell("candidate")
-            link = re.search(r'<a href="/wiki/([^"]+)"[^>]*>([^<]+)</a>', c_html)
+            c_html = cell(name_key)
+            link = re.search(r'<a href="/wiki/(?!File:)([^"]+)"[^>]*>([^<]+)</a>', c_html)
             name = strip(link.group(2)) if link else strip(c_html)
             country = re.search(r"\(([^)]+)\)", strip(c_html))
-            photo_file = re.search(r'href="/wiki/File:([^"]+)"', cell("photo"))
+            photo_html = r[photo_ix]["html"] if photo_ix is not None and photo_ix < len(r) else ""
+            photo_file = re.search(r'href="/wiki/File:([^"]+)"', photo_html or c_html)
             prev = [strip(x) for x in re.split(r"<br\s*/?>|</li>", re.sub(r"<sup.*?</sup>", "", cell("prior experience"), flags=re.S))]
             out.append({
                 "name": name,
@@ -742,6 +748,11 @@ UN_WORD = re.compile(r"\bU\.?N\.?\b|United Nations|Naciones Unidas|ONU\b", re.I)
 # a headline reporting that a candidate has left the race (not that they might, or were urged to)
 WITHDREW = re.compile(r"\b(withdr(?:aws|ew|awn|awing|awal)|pull(?:s|ed)? out|quits?|drops? out|dropped out|bows? out|exits? (?:the )?race|"
                       r"ends? (?:his|her) (?:bid|candidacy|campaign)|abandons?|se retire|retire sa candidature|renonce|se retira|retira su)\b", re.I)
+# a headline reporting that a state has nominated someone (not that it might, or is urged to)
+NOMINATED = re.compile(r"\b(nominat(?:es|ed|ion|ing)|puts? forward|throws?|threw|enters? (?:the )?race|joins? (?:the )?race|candidacy|"
+                       r"candidate for|bid for|officially enters|designa|postula|candidature)\b", re.I)
+NOT_NOMINATED = re.compile(r"\b(not|no|may|might|could|would|consider\w*|mulls?|weighs?|rumou?r\w*|urg\w*|should|if|plans? to|set to|"
+                           r"expected to|to nominate|likely|eyes?|ready to|poised)\b|n't\b|\?", re.I)
 NOT_WITHDREW = re.compile(r"\b(not|never|no plans|refus\w*|den(?:y|ies|ied)|urg\w*|calls? (?:on|for)|demand\w*|should|must|may|might|could|"
                           r"would|consider\w*|rumou?r\w*|mulls?|weighs?|pressure\w*|asked to|if)\b|n't\b|\?", re.I)
 
@@ -1259,6 +1270,9 @@ def main():
             "nominated_by_names": [countries.name.get(i, i) for i in nominators],
             "nominated_by_iso2": [countries.iso2.get(i) for i in nominators],
             "nomination_date": oc["nomination_date"],
+            "nomination_reported": False,
+            "nomination_announced": None,
+            "nomination_announced_url": None,
             "status": "withdrawn" if withdrawn else "nominated",
             "withdrawal_date": withdrawal_date,
             "withdrawal_announced": announced,
@@ -1285,6 +1299,95 @@ def main():
             "wikipedia_url": info.get("page_url") or ((f"https://en.wikipedia.org/wiki/{urllib.parse.quote(wpc['wiki_title'].replace(' ', '_'))}") if wpc and wpc.get("wiki_title") else None),
             "news_count_60d": 0,
             "sources": sources + [{"name": "Wikipedia citation", "url": u} for u in (wpc or {}).get("refs", [])[:3]],
+            "_wiki_title": (wpc or {}).get("wiki_title"),
+        })
+
+    # Nominations announced before the UN posts the joint letter: Wikipedia's candidate table or
+    # 1 for 8 Billion's official list has the person, the UN page does not yet. Shown as a candidate
+    # marked "announced" (headlines are attached once the news is in), as reported withdrawals are.
+    pending = [(w, None) for w in wp_cands if w.get("nominated") and not w.get("withdrew")]
+    for x in f8:
+        if "candidate" not in x["section"] or "official" not in x["section"]:
+            continue
+        i = next((k for k, (w, _) in enumerate(pending) if w and same_person(w["name"], x["name"])), None)
+        if i is None:
+            pending.append((None, x))
+        else:
+            pending[i] = (pending[i][0], x)
+    for wpc, f8c in pending:
+        nm = (wpc or f8c)["name"]
+        if any(same_person(nm, c["official_name"]) or same_person(nm, c["name"]) for c in candidates):
+            continue
+        if wpc and not f8c:
+            f8c = find(f8, nm)  # a card in any section gives role and country
+        short = (f8c or {}).get("name") or nm
+        cid = slugify(short)
+        pc = next((x for x in prev.get("candidates") or [] if x.get("id") == cid), {})
+        nat = nat_src = None
+        if f8c and f8c.get("country"):
+            nat = countries.resolve(re.split(r"\s*/\s*", f8c["country"])[0])
+            nat_src = F8_CANDIDATES
+        if not nat and wpc and wpc.get("country_text"):
+            nat = countries.resolve(re.split(r"\s*/\s*", wpc["country_text"])[0])
+            nat_src = WP_URL
+        info = page_info.get((wpc or {}).get("wiki_title") or "", {}) if wpc else {}
+        nominators = countries.split_list((wpc or {}).get("nominator_text") or (f8c or {}).get("nominated by") or "")
+        date = (wpc or {}).get("nominated") or parse_day((f8c or {}).get("nominated") or "") or pc.get("nomination_announced")
+        reported = []
+        if wpc:
+            reported.append((wpc["nominated"], "Wikipedia: 2026 United Nations Secretary-General selection", WP_URL))
+        if f8c and "official" in f8c["section"]:
+            reported.append((parse_day(f8c.get("nominated") or ""), "1 for 8 Billion: official candidates", F8_CANDIDATES))
+        region = countries.region.get(nat) if nat else None
+        photo = info.get("thumb")
+        pf = (wpc or {}).get("photo_file")
+        if pf and pf in thumbs and any(t in fold(pf.replace("_", " ")).split() for t in fold(nm).split()[1:] if len(t) >= 4):
+            photo = thumbs[pf]["thumb"]
+        log(f"  nomination announced, not on the UN page yet: {short} ({date}; {', '.join(n.split(':')[0] for _, n, _ in reported)})")
+        candidates.append({
+            "id": cid,
+            "name": short,
+            "official_name": nm,
+            "slug": people_slug([nm, short], (wpc or {}).get("wiki_title")),
+            "nationality": nat,
+            "nationality_iso2": countries.iso2.get(nat) if nat else None,
+            "nationality_name": countries.name.get(nat) if nat else ((f8c or {}).get("country") or (wpc or {}).get("country_text")),
+            "nationality_note": (f8c or {}).get("country") if f8c and "/" in (f8c.get("country") or "") else None,
+            "nationality_source": nat_src,
+            "nominated_by": nominators,
+            "nominated_by_names": [countries.name.get(i, i) for i in nominators],
+            "nominated_by_iso2": [countries.iso2.get(i) for i in nominators],
+            "nomination_date": date,
+            "nomination_reported": True,
+            "nomination_announced": date,
+            "nomination_announced_url": None,
+            "status": "nominated",
+            "withdrawal_date": None,
+            "withdrawal_announced": None,
+            "withdrawal_announced_url": None,
+            "withdrawals": [],
+            "_reported_withdrawal": [],
+            "_reported_nomination": reported,
+            "gender": pc.get("gender"),
+            "region_group": region[1] if region else (wpc or {}).get("region"),
+            "region_group_code": region[0] if region else None,
+            "current_role": (f8c or {}).get("role") or info.get("description"),
+            "current_role_source": F8_CANDIDATES if (f8c or {}).get("role") else (WP_URL if info.get("description") else None),
+            "previous_roles": (wpc or {}).get("previous_roles") or [],
+            "vision_statement_url": None,
+            "vision_statement_other": None,
+            "cv_url": None,
+            "disclosure_url": None,
+            "letter_url": None,
+            "letter_symbol": None,
+            "dialogue_date": None,
+            "dialogue_time": None,
+            "webcast_url": None,
+            "photo": photo,
+            "photo_official": None,
+            "wikipedia_url": info.get("page_url") or ((f"https://en.wikipedia.org/wiki/{urllib.parse.quote(wpc['wiki_title'].replace(' ', '_'))}") if wpc and wpc.get("wiki_title") else None),
+            "news_count_60d": 0,
+            "sources": [{"name": name, "url": url} for _, name, url in reported] + [{"name": "Wikipedia citation", "url": u} for u in (wpc or {}).get("refs", [])[:3]],
             "_wiki_title": (wpc or {}).get("wiki_title"),
         })
 
@@ -1572,6 +1675,22 @@ def main():
                              f"{', ' + ', '.join(name.split(':')[0] for _, name, _ in reported) if reported else ''}); "
                              "the UN page has no joint letter on it yet")
 
+    for c in candidates:
+        reported = c.pop("_reported_nomination", [])
+        pc = next((x for x in prev.get("candidates") or [] if x.get("id") == c["id"]), {})
+        if not c.get("nomination_reported"):
+            if not c.get("nomination_announced") and pc.get("nomination_announced") and pc.get("nomination_announced") != c.get("nomination_date"):
+                c["nomination_announced"] = pc["nomination_announced"]  # the day it was announced, now that the letter is up
+                c["nomination_announced_url"] = pc.get("nomination_announced_url")
+            continue
+        heads = sorted((n for n in out_news if c["id"] in n["in_headline"] and NOMINATED.search(n["title"]) and not NOT_NOMINATED.search(n["title"])),
+                       key=lambda n: n["date"])
+        have = {s["url"] for s in c["sources"]}
+        c["sources"] += [{"name": f"{n['outlet'] or 'News'}: {n['title']}"[:160], "url": n["url"]} for n in heads[:3] if n["url"] not in have]
+        c["nomination_announced_url"] = heads[0]["url"] if heads else (reported[0][2] if reported else None)
+        discrepancies.append(f"{c['name']}: nomination {c['nomination_date']} per {', '.join(name.split(':')[0] for _, name, _ in reported)} "
+                             f"({len(heads)} news reports); the UN page has no joint letter on it yet")
+
     also = []
     for key, m in mentioned.items():
         hits = [n for n in out_news if key in n["also_mentioned"]]
@@ -1660,7 +1779,10 @@ def main():
     }
 
     latest_poll = next((p for p in reversed(polls) if p["results"]), polls[-1] if polls else None)
-    status_line = f"{len(active)} official candidate{'s' if len(active) != 1 else ''}"
+    announced_n = sum(1 for c in active if c.get("nomination_reported"))
+    status_line = f"{len(active) - announced_n} official candidate{'s' if len(active) - announced_n != 1 else ''}"
+    if announced_n:
+        status_line += f" + {announced_n} announced"
     if any(c["status"] == "withdrawn" for c in candidates):
         status_line += f" ({sum(1 for c in candidates if c['status'] == 'withdrawn')} withdrawn)"
     if latest_poll:
@@ -1695,6 +1817,7 @@ def main():
                 "Official nominees, nominating states, letters, vision statements, CVs, dialogue dates and webcasts come from the UN page; that page is authoritative where sources disagree.",
                 "Straw poll results are NOT published by the Security Council. Figures are the leaked tallies reported by 1 for 8 Billion, PassBlue, Reuters and others, as tabulated on Wikipedia.",
                 "Until ballots are colour-coded, a 'discourage' vote cannot be attributed to a permanent member (possible veto).",
+                "A nomination announced by the nominating state and listed by Wikipedia or 1 for 8 Billion is shown as 'announced' until the UN posts the PGA/PSC joint letter.",
                 "'Also mentioned' people are names discussed in coverage or by trackers as possible candidates. They are NOT official candidates unless nominated by a Member State.",
                 "News: last 60 days from Google News, PassBlue, Security Council Report and the site's archive; counts are of distinct headlines.",
             ],

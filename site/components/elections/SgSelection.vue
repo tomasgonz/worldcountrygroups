@@ -59,13 +59,17 @@
       <section class="bg-white rounded-2xl ring-1 ring-primary-200/70 p-5 sm:p-6">
         <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1">
           <h3 class="font-serif text-xl font-bold text-primary-900">Official candidates</h3>
-          <span class="text-xs text-primary-400">Nominated by Member States, per the UN</span>
+          <span class="text-xs text-primary-400">Nominated by Member States, per the UN<template v-if="active.some(c => c.nomination_reported)">; announced nominations marked until the UN posts the letter</template></span>
         </div>
         <p class="text-sm text-primary-500 mb-4">Ordered by "encourage" votes in the latest straw poll.</p>
 
         <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
           <article v-for="c in active" :key="c.id" class="rounded-2xl ring-1 ring-primary-200/70 p-4 flex flex-col">
             <CandHead :c="c" />
+            <p v-if="c.nomination_reported" class="mt-2 text-xs text-amber-800 bg-amber-50 rounded px-2 py-1">
+              Nomination announced{{ c.nomination_announced ? ' ' + fmtDate(c.nomination_announced) : '' }}; the UN has not yet posted the joint letter.
+              <a v-if="c.nomination_announced_url" :href="c.nomination_announced_url" target="_blank" rel="noopener" class="underline decoration-dotted ml-1">Report</a>
+            </p>
             <p v-if="c.current_role" class="mt-3 text-sm text-primary-700">{{ c.current_role }}</p>
             <details v-if="c.previous_roles.length" class="mt-1 text-xs text-primary-500">
               <summary class="cursor-pointer select-none hover:text-primary-700">Career ({{ c.previous_roles.length }})</summary>
@@ -473,6 +477,7 @@ interface Cand {
   nationality: string | null; nationality_iso2: string | null; nationality_name: string | null
   nominated_by: string[]; nominated_by_names: string[]; nominated_by_iso2?: (string | null)[]
   nomination_date: string | null; status: 'nominated' | 'withdrawn' | 'selected'
+  nomination_reported?: boolean; nomination_announced?: string | null; nomination_announced_url?: string | null
   withdrawal_date: string | null; withdrawal_announced: string | null
   withdrawals: { date: string | null; by: string[]; url: string | null; symbol: string | null }[]
   gender: 'female' | 'male' | null; region_group: string | null; region_group_code: string | null
