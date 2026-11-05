@@ -96,6 +96,26 @@ NOMINATION_WINDOW = {
     "sources": [{"name": "PGA/PSC joint letter, 25 November 2025", "url": JOINT_LETTER_URL},
                 {"name": "Letter from the President of the Security Council, 29 May 2026", "url": PSC_LETTER_URL}],
 }
+# Straw-poll results that 1 for 8 Billion publishes only as an image, transcribed by hand
+# (candidate, encourage, discourage, no opinion). Used only while the Wikipedia table has no
+# numbers for that date; once it does, Wikipedia wins and any difference is reported.
+F8_TRANSCRIBED = {
+    "2026-11-05": {
+        "n": 8,
+        "image": "https://images.squarespace-cdn.com/content/v1/5399cc0ae4b0705199b37aa3/b25754b5-23a3-4769-b1ac-2ec8cf54335d/Straw+poll+8+%281%29.png",
+        "note": "Results transcribed from 1 for 8 Billion's published table, which calls them unconfirmed as of 5 November 2026",
+        "results": [
+            ("Rebeca Grynspan", 12, 3, 0),
+            ("Rafael Grossi", 9, 4, 2),
+            ("Carolyn Rodrigues Birkett", 8, 5, 2),
+            ("Lana Nusseibeh", 7, 6, 2),
+            ("Olara Otunnu", 4, 9, 2),
+            ("Feridun Hadia Sinirlioğlu", 3, 8, 4),
+            ("María Fernanda Espinosa Garcés", 3, 10, 2),
+            ("Ivonne A-Baki", 1, 14, 0),
+        ],
+    },
+}
 JOINT_LETTER_NOTES = [
     {"text": ("The joint letter notes 'with regret that no woman has ever held the position of Secretary-General' and "
               "encourages Member States to strongly consider nominating women; it also notes 'the importance of regional diversity'."),
@@ -1406,16 +1426,9 @@ def main():
                 return c
         return None
 
-    polls = []
-    year = int(today[:4])
-    for i, p in enumerate(wp_polls):
-        date = parse_day(p["label"], year)
-        n = i + 1
-        f8m = next((x for x in f8_polls if x["date"] == date), None)
-        if f8m:
-            n = f8m["n"]
+    def to_results(rows):
         results = []
-        for r in p["results"]:
+        for r in rows:
             c = match_cand(r["candidate"])
             results.append({"candidate": c["name"] if c else r["candidate"], "candidate_id": c["id"] if c else slugify(r["candidate"]),
                             "encourage": r["encourage"], "discourage": r["discourage"], "no_opinion": r["no_opinion"],
@@ -1423,6 +1436,40 @@ def main():
                             "p5_encourage_n": r["p5_encourage_n"], "p5_discourage_n": r["p5_discourage_n"],
                             "p5_no_opinion_n": r["p5_no_opinion_n"]})
         results.sort(key=lambda r: (-r["encourage"], r["discourage"]))
+        return results
+
+    def transcribed_rows(tr):
+        return [{"candidate": name, "encourage": e, "discourage": d, "no_opinion": o,
+                 "p5_encourage": None, "p5_discourage": None,
+                 "p5_encourage_n": None, "p5_discourage_n": None, "p5_no_opinion_n": None}
+                for name, e, d, o in tr["results"]]
+
+    def transcribed_source(tr):
+        return {"name": f"1 for 8 Billion: results of straw poll {tr['n']} (published as an image, transcribed)", "url": F8_POLLS}
+
+    polls = []
+    year = int(today[:4])
+    for p in wp_polls:
+        date = parse_day(p["label"], year)
+        if not date:  # a blank or stray header cell (an edit in progress) is not a poll
+            log(f"  ! Wikipedia straw-poll column without a date ({p['label']!r}); skipped")
+            continue
+        n = len(polls) + 1
+        f8m = next((x for x in f8_polls if x["date"] == date), None)
+        if f8m:
+            n = f8m["n"]
+        results = to_results(p["results"])
+        tr = F8_TRANSCRIBED.get(date)
+        if tr and results:  # Wikipedia has caught up: its numbers win; say so if they differ
+            mine = {x["candidate_id"]: x for x in to_results(transcribed_rows(tr))}
+            for r in results:
+                t = mine.get(r["candidate_id"])
+                if t and (t["encourage"], t["discourage"], t["no_opinion"]) != (r["encourage"], r["discourage"], r["no_opinion"]):
+                    discrepancies.append(f"Straw poll {n}, {r['candidate']}: {r['encourage']}-{r['discourage']}-{r['no_opinion']} on Wikipedia vs "
+                                         f"{t['encourage']}-{t['discourage']}-{t['no_opinion']} transcribed from 1 for 8 Billion (Wikipedia used)")
+            tr = None
+        elif tr:
+            results = to_results(transcribed_rows(tr))
         scr = scr_polls.get(n)
         if not scr:
             pp = next((x for x in (prev.get("process", {}).get("straw_polls") or []) if x.get("n") == n and x.get("scr_url")), None)
@@ -1432,9 +1479,10 @@ def main():
         if not colour_coded:  # shading on an identical-ballot poll is an editor's guess, not a P5 vote
             for r in results:
                 r["p5_encourage"] = r["p5_discourage"] = None
-        srcs = [{"name": r["text"][:120], "url": r["url"]} for r in p["refs"] if r.get("url")]
+        srcs = [transcribed_source(tr)] if tr else []
+        srcs += [{"name": r["text"][:120], "url": r["url"]} for r in p["refs"] if r.get("url")]
         srcs.append({"name": "Wikipedia straw poll table", "url": WP_URL})
-        if f8m:
+        if f8m and not tr:
             srcs.append({"name": "1 for 8 Billion: UN Security Council straw polls", "url": F8_POLLS})
         scr_url = (scr or {}).get("url")
         if scr_url:
@@ -1444,7 +1492,8 @@ def main():
             "n": n, "date": date,
             "colour_coded": colour_coded,
             "ballot_note": ("Identical ballots for all 15 members: P5 votes cannot be told apart (Security Council Report)"
-                            if not colour_coded else "Colour-coded ballots: P5 votes are distinguishable"),
+                            if not colour_coded else "Colour-coded ballots: P5 votes are distinguishable")
+                           + (f". {tr['note']}" if tr else ""),
             "candidates_voted": len(results),
             "ballots_cast": total,
             "results": results,
@@ -1458,10 +1507,14 @@ def main():
     have = {p["date"] for p in polls}
     for fp in f8_polls:
         if fp["date"] not in have:
+            tr = F8_TRANSCRIBED.get(fp["date"])
+            results = to_results(transcribed_rows(tr)) if tr else []
             polls.append({"n": fp["n"], "date": fp["date"], "colour_coded": bool((scr_polls.get(fp["n"]) or {}).get("colour_coded")),
-                          "ballot_note": "Results not yet transcribed from the published image", "candidates_voted": None,
-                          "ballots_cast": None, "results": [], "source_url": F8_POLLS,
-                          "sources": [{"name": "1 for 8 Billion: UN Security Council straw polls", "url": F8_POLLS}],
+                          "ballot_note": tr["note"] if tr else "Results not yet transcribed from the published image",
+                          "candidates_voted": len(results) if tr else None,
+                          "ballots_cast": sum(r["encourage"] + r["discourage"] + r["no_opinion"] for r in results) if tr else None,
+                          "results": results, "source_url": F8_POLLS,
+                          "sources": [transcribed_source(tr) if tr else {"name": "1 for 8 Billion: UN Security Council straw polls", "url": F8_POLLS}],
                           "scr_url": (scr_polls.get(fp["n"]) or {}).get("url"), "results_official": False})
     for n, s in scr_polls.items():  # announced/held per SCR, not in either list
         if not any(p["n"] == n for p in polls) and s.get("date") and s["date"] <= today:
@@ -1471,8 +1524,8 @@ def main():
                           "scr_scheduled": s.get("scheduled"), "scr_colour_coded": s.get("colour_coded"),
                           "candidates_voted": None, "ballots_cast": None, "results": [], "source_url": s["url"],
                           "sources": [{"name": "Security Council Report: What's in Blue", "url": s["url"]}], "scr_url": s["url"], "results_official": False})
-    if not polls and prev.get("process", {}).get("straw_polls"):
-        polls = prev["process"]["straw_polls"]
+    if not polls and any(x.get("date") for x in prev.get("process", {}).get("straw_polls") or []):
+        polls = [x for x in prev["process"]["straw_polls"] if x.get("date")]
         source_status["straw_polls"] = "kept from previous run"
     polls.sort(key=lambda p: (p["date"] or "", p["n"]))
     for p in polls:
@@ -1845,10 +1898,11 @@ def main():
     # sanity checks before replacing the file
     if not out["candidates"]:
         sys.exit("No candidates; not writing.")
-    prev_polls = len((prev.get("process") or {}).get("straw_polls") or [])
-    if len(polls) < prev_polls:
-        log(f"  ! straw polls dropped from {prev_polls} to {len(polls)}; keeping previous poll list")
-        out["process"]["straw_polls"] = prev["process"]["straw_polls"]
+    # an undated entry was never a poll (a blank column read once); it must not hold back real ones
+    prev_polls = [x for x in ((prev.get("process") or {}).get("straw_polls") or []) if x.get("date")]
+    if len(polls) < len(prev_polls):
+        log(f"  ! straw polls dropped from {len(prev_polls)} to {len(polls)}; keeping previous poll list")
+        out["process"]["straw_polls"] = prev_polls
         source_status["straw_polls"] = "kept from previous run (fewer parsed)"
 
     tmp = OUTPUT_FILE + ".tmp"
